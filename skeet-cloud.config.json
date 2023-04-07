@@ -1,0 +1,37 @@
+{
+  "api": {
+    "appName": "skeet-framework",
+    "projectId": "skeet-framework",
+    "region": "asia-northeast1",
+    "cloudRun": {
+      "name": "",
+      "url": "https://lb.skeet.dev",
+      "cpu": 1,
+      "maxConcurrency": 10,
+      "maxInstances": 100,
+      "minInstances": 0,
+      "memory": "4Gi"
+    }
+  },
+  "cloudArmor": [
+    {
+      "securityPolicyName": "skeet-armor",
+      "rules": [
+        {
+          "priority": "1000",
+          "description": "ban 300sec if exceed 50 access in 60sec",
+          "options": {
+            "action": "rate-based-ban",
+            "src-ip-ranges": "*",
+            "rate-limit-threshold-count": "50",
+            "rate-limit-threshold-interval-sec": "60",
+            "ban-duration-sec": "300",
+            "conform-action": "allow",
+            "exceed-action": "deny-404",
+            "enforce-on-key": "IP"
+          }
+        }
+      ]
+    }
+  ]
+}
