@@ -30,6 +30,7 @@ export const getFunctionInfo = async (functionName: string) => {
     name: `skeet-functions-${functionName}`,
     neg: `skeet-${functionName}-neg`,
     backendService: `skeet-${functionName}-bs`,
+    armor: `skeet-${functionName}-armor`,
   }
   return functionInfo
 }

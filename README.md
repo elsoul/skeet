@@ -58,7 +58,7 @@ Automated to build all the Google Cloud VPC network settings;
 ## Install skeet
 
 ```bash
-$ npm i -g skeet
+$ npm i -g @skeet-framework/cli
 ```
 
 ## Create Skeet API
@@ -77,7 +77,7 @@ $ skeet s
 
 Now you can access;
 
-`http://localhost:4000/graphql`
+`http://localhost:4000/`
 
 ## Zero to Deploy
 
@@ -99,21 +99,13 @@ $ skeet deploy
 
 ![Skeet Deploy](https://storage.googleapis.com/skeet-assets/animation/skeet-deploy-compressed.gif)
 
-## Add Web3 Worker Plugins
+## Add Cloud Functions
 
-Add Web3 Worker Plugin by Skeet CLI
+Add Cloud Functions 2nd Gen by Skeet CLI
 
 ```bash
-$ skeet add workerPlugin
-? Select Services to deploy (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
-  = Plugins =
-❯◯ solana-transfer
- ◯ orca-swap
- ◯ jupiter-swap
+$ skeet add functions <functionName>
 ```
-
-This command deploy Skeet Worker Plugin Container To Google Cloud Run.
-Skeet API can run tasks by Google Cloud Task.
 
 Document: [https://skeet.dev](https://skeet.dev)
 
@@ -123,27 +115,20 @@ Document: [https://skeet.dev](https://skeet.dev)
 $ skeet --help
 Usage: skeet [options] [command]
 
-CLI to Skeet TypeScript Serverless Framework
+CLI to skeet framework
 
 Options:
   -V, --version             output the version number
   -h, --help                display help for command
 
 Commands:
-  test
-  create <initAppName>      Create Skeet App
-  init                      Setup Google Cloud Platform
+  create <appName>          Create Skeet AI Kit to Google Cloud Platform
   server|s                  Run Skeet Server
-  deploy                    Deploy to Google Cloud Run
+  init                      Deploy skeet AI Kit to Google Cloud Platform
+  iam                       Setup IAM for Google Cloud Platform
+  vpc                       Setup VPC for Google Cloud Platform
   yarn [options] <yarnCmd>
   add                       Add Comannd
-  g|generate                Generate Comannd
-  d|delete                  Delete Comannd
-  db                        DB Command
-  sql                       CloudSQL Comannd
-  setup                     Setup Command
-  sync                      Sync Command
-  docker                    Docker Command
   help [command]            display help for command
 ```
 
