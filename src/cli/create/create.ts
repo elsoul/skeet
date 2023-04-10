@@ -11,8 +11,8 @@ export const create = async (initAppName: string) => {
 }
 
 export const skeetCreate = async (appName: string) => {
-  const appDir = await createFunctionsDir(appName)
-  const gitCloneCmd = ['git', 'clone', APP_REPO_URL, appDir]
+  const appDir = './' + appName
+  const gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
   await execSyncCmd(gitCloneCmd)
   const yarnApiCmd = ['yarn']
   await execSyncCmd(yarnApiCmd, appDir)
@@ -22,22 +22,15 @@ export const skeetCreate = async (appName: string) => {
   await sleep(2000)
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
-}
-
-export const createFunctionsDir = async (functionName: string) => {
-  try {
-    const functionDir = path.join(functionName, `./functions/${functionName}`)
-    fs.mkdir(functionDir, { recursive: true }, (err) => {
-      if (err) throw err
-    })
-    return functionDir
-  } catch (error) {
-    return `createFunctionsDir: ${error}`
+  await Logger.skeetAA()
+  await Logger.welcomText(appName)
+  const nmb = Math.floor(Math.random() * 4 + 1)
+  if (nmb === 4) {
+    await Logger.cmText()
   }
 }
 
 export const generateInitFiles = async (appName: string) => {
-  const apiDir = path.join(appName, `./functions/${appName}`)
   const packageJson = await fileDataOf.packageJson(appName)
   fs.writeFileSync(
     packageJson.filePath,
@@ -57,6 +50,18 @@ export const generateInitFiles = async (appName: string) => {
 
   const eslintignore = await fileDataOf.eslintignore(appName)
   fs.writeFileSync(eslintignore.filePath, eslintignore.body)
+
+  const firebaserc = await fileDataOf.firebaserc(appName)
+  fs.writeFileSync(firebaserc.filePath, firebaserc.body)
+
+  const firestoreIndexesJson = await fileDataOf.firestoreIndexesJson(appName)
+  fs.writeFileSync(firestoreIndexesJson.filePath, firestoreIndexesJson.body)
+
+  const firestoreRules = await fileDataOf.firestoreRules(appName)
+  fs.writeFileSync(firestoreRules.filePath, firestoreRules.body)
+
+  const databaseRulesJson = await fileDataOf.databaseRulesJson(appName)
+  fs.writeFileSync(databaseRulesJson.filePath, databaseRulesJson.body)
   const prettierrc = await fileDataOf.prettierrc(appName)
   fs.writeFileSync(
     prettierrc.filePath,
@@ -69,9 +74,7 @@ export const generateInitFiles = async (appName: string) => {
   const gitignore = await fileDataOf.gitignore(appName)
   fs.writeFileSync(gitignore.filePath, gitignore.body)
   const rmDefaultEnv = ['rm', '.env']
-  await execSyncCmd(rmDefaultEnv, apiDir)
-  const apiEnv = await fileDataOf.apiEnv(appName)
-  fs.writeFileSync(apiEnv.filePath, apiEnv.body)
+  await execSyncCmd(rmDefaultEnv)
   const gitattributes = await fileDataOf.gitattributes(appName)
   fs.writeFileSync(gitattributes.filePath, gitattributes.body)
 }

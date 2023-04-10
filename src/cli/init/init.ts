@@ -12,6 +12,7 @@ import {
   createGitRepo,
   syncArmor,
   getZone,
+  deploy,
 } from '@/cli'
 
 const requireRepoName = (value: string) => {
@@ -64,7 +65,7 @@ export const init = async () => {
   const skeetConfig = await importConfig()
   inquirer.prompt(questions).then(async (answer) => {
     const answers = JSON.parse(JSON.stringify(answer))
-    // await setupCloud(skeetConfig, answers.githubRepo)
+    await setupCloud(skeetConfig, answers.githubRepo)
     const functionName = 'hello'
     await setupLoadBalancer(
       skeetConfig,
@@ -72,9 +73,9 @@ export const init = async () => {
       answers.nsDomain,
       functionName
     )
-    await initArmor(skeetConfig.api.projectId, skeetConfig.api.appName)
+    await initArmor(skeetConfig.app.projectId, skeetConfig.app.name)
     await syncArmor()
-    await getZone(skeetConfig.api.projectId, skeetConfig.api.appName)
+    await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
     await Logger.sync(
       `Copy nameServer's addresses above and paste them to your DNS settings`
     )
@@ -85,17 +86,16 @@ export const init = async () => {
   })
 }
 
-export const apiRunDeploy = async (skeetConfig: SkeetCloudConfig) => {}
-
 export const setupCloud = async (
   skeetConfig: SkeetCloudConfig,
   repoName: string
 ) => {
   await Logger.sync(`setting up your google cloud platform...`)
-  await setGcloudProject(skeetConfig.api.projectId)
+  await setGcloudProject(skeetConfig.app.projectId)
   await gitInit()
   await gitCryptInit()
   await gitCommit()
   await createGitRepo(repoName)
   await setupGcp(skeetConfig)
+  await deploy()
 }

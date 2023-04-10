@@ -1,18 +1,46 @@
 {
-  "api": {
-    "appName": "skeet-framework",
-    "projectId": "skeet-framework",
-    "region": "asia-northeast1",
-    "cloudRun": {
-      "name": "",
-      "url": "https://lb.skeet.dev",
-      "cpu": 1,
-      "maxConcurrency": 10,
-      "maxInstances": 100,
-      "minInstances": 0,
-      "memory": "4Gi"
-    }
+  "app": {
+    "name": "skeet-app",
+    "projectId": "skeet-example",
+    "region": "europe-west4",
+    "appDomain": "app.skeet.dev",
+    "functionsDomain": "functions.skeet.dev"
   },
+  "functions": [
+    {
+      "name": "openai",
+      "methods": [
+        {
+          "name": "hello",
+          "url": "",
+          "httpsOptions": {
+            "region": "europe-west4",
+            "cpu": 1,
+            "memory": "1Gi",
+            "maxInstances": 100,
+            "minInstances": 0,
+            "concurrency": 10,
+            "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
+            "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
+          }
+        },
+        {
+          "name": "openaichatroom",
+          "url": "",
+          "httpsOptions": {
+            "region": "europe-west4",
+            "cpu": 1,
+            "memory": "1Gi",
+            "maxInstances": 100,
+            "minInstances": 0,
+            "concurrency": 10,
+            "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
+            "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
+          }
+        }
+      ]
+    }
+  ],
   "cloudArmor": [
     {
       "securityPolicyName": "skeet-armor",

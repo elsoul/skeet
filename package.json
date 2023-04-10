@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "repository": "https://github.com/elsoul/skeet-cli.git",
@@ -47,6 +47,7 @@
     "esbuild": "0.17.14",
     "eslint": "8.36.0",
     "eslint-config-prettier": "8.8.0",
+    "firebase-functions": "4.2.1",
     "nodemon": "2.0.22",
     "npm-check-updates": "16.8.0",
     "prettier": "2.8.7",

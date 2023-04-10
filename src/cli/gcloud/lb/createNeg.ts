@@ -1,24 +1,24 @@
 import { execSyncCmd } from '@/lib/execSyncCmd'
-import { getNegName, getNetworkConfig } from '@/lib/getSkeetConfig'
+import { getFunctionInfo, getNegName } from '@/lib/getSkeetConfig'
 
 export const createNeg = async (
   projectId: string,
   functionName: string,
   region: string
 ) => {
-  const neg = await getNegName(functionName)
+  const functionInfo = await getFunctionInfo(functionName)
   const shCmd = [
     'gcloud',
     'compute',
     'network-endpoint-groups',
     'create',
-    neg,
+    functionInfo.neg,
     '--region',
     region,
     '--network-endpoint-type',
     'serverless',
     '--cloud-run-service',
-    functionName,
+    functionInfo.name,
     '--project',
     projectId,
   ]

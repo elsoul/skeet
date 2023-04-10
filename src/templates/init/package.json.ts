@@ -10,8 +10,7 @@ export const packageJson = async (appName: string) => {
     license: 'Apache-2.0',
     private: true,
     scripts: {
-      skeet: 'run-p skeet:*',
-      'skeet:functions': 'firebase emulators:start',
+      dev: 'firebase emulators:start',
       deploy: 'firebase deploy --only functions',
     },
     devDependencies: {

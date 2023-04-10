@@ -1,10 +1,13 @@
 import { createHash } from 'crypto'
 import { execSync } from 'child_process'
+import fs from 'fs'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
+export const FIREBASE_CONFIG_PATH = './firebase.json'
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const ROUTE_PACKAGE_JSON_PATH = './package.json'
+export const FUNCTIONS_REPO_URL = 'https://github.com/elsoul/skeet-functions'
 export const APP_REPO_URL = 'https://github.com/elsoul/skeet-app'
 export const FRONT_APP_REPO_URL = 'https://github.com/elsoul/skeet-app-template'
 export const FRONT_APP_PATH = './src'
@@ -20,6 +23,15 @@ export const genSecret = async (name: string) => {
 
 export const getNegName = async (functionName: string) => {
   return `skeet-${functionName}-neg`
+}
+
+export const getFunctionInfo = async (functionName: string) => {
+  const functionInfo = {
+    name: `skeet-functions-${functionName}`,
+    neg: `skeet-${functionName}-neg`,
+    backendService: `skeet-${functionName}-bs`,
+  }
+  return functionInfo
 }
 
 export const getNetworkConfig = async (projectId: string, appName: string) => {
@@ -83,4 +95,13 @@ export const getRunUrl = async (projectId: string, appName: string) => {
   } catch (error) {
     return ''
   }
+}
+
+export const getFunctions = async () => {
+  const functionDirs = fs
+    .readdirSync(FUNCTIONS_PATH + '/', { withFileTypes: true })
+    .filter((item) => item.isDirectory())
+    .map((item) => item.name)
+
+  return functionDirs
 }

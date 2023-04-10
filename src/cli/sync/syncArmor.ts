@@ -10,22 +10,22 @@ import { Logger } from '@/lib/logger'
 
 export const syncArmor = async () => {
   const config = await importConfig()
-  await setGcloudProject(config.api.projectId)
+  await setGcloudProject(config.app.projectId)
   if (config.cloudArmor)
     for await (const rule of config.cloudArmor[0].rules) {
       const result = await isRuleExist(config, rule.priority)
       if (result) {
         await updateSecurityPolicyRule(
-          config.api.projectId,
-          config.api.appName,
+          config.app.projectId,
+          config.app.name,
           rule.priority,
           rule.options
         )
       } else {
         console.log('creating...')
         await createSecurityPolicyRule(
-          config.api.projectId,
-          config.api.appName,
+          config.app.projectId,
+          config.app.name,
           rule.description,
           rule.priority,
           rule.options
@@ -41,11 +41,11 @@ export const isRuleExist = async (
 ) => {
   try {
     const appConf = await getNetworkConfig(
-      config.api.projectId,
-      config.api.appName
+      config.app.projectId,
+      config.app.name
     )
     if (config.cloudArmor) {
-      const cmd = `gcloud compute security-policies rules describe ${priority} --security-policy=${appConf.securityPolicyName} --project=${config.api.projectId}`
+      const cmd = `gcloud compute security-policies rules describe ${priority} --security-policy=${appConf.securityPolicyName} --project=${config.app.projectId}`
       execSync(cmd, { stdio: 'ignore' })
     }
     return true

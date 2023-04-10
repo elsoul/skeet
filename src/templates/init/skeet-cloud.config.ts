@@ -4,21 +4,52 @@ export const skeetCloudConfigGen = async (appName: string) => {
   const filePath = `${appName}/skeet-cloud.config.json`
   const homeIp = await getHomeIp()
   const body = `{
-  "api": {
-    "appName": "${appName}",
+  "app": {
+    "name": "${appName}",
     "projectId": "${appName}",
     "region": "europe-west4",
-    "hasLoadBalancer": false,
-    "cloudRun": {
-      "name": "skeet-${appName}-api",
-      "url": "",
-      "cpu": 1,
-      "maxConcurrency": 80,
-      "maxInstances": 100,
-      "minInstances": 0,
-      "memory": "4Gi"
-    },
+    "appDomain": "your-app-url.com",
+    "functionsDomain": "functions.your-app-url.com"
   },
+  "functions": [
+    {
+      "name": "openai",
+      "methods": [
+        {
+          "name": "hello",
+          "url": "",
+          "httpsOptions": [
+            {
+              "region": "europe-west4",
+              "cpu": 1,
+              "memory": "1Gi",
+              "maxInstances": 100,
+              "minInstances": 0,
+              "concurrency": 10,
+              "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
+              "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
+            }
+          ]
+        },
+        {
+          "name": "openaichatroom",
+          "url": "",
+          "httpsOptions": [
+            {
+              "region": "europe-west4",
+              "cpu": 1,
+              "memory": "1Gi",
+              "maxInstances": 100,
+              "minInstances": 0,
+              "concurrency": 10,
+              "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
+              "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "cloudArmor": [
     {
       "securityPolicyName": "skeet-${appName}-armor",

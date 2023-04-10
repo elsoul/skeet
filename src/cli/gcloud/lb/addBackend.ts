@@ -1,22 +1,20 @@
 import { execSyncCmd } from '@/lib/execSyncCmd'
-import { getNegName, getNetworkConfig } from '@/lib/getSkeetConfig'
+import { getFunctionInfo } from '@/lib/getSkeetConfig'
 
 export const addBackend = async (
   projectId: string,
-  appName: string,
   functionName: string,
   region: string
 ) => {
-  const neg = await getNegName(functionName)
-  const appConf = await getNetworkConfig(projectId, appName)
+  const functionInfo = await getFunctionInfo(functionName)
   const shCmd = [
     'gcloud',
     'compute',
     'backend-services',
     'add-backend',
-    appConf.backendServiceName,
+    functionInfo.backendService,
     '--network-endpoint-group',
-    neg,
+    functionInfo.neg,
     '--network-endpoint-group-region',
     region,
     '--global',

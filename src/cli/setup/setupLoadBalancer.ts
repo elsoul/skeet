@@ -18,49 +18,44 @@ import { Logger } from '@/lib/logger'
 
 export const setupLoadBalancer = async (
   config: SkeetCloudConfig,
-  apiDomain: string,
+  appDomain: string,
   nsDomain: string,
   functionName: string
 ) => {
   try {
-    await setGcloudProject(config.api.projectId)
+    await setGcloudProject(config.app.projectId)
     const networkConf = await getNetworkConfig(
-      config.api.projectId,
-      config.api.appName
+      config.app.projectId,
+      config.app.name
     )
     await createFixIp(
-      config.api.projectId,
-      config.api.region,
+      config.app.projectId,
+      config.app.region,
       networkConf.loadBalancerIpName,
       true
     )
-    await createNeg(config.api.projectId, functionName, config.api.region)
-    await createBackend(config.api.projectId, config.api.appName)
-    await addBackend(
-      config.api.projectId,
-      config.api.appName,
-      functionName,
-      config.api.region
-    )
-    await createLb(config.api.projectId, config.api.appName)
-    await createSsl(config.api.projectId, config.api.appName, apiDomain)
-    await createProxy(config.api.projectId, config.api.appName)
-    await createFr(config.api.projectId, config.api.appName)
+    await createNeg(config.app.projectId, functionName, config.app.region)
+    await createBackend(config.app.projectId, functionName)
+    await addBackend(config.app.projectId, functionName, config.app.region)
+    await createLb(config.app.projectId, config.app.name)
+    await createSsl(config.app.projectId, config.app.name, appDomain)
+    await createProxy(config.app.projectId, config.app.name)
+    await createFr(config.app.projectId, config.app.name)
 
-    const ip = await getIp(config.api.projectId, networkConf.loadBalancerIpName)
+    const ip = await getIp(config.app.projectId, networkConf.loadBalancerIpName)
 
-    await createZone(config.api.projectId, config.api.appName, nsDomain)
+    await createZone(config.app.projectId, config.app.name, nsDomain)
 
     await createRecord(
-      config.api.projectId,
+      config.app.projectId,
       networkConf.zoneName,
-      apiDomain,
+      appDomain,
       ip
     )
     await createCaaRecords(
-      config.api.projectId,
+      config.app.projectId,
       networkConf.zoneName,
-      apiDomain
+      appDomain
     )
   } catch (error) {
     await Logger.error(`setupLoadBalancer error: ${JSON.stringify(error)}`)
