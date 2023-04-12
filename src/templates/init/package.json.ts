@@ -10,8 +10,11 @@ export const packageJson = async (appName: string) => {
     license: 'Apache-2.0',
     private: true,
     scripts: {
-      dev: 'firebase emulators:start',
-      deploy: 'firebase deploy --only functions',
+      skeet: 'run-p skeet:*',
+      'skeet:openai': 'yarn --cwd functions/openai dev',
+      'skeet:dev': 'firebase emulators:start',
+      deploy: 'firebase deploy',
+      'functions:deploy': 'firebase deploy --only functions',
     },
     devDependencies: {
       '@types/jest': '29.5.0',
@@ -22,6 +25,7 @@ export const packageJson = async (appName: string) => {
       'eslint-config-prettier': '8.8.0',
       nodemon: '2.0.22',
       'npm-check-updates': '16.8.0',
+      'npm-run-all': '4.1.5',
       prettier: '2.8.7',
       'ts-jest': '29.0.5',
       'ts-loader': '9.4.2',

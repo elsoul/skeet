@@ -18,34 +18,14 @@ export const skeetCloudConfigGen = async (appName: string) => {
         {
           "name": "hello",
           "url": "",
-          "httpsOptions": [
-            {
-              "region": "europe-west4",
-              "cpu": 1,
-              "memory": "1Gi",
-              "maxInstances": 100,
-              "minInstances": 0,
-              "concurrency": 10,
-              "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
-              "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
-            }
-          ]
+          "pubsub": false,
+          "scheduler: ""
         },
         {
           "name": "openaichatroom",
           "url": "",
-          "httpsOptions": [
-            {
-              "region": "europe-west4",
-              "cpu": 1,
-              "memory": "1Gi",
-              "maxInstances": 100,
-              "minInstances": 0,
-              "concurrency": 10,
-              "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
-              "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
-            }
-          ]
+          "pubsub": false,
+          "scheduler: ""
         }
       ]
     }

@@ -4,11 +4,13 @@ import {
   FIREBASE_CONFIG_PATH,
   FUNCTIONS_PATH,
   FUNCTIONS_REPO_URL,
+  ROUTE_PACKAGE_JSON_PATH,
   SKEET_CONFIG_PATH,
   getFunctionInfo,
 } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
 import { skeetError } from '@/lib/skeetError'
+import { functionsYml } from '@/templates/init'
 import { HttpsOptions } from 'firebase-functions/v2/https'
 import fs from 'fs'
 
@@ -28,6 +30,8 @@ export const addFunctions = async (functionName: string) => {
       await execSyncCmd(rmDefaultGit, functionDir)
       await updateSkeetCloudConfig(functionName)
       await updateFirebaseConfig(functionName)
+      await addFunctionsToPackageJson(functionName)
+      await functionsYml(functionName)
     }
   } catch (error) {
     await skeetError('addFunctions', error)
@@ -81,4 +85,17 @@ export const updateFirebaseConfig = async (functionName: string) => {
     JSON.stringify(firebaseConfig, null, 2)
   )
   Logger.success('Successfully Updated firebase.json!')
+}
+
+export const addFunctionsToPackageJson = async (functionName: string) => {
+  const packageJson = fs.readFileSync(ROUTE_PACKAGE_JSON_PATH)
+  const newPackageJson = JSON.parse(String(packageJson))
+  newPackageJson.scripts[
+    `skeet:${functionName}`
+  ] = `yarn --cwd ./functions/${functionName} dev`
+  fs.writeFileSync(
+    ROUTE_PACKAGE_JSON_PATH,
+    JSON.stringify(newPackageJson, null, 2)
+  )
+  Logger.success('Successfully Updated ./package.json!')
 }

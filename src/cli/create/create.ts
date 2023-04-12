@@ -1,6 +1,5 @@
 import { Logger } from '@/lib/logger'
 import fs from 'fs'
-import path from 'path'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
