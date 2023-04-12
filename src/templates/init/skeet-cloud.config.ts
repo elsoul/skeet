@@ -19,13 +19,13 @@ export const skeetCloudConfigGen = async (appName: string) => {
           "name": "hello",
           "url": "",
           "pubsub": false,
-          "scheduler: ""
+          "scheduler": ""
         },
         {
           "name": "openaichatroom",
           "url": "",
           "pubsub": false,
-          "scheduler: ""
+          "scheduler": ""
         }
       ]
     }
