@@ -11,7 +11,7 @@ export const addPathMatcher = async (
   const appConf = await getNetworkConfig(projectId, appName)
   const functionInfo = await getFunctionInfo(functionName)
   const path = init
-    ? `/*=${functionInfo.backendService}`
+    ? `/=${functionInfo.backendService}`
     : `/${functionName}/*=${functionInfo.backendService}`
   const shCmd = [
     'gcloud',
