@@ -119,9 +119,12 @@ async function main() {
       .option('--skip-setup-cloud', 'Generate Skeet Cloud Config', false)
       .description('Deploy skeet AI Kit to Google Cloud Platform')
       .action(async (options) => {
-        options.onlyConfig
-          ? await skeetCloudConfigAppGen()
-          : await init(options.skipSetupCloud)
+        if (options.onlyConfig) {
+          const data = await skeetCloudConfigAppGen()
+          fs.writeFileSync(data.filePath, data.body)
+        } else {
+          await init(options.skipSetupCloud)
+        }
       })
 
     const iam = program.command('iam').description('Skeet IAM Comannd')
