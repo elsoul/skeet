@@ -1,6 +1,5 @@
 import { execCmd } from '@/lib/execCmd'
-import { execSyncCmd } from '@/lib/execSyncCmd'
-import { exec, execSync, spawnSync } from 'child_process'
+import { execSync, spawnSync } from 'child_process'
 
 export const server = async () => {
   try {
