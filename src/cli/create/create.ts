@@ -20,6 +20,8 @@ export const skeetCreate = async (appName: string) => {
   const yarnApiCmd = ['yarn']
   await execSyncCmd(yarnApiCmd, appDir)
   await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/openai`)
+  const makeEnvCmd = ['echo', `PROJECT_ID=${appName}`, '>', '.env']
+  await execSyncCmd(makeEnvCmd, `${appDir}/${FUNCTIONS_PATH}/openai`)
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
   await generateInitFiles(appName)

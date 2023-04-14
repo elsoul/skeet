@@ -7,13 +7,12 @@ import {
   setupLoadBalancer,
   setGcloudProject,
   gitInit,
-  gitCryptInit,
   gitCommit,
   createGitRepo,
   syncArmor,
   getZone,
-  deploy,
 } from '@/cli'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 const requireRepoName = (value: string) => {
   if (/.+\/.+/.test(value)) {
@@ -93,9 +92,9 @@ export const setupCloud = async (
   await Logger.sync(`setting up your google cloud platform...`)
   await setGcloudProject(skeetConfig.app.projectId)
   await gitInit()
-  await gitCryptInit()
   await gitCommit()
   await createGitRepo(repoName)
   await setupGcp(skeetConfig)
-  await deploy()
+  const shCmd = ['firebase', 'deploy', '--only', 'functions']
+  await execSyncCmd(shCmd)
 }

@@ -16,6 +16,7 @@ import fs from 'fs'
 
 export const addFunctions = async (functionName: string) => {
   try {
+    const skeetConfig: SkeetCloudConfig = await importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}`
     if (fs.existsSync(functionDir)) {
       await Logger.error(`Already exist functionName: ${functionName}!`)
@@ -28,6 +29,13 @@ export const addFunctions = async (functionName: string) => {
       await execSyncCmd(gitCloneCmd)
       const rmDefaultGit = ['rm', '-rf', '.git']
       await execSyncCmd(rmDefaultGit, functionDir)
+      const makeEnvCmd = [
+        'echo',
+        `PROJECT_ID=${skeetConfig.app.projectId}`,
+        '>',
+        '.env',
+      ]
+      await execSyncCmd(makeEnvCmd, `${FUNCTIONS_PATH}/${functionName}`)
       await updateSkeetCloudConfig(functionName)
       await updateFirebaseConfig(functionName)
       await addFunctionsToPackageJson(functionName)

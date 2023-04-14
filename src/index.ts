@@ -7,6 +7,7 @@ import {
   addJsonEnv,
   create,
   createServiceAccountKey,
+  deploy,
   init,
   setupIam,
   setupNetwork,
@@ -107,6 +108,10 @@ async function main() {
       .description('Run Skeet Server')
       .alias('s')
       .action(server)
+    program
+      .command('deploy')
+      .description('Deploy Skeet APP to Google Cloud Platform')
+      .action(deploy)
     program
       .command('init')
       .description('Deploy skeet AI Kit to Google Cloud Platform')
