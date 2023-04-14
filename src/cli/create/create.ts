@@ -3,7 +3,7 @@ import fs from 'fs'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
-import { APP_REPO_URL } from '@/lib/getSkeetConfig'
+import { APP_REPO_URL, FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 
 export const create = async (initAppName: string) => {
   await skeetCreate(initAppName)
@@ -11,10 +11,15 @@ export const create = async (initAppName: string) => {
 
 export const skeetCreate = async (appName: string) => {
   const appDir = './' + appName
+  if (fs.existsSync(appDir)) {
+    await Logger.error(`Directory ${appName} already exists.`)
+    process.exit(0)
+  }
   const gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
   await execSyncCmd(gitCloneCmd)
   const yarnApiCmd = ['yarn']
   await execSyncCmd(yarnApiCmd, appDir)
+  await execSyncCmd(yarnApiCmd, `${FUNCTIONS_PATH}/openai`)
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
   await generateInitFiles(appName)
@@ -72,8 +77,6 @@ export const generateInitFiles = async (appName: string) => {
   fs.writeFileSync(prettierignore.filePath, prettierignore.body)
   const gitignore = await fileDataOf.gitignore(appName)
   fs.writeFileSync(gitignore.filePath, gitignore.body)
-  const rmDefaultEnv = ['rm', '.env']
-  await execSyncCmd(rmDefaultEnv)
   const gitattributes = await fileDataOf.gitattributes(appName)
   fs.writeFileSync(gitattributes.filePath, gitattributes.body)
 }

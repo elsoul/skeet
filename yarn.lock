@@ -2444,7 +2444,7 @@ find-up@^4.0.0, find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-firebase-functions@^4.2.1:
+firebase-functions@4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/firebase-functions/-/firebase-functions-4.2.1.tgz#3400aebe8192e9f0a62a8a39625fa76699c0208e"
   integrity sha512-+NjbI6TD3ivuoT7B3oC4iwRlt41QDTcYowo3TO88ZyMHmjCzlrbiuAjiPzz/zfwgi3+GCoP1tztHOQHhDGYE5w==
