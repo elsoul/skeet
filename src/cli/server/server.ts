@@ -1,16 +1,21 @@
 import { execCmd } from '@/lib/execCmd'
-import { spawnSync } from 'child_process'
+import { exec } from 'child_process'
 
 export const server = async () => {
   try {
-    const killEmulator =
-      "kill $(ps aux | grep 'cloud-firestore-emulator.*host 127.0.0.1' | awk '{print $2}')"
-
-    spawnSync(killEmulator, { stdio: 'ignore' })
-    const shCmd = ['yarn', 'skeet']
-    await execCmd(shCmd)
+    const pid = exec(
+      "ps aux | grep 'cloud-firestore-emulator.*host 127.0.0.1' | awk '{print $2}'",
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`exec error: ${error}`)
+          return
+        }
+        return stdout
+      }
+    )
+    exec(`kill -9 ${pid}`)
+    await execCmd(['skeet', 's'])
   } catch (error) {
-    const shCmd = ['yarn', 'skeet']
-    await execCmd(shCmd)
+    console.log(error)
   }
 }
