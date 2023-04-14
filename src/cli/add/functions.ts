@@ -29,13 +29,10 @@ export const addFunctions = async (functionName: string) => {
       await execSyncCmd(gitCloneCmd)
       const rmDefaultGit = ['rm', '-rf', '.git']
       await execSyncCmd(rmDefaultGit, functionDir)
-      const makeEnvCmd = [
-        'echo',
-        `PROJECT_ID=${skeetConfig.app.projectId}`,
-        '>',
-        '.env',
-      ]
-      await execSyncCmd(makeEnvCmd, `${FUNCTIONS_PATH}/${functionName}`)
+      fs.writeFileSync(
+        `${functionDir}/.env`,
+        `PROJECT_ID=${skeetConfig.app.projectId}`
+      )
       await updateSkeetCloudConfig(functionName)
       await updateFirebaseConfig(functionName)
       await addFunctionsToPackageJson(functionName)
