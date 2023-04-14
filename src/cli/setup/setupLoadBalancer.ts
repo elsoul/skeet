@@ -19,8 +19,7 @@ import { Logger } from '@/lib/logger'
 export const setupLoadBalancer = async (
   config: SkeetCloudConfig,
   appDomain: string,
-  nsDomain: string,
-  functionName: string
+  nsDomain: string
 ) => {
   try {
     await setGcloudProject(config.app.projectId)
@@ -34,9 +33,9 @@ export const setupLoadBalancer = async (
       networkConf.loadBalancerIpName,
       true
     )
-    await createNeg(config.app.projectId, functionName, config.app.region)
-    await createBackend(config.app.projectId, functionName)
-    await addBackend(config.app.projectId, functionName, config.app.region)
+    await createNeg(config.app.projectId, config.app.name, config.app.region)
+    await createBackend(config.app.projectId, config.app.name)
+    await addBackend(config.app.projectId, config.app.name, config.app.region)
     await createLb(config.app.projectId, config.app.name)
     await createSsl(config.app.projectId, config.app.name, appDomain)
     await createProxy(config.app.projectId, config.app.name)

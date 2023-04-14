@@ -60,18 +60,15 @@ const questions = [
   },
 ]
 
-export const init = async () => {
+export const init = async (skipSetupCloud = false) => {
   const skeetConfig = await importConfig()
   inquirer.prompt(questions).then(async (answer) => {
     const answers = JSON.parse(JSON.stringify(answer))
-    await setupCloud(skeetConfig, answers.githubRepo)
-    const functionName = 'hello'
-    await setupLoadBalancer(
-      skeetConfig,
-      answers.lbDomain,
-      answers.nsDomain,
-      functionName
-    )
+    if (!skipSetupCloud) {
+      await setupCloud(skeetConfig, answers.githubRepo)
+    }
+
+    await setupLoadBalancer(skeetConfig, answers.lbDomain, answers.nsDomain)
     await initArmor(skeetConfig.app.projectId, skeetConfig.app.name)
     await syncArmor()
     await getZone(skeetConfig.app.projectId, skeetConfig.app.name)

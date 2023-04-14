@@ -18,6 +18,7 @@ import { HttpsOptions } from 'firebase-functions/v2/https'
 import { addFunctions } from './cli/add'
 import { addRounting } from './cli/add/routing'
 import { Logger } from './lib/logger'
+import { skeetCloudConfigAppGen } from './templates/init/skeet-cloud.config-app'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -114,10 +115,15 @@ async function main() {
       .action(deploy)
     program
       .command('init')
+      .option('--only-config', 'Generate Skeet Cloud Config', false)
+      .option('--skip-setup-cloud', 'Generate Skeet Cloud Config', false)
       .description('Deploy skeet AI Kit to Google Cloud Platform')
-      .action(async () => {
-        await init()
+      .action(async (options) => {
+        options.onlyConfig
+          ? await skeetCloudConfigAppGen()
+          : await init(options.skipSetupCloud)
       })
+
     const iam = program.command('iam').description('Skeet IAM Comannd')
     iam
       .command('init')
