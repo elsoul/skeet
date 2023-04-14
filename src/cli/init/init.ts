@@ -13,6 +13,8 @@ import {
   getZone,
 } from '@/cli'
 import { execSyncCmd } from '@/lib/execSyncCmd'
+import { SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
+import fs from 'fs'
 
 const requireRepoName = (value: string) => {
   if (/.+\/.+/.test(value)) {
@@ -69,6 +71,7 @@ export const init = async (skipSetupCloud = false) => {
     }
 
     await setupLoadBalancer(skeetConfig, answers.lbDomain, answers.nsDomain)
+    await addDomainToConfig(answers.nsDomain, answers.lbDomain)
     await initArmor(skeetConfig.app.projectId, skeetConfig.app.name)
     await syncArmor()
     await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
@@ -94,4 +97,16 @@ export const setupCloud = async (
   await setupGcp(skeetConfig)
   const shCmd = ['firebase', 'deploy', '--only', 'functions']
   await execSyncCmd(shCmd)
+}
+
+export const addDomainToConfig = async (
+  nsDomain: string,
+  functionsDomain: string
+) => {
+  const skeetConfig: SkeetCloudConfig = await importConfig()
+
+  skeetConfig.app.appDomain = nsDomain
+  skeetConfig.app.functionsDomain = functionsDomain
+  fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+  Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
