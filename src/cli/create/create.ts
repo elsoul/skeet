@@ -22,7 +22,7 @@ export const skeetCreate = async (appName: string) => {
   await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/openai`)
   fs.writeFileSync(
     `${appDir}/${FUNCTIONS_PATH}/openai/.env`,
-    `PROJECT_ID=${appName}`
+    `PROJECT_ID=${appName}\nREGION=europe-west4`
   )
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)

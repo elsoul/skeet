@@ -31,7 +31,7 @@ export const addFunctions = async (functionName: string) => {
       await execSyncCmd(rmDefaultGit, functionDir)
       fs.writeFileSync(
         `${functionDir}/.env`,
-        `PROJECT_ID=${skeetConfig.app.projectId}`
+        `PROJECT_ID=${skeetConfig.app.projectId}\nREGION=${skeetConfig.app.region}`
       )
       await updateSkeetCloudConfig(functionName)
       await updateFirebaseConfig(functionName)
