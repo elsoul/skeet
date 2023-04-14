@@ -12,6 +12,6 @@ export const addRounting = async (
   await createNeg(projectId, functionName, region)
   await createBackend(projectId, functionName)
   await addBackend(projectId, functionName, region)
-  await addPathMatcher(projectId, functionName, domain)
+  await addPathMatcher(projectId, config.app.name, functionName, domain)
   await updateBackend(config.app.projectId, config.app.name, functionName)
 }

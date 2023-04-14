@@ -10,11 +10,13 @@ import {
   createRecord,
   createSsl,
   createZone,
+  updateBackend,
 } from '@/cli'
 import { getIp, setGcloudProject } from '@/cli'
 import { SkeetCloudConfig } from '@/index'
 import { getNetworkConfig } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
+import { addPathMatcher } from '../gcloud/lb/addPathMatcher'
 
 export const setupLoadBalancer = async (
   config: SkeetCloudConfig,
@@ -40,6 +42,19 @@ export const setupLoadBalancer = async (
     await createSsl(config.app.projectId, config.app.name, appDomain)
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
+
+    const functionName = 'root'
+    await createNeg(config.app.projectId, functionName, config.app.region)
+    await createBackend(config.app.projectId, functionName)
+    await addBackend(config.app.projectId, functionName, config.app.region)
+    await addPathMatcher(
+      config.app.projectId,
+      config.app.name,
+      functionName,
+      appDomain,
+      true
+    )
+    await updateBackend(config.app.projectId, config.app.name, functionName)
 
     const ip = await getIp(config.app.projectId, networkConf.loadBalancerIpName)
 
