@@ -47,4 +47,6 @@ export const roleList = [
   'roles/cloudtranslate.admin',
   'roles/cloudtasks.admin',
   'roles/compute.networkAdmin',
+  'roles/cloudfunctions.admin',
+  'roles/firebasehosting.sites.create',
 ]

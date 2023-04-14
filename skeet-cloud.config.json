@@ -3,8 +3,7 @@
     "name": "skeet-app",
     "projectId": "skeet-example",
     "region": "europe-west4",
-    "appDomain": "app.skeet.dev",
-    "functionsDomain": "functions.skeet.dev"
+    "appUrl": ""
   },
   "functions": [
     {
@@ -13,50 +12,59 @@
         {
           "name": "hello",
           "url": "",
-          "httpsOptions": {
-            "region": "europe-west4",
-            "cpu": 1,
-            "memory": "1Gi",
-            "maxInstances": 100,
-            "minInstances": 0,
-            "concurrency": 10,
-            "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
-            "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
-          }
+          "pubsub": false,
+          "scheduler": ""
         },
         {
           "name": "openaichatroom",
           "url": "",
-          "httpsOptions": {
-            "region": "europe-west4",
-            "cpu": 1,
-            "memory": "1Gi",
-            "maxInstances": 100,
-            "minInstances": 0,
-            "concurrency": 10,
-            "ingressSettings": "ALLOW_INTERNAL_AND_GCLB",
-            "vpcConnectorEgressSettings": "PRIVATE_RANGES_ONLY"
-          }
+          "pubsub": true,
+          "scheduler": "every 24 hours"
         }
       ]
     }
   ],
   "cloudArmor": [
     {
-      "securityPolicyName": "skeet-armor",
+      "securityPolicyName": "skeet-skeet-example-armor",
       "rules": [
         {
-          "priority": "1000",
-          "description": "ban 300sec if exceed 50 access in 60sec",
+          "priority": "10",
+          "description": "Allow Your Home IP addresses",
           "options": {
-            "action": "rate-based-ban",
-            "src-ip-ranges": "*",
-            "rate-limit-threshold-count": "50",
-            "rate-limit-threshold-interval-sec": "60",
-            "ban-duration-sec": "300",
-            "conform-action": "allow",
-            "exceed-action": "deny-404",
-            "enforce-on-key": "IP"
+            "src-ip-ranges": "x.x.x.x",
+            "action": "allow"
+          }
+        },
+        {
+          "priority": "100",
+          "description": "Defense from SQLi attack",
+          "options": {
+            "action": "deny-403",
+            "expression": "evaluatePreconfiguredExpr('sqli-stable')"
+          }
+        },
+        {
+          "priority": "200",
+          "description": "Defense from XSS attack",
+          "options": {
+            "action": "deny-403",
+            "expression": "evaluatePreconfiguredExpr('xss-stable')"
+          }
+        },
+        {
+          "priority": "300",
+          "description": "Defense from NodeJS attack",
+          "options": {
+            "action": "deny-403",
+            "expression": "evaluatePreconfiguredExpr('nodejs-v33-stable')"
+          }
+        },
+        {
+          "priority": "2147483647",
+          "description": "Deny All IP addresses",
+          "options": {
+            "action": "deny-403"
           }
         }
       ]
