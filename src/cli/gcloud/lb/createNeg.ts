@@ -18,7 +18,7 @@ export const createNeg = async (
     '--network-endpoint-type',
     'serverless',
     '--cloud-run-service',
-    functionInfo.name,
+    functionName,
     '--project',
     projectId,
   ]
