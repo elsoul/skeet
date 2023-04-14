@@ -14,7 +14,8 @@ export const server = async () => {
       }
     )
     exec(`kill -9 ${pid}`)
-    await execCmd(['skeet', 's'])
+    const shCmd = ['yarn', 'skeet']
+    await execCmd(shCmd)
   } catch (error) {
     console.log(error)
   }
