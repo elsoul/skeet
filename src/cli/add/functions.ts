@@ -63,7 +63,8 @@ export const updateSkeetCloudConfig = async (functionName: string) => {
       {
         name: 'hello',
         url: '',
-        httpsOptions,
+        pubsub: false,
+        scheduler: '',
       },
     ],
   }

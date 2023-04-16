@@ -42,7 +42,8 @@ export type FunctionConfig = {
 export type FunctionMethods = {
   name: string
   url: string
-  httpsOptions: HttpsOptions
+  pubsub: boolean
+  scheduler: string
 }
 
 export type CloudArmor = Array<SecurityPolicy>
