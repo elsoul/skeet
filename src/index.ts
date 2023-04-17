@@ -9,6 +9,7 @@ import {
   createServiceAccountKey,
   deploy,
   init,
+  listRegions,
   setupIam,
   setupNetwork,
   yarn,

@@ -13,8 +13,9 @@ import {
   getZone,
 } from '@/cli'
 import { execSyncCmd } from '@/lib/execSyncCmd'
-import { SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
+import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
+import { execSync } from 'child_process'
 
 const requireRepoName = (value: string) => {
   if (/.+\/.+/.test(value)) {
@@ -64,25 +65,56 @@ const questions = [
 
 export const init = async (skipSetupCloud = false) => {
   const skeetConfig = await importConfig()
-  inquirer.prompt(questions).then(async (answer) => {
-    const answers = JSON.parse(JSON.stringify(answer))
-    if (!skipSetupCloud) {
-      await setupCloud(skeetConfig, answers.githubRepo)
-    }
+  const regions = (await listRegions()) || []
+  const regionsArray: Array<{ [key: string]: string }> = []
+  for await (const region of regions) {
+    regionsArray.push({ name: region })
+  }
 
-    await setupLoadBalancer(skeetConfig, answers.lbDomain, answers.nsDomain)
-    await addDomainToConfig(answers.nsDomain, answers.lbDomain)
-    await initArmor(skeetConfig.app.projectId, skeetConfig.app.name)
-    await syncArmor()
-    await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
-    await Logger.sync(
-      `Copy nameServer's addresses above and paste them to your DNS settings`
-    )
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        message: 'Select Regions to deploy',
+        name: 'region',
+        choices: [new inquirer.Separator(' = Regions = '), ...regionsArray],
+        validate(answer) {
+          if (answer.length < 1) {
+            return 'You must choose at least one service.'
+          }
 
-    await Logger.success(
-      `✔︎ created Load Balancer!\nhttps will be ready in about an hour after your DNS settings 🎉`
-    )
-  })
+          return true
+        },
+      },
+    ])
+    .then(async (region) => {
+      if (region) {
+        await addRegionToConfig(region.region)
+        inquirer.prompt(questions).then(async (answer) => {
+          const answers = JSON.parse(JSON.stringify(answer))
+          if (!skipSetupCloud) {
+            await setupCloud(skeetConfig, answers.githubRepo)
+          }
+
+          await setupLoadBalancer(
+            skeetConfig,
+            answers.lbDomain,
+            answers.nsDomain
+          )
+          await addDomainToConfig(answers.nsDomain, answers.lbDomain)
+          await initArmor(skeetConfig.app.projectId, skeetConfig.app.name)
+          await syncArmor()
+          await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
+          await Logger.sync(
+            `Copy nameServer's addresses above and paste them to your DNS settings`
+          )
+
+          await Logger.success(
+            `✔︎ created Load Balancer!\nhttps will be ready in about an hour after your DNS settings 🎉`
+          )
+        })
+      }
+    })
 }
 
 export const setupCloud = async (
@@ -109,4 +141,28 @@ export const addDomainToConfig = async (
   skeetConfig.app.functionsDomain = functionsDomain
   fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.success('Successfully Updated skeet-cloud.config.json!')
+}
+
+export const addRegionToConfig = async (region: string) => {
+  const skeetConfig: SkeetCloudConfig = await importConfig()
+
+  skeetConfig.app.region = region
+  fs.writeFileSync(
+    `${FUNCTIONS_PATH}/openai/.env`,
+    `PROJECT_ID=${skeetConfig.app.name}\nREGION=${region}`
+  )
+  fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+  Logger.success('Successfully Updated skeet-cloud.config.json!')
+}
+
+export const listRegions = async () => {
+  try {
+    const stdout = execSync(
+      'gcloud compute regions list --format="value(name)"'
+    )
+    const regions = stdout.toString().trim().split('\n')
+    return regions
+  } catch (error) {
+    console.error(`listRegions: ${error}`)
+  }
 }

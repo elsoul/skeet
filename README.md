@@ -34,6 +34,8 @@ Build Serverless Apps faster.
 Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Cloud Functions 2nd Generation.
 Automated to build all the Google Cloud VPC network settings;
 
+![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif)
+
 - Firewall
 - VPC Network
 - Subnet Network
@@ -66,8 +68,6 @@ $ npm i -g @skeet-framework/cli
 ```bash
 $ skeet create ${appName}
 ```
-
-![Skeet Create](https://storage.googleapis.com/skeet-assets/animation/skeet-create-compressed.gif)
 
 ## Run local
 
