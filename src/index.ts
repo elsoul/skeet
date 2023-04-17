@@ -9,13 +9,12 @@ import {
   createServiceAccountKey,
   deploy,
   init,
-  listRegions,
   setupIam,
   setupNetwork,
   yarn,
+  listFunctions,
 } from '@/cli'
 import { server } from '@/cli/server'
-import { HttpsOptions } from 'firebase-functions/v2/https'
 import { addFunctions } from './cli/add'
 import { addRounting } from './cli/add/routing'
 import { Logger } from './lib/logger'
@@ -194,6 +193,14 @@ async function main() {
           config.app.region,
           config.app.functionsDomain
         )
+      })
+
+    const list = program.command('list').description('Show Skeet App List')
+    list
+      .command('functions')
+      .description('Show Skeet Functions List')
+      .action(async () => {
+        await listFunctions()
       })
 
     await program.parseAsync(process.argv)

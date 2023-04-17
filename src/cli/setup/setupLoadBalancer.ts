@@ -20,7 +20,7 @@ import { addPathMatcher } from '../gcloud/lb/addPathMatcher'
 
 export const setupLoadBalancer = async (
   config: SkeetCloudConfig,
-  appDomain: string,
+  lbDomain: string,
   nsDomain: string
 ) => {
   try {
@@ -46,25 +46,31 @@ export const setupLoadBalancer = async (
       true
     )
     await createLb(config.app.projectId, config.app.name)
-    await createSsl(config.app.projectId, config.app.name, appDomain)
+    await createSsl(config.app.projectId, config.app.name, lbDomain)
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
+
+    await createBackend(config.app.projectId, functionName)
+    await addBackend(
+      config.app.projectId,
+      config.app.name,
+      functionName,
+      config.app.region
+    )
+    await addPathMatcher(
+      config.app.projectId,
+      config.app.name,
+      functionName,
+      lbDomain
+    )
+    await updateBackend(config.app.projectId, config.app.name, functionName)
 
     const ip = await getIp(config.app.projectId, networkConf.loadBalancerIpName)
 
     await createZone(config.app.projectId, config.app.name, nsDomain)
 
-    await createRecord(
-      config.app.projectId,
-      networkConf.zoneName,
-      appDomain,
-      ip
-    )
-    await createCaaRecords(
-      config.app.projectId,
-      networkConf.zoneName,
-      appDomain
-    )
+    await createRecord(config.app.projectId, networkConf.zoneName, lbDomain, ip)
+    await createCaaRecords(config.app.projectId, networkConf.zoneName, lbDomain)
   } catch (error) {
     await Logger.error(`setupLoadBalancer error: ${JSON.stringify(error)}`)
     process.exit(1)
