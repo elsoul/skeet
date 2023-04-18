@@ -157,8 +157,9 @@ export const addRegionToConfig = async (region: string) => {
 
 export const listRegions = async () => {
   try {
+    const skeetConfig: SkeetCloudConfig = await importConfig()
     const stdout = execSync(
-      'gcloud compute regions list --format="value(name)"'
+      `gcloud compute regions list --format="value(name)" --project ${skeetConfig.app.projectId}`
     )
     const regions = stdout.toString().trim().split('\n')
     return regions
