@@ -34,17 +34,8 @@ The Skeet project was launched with the goal of reducing software development, o
 
 Build Serverless Apps faster.
 Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Cloud Functions 2nd Generation.
-Automated to build all the Google Cloud VPC network settings;
 
 ![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif)
-
-- Firewall
-- VPC Network
-- Subnet Network
-- VPC Connector
-- Load Balancer
-- Cloud Armor
-- Cloud DNS
 
 ## Dependency
 
@@ -57,21 +48,33 @@ Automated to build all the Google Cloud VPC network settings;
 - [GitHub CLI](https://cli.github.com/)
 - [Git Crypt](https://github.com/AGWA/git-crypt)
 
+## Cloud Network Architecture
+
+Automated to build all the Google Cloud VPC network settings;
+
+- Firewall
+- VPC Network
+- Subnet Network
+- VPC Connector
+- Load Balancer
+- Cloud Armor
+- Cloud DNS
+
 ## Usage
 
-## Install skeet
+### Install skeet
 
 ```bash
 $ npm i -g @skeet-framework/cli
 ```
 
-## Create Skeet API
+### Create Skeet API
 
 ```bash
 $ skeet create ${appName}
 ```
 
-## Run local
+### Run local
 
 ```bash
 $ skeet s
@@ -89,10 +92,6 @@ Now you can access;
 $ skeet init
 ```
 
-### Document
-
-- [Skeet Document](https://skeet.dev)
-
 ### Deploy All Services to Google Cloud Run
 
 ```bash
@@ -101,15 +100,13 @@ $ skeet deploy
 
 ![Skeet Deploy](https://storage.googleapis.com/skeet-assets/animation/skeet-deploy-compressed.gif)
 
-## Add Cloud Functions
+### Add Cloud Functions
 
 Add Cloud Functions 2nd Gen by Skeet CLI
 
 ```bash
 $ skeet add functions <functionName>
 ```
-
-Document: [https://skeet.dev](https://skeet.dev)
 
 ## Skeet CLI
 
