@@ -46,7 +46,6 @@ Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Clou
 - [Firebase CLI](https://firebase.google.com/docs/cli)
 - [Docker](https://www.docker.com/)
 - [GitHub CLI](https://cli.github.com/)
-- [Git Crypt](https://github.com/AGWA/git-crypt)
 
 ## Cloud Network Architecture
 
