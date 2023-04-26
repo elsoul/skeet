@@ -61,13 +61,13 @@ Automated to build all the Google Cloud VPC network settings;
 
 ## Usage
 
-### Install skeet
+### Install Skeet CLI
 
 ```bash
 $ npm i -g @skeet-framework/cli
 ```
 
-### Create Skeet API
+### Create Skeet App
 
 ```bash
 $ skeet create ${appName}
@@ -85,13 +85,13 @@ Now you can access;
 
 ## Zero to Deploy
 
-### Git Init
+### Project Init
 
 ```bash
 $ skeet init
 ```
 
-### Deploy All Services to Google Cloud Run
+### Deploy Whole Application
 
 ```bash
 $ skeet deploy
@@ -100,8 +100,6 @@ $ skeet deploy
 ![Skeet Deploy](https://storage.googleapis.com/skeet-assets/animation/skeet-deploy-compressed.gif)
 
 ### Add Cloud Functions
-
-Add Cloud Functions 2nd Gen by Skeet CLI
 
 ```bash
 $ skeet add functions <functionName>
@@ -113,22 +111,26 @@ $ skeet add functions <functionName>
 $ skeet --help
 Usage: skeet [options] [command]
 
-CLI to skeet framework
+CLI for Skeet - Full-stack TypeScript Serverless framework
 
 Options:
   -V, --version             output the version number
   -h, --help                display help for command
 
 Commands:
-  create <appName>          Create Skeet AI Kit to Google Cloud Platform
+  create <appName>          Create Skeet App
   server|s                  Run Skeet Server
-  init                      Deploy skeet AI Kit to Google Cloud Platform
-  iam                       Setup IAM for Google Cloud Platform
+  deploy                    Deploy Skeet App
+  init [options]
+  iam                       Skeet IAM Comannd
   vpc                       Setup VPC for Google Cloud Platform
   yarn [options] <yarnCmd>
   add                       Add Comannd
+  list                      Show Skeet App List
   help [command]            display help for command
 ```
+
+Skeet Doc: https://skeet.dev/
 
 ## Contributing
 

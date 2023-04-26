@@ -92,16 +92,20 @@ export const importFirebaseConfig = async () => {
 
 const program = new Command()
 
-program.name('skeet').description('CLI to skeet framework').version(VERSION)
+program
+  .name('skeet')
+  .description('CLI for Skeet - Full-stack TypeScript Serverless framework')
+  .version(VERSION)
 
 Dotenv.config()
 
 async function main() {
+  // Please check the descriptions if they are correct.
   try {
     program
       .command('create')
       .argument('<appName>', 'Name of the app')
-      .description('Create Skeet AI Kit to Google Cloud Platform')
+      .description('Create Skeet App')
       .action(async (appName: string) => {
         await create(appName)
       })
@@ -118,7 +122,7 @@ async function main() {
       .command('init')
       .option('--only-config', 'Generate Skeet Cloud Config', false)
       .option('--skip-setup-cloud', 'Generate Skeet Cloud Config', false)
-      .description('Deploy skeet AI Kit to Google Cloud Platform')
+      .description('Generate Skeet Cloud Config')
       .action(async (options) => {
         if (options.onlyConfig) {
           const data = await skeetCloudConfigAppGen()
