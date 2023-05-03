@@ -23,12 +23,13 @@ export const addPathMatcher = async (
     functionInfo.backendService,
     '--path-matcher-name',
     functionInfo.name,
-    '--new-hosts',
-    domain,
     '--backend-service-path-rules',
     path,
     '--project',
     projectId,
   ]
+  if (init) {
+    shCmd.push('--new-hosts', domain)
+  }
   await execSyncCmd(shCmd)
 }

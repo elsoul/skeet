@@ -36,7 +36,8 @@ export const addFunctions = async (functionName: string) => {
       await updateSkeetCloudConfig(functionName)
       await updateFirebaseConfig(functionName)
       await addFunctionsToPackageJson(functionName)
-      await functionsYml(functionName)
+      const githubAction = await functionsYml(functionName)
+      fs.writeFileSync(githubAction.filePath, githubAction.body)
     }
   } catch (error) {
     await skeetError('addFunctions', error)

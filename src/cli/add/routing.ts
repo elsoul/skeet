@@ -1,8 +1,6 @@
 import { addBackend, createBackend, createNeg, updateBackend } from '@/cli'
 import { addPathMatcher } from '@/cli/gcloud/lb/addPathMatcher'
 import { importConfig } from '@/index'
-import { functionsYml } from '@/templates/init'
-import fs from 'fs'
 
 export const addRounting = async (
   projectId: string,
@@ -16,6 +14,4 @@ export const addRounting = async (
   await addBackend(projectId, config.app.name, functionName, region)
   await addPathMatcher(projectId, config.app.name, functionName, domain)
   await updateBackend(config.app.projectId, config.app.name, functionName)
-  const githubAction = await functionsYml(functionName)
-  fs.writeFileSync(githubAction.filePath, githubAction.body)
 }
