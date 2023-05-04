@@ -6,16 +6,16 @@
   </a>
   <br/>
 
-  <a aria-label="npm version" href="https://www.npmjs.com/package/skeet">
-    <img alt="" src="https://badgen.net/npm/v/skeet">
+  <a aria-label="npm version" href="https://www.npmjs.com/package/@skeet-framework/cli">
+    <img alt="" src="https://badgen.net/npm/v/@skeet-framework/cli">
   </a>
-  <a aria-label="Downloads Number" href="https://www.npmjs.com/package/skeet">
-    <img alt="" src="https://badgen.net/npm/dt/skeet">
+  <a aria-label="Downloads Number" href="https://www.npmjs.com/package/@skeet-framework/cli">
+    <img alt="" src="https://badgen.net/npm/dt/@skeet-framework/cli">
   </a>
-  <a aria-label="License" href="https://github.com/elsoul/skeet/blob/master/LICENSE.txt">
+  <a aria-label="License" href="https://github.com/elsoul/skeet-cli/blob/master/LICENSE.txt">
     <img alt="" src="https://badgen.net/badge/license/Apache/blue">
   </a>
-    <a aria-label="Code of Conduct" href="https://github.com/elsoul/skeet/blob/master/CODE_OF_CONDUCT.md">
+    <a aria-label="Code of Conduct" href="https://github.com/elsoul/skeet-cli/blob/master/CODE_OF_CONDUCT.md">
     <img alt="" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg">
   </a>
 </p>
@@ -23,6 +23,8 @@
 ## Skeet TypeScript Serverless Framework
 
 TypeScript, Firebase Cloud FireStore, Jest Test, Google Cloud Functions 2nd Generation
+
+Doc: https://skeet.dev/
 
 ## What's Skeet?
 
@@ -32,17 +34,8 @@ The Skeet project was launched with the goal of reducing software development, o
 
 Build Serverless Apps faster.
 Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Cloud Functions 2nd Generation.
-Automated to build all the Google Cloud VPC network settings;
 
 ![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif)
-
-- Firewall
-- VPC Network
-- Subnet Network
-- VPC Connector
-- Load Balancer
-- Cloud Armor
-- Cloud DNS
 
 ## Dependency
 
@@ -53,23 +46,34 @@ Automated to build all the Google Cloud VPC network settings;
 - [Firebase CLI](https://firebase.google.com/docs/cli)
 - [Docker](https://www.docker.com/)
 - [GitHub CLI](https://cli.github.com/)
-- [Git Crypt](https://github.com/AGWA/git-crypt)
+
+## Cloud Network Architecture
+
+Automated to build all the Google Cloud VPC network settings;
+
+- Firewall
+- VPC Network
+- Subnet Network
+- VPC Connector
+- Load Balancer
+- Cloud Armor
+- Cloud DNS
 
 ## Usage
 
-## Install skeet
+### Install Skeet CLI
 
 ```bash
 $ npm i -g @skeet-framework/cli
 ```
 
-## Create Skeet API
+### Create Skeet App
 
 ```bash
 $ skeet create ${appName}
 ```
 
-## Run local
+### Run local
 
 ```bash
 $ skeet s
@@ -81,17 +85,13 @@ Now you can access;
 
 ## Zero to Deploy
 
-### Git Init
+### Project Init
 
 ```bash
 $ skeet init
 ```
 
-### Document
-
-- [Skeet Document](https://skeet.dev)
-
-### Deploy All Services to Google Cloud Run
+### Deploy Whole Application
 
 ```bash
 $ skeet deploy
@@ -99,15 +99,11 @@ $ skeet deploy
 
 ![Skeet Deploy](https://storage.googleapis.com/skeet-assets/animation/skeet-deploy-compressed.gif)
 
-## Add Cloud Functions
-
-Add Cloud Functions 2nd Gen by Skeet CLI
+### Add Cloud Functions
 
 ```bash
 $ skeet add functions <functionName>
 ```
-
-Document: [https://skeet.dev](https://skeet.dev)
 
 ## Skeet CLI
 
@@ -115,26 +111,30 @@ Document: [https://skeet.dev](https://skeet.dev)
 $ skeet --help
 Usage: skeet [options] [command]
 
-CLI to skeet framework
+CLI for Skeet - Full-stack TypeScript Serverless framework
 
 Options:
   -V, --version             output the version number
   -h, --help                display help for command
 
 Commands:
-  create <appName>          Create Skeet AI Kit to Google Cloud Platform
+  create <appName>          Create Skeet App
   server|s                  Run Skeet Server
-  init                      Deploy skeet AI Kit to Google Cloud Platform
-  iam                       Setup IAM for Google Cloud Platform
+  deploy                    Deploy Skeet App
+  init [options]
+  iam                       Skeet IAM Comannd
   vpc                       Setup VPC for Google Cloud Platform
   yarn [options] <yarnCmd>
   add                       Add Comannd
+  list                      Show Skeet App List
   help [command]            display help for command
 ```
 
+Skeet Doc: https://skeet.dev/
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/skeet This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/skeet-cli This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -142,4 +142,4 @@ The package is available as open source under the terms of the [Apache-2.0 Licen
 
 ## Code of Conduct
 
-Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet-cli/blob/master/CODE_OF_CONDUCT.md).
