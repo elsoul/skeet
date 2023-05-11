@@ -2,7 +2,7 @@ import fs from 'fs'
 
 export const functionsYml = async (functionName: string) => {
   fs.mkdirSync('.github/workflows', { recursive: true })
-  const nodeVersion = '18.14.2'
+  const nodeVersion = '18.16.0'
   const name = functionName.toLocaleUpperCase()
   const ymlName = `functions-${functionName}.yml`
   const filePath = `.github/workflows/${ymlName}`
