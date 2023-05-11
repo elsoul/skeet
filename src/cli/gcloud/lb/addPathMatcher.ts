@@ -12,7 +12,7 @@ export const addPathMatcher = async (
   const functionInfo = await getFunctionInfo(functionName)
   const path = init
     ? `/=${functionInfo.backendService}`
-    : `/${functionName}/*=${functionInfo.backendService}`
+    : `/${functionName}=${functionInfo.backendService}`
   const shCmd = [
     'gcloud',
     'compute',

@@ -1,5 +1,6 @@
 import { execSyncCmd } from '@/lib/execSyncCmd'
-import { getFunctionInfo, getNegName } from '@/lib/getSkeetConfig'
+import { getFunctionInfo } from '@/lib/getSkeetConfig'
+import { convertToKebabCase } from '@/utils/string'
 
 export const createNeg = async (
   projectId: string,
@@ -7,6 +8,7 @@ export const createNeg = async (
   region: string
 ) => {
   const functionInfo = await getFunctionInfo(functionName)
+  const kebab = convertToKebabCase(functionName)
   const shCmd = [
     'gcloud',
     'compute',
@@ -18,7 +20,7 @@ export const createNeg = async (
     '--network-endpoint-type',
     'serverless',
     '--cloud-run-service',
-    functionName,
+    kebab,
     '--project',
     projectId,
   ]
