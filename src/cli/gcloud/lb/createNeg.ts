@@ -7,8 +7,8 @@ export const createNeg = async (
   functionName: string,
   region: string
 ) => {
-  const functionInfo = await getFunctionInfo(functionName)
   const kebab = convertToKebabCase(functionName)
+  const functionInfo = await getFunctionInfo(kebab)
   const shCmd = [
     'gcloud',
     'compute',
@@ -20,7 +20,7 @@ export const createNeg = async (
     '--network-endpoint-type',
     'serverless',
     '--cloud-run-service',
-    kebab,
+    functionName,
     '--project',
     projectId,
   ]
