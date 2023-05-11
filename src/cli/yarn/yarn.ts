@@ -15,7 +15,7 @@ export enum YarnCmd {
 }
 
 export const yarn = async (
-  yarnCmd: YarnCmd,
+  yarnCmd: string,
   packageName: string = '',
   isDev: boolean = false
 ) => {

@@ -168,11 +168,7 @@ async function main() {
       )
       .option('-p, --p <packageName>', 'npm package name', '')
       .option('-D', 'Dependency environment', false)
-      .action(async (yarnCmd: YarnCmd, options) => {
-        if (!Object.values(YarnCmd)?.includes(yarnCmd)) {
-          await Logger.error('Invalid Yarn command')
-          process.exit(1)
-        }
+      .action(async (yarnCmd: string, options) => {
         if (yarnCmd === 'add' && options.p === '') {
           await Logger.error('You need to define package name!')
           process.exit(1)
