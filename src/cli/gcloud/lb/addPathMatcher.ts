@@ -28,25 +28,7 @@ export const addPathMatcher = async (
     '--project',
     projectId,
   ]
-  if (init) {
-    shCmd.push('--new-hosts', domain)
-  } else {
-    shCmd = [
-      'gcloud',
-      'compute',
-      'url-maps',
-      'edit',
-      appConf.loadBalancerName,
-      '--default-service',
-      functionInfo.backendService,
-      '--path-matcher-name',
-      functionInfo.name,
-      '--backend-service-path-rules',
-      path,
-      '--project',
-      projectId,
-    ]
-    shCmd.push('--existing-host', domain)
-  }
+  shCmd.push('--new-hosts', domain)
+
   await execSyncCmd(shCmd)
 }
