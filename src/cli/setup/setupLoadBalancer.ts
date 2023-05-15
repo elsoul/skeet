@@ -38,7 +38,6 @@ export const setupLoadBalancer = async (
     )
     const functionName = 'root'
     await createNeg(config.app.projectId, functionName, config.app.region)
-    await createBackend(config.app.projectId, config.app.name)
     await addBackend(
       config.app.projectId,
       config.app.name,

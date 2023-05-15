@@ -28,7 +28,10 @@ export const addPathMatcher = async (
     '--project',
     projectId,
   ]
-  shCmd.push('--new-hosts', domain)
-
+  if (init) {
+    shCmd.push('--new-hosts', domain)
+  } else {
+    shCmd.push('--existing-host', domain)
+  }
   await execSyncCmd(shCmd)
 }
