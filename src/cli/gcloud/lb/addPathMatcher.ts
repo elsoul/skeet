@@ -13,7 +13,7 @@ export const addPathMatcher = async (
   const path = init
     ? `/=${functionInfo.backendService}`
     : `/${functionName}=${functionInfo.backendService}`
-  const shCmd = [
+  let shCmd = [
     'gcloud',
     'compute',
     'url-maps',
@@ -31,6 +31,21 @@ export const addPathMatcher = async (
   if (init) {
     shCmd.push('--new-hosts', domain)
   } else {
+    shCmd = [
+      'gcloud',
+      'compute',
+      'url-maps',
+      'edit',
+      appConf.loadBalancerName,
+      '--default-service',
+      functionInfo.backendService,
+      '--path-matcher-name',
+      functionInfo.name,
+      '--backend-service-path-rules',
+      path,
+      '--project',
+      projectId,
+    ]
     shCmd.push('--existing-host', domain)
   }
   await execSyncCmd(shCmd)
