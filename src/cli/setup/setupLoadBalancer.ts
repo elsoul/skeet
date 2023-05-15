@@ -8,6 +8,7 @@ import {
   createNeg,
   createProxy,
   createRecord,
+  createSecurityPolicy,
   createSsl,
   createZone,
   updateBackend,
@@ -63,6 +64,7 @@ export const setupLoadBalancer = async (
       functionName,
       lbDomain
     )
+    await createSecurityPolicy(config.app.projectId, config.app.name)
     await updateBackend(config.app.projectId, config.app.name, functionName)
 
     const ip = await getIp(config.app.projectId, networkConf.loadBalancerIpName)
