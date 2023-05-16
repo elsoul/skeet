@@ -195,6 +195,22 @@ async function main() {
         )
       })
 
+    const sync = program.command('sync').description('Skeet Sync Comannd')
+    sync
+      .command('models')
+      .description('Sync Models')
+      .action(async () => {
+        //await syncModels()
+      })
+    sync
+      .command('types')
+      .description('Sync Types')
+      .action(async () => {})
+    sync
+      .command('routings')
+      .description('Sync Routings')
+      .action(async () => {})
+
     const list = program.command('list').description('Show Skeet App List')
     list
       .command('functions')

@@ -1,6 +1,8 @@
 import { createHash } from 'crypto'
 import { execSync } from 'child_process'
 import fs from 'fs'
+import path from 'path'
+import { getDirectoriesRecursively } from './getDirs'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -53,6 +55,7 @@ export const getNetworkConfig = async (projectId: string, appName: string) => {
     ipRangeName: skeetHd + '-ip-range',
     serviceAccountName: `${projectId}@${projectId}.iam.gserviceaccount.com`,
     networkEndpointGroupName: `${skeetHd}-neg`,
+    defaultBackendServiceName: `${skeetHd}-default-bs`,
     backendServiceName: `${skeetHd}-bs`,
     loadBalancerName: `${skeetHd}-lb`,
     sslName: `${skeetHd}-ssl`,
@@ -98,11 +101,12 @@ export const getRunUrl = async (projectId: string, appName: string) => {
   }
 }
 
-export const getFunctions = async () => {
-  const functionDirs = fs
-    .readdirSync(FUNCTIONS_PATH + '/', { withFileTypes: true })
-    .filter((item) => item.isDirectory())
-    .map((item) => item.name)
-
-  return functionDirs
+export const getFunctions = () => {
+  try {
+    const functionsPath = path.join(__dirname, FUNCTIONS_PATH)
+    const allDirectories = getDirectoriesRecursively(functionsPath)
+    return allDirectories
+  } catch (error) {
+    throw new Error(`getFunctions: ${error}`)
+  }
 }

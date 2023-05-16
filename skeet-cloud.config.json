@@ -22,6 +22,28 @@
           "scheduler": "every 24 hours"
         }
       ]
+    },
+    {
+      "name": "skeet-functions-twitter",
+      "methods": [
+        {
+          "name": "hello",
+          "url": "",
+          "pubsub": false,
+          "scheduler": ""
+        }
+      ]
+    },
+    {
+      "name": "skeet-functions-openai",
+      "methods": [
+        {
+          "name": "hello",
+          "url": "",
+          "pubsub": false,
+          "scheduler": ""
+        }
+      ]
     }
   ],
   "cloudArmor": [

@@ -20,8 +20,6 @@ export const setupGcp = async (config: SkeetCloudConfig) => {
   await sleep(2000)
   await addJsonEnv()
   await sleep(2000)
-  await dockerLogin()
-  await sleep(2000)
   fs.rmSync(KEYFILE_PATH)
   await runAddAllRole(config.app.projectId, config.app.name)
   await runVpcNat(config.app.projectId, config.app.name, config.app.region)

@@ -18,7 +18,7 @@ export const packageJson = async (appName: string) => {
     },
     devDependencies: {
       '@types/jest': '29.5.0',
-      '@types/node': '18.15.10',
+      '@types/node': '18.16.0',
       'babel-loader': '9.1.2',
       esbuild: '0.17.14',
       eslint: '8.36.0',
@@ -30,7 +30,7 @@ export const packageJson = async (appName: string) => {
       'ts-jest': '29.0.5',
       'ts-loader': '9.4.2',
       'tsconfig-paths': '4.1.2',
-      typescript: '5.0.2',
+      typescript: '5.0.4',
     },
   }
   return {

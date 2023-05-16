@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "repository": "https://github.com/elsoul/skeet-cli.git",
@@ -24,7 +24,9 @@
     "build": "yarn update:version && npx ts-node build.ts && npx ts-node add-line.ts",
     "publish": "npm publish",
     "dev": "nodemon",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "skeet:twitter": "yarn --cwd ./functions/twitter dev",
+    "skeet:openai": "yarn --cwd ./functions/openai dev"
   },
   "dependencies": {
     "chalk": "5.2.0",

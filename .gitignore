@@ -45,3 +45,4 @@ firebase-debug.log
 
 /apps/
 keyfile.json
+/functions/

@@ -1,5 +1,6 @@
 import {
   addBackend,
+  addPathMatcher,
   createBackend,
   createCaaRecords,
   createFixIp,
@@ -17,7 +18,6 @@ import { getIp, setGcloudProject } from '@/cli'
 import { SkeetCloudConfig } from '@/index'
 import { getNetworkConfig } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
-import { addPathMatcher } from '../gcloud/lb/addPathMatcher'
 
 export const setupLoadBalancer = async (
   config: SkeetCloudConfig,
@@ -61,7 +61,9 @@ export const setupLoadBalancer = async (
       config.app.projectId,
       config.app.name,
       functionName,
-      lbDomain
+      lbDomain,
+      [],
+      true
     )
     await createSecurityPolicy(config.app.projectId, config.app.name)
     await updateBackend(config.app.projectId, config.app.name, functionName)
