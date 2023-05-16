@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { getFunctions } from './getSkeetConfig'
+import { getFunctions } from './getDirs'
 
 export const getHTTPRoutingFiles = async () => {
   const functions = getFunctions()

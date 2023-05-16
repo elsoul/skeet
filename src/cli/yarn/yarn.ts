@@ -1,6 +1,7 @@
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import inquirer from 'inquirer'
-import { FUNCTIONS_PATH, getFunctions } from '@/lib/getSkeetConfig'
+import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { getFunctions } from '@/lib/getDirs'
 
 export type YarnService = {
   yarn: Array<string>
@@ -19,7 +20,7 @@ export const yarn = async (
   packageName: string = '',
   isDev: boolean = false
 ) => {
-  const functions = await getFunctions()
+  const functions = getFunctions()
   const functionsArray: Array<{ [key: string]: string }> = []
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })

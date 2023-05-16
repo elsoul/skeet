@@ -1,8 +1,5 @@
 import { createHash } from 'crypto'
 import { execSync } from 'child_process'
-import fs from 'fs'
-import path from 'path'
-import { getDirectoriesRecursively } from './getDirs'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -98,14 +95,5 @@ export const getRunUrl = async (projectId: string, appName: string) => {
     return res
   } catch (error) {
     return ''
-  }
-}
-
-export const getFunctions = () => {
-  try {
-    const allDirectories = getDirectoriesRecursively(FUNCTIONS_PATH)
-    return allDirectories
-  } catch (error) {
-    throw new Error(`getFunctions: ${error}`)
   }
 }

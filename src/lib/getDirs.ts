@@ -1,60 +1,48 @@
-import fs from 'fs'
-import path from 'path'
+import * as fs from 'fs'
+import * as path from 'path'
+import { FUNCTIONS_PATH } from './getSkeetConfig'
 
-interface DirectoryInfo {
+interface FunctionInfo {
   name: string
   lastModified: Date
 }
 
 const getDirectoryLastModified = (directoryPath: string): Date => {
-  const fileNames = fs.readdirSync(directoryPath)
+  const fileNames = fs.readdirSync(directoryPath, { withFileTypes: true })
   let latestModified: Date = new Date(0) // 初期値を古い日時に設定
 
-  fileNames.forEach((fileName) => {
-    const filePath = path.join(directoryPath, fileName)
-    const stats = fs.statSync(filePath)
+  fileNames.forEach((file) => {
+    if (file.isDirectory()) {
+      const filePath = path.join(directoryPath, file.name)
+      const stats = fs.statSync(filePath)
 
-    if (stats.isDirectory()) {
-      const directoryModified = getDirectoryLastModified(filePath)
-      if (directoryModified > latestModified) {
-        latestModified = directoryModified
+      if (stats.isDirectory()) {
+        const directoryModified = getDirectoryLastModified(filePath)
+        if (directoryModified > latestModified) {
+          latestModified = directoryModified
+        }
+      } else if (stats.isFile() && stats.mtime > latestModified) {
+        latestModified = stats.mtime
       }
-    } else if (stats.isFile() && stats.mtime > latestModified) {
-      latestModified = stats.mtime
     }
   })
 
   return latestModified
 }
 
-export const getDirectoriesRecursively = (directoryPath: string): string[] => {
-  try {
-    const directories: DirectoryInfo[] = []
+export const getFunctions = () => {
+  const functionDirs: FunctionInfo[] = fs
+    .readdirSync(FUNCTIONS_PATH, { withFileTypes: true })
+    .filter((item) => item.isDirectory())
+    .map((item) => {
+      const functionPath = path.join(FUNCTIONS_PATH, item.name)
+      const lastModified = getDirectoryLastModified(functionPath)
+      return { name: item.name, lastModified }
+    })
 
-    const traverseDirectories = (currentPath: string) => {
-      const fileNames = fs.readdirSync(currentPath)
+  const sortedFunctionDirs = functionDirs.sort(
+    (a, b) => b.lastModified.getTime() - a.lastModified.getTime()
+  )
 
-      fileNames.forEach((fileName) => {
-        const filePath = path.join(currentPath, fileName)
-        const stats = fs.statSync(filePath)
-
-        if (stats.isDirectory()) {
-          const lastModified = getDirectoryLastModified(filePath)
-          directories.push({ name: fileName, lastModified })
-          traverseDirectories(filePath)
-        }
-      })
-    }
-
-    traverseDirectories(directoryPath)
-
-    directories.sort(
-      (a, b) => b.lastModified.getTime() - a.lastModified.getTime()
-    )
-
-    return directories.map((directory) => directory.name)
-  } catch (error) {
-    console.error(`Error traversing directories: ${directoryPath}`, error)
-    return []
-  }
+  return sortedFunctionDirs.map((functionDir) => functionDir.name)
 }
