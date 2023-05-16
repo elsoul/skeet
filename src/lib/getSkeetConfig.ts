@@ -103,8 +103,7 @@ export const getRunUrl = async (projectId: string, appName: string) => {
 
 export const getFunctions = () => {
   try {
-    const functionsPath = path.join(__dirname, FUNCTIONS_PATH)
-    const allDirectories = getDirectoriesRecursively(functionsPath)
+    const allDirectories = getDirectoriesRecursively(FUNCTIONS_PATH)
     return allDirectories
   } catch (error) {
     throw new Error(`getFunctions: ${error}`)
