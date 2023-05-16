@@ -6,9 +6,7 @@ export const getHTTPRoutingFiles = async () => {
   const functions = getFunctions()
   for (const functionName of functions) {
     const httpRoutingPath = path.join(
-      __dirname,
-      '..',
-      '..',
+      '.',
       'functions',
       functionName,
       'src',

@@ -40,7 +40,7 @@ export const replaceFileExtension = (
 export const getHTTPRoutingFiles = (functionName: string) => {
   try {
     const httpRoutingPath = path.join(
-      __dirname,
+      '.',
       'functions',
       functionName,
       'src',
