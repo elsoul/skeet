@@ -1,9 +1,8 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
 import { getHTTPRoutingFiles } from '@/lib/getHttpRountings'
 import { getFunctionInfo } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'
-import { execSync, spawnSync } from 'child_process'
-import { constants } from 'fs/promises'
+import { addRounting } from '../add'
+import { addBackendSetup } from '../add/addBackendSetup'
 
 export const syncRoutings = async () => {
   const files = await getHTTPRoutingFiles()
@@ -16,5 +15,13 @@ export const syncRoutings = async () => {
       paths.push(pathString)
     }
   }
-  console.log(paths)
+  for await (const functionInfo of files) {
+    try {
+      await addBackendSetup(functionInfo.functionName)
+      const res = await addRounting(functionInfo.functionName, paths)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

@@ -15,12 +15,17 @@ import {
   listFunctions,
   syncRoutings,
   syncModels,
+  syncTypes,
 } from '@/cli'
 import { server } from '@/cli/server'
 import { addFunctions } from './cli/add'
 import { addRounting } from './cli/add/routing'
 import { Logger } from './lib/logger'
 import { skeetCloudConfigAppGen } from './templates/init/skeet-cloud.config-app'
+import { getHTTPRoutingFiles } from './lib/getHttpRountings'
+import { convertToKebabCase } from './utils/string'
+import { getFunctionInfo } from './lib/getSkeetConfig'
+import { addBackendSetup } from './cli/add/addBackendSetup'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -188,13 +193,18 @@ async function main() {
       .command('routings')
       .argument('<functionsName>', 'Functions Name - e.g. openai')
       .action(async (functionsName: string) => {
-        const config = await importConfig()
-        await addRounting(
-          config.app.projectId,
-          functionsName,
-          config.app.region,
-          config.app.functionsDomain
-        )
+        const files = await getHTTPRoutingFiles()
+        const paths = []
+        for (const file of files) {
+          for (const path of file.httpEndpoints) {
+            const kebab = convertToKebabCase(path)
+            const functionInfo = await getFunctionInfo(kebab)
+            const pathString = `/${file.functionName}/${kebab}=${functionInfo.backendService}`
+            paths.push(pathString)
+          }
+        }
+        await addBackendSetup(functionsName)
+        await addRounting(functionsName, paths)
       })
 
     const sync = program.command('sync').description('Skeet Sync Comannd')
@@ -207,7 +217,9 @@ async function main() {
     sync
       .command('types')
       .description('Sync Types')
-      .action(async () => {})
+      .action(async () => {
+        await syncTypes()
+      })
     sync
       .command('routings')
       .description('Sync Routings')

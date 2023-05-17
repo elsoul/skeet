@@ -7,7 +7,7 @@ interface DirectoryInfo {
   lastModified: Date
 }
 
-const getDirectoryLastModified = (directoryPath: string): Date => {
+export const getDirectoryLastModified = (directoryPath: string): Date => {
   const fileNames = fs.readdirSync(directoryPath)
   let latestModified: Date = new Date(0) // 初期値を古い日時に設定
 
@@ -37,7 +37,6 @@ export const getFunctions = async (isForModels = false): Promise<string[]> => {
         const dirPath = isForModels
           ? path.join(FUNCTIONS_PATH, item.name, 'src', 'models')
           : path.join(FUNCTIONS_PATH, item.name)
-        console.log(dirPath)
         const lastModified = getDirectoryLastModified(dirPath)
         return {
           name: item.name,
