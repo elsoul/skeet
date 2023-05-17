@@ -33,7 +33,7 @@ export const addFunctions = async (functionName: string) => {
         `${functionDir}/.env`,
         `PROJECT_ID=${skeetConfig.app.projectId}\nREGION=${skeetConfig.app.region}`
       )
-      await updateSkeetCloudConfig(functionName)
+      // await updateSkeetCloudConfig(functionName)
       await updateFirebaseConfig(functionName)
       await addFunctionsToPackageJson(functionName)
       const githubAction = await functionsYml(functionName)

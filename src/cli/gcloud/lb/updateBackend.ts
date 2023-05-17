@@ -4,9 +4,9 @@ import { getFunctionInfo, getNetworkConfig } from '@/lib/getSkeetConfig'
 export const updateBackend = async (
   projectId: string,
   appName: string,
-  functionName: string
+  methodName: string
 ) => {
-  const functionInfo = await getFunctionInfo(functionName)
+  const functionInfo = await getFunctionInfo(methodName)
   const skeetConfig = await getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',

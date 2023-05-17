@@ -15,13 +15,11 @@ export const syncRoutings = async () => {
       paths.push(pathString)
     }
   }
-  for await (const functionInfo of files) {
-    try {
-      await addBackendSetup(functionInfo.functionName)
-      const res = await addRounting(functionInfo.functionName, paths)
-      console.log(res)
-    } catch (error) {
-      console.log(error)
+  for (const file of files) {
+    for (const path of file.httpEndpoints) {
+      const kebab = convertToKebabCase(path)
+      await addBackendSetup(kebab)
+      await addRounting(kebab, paths)
     }
   }
 }

@@ -4,13 +4,13 @@ import { getFunctionInfo, getNetworkConfig } from '@/lib/getSkeetConfig'
 export const addPathMatcher = async (
   projectId: string,
   appName: string,
-  functionName: string,
+  methodName: string,
   domain: string,
   paths?: Array<string>,
   init = false
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
-  const functionInfo = await getFunctionInfo(functionName)
+  const functionInfo = await getFunctionInfo(methodName)
   paths = paths || []
   paths.push(`/=${appConf.defaultBackendServiceName}`)
   let shCmd = []

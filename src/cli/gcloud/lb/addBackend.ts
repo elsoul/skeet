@@ -4,12 +4,12 @@ import { getFunctionInfo, getNetworkConfig } from '@/lib/getSkeetConfig'
 export const addBackend = async (
   projectId: string,
   appName: string,
-  functionName: string,
+  methodName: string,
   region: string,
   init = false
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
-  const functionInfo = await getFunctionInfo(functionName)
+  const functionInfo = await getFunctionInfo(methodName)
   const backendName = init
     ? appConf.backendServiceName
     : functionInfo.backendService

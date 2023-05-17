@@ -6,7 +6,7 @@ import fs from 'fs'
 export const syncTypes = async () => {
   const types = await getTypeFiles()
   for await (const type of types) {
-    Logger.sync(`Syncing ${type.functionName}...`)
+    Logger.sync(`⏳ Syncing ${type.functionName}...`)
     for await (const typePath of type.modelsPath) {
       const typeFilePath = `functions/${type.functionName}/src/types/http/${typePath}`
       const frontTypeDir = `src/types/http/${type.functionName}`
@@ -14,7 +14,7 @@ export const syncTypes = async () => {
         fs.mkdirSync(frontTypeDir, { recursive: true })
       }
       const frontTypePath = `${frontTypeDir}/${typePath}`
-      Logger.sync(`Copying ${typeFilePath} to ${frontTypePath}`)
+      Logger.sync(`📃 Copying ${typeFilePath} to ${frontTypePath}`)
       await copyFileWithOverwrite(typeFilePath, frontTypePath)
     }
   }

@@ -4,11 +4,11 @@ import { convertToKebabCase } from '@/utils/string'
 
 export const createNeg = async (
   projectId: string,
-  functionName: string,
+  methodName: string,
   region: string
 ) => {
-  const kebab = convertToKebabCase(functionName)
-  const cloudRunName = functionName.toLowerCase()
+  const kebab = convertToKebabCase(methodName)
+  const cloudRunName = methodName.toLowerCase()
   const functionInfo = await getFunctionInfo(kebab)
   const shCmd = [
     'gcloud',

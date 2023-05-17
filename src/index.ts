@@ -1,5 +1,5 @@
 import Dotenv from 'dotenv'
-import { Command } from 'commander'
+import { Command, ErrorOptions } from 'commander'
 import fs from 'fs'
 import { VERSION } from '@/lib/version'
 import {
@@ -26,6 +26,7 @@ import { getHTTPRoutingFiles } from './lib/getHttpRountings'
 import { convertToKebabCase } from './utils/string'
 import { getFunctionInfo } from './lib/getSkeetConfig'
 import { addBackendSetup } from './cli/add/addBackendSetup'
+import { deleteRoutings } from './cli/delete'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -225,6 +226,17 @@ async function main() {
       .description('Sync Routings')
       .action(async () => {
         await syncRoutings()
+      })
+
+    const d = program
+      .command('delete')
+      .alias('d')
+      .description('Skeet Delete Command')
+    d.command('rountings')
+      .argument('<methodName>', 'Functions Name - e.g. openai')
+      .description('Delete Routings')
+      .action(async (methodName: string) => {
+        await deleteRoutings(methodName)
       })
 
     const list = program.command('list').description('Show Skeet App List')

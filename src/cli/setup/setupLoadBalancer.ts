@@ -36,12 +36,12 @@ export const setupLoadBalancer = async (
       networkConf.loadBalancerIpName,
       true
     )
-    const functionName = 'root'
-    await createNeg(config.app.projectId, functionName, config.app.region)
+    const methodName = 'root'
+    await createNeg(config.app.projectId, methodName, config.app.region)
     await addBackend(
       config.app.projectId,
       config.app.name,
-      functionName,
+      methodName,
       config.app.region,
       true
     )
@@ -49,23 +49,23 @@ export const setupLoadBalancer = async (
     await createSsl(config.app.projectId, config.app.name, lbDomain)
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
-    await createBackend(config.app.projectId, functionName)
+    await createBackend(config.app.projectId, methodName)
     await addBackend(
       config.app.projectId,
       config.app.name,
-      functionName,
+      methodName,
       config.app.region
     )
     await addPathMatcher(
       config.app.projectId,
       config.app.name,
-      functionName,
+      methodName,
       lbDomain,
       [],
       true
     )
     await createSecurityPolicy(config.app.projectId, config.app.name)
-    await updateBackend(config.app.projectId, config.app.name, functionName)
+    await updateBackend(config.app.projectId, config.app.name, methodName)
 
     const ip = await getIp(config.app.projectId, networkConf.loadBalancerIpName)
 
