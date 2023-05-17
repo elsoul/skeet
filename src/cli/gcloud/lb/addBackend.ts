@@ -11,7 +11,7 @@ export const addBackend = async (
   const appConf = await getNetworkConfig(projectId, appName)
   const functionInfo = await getFunctionInfo(methodName)
   const backendName = init
-    ? appConf.backendServiceName
+    ? appConf.defaultBackendServiceName
     : functionInfo.backendService
   const shCmd = [
     'gcloud',

@@ -22,6 +22,6 @@
   },
   "files": ["package.json"],
   "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules", "skeet-cloud.config.js"],
+  "exclude": ["dist", "node_modules", "skeet-cloud.config.json"],
   "compileOnSave": false
 }

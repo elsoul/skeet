@@ -22,7 +22,7 @@ export const addPathMatcher = async (
       'add-path-matcher',
       appConf.loadBalancerName,
       '--default-service',
-      functionInfo.backendService,
+      appConf.defaultBackendServiceName,
       '--path-matcher-name',
       functionInfo.name,
       '--backend-service-path-rules',

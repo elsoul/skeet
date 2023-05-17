@@ -232,7 +232,7 @@ async function main() {
       .command('delete')
       .alias('d')
       .description('Skeet Delete Command')
-    d.command('rountings')
+    d.command('routings')
       .argument('<methodName>', 'Functions Name - e.g. openai')
       .description('Delete Routings')
       .action(async (methodName: string) => {
