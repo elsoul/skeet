@@ -1,8 +1,9 @@
 import { getHTTPRoutingFiles } from '@/lib/getHttpRountings'
-import { getFunctionInfo } from '@/lib/getSkeetConfig'
+import { getFunctionInfo, getNetworkConfig } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'
 import { addRounting } from '../add'
 import { addBackendSetup } from '../add/addBackendSetup'
+import { importConfig } from '@/index'
 
 export const syncRoutings = async () => {
   const files = await getHTTPRoutingFiles()
@@ -11,15 +12,15 @@ export const syncRoutings = async () => {
     for (const path of file.httpEndpoints) {
       const kebab = convertToKebabCase(path)
       const functionInfo = await getFunctionInfo(kebab)
+      await addBackendSetup(kebab)
       const pathString = `/${file.functionName}/${kebab}=${functionInfo.backendService}`
       paths.push(pathString)
     }
   }
-  for (const file of files) {
-    for (const path of file.httpEndpoints) {
-      const kebab = convertToKebabCase(path)
-      await addBackendSetup(kebab)
-      await addRounting(kebab, paths)
-    }
-  }
+  const config = await importConfig()
+  const { pathMatcherName } = await getNetworkConfig(
+    config.app.projectId,
+    config.app.name
+  )
+  await addRounting(pathMatcherName, paths)
 }

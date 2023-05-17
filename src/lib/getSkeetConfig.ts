@@ -60,6 +60,7 @@ export const getNetworkConfig = async (projectId: string, appName: string) => {
     forwardingRuleName: `${skeetHd}-fr`,
     zoneName: `${skeetHd}-zone`,
     securityPolicyName: `${skeetHd}-armor`,
+    pathMatcherName: `${skeetHd}-pm`,
   }
 }
 

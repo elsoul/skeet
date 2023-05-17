@@ -11,7 +11,7 @@ export const skeetCloudConfigGen = async (appName: string) => {
     "appDomain": "your-app-url.com",
     "functionsDomain": "functions.your-app-url.com"
   },
-  "functions": [
+  "functions-http": [
     {
       "name": "openai",
       "methods": [

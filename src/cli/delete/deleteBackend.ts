@@ -13,6 +13,7 @@ export const deleteBackend = async (projectId: string, methodName: string) => {
       '--global',
       '--project',
       projectId,
+      '--quiet',
     ]
     await execSyncCmd(shCmd)
   } catch (error) {

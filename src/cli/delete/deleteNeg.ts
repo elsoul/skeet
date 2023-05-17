@@ -20,6 +20,7 @@ export const deleteNeg = async (
       region,
       '--project',
       projectId,
+      '--quiet',
     ]
     await execSyncCmd(shCmd)
   } catch (error) {
