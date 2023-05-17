@@ -27,7 +27,7 @@ export const copyFileWithOverwrite = async (
       fs.unlinkSync(destinationFilePath) // 既存のファイルを削除
     }
     await copyFile(sourceFilePath, destinationFilePath)
-    Logger.success(`File copied: ${destinationFilePath}`)
+    Logger.success(`✔️ File copied: ${destinationFilePath}`)
   } catch (error) {
     console.error('Error copying file:', error)
   }
