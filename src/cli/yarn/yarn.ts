@@ -20,7 +20,7 @@ export const yarn = async (
   packageName: string = '',
   isDev: boolean = false
 ) => {
-  const functions = getFunctions()
+  const functions = await getFunctions()
   const functionsArray: Array<{ [key: string]: string }> = []
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })

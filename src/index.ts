@@ -13,6 +13,8 @@ import {
   setupNetwork,
   yarn,
   listFunctions,
+  syncRoutings,
+  syncModels,
 } from '@/cli'
 import { server } from '@/cli/server'
 import { addFunctions } from './cli/add'
@@ -200,7 +202,7 @@ async function main() {
       .command('models')
       .description('Sync Models')
       .action(async () => {
-        //await syncModels()
+        await syncModels()
       })
     sync
       .command('types')
@@ -209,7 +211,9 @@ async function main() {
     sync
       .command('routings')
       .description('Sync Routings')
-      .action(async () => {})
+      .action(async () => {
+        await syncRoutings()
+      })
 
     const list = program.command('list').description('Show Skeet App List')
     list

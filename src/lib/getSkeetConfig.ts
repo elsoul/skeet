@@ -97,3 +97,30 @@ export const getRunUrl = async (projectId: string, appName: string) => {
     return ''
   }
 }
+
+export const isNegExists = async (
+  negName: string,
+  region: string,
+  projectId: string
+) => {
+  const shCmd = [
+    'gcloud',
+    'compute',
+    'network-endpoint-groups',
+    'describe',
+    negName,
+    '--region',
+    region,
+    '--project',
+    projectId,
+  ]
+  try {
+    const stdout = execSync(shCmd.join(' '), { stdio: 'ignore' })
+    const message = stdout.toString().trim().split('\n')
+    if (message.includes('ERROR:')) throw new Error('does not exist')
+    return true
+  } catch (error) {
+    console.log('false')
+    return false
+  }
+}

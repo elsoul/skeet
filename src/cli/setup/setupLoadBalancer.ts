@@ -49,7 +49,6 @@ export const setupLoadBalancer = async (
     await createSsl(config.app.projectId, config.app.name, lbDomain)
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
-
     await createBackend(config.app.projectId, functionName)
     await addBackend(
       config.app.projectId,
@@ -71,7 +70,6 @@ export const setupLoadBalancer = async (
     const ip = await getIp(config.app.projectId, networkConf.loadBalancerIpName)
 
     await createZone(config.app.projectId, config.app.name, nsDomain)
-
     await createRecord(config.app.projectId, networkConf.zoneName, lbDomain, ip)
     await createCaaRecords(config.app.projectId, networkConf.zoneName, lbDomain)
   } catch (error) {

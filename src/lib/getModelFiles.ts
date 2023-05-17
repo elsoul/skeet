@@ -2,8 +2,8 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { getFunctions } from './getDirs'
 
-export const getHTTPRoutingFiles = async () => {
-  const functions = await getFunctions()
+export const getModelFiles = async () => {
+  const functions = await getFunctions(true)
   const data = []
   for (const functionName of functions) {
     const httpRoutingPath = path.join(
@@ -11,14 +11,13 @@ export const getHTTPRoutingFiles = async () => {
       'functions',
       functionName,
       'src',
-      'routings',
-      'http'
+      'models'
     )
     const files = fs
       .readdirSync(httpRoutingPath)
       .filter((fileName) => fileName.endsWith('.ts') && fileName !== 'index.ts')
-      .map((fileName) => fileName.replace(/\.ts$/, ''))
-    data.push({ functionName, httpEndpoints: files })
+      .map((fileName) => httpRoutingPath + '/' + fileName)
+    data.push({ functionName, modelsPath: files })
   }
   return data
 }

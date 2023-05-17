@@ -3,7 +3,7 @@ import { getFunctions } from '@/lib/getDirs'
 import inquirer from 'inquirer'
 
 export const deploy = async () => {
-  const functions = getFunctions()
+  const functions = await getFunctions()
   const functionsArray: Array<{ [key: string]: string }> = []
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
