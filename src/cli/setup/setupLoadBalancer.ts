@@ -38,6 +38,8 @@ export const setupLoadBalancer = async (
     )
     const methodName = 'root'
     await createNeg(config.app.projectId, methodName, config.app.region)
+    const defaultBackendServiceName = `${config.app.name}-default`
+    await createBackend(config.app.projectId, defaultBackendServiceName)
     await addBackend(
       config.app.projectId,
       config.app.name,
@@ -49,13 +51,13 @@ export const setupLoadBalancer = async (
     await createSsl(config.app.projectId, config.app.name, lbDomain)
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
-    // await createBackend(config.app.projectId, methodName)
-    // await addBackend(
-    //   config.app.projectId,
-    //   config.app.name,
-    //   methodName,
-    //   config.app.region
-    // )
+    await createBackend(config.app.projectId, methodName)
+    await addBackend(
+      config.app.projectId,
+      config.app.name,
+      methodName,
+      config.app.region
+    )
     await addPathMatcher(
       config.app.projectId,
       config.app.name,

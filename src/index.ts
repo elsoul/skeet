@@ -16,6 +16,7 @@ import {
   syncRoutings,
   syncModels,
   syncTypes,
+  setupLoadBalancer,
 } from '@/cli'
 import { server } from '@/cli/server'
 import { addFunctions } from './cli/add'
@@ -149,7 +150,7 @@ async function main() {
       })
     iam
       .command('pull')
-      .description('Download IAM for Google Cloud Platform')
+      .description('Download IAM Key for Google Cloud Platform')
       .action(async () => {
         const config = await importConfig()
         await createServiceAccountKey(config.app.projectId, config.app.name)
@@ -165,6 +166,17 @@ async function main() {
       .description('Setup VPC for Google Cloud Platform')
       .action(async () => {
         await setupNetwork()
+      })
+    program
+      .command('lb')
+      .description('Setup LoadBalancer for Google Cloud Platform')
+      .action(async () => {
+        const config = await importConfig()
+        await setupLoadBalancer(
+          config,
+          config.app.functionsDomain,
+          config.app.appDomain
+        )
       })
     program
       .command('yarn')
@@ -189,23 +201,6 @@ async function main() {
       .argument('<functionsName>', 'Functions Name - e.g. openai')
       .action(async (functionsName: string) => {
         await addFunctions(functionsName)
-      })
-    add
-      .command('routings')
-      .argument('<functionsName>', 'Functions Name - e.g. openai')
-      .action(async (functionsName: string) => {
-        const files = await getHTTPRoutingFiles()
-        const paths = []
-        for (const file of files) {
-          for (const path of file.httpEndpoints) {
-            const kebab = convertToKebabCase(path)
-            const functionInfo = await getFunctionInfo(kebab)
-            const pathString = `/${file.functionName}/${kebab}=${functionInfo.backendService}`
-            paths.push(pathString)
-          }
-        }
-        await addBackendSetup(functionsName)
-        await addRounting(functionsName, paths)
       })
 
     const sync = program.command('sync').description('Skeet Sync Comannd')

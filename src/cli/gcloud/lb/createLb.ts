@@ -10,7 +10,7 @@ export const createLb = async (projectId: string, appName: string) => {
     'create',
     appConf.loadBalancerName,
     '--default-service',
-    appConf.backendServiceName,
+    appConf.defaultBackendServiceName,
     '--project',
     projectId,
   ]
