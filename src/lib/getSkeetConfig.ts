@@ -100,10 +100,11 @@ export const getRunUrl = async (projectId: string, appName: string) => {
 }
 
 export const isNegExists = async (
-  negName: string,
+  projectId: string,
   region: string,
-  projectId: string
+  methodName: string
 ) => {
+  const negName = `skeet-${methodName}-neg`
   const shCmd = [
     'gcloud',
     'compute',
@@ -116,12 +117,10 @@ export const isNegExists = async (
     projectId,
   ]
   try {
-    const stdout = execSync(shCmd.join(' '), { stdio: 'ignore' })
-    const message = stdout.toString().trim().split('\n')
-    if (message.includes('ERROR:')) throw new Error('does not exist')
+    const stdout = String(execSync(shCmd.join(' '), { stdio: 'ignore' }))
+    if (stdout.includes('ERROR:')) throw new Error('does not exist')
     return true
   } catch (error) {
-    console.log('false')
     return false
   }
 }

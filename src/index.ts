@@ -24,7 +24,7 @@ import { Logger } from './lib/logger'
 import { skeetCloudConfigAppGen } from './templates/init/skeet-cloud.config-app'
 import { getHTTPRoutingFiles } from './lib/getHttpRountings'
 import { convertToKebabCase } from './utils/string'
-import { getFunctionInfo } from './lib/getSkeetConfig'
+import { getFunctionInfo, isNegExists } from './lib/getSkeetConfig'
 import { addBackendSetup } from './cli/add/addBackendSetup'
 import { deleteRoutings } from './cli/delete'
 
@@ -246,6 +246,14 @@ async function main() {
       .action(async () => {
         await listFunctions()
       })
+
+    program.command('test').action(async () => {
+      const projectId = 'figaro-labs'
+      const region = 'europe-west6'
+      const methodName = 'twitter-callback'
+      const res = await isNegExists(projectId, region, methodName)
+      console.log(res)
+    })
 
     await program.parseAsync(process.argv)
   } catch (error) {

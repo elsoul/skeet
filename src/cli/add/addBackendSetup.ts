@@ -13,7 +13,7 @@ export const addBackendSetup = async (functionName: string) => {
       config.app.region,
       config.app.projectId
     )
-    if (isNeg) throw new Error(`${functionName} is already exists`)
+    if (isNeg) return { status: 'skip' }
 
     await createNeg(config.app.projectId, functionName, config.app.region)
     await createBackend(config.app.projectId, kebab)
