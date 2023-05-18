@@ -44,7 +44,6 @@ Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Clou
 - [Yarn](https://yarnpkg.com/)
 - [Google SDK](https://cloud.google.com/sdk/docs)
 - [Firebase CLI](https://firebase.google.com/docs/cli)
-- [Docker](https://www.docker.com/)
 - [GitHub CLI](https://cli.github.com/)
 
 ## Cloud Network Architecture
@@ -76,12 +75,13 @@ $ skeet create ${appName}
 ### Run local
 
 ```bash
+$ cd ${appName}
 $ skeet s
 ```
 
 Now you can access;
 
-`http://localhost:4000/`
+[http://localhost:4000/](http://localhost:4000/)
 
 ## Zero to Deploy
 

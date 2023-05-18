@@ -15,7 +15,6 @@ export const getModelFiles = async () => {
     )
     const files = fs
       .readdirSync(httpRoutingPath)
-      .filter((fileName) => fileName.endsWith('.ts') && fileName !== 'index.ts')
       .map((fileName) => httpRoutingPath + '/' + fileName)
     data.push({ functionName, modelsPath: files })
   }

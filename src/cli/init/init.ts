@@ -65,12 +65,11 @@ const questions = [
 
 export const init = async (skipSetupCloud = false) => {
   const skeetConfig = await importConfig()
-  if(await computeEngineDisabled()) {
+  if (await computeEngineDisabled()) {
     return 'Compute engine API is not enabled. Please enable compute engine on the GCP project to continue (gcloud services enable compute.googleapis.com).'
   }
-  const regions = (await listRegions()) || []
   const regionsArray: Array<{ [key: string]: string }> = []
-  for await (const region of regions) {
+  for await (const region of regionList) {
     regionsArray.push({ name: region })
   }
 
@@ -92,6 +91,7 @@ export const init = async (skipSetupCloud = false) => {
     ])
     .then(async (region) => {
       if (region) {
+        Logger.sync(`👷 setting up your skeet...`)
         await addRegionToConfig(region.region)
         inquirer.prompt(questions).then(async (answer) => {
           const answers = JSON.parse(JSON.stringify(answer))
@@ -158,24 +158,38 @@ export const addRegionToConfig = async (region: string) => {
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
-export const listRegions = async () => {
-  try {
-    const stdout = execSync(
-      `gcloud compute regions list --format="value(name)"`
-    )
-    const regions = stdout.toString().trim().split('\n')
-    return regions
-  } catch (error) {
-    console.error(`listRegions: ${error}`)
-  }
-}
+export const regionList = [
+  'asia-east1',
+  'asia-east2',
+  'asia-northeast1',
+  'asia-northeast2',
+  'asia-northeast3',
+  'asia-south1',
+  'asia-southeast1',
+  'asia-southeast2',
+  'australia-southeast1',
+  'europe-central2',
+  'europe-west1',
+  'europe-west2',
+  'europe-west3',
+  'europe-west6',
+  'northamerica-northeast1',
+  'southamerica-east1',
+  'us-central1',
+  'us-east1',
+  'us-east4',
+  'us-west1',
+  'us-west2',
+  'us-west3',
+  'us-west4',
+]
 
 export const computeEngineDisabled = async () => {
   try {
     const stdout = execSync(
       `gcloud services list | grep compute.googleapis.com`
     )
-    return stdout.toString().trim() === ""
+    return stdout.toString().trim() === ''
   } catch (error) {
     console.error(`computeEngineEnabled: ${error}`)
   }
