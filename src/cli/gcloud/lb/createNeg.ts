@@ -1,3 +1,4 @@
+import { importConfig } from '@/index'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import { getFunctionInfo } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'
@@ -6,17 +7,22 @@ import { convertToKebabCase } from '@/utils/string'
 export const createNeg = async (
   projectId: string,
   methodName: string,
-  region: string
+  region: string,
+  init = false
 ) => {
   const kebab = convertToKebabCase(methodName)
-  const cloudRunName = kebab.replace(/-/g, '')
   const functionInfo = await getFunctionInfo(kebab)
+  const config = await importConfig()
+  const negName = init
+    ? `skeet-${config.app.name}-default-neg`
+    : functionInfo.neg
+  const cloudRunName = kebab.replace(/-/g, '')
   const shCmd = [
     'gcloud',
     'compute',
     'network-endpoint-groups',
     'create',
-    functionInfo.neg,
+    negName,
     '--region',
     region,
     '--network-endpoint-type',
