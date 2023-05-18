@@ -10,7 +10,7 @@ export const createServiceAccount = async (
     'service-accounts',
     'create',
     appName,
-    "--description='Kinpachi Service Account'",
+    "--description='Skeet Framework Service Account'",
     `--display-name=${appName}`,
     '--project',
     projectId,

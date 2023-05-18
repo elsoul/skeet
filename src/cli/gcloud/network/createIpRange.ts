@@ -15,7 +15,7 @@ export const createIpRange = async (projectId: string, appName: string) => {
     '--prefix-length',
     '16',
     '--description',
-    'Peering Range for Kinpachi APP',
+    'Peering Range for Skeet APP',
     '--network',
     networkConfig.networkName,
     '--project',

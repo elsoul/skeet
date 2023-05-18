@@ -247,14 +247,6 @@ async function main() {
         await listFunctions()
       })
 
-    program.command('test').action(async () => {
-      const projectId = 'figaro-labs'
-      const region = 'europe-west6'
-      const methodName = 'twitter-callback'
-      const res = await isNegExists(projectId, region, methodName)
-      console.log(res)
-    })
-
     await program.parseAsync(process.argv)
   } catch (error) {
     console.log(error)

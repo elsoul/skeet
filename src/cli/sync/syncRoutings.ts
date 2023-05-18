@@ -4,10 +4,12 @@ import { convertToKebabCase } from '@/utils/string'
 import { addRounting } from '../add'
 import { addBackendSetup } from '../add/addBackendSetup'
 import { importConfig } from '@/index'
+import { Logger } from '@/lib/logger'
 
 export const syncRoutings = async () => {
   const files = await getHTTPRoutingFiles()
   const paths = []
+  Logger.sync('⏳ syncRoutings...')
   for (const file of files) {
     for (const path of file.httpEndpoints) {
       const kebab = convertToKebabCase(path)

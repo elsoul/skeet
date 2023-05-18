@@ -18,7 +18,7 @@ export const createZone = async (
     '--visibility',
     'public',
     '--description',
-    `Kinpachi ${domain} config`,
+    `Skeet ${domain} config`,
     '--project',
     projectId,
   ]
