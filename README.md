@@ -58,6 +58,8 @@ Automated to build all the Google Cloud VPC network settings;
 - Cloud Armor
 - Cloud DNS
 
+- [Skeet Doc](https://skeet.dev/)
+
 ## Usage
 
 ### Install Skeet CLI
@@ -83,28 +85,6 @@ Now you can access;
 
 [http://localhost:4000/](http://localhost:4000/)
 
-## Zero to Deploy
-
-### Project Init
-
-```bash
-$ skeet init
-```
-
-### Deploy Whole Application
-
-```bash
-$ skeet deploy
-```
-
-![Skeet Deploy](https://storage.googleapis.com/skeet-assets/animation/skeet-deploy-compressed.gif)
-
-### Add Cloud Functions
-
-```bash
-$ skeet add functions <functionName>
-```
-
 ## Skeet CLI
 
 ```bash
@@ -120,12 +100,14 @@ Options:
 Commands:
   create <appName>          Create Skeet App
   server|s                  Run Skeet Server
-  deploy                    Deploy Skeet App
-  init [options]
+  deploy                    Deploy Skeet APP to Google Cloud Platform
+  init [options]            Generate Skeet Cloud Config
   iam                       Skeet IAM Comannd
   vpc                       Setup VPC for Google Cloud Platform
   yarn [options] <yarnCmd>
   add                       Add Comannd
+  sync                      Skeet Sync Comannd
+  delete|d                  Skeet Delete Command
   list                      Show Skeet App List
   help [command]            display help for command
 ```
