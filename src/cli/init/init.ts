@@ -65,9 +65,6 @@ const questions = [
 
 export const init = async (skipSetupCloud = false) => {
   const skeetConfig = await importConfig()
-  if (await computeEngineDisabled()) {
-    return 'Compute engine API is not enabled. Please enable compute engine on the GCP project to continue (gcloud services enable compute.googleapis.com).'
-  }
   const regionsArray: Array<{ [key: string]: string }> = []
   for await (const region of regionList) {
     regionsArray.push({ name: region })
@@ -184,14 +181,3 @@ export const regionList = [
   'us-west3',
   'us-west4',
 ]
-
-export const computeEngineDisabled = async () => {
-  try {
-    const stdout = execSync(
-      `gcloud services list | grep compute.googleapis.com`
-    )
-    return stdout.toString().trim() === ''
-  } catch (error) {
-    console.error(`computeEngineEnabled: ${error}`)
-  }
-}
