@@ -104,13 +104,13 @@ export const isNegExists = async (
   region: string,
   methodName: string
 ) => {
-  const negName = `skeet-${methodName}-neg`
+  const { neg } = await getFunctionInfo(methodName)
   const shCmd = [
     'gcloud',
     'compute',
     'network-endpoint-groups',
     'describe',
-    negName,
+    neg,
     '--region',
     region,
     '--project',
