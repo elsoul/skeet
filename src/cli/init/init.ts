@@ -96,7 +96,7 @@ export const init = async (skipSetupCloud = false) => {
         inquirer.prompt(questions).then(async (answer) => {
           const answers = JSON.parse(JSON.stringify(answer))
           if (!skipSetupCloud) {
-            await setupCloud(skeetConfig, answers.githubRepo)
+            await setupCloud(skeetConfig, answers.githubRepo, region.region)
           }
 
           await setupLoadBalancer(
@@ -122,14 +122,15 @@ export const init = async (skipSetupCloud = false) => {
 
 export const setupCloud = async (
   skeetConfig: SkeetCloudConfig,
-  repoName: string
+  repoName: string,
+  region: string
 ) => {
   await Logger.sync(`setting up your google cloud platform...`)
   await setGcloudProject(skeetConfig.app.projectId)
   await gitInit()
   await gitCommit()
   await createGitRepo(repoName)
-  await setupGcp(skeetConfig)
+  await setupGcp(skeetConfig, region)
   const shCmd = ['firebase', 'deploy', '--only', 'functions']
   await execSyncCmd(shCmd)
 }

@@ -12,7 +12,7 @@ import { SkeetCloudConfig } from '@/index'
 import { KEYFILE_PATH } from '@/lib/getSkeetConfig'
 import { sleep } from '@/utils/time'
 import fs from 'fs'
-export const setupGcp = async (config: SkeetCloudConfig) => {
+export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   await setGcloudProject(config.app.projectId)
   await runEnableAllPermission(config.app.projectId)
   await createServiceAccount(config.app.projectId, config.app.name)
@@ -22,5 +22,5 @@ export const setupGcp = async (config: SkeetCloudConfig) => {
   await sleep(2000)
   fs.rmSync(KEYFILE_PATH)
   await runAddAllRole(config.app.projectId, config.app.name)
-  await runVpcNat(config.app.projectId, config.app.name, config.app.region)
+  await runVpcNat(config.app.projectId, config.app.name, region)
 }
