@@ -58,8 +58,6 @@ Automated to build all the Google Cloud VPC network settings;
 - Cloud Armor
 - Cloud DNS
 
-- [Skeet Doc](https://skeet.dev/)
-
 ## Usage
 
 ### Install Skeet CLI
@@ -112,7 +110,7 @@ Commands:
   help [command]            display help for command
 ```
 
-Skeet Doc: https://skeet.dev/
+- [Skeet Doc](https://skeet.dev/)
 
 ## Contributing
 

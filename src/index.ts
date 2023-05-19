@@ -1,5 +1,5 @@
 import Dotenv from 'dotenv'
-import { Command, ErrorOptions } from 'commander'
+import { Command } from 'commander'
 import fs from 'fs'
 import { VERSION } from '@/lib/version'
 import {
@@ -10,23 +10,17 @@ import {
   deploy,
   init,
   setupIam,
-  setupNetwork,
   yarn,
   listFunctions,
   syncRoutings,
   syncModels,
   syncTypes,
-  setupLoadBalancer,
+  syncArmor,
 } from '@/cli'
 import { server } from '@/cli/server'
 import { addFunctions } from './cli/add'
-import { addRounting } from './cli/add/routing'
 import { Logger } from './lib/logger'
 import { skeetCloudConfigAppGen } from './templates/init/skeet-cloud.config-app'
-import { getHTTPRoutingFiles } from './lib/getHttpRountings'
-import { convertToKebabCase } from './utils/string'
-import { getFunctionInfo, isNegExists } from './lib/getSkeetConfig'
-import { addBackendSetup } from './cli/add/addBackendSetup'
 import { deleteRoutings } from './cli/delete'
 
 export type SkeetCloudConfig = {
@@ -66,15 +60,6 @@ export type SecurityPolicy = {
       options: { [key: string]: string }
     }
   ]
-}
-
-export enum ArmorAction {
-  ALLOW = 'allow',
-  DENY1 = 'deny-403',
-  DENY2 = 'deny-404',
-  DENY3 = 'deny-429',
-  DENY4 = 'deny-502',
-  REDIRECT = 'redirect',
 }
 
 export const importConfig = async () => {
@@ -162,23 +147,6 @@ async function main() {
         await addJsonEnv()
       })
     program
-      .command('vpc')
-      .description('Setup VPC for Google Cloud Platform')
-      .action(async () => {
-        await setupNetwork()
-      })
-    program
-      .command('lb')
-      .description('Setup LoadBalancer for Google Cloud Platform')
-      .action(async () => {
-        const config = await importConfig()
-        await setupLoadBalancer(
-          config,
-          config.app.functionsDomain,
-          config.app.appDomain
-        )
-      })
-    program
       .command('yarn')
       .argument(
         '<yarnCmd>',
@@ -221,6 +189,12 @@ async function main() {
       .description('Sync Routings')
       .action(async () => {
         await syncRoutings()
+      })
+    sync
+      .command('armor')
+      .description('Sync Cloud Armor Rules')
+      .action(async () => {
+        await syncArmor()
       })
 
     const d = program
