@@ -11,25 +11,6 @@ export const skeetCloudConfigGen = async (appName: string) => {
     "appDomain": "your-app-url.com",
     "functionsDomain": "functions.your-app-url.com"
   },
-  "functions-http": [
-    {
-      "name": "openai",
-      "methods": [
-        {
-          "name": "hello",
-          "url": "",
-          "pubsub": false,
-          "scheduler": ""
-        },
-        {
-          "name": "openaichatroom",
-          "url": "",
-          "pubsub": false,
-          "scheduler": ""
-        }
-      ]
-    }
-  ],
   "cloudArmor": [
     {
       "securityPolicyName": "skeet-${appName}-armor",

@@ -1,5 +1,8 @@
 import { SkeetCloudConfig, importConfig, importFirebaseConfig } from '@/index'
+import { copyFileWithOverwrite } from '@/lib/copyFiles'
 import { execSyncCmd } from '@/lib/execSyncCmd'
+import { getFunctions } from '@/lib/getDirs'
+import { getModelFiles } from '@/lib/getModelFiles'
 import {
   FIREBASE_CONFIG_PATH,
   FUNCTIONS_PATH,
@@ -25,6 +28,10 @@ export const addFunctions = async (functionName: string) => {
       fs.mkdir(functionDir, { recursive: true }, (err) => {
         if (err) throw err
       })
+      const functions = await getModelFiles()
+      const latestModel = functions[0]
+      const newModelPath = `${functionDir}/src/models`
+
       const gitCloneCmd = ['git', 'clone', FUNCTIONS_REPO_URL, functionDir]
       await execSyncCmd(gitCloneCmd)
       const rmDefaultGit = ['rm', '-rf', '.git']
@@ -33,7 +40,12 @@ export const addFunctions = async (functionName: string) => {
         `${functionDir}/.env`,
         `PROJECT_ID=${skeetConfig.app.projectId}\nREGION=${skeetConfig.app.region}`
       )
-      // await updateSkeetCloudConfig(functionName)
+      for await (const modelPath of latestModel.modelsPath) {
+        const latestModelFileName = modelPath.split('/').pop()
+        const newModelFileName = `${newModelPath}/${latestModelFileName}`
+        Logger.sync(`📃 Copying ${modelPath} to ${newModelFileName}...`)
+        await copyFileWithOverwrite(modelPath, `${newModelFileName}`)
+      }
       await updateFirebaseConfig(functionName)
       await addFunctionsToPackageJson(functionName)
       const githubAction = await functionsYml(functionName)
@@ -42,36 +54,6 @@ export const addFunctions = async (functionName: string) => {
   } catch (error) {
     await skeetError('addFunctions', error)
   }
-}
-
-export const updateSkeetCloudConfig = async (functionName: string) => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
-  const region = skeetConfig.app.region || 'europe-west4'
-  const functionInfo = await getFunctionInfo(functionName)
-  const httpsOptions: HttpsOptions = {
-    region,
-    cpu: 1,
-    memory: '1GiB',
-    maxInstances: 100,
-    minInstances: 0,
-    concurrency: 10,
-    ingressSettings: 'ALLOW_INTERNAL_AND_GCLB',
-    vpcConnectorEgressSettings: 'PRIVATE_RANGES_ONLY',
-  }
-  const newFunction = {
-    name: functionInfo.name,
-    methods: [
-      {
-        name: 'hello',
-        url: '',
-        pubsub: false,
-        scheduler: '',
-      },
-    ],
-  }
-  skeetConfig.functions.push(newFunction)
-  fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
-  Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
 export const updateFirebaseConfig = async (functionName: string) => {

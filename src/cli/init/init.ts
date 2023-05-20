@@ -102,7 +102,7 @@ export const init = async (skipSetupCloud = false) => {
             answers.nsDomain
           )
           await addDomainToConfig(answers.nsDomain, answers.lbDomain)
-          await initArmor(skeetConfig.app.projectId, skeetConfig.app.name)
+          await initArmor()
           await syncArmor()
           await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
           await Logger.sync(
