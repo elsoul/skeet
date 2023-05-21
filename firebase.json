@@ -19,16 +19,6 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ]
-    },
-    {
-      "source": "functions/openai",
-      "codebase": "openai",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log"
-      ]
     }
   ],
   "database": {

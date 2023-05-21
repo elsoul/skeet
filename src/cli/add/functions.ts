@@ -21,11 +21,12 @@ export const addFunctions = async (functionName: string) => {
       await Logger.error(`Already exist functionName: ${functionName}!`)
       return ''
     } else {
+      const functions = await getModelFiles()
+      const latestModel = functions[0]
+
       fs.mkdir(functionDir, { recursive: true }, (err) => {
         if (err) throw err
       })
-      const functions = await getModelFiles()
-      const latestModel = functions[0]
 
       const gitCloneCmd = ['git', 'clone', FUNCTIONS_REPO_URL, functionDir]
       await execSyncCmd(gitCloneCmd)
