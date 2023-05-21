@@ -174,25 +174,25 @@ async function main() {
     const sync = program.command('sync').description('Skeet Sync Comannd')
     sync
       .command('models')
-      .description('Sync Models')
+      .description('Skeet Sync Models')
       .action(async () => {
         await syncModels()
       })
     sync
       .command('types')
-      .description('Sync Types')
+      .description('Skeet Sync Types')
       .action(async () => {
         await syncTypes()
       })
     sync
       .command('routings')
-      .description('Sync Routings')
+      .description('Skeet Sync Routings')
       .action(async () => {
         await syncRoutings()
       })
     sync
       .command('armor')
-      .description('Sync Cloud Armor Rules')
+      .description('Skeet Sync Cloud Armor Rules')
       .action(async () => {
         await syncArmor()
       })

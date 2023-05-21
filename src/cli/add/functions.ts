@@ -1,20 +1,16 @@
 import { SkeetCloudConfig, importConfig, importFirebaseConfig } from '@/index'
 import { copyFileWithOverwrite } from '@/lib/copyFiles'
 import { execSyncCmd } from '@/lib/execSyncCmd'
-import { getFunctions } from '@/lib/getDirs'
 import { getModelFiles } from '@/lib/getModelFiles'
 import {
   FIREBASE_CONFIG_PATH,
   FUNCTIONS_PATH,
   FUNCTIONS_REPO_URL,
   ROUTE_PACKAGE_JSON_PATH,
-  SKEET_CONFIG_PATH,
-  getFunctionInfo,
 } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
 import { skeetError } from '@/lib/skeetError'
 import { functionsYml } from '@/templates/init'
-import { HttpsOptions } from 'firebase-functions/v2/https'
 import fs from 'fs'
 
 export const addFunctions = async (functionName: string) => {
@@ -30,7 +26,6 @@ export const addFunctions = async (functionName: string) => {
       })
       const functions = await getModelFiles()
       const latestModel = functions[0]
-      const newModelPath = `${functionDir}/src/models`
 
       const gitCloneCmd = ['git', 'clone', FUNCTIONS_REPO_URL, functionDir]
       await execSyncCmd(gitCloneCmd)
@@ -40,6 +35,7 @@ export const addFunctions = async (functionName: string) => {
         `${functionDir}/.env`,
         `PROJECT_ID=${skeetConfig.app.projectId}\nREGION=${skeetConfig.app.region}`
       )
+      const newModelPath = `${functionDir}/src/models`
       for await (const modelPath of latestModel.modelsPath) {
         const latestModelFileName = modelPath.split('/').pop()
         const newModelFileName = `${newModelPath}/${latestModelFileName}`
