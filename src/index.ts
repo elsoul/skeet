@@ -16,7 +16,7 @@ import {
   syncRoutings,
   syncModels,
   syncTypes,
-  syncArmor,
+  syncArmors,
   addFunctions,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
@@ -99,24 +99,24 @@ async function main() {
     program
       .command('create')
       .argument('<appName>', 'Name of the app')
-      .description('Create Skeet App')
+      .description('Create Skeet Framework App')
       .action(async (appName: string) => {
         await create(appName)
       })
     program
       .command('server')
-      .description('Run Skeet Server')
+      .description('Run Firebase Emulator for Skeet APP')
       .alias('s')
       .action(server)
     program
       .command('deploy')
-      .description('Deploy Skeet APP to Google Cloud Platform')
+      .description('Deploy Skeet APP to Firebase Cloud Functions')
       .action(deploy)
     program
       .command('init')
       .option('--only-config', 'Generate Skeet Cloud Config', false)
       .option('--skip-setup-cloud', 'Generate Skeet Cloud Config', false)
-      .description('Generate Skeet Cloud Config')
+      .description('Initialize Google Cloud Setups for Skeet APP')
       .action(async (options) => {
         if (options.onlyConfig) {
           const data = await skeetCloudConfigAppGen()
@@ -126,7 +126,9 @@ async function main() {
         }
       })
 
-    const iam = program.command('iam').description('Skeet IAM Comannd')
+    const iam = program
+      .command('iam')
+      .description('Skeet IAM Comannd to setup Google Cloud Platform')
     iam
       .command('init')
       .description('Setup IAM for Google Cloud Platform')
@@ -148,6 +150,9 @@ async function main() {
       })
     program
       .command('yarn')
+      .description(
+        'Skeet Yarn Comannd to run yarn command for multiple functions'
+      )
       .argument(
         '<yarnCmd>',
         Object.entries(YarnCmd)
@@ -163,7 +168,9 @@ async function main() {
         }
         await yarn(yarnCmd, options.p, options.D)
       })
-    const add = program.command('add').description('Add Comannd')
+    const add = program
+      .command('add')
+      .description('Skeet Add Comannd to add new functions')
     add
       .command('functions')
       .argument('<functionsName>', 'Functions Name - e.g. openai')
@@ -171,7 +178,9 @@ async function main() {
         await addFunctions(functionsName)
       })
 
-    const sync = program.command('sync').description('Skeet Sync Comannd')
+    const sync = program
+      .command('sync')
+      .description('Skeet Sync Comannd to sync backend and frontend')
     sync
       .command('models')
       .description('Skeet Sync Models')
@@ -191,10 +200,10 @@ async function main() {
         await syncRoutings()
       })
     sync
-      .command('armor')
+      .command('armors')
       .description('Skeet Sync Cloud Armor Rules')
       .action(async () => {
-        await syncArmor()
+        await syncArmors()
       })
 
     const d = program

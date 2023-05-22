@@ -9,7 +9,7 @@ import {
   gitInit,
   gitCommit,
   createGitRepo,
-  syncArmor,
+  syncArmors,
   getZone,
 } from '@/cli'
 import { execSyncCmd } from '@/lib/execSyncCmd'
@@ -103,7 +103,7 @@ export const init = async (skipSetupCloud = false) => {
           )
           await addDomainToConfig(answers.nsDomain, answers.lbDomain)
           await initArmor()
-          await syncArmor()
+          await syncArmors()
           await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
           await Logger.sync(
             `Copy nameServer's addresses above and paste them to your DNS settings`

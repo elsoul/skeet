@@ -8,7 +8,7 @@ import {
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 
-export const syncArmor = async () => {
+export const syncArmors = async () => {
   const config = await importConfig()
   await setGcloudProject(config.app.projectId)
   if (config.cloudArmor)

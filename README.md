@@ -97,15 +97,14 @@ Options:
   -h, --help                display help for command
 
 Commands:
-  create <appName>          Create Skeet App
-  server|s                  Run Skeet Server
-  deploy                    Deploy Skeet APP to Google Cloud Platform
-  init [options]            Generate Skeet Cloud Config
-  iam                       Skeet IAM Comannd
-  vpc                       Setup VPC for Google Cloud Platform
-  yarn [options] <yarnCmd>
-  add                       Add Comannd
-  sync                      Skeet Sync Comannd
+  create <appName>          Create Skeet Framework App
+  server|s                  Run Firebase Emulator for Skeet APP
+  deploy                    Deploy Skeet APP to Firebase Cloud Functions
+  init [options]            Initialize Google Cloud Setups for Skeet APP
+  iam                       Skeet IAM Comannd to setup Google Cloud Platform
+  yarn [options] <yarnCmd>  Skeet Yarn Comannd to run yarn command for multiple functions
+  add                       Skeet Add Comannd to add new functions
+  sync                      Skeet Sync Comannd to sync backend and frontend
   delete|d                  Skeet Delete Command
   list                      Show Skeet App List
   help [command]            display help for command
