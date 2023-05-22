@@ -18,6 +18,7 @@ import {
   syncTypes,
   syncArmors,
   addFunctions,
+  addMethod,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
@@ -176,6 +177,12 @@ async function main() {
       .argument('<functionsName>', 'Functions Name - e.g. openai')
       .action(async (functionsName: string) => {
         await addFunctions(functionsName)
+      })
+    add
+      .command('method')
+      .argument('<methoName>', 'Method Name - e.g. addStreamUserChat')
+      .action(async (methoName: string) => {
+        await addMethod(methoName)
       })
 
     const sync = program

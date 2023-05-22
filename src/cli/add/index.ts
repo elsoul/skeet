@@ -1,4 +1,5 @@
-export * from './functions'
+export * from './addFunctions'
 export * from './model'
 export * from './routing'
 export * from './addBackendSetup'
+export * from './addMethod'

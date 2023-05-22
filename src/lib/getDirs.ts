@@ -2,14 +2,9 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { FUNCTIONS_PATH } from './getSkeetConfig'
 
-interface DirectoryInfo {
-  name: string
-  lastModified: Date
-}
-
 export const getDirectoryLastModified = (directoryPath: string): Date => {
   const fileNames = fs.readdirSync(directoryPath)
-  let latestModified: Date = new Date(0) // 初期値を古い日時に設定
+  let latestModified: Date = new Date(0)
 
   fileNames.forEach((fileName) => {
     const filePath = path.join(directoryPath, fileName)
@@ -54,3 +49,11 @@ export const getFunctions = async (isForModels = false): Promise<string[]> => {
     return []
   }
 }
+
+export const functionsInstanceTypes = [
+  'http',
+  'firestore',
+  'pubSub',
+  'scheduler',
+  'auth',
+]
