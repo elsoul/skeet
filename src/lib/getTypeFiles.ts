@@ -4,7 +4,6 @@ import { getFunctions } from './getDirs'
 
 export const getTypeFiles = async () => {
   const functions = await getFunctions()
-  console.log(functions)
   const data = []
   for (const functionName of functions) {
     const httpRoutingPath = path.join(

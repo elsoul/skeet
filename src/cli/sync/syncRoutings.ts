@@ -1,12 +1,13 @@
 import { getHTTPRoutingFiles } from '@/lib/getHttpRountings'
 import { getFunctionInfo, getNetworkConfig } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'
-import { addRounting } from '../add'
-import { addBackendSetup } from '../add/addBackendSetup'
 import { importConfig } from '@/index'
 import { Logger } from '@/lib/logger'
+import { setGcloudProject, addRounting, addBackendSetup } from '@/cli'
 
 export const syncRoutings = async () => {
+  const { app } = await importConfig()
+  await setGcloudProject(app.projectId)
   const files = await getHTTPRoutingFiles()
   const paths = []
   Logger.sync('⏳ syncRoutings...')

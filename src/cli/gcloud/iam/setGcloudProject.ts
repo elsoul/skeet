@@ -1,6 +1,10 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execSync } from 'child_process'
 
 export const setGcloudProject = async (projectId: string) => {
-  const shCmd = ['gcloud', 'config', 'set', 'project', projectId]
-  await execSyncCmd(shCmd)
+  try {
+    const shCmd = ['gcloud', 'config', 'set', 'project', projectId]
+    execSync(shCmd.join(' '), { stdio: 'ignore' })
+  } catch (error) {
+    throw new Error(`setGcloudProject: ${error}`)
+  }
 }

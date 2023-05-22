@@ -5,6 +5,7 @@ import { VERSION } from '@/lib/version'
 import {
   YarnCmd,
   addJsonEnv,
+  server,
   create,
   createServiceAccountKey,
   deploy,
@@ -16,11 +17,10 @@ import {
   syncModels,
   syncTypes,
   syncArmor,
+  addFunctions,
 } from '@/cli'
-import { server } from '@/cli/server'
-import { addFunctions } from './cli/add'
-import { Logger } from './lib/logger'
-import { skeetCloudConfigAppGen } from './templates/init/skeet-cloud.config-app'
+import { Logger } from '@/lib/logger'
+import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
 import { deleteRoutings } from './cli/delete'
 
 export type SkeetCloudConfig = {

@@ -45,6 +45,7 @@ Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Clou
 - [Google SDK](https://cloud.google.com/sdk/docs)
 - [Firebase CLI](https://firebase.google.com/docs/cli)
 - [GitHub CLI](https://cli.github.com/)
+- [Skeet Framework Plugin - Firestore](https://skeet.dev/doc/backend/skeet-firestore/)
 
 ## Cloud Network Architecture
 

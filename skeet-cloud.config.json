@@ -5,47 +5,6 @@
     "region": "europe-west4",
     "appUrl": ""
   },
-  "functions": [
-    {
-      "name": "openai",
-      "methods": [
-        {
-          "name": "hello",
-          "url": "",
-          "pubsub": false,
-          "scheduler": ""
-        },
-        {
-          "name": "openaichatroom",
-          "url": "",
-          "pubsub": true,
-          "scheduler": "every 24 hours"
-        }
-      ]
-    },
-    {
-      "name": "skeet-functions-twitter",
-      "methods": [
-        {
-          "name": "hello",
-          "url": "",
-          "pubsub": false,
-          "scheduler": ""
-        }
-      ]
-    },
-    {
-      "name": "skeet-functions-openai",
-      "methods": [
-        {
-          "name": "hello",
-          "url": "",
-          "pubsub": false,
-          "scheduler": ""
-        }
-      ]
-    }
-  ],
   "cloudArmor": [
     {
       "securityPolicyName": "skeet-skeet-example-armor",
