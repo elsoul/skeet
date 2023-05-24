@@ -67,7 +67,7 @@ export type SecurityPolicy = {
 
 export const importConfig = async () => {
   try {
-    const config = fs.readFileSync(`${process.cwd()}/skeet-cloud.config.json`)
+    const config = fs.readFileSync(`./skeet-cloud.config.json`)
     const json: SkeetCloudConfig = JSON.parse(String(config))
     return json
   } catch (error) {
@@ -78,7 +78,7 @@ export const importConfig = async () => {
 
 export const importFirebaseConfig = async () => {
   try {
-    const config = fs.readFileSync(`${process.cwd()}/firebase.json`)
+    const config = fs.readFileSync(`./firebase.json`)
     const json = JSON.parse(String(config))
     return json
   } catch (error) {
