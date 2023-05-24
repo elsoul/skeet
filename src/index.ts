@@ -21,10 +21,11 @@ import {
   addMethod,
   login,
   addModel,
+  curl,
+  deleteRoutings,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
-import { deleteRoutings } from './cli/delete'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -182,9 +183,9 @@ async function main() {
       })
     add
       .command('method')
-      .argument('<methoName>', 'Method Name - e.g. addStreamUserChat')
-      .action(async (methoName: string) => {
-        await addMethod(methoName)
+      .argument('<methodName>', 'Method Name - e.g. addStreamUserChat')
+      .action(async (methodName: string) => {
+        await addMethod(methodName)
       })
     add
       .command('model')
@@ -253,11 +254,17 @@ async function main() {
       .action(async () => {
         await listFunctions()
       })
-    list
-      .command('models')
-      .description('Show Skeet Models List')
-      .action(async () => {
-        await Logger.successCheck('successfully created')
+
+    program
+      .command('curl')
+      .description('Skeet Curl Command - Call Cloud Functions Endpoint for Dev')
+      .argument(
+        '<methodName>',
+        'Method Name - e.g. skeet curl createUserChatRoom'
+      )
+      .action(async (methodName: string) => {
+        const config = await importConfig()
+        await curl(config.app.projectId, config.app.region, methodName)
       })
 
     await program.parseAsync(process.argv)

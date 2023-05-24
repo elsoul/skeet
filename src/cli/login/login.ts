@@ -6,7 +6,6 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth'
 import dotenv from 'dotenv'
-import { importConfig } from '@/index'
 import { Logger } from '@/lib/logger'
 dotenv.config()
 
@@ -36,16 +35,17 @@ export const login = async (
 
     // @ts-ignore
     const accessToken = loginUserCredential.user.accessToken
-    const skeetCloudConfig = await importConfig()
     Logger.warning(
-      '🚸 === Copy & Paste below commands to your terminal === 🚸\n'
+      '🚸 === Copy & Paste below command to your terminal === 🚸\n'
     )
-    const exportLog = `export ACCESS_TOKEN=${accessToken}\nexport PROJECT_ID=${skeetCloudConfig.app.projectId}\nexport REGION=${skeetCloudConfig.app.region}\n`
+    const exportLog = `export ACCESS_TOKEN=${accessToken}\n`
     Logger.normal(exportLog)
-    Logger.warning('🚸 =========           END           ========= 🚸\n')
+    Logger.warning('🚸 =========           END           ========= 🚸\n\n')
 
-    const curlDescription = `Example POST Request to create UserChatRoom`
-    const curlText = `curl --location --request POST http://127.0.0.1:5001/$PROJECT_ID/$REGION/createUserChatRoom --header "Authorization: Bearer $ACCESS_TOKEN" | json_pp`
+    const successLog = `💃Let's try \`$ skeet curl <MethodName>\` to test request🕺\n`
+    Logger.normal(successLog)
+    const curlText = '$ skeet curl createUserChatRoom'
+    Logger.normal(curlText)
     return true
   } catch (error) {
     throw new Error(`login: ${error}`)
