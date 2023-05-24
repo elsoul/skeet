@@ -20,11 +20,11 @@ import {
   addFunctions,
   addMethod,
   login,
+  addModel,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
 import { deleteRoutings } from './cli/delete'
-import e from 'express'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -186,6 +186,13 @@ async function main() {
       .action(async (methoName: string) => {
         await addMethod(methoName)
       })
+    add
+      .command('model')
+      .argument('<modelName>', 'Model Name - e.g. Article')
+      .action(async (modelName: string) => {
+        console.log(modelName)
+        await addModel(modelName)
+      })
 
     const sync = program
       .command('sync')
@@ -245,6 +252,12 @@ async function main() {
       .description('Show Skeet Functions List')
       .action(async () => {
         await listFunctions()
+      })
+    list
+      .command('models')
+      .description('Show Skeet Models List')
+      .action(async () => {
+        await Logger.successCheck('successfully created')
       })
 
     await program.parseAsync(process.argv)

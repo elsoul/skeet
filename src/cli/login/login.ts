@@ -43,6 +43,9 @@ export const login = async (
     const exportLog = `export ACCESS_TOKEN=${accessToken}\nexport PROJECT_ID=${skeetCloudConfig.app.projectId}\nexport REGION=${skeetCloudConfig.app.region}\n`
     Logger.normal(exportLog)
     Logger.warning('🚸 =========           END           ========= 🚸\n')
+
+    const curlDescription = `Example POST Request to create UserChatRoom`
+    const curlText = `curl --location --request POST http://127.0.0.1:5001/$PROJECT_ID/$REGION/createUserChatRoom --header "Authorization: Bearer $ACCESS_TOKEN" | json_pp`
     return true
   } catch (error) {
     throw new Error(`login: ${error}`)

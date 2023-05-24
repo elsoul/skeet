@@ -37,6 +37,13 @@ export module Logger {
     console.log(greyHex(text))
   }
 
+  export const successCheck = async (text: string) => {
+    const check = successHex('✔')
+    const plainText = chalk.white(text)
+    const textLog = `${check} ${plainText} 🎉`
+    console.log(textLog)
+  }
+
   export const skeetAA = async () => {
     const row1SKEE = Logger.syncHex('   _____ __ __ ____________')
     const row1T = Logger.errorHex('______')

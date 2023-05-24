@@ -39,7 +39,7 @@ export const genInstanceMethod = async (
   }
 }
 
-const appendLineToFile = (filePath: string, line: string) => {
+export const appendLineToFile = (filePath: string, line: string) => {
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8')
     const updatedContent = fileContent.endsWith('\n')
