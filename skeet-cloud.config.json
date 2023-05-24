@@ -1,8 +1,8 @@
 {
   "app": {
     "name": "skeet-app",
-    "projectId": "skeet-example",
-    "region": "europe-west4",
+    "projectId": "skeet-app",
+    "region": "europe-west6",
     "appUrl": ""
   },
   "cloudArmor": [

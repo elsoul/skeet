@@ -241,7 +241,7 @@ async function main() {
       .option('--password', 'Login Password', '')
       .action(async (options) => {
         if (options.production) {
-          await login(options.email, options.password, false)
+          await login(String(options.email), String(options.password), false)
         } else {
           await login()
         }
@@ -262,9 +262,41 @@ async function main() {
         '<methodName>',
         'Method Name - e.g. skeet curl createUserChatRoom'
       )
-      .action(async (methodName: string) => {
+      .option(
+        '-d,--data [data]',
+        'JSON Request Body - e.g. \'{ "docId": "xxx" }\''
+      )
+      .option('--production', 'For Production', false)
+      .option(
+        '-f,--functions [functions]',
+        'For Production Functions Name',
+        false
+      )
+      .action(async (methodName: string, options) => {
         const config = await importConfig()
-        await curl(config.app.projectId, config.app.region, methodName)
+        if (options.production) {
+          if (!options.functions)
+            throw new Error('Need to define functionsName')
+
+          const functionsDomain = config.app.functionsDomain
+          await curl<Record<any, any>>(
+            config.app.projectId,
+            config.app.region,
+            methodName,
+            options.data,
+            true,
+            functionsDomain,
+            options.functions
+          )
+        } else {
+          console.log(options)
+          await curl<Record<any, any>>(
+            config.app.projectId,
+            config.app.region,
+            methodName,
+            options.data
+          )
+        }
       })
 
     await program.parseAsync(process.argv)

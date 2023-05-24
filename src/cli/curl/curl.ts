@@ -1,14 +1,25 @@
 import { Logger } from '@/lib/logger'
+import { convertToKebabCase } from '@/utils/string'
 import { execSync } from 'child_process'
 
-export const curl = async (
+export const curl = async <T>(
   projectId: string,
   region: string,
-  methodName: string
+  methodName: string,
+  params: T = false as T,
+  isProduction = false,
+  functionsDomain = '',
+  functionsName = ''
 ) => {
   try {
-    const url = `http://127.0.0.1:5001/${projectId}/${region}/${methodName}`
+    const kebab = convertToKebabCase(methodName)
+    const url = isProduction
+      ? `https://${functionsDomain}/${functionsName}/${kebab}`
+      : `http://127.0.0.1:5001/${projectId}/${region}/${methodName}`
     const accessToken = process.env.ACCESS_TOKEN
+    const curlCmd = params
+      ? `curl --location --request POST ${url} --data '${params}' --header 'Content-Type: application/json' --header "Authorization: Bearer ${accessToken}" | json_pp`
+      : `curl --location --request POST ${url} --header "Authorization: Bearer ${accessToken}" | json_pp`
 
     if (!accessToken) {
       throw new Error(
@@ -16,8 +27,8 @@ export const curl = async (
       )
     }
 
-    const curlCommand = `curl --location --request POST ${url} --header "Authorization: Bearer ${accessToken}" | json_pp`
-    const res = execSync(curlCommand)
+    console.log(curlCmd)
+    const res = execSync(curlCmd)
     const data = res.toString()
 
     await Logger.normal(data)
