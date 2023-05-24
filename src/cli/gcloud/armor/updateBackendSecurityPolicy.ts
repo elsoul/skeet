@@ -11,7 +11,7 @@ export const updateBackendSecurityPolicy = async (
     'compute',
     'backend-services',
     'update',
-    appConf.backendServiceName,
+    appConf.defaultBackendServiceName,
     '--security-policy',
     appConf.securityPolicyName,
     '--project',

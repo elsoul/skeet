@@ -128,7 +128,7 @@ export const setupCloud = async (
   await gitCommit()
   await createGitRepo(repoName)
   await setupGcp(skeetConfig, region)
-  const shCmd = ['firebase', 'deploy', '--only', 'functions']
+  const shCmd = ['firebase', 'deploy', '--only', 'functions', '-P', `${skeetConfig.app.projectId}`]
   await execSyncCmd(shCmd)
 }
 
