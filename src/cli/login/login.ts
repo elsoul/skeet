@@ -18,7 +18,7 @@ export const login = async (
   try {
     // @ts-ignore
     const firebaseConfig = (await import(
-      `${__dirname}/lib/firebaseConfig`
+      `./lib/firebaseConfig`
     )) as FirebaseOptions
     // @ts-ignore
     const firebaseApp = initializeApp(firebaseConfig.default)
