@@ -19,10 +19,12 @@ import {
   syncArmors,
   addFunctions,
   addMethod,
+  login,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
 import { deleteRoutings } from './cli/delete'
+import e from 'express'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -222,6 +224,19 @@ async function main() {
       .description('Delete Routings')
       .action(async (methodName: string) => {
         await deleteRoutings(methodName)
+      })
+    program
+      .command('login')
+      .description('Skeet Login Command - Create Firebase Login Token')
+      .option('--production', 'For Production', false)
+      .option('--email', 'Login Email', '')
+      .option('--password', 'Login Password', '')
+      .action(async (options) => {
+        if (options.production) {
+          await login(options.email, options.password, false)
+        } else {
+          await login()
+        }
       })
 
     const list = program.command('list').description('Show Skeet App List')

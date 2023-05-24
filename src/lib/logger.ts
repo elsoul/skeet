@@ -9,6 +9,10 @@ export module Logger {
   export const indigoHex = chalk.hex('#3950A0')
   export const pinkHex = chalk.hex('#D8A1C4')
 
+  export const normal = async (text: string) => {
+    console.log(chalk.white(text))
+  }
+
   export const success = async (text: string) => {
     console.log(successHex(text))
   }

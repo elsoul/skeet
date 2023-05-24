@@ -22,6 +22,11 @@
   },
   "files": ["package.json"],
   "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules", "skeet-cloud.config.json"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "skeet-cloud.config.json",
+    "src/cli/login/login.ts"
+  ],
   "compileOnSave": false
 }
