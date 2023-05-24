@@ -183,9 +183,9 @@ async function main() {
       })
     add
       .command('method')
-      .argument('<methoName>', 'Method Name - e.g. addStreamUserChat')
-      .action(async (methoName: string) => {
-        await addMethod(methoName)
+      .argument('<methodName>', 'Method Name - e.g. addStreamUserChat')
+      .action(async (methodName: string) => {
+        await addMethod(methodName)
       })
     add
       .command('model')

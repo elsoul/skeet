@@ -36,15 +36,15 @@ export const login = async (
     // @ts-ignore
     const accessToken = loginUserCredential.user.accessToken
     Logger.warning(
-      '🚸 === Copy & Paste below commands to your terminal === 🚸\n'
+      '🚸 === Copy & Paste below command to your terminal === 🚸\n'
     )
     const exportLog = `export ACCESS_TOKEN=${accessToken}\n`
     Logger.normal(exportLog)
     Logger.warning('🚸 =========           END           ========= 🚸\n\n')
 
-    const curlDescription = `Example POST Request to create UserChatRoom\n`
-    Logger.sync(curlDescription)
-    const curlText = 'run `skeet curl createUserChatRoom`'
+    const successLog = `💃Let's try \`$ skeet curl <MethodName>\` to test request🕺\n`
+    Logger.normal(successLog)
+    const curlText = '$ skeet curl createUserChatRoom'
     Logger.normal(curlText)
     return true
   } catch (error) {
