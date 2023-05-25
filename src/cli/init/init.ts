@@ -76,10 +76,6 @@ export const projectIdNotExists = async (projectId: string) => {
 
 export const init = async (skipSetupCloud = false) => {
   const skeetConfig = await importConfig()
-  if (await projectIdNotExists(skeetConfig.app.projectId)) {
-    return 'Project ID with that name does not exist. Please check that skeet-cloud.config.json reflects the project ID from Google Cloud.'
-  }
-
   const regionsArray: Array<{ [key: string]: string }> = []
   for await (const region of regionList) {
     regionsArray.push({ name: region })
@@ -103,6 +99,10 @@ export const init = async (skipSetupCloud = false) => {
     ])
     .then(async (region) => {
       if (region) {
+        if (await projectIdNotExists(skeetConfig.app.projectId)) {
+          Logger.error('Project ID with that name does not exist. Please check that skeet-cloud.config.json reflects the project ID from Google Cloud.')
+          return
+        }
         Logger.normal(`👷 setting up your skeet...`)
         await addRegionToConfig(region.region)
         inquirer.prompt(questions).then(async (answer) => {
