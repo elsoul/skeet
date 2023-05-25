@@ -3,11 +3,7 @@ export const packageJson = async (appName: string) => {
   const body = {
     name: appName,
     version: '0.0.1',
-    description: 'Skeet Framework',
-    main: 'dist/index.js',
-    repository: 'https://github.com/elsoul/skeet-cli.git',
-    author: 'ELSOUL LABO B.V.',
-    license: 'Apache-2.0',
+    description: `${appName}`,
     private: true,
     scripts: {
       skeet: 'run-p skeet:*',

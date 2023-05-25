@@ -3,7 +3,7 @@
   "version": "0.12.13",
   "description": "Skeet CLI",
   "main": "dist/index.js",
-  "repository": "https://github.com/elsoul/skeet-cli.git",
+  "repository": "https://github.com/elsoul/skeet-cli",
   "keywords": [
     "openai",
     "firestore",
