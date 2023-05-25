@@ -247,11 +247,11 @@ async function main() {
       .command('login')
       .description('Skeet Login Command - Create Firebase Login Token')
       .option('--production', 'For Production', false)
-      .option('--email', 'Login Email', '')
-      .option('--password', 'Login Password', '')
+      .option('--email [email]', 'Login Email', '')
+      .option('--password [password]', 'Login Password', '')
       .action(async (options) => {
         if (options.production) {
-          await login(String(options.email), String(options.password))
+          await login(options.email, options.password)
         } else {
           await login()
         }
@@ -274,7 +274,7 @@ async function main() {
       )
       .option(
         '-d,--data [data]',
-        'JSON Request Body - e.g. \'{ "docId": "xxx" }\''
+        'JSON Request Body - e.g. \'{ "model": "gpt4", "maxTokens": 420 }\''
       )
       .option('--production', 'For Production', false)
       .option(
