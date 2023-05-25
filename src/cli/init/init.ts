@@ -65,11 +65,12 @@ const questions = [
 ]
 
 export const projectIdNotExists = async (projectId: string) => {
-  const cmd = `gcloud projects list --filter abc123`
+  const cmd = `gcloud projects list --filter ${projectId}`
     const { promisify } = require('util')
     const exec = promisify(require('child_process').exec)
 
     const output = await exec(cmd)
+    console.log(output)
 
     return output.stderr.trim() !== ''
 }
