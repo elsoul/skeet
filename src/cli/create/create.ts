@@ -4,6 +4,7 @@ import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
 import { APP_REPO_URL, FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { execSync } from 'child_process'
 
 export const create = async (initAppName: string) => {
   await skeetCreate(initAppName)

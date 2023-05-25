@@ -96,6 +96,12 @@ export const init = async (skipSetupCloud = false) => {
           if (!skipSetupCloud) {
             await setupCloud(skeetConfig, answers.githubRepo, region.region)
             await genFirebaseConfig()
+            try {
+              const cmd = ['mv', `./github`, `./.github`]
+              execSync(cmd.join(' '))
+            } catch (error) {
+              console.log(error)
+            }
           }
 
           await setupLoadBalancer(

@@ -28,6 +28,8 @@ import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
 import { genFirebaseConfig } from './cli/init/genFirebaseConfig'
 import { firebaseSdkConfig } from './cli/init/firebaseSdkConfig'
+import e from 'express'
+import { execSync } from 'child_process'
 
 export type SkeetCloudConfig = {
   app: AppConfig
