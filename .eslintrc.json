@@ -1,10 +1,26 @@
 {
-  "extends": ["prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
-
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "env": {
     "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 0,
+    "@typescript-eslint/ban-ts-comment": [
+      "off",
+      {
+        "ts-ignore": "allow-with-description"
+      }
+    ],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
   }
 }
