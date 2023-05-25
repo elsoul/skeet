@@ -64,11 +64,24 @@ const questions = [
   },
 ]
 
+export const projectIdNotExists = async (projectId: string) => {
+  const cmd = `gcloud projects list --filter ${projectId}`
+  const { promisify } = require('util')
+  const exec = promisify(require('child_process').exec)
+
+  const output = await exec(cmd)
+  return output.stdout.trim() === 'Listed 0 items.'
+}
+
 export const init = async (skipSetupCloud = false) => {
   const skeetConfig = await importConfig()
   const regionsArray: Array<{ [key: string]: string }> = []
   for await (const region of regionList) {
     regionsArray.push({ name: region })
+  }
+
+  if (await projectIdNotExists(skeetConfig.app.projectId)) {
+    return 'Project ID with that name does not exist. Please check that skeet-cloud.config.json reflects the project ID from Google Cloud.'
   }
 
   inquirer
