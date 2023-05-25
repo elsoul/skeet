@@ -75,6 +75,8 @@ export const projectIdNotExists = async (projectId: string) => {
 }
 
 export const init = async (skipSetupCloud = false) => {
+  console.log("Testing 123 Github Branch")
+
   const skeetConfig = await importConfig()
   const regionsArray: Array<{ [key: string]: string }> = []
   for await (const region of regionList) {
