@@ -241,7 +241,7 @@ async function main() {
       .option('--password', 'Login Password', '')
       .action(async (options) => {
         if (options.production) {
-          await login(String(options.email), String(options.password), false)
+          await login(String(options.email), String(options.password))
         } else {
           await login()
         }
