@@ -34,7 +34,7 @@ export const syncModels = async () => {
       const oldModels = models.slice(1)
       Logger.success(`latestModel: ${latestModel.functionName}`)
       for await (const model of models) {
-        await Logger.sync(`Syncing ${model.functionName}...`)
+        Logger.sync(`Syncing ${model.functionName}...`)
         if (model.functionName === latestModel.functionName) continue
         for await (const latestModelPath of latestModel.modelsPath) {
           const latestModelFileName = latestModelPath.split('/').pop()
@@ -51,7 +51,7 @@ export const syncModels = async () => {
           await copyFileWithOverwrite(latestModelPath, frontModelPath)
         }
       }
-      await Logger.sync('Synced Models Types 🎉')
+      Logger.sync('Synced Models Types 🎉')
       return true
     })
 }

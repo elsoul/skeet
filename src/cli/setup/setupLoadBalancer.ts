@@ -70,7 +70,7 @@ export const setupLoadBalancer = async (
     await createRecord(config.app.projectId, networkConf.zoneName, lbDomain, ip)
     await createCaaRecords(config.app.projectId, networkConf.zoneName, lbDomain)
   } catch (error) {
-    await Logger.error(`setupLoadBalancer error: ${JSON.stringify(error)}`)
+    Logger.error(`setupLoadBalancer error: ${JSON.stringify(error)}`)
     process.exit(1)
   }
 }

@@ -12,7 +12,7 @@ export const create = async (initAppName: string) => {
 export const skeetCreate = async (appName: string) => {
   const appDir = './' + appName
   if (fs.existsSync(appDir)) {
-    await Logger.error(`Directory ${appName} already exists.`)
+    Logger.error(`Directory ${appName} already exists.`)
     process.exit(0)
   }
   const gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
@@ -30,11 +30,11 @@ export const skeetCreate = async (appName: string) => {
   await sleep(2000)
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
-  await Logger.skeetAA()
-  await Logger.welcomText(appName)
+  Logger.skeetAA()
+  Logger.welcomText(appName)
   const nmb = Math.floor(Math.random() * 4 + 1)
   if (nmb === 4) {
-    await Logger.cmText()
+    Logger.cmText()
   }
 }
 

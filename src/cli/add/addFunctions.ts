@@ -18,7 +18,7 @@ export const addFunctions = async (functionName: string) => {
     const skeetConfig: SkeetCloudConfig = await importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}`
     if (fs.existsSync(functionDir)) {
-      await Logger.error(`Already exist functionName: ${functionName}!`)
+      Logger.error(`Already exist functionName: ${functionName}!`)
       return ''
     } else {
       const functions = await getModelFiles()

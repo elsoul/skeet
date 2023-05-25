@@ -31,7 +31,7 @@ export const curl = async <T>(
     const res = execSync(curlCmd)
     const data = res.toString()
 
-    await Logger.normal(data)
+    Logger.normal(data)
   } catch (error) {
     throw new Error(`curl: ${error}`)
   }

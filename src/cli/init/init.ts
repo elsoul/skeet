@@ -16,6 +16,7 @@ import { execSyncCmd } from '@/lib/execSyncCmd'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
 import { execSync } from 'child_process'
+import { genFirebaseConfig } from './genFirebaseConfig'
 
 const requireRepoName = (value: string) => {
   if (/.+\/.+/.test(value)) {
@@ -88,12 +89,13 @@ export const init = async (skipSetupCloud = false) => {
     ])
     .then(async (region) => {
       if (region) {
-        Logger.sync(`👷 setting up your skeet...`)
+        Logger.normal(`👷 setting up your skeet...`)
         await addRegionToConfig(region.region)
         inquirer.prompt(questions).then(async (answer) => {
           const answers = JSON.parse(JSON.stringify(answer))
           if (!skipSetupCloud) {
             await setupCloud(skeetConfig, answers.githubRepo, region.region)
+            await genFirebaseConfig()
           }
 
           await setupLoadBalancer(
@@ -105,13 +107,13 @@ export const init = async (skipSetupCloud = false) => {
           await initArmor()
           await syncArmors()
           await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
-          await Logger.sync(
-            `Copy nameServer's addresses above and paste them to your DNS settings`
+          Logger.warning(
+            `⚠️ Copy nameServer's addresses above and paste them to your DNS settings ⚠️`
           )
-
-          await Logger.success(
-            `✔︎ created Load Balancer!\nhttps will be ready in about an hour after your DNS settings 🎉`
+          Logger.warning(
+            '\n\n👷 https will be ready in about an hour after your DNS settings 👷\n\n'
           )
+          Logger.successCheck(`Load Balancer has been created successfully`)
         })
       }
     })
@@ -122,13 +124,20 @@ export const setupCloud = async (
   repoName: string,
   region: string
 ) => {
-  await Logger.sync(`setting up your google cloud platform...`)
+  Logger.sync(`setting up your google cloud platform...`)
   await setGcloudProject(skeetConfig.app.projectId)
   await gitInit()
   await gitCommit()
   await createGitRepo(repoName)
   await setupGcp(skeetConfig, region)
-  const shCmd = ['firebase', 'deploy', '--only', 'functions', '-P', `${skeetConfig.app.projectId}`]
+  const shCmd = [
+    'firebase',
+    'deploy',
+    '--only',
+    'functions',
+    '-P',
+    `${skeetConfig.app.projectId}`,
+  ]
   await execSyncCmd(shCmd)
 }
 

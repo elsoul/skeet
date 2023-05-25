@@ -32,7 +32,7 @@ export const syncArmors = async () => {
         )
       }
     }
-  await Logger.success(`successfully updated Cloud Armor!`)
+  Logger.success(`successfully updated Cloud Armor!`)
 }
 
 export const isRuleExist = async (
