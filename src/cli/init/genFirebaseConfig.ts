@@ -10,9 +10,8 @@ export const genFirebaseConfig = async () => {
     if (fs.existsSync(sourceFilePath)) {
       fs.rmSync(sourceFilePath)
     }
-    console.log(`Generating '${fs.existsSync(targetFilePath)}'`)
     if (!fs.existsSync(targetFilePath)) {
-      fs.mkdirSync('lib')
+      fs.mkdirSync('lib', { recursive: true })
     }
     await firebaseSdkConfig()
 
