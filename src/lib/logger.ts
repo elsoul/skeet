@@ -9,42 +9,42 @@ export module Logger {
   export const indigoHex = chalk.hex('#3950A0')
   export const pinkHex = chalk.hex('#D8A1C4')
 
-  export const normal = async (text: string) => {
+  export const normal = (text: string) => {
     console.log(chalk.white(text))
   }
 
-  export const success = async (text: string) => {
+  export const success = (text: string) => {
     console.log(successHex(text))
   }
 
-  export const warning = async (text: string) => {
+  export const warning = (text: string) => {
     console.log(warningHex(text))
   }
 
-  export const error = async (text: string) => {
+  export const error = (text: string) => {
     console.log(errorHex(text))
   }
 
-  export const errorString = async (text: string) => {
+  export const errorString = (text: string) => {
     return errorHex(text)
   }
 
-  export const sync = async (text: string) => {
+  export const sync = (text: string) => {
     console.log(syncHex(text))
   }
 
-  export const grey = async (text: string) => {
+  export const grey = (text: string) => {
     console.log(greyHex(text))
   }
 
-  export const successCheck = async (text: string) => {
+  export const successCheck = (text: string) => {
     const check = successHex('✔')
     const plainText = chalk.white(text)
     const textLog = `${check} ${plainText} 🎉`
     console.log(textLog)
   }
 
-  export const skeetAA = async () => {
+  export const skeetAA = () => {
     const row1SKEE = Logger.syncHex('   _____ __ __ ____________')
     const row1T = Logger.errorHex('______')
     const row2SKEE = Logger.syncHex('  / ___// //_// ____/ ____/')
@@ -62,7 +62,7 @@ export module Logger {
     console.log(`${row5SKEE}${row5T}`)
   }
 
-  export const welcomText = async (appName: string) => {
+  export const welcomText = (appName: string) => {
     const title = warningHex(
       '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡'
     )
@@ -74,7 +74,7 @@ Go To : http://127.0.0.1:4000/`
     console.log(greyHex(text))
   }
 
-  export const cmText = async () => {
+  export const cmText = () => {
     const text = `
     💃🤝🕺 We Support OpenSource Software Comunities 💃🤝🕺
   Why?  - OpenSouce Software Comunities should be deserved more 💎

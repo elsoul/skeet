@@ -26,6 +26,8 @@ import {
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
+import { genFirebaseConfig } from './cli/init/genFirebaseConfig'
+import { firebaseSdkConfig } from './cli/init/firebaseSdkConfig'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -167,7 +169,7 @@ async function main() {
       .option('-D', 'Dependency environment', false)
       .action(async (yarnCmd: string, options) => {
         if (yarnCmd === 'add' && options.p === '') {
-          await Logger.error('You need to define package name!')
+          Logger.error('You need to define package name!')
           process.exit(1)
         }
         await yarn(yarnCmd, options.p, options.D)
@@ -221,6 +223,12 @@ async function main() {
       .description('Skeet Sync Cloud Armor Rules')
       .action(async () => {
         await syncArmors()
+      })
+    sync
+      .command('firebase:config')
+      .description('Export Firebase Config File to `./lib/firebaseConfig.ts`')
+      .action(async () => {
+        await genFirebaseConfig()
       })
 
     const d = program
