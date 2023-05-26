@@ -11,12 +11,14 @@ import {
   createGitRepo,
   syncArmors,
   getZone,
+  firebaseUseAdd,
 } from '@/cli'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
 import { execSync } from 'child_process'
 import { genFirebaseConfig } from './genFirebaseConfig'
+import chalk from 'chalk'
 
 const requireRepoName = (value: string) => {
   if (/.+\/.+/.test(value)) {
@@ -37,14 +39,6 @@ const requireDomainName = (value: string) => {
 const questions = [
   {
     type: 'input',
-    name: 'projectId',
-    message: "What's your GCP Project ID",
-    default() {
-      return 'skeet-app-123456'
-    },
-  },
-  {
-    type: 'input',
     name: 'githubRepo',
     message: "What's your GitHub Repo Name",
     validate: requireRepoName,
@@ -55,7 +49,7 @@ const questions = [
   {
     type: 'input',
     name: 'nsDomain',
-    message: "What's your domain address for NameServer",
+    message: "What's your domain address for DNS",
     validate: requireDomainName,
     default() {
       return 'skeet.dev'
@@ -64,7 +58,7 @@ const questions = [
   {
     type: 'input',
     name: 'lbDomain',
-    message: "What's your domain address for Load Balancer",
+    message: "What's your subdomain address for Load Balancer",
     validate: requireDomainName,
     default() {
       return 'lb.skeet.dev'
@@ -73,16 +67,41 @@ const questions = [
 ]
 
 export const projectIdNotExists = async (projectId: string) => {
+  if (projectId.length < 4) return false
+
   const cmd = `gcloud projects list --filter ${projectId}`
   const { promisify } = require('util')
   const exec = promisify(require('child_process').exec)
 
   const output = await exec(cmd)
-
+  console.log(output.stderr.trim())
   return output.stderr.trim() !== ''
 }
 
+const questionProjectId = inquirer.prompt([
+  {
+    type: 'input',
+    name: 'projectId',
+    message: "What's your GCP Project ID",
+    default() {
+      return 'skeet-app-123456'
+    },
+  },
+])
+
 export const init = async (skipSetupCloud = false) => {
+  let projectId = ''
+  await questionProjectId.then(async (answer) => {
+    projectId = answer.projectId
+  })
+  if (await projectIdNotExists(projectId)) {
+    Logger.warning('⚠️ Project ID with that name does not exist ⚠️\n')
+    Logger.normal(
+      `Please check the project ID from Google Cloud. \n\nex) \`skeet-app\` might be \`skeet-app-123456\`.`
+    )
+    return
+  }
+  await firebaseUseAdd(projectId)
   const regionsArray: Array<{ [key: string]: string }> = []
   for await (const region of regionList) {
     regionsArray.push({ name: region })
@@ -94,7 +113,7 @@ export const init = async (skipSetupCloud = false) => {
         type: 'list',
         message: 'Select Regions to deploy',
         name: 'region',
-        choices: [new inquirer.Separator(' = Regions = '), ...regionsArray],
+        choices: [new inquirer.Separator(' 🌏 Regions 🌏 '), ...regionsArray],
         validate(answer) {
           if (answer.length < 1) {
             return 'You must choose at least one service.'
@@ -106,23 +125,33 @@ export const init = async (skipSetupCloud = false) => {
     ])
     .then(async (region) => {
       if (region) {
-        Logger.normal(`👷 setting up your skeet...`)
-
         inquirer.prompt(questions).then(async (answer) => {
           const answers = JSON.parse(JSON.stringify(answer))
           await addParamsToConfig(
             region.region,
-            answers.projectId,
+            projectId,
             answers.nsDomain,
             answers.lbDomain
           )
           const skeetConfig = await importConfig()
-          if (await projectIdNotExists(skeetConfig.app.projectId)) {
-            Logger.error(
-              'Project ID with that name does not exist. Please check the project ID from Google Cloud. \nex) `skeet-app` might be `skeet-app-123456`.'
-            )
-            return
-          }
+
+          Logger.warning(
+            `\n⚠️ Please make sure if you create Firestore & FirebaseAuth ⚠️\n`
+          )
+          Logger.normal(`Click the link to check 👇`)
+          Logger.normal(
+            `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`
+          )
+          Logger.normal(
+            `FirebaseAuth: https://console.firebase.google.com/project/${projectId}/authentication\n`
+          )
+          Logger.normal(
+            `Login Setup:\n\n$ gh auth login\n$ gcloud auth application-default login\n$ gcloud auth login\n$ fireabse login\n`
+          )
+          Logger.normal(
+            `📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`
+          )
+          await checkIfFirebaseSetup(projectId)
 
           if (!skipSetupCloud) {
             await setupCloud(skeetConfig, answers.githubRepo, region.region)
@@ -234,3 +263,26 @@ export const regionList = [
   'us-west3',
   'us-west4',
 ]
+
+const checkIfFirebaseSetup = async (projectId: string) => {
+  try {
+    const firebaseSettingsCheck = inquirer.prompt([
+      {
+        type: 'list',
+        message: 'Are you sure if you already set them up?',
+        name: 'firebase',
+        choices: [new inquirer.Separator(chalk.white()), ...['yes', 'no']],
+      },
+    ])
+    await firebaseSettingsCheck.then(async (answers) => {
+      if (answers.firebase === 'no') {
+        Logger.error(
+          'Please setup Firestore before running this command. \nhttps://console.firebase.google.com/project/${projectId}/firestore'
+        )
+        throw new Error('Firestore is not setup')
+      }
+    })
+  } catch (error) {
+    throw new Error(`checkIfFirebaseSetup: ${error}`)
+  }
+}
