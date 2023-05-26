@@ -34,7 +34,7 @@ export const addFunctions = async (functionName: string) => {
       await execSyncCmd(rmDefaultGit, functionDir)
       fs.writeFileSync(
         `${functionDir}/.env`,
-        `PROJECT_ID=${skeetConfig.app.projectId}\nREGION=${skeetConfig.app.region}`
+        `SKEET_APP_NAME=${skeetConfig.app.name}\nPROJECT_ID=${skeetConfig.app.projectId}\nREGION=${skeetConfig.app.region}`
       )
       const newModelPath = `${functionDir}/src/models`
       for await (const modelPath of latestModel.modelsPath) {

@@ -78,19 +78,18 @@ export const projectIdNotExists = async (projectId: string) => {
   return output.stderr.trim() !== ''
 }
 
-const questionProjectId = inquirer.prompt([
-  {
-    type: 'input',
-    name: 'projectId',
-    message: "What's your GCP Project ID",
-    default() {
-      return 'skeet-app-123456'
-    },
-  },
-])
-
 export const init = async (skipSetupCloud = false) => {
   let projectId = ''
+  const questionProjectId = inquirer.prompt([
+    {
+      type: 'input',
+      name: 'projectId',
+      message: "What's your GCP Project ID",
+      default() {
+        return 'skeet-app-123456'
+      },
+    },
+  ])
   await questionProjectId.then(async (answer) => {
     projectId = answer.projectId
   })
