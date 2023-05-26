@@ -23,14 +23,10 @@ import {
   addModel,
   curl,
   deleteRoutings,
-  firebaseUseAdd,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
 import { genFirebaseConfig } from './cli/init/genFirebaseConfig'
-import inquirer from 'inquirer'
-import chalk from 'chalk'
-
 export type SkeetCloudConfig = {
   app: AppConfig
   functions: FunctionConfig[]
@@ -310,10 +306,9 @@ async function main() {
       })
     program
       .command('test')
-      .description('Skeet Test Command - Run Jest Test')
+      .description('Skeet Test Command - Coming Soon...')
       .action(async () => {
-        const projectId = 'skeet-apsp'
-        firebaseUseAdd(projectId)
+        console.log('test')
       })
 
     await program.parseAsync(process.argv)
