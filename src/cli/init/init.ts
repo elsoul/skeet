@@ -37,6 +37,14 @@ const requireDomainName = (value: string) => {
 const questions = [
   {
     type: 'input',
+    name: 'projectId',
+    message: "What's your GCP Project ID",
+    default() {
+      return 'skeet-app-123456'
+    },
+  },
+  {
+    type: 'input',
     name: 'githubRepo',
     message: "What's your GitHub Repo Name",
     validate: requireRepoName,
@@ -66,16 +74,15 @@ const questions = [
 
 export const projectIdNotExists = async (projectId: string) => {
   const cmd = `gcloud projects list --filter ${projectId}`
-    const { promisify } = require('util')
-    const exec = promisify(require('child_process').exec)
+  const { promisify } = require('util')
+  const exec = promisify(require('child_process').exec)
 
-    const output = await exec(cmd)
+  const output = await exec(cmd)
 
-    return output.stderr.trim() !== ''
+  return output.stderr.trim() !== ''
 }
 
 export const init = async (skipSetupCloud = false) => {
-  const skeetConfig = await importConfig()
   const regionsArray: Array<{ [key: string]: string }> = []
   for await (const region of regionList) {
     regionsArray.push({ name: region })
@@ -99,17 +106,26 @@ export const init = async (skipSetupCloud = false) => {
     ])
     .then(async (region) => {
       if (region) {
-        if (await projectIdNotExists(skeetConfig.app.projectId)) {
-          Logger.error('Project ID with that name does not exist. Please check that skeet-cloud.config.json reflects the project ID from Google Cloud.')
-          return
-        }
         Logger.normal(`👷 setting up your skeet...`)
-        await addRegionToConfig(region.region)
+
         inquirer.prompt(questions).then(async (answer) => {
           const answers = JSON.parse(JSON.stringify(answer))
+          await addParamsToConfig(
+            region.region,
+            answers.projectId,
+            answers.nsDomain,
+            answers.lbDomain
+          )
+          const skeetConfig = await importConfig()
+          if (await projectIdNotExists(skeetConfig.app.projectId)) {
+            Logger.error(
+              'Project ID with that name does not exist. Please check the project ID from Google Cloud. \nex) `skeet-app` might be `skeet-app-123456`.'
+            )
+            return
+          }
+
           if (!skipSetupCloud) {
             await setupCloud(skeetConfig, answers.githubRepo, region.region)
-            await genFirebaseConfig()
             try {
               const cmd = ['mv', `./github`, `./.github`]
               execSync(cmd.join(' '))
@@ -117,16 +133,24 @@ export const init = async (skipSetupCloud = false) => {
               console.log(error)
             }
           }
+          const shCmd = [
+            'firebase',
+            'deploy',
+            '--only',
+            'functions',
+            '-P',
+            `${answers.projectId}`,
+          ]
+          await execSyncCmd(shCmd)
 
           await setupLoadBalancer(
             skeetConfig,
             answers.lbDomain,
             answers.nsDomain
           )
-          await addDomainToConfig(answers.nsDomain, answers.lbDomain)
           await initArmor()
           await syncArmors()
-          await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
+          await getZone(answers.projectId, skeetConfig.app.name)
           Logger.warning(
             `⚠️ Copy nameServer's addresses above and paste them to your DNS settings ⚠️`
           )
@@ -150,15 +174,6 @@ export const setupCloud = async (
   await gitCommit()
   await createGitRepo(repoName)
   await setupGcp(skeetConfig, region)
-  const shCmd = [
-    'firebase',
-    'deploy',
-    '--only',
-    'functions',
-    '-P',
-    `${skeetConfig.app.projectId}`,
-  ]
-  await execSyncCmd(shCmd)
 }
 
 export const addDomainToConfig = async (
@@ -173,13 +188,22 @@ export const addDomainToConfig = async (
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
-export const addRegionToConfig = async (region: string) => {
+export const addParamsToConfig = async (
+  region: string,
+  projectId: string,
+  nsDomain: string,
+  functionsDomain: string
+) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
 
   skeetConfig.app.region = region
+  skeetConfig.app.projectId = projectId
+  skeetConfig.app.appDomain = nsDomain
+  skeetConfig.app.functionsDomain = functionsDomain
+
   fs.writeFileSync(
     `${FUNCTIONS_PATH}/openai/.env`,
-    `PROJECT_ID=${skeetConfig.app.name}\nREGION=${region}`
+    `SKEET_APP_NAME=${skeetConfig.app.name}\nPROJECT_ID=${projectId}\nREGION=${region}`
   )
   fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.success('Successfully Updated skeet-cloud.config.json!')
