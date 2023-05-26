@@ -151,7 +151,7 @@ export const init = async (skipSetupCloud = false) => {
             `📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`
           )
           await checkIfFirebaseSetup(projectId)
-
+          await genFirebaseConfig()
           if (!skipSetupCloud) {
             await setupCloud(skeetConfig, answers.githubRepo, region.region)
             try {
@@ -167,7 +167,7 @@ export const init = async (skipSetupCloud = false) => {
             '--only',
             'functions',
             '-P',
-            `${answers.projectId}`,
+            `${projectId}`,
           ]
           await execSyncCmd(shCmd)
 
@@ -178,7 +178,7 @@ export const init = async (skipSetupCloud = false) => {
           )
           await initArmor()
           await syncArmors()
-          await getZone(answers.projectId, skeetConfig.app.name)
+          await getZone(projectId, skeetConfig.app.name)
           Logger.warning(
             `⚠️ Copy nameServer's addresses above and paste them to your DNS settings ⚠️`
           )

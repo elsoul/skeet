@@ -52,6 +52,6 @@ export const genFirebaseConfig = async () => {
     fs.rmSync('firebaseConfig.js')
     return true
   } catch (error) {
-    throw new Error(`genFirebaseConfig: ${error}`)
+    Logger.error(`genFirebaseConfig: ${error}`)
   }
 }
