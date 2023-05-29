@@ -8,6 +8,7 @@ import {
   setGcloudProject,
   gitInit,
   gitCommit,
+  checkRepoExists,
   createGitRepo,
   syncArmors,
   getZone,
@@ -199,6 +200,11 @@ export const setupCloud = async (
 ) => {
   Logger.sync(`setting up your google cloud platform...`)
   await setGcloudProject(skeetConfig.app.projectId)
+
+  if(await checkRepoExists(repoName)) {
+    Logger.warning(`⚠️ Repository ${repoName} already exists. Please choose a new repository name. ⚠️\n`)
+    process.exit(0)
+  }
   await gitInit()
   await gitCommit()
   await createGitRepo(repoName)

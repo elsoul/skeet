@@ -1,3 +1,4 @@
+export * from './checkRepoExists'
 export * from './createGitRepo'
 export * from './gitInit'
 export * from './addEnv'
