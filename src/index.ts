@@ -23,6 +23,7 @@ import {
   addModel,
   curl,
   deleteRoutings,
+  listHttps,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
@@ -242,11 +243,10 @@ async function main() {
     program
       .command('login')
       .description('Skeet Login Command - Create Firebase Login Token')
-      .option('--production', 'For Production', false)
       .option('--email [email]', 'Login Email', '')
       .option('--password [password]', 'Login Password', '')
       .action(async (options) => {
-        if (options.production) {
+        if (options.email !== '') {
           await login(options.email, options.password)
         } else {
           await login()
@@ -259,6 +259,12 @@ async function main() {
       .description('Show Skeet Functions List')
       .action(async () => {
         await listFunctions()
+      })
+    list
+      .command('https')
+      .description('Show Skeet Https List')
+      .action(async () => {
+        await listHttps()
       })
 
     program

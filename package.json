@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "repository": "https://github.com/elsoul/skeet-cli",
@@ -30,6 +30,7 @@
   "dependencies": {
     "chalk": "5.2.0",
     "chalk-pipe": "6.0.0",
+    "cli-table3": "^0.6.3",
     "commander": "10.0.0",
     "dotenv": "16.0.3",
     "dotenv-cli": "7.1.0",

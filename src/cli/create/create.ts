@@ -4,7 +4,6 @@ import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
 import { APP_REPO_URL, FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
-import { execSync } from 'child_process'
 
 export const create = async (initAppName: string) => {
   await skeetCreate(initAppName)
@@ -31,6 +30,14 @@ export const skeetCreate = async (appName: string) => {
   await sleep(2000)
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
+
+  // update fireabse.json hosting target
+  const firebaseJsonPath = `./${appName}/firebase.json`
+  const firebaseJson = fs.readFileSync(firebaseJsonPath)
+  const newFirebaseJson = JSON.parse(String(firebaseJson))
+  newFirebaseJson.hosting.target = appName
+  fs.writeFileSync(firebaseJsonPath, JSON.stringify(newFirebaseJson, null, 2))
+
   Logger.skeetAA()
   Logger.welcomText(appName)
   const nmb = Math.floor(Math.random() * 4 + 1)
