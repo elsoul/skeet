@@ -84,4 +84,43 @@ Go To : http://127.0.0.1:4000/`
   `
     console.log(successHex(text))
   }
+
+  export const projectIdNotExistsError = (projectId: string) => {
+    try {
+      Logger.warning('⚠️ Project ID with that name does not exist ⚠️\n')
+      Logger.normal(
+        `Please check the project ID from Google Cloud. \n\nex) \`skeet-app\` might be \`skeet-app-123456\`.`
+      )
+      throw new Error(`Project ID ${projectId} does not exist`)
+    } catch (error) {
+      throw new Error(`projectIdNotExistsLog: ${error}`)
+    }
+  }
+
+  export const dnsSetupLog = () => {
+    Logger.warning(
+      `⚠️ Copy nameServer's addresses above and paste them to your DNS settings ⚠️`
+    )
+    Logger.warning(
+      '\n\n👷 https will be ready in about an hour after your DNS settings 👷\n\n'
+    )
+    Logger.successCheck(`Load Balancer has been created successfully`)
+  }
+
+  export const confirmIfFirebaseSetupLog = (projectId: string) => {
+    Logger.warning(
+      `\n⚠️ Please make sure if you create Firestore & FirebaseAuth ⚠️\n`
+    )
+    Logger.normal(`Click the link to check 👇`)
+    Logger.normal(
+      `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`
+    )
+    Logger.normal(
+      `FirebaseAuth: https://console.firebase.google.com/project/${projectId}/authentication\n`
+    )
+    Logger.normal(
+      `Login Setup:\n\n$ gh auth login\n$ gcloud auth application-default login\n$ gcloud auth login\n$ fireabse login\n`
+    )
+    Logger.normal(`📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`)
+  }
 }

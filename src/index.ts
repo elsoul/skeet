@@ -24,6 +24,7 @@ import {
   curl,
   deleteRoutings,
   listHttps,
+  initLb,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
@@ -120,14 +121,16 @@ async function main() {
     program
       .command('init')
       .option('--only-config', 'Generate Skeet Cloud Config', false)
-      .option('--skip-setup-cloud', 'Generate Skeet Cloud Config', false)
+      .option('--load-balancer', 'Setup Cloud Load Balancer', false)
       .description('Initialize Google Cloud Setups for Skeet APP')
       .action(async (options) => {
         if (options.onlyConfig) {
           const data = await skeetCloudConfigAppGen()
           fs.writeFileSync(data.filePath, data.body)
+        } else if (options.loadBalancer) {
+          await initLb()
         } else {
-          await init(options.skipSetupCloud)
+          await init()
         }
       })
 
@@ -227,7 +230,8 @@ async function main() {
       .command('firebase:config')
       .description('Export Firebase Config File to `./lib/firebaseConfig.ts`')
       .action(async () => {
-        await genFirebaseConfig()
+        const config = await importConfig()
+        await genFirebaseConfig(config.app.projectId)
       })
 
     const d = program

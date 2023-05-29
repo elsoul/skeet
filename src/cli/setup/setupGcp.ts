@@ -1,10 +1,8 @@
 import {
   createServiceAccount,
   createServiceAccountKey,
-  dockerLogin,
   runAddAllRole,
   runEnableAllPermission,
-  runVpcNat,
   setGcloudProject,
   addJsonEnv,
 } from '@/cli'
@@ -22,5 +20,4 @@ export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   await sleep(2000)
   fs.rmSync(KEYFILE_PATH)
   await runAddAllRole(config.app.projectId, config.app.name)
-  await runVpcNat(config.app.projectId, config.app.name, region)
 }
