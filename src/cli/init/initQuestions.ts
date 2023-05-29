@@ -31,6 +31,34 @@ export module InitQuestions {
     },
   ]
 
+  export const regionQuestions = [
+    {
+      type: 'list',
+      message: 'Select Regions to deploy',
+      name: 'region',
+      choices: [
+        new inquirer.Separator(' 🌏 Regions 🌏 '),
+        ...regionList.map((value) => ({ name: value })),
+      ],
+      validate(answer: string) {
+        if (answer.length < 1) {
+          return 'You must choose at least one service.'
+        }
+
+        return true
+      },
+    },
+    {
+      type: 'list',
+      message: 'Do you want to setup your domain?',
+      name: 'isNeedDomain',
+      choices: [
+        new inquirer.Separator(chalk.white()),
+        ...['yes(needs your domain)', 'no'],
+      ],
+    },
+  ]
+
   export const domainQuestions = [
     {
       type: 'input',
@@ -58,34 +86,6 @@ export module InitQuestions {
       default() {
         return 'lb.skeet.dev'
       },
-    },
-  ]
-
-  export const regionQuestions = [
-    {
-      type: 'list',
-      message: 'Select Regions to deploy',
-      name: 'region',
-      choices: [
-        new inquirer.Separator(' 🌏 Regions 🌏 '),
-        ...regionList.map((value) => ({ name: value })),
-      ],
-      validate(answer: string) {
-        if (answer.length < 1) {
-          return 'You must choose at least one service.'
-        }
-
-        return true
-      },
-    },
-    {
-      type: 'list',
-      message: 'Do you want to setup your domain?',
-      name: 'isNeedDomain',
-      choices: [
-        new inquirer.Separator(chalk.white()),
-        ...['yes(needs your domain)', 'no'],
-      ],
     },
   ]
 

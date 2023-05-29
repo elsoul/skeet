@@ -60,8 +60,9 @@ export const generateInitFiles = async (appName: string) => {
   const firestoreIndexesJson = await fileDataOf.firestoreIndexesJson(appName)
   fs.writeFileSync(firestoreIndexesJson.filePath, firestoreIndexesJson.body)
 
-  const firestoreRules = await fileDataOf.firestoreRules(appName)
-  fs.writeFileSync(firestoreRules.filePath, firestoreRules.body)
+  // Generate firestore.rules
+  // const firestoreRules = await fileDataOf.firestoreRules(appName)
+  // fs.writeFileSync(firestoreRules.filePath, firestoreRules.body)
 
   const databaseRulesJson = await fileDataOf.databaseRulesJson(appName)
   fs.writeFileSync(databaseRulesJson.filePath, databaseRulesJson.body)
