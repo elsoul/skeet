@@ -31,13 +31,6 @@ export const skeetCreate = async (appName: string) => {
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
 
-  // update fireabse.json hosting target
-  const firebaseJsonPath = `./${appName}/firebase.json`
-  const firebaseJson = fs.readFileSync(firebaseJsonPath)
-  const newFirebaseJson = JSON.parse(String(firebaseJson))
-  newFirebaseJson.hosting.target = appName
-  fs.writeFileSync(firebaseJsonPath, JSON.stringify(newFirebaseJson, null, 2))
-
   Logger.skeetAA()
   Logger.welcomText(appName)
   const nmb = Math.floor(Math.random() * 4 + 1)
@@ -47,12 +40,6 @@ export const skeetCreate = async (appName: string) => {
 }
 
 export const generateInitFiles = async (appName: string) => {
-  const packageJson = await fileDataOf.packageJson(appName)
-  fs.writeFileSync(
-    packageJson.filePath,
-    JSON.stringify(packageJson.body, null, 2)
-  )
-
   const tsconfigJson = await fileDataOf.tsconfigJson(appName)
   fs.writeFileSync(
     tsconfigJson.filePath,
