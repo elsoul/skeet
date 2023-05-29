@@ -1,8 +1,10 @@
 import { Logger } from '@/lib/logger'
 import fs from 'fs'
 import { firebaseSdkConfig } from './firebaseSdkConfig'
+import { firebaseCreateWebProject } from './firebaseCreateWebProject'
+import { firebaseApplyWebProject } from './firebaseApplyWebProject'
 
-export const genFirebaseConfig = async () => {
+export const genFirebaseConfig = async (projectId: string) => {
   try {
     let sourceFilePath = './firebaseConfig.js'
     const targetFilePath = './lib/firebaseConfig.ts'
@@ -14,6 +16,8 @@ export const genFirebaseConfig = async () => {
       fs.mkdirSync('lib', { recursive: true })
     }
     await firebaseSdkConfig()
+    await firebaseCreateWebProject(projectId)
+    await firebaseApplyWebProject(projectId)
 
     fs.readFile(sourceFilePath, 'utf8', (err, data) => {
       if (err) {

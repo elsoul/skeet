@@ -151,7 +151,8 @@ export const init = async (skipSetupCloud = false) => {
             `📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`
           )
           await checkIfFirebaseSetup(projectId)
-          await genFirebaseConfig()
+          await genFirebaseConfig(projectId)
+
           if (!skipSetupCloud) {
             await setupCloud(skeetConfig, answers.githubRepo, region.region)
             try {
