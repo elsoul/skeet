@@ -7,16 +7,12 @@ export const checkRepoExists = async (
     'gh',
     'repo',
     'list',
-    '|',
-    'grep',
-    repoName,
   ]
   const { promisify } = require('util')
   const exec = promisify(require('child_process').exec)
 
   const cmdResult = await exec(cmd.join(' '))
   const repoExists = String(cmdResult.stdout).trim().includes(repoName)
-  console.log(cmdResult)
 
   return repoExists
 }
