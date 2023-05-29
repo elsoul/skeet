@@ -1,2 +1,7 @@
 export * from './init'
 export * from './firebaseUseAdd'
+export * from './firebaseCreateWebProject'
+export * from './firebaseApplyWebProject'
+export * from './firebaseSdkConfig'
+export * from './genFirebaseConfig'
+export * from './updateFirebaseJson'
