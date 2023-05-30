@@ -8,11 +8,11 @@ export const genHttpMethod = async (
   const httpParams = firstChar + methodName.slice(1) + 'Params'
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/http/${methodName}.ts`
   const body = `import { onRequest } from 'firebase-functions/v2/https'
-  import { defaultHttpOption } from '@/routings/options'
+  import { publicHttpOption } from '@/routings/options'
   import { TypedRequestBody } from '@/index'
   import { ${httpParams} } from '@/types/http/${methodName}Params'
 
-  export const ${methodName} = onRequest(defaultHttpOption, async (req: TypedRequestBody<${httpParams}>, res) => {
+  export const ${methodName} = onRequest(publicHttpOption, async (req: TypedRequestBody<${httpParams}>, res) => {
     try {
       res.json({
         status: 'success'

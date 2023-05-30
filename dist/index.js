@@ -330,11 +330,11 @@ REGION=${e.app.region}`);let p=`${r}/src/models`;for await(let c of n.modelsPath
     }
   )
   `;return{filePath:r,body:i}};var CP=async(t,e)=>{let i=e.charAt(0).toUpperCase()+e.slice(1)+"Params",n=`${xe}/${t}/src/routings/http/${e}.ts`,a=`import { onRequest } from 'firebase-functions/v2/https'
-  import { defaultHttpOption } from '@/routings/options'
+  import { publicHttpOption } from '@/routings/options'
   import { TypedRequestBody } from '@/index'
   import { ${i} } from '@/types/http/${e}Params'
 
-  export const ${e} = onRequest(defaultHttpOption, async (req: TypedRequestBody<${i}>, res) => {
+  export const ${e} = onRequest(publicHttpOption, async (req: TypedRequestBody<${i}>, res) => {
     try {
       res.json({
         status: 'success'
