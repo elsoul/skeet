@@ -149,7 +149,6 @@ const setupProject = async (region: string, projectId: string) => {
 const setupCloudIfNeeded = async (isNeedDomain: string) => {
   const domainAnswer = await askForDomain()
   const skeetConfig = await importConfig()
-  console.log(domainAnswer)
   if (isNeedDomain !== 'no') {
     await setupCloud(
       skeetConfig,
