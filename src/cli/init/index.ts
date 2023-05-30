@@ -1,4 +1,5 @@
 export * from './init'
+export * from './initLb'
 export * from './firebaseUseAdd'
 export * from './firebaseCreateWebProject'
 export * from './firebaseApplyWebProject'

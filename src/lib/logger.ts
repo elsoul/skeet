@@ -118,9 +118,6 @@ Go To : http://127.0.0.1:4000/`
     Logger.normal(
       `FirebaseAuth: https://console.firebase.google.com/project/${projectId}/authentication\n`
     )
-    Logger.normal(
-      `Login Setup:\n\n$ gh auth login\n$ gcloud auth application-default login\n$ gcloud auth login\n$ fireabse login\n`
-    )
     Logger.normal(`📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`)
   }
 }

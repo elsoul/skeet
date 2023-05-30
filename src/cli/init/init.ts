@@ -23,53 +23,17 @@ import { execSync } from 'child_process'
 import { genFirebaseConfig } from './genFirebaseConfig'
 
 export const init = async () => {
-  let projectId = ''
-  const projectInquirer = inquirer.prompt(InitQuestions.projectQuestions)
-  await projectInquirer.then(async (answer) => {
-    projectId = answer.projectId
-  })
-
+  const projectId = await askForProjectId()
   if (await projectIdNotExists(projectId))
     Logger.projectIdNotExistsError(projectId)
 
   await firebaseUseAdd(projectId)
 
-  const regionInquirer = inquirer.prompt(InitQuestions.regionQuestions)
+  const region = await askForRegion()
+  if (!region) throw new Error('region is undefined')
 
-  await regionInquirer.then(async (region) => {
-    if (!region) throw new Error('region is undefined')
-
-    await addProjectRegion(region.region, projectId)
-    const skeetConfig = await importConfig()
-
-    Logger.confirmIfFirebaseSetupLog(projectId)
-    await InitQuestions.checkIfFirebaseSetup(projectId)
-    await genFirebaseConfig(projectId)
-
-    if (region.isNeedDomain !== 'no') {
-      const domainInquirer = inquirer.prompt(InitQuestions.domainQuestions)
-      await domainInquirer.then(async (domainAnswer) => {
-        await setupCloud(skeetConfig, domainAnswer.githubRepo, region.region)
-        await runVpcNat(projectId, skeetConfig.app.name, region)
-        await genGithubActions()
-        // firebase deploy
-        await firebaseDeploy(projectId)
-
-        await setupLoadBalancer(
-          skeetConfig,
-          domainAnswer.lbDomain,
-          domainAnswer.nsDomain
-        )
-        await initArmor()
-        await syncArmors()
-        await getZone(projectId, skeetConfig.app.name)
-        Logger.dnsSetupLog()
-      })
-    } else {
-      // firebase deploy
-      await firebaseDeploy(projectId)
-    }
-  })
+  await setupProject(region.region, projectId)
+  await setupCloudIfNeeded(region.isNeedDomain)
 }
 
 export const genGithubActions = async () => {
@@ -101,8 +65,10 @@ export const setupCloud = async (
   Logger.sync(`setting up your google cloud platform...`)
   await setGcloudProject(skeetConfig.app.projectId)
 
-  if(await checkRepoExists(repoName)) {
-    Logger.warning(`⚠️ Repository ${repoName} already exists. Please choose a new repository name. ⚠️\n`)
+  if (await checkRepoExists(repoName)) {
+    Logger.warning(
+      `⚠️ Repository ${repoName} already exists. Please choose a new repository name. ⚠️\n`
+    )
     process.exit(0)
   }
   await gitInit()
@@ -137,7 +103,7 @@ export const addProjectRegion = async (region: string, projectId: string) => {
   Logger.successCheck('Successfully Updated skeet-cloud.config.json')
 }
 
-const firebaseDeploy = async (projectId: string) => {
+export const firebaseDeploy = async (projectId: string) => {
   try {
     const shCmd = [
       'firebase',
@@ -153,10 +119,38 @@ const firebaseDeploy = async (projectId: string) => {
   }
 }
 
-export const initLb = async () => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
-  const domainInquirer = inquirer.prompt(InitQuestions.domainQuestions)
-  await domainInquirer.then(async (domainAnswer) => {
+const askForProjectId = async () => {
+  const projectInquirer = inquirer.prompt(InitQuestions.projectQuestions)
+  let projectId = ''
+  await projectInquirer.then(async (answer) => {
+    projectId = answer.projectId
+  })
+  return projectId
+}
+
+const askForRegion = async () => {
+  const regionInquirer = inquirer.prompt(InitQuestions.regionQuestions)
+  let region = 'europe-west6'
+  let isNeedDomain = 'no'
+  await regionInquirer.then(async (regionAnswer) => {
+    region = regionAnswer.region
+    isNeedDomain = regionAnswer.isNeedDomain
+  })
+  return { region, isNeedDomain }
+}
+
+const setupProject = async (region: string, projectId: string) => {
+  await addProjectRegion(region, projectId)
+  Logger.confirmIfFirebaseSetupLog(projectId)
+  await InitQuestions.checkIfFirebaseSetup(projectId)
+  await genFirebaseConfig(projectId)
+}
+
+const setupCloudIfNeeded = async (isNeedDomain: string) => {
+  const domainAnswer = await askForDomain()
+  const skeetConfig = await importConfig()
+  console.log(domainAnswer)
+  if (isNeedDomain !== 'no') {
     await setupCloud(
       skeetConfig,
       domainAnswer.githubRepo,
@@ -167,18 +161,38 @@ export const initLb = async () => {
       skeetConfig.app.name,
       skeetConfig.app.region
     )
-    await genGithubActions()
-    // firebase deploy
     await firebaseDeploy(skeetConfig.app.projectId)
-
     await setupLoadBalancer(
       skeetConfig,
       domainAnswer.lbDomain,
       domainAnswer.nsDomain
     )
-    await initArmor()
-    await syncArmors()
-    await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
-    Logger.dnsSetupLog()
+    await additionalSetup(skeetConfig.app.projectId, skeetConfig.app.name)
+  } else {
+    await firebaseDeploy(skeetConfig.app.projectId)
+  }
+}
+
+const askForDomain = async () => {
+  const domainInquirer = inquirer.prompt(InitQuestions.domainQuestions)
+  let isDomain = false
+  let githubRepo = ''
+  let nsDomain = ''
+  let lbDomain = ''
+  await domainInquirer.then(async (domain) => {
+    isDomain = domain.isDomain
+    githubRepo = domain.githubRepo
+    nsDomain = domain.nsDomain
+    lbDomain = domain.lbDomain
   })
+  return { isDomain, githubRepo, nsDomain, lbDomain }
+}
+
+const additionalSetup = async (projectId: string, appName: string) => {
+  await genGithubActions()
+  await firebaseDeploy(projectId)
+  await initArmor()
+  await syncArmors()
+  await getZone(projectId, appName)
+  Logger.dnsSetupLog()
 }
