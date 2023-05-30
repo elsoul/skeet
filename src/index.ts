@@ -120,6 +120,7 @@ async function main() {
       .action(deploy)
     program
       .command('init')
+      .option('--only-dev', 'Skip Cloud Setup', false)
       .option('--only-config', 'Generate Skeet Cloud Config', false)
       .option('--load-balancer', 'Setup Cloud Load Balancer', false)
       .description('Initialize Google Cloud Setups for Skeet APP')
@@ -130,7 +131,7 @@ async function main() {
         } else if (options.loadBalancer) {
           await initLb()
         } else {
-          await init()
+          await init(options.onlyDev)
         }
       })
 

@@ -7,7 +7,7 @@ import {
   updateFirebaseConfig,
 } from '@/cli'
 
-export const genFirebaseConfig = async (projectId: string) => {
+export const genFirebaseConfig = async (projectId: string, init = false) => {
   try {
     let sourceFilePath = './firebaseConfig.js'
     const targetFilePath = './lib/firebaseConfig.ts'
@@ -19,8 +19,10 @@ export const genFirebaseConfig = async (projectId: string) => {
       fs.mkdirSync('lib', { recursive: true })
     }
 
-    await firebaseCreateWebProject(projectId)
-    await firebaseApplyWebProject(projectId)
+    if (init) {
+      await firebaseCreateWebProject(projectId)
+      await firebaseApplyWebProject(projectId)
+    }
     await firebaseSdkConfig()
     await updateFirebaseConfig(projectId)
 

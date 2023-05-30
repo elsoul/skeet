@@ -22,12 +22,14 @@ import fs from 'fs'
 import { execSync } from 'child_process'
 import { genFirebaseConfig } from './genFirebaseConfig'
 
-export const init = async () => {
+export const init = async (isOnlyDev = false) => {
   const projectId = await askForProjectId()
   if (await projectIdNotExists(projectId))
     Logger.projectIdNotExistsError(projectId)
 
   await firebaseUseAdd(projectId)
+  await genFirebaseConfig(projectId, true)
+  if (isOnlyDev) return
 
   const region = await askForRegion()
   if (!region) throw new Error('region is undefined')
@@ -143,7 +145,6 @@ const setupProject = async (region: string, projectId: string) => {
   await addProjectRegion(region, projectId)
   Logger.confirmIfFirebaseSetupLog(projectId)
   await InitQuestions.checkIfFirebaseSetup(projectId)
-  await genFirebaseConfig(projectId)
 }
 
 const setupCloudIfNeeded = async (isNeedDomain: string) => {
