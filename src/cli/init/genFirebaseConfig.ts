@@ -5,6 +5,7 @@ import {
   firebaseCreateWebProject,
   firebaseApplyWebProject,
   updateFirebaseConfig,
+  updateFirebaseJson,
 } from '@/cli'
 
 export const genFirebaseConfig = async (projectId: string, init = false) => {
@@ -24,7 +25,7 @@ export const genFirebaseConfig = async (projectId: string, init = false) => {
       await firebaseApplyWebProject(projectId)
     }
     await firebaseSdkConfig()
-    await updateFirebaseConfig(projectId)
+    await updateFirebaseJson(projectId)
 
     fs.readFile(sourceFilePath, 'utf8', (err, data) => {
       if (err) {
