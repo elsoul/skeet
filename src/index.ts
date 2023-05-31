@@ -25,10 +25,11 @@ import {
   deleteRoutings,
   listHttps,
   initLb,
+  genFirebaseConfig,
+  skeetTest,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
-import { genFirebaseConfig } from './cli/init/genFirebaseConfig'
 export type SkeetCloudConfig = {
   app: AppConfig
   functions: FunctionConfig[]
@@ -317,9 +318,9 @@ async function main() {
       })
     program
       .command('test')
-      .description('Skeet Test Command - Coming Soon...')
+      .description('Skeet Jest Test Command')
       .action(async () => {
-        console.log('test')
+        await skeetTest()
       })
 
     await program.parseAsync(process.argv)
