@@ -27,31 +27,36 @@ export const syncModels = async () => {
     ])
     .then(async (answer) => {
       if (answer.model !== latestModel.functionName) {
-        Logger.warning(`Warning: Is this really the latest model? 🤔`)
+        Logger.warning(`⚠️ Warning: Is this really the latest model? 🤔`)
         return false
       }
 
       const oldModels = models.slice(1)
-      Logger.success(`latestModel: ${latestModel.functionName}`)
+      Logger.normal(`latestModel: ${latestModel.functionName}`)
       for await (const model of models) {
-        Logger.sync(`Syncing ${model.functionName}...`)
-        if (model.functionName === latestModel.functionName) continue
         for await (const latestModelPath of latestModel.modelsPath) {
-          const latestModelFileName = latestModelPath.split('/').pop()
+          const latestModelFileName = latestModelPath.split('/').pop() || ''
+          await copyToFrontend(latestModelFileName, latestModelPath)
+          if (model.functionName === latestModel.functionName) continue
+
           for await (const functionData of oldModels) {
             const modelPath = `functions/${functionData.functionName}/src/models/${latestModelFileName}`
-            console.log(`Copying ${latestModelPath} to ${modelPath}`)
             await copyFileWithOverwrite(latestModelPath, modelPath)
           }
-          const frontModelPath = `src/types/models/${latestModelFileName}`
-          if (fs.existsSync('src/types/models')) {
-            fs.mkdirSync('src/types/models', { recursive: true })
-          }
-          console.log(`Copying ${latestModelPath} to ${frontModelPath}`)
-          await copyFileWithOverwrite(latestModelPath, frontModelPath)
         }
       }
-      Logger.sync('Synced Models Types 🎉')
+      Logger.successCheck('Successfully Synced Models')
       return true
     })
+}
+
+const copyToFrontend = async (
+  latestModelFileName: string,
+  latestModelPath: string
+) => {
+  const frontModelPath = `src/types/models/${latestModelFileName}`
+  if (fs.existsSync('src/types/models')) {
+    fs.mkdirSync('src/types/models', { recursive: true })
+  }
+  await copyFileWithOverwrite(latestModelPath, frontModelPath)
 }
