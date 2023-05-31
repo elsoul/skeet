@@ -5,19 +5,21 @@ import fs from 'fs'
 export const updateFirebaseJson = async (projectId: string) => {
   const firebaseJson = fs.readFileSync(FIREBASE_CONFIG_PATH)
   const newFirebaseJson = JSON.parse(String(firebaseJson))
-  newFirebaseJson.hosting.target = projectId
-  newFirebaseJson.hosting.public = 'web-build'
-  newFirebaseJson.hosting.ignore = [
-    'firebase.json',
-    '**/.*',
-    '**/node_modules/**',
-  ]
-  newFirebaseJson.hosting.rewrites = [
-    {
-      source: '**',
-      destination: '/index.html',
-    },
-  ]
+  if (!newFirebaseJson.hosting) {
+    newFirebaseJson.hosting = []
+  }
+  const hosting = {
+    target: projectId,
+    public: 'web-build',
+    ignore: ['firebase.json', '**/.*', '**/node_modules/**'],
+    rewrites: [
+      {
+        source: '**',
+        destination: '/index.html',
+      },
+    ],
+  }
+  newFirebaseJson.hosting.push(hosting)
   fs.writeFileSync(
     FIREBASE_CONFIG_PATH,
     JSON.stringify(newFirebaseJson, null, 2)
