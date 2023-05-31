@@ -13,4 +13,5 @@ module.exports = {
   },
   setupFilesAfterEnv: ['./tests/jest.setup.ts'],
   reporters: ['default', 'github-actions'],
+  testPathIgnorePatterns: ['<rootDir>/src/cli/test/*', '<rootDir>/dist/'],
 }
