@@ -4,14 +4,13 @@ import {
   firebaseSdkConfig,
   firebaseCreateWebProject,
   firebaseApplyWebProject,
-  updateFirebaseConfig,
   updateFirebaseJson,
 } from '@/cli'
 
-export const genFirebaseConfig = async (projectId: string, init = false) => {
+export const addFirebaseApp = async (appDisplayName: string) => {
   try {
     let sourceFilePath = './firebaseConfig.js'
-    const targetFilePath = './lib/firebaseConfig.ts'
+    const targetFilePath = `./lib/firebaseAppConfig/${appDisplayName}.ts`
 
     if (fs.existsSync(sourceFilePath)) {
       fs.rmSync(sourceFilePath)
@@ -20,13 +19,23 @@ export const genFirebaseConfig = async (projectId: string, init = false) => {
       fs.mkdirSync('lib', { recursive: true })
     }
 
-    if (init) {
-      await firebaseCreateWebProject(projectId)
-      await firebaseApplyWebProject(projectId)
-    }
-    await firebaseSdkConfig()
-    await updateFirebaseJson(projectId)
+    const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
+    await firebaseApplyWebProject(appId)
+    await firebaseSdkConfig(appId)
+    await updateFirebaseJson(appId)
+    await rewriteFirebaseConfig(sourceFilePath, targetFilePath)
 
+    return true
+  } catch (error) {
+    Logger.error(`genFirebaseConfig: ${error}`)
+  }
+}
+
+const rewriteFirebaseConfig = async (
+  sourceFilePath: string,
+  targetFilePath: string
+) => {
+  try {
     fs.readFile(sourceFilePath, 'utf8', (err, data) => {
       if (err) {
         console.error('Error reading the file:', err)
@@ -61,9 +70,9 @@ export const genFirebaseConfig = async (projectId: string, init = false) => {
         )
       })
     })
-    fs.rmSync('firebaseConfig.js')
+    fs.rmSync(sourceFilePath)
     return true
   } catch (error) {
-    Logger.error(`genFirebaseConfig: ${error}`)
+    throw new Error(`rewriteFirebaseConfig: ${error}`)
   }
 }

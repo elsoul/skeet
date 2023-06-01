@@ -44,11 +44,11 @@ export const skeetCreate = async (appName: string) => {
 }
 
 export const generateInitFiles = async (appName: string) => {
-  const tsconfigJson = await fileDataOf.tsconfigJson(appName)
-  fs.writeFileSync(
-    tsconfigJson.filePath,
-    JSON.stringify(tsconfigJson.body, null, 2)
-  )
+  // const tsconfigJson = await fileDataOf.tsconfigJson(appName)
+  // fs.writeFileSync(
+  //   tsconfigJson.filePath,
+  //   JSON.stringify(tsconfigJson.body, null, 2)
+  // )
   const eslintrcJson = await fileDataOf.eslintrcJson(appName)
   fs.writeFileSync(
     eslintrcJson.filePath,

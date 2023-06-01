@@ -15,12 +15,12 @@ import {
   firebaseUseAdd,
   runVpcNat,
   InitQuestions,
+  addFirebaseApp,
 } from '@/cli'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
 import { execSync } from 'child_process'
-import { genFirebaseConfig } from './genFirebaseConfig'
 
 export const init = async (isOnlyDev = false) => {
   const projectId = await askForProjectId()
@@ -28,7 +28,8 @@ export const init = async (isOnlyDev = false) => {
     Logger.projectIdNotExistsError(projectId)
 
   await firebaseUseAdd(projectId)
-  await genFirebaseConfig(projectId, true)
+  const defaultAppDisplayName = projectId
+  await addFirebaseApp(defaultAppDisplayName)
   if (isOnlyDev) return
 
   const region = await askForRegion()

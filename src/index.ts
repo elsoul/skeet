@@ -25,8 +25,9 @@ import {
   deleteRoutings,
   listHttps,
   initLb,
-  genFirebaseConfig,
   skeetTest,
+  firebaseAppList,
+  addFirebaseApp,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
@@ -200,6 +201,15 @@ async function main() {
         console.log(modelName)
         await addModel(modelName)
       })
+    add
+      .command('app')
+      .argument(
+        '<appDisplayName>',
+        'Firebase App Display Name - e.g. skeet-web-console'
+      )
+      .action(async (appDisplayName: string) => {
+        await addFirebaseApp(appDisplayName)
+      })
 
     const sync = program
       .command('sync')
@@ -227,13 +237,6 @@ async function main() {
       .description('Skeet Sync Cloud Armor Rules')
       .action(async () => {
         await syncArmors()
-      })
-    sync
-      .command('firebase:config')
-      .description('Export Firebase Config File to `./lib/firebaseConfig.ts`')
-      .action(async () => {
-        const config = await importConfig()
-        await genFirebaseConfig(config.app.projectId)
       })
 
     const d = program
