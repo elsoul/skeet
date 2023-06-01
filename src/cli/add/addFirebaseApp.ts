@@ -10,13 +10,14 @@ import {
 export const addFirebaseApp = async (appDisplayName: string) => {
   try {
     let sourceFilePath = './firebaseConfig.js'
-    const targetFilePath = `./lib/firebaseAppConfig/${appDisplayName}.ts`
+    const firebaseConfigDir = './lib/firebaseAppConfig'
+    const targetFilePath = `${firebaseConfigDir}/${appDisplayName}.ts`
 
     if (fs.existsSync(sourceFilePath)) {
       fs.rmSync(sourceFilePath)
     }
-    if (!fs.existsSync(targetFilePath)) {
-      fs.mkdirSync('lib', { recursive: true })
+    if (!fs.existsSync(firebaseConfigDir)) {
+      fs.mkdirSync(firebaseConfigDir, { recursive: true })
     }
 
     const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
@@ -27,7 +28,7 @@ export const addFirebaseApp = async (appDisplayName: string) => {
 
     return true
   } catch (error) {
-    Logger.error(`genFirebaseConfig: ${error}`)
+    Logger.error(`addFirebaseApp: ${error}`)
   }
 }
 
