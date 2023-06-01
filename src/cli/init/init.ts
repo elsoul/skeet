@@ -133,6 +133,7 @@ const askForProjectId = async () => {
   let region = ''
   await projectInquirer.then(async (answer) => {
     projectId = answer.projectId
+    region = answer.region
   })
   return { projectId, region }
 }
