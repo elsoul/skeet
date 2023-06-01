@@ -1,5 +1,12 @@
 import { Logger } from '@/lib/logger'
-import fs from 'fs'
+import {
+  readFileSync,
+  writeFileSync,
+  unlinkSync,
+  existsSync,
+  rmSync,
+  mkdirSync,
+} from 'fs'
 import {
   firebaseSdkConfig,
   firebaseCreateWebProject,
@@ -13,11 +20,11 @@ export const addFirebaseApp = async (appDisplayName: string) => {
     const firebaseConfigDir = './lib/firebaseAppConfig'
     const targetFilePath = `${firebaseConfigDir}/${appDisplayName}.ts`
 
-    if (fs.existsSync(sourceFilePath)) {
-      fs.rmSync(sourceFilePath)
+    if (existsSync(sourceFilePath)) {
+      rmSync(sourceFilePath)
     }
-    if (!fs.existsSync(firebaseConfigDir)) {
-      fs.mkdirSync(firebaseConfigDir, { recursive: true })
+    if (!existsSync(firebaseConfigDir)) {
+      mkdirSync(firebaseConfigDir, { recursive: true })
     }
 
     const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
@@ -37,41 +44,29 @@ const rewriteFirebaseConfig = async (
   targetFilePath: string
 ) => {
   try {
-    fs.readFile(sourceFilePath, 'utf8', (err, data) => {
-      if (err) {
-        console.error('Error reading the file:', err)
-        return
-      }
+    const data = readFileSync(sourceFilePath, 'utf8')
+    const modifiedData = data.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '')
 
-      const modifiedData = data.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '') // コメントを除外する正規表現
+    const match = modifiedData.match(/firebase\.initializeApp\(({[\s\S]+?})\);/)
+    if (!match) {
+      console.error('Firebase initialization code not found in the file.')
+      return
+    }
 
-      const match = modifiedData.match(
-        /firebase\.initializeApp\(({[\s\S]+?})\);/
-      )
-      if (!match) {
-        console.error('Firebase initialization code not found in the file.')
-        return
-      }
+    const config = match[1]
+    const parsedConfig = JSON.parse(config)
+    const formattedConfig = Object.entries(parsedConfig)
+      .map(([key, value]) => `  ${key}: ${JSON.stringify(value)},`)
+      .join('\n')
 
-      const config = match[1]
-      const parsedConfig = JSON.parse(config)
-      const formattedConfig = Object.entries(parsedConfig)
-        .map(([key, value]) => `  ${key}: ${JSON.stringify(value)},`)
-        .join('\n')
+    const finalData = `const firebaseConfig = {\n${formattedConfig}\n}\nexport default firebaseConfig;`
 
-      const finalData = `const firebaseConfig = {\n${formattedConfig}\n}\nexport default firebaseConfig;`
+    writeFileSync(targetFilePath, finalData, 'utf8')
+    unlinkSync(sourceFilePath)
 
-      fs.writeFile(targetFilePath, finalData, 'utf8', (err) => {
-        if (err) {
-          console.error('Error writing the file:', err)
-          return
-        }
-        Logger.successCheck(
-          `File '${targetFilePath}' has been created successfully`
-        )
-      })
-    })
-    fs.rmSync(sourceFilePath)
+    Logger.successCheck(
+      `File '${targetFilePath}' has been created successfully`
+    )
     return true
   } catch (error) {
     throw new Error(`rewriteFirebaseConfig: ${error}`)

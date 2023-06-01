@@ -2,17 +2,5 @@
   "projects": {
     "default": "skeet-app"
   },
-  "targets": {
-    "skeet-app": {
-      "hosting": {
-        "skeet-app": [
-          "web"
-        ],
-        "epics-beta": [
-          "WEB"
-        ]
-      }
-    }
-  },
   "etags": {}
 }
