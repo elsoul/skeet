@@ -12,6 +12,7 @@ import {
   firebaseCreateWebProject,
   firebaseApplyWebProject,
   updateFirebaseJson,
+  firebaseAppList,
 } from '@/cli'
 
 export const addFirebaseApp = async (appDisplayName: string) => {
@@ -26,6 +27,11 @@ export const addFirebaseApp = async (appDisplayName: string) => {
     if (!existsSync(firebaseConfigDir)) {
       mkdirSync(firebaseConfigDir, { recursive: true })
     }
+    const appList = await firebaseAppList()
+    if (checkAppExistence(appList, appDisplayName))
+      throw new Error(
+        `App '${appDisplayName}' already exists. skip this process...`
+      )
 
     const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
     await firebaseApplyWebProject(appDisplayName)
@@ -35,7 +41,7 @@ export const addFirebaseApp = async (appDisplayName: string) => {
 
     return true
   } catch (error) {
-    Logger.error(`addFirebaseApp: ${error}`)
+    Logger.warning(`⚠️ addFirebaseApp: ${error}`)
   }
 }
 
@@ -71,4 +77,14 @@ const rewriteFirebaseConfig = async (
   } catch (error) {
     throw new Error(`rewriteFirebaseConfig: ${error}`)
   }
+}
+
+interface App {
+  'App Display Name': string
+  'App ID': string
+  Platform: string
+}
+
+const checkAppExistence = (appList: App[], appName: string): boolean => {
+  return appList.some((app) => app['App Display Name'] === appName)
 }

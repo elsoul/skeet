@@ -22,10 +22,7 @@ export const firebaseAppList = async () => {
           Platform: columns[2],
         }
       })
-
-    // 結果をJSON文字列に変換して表示
-    const jsonResult = JSON.stringify(appList, null, 2)
-    return jsonResult
+    return appList
   } catch (error) {
     throw new Error(`firebaseAppList: ${error}`)
   }
