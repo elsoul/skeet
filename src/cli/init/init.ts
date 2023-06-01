@@ -155,9 +155,9 @@ const setupProject = async (projectId: string) => {
 }
 
 const setupCloudIfNeeded = async (isNeedDomain: string) => {
-  const domainAnswer = await askForDomain()
   const skeetConfig = await importConfig()
   if (isNeedDomain !== 'no') {
+    const domainAnswer = await askForDomain()
     await setupCloud(
       skeetConfig,
       domainAnswer.githubRepo,
@@ -197,7 +197,6 @@ const askForDomain = async () => {
 
 const additionalSetup = async (projectId: string, appName: string) => {
   await genGithubActions()
-  await firebaseDeploy(projectId)
   await initArmor()
   await syncArmors()
   await getZone(projectId, appName)
