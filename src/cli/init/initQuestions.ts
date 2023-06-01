@@ -29,9 +29,6 @@ export module InitQuestions {
         return 'skeet-app-123456'
       },
     },
-  ]
-
-  export const regionQuestions = [
     {
       type: 'list',
       message: 'Select Regions to deploy',
@@ -48,6 +45,9 @@ export module InitQuestions {
         return true
       },
     },
+  ]
+
+  export const needDomainQuestions = [
     {
       type: 'list',
       message: 'Do you want to setup your domain?',

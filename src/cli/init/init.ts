@@ -23,20 +23,21 @@ import fs from 'fs'
 import { execSync } from 'child_process'
 
 export const init = async (isOnlyDev = false) => {
-  const projectId = await askForProjectId()
+  const { projectId, region } = await askForProjectId()
   if (await projectIdNotExists(projectId))
     Logger.projectIdNotExistsError(projectId)
 
+  if (!region) throw new Error('region is undefined')
+
   await firebaseUseAdd(projectId)
+  await addProjectRegion(region, projectId)
   const defaultAppDisplayName = projectId
   await addFirebaseApp(defaultAppDisplayName)
   if (isOnlyDev) return
 
-  const region = await askForRegion()
-  if (!region) throw new Error('region is undefined')
-
-  await setupProject(region.region, projectId)
-  await setupCloudIfNeeded(region.isNeedDomain)
+  await setupProject(projectId)
+  const isNeedDomain = await askForNeedDomain()
+  await setupCloudIfNeeded(isNeedDomain)
 }
 
 export const genGithubActions = async () => {
@@ -102,6 +103,10 @@ export const addProjectRegion = async (region: string, projectId: string) => {
     `${FUNCTIONS_PATH}/openai/.env`,
     `SKEET_APP_NAME=${skeetConfig.app.name}\nPROJECT_ID=${projectId}\nREGION=${region}`
   )
+  fs.writeFileSync(
+    `.env`,
+    `SKEET_APP_NAME=${skeetConfig.app.name}\nPROJECT_ID=${projectId}\nREGION=${region}`
+  )
   fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.successCheck('Successfully Updated skeet-cloud.config.json')
 }
@@ -125,25 +130,23 @@ export const firebaseDeploy = async (projectId: string) => {
 const askForProjectId = async () => {
   const projectInquirer = inquirer.prompt(InitQuestions.projectQuestions)
   let projectId = ''
+  let region = ''
   await projectInquirer.then(async (answer) => {
     projectId = answer.projectId
   })
-  return projectId
+  return { projectId, region }
 }
 
-const askForRegion = async () => {
-  const regionInquirer = inquirer.prompt(InitQuestions.regionQuestions)
-  let region = 'europe-west6'
+const askForNeedDomain = async () => {
+  const needDomainInquirer = inquirer.prompt(InitQuestions.needDomainQuestions)
   let isNeedDomain = 'no'
-  await regionInquirer.then(async (regionAnswer) => {
-    region = regionAnswer.region
-    isNeedDomain = regionAnswer.isNeedDomain
+  await needDomainInquirer.then(async (needDomainAnswer) => {
+    isNeedDomain = needDomainAnswer.isNeedDomain
   })
-  return { region, isNeedDomain }
+  return isNeedDomain
 }
 
-const setupProject = async (region: string, projectId: string) => {
-  await addProjectRegion(region, projectId)
+const setupProject = async (projectId: string) => {
   Logger.confirmIfFirebaseSetupLog(projectId)
   await InitQuestions.checkIfFirebaseSetup(projectId)
 }
