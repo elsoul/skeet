@@ -28,6 +28,7 @@ import {
   skeetTest,
   firebaseAppList,
   addFirebaseApp,
+  getZone,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'

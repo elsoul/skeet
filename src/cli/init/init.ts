@@ -199,8 +199,8 @@ const additionalSetup = async (projectId: string, appName: string) => {
   await genGithubActions()
   await initArmor()
   await syncArmors()
-  await getZone(projectId, appName)
-  Logger.dnsSetupLog()
+  const ips = await getZone(projectId, appName)
+  Logger.dnsSetupLog(ips)
 }
 
 const copyDefaultFirebaseConfig = async (appDisplayName: string) => {

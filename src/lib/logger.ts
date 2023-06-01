@@ -97,14 +97,18 @@ Go To : http://127.0.0.1:4000/`
     }
   }
 
-  export const dnsSetupLog = () => {
+  export const dnsSetupLog = (nameServerAddresses: Array<string>) => {
     Logger.warning(
-      `⚠️ Copy nameServer's addresses above and paste them to your DNS settings ⚠️`
+      '🚸 === Copy & Paste below nameServer addresses to your DNS Setting === 🚸\n'
     )
+    const exportLog = `${nameServerAddresses.join('\n')}\n`
+    Logger.normal(exportLog)
+    // Logger.warning('🚸 =========           END           ========= 🚸\n\n')
+
     Logger.warning(
-      '\n\n👷 https will be ready in about an hour after your DNS settings 👷\n\n'
+      '👷 === https will be ready in about an hour after your DNS settings === 👷\n'
     )
-    Logger.successCheck(`Load Balancer has been created successfully`)
+    Logger.successCheck(`You are all set`)
   }
 
   export const confirmIfFirebaseSetupLog = (projectId: string) => {
