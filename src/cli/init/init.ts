@@ -205,7 +205,7 @@ const additionalSetup = async (projectId: string, appName: string) => {
 }
 
 const copyDefaultFirebaseConfig = async (appDisplayName: string) => {
-  const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}`
+  const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}.ts`
   const defaultFirebaseConfigPath = `./lib/firebaseConfig.ts`
   await copyFileWithOverwrite(
     originalFirebaseConfigPath,
