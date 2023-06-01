@@ -21,9 +21,9 @@ export const addFirebaseApp = async (appDisplayName: string) => {
     }
 
     const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
-    await firebaseApplyWebProject(appId)
+    await firebaseApplyWebProject(appDisplayName)
     await firebaseSdkConfig(appId)
-    await updateFirebaseJson(appId)
+    await updateFirebaseJson(appDisplayName)
     await rewriteFirebaseConfig(sourceFilePath, targetFilePath)
 
     return true

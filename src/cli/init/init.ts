@@ -21,6 +21,7 @@ import { execSyncCmd } from '@/lib/execSyncCmd'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
 import { execSync } from 'child_process'
+import { copyFileWithOverwrite } from '@/lib/copyFiles'
 
 export const init = async (isOnlyDev = false) => {
   const { projectId, region } = await askForProjectId()
@@ -33,6 +34,7 @@ export const init = async (isOnlyDev = false) => {
   await addProjectRegion(region, projectId)
   const defaultAppDisplayName = projectId
   await addFirebaseApp(defaultAppDisplayName)
+  await copyDefaultFirebaseConfig(defaultAppDisplayName)
   if (isOnlyDev) return
 
   await setupProject(projectId)
@@ -200,4 +202,13 @@ const additionalSetup = async (projectId: string, appName: string) => {
   await syncArmors()
   await getZone(projectId, appName)
   Logger.dnsSetupLog()
+}
+
+const copyDefaultFirebaseConfig = async (appDisplayName: string) => {
+  const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}`
+  const defaultFirebaseConfigPath = `./lib/firebaseConfig.ts`
+  await copyFileWithOverwrite(
+    originalFirebaseConfigPath,
+    defaultFirebaseConfigPath
+  )
 }

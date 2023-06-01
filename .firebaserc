@@ -7,6 +7,9 @@
       "hosting": {
         "skeet-app": [
           "web"
+        ],
+        "epics-beta": [
+          "WEB"
         ]
       }
     }
