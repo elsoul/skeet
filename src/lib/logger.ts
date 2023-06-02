@@ -109,6 +109,7 @@ Go To : http://127.0.0.1:4000/`
       '👷 === https will be ready in about an hour after your DNS settings === 👷\n'
     )
     Logger.successCheck(`You are all set`)
+    Logger.normal(`\n📗 Doc: https://skeet.dev`)
   }
 
   export const confirmIfFirebaseSetupLog = (projectId: string) => {

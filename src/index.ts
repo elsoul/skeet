@@ -26,7 +26,6 @@ import {
   listHttps,
   initLb,
   skeetTest,
-  firebaseAppList,
   addFirebaseApp,
   getZone,
 } from '@/cli'
@@ -209,7 +208,8 @@ async function main() {
         'Firebase App Display Name - e.g. skeet-web-console'
       )
       .action(async (appDisplayName: string) => {
-        await addFirebaseApp(appDisplayName)
+        const { app } = await importConfig()
+        await addFirebaseApp(app.projectId, appDisplayName)
       })
 
     const sync = program
@@ -275,6 +275,14 @@ async function main() {
       .description('Show Skeet Https List')
       .action(async () => {
         await listHttps()
+      })
+    list
+      .command('dns')
+      .description('Show Skeet NameServer Records')
+      .action(async () => {
+        const { app } = await importConfig()
+        const res = await getZone(app.projectId, app.name)
+        Logger.dnsSetupLog(res)
       })
 
     program

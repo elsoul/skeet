@@ -93,21 +93,24 @@ Usage: skeet [options] [command]
 CLI for Skeet - Full-stack TypeScript Serverless framework
 
 Options:
-  -V, --version             output the version number
-  -h, --help                display help for command
+  -V, --version                output the version number
+  -h, --help                   display help for command
 
 Commands:
-  create <appName>          Create Skeet Framework App
-  server|s                  Run Firebase Emulator for Skeet APP
-  deploy                    Deploy Skeet APP to Firebase Cloud Functions
-  init [options]            Initialize Google Cloud Setups for Skeet APP
-  iam                       Skeet IAM Comannd to setup Google Cloud Platform
-  yarn [options] <yarnCmd>  Skeet Yarn Comannd to run yarn command for multiple functions
-  add                       Skeet Add Comannd to add new functions
-  sync                      Skeet Sync Comannd to sync backend and frontend
-  delete|d                  Skeet Delete Command
-  list                      Show Skeet App List
-  help [command]            display help for command
+  create <appName>             Create Skeet Framework App
+  server|s                     Run Firebase Emulator for Skeet APP
+  deploy                       Deploy Skeet APP to Firebase Cloud Functions
+  init [options]               Initialize Google Cloud Setups for Skeet APP
+  iam                          Skeet IAM Comannd to setup Google Cloud Platform
+  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
+  add                          Skeet Add Comannd to add new functions
+  sync                         Skeet Sync Comannd to sync backend and frontend
+  delete|d                     Skeet Delete Command
+  login [options]              Skeet Login Command - Create Firebase Login Token
+  list                         Show Skeet App List
+  curl [options] <methodName>  Skeet Curl Command - Call Cloud Functions Endpoint for Dev
+  test                         Skeet Jest Test Command
+  help [command]               display help for command
 ```
 
 - [Skeet Doc](https://skeet.dev/)

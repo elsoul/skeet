@@ -15,7 +15,10 @@ import {
   firebaseAppList,
 } from '@/cli'
 
-export const addFirebaseApp = async (appDisplayName: string) => {
+export const addFirebaseApp = async (
+  projectId: string,
+  appDisplayName: string
+) => {
   try {
     let sourceFilePath = './firebaseConfig.js'
     const firebaseConfigDir = './lib/firebaseAppConfig'
@@ -34,7 +37,7 @@ export const addFirebaseApp = async (appDisplayName: string) => {
       )
 
     const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
-    await firebaseApplyWebProject(appDisplayName)
+    await firebaseApplyWebProject(projectId, appDisplayName)
     await firebaseSdkConfig(appId)
     await updateFirebaseJson(appDisplayName)
     await rewriteFirebaseConfig(sourceFilePath, targetFilePath)

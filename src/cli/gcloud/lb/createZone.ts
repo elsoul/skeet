@@ -39,7 +39,7 @@ export const getZone = async (projectId: string, appName: string) => {
       projectId,
     ]
     const res = String(execSync(shCmd.join(' ')))
-    const regex = /ns-cloud-d\d\.googledomains\.com\./
+    const regex = /ns-cloud-[a-zA-Z0-9]{2}\.googledomains\.com\./
     const lines = res.split('\n')
     const zoneLines: string[] = []
 

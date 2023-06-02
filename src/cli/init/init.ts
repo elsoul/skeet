@@ -33,7 +33,7 @@ export const init = async (isOnlyDev = false) => {
   await firebaseUseAdd(projectId)
   await addProjectRegion(region, projectId)
   const defaultAppDisplayName = projectId
-  await addFirebaseApp(defaultAppDisplayName)
+  await addFirebaseApp(projectId, defaultAppDisplayName)
   await copyDefaultFirebaseConfig(defaultAppDisplayName)
   if (isOnlyDev) return
 
