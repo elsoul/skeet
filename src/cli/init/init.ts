@@ -157,6 +157,7 @@ const setupCloudIfNeeded = async (isNeedDomain: string) => {
   const skeetConfig = await importConfig()
   if (isNeedDomain !== 'no') {
     const domainAnswer = await askForDomain()
+    await addDomainToConfig(domainAnswer.nsDomain, domainAnswer.lbDomain)
     await setupCloud(
       skeetConfig,
       domainAnswer.githubRepo,
