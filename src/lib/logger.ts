@@ -13,17 +13,26 @@ export module Logger {
   export const indigoHex = chalk.hex('#3950A0')
   export const pinkHex = chalk.hex('#D8A1C4')
 
-  export const syncSpinner = async (text: string) => {
+  export const syncSpinner = async (
+    text: string,
+    asyncFunc: () => Promise<void>
+  ) => {
     const spinnerEmoji =
       spinnerPattern[Math.floor(Math.random() * spinnerPattern.length)]
     const spinner = new Spinner(
       `%s ${spinnerEmoji.left} ` + chalk.white(text) + ` ${spinnerEmoji.right}`
     )
-    //
     const spList = defaultSpinners[9]
     spinner.setSpinnerString(spList)
     spinner.start()
-    return spinner
+
+    try {
+      await asyncFunc()
+      spinner.stop(true)
+    } catch (error) {
+      spinner.stop(true)
+      throw new Error(`syncSpinner Error: ${error}`)
+    }
   }
 
   export const normal = (text: string) => {
