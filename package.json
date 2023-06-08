@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "0.14.6",
+  "version": "0.14.7",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "repository": "https://github.com/elsoul/skeet-cli",
@@ -28,9 +28,11 @@
     "skeet:openai": "yarn --cwd ./functions/openai dev"
   },
   "dependencies": {
+    "@types/cli-spinner": "^0.2.1",
     "@types/node-fetch": "^2.6.4",
     "chalk": "5.2.0",
     "chalk-pipe": "6.0.0",
+    "cli-spinner": "^0.2.10",
     "cli-table3": "0.6.3",
     "commander": "10.0.1",
     "dotenv": "16.0.3",

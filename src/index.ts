@@ -31,6 +31,8 @@ import {
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
+import { sleep } from './utils/time'
+import chalk from 'chalk'
 export type SkeetCloudConfig = {
   app: AppConfig
   functions: FunctionConfig[]

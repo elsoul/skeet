@@ -1,4 +1,8 @@
+import { sleep } from '@/utils/time'
 import chalk from 'chalk'
+import { Spinner } from 'cli-spinner'
+import { clear } from 'console'
+import { defaultSpinners, spinnerPattern } from './spinnerList'
 
 export module Logger {
   export const successHex = chalk.hex('#39A845')
@@ -8,6 +12,19 @@ export module Logger {
   export const greyHex = chalk.hex('#BEBDBD')
   export const indigoHex = chalk.hex('#3950A0')
   export const pinkHex = chalk.hex('#D8A1C4')
+
+  export const syncSpinner = async (text: string) => {
+    const spinnerEmoji =
+      spinnerPattern[Math.floor(Math.random() * spinnerPattern.length)]
+    const spinner = new Spinner(
+      `%s ${spinnerEmoji.left} ` + chalk.white(text) + ` ${spinnerEmoji.right}`
+    )
+    //
+    const spList = defaultSpinners[9]
+    spinner.setSpinnerString(spList)
+    spinner.start()
+    return spinner
+  }
 
   export const normal = (text: string) => {
     console.log(chalk.white(text))

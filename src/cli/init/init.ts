@@ -68,7 +68,9 @@ export const setupCloud = async (
   repoName: string,
   region: string
 ) => {
-  Logger.sync(`setting up your google cloud platform...`)
+  const spinner = await Logger.syncSpinner(
+    `setting up your google cloud platform...`
+  )
   await setGcloudProject(skeetConfig.app.projectId)
 
   if (await checkRepoExists(repoName)) {
@@ -81,6 +83,7 @@ export const setupCloud = async (
   await gitCommit()
   await createGitRepo(repoName)
   await setupGcp(skeetConfig, region)
+  spinner.stop()
 }
 
 export const addDomainToConfig = async (
@@ -157,6 +160,7 @@ const setupProject = async (projectId: string) => {
 const setupCloudIfNeeded = async (isNeedDomain: string) => {
   const skeetConfig = await importConfig()
   if (isNeedDomain !== 'no') {
+    const spinner = await Logger.syncSpinner(`setting up your VPC Network...`)
     const domainAnswer = await askForDomain()
     await setupCloud(
       skeetConfig,
@@ -175,6 +179,7 @@ const setupCloudIfNeeded = async (isNeedDomain: string) => {
       domainAnswer.nsDomain
     )
     await additionalSetup(skeetConfig.app.projectId, skeetConfig.app.name)
+    spinner.stop()
   } else {
     await firebaseDeploy(skeetConfig.app.projectId)
   }
