@@ -24,28 +24,30 @@
 
 TypeScript, Firebase Cloud FireStore, Jest Test, Google Cloud Functions 2nd Generation
 
-Doc: https://skeet.dev/
+📗 Doc: https://skeet.dev/
 
 ## What's Skeet?
 
-Reduce app development and maintenance costs.
+⚡️ Reduce App Development and Maintenance Costs ⚡️
 
-The Skeet project was launched with the goal of reducing software development, operation, and maintenance costs.
+Skeet is a full-stack TypeScript serverless application framework.
 
-Build Serverless Apps faster.
-Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Cloud Functions 2nd Generation.
+Skeet was born to reduce the cost of software development and operation.
+
+Start developing and deploying serverless apps quickly.
+
+Get ready to use scalable Cloud Firestore and Cloud Functions securely right away.
 
 ![https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
 
 ## Dependency
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [Node](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/)
-- [Google SDK](https://cloud.google.com/sdk/docs)
-- [Firebase CLI](https://firebase.google.com/docs/cli)
-- [GitHub CLI](https://cli.github.com/)
-- [Skeet Framework Plugin - Firestore](https://skeet.dev/doc/backend/skeet-firestore/)
+- [TypeScript](https://www.typescriptlang.org/) ^5.0.0
+- [Node.js](https://nodejs.org/ja/) ^18.16.0
+- [Yarn](https://yarnpkg.com/) ^1.22.19
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
+- [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0
+- [GitHub CLI](https://cli.github.com/) ^2.29.0
 
 ## Cloud Network Architecture
 
@@ -61,59 +63,96 @@ Automated to build all the Google Cloud VPC network settings;
 
 ## Usage
 
-### Install Skeet CLI
+### Install Skeet CLI and Firebase CLI
 
 ```bash
 $ npm i -g @skeet-framework/cli
+$ npm install -g firebase-tools
 ```
 
 ### Create Skeet App
 
 ```bash
-$ skeet create ${appName}
+$ skeet create <appName>
 ```
 
 ### Run local
 
 ```bash
-$ cd ${appName}
+$ cd <appName>
 $ skeet s
 ```
 
-Now you can access;
+Now you have both frontend and backend running locally ⭐️
 
-[http://localhost:4000/](http://localhost:4000/)
+📲 Frontend - [http://localhost:19006/](http://localhost:19006/)
 
-**You need to setup a Firebase project and set up the OpenAI API Keys to use default chatApp**
+💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
 
-Activate Skeet ChatApp
+**⚠️ You need to finish _Activate Skeet ChatApp_ step to fully use default skeetApp ⚠️**
 
-- Create Googel Cloud Project(https://console.cloud.google.com/projectcreate)
-- Create Firebase Project(https://console.firebase.google.com/)
-- Activate Firebase Authentication(https://console.firebase.google.com/project/${projectId}/authentication)
-- Activate Firebase Firestore(https://console.firebase.google.com/project/${projectId}/firestore)
-- Create OpenAI API Key(https://beta.openai.com/)
+## 🤖 Activate Skeet ChatApp 🤖
 
-- [OpenAI API](https://platform.openai.com/docs/introduction)
+### 1. Create Googel Cloud Project
 
-Example _.env_ for default openai chatApp
-_./functions/openai/.env_
+Create Google Cloud Project
 
-```bash
-SKEET_APP_NAME=skeet-demo
-PROJECT_ID=skeet-demo
-REGION=europe-west6
-CHAT_GPT_KEY=your-openai-api-key
-CHAT_GPT_ORG=your-openai-api-org
-```
+- [https://console.cloud.google.com/projectcreate](https://console.cloud.google.com/projectcreate)
 
-### Get Ready to use ChatApp
+### 2. Add Firebase Project
+
+Add Firebase Project
+
+- [https://console.firebase.google.com/](https://console.firebase.google.com/)
+
+### 3. Activate Firebase Authentication
+
+- Activate Firebase Authentication
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-auth.png)
+
+- Activate Google Sign-in
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/enable-fb-auth.png)
+
+### 4. Activate Firebase Firestore
+
+- Activate Firestore
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-firestore.png)
+
+- Select Native Mode
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-env-firestore.png)
+
+- Select Region
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-firestore.png)
+
+### 5. Create OpenAI API Key(https://beta.openai.com/)
+
+![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
+
+### Skeet init to activate Skeet ChatApp
 
 ```bash
 $ skeet init --only-dev
 ```
 
+Add your OpenAI API Key and Org to _.env_ file
+
+_./functions/openai/.env_
+
+```bash
+SKEET_APP_NAME=skeet-demo
+PROJECT_ID=skeet-demo-12356
+REGION=europe-west6
+CHAT_GPT_KEY=your-openai-api-key
+CHAT_GPT_ORG=your-openai-api-org
+```
+
+📕 [OpenAI API Document](https://platform.openai.com/docs/introduction)
+
+Now you are ready to use Skeet ChatApp 🎉
+
 Please check the [Skeet Doc](https://skeet.dev/) for more details.
+
+📗 [Skeet Doc](https://skeet.dev/)
 
 ## Skeet CLI
 
@@ -143,8 +182,6 @@ Commands:
   test                         Skeet Jest Test Command
   help [command]               display help for command
 ```
-
-- [Skeet Doc](https://skeet.dev/)
 
 ## Contributing
 
