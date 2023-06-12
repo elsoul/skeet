@@ -28,14 +28,14 @@ Doc: https://skeet.dev/
 
 ## What's Skeet?
 
-TypeScript Serverless Framework 'Skeet'.
+Reduce app development and maintenance costs.
 
 The Skeet project was launched with the goal of reducing software development, operation, and maintenance costs.
 
 Build Serverless Apps faster.
 Powered by TypeScript, Firebase Cloud FireStore, Jest, Prettier, and Google Cloud Functions 2nd Generation.
 
-![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create.gif)
+![https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
 
 ## Dependency
 
