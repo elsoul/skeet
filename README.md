@@ -128,10 +128,21 @@ Add Firebase Project
 
 ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
 
-### Skeet init to activate Skeet ChatApp
+### 6. Skeet init to activate Skeet ChatApp
+
+Run _skeet init_ command and select your GCP Project ID and Regions to setup.
 
 ```bash
 $ skeet init --only-dev
+? What's your GCP Project ID skeet-demo
+? Select Regions to deploy
+  europe-west1
+  europe-west2
+  europe-west3
+❯ europe-west6
+  northamerica-northeast1
+  southamerica-east1
+  us-central1
 ```
 
 Add your OpenAI API Key and Org to _.env_ file
