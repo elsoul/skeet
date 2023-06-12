@@ -124,11 +124,7 @@ Add Firebase Project
 - Select Region
   ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-firestore.png)
 
-### 5. Create OpenAI API Key(https://beta.openai.com/)
-
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
-
-### 6. Skeet init to activate Skeet ChatApp
+### 5. Skeet init to activate Skeet ChatApp
 
 Run _skeet init_ command and select your GCP Project ID and Regions to setup.
 
@@ -145,6 +141,10 @@ $ skeet init --only-dev
   us-central1
 ```
 
+### 6. Create OpenAI API Key(https://beta.openai.com/)
+
+![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
+
 Add your OpenAI API Key and Org to _.env_ file
 
 _./functions/openai/.env_
@@ -160,6 +160,10 @@ CHAT_GPT_ORG=your-openai-api-org
 📕 [OpenAI API Document](https://platform.openai.com/docs/introduction)
 
 Now you are ready to use Skeet ChatApp 🎉
+
+```bash
+$ skeet s
+```
 
 Please check the [Skeet Doc](https://skeet.dev/) for more details.
 
