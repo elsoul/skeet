@@ -84,6 +84,37 @@ Now you can access;
 
 [http://localhost:4000/](http://localhost:4000/)
 
+**You need to setup a Firebase project and set up the OpenAI API Keys to use default chatApp**
+
+Activate Skeet ChatApp
+
+- Create Googel Cloud Project(https://console.cloud.google.com/projectcreate)
+- Create Firebase Project(https://console.firebase.google.com/)
+- Activate Firebase Authentication(https://console.firebase.google.com/project/${projectId}/authentication)
+- Activate Firebase Firestore(https://console.firebase.google.com/project/${projectId}/firestore)
+- Create OpenAI API Key(https://beta.openai.com/)
+
+- [OpenAI API](https://platform.openai.com/docs/introduction)
+
+Example _.env_ for default openai chatApp
+_./functions/openai/.env_
+
+```bash
+SKEET_APP_NAME=skeet-demo
+PROJECT_ID=skeet-demo
+REGION=europe-west6
+CHAT_GPT_KEY=your-openai-api-key
+CHAT_GPT_ORG=your-openai-api-org
+```
+
+### Get Ready to use ChatApp
+
+```bash
+$ skeet init --only-dev
+```
+
+Please check the [Skeet Doc](https://skeet.dev/) for more details.
+
 ## Skeet CLI
 
 ```bash
