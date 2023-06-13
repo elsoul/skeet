@@ -51,7 +51,7 @@ Get ready to use scalable Cloud Firestore and Cloud Functions securely right awa
 
 ## 📗 Usage 📗
 
-### ① Install Skeet CLI and Firebase CLI
+### ① Install Skeet/Firebase CLI
 
 ```bash
 $ npm i -g @skeet-framework/cli
@@ -153,7 +153,7 @@ CHAT_GPT_ORG=your-openai-api-org
 
 Now you are ready to use Skeet ChatApp 🎉
 
-## 📱 User Registration and Authentication 📱
+## 📱 User Login Auth 📱
 
 ```bash
 $ skeet s
@@ -181,7 +181,7 @@ Successfully verified your email address.
 
 ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/email-validation-clicked.png)
 
-## ✉️ Create OpenAI Chat Room ✉️
+## ✉️ Create AI Chat Room ✉️
 
 After login, access this page to create a chat room.
 

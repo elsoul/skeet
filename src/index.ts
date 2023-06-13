@@ -115,12 +115,12 @@ async function main() {
       })
     program
       .command('server')
-      .description('Run Firebase Emulator for Skeet APP')
+      .description('Run Skeet App')
       .alias('s')
       .action(server)
     program
       .command('deploy')
-      .description('Deploy Skeet APP to Firebase Cloud Functions')
+      .description('Deploy Skeet APP to Firebase')
       .action(deploy)
     program
       .command('init')
@@ -168,9 +168,7 @@ async function main() {
       )
       .argument(
         '<yarnCmd>',
-        Object.entries(YarnCmd)
-          .map(([_, value]) => value)
-          .join(',')
+        'Yarn Command - e.g. skeet yarn add -D @types/node'
       )
       .option('-p, --p <packageName>', 'npm package name', '')
       .option('-D', 'Dependency environment', false)
