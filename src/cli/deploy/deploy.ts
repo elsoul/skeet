@@ -1,7 +1,12 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
 import { getFunctions } from '@/lib/getDirs'
 import inquirer from 'inquirer'
-import { deployWebApp } from './deployWebApp'
+import {
+  yarnBuild,
+  deployWebApp,
+  deployRules,
+  firebaseFunctionsDeploy,
+} from '@/cli'
+import { importConfig } from '@/index'
 
 export const deploy = async () => {
   const functions = await getFunctions()
@@ -28,18 +33,13 @@ export const deploy = async () => {
     .then(async (answers: { functions: Array<string> }) => {
       if (answers.functions) {
         answers.functions.forEach(async (service) => {
+          const config = await importConfig()
           if (service === 'webApp') {
             await deployWebApp()
+            await deployRules(config.app.projectId)
           } else {
-            const yarnBuild = ['yarn', '--cwd', `functions/${service}`, 'build']
-            await execSyncCmd(yarnBuild)
-            const shCmd = [
-              'firebase',
-              'deploy',
-              '--only',
-              `functions:${service}`,
-            ]
-            await execSyncCmd(shCmd)
+            await yarnBuild(service)
+            await firebaseFunctionsDeploy(config.app.projectId, service)
           }
         })
       }

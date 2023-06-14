@@ -16,8 +16,10 @@ import {
   runVpcNat,
   InitQuestions,
   addFirebaseApp,
+  deployRules,
+  firebaseFunctionsDeploy,
+  yarnBuild,
 } from '@/cli'
-import { execSyncCmd } from '@/lib/execSyncCmd'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
 import { execSync } from 'child_process'
@@ -112,22 +114,6 @@ export const addProjectRegion = async (region: string, projectId: string) => {
   Logger.successCheck('Successfully Updated skeet-cloud.config.json')
 }
 
-export const firebaseDeploy = async (projectId: string) => {
-  try {
-    const shCmd = [
-      'firebase',
-      'deploy',
-      '--only',
-      'functions',
-      '-P',
-      `${projectId}`,
-    ]
-    await execSyncCmd(shCmd)
-  } catch (error) {
-    throw new Error(`firebaseDeploy: ${error}`)
-  }
-}
-
 const askForProjectId = async () => {
   const projectInquirer = inquirer.prompt(InitQuestions.projectQuestions)
   let projectId = ''
@@ -168,7 +154,9 @@ const setupCloudIfNeeded = async (isNeedDomain: string) => {
       skeetConfig.app.name,
       skeetConfig.app.region
     )
-    await firebaseDeploy(skeetConfig.app.projectId)
+    await yarnBuild('openai')
+    await firebaseFunctionsDeploy(skeetConfig.app.projectId)
+    await deployRules(skeetConfig.app.projectId)
     await setupLoadBalancer(
       skeetConfig,
       domainAnswer.lbDomain,
@@ -176,7 +164,8 @@ const setupCloudIfNeeded = async (isNeedDomain: string) => {
     )
     await additionalSetup(skeetConfig.app.projectId, skeetConfig.app.name)
   } else {
-    await firebaseDeploy(skeetConfig.app.projectId)
+    await firebaseFunctionsDeploy(skeetConfig.app.projectId)
+    await deployRules(skeetConfig.app.projectId)
   }
 }
 

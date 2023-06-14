@@ -6,10 +6,10 @@ import {
   getZone,
   initArmor,
   runVpcNat,
-  firebaseDeploy,
   genGithubActions,
   setupCloud,
   InitQuestions,
+  firebaseFunctionsDeploy,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 
@@ -28,8 +28,7 @@ export const initLb = async () => {
       skeetConfig.app.region
     )
     await genGithubActions()
-    // firebase deploy
-    await firebaseDeploy(skeetConfig.app.projectId)
+    await firebaseFunctionsDeploy(skeetConfig.app.projectId)
 
     await setupLoadBalancer(
       skeetConfig,
