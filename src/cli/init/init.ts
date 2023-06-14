@@ -81,7 +81,17 @@ export const setupCloud = async (
   await gitInit()
   await gitCommit()
   await createGitRepo(repoName)
+  addAppJson(repoName)
   await setupGcp(skeetConfig, region)
+}
+
+const addAppJson = (repoName: string) => {
+  const filePath = `./app.json`
+  const appJson = fs.readFileSync(filePath)
+  const newAppJson = JSON.parse(String(appJson))
+  newAppJson.expo.githubUrl = `https://github.com/${repoName}`
+  fs.writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
+  Logger.successCheck(`Successfully Updated ${filePath}`)
 }
 
 export const addDomainToConfig = async (
