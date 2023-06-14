@@ -34,7 +34,7 @@ export const ${pubsubTopicName} = onMessagePublished(
   }
 }
 
-const toPascalCase = (str: string) => {
+export const toPascalCase = (str: string) => {
   return str
     .split(/(?=[A-Z])|[-_\s]/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())

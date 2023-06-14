@@ -1,17 +1,20 @@
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { toPascalCase } from './genPubSubMethod'
 
 export const genFirestoreMethod = async (
   functionsName: string,
   methodName: string
 ) => {
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/firestore/${methodName}.ts`
+  const pascalMethodName = toPascalCase(methodName)
+  const firestoreMethodName = `on${pascalMethodName}`
+  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/firestore/${firestoreMethodName}.ts`
   const body = `import { onDocumentCreated } from 'firebase-functions/v2/firestore'
 import { firestoreDefaultOption } from '@/routings/options'
 
-export const ${methodName} = onDocumentCreated(
+export const ${firestoreMethodName} = onDocumentCreated(
   firestoreDefaultOption('User/{userId}'),
   (event) => {
-    console.log(\`${methodName} triggered!\`)
+    console.log(\`${firestoreMethodName} triggered!\`)
     try {
       console.log(event.params)
     } catch (error) {
