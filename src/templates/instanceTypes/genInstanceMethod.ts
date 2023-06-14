@@ -4,7 +4,7 @@ import { genFirestoreMethod } from './genFirestoreMethod'
 import { genHttpMethod } from './genHttpMethod'
 import { genHttpMethodParams } from './genHttpMethodParams'
 import { genPubSubMethod, toPascalCase } from './genPubSubMethod'
-import { genSchedulerMethod } from './genSchedulerMethod'
+import { genScheduleMethod } from './genScheduleMethod'
 import fs from 'fs'
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 import { genPubSubMethodParams } from './genPubSubMethodParams'
@@ -31,9 +31,9 @@ export const genInstanceMethod = async (
         fs.writeFileSync(pubsubParams.filePath, pubsubParams.body)
         Logger.successCheck(`${pubsubParams.filePath} created`)
         return await genPubSubMethod(functionsName, methodName)
-      case 'scheduler':
+      case 'schedule':
         addImportToIndex(instanceType, functionsName, methodName)
-        return await genSchedulerMethod(functionsName, methodName)
+        return await genScheduleMethod(functionsName, methodName)
       default:
         addImportToIndex(instanceType, functionsName, methodName)
         const params = await genHttpMethodParams(functionsName, methodName)
@@ -70,14 +70,7 @@ const addImportToIndex = (
       bodyLine = `export * from './${methodName}'`
     } else {
       const pascalMethodName = toPascalCase(methodName)
-      let path = ''
-      if (instanceType === 'firestore') {
-        path = `./on${pascalMethodName}`
-      } else if (instanceType === 'scheduler') {
-        path = `./schedule${pascalMethodName}`
-      } else {
-        path = `./${instanceType}${pascalMethodName}`
-      }
+      const path = `./${instanceType}${pascalMethodName}`
       bodyLine = `export * from '${path}'`
     }
     appendLineToFile(indexFilePath, bodyLine)

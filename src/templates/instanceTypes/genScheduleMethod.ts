@@ -1,18 +1,18 @@
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 import { toPascalCase } from './genPubSubMethod'
 
-export const genSchedulerMethod = async (
+export const genScheduleMethod = async (
   functionsName: string,
   methodName: string
 ) => {
   const pascalMethodName = toPascalCase(methodName)
-  const schedulerMethodName = `schedule${pascalMethodName}`
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/scheduler/${schedulerMethodName}.ts`
+  const scheduleMethodName = `schedule${pascalMethodName}`
+  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/schedule/${scheduleMethodName}.ts`
   const body = `import { onSchedule } from 'firebase-functions/v2/scheduler'
-import { schedulerDefaultOption } from '@/routings/options'
+import { scheduleDefaultOption } from '@/routings/options'
 
-export const ${schedulerMethodName} = onSchedule(
-  schedulerDefaultOption,
+export const ${scheduleMethodName} = onSchedule(
+  scheduleDefaultOption,
   async (event) => {
     try {
       console.log({ status: 'success' })

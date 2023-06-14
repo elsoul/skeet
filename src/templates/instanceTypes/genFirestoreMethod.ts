@@ -6,7 +6,7 @@ export const genFirestoreMethod = async (
   methodName: string
 ) => {
   const pascalMethodName = toPascalCase(methodName)
-  const firestoreMethodName = `on${pascalMethodName}`
+  const firestoreMethodName = `firestore${pascalMethodName}`
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/firestore/${firestoreMethodName}.ts`
   const body = `import { onDocumentCreated } from 'firebase-functions/v2/firestore'
 import { firestoreDefaultOption } from '@/routings/options'

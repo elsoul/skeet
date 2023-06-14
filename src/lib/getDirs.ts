@@ -54,6 +54,6 @@ export const functionsInstanceTypes = [
   'http',
   'firestore',
   'pubsub',
-  'scheduler',
+  'schedule',
   'auth',
 ]
