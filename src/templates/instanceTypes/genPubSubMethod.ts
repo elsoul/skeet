@@ -4,11 +4,10 @@ export const genPubSubMethod = async (
   functionsName: string,
   methodName: string
 ) => {
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/pubsub/${methodName}.ts`
   const pascalMethodName = toPascalCase(methodName)
+  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/pubsub/pubsub${pascalMethodName}.ts`
   const pubsubParamsName = `PubSub${pascalMethodName}Params`
-  const pubsubParamsPathName =
-    pubsubParamsName.charAt(0).toLowerCase() + pubsubParamsName.slice(1)
+  const pubsubParamsPathName = `pubsub${pascalMethodName}Params`
   const pubsubTopicName = `pubsub${pascalMethodName}`
   const body = `import { onMessagePublished } from 'firebase-functions/v2/pubsub'
 import { pubsubDefaultOption } from '@/routings/options'

@@ -9,14 +9,14 @@ export const genAuthMethod = async (
   const authMethodName = `auth${pascalMethodName}`
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/auth/${authMethodName}.ts`
   const body = `import * as functions from 'firebase-functions/v1'
-import { authPublicOption } from '@/routings'
+import { authDefaultOption } from '@/routings'
 import dotenv from 'dotenv'
 dotenv.config()
 
 const region = process.env.REGION || 'europe-west6'
 
 export const ${authMethodName} = functions
-  .runWith(authPublicOption)
+  .runWith(authDefaultOption)
   .region(region)
   .auth.user()
   .onCreate(async (user) => {
