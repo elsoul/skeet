@@ -5,16 +5,24 @@ export const genPubSubMethod = async (
   methodName: string
 ) => {
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/pubsub/${methodName}.ts`
+  const pascalMethodName = toPascalCase(methodName)
+  const pubsubParamsName = `PubSub${pascalMethodName}Params`
+  const pubsubParamsPathName =
+    pubsubParamsName.charAt(0).toLowerCase() + pubsubParamsName.slice(1)
+  const pubsubTopicName = `pubsub${pascalMethodName}`
   const body = `import { onMessagePublished } from 'firebase-functions/v2/pubsub'
 import { pubsubDefaultOption } from '@/routings/options'
+import { parsePubSubMessage } from '@/lib/pubsub'
+import { ${pubsubParamsName} } from '@/types/pubsub/${pubsubParamsPathName}
 
-export const TOPIC_NAME = '${methodName}'
+export const pubsubTopic = ${pubsubTopicName}
 
-export const ${methodName} = onMessagePublished(
-  pubsubDefaultOption(TOPIC_NAME),
+export const ${pubsubTopicName} = onMessagePublished(
+  pubsubDefaultOption(pubsubTopic),
   async (event) => {
     try {
-      console.log({ status: 'success', topic: TOPIC_NAME, event })
+      const pubsubObject = parsePubSubMessage<${pubsubParamsName}>(event)
+      console.log({ status: 'success', topic: pubsubTopic, event, pubsubObject })
     } catch (error) {
       console.error({ status: 'error', message: String(error) })
     }
@@ -24,4 +32,11 @@ export const ${methodName} = onMessagePublished(
     filePath,
     body,
   }
+}
+
+const toPascalCase = (str: string) => {
+  return str
+    .split(/(?=[A-Z])|[-_\s]/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('')
 }

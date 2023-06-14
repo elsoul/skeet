@@ -7,6 +7,7 @@ import { genPubSubMethod } from './genPubSubMethod'
 import { genSchedulerMethod } from './genSchedulerMethod'
 import fs from 'fs'
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { genPubSubMethodParams } from './genPubSubMethodParams'
 
 export const genInstanceMethod = async (
   instanceType: string,
@@ -16,22 +17,28 @@ export const genInstanceMethod = async (
   try {
     switch (instanceType) {
       case 'auth':
-        addImpostToIndex(instanceType, functionsName, methodName)
+        addImportToIndex(instanceType, functionsName, methodName)
         return await genAuthMethod(functionsName, methodName)
       case 'firestore':
-        addImpostToIndex(instanceType, functionsName, methodName)
+        addImportToIndex(instanceType, functionsName, methodName)
         return await genFirestoreMethod(functionsName, methodName)
       case 'pubsub':
-        addImpostToIndex(instanceType, functionsName, methodName)
+        addImportToIndex(instanceType, functionsName, methodName)
+        const pubsubParams = await genPubSubMethodParams(
+          functionsName,
+          methodName
+        )
+        fs.writeFileSync(pubsubParams.filePath, pubsubParams.body)
+        Logger.successCheck(`${pubsubParams.filePath} created`)
         return await genPubSubMethod(functionsName, methodName)
       case 'scheduler':
-        addImpostToIndex(instanceType, functionsName, methodName)
+        addImportToIndex(instanceType, functionsName, methodName)
         return await genSchedulerMethod(functionsName, methodName)
       default:
-        addImpostToIndex(instanceType, functionsName, methodName)
+        addImportToIndex(instanceType, functionsName, methodName)
         const params = await genHttpMethodParams(functionsName, methodName)
         fs.writeFileSync(params.filePath, params.body)
-        Logger.success(`✔️ ${params.filePath} created!`)
+        Logger.successCheck(`${params.filePath} created`)
         return await genHttpMethod(functionsName, methodName)
     }
   } catch (error) {
@@ -51,7 +58,7 @@ export const appendLineToFile = (filePath: string, line: string) => {
   }
 }
 
-const addImpostToIndex = (
+const addImportToIndex = (
   instanceType: string,
   functionsName: string,
   methodName: string
@@ -61,6 +68,6 @@ const addImpostToIndex = (
     const bodyLine = `export * from './${methodName}'`
     appendLineToFile(indexFilePath, bodyLine)
   } catch (error) {
-    throw new Error(`addImpostToIndex: ${error}`)
+    throw new Error(`addImportToIndex: ${error}`)
   }
 }
