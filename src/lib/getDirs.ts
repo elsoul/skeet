@@ -53,7 +53,7 @@ export const getFunctions = async (isForModels = false): Promise<string[]> => {
 export const functionsInstanceTypes = [
   'http',
   'firestore',
-  'pubSub',
+  'pubsub',
   'scheduler',
   'auth',
 ]

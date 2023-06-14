@@ -6,21 +6,20 @@ export const genSchedulerMethod = async (
 ) => {
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/scheduler/${methodName}.ts`
   const body = `import { onSchedule } from 'firebase-functions/v2/scheduler'
-  import { schedulerDefaultOption } from '@/routings/options'
-  
-  const TOPIC_NAME = '${methodName}'
-  
-  export const ${methodName} = onSchedule(
-    schedulerDefaultOption,
-    async (event) => {
-      try {
-        console.log({ status: 'success', topic: TOPIC_NAME, event })
-      } catch (error) {
-        console.log({ status: 'error', message: String(error) })
-      }
+import { schedulerDefaultOption } from '@/routings/options'
+
+const TOPIC_NAME = '${methodName}'
+
+export const ${methodName} = onSchedule(
+  schedulerDefaultOption,
+  async (event) => {
+    try {
+      console.log({ status: 'success', topic: TOPIC_NAME, event })
+    } catch (error) {
+      console.log({ status: 'error', message: String(error) })
     }
-  )
-  `
+  }
+)`
   return {
     filePath,
     body,
