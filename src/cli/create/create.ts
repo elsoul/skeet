@@ -3,7 +3,11 @@ import fs from 'fs'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
-import { APP_REPO_URL, FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import {
+  APP_REPO_URL,
+  FUNCTIONS_PATH,
+  ROUTE_PACKAGE_JSON_PATH,
+} from '@/lib/getSkeetConfig'
 
 export const create = async (initAppName: string) => {
   await skeetCreate(initAppName)
@@ -49,6 +53,8 @@ export const generateInitFiles = async (appName: string) => {
   //   tsconfigJson.filePath,
   //   JSON.stringify(tsconfigJson.body, null, 2)
   // )
+  await initPackageJson(appName)
+  await initAppJson(appName)
   const eslintrcJson = await fileDataOf.eslintrcJson(appName)
   fs.writeFileSync(
     eslintrcJson.filePath,
@@ -83,4 +89,30 @@ export const generateInitFiles = async (appName: string) => {
   fs.writeFileSync(gitignore.filePath, gitignore.body)
   const gitattributes = await fileDataOf.gitattributes(appName)
   fs.writeFileSync(gitattributes.filePath, gitattributes.body)
+}
+
+export const initPackageJson = async (appName: string) => {
+  const packageJson = fs.readFileSync(ROUTE_PACKAGE_JSON_PATH)
+  const newPackageJson = JSON.parse(String(packageJson))
+  newPackageJson.name = appName
+  newPackageJson.version = '0.0.1'
+  newPackageJson.description = `Full-stack Serverless Framework Skeet ${appName} App`
+  fs.writeFileSync(
+    ROUTE_PACKAGE_JSON_PATH,
+    JSON.stringify(newPackageJson, null, 2)
+  )
+  Logger.successCheck('Successfully Updated ./package.json')
+}
+
+export const initAppJson = async (appName: string) => {
+  const appDir = './' + appName
+  const filePath = `${appDir}/app.json`
+  const appJson = fs.readFileSync(filePath)
+  const newAppJson = JSON.parse(String(appJson))
+  newAppJson.name = appName
+  newAppJson.slug = appName
+  newAppJson.schema = appName
+  newAppJson.owner = 'skeet'
+  fs.writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
+  Logger.successCheck('Successfully Updated ./app.json')
 }
