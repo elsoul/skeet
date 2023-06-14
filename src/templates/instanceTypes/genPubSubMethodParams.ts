@@ -6,7 +6,7 @@ export const genPubSubMethodParams = async (
 ) => {
   const firstChar = methodName.charAt(0).toUpperCase()
   const capitalizedMethodName = firstChar + methodName.slice(1)
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/types/pubsub/${methodName}Params.ts`
+  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/types/pubsub/pubsub${methodName}Params.ts`
   const body = `export type PubSub${capitalizedMethodName}Params = {
   name?: string
 }

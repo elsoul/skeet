@@ -13,9 +13,9 @@ export const genPubSubMethod = async (
   const body = `import { onMessagePublished } from 'firebase-functions/v2/pubsub'
 import { pubsubDefaultOption } from '@/routings/options'
 import { parsePubSubMessage } from '@/lib/pubsub'
-import { ${pubsubParamsName} } from '@/types/pubsub/${pubsubParamsPathName}
+import { ${pubsubParamsName} } from '@/types/pubsub/${pubsubParamsPathName}'
 
-export const pubsubTopic = ${pubsubTopicName}
+export const pubsubTopic = '${pubsubTopicName}'
 
 export const ${pubsubTopicName} = onMessagePublished(
   pubsubDefaultOption(pubsubTopic),

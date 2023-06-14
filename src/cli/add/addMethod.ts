@@ -47,7 +47,7 @@ export const addMethod = async (methodName: string) => {
           methodName
         )
         fs.writeFileSync(genFile.filePath, genFile.body)
-        Logger.success(`✔️ ${genFile.filePath} created!`)
+        Logger.successCheck(`${genFile.filePath} created`)
       })
     })
 
