@@ -1,49 +1,103 @@
 export const gitignore = async (appName: string) => {
   const filePath = `${appName}/.gitignore`
   const body = `
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Compiled JavaScript files
+lib/**/*.js
+lib/**/*.js.map
 
-# dependencies
-/apps/*/node_modules
-/node_modules
-/.pnp
-.pnp.js
+# TypeScript v1 declaration files
+typings/
 
-# testing
-/coverage
+# Node.js dependency directory
+node_modules/
+keyfile.json
+.env
+functions/**/.env
+functions/**/*.log
+*.log
+**/*.log
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-/dist
-
-# misc
+# OSX
+#
 .DS_Store
-*.pem
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
+# Bundle artifacts
+*.jsbundle
+
+# CocoaPods
+/ios/Pods/
+
+# Expo
+.expo/
+web-build/
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
 
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
+# local env files
+.env*.local
 
 # Gcloud key
-keyfile.json
+gcloud-key.json
+
+# env
+.env
 
 #firebase
 .firebase
 firebase-debug.log
-firestore.json
   `
   return {
     filePath,

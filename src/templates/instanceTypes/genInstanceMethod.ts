@@ -3,7 +3,7 @@ import { genAuthMethod } from './genAuthMethod'
 import { genFirestoreMethod } from './genFirestoreMethod'
 import { genHttpMethod } from './genHttpMethod'
 import { genHttpMethodParams } from './genHttpMethodParams'
-import { genPubSubMethod, toPascalCase } from './genPubSubMethod'
+import { genPubSubMethod } from './genPubSubMethod'
 import { genScheduleMethod } from './genScheduleMethod'
 import fs from 'fs'
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
@@ -65,14 +65,7 @@ const addImportToIndex = (
 ) => {
   try {
     const indexFilePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/${instanceType}/index.ts`
-    let bodyLine = ''
-    if (instanceType === 'http') {
-      bodyLine = `export * from './${methodName}'`
-    } else {
-      const pascalMethodName = toPascalCase(methodName)
-      const path = `./${instanceType}${pascalMethodName}`
-      bodyLine = `export * from '${path}'`
-    }
+    const bodyLine = `export * from './${methodName}'`
     appendLineToFile(indexFilePath, bodyLine)
   } catch (error) {
     throw new Error(`addImportToIndex: ${error}`)

@@ -1,17 +1,16 @@
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
-import { toPascalCase } from './genPubSubMethod'
+import { toCamelCase } from './genPubSubMethod'
 
 export const genScheduleMethod = async (
   functionsName: string,
   methodName: string
 ) => {
-  const pascalMethodName = toPascalCase(methodName)
-  const scheduleMethodName = `schedule${pascalMethodName}`
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/schedule/${scheduleMethodName}.ts`
+  const camelMethodName = toCamelCase(methodName)
+  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/schedule/${camelMethodName}.ts`
   const body = `import { onSchedule } from 'firebase-functions/v2/scheduler'
 import { scheduleDefaultOption } from '@/routings/options'
 
-export const ${scheduleMethodName} = onSchedule(
+export const ${camelMethodName} = onSchedule(
   scheduleDefaultOption,
   async (event) => {
     try {

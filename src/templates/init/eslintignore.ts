@@ -1,12 +1,11 @@
 export const eslintignore = async (appName: string) => {
   const filePath = `${appName}/.eslintignore`
   const body = `
-.next
-out
-dist
-build
-src/__generated__
-src / schema.graphql
+  out
+  dist
+  build
+  node_modules
+  web-build  
   `
   return {
     filePath,

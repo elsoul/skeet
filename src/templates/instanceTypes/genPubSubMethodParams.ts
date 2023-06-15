@@ -6,8 +6,8 @@ export const genPubSubMethodParams = async (
   methodName: string
 ) => {
   const pascalMethodName = toPascalCase(methodName)
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/types/pubsub/pubsub${pascalMethodName}Params.ts`
-  const body = `export type PubSub${pascalMethodName}Params = {
+  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/types/pubsub/${pascalMethodName}Params.ts`
+  const body = `export type ${pascalMethodName}Params = {
   name?: string
 }
   `
