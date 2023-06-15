@@ -92,16 +92,17 @@ export const generateInitFiles = async (appName: string) => {
 }
 
 export const initPackageJson = async (appName: string) => {
-  const packageJson = fs.readFileSync(ROUTE_PACKAGE_JSON_PATH)
-  const newPackageJson = JSON.parse(String(packageJson))
-  newPackageJson.name = appName
-  newPackageJson.version = '0.0.1'
-  newPackageJson.description = `Full-stack Serverless Framework Skeet ${appName} App`
-  fs.writeFileSync(
-    ROUTE_PACKAGE_JSON_PATH,
-    JSON.stringify(newPackageJson, null, 2)
-  )
-  Logger.successCheck('Successfully Updated ./package.json')
+  try {
+    const filePath = `./${appName}/package.json`
+    const packageJson = fs.readFileSync(filePath)
+    const newPackageJson = JSON.parse(String(packageJson))
+    newPackageJson.name = appName
+    newPackageJson.version = '0.0.1'
+    newPackageJson.description = `Full-stack Serverless Framework Skeet ${appName} App`
+    fs.writeFileSync(filePath, JSON.stringify(newPackageJson, null, 2))
+  } catch (error) {
+    throw new Error(`initPackageJson: ${error}`)
+  }
 }
 
 export const initAppJson = async (appName: string) => {
