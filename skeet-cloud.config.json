@@ -5,7 +5,8 @@
     "appUrl": "",
     "appDomain": "skeet.dev",
     "functionsDomain": "lb.skeet.dev",
-    "projectId": "skeet-app"
+    "projectId": "skeet-app",
+    "secretKeys": []
   },
   "cloudArmor": [
     {

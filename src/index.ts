@@ -30,6 +30,8 @@ import {
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
+import { addSecret } from './cli/add/addSecret'
+import { getSecret } from './cli/get'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -209,6 +211,12 @@ async function main() {
         const { app } = await importConfig()
         await addFirebaseApp(app.projectId, appDisplayName)
       })
+    add
+      .command('secret')
+      .argument('<secretKey>', 'Secret Key - e.g. API_KEY')
+      .action(async (secretKey: string) => {
+        await addSecret(secretKey)
+      })
 
     const sync = program
       .command('sync')
@@ -261,26 +269,33 @@ async function main() {
         }
       })
 
-    const list = program.command('list').description('Show Skeet App List')
-    list
+    const get = program.command('get').description('Get Skeet App List')
+    get
       .command('functions')
       .description('Show Skeet Functions List')
       .action(async () => {
         await listFunctions()
       })
-    list
+    get
       .command('https')
       .description('Show Skeet Https List')
       .action(async () => {
         await listHttps()
       })
-    list
+    get
       .command('dns')
       .description('Show Skeet NameServer Records')
       .action(async () => {
         const { app } = await importConfig()
         const res = await getZone(app.projectId, app.name)
         Logger.dnsSetupLog(res)
+      })
+    get
+      .command('secret')
+      .argument('<secretKey>', 'Secret Key - e.g. API_KEY')
+      .description('Get Skeet Secret Value')
+      .action(async (secretKey: string) => {
+        await getSecret(secretKey)
       })
 
     program
