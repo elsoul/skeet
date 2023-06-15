@@ -24,14 +24,6 @@ export const skeetCreate = async (appName: string) => {
   const yarnApiCmd = ['yarn']
   await execSyncCmd(yarnApiCmd, appDir)
   await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/openai`)
-  fs.writeFileSync(
-    `${appDir}/${FUNCTIONS_PATH}/openai/.env`,
-    `SKEET_APP_NAME=${appName}\nPROJECT_ID=${appName}\nREGION=europe-west4`
-  )
-  fs.writeFileSync(
-    `${appDir}/.env`,
-    `SKEET_APP_NAME=${appName}\nPROJECT_ID=${appName}\nREGION=europe-west4`
-  )
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
   await generateInitFiles(appName)
@@ -55,6 +47,7 @@ export const generateInitFiles = async (appName: string) => {
   // )
   await initPackageJson(appName)
   await initAppJson(appName)
+  await addAppNameToSkeetOptions(appName)
   const eslintrcJson = await fileDataOf.eslintrcJson(appName)
   fs.writeFileSync(
     eslintrcJson.filePath,
@@ -74,8 +67,6 @@ export const generateInitFiles = async (appName: string) => {
   // const firestoreRules = await fileDataOf.firestoreRules(appName)
   // fs.writeFileSync(firestoreRules.filePath, firestoreRules.body)
 
-  const databaseRulesJson = await fileDataOf.databaseRulesJson(appName)
-  fs.writeFileSync(databaseRulesJson.filePath, databaseRulesJson.body)
   const prettierrc = await fileDataOf.prettierrc(appName)
   fs.writeFileSync(
     prettierrc.filePath,
@@ -87,8 +78,6 @@ export const generateInitFiles = async (appName: string) => {
   fs.writeFileSync(prettierignore.filePath, prettierignore.body)
   const gitignore = await fileDataOf.gitignore(appName)
   fs.writeFileSync(gitignore.filePath, gitignore.body)
-  const gitattributes = await fileDataOf.gitattributes(appName)
-  fs.writeFileSync(gitattributes.filePath, gitattributes.body)
 }
 
 export const initPackageJson = async (appName: string) => {
@@ -116,4 +105,16 @@ export const initAppJson = async (appName: string) => {
   newAppJson.owner = 'skeet'
   fs.writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
   Logger.successCheck('Successfully Updated ./app.json')
+}
+
+export const addAppNameToSkeetOptions = async (appName: string) => {
+  try {
+    const filePath = `./${appName}/skeetOptions.json`
+    const jsonFile = fs.readFileSync(filePath)
+    const skeetOptions = JSON.parse(String(jsonFile))
+    skeetOptions.name = appName
+    fs.writeFileSync(filePath, JSON.stringify(skeetOptions, null, 2))
+  } catch (error) {
+    throw new Error(`addAppNameToSkeetOptions: ${error}`)
+  }
 }

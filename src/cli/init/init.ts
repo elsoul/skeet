@@ -33,7 +33,7 @@ export const init = async (isOnlyDev = false) => {
   if (!region) throw new Error('region is undefined')
 
   await firebaseUseAdd(projectId)
-  await addProjectRegion(region, projectId)
+  await addProjectRegionToSkeetOptions(region, projectId)
   const defaultAppDisplayName = projectId
   await addFirebaseApp(projectId, defaultAppDisplayName)
   await copyDefaultFirebaseConfig(defaultAppDisplayName)
@@ -99,6 +99,12 @@ export const addDomainToConfig = async (
   functionsDomain: string
 ) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetOptionsFile = './skeetOptions.json'
+  const jsonFile = fs.readFileSync(skeetOptionsFile)
+  const newJsonFile = JSON.parse(String(jsonFile))
+  newJsonFile.nsDomain = nsDomain
+  newJsonFile.functionsDomain = functionsDomain
+  fs.writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 
   skeetConfig.app.appDomain = nsDomain
   skeetConfig.app.functionsDomain = functionsDomain
@@ -106,20 +112,22 @@ export const addDomainToConfig = async (
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
-export const addProjectRegion = async (region: string, projectId: string) => {
+export const addProjectRegionToSkeetOptions = async (
+  region: string,
+  projectId: string
+) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
 
   skeetConfig.app.region = region
   skeetConfig.app.projectId = projectId
 
-  fs.writeFileSync(
-    `${FUNCTIONS_PATH}/openai/.env`,
-    `SKEET_APP_NAME=${skeetConfig.app.name}\nPROJECT_ID=${projectId}\nREGION=${region}`
-  )
-  fs.writeFileSync(
-    `.env`,
-    `SKEET_APP_NAME=${skeetConfig.app.name}\nPROJECT_ID=${projectId}\nREGION=${region}`
-  )
+  const filePath = `./skeetOptions.json`
+  const jsonFile = fs.readFileSync(filePath)
+  const newJsonFile = JSON.parse(String(jsonFile))
+  newJsonFile.name = skeetConfig.app.name
+  newJsonFile.projectId = skeetConfig.app.projectId
+  newJsonFile.region = skeetConfig.app.region
+  fs.writeFileSync(filePath, JSON.stringify(newJsonFile, null, 2))
   fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.successCheck('Successfully Updated skeet-cloud.config.json')
 }

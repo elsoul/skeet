@@ -12,6 +12,7 @@ import { Logger } from '@/lib/logger'
 import { skeetError } from '@/lib/skeetError'
 import { functionsYml } from '@/templates/init'
 import fs from 'fs'
+import { addDomainToConfig, addProjectRegionToSkeetOptions } from '../init'
 
 export const addFunctions = async (functionName: string) => {
   try {
@@ -32,9 +33,13 @@ export const addFunctions = async (functionName: string) => {
       await execSyncCmd(gitCloneCmd)
       const rmDefaultGit = ['rm', '-rf', '.git']
       await execSyncCmd(rmDefaultGit, functionDir)
-      fs.writeFileSync(
-        `${functionDir}/.env`,
-        `SKEET_APP_NAME=${skeetConfig.app.name}\nPROJECT_ID=${skeetConfig.app.projectId}\nREGION=${skeetConfig.app.region}`
+      await addProjectRegionToSkeetOptions(
+        skeetConfig.app.region,
+        skeetConfig.app.projectId
+      )
+      await addDomainToConfig(
+        skeetConfig.app.appDomain,
+        skeetConfig.app.functionsDomain
       )
       const newModelPath = `${functionDir}/src/models`
       for await (const modelPath of latestModel.modelsPath) {
