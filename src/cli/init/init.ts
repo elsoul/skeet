@@ -97,10 +97,11 @@ const addAppJson = (repoName: string) => {
 
 export const addDomainToConfig = async (
   nsDomain: string,
-  functionsDomain: string
+  functionsDomain: string,
+  functionName: string
 ) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
-  const skeetOptionsFile = './skeetOptions.json'
+  const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = fs.readFileSync(skeetOptionsFile)
   const newJsonFile = JSON.parse(String(jsonFile))
   newJsonFile.nsDomain = nsDomain
@@ -163,7 +164,12 @@ const setupCloudIfNeeded = async (isNeedDomain: string) => {
   const skeetConfig = await importConfig()
   if (isNeedDomain !== 'no') {
     const domainAnswer = await askForDomain()
-    await addDomainToConfig(domainAnswer.nsDomain, domainAnswer.lbDomain)
+    const defaultFunctionName = 'openai'
+    await addDomainToConfig(
+      domainAnswer.nsDomain,
+      domainAnswer.lbDomain,
+      defaultFunctionName
+    )
     await setupCloud(
       skeetConfig,
       domainAnswer.githubRepo,

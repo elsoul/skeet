@@ -40,7 +40,8 @@ export const addFunctions = async (functionName: string) => {
       )
       await addDomainToConfig(
         skeetConfig.app.appDomain,
-        skeetConfig.app.functionsDomain
+        skeetConfig.app.functionsDomain,
+        functionName
       )
       const newModelPath = `${functionDir}/src/models`
       for await (const modelPath of latestModel.modelsPath) {
