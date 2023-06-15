@@ -32,8 +32,9 @@ export const init = async (isOnlyDev = false) => {
 
   if (!region) throw new Error('region is undefined')
 
+  const defaultFunctionName = 'openai'
   await firebaseUseAdd(projectId)
-  await addProjectRegionToSkeetOptions(region, projectId)
+  await addProjectRegionToSkeetOptions(region, projectId, defaultFunctionName)
   const defaultAppDisplayName = projectId
   await addFirebaseApp(projectId, defaultAppDisplayName)
   await copyDefaultFirebaseConfig(defaultAppDisplayName)
@@ -114,14 +115,15 @@ export const addDomainToConfig = async (
 
 export const addProjectRegionToSkeetOptions = async (
   region: string,
-  projectId: string
+  projectId: string,
+  functionName: string
 ) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
 
   skeetConfig.app.region = region
   skeetConfig.app.projectId = projectId
 
-  const filePath = `./skeetOptions.json`
+  const filePath = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = fs.readFileSync(filePath)
   const newJsonFile = JSON.parse(String(jsonFile))
   newJsonFile.name = skeetConfig.app.name

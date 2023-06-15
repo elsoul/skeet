@@ -35,7 +35,8 @@ export const addFunctions = async (functionName: string) => {
       await execSyncCmd(rmDefaultGit, functionDir)
       await addProjectRegionToSkeetOptions(
         skeetConfig.app.region,
-        skeetConfig.app.projectId
+        skeetConfig.app.projectId,
+        functionName
       )
       await addDomainToConfig(
         skeetConfig.app.appDomain,
