@@ -27,6 +27,7 @@ import {
   skeetTest,
   addFirebaseApp,
   getZone,
+  addWebAppDomain,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
@@ -216,6 +217,13 @@ async function main() {
       .argument('<secretKey>', 'Secret Key - e.g. API_KEY')
       .action(async (secretKey: string) => {
         await addSecret(secretKey)
+      })
+    add
+      .command('webAppDomain')
+      .option('-d, --domain <domain>', 'Web App Domain - e.g. skeet.dev', '')
+      .option('-i, --ip <ip>', 'IP Address - e.g. 2.2.2.2', '')
+      .action(async (options) => {
+        await addWebAppDomain(options.domain, options.ip)
       })
 
     const sync = program
