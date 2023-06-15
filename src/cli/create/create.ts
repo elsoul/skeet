@@ -113,7 +113,7 @@ export const addAppNameToSkeetOptions = async (
   functionName: string
 ) => {
   try {
-    const filePath = `./functions/${functionName}/skeetOptions.json`
+    const filePath = `./${appName}/functions/${functionName}/skeetOptions.json`
     const jsonFile = fs.readFileSync(filePath)
     const skeetOptions = JSON.parse(String(jsonFile))
     skeetOptions.name = appName
