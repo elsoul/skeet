@@ -45,9 +45,10 @@ export const generateInitFiles = async (appName: string) => {
   //   tsconfigJson.filePath,
   //   JSON.stringify(tsconfigJson.body, null, 2)
   // )
+  const defaultFunctionName = 'openai'
   await initPackageJson(appName)
   await initAppJson(appName)
-  await addAppNameToSkeetOptions(appName)
+  await addAppNameToSkeetOptions(appName, defaultFunctionName)
   const eslintrcJson = await fileDataOf.eslintrcJson(appName)
   fs.writeFileSync(
     eslintrcJson.filePath,
@@ -107,9 +108,12 @@ export const initAppJson = async (appName: string) => {
   Logger.successCheck('Successfully Updated ./app.json')
 }
 
-export const addAppNameToSkeetOptions = async (appName: string) => {
+export const addAppNameToSkeetOptions = async (
+  appName: string,
+  functionName: string
+) => {
   try {
-    const filePath = `./${appName}/skeetOptions.json`
+    const filePath = `./${functionName}/skeetOptions.json`
     const jsonFile = fs.readFileSync(filePath)
     const skeetOptions = JSON.parse(String(jsonFile))
     skeetOptions.name = appName
