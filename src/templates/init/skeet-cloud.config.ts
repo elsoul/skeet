@@ -24,22 +24,6 @@ export const skeetCloudConfigGen = async (appName: string) => {
           }
         },
         {
-          "priority": "100",
-          "description": "Defense from SQLi attack",
-          "options": {
-            "action": "deny-403",
-            "expression": "evaluatePreconfiguredExpr('sqli-stable')"
-          }
-        },
-        {
-          "priority": "200",
-          "description": "Defense from XSS attack",
-          "options": {
-            "action": "deny-403",
-            "expression": "evaluatePreconfiguredExpr('xss-stable')"
-          }
-        },
-        {
           "priority": "300",
           "description": "Defense from NodeJS attack",
           "options": {
