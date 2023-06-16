@@ -1,8 +1,5 @@
-import { functionsInstanceTypes, getFunctions } from '@/lib/getDirs'
-import { genInstanceMethod } from '@/templates/instanceTypes'
+import { getFunctions } from '@/lib/getDirs'
 import inquirer from 'inquirer'
-import fs from 'fs'
-import { Logger } from '@/lib/logger'
 import { genModel } from './genModel'
 
 export const addModel = async (modelName: string) => {

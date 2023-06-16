@@ -77,7 +77,7 @@ export const updateFirebaseConfig = async (functionName: string) => {
     FIREBASE_CONFIG_PATH,
     JSON.stringify(firebaseConfig, null, 2)
   )
-  Logger.success('Successfully Updated firebase.json!')
+  Logger.successCheck('Successfully Updated firebase.json')
 }
 
 export const addFunctionsToPackageJson = async (functionName: string) => {
@@ -90,5 +90,5 @@ export const addFunctionsToPackageJson = async (functionName: string) => {
     ROUTE_PACKAGE_JSON_PATH,
     JSON.stringify(newPackageJson, null, 2)
   )
-  Logger.success('Successfully Updated ./package.json!')
+  Logger.successCheck('Successfully Updated ./package.json')
 }

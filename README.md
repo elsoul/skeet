@@ -231,7 +231,7 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   login [options]              Skeet Login Command - Create Firebase Login Token
-  list                         Show Skeet App List
+  get                          Get Skeet App List
   curl [options] <methodName>  Skeet Curl Command - Call Cloud Functions Endpoint for Dev
   test                         Skeet Jest Test Command
   help [command]               display help for command

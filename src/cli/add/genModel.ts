@@ -1,13 +1,14 @@
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
-import { appendLineToFile } from '@/templates/instanceTypes'
+import { Logger } from '@/lib/logger'
+import { appendLineToFile, toCamelCase } from '@/templates/instanceTypes'
 import fs from 'fs'
 
 export const genModel = (functionsName: string, modelName: string) => {
   try {
-    const lowerModelName = modelName.toLowerCase()
-    const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/models/${lowerModelName}Models.ts`
+    const camel = toCamelCase(modelName)
+    const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/models/${camel}Models.ts`
     const modelIndexPath = `${FUNCTIONS_PATH}/${functionsName}/src/models/index.ts`
-    const body = `import { Ref } from 'typesaurus'
+    const body = `import { Ref } from '@skeet-framework/firestore'
 
 // ⚡️ This is a Skeet Framework Sample Models ⚡️
 // Define Your Model Types
@@ -37,8 +38,9 @@ export type GrandChild = {
   updatedAt?: string
 }`
     fs.writeFileSync(filePath, body)
-    const indexLine = `export * from './${lowerModelName}Models'`
+    const indexLine = `export * from './${camel}Models'`
     appendLineToFile(modelIndexPath, indexLine)
+    Logger.successCheck(`Successfully ${filePath} created`)
     return true
   } catch (error) {
     throw new Error(`genModel: ${error}`)

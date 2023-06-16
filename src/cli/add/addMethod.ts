@@ -3,6 +3,7 @@ import { genInstanceMethod } from '@/templates/instanceTypes'
 import inquirer from 'inquirer'
 import fs from 'fs'
 import { Logger } from '@/lib/logger'
+import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 
 export const addMethod = async (methodName: string) => {
   try {
@@ -48,11 +49,37 @@ export const addMethod = async (methodName: string) => {
         )
         fs.writeFileSync(genFile.filePath, genFile.body)
         Logger.successCheck(`${genFile.filePath} created`)
+        const indexFile = `${FUNCTIONS_PATH}/${functionsName.functions}/src/index.ts`
+        insertFunction(indexFile, methodName)
       })
     })
 
     return { status: 'success' }
   } catch (error) {
     throw new Error(`addMethod: ${error}`)
+  }
+}
+
+const insertFunction = (filePath: string, functionName: string) => {
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8')
+    let lines = data.split('\n')
+    const targetLine = "} from '@/routings'"
+    const insertionPoint = lines.findIndex((line) => line.includes(targetLine))
+
+    if (insertionPoint === -1) {
+      console.log(
+        `Couldn't find the target line ("${targetLine}") in the file.`
+      )
+      return false
+    }
+
+    lines.splice(insertionPoint, 0, `  ${functionName},`)
+    const newData = lines.join('\n')
+    fs.writeFileSync(filePath, newData, 'utf-8')
+    Logger.successCheck(`Successfully exported to ${filePath}`)
+    return true
+  } catch (error) {
+    throw new Error(`insertFunction: ${error}`)
   }
 }
