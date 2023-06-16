@@ -32,13 +32,13 @@ export const curl = async <T>(
       curlCmd = curlCmd + ` --header 'Content-Type: application/json'`
       curlCmd = curlCmd + ` --data '${params}'`
     }
+    curlCmd = curlCmd + ` | json_pp`
     if (!accessToken) {
       throw new Error(
         'ACCESS_TOKEN environment variable is not set.\n Please run `skeet login`'
       )
     }
 
-    console.log(curlCmd)
     const res = execSync(curlCmd)
     const data = res.toString()
 
