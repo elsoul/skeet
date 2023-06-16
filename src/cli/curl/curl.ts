@@ -7,20 +7,31 @@ export const curl = async <T>(
   region: string,
   methodName: string,
   params: T = false as T,
-  isProduction = false,
-  functionsDomain = '',
-  functionsName = ''
+  options: {
+    isProduction?: boolean
+    functionsDomain?: string
+    functionsName?: string
+    isRaw?: boolean
+  } = {
+    isProduction: false,
+    functionsDomain: '',
+    functionsName: '',
+    isRaw: false,
+  }
 ) => {
   try {
     const kebab = convertToKebabCase(methodName)
-    const url = isProduction
-      ? `https://${functionsDomain}/${functionsName}/${kebab}`
+    const url = options.isProduction
+      ? `https://${options.functionsDomain}/${options.functionsName}/${kebab}`
       : `http://127.0.0.1:5001/${projectId}/${region}/${methodName}`
     const accessToken = process.env.ACCESS_TOKEN
-    const curlCmd = params
-      ? `curl --location --request POST ${url} --data '${params}' --header 'Content-Type: application/json' --header "Authorization: Bearer ${accessToken}" | json_pp`
-      : `curl --location --request POST ${url} --header "Authorization: Bearer ${accessToken}" | json_pp`
+    let curlCmd = `curl --location --request POST ${url} --header "Authorization: Bearer ${accessToken}"`
 
+    if (options.isRaw) curlCmd = curlCmd + ` --raw`
+    if (params) {
+      curlCmd = curlCmd + ` --header 'Content-Type: application/json'`
+      curlCmd = curlCmd + ` --data '${params}'`
+    }
     if (!accessToken) {
       throw new Error(
         'ACCESS_TOKEN environment variable is not set.\n Please run `skeet login`'

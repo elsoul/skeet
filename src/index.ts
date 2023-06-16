@@ -317,7 +317,8 @@ async function main() {
         '-d,--data [data]',
         'JSON Request Body - e.g. \'{ "model": "gpt4", "maxTokens": 420 }\''
       )
-      .option('--production', 'For Production', false)
+      .option('-r, --raw', 'Show chunk data', false)
+      .option('-p, --production', 'For Production', false)
       .option(
         '-f,--functions [functions]',
         'For Production Functions Name',
@@ -330,14 +331,18 @@ async function main() {
             throw new Error('Need to define functionsName')
 
           const functionsDomain = config.app.functionsDomain
+          const curlOptions = {
+            isProduction: options.production,
+            functionsDomain,
+            functionsName: options.functions,
+            isRaw: options.raw,
+          }
           await curl<Record<any, any>>(
             config.app.projectId,
             config.app.region,
             methodName,
             options.data,
-            true,
-            functionsDomain,
-            options.functions
+            curlOptions
           )
         } else {
           console.log(options)
