@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import { readdirSync } from 'fs'
 import * as path from 'path'
 import { getFunctions } from './getDirs'
 
@@ -13,9 +13,12 @@ export const getModelFiles = async () => {
       'src',
       'models'
     )
-    const files = fs
-      .readdirSync(httpRoutingPath)
-      .map((fileName) => httpRoutingPath + '/' + fileName)
+    let files = readdirSync(httpRoutingPath).map(
+      (fileName) => httpRoutingPath + '/' + fileName
+    )
+
+    files = files.filter((file) => !file.includes('/src/models/lib'))
+
     data.push({ functionName, modelsPath: files })
   }
   return data
