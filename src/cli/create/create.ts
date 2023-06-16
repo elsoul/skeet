@@ -26,11 +26,11 @@ export const skeetCreate = async (appName: string) => {
   await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/openai`)
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
-  await generateInitFiles(appName)
   await sleep(2000)
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
 
+  await generateInitFiles(appName)
   Logger.skeetAA()
   Logger.welcomText(appName)
   const nmb = Math.floor(Math.random() * 4 + 1)
@@ -100,10 +100,10 @@ export const initAppJson = async (appName: string) => {
   const filePath = `${appDir}/app.json`
   const appJson = fs.readFileSync(filePath)
   const newAppJson = JSON.parse(String(appJson))
-  newAppJson.name = appName
-  newAppJson.slug = appName
-  newAppJson.schema = appName
-  newAppJson.owner = 'skeet'
+  newAppJson.expo.name = appName
+  newAppJson.expo.slug = appName
+  newAppJson.expo.scheme = appName
+  newAppJson.expo.owner = 'skeet'
   fs.writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
   Logger.successCheck('Successfully Updated ./app.json')
 }
