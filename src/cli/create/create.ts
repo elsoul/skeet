@@ -8,6 +8,7 @@ import {
   FUNCTIONS_PATH,
   ROUTE_PACKAGE_JSON_PATH,
 } from '@/lib/getSkeetConfig'
+import { convertFromKebabCaseToLowerCase } from '@/utils/string'
 
 export const create = async (initAppName: string) => {
   await skeetCreate(initAppName)
@@ -100,10 +101,14 @@ export const initAppJson = async (appName: string) => {
   const filePath = `${appDir}/app.json`
   const appJson = fs.readFileSync(filePath)
   const newAppJson = JSON.parse(String(appJson))
+  const appNameLowerCase = convertFromKebabCaseToLowerCase(appName)
   newAppJson.expo.name = appName
   newAppJson.expo.slug = appName
-  newAppJson.expo.scheme = appName
+  newAppJson.expo.scheme = appNameLowerCase
   newAppJson.expo.owner = 'skeet'
+  newAppJson.expo.githubUrl = `https://github.com/YOUR_ACCOUNT/${appName}`
+  newAppJson.expo.android.package = `com.skeet.${appNameLowerCase}`
+  newAppJson.expo.ios.bundleIdentifier = `com.skeet.${appNameLowerCase}`
   fs.writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
   Logger.successCheck('Successfully Updated ./app.json')
 }
