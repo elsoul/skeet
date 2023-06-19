@@ -157,7 +157,10 @@ Go To : http://127.0.0.1:4000/`
       `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`
     )
     Logger.normal(
-      `FirebaseAuth: https://console.firebase.google.com/project/${projectId}/authentication\n`
+      `Firebase Auth: https://console.firebase.google.com/project/${projectId}/authentication\n`
+    )
+    Logger.normal(
+      `Cloud Storage: https://console.firebase.google.com/project/${projectId}/storage\n`
     )
     Logger.normal(`📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`)
   }
