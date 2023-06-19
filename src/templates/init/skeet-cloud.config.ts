@@ -54,12 +54,16 @@ type IpifyResponse = {
 }
 
 export const getHomeIp = async () => {
-  const url = 'https://api.ipify.org/?format=json'
-  let response = await sendGet(url)
-  let data = await response.json()
-  const ipifyResponse = data as IpifyResponse
-  const ip = ipifyResponse.ip.replace(/\r?\n/g, '')
-  return ip
+  try {
+    const url = 'https://api.ipify.org/?format=json'
+    let response = await sendGet(url)
+    let data = await response.json()
+    const ipifyResponse = data as IpifyResponse
+    const ip = ipifyResponse.ip.replace(/\r?\n/g, '')
+    return ip
+  } catch (error) {
+    return ''
+  }
 }
 
 const sendGet = async (url: string) => {

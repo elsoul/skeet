@@ -27,12 +27,17 @@ export const curl = async <T>(
     const accessToken = process.env.ACCESS_TOKEN
     let curlCmd = `curl --location --request POST ${url} --header "Authorization: Bearer ${accessToken}"`
 
-    if (options.isRaw) curlCmd = curlCmd + ` --raw`
     if (params) {
       curlCmd = curlCmd + ` --header 'Content-Type: application/json'`
       curlCmd = curlCmd + ` --data '${params}'`
     }
-    curlCmd = curlCmd + ` | json_pp`
+
+    if (options.isRaw) {
+      curlCmd = curlCmd + ` --raw`
+    } else {
+      curlCmd = curlCmd + ` | json_pp`
+    }
+
     if (!accessToken) {
       throw new Error(
         'ACCESS_TOKEN environment variable is not set.\n Please run `skeet login`'

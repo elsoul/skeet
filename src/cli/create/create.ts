@@ -50,6 +50,7 @@ export const generateInitFiles = async (appName: string) => {
   await initPackageJson(appName)
   await initAppJson(appName)
   await addAppNameToSkeetOptions(appName, defaultFunctionName)
+
   const eslintrcJson = await fileDataOf.eslintrcJson(appName)
   fs.writeFileSync(
     eslintrcJson.filePath,
