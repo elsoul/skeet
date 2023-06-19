@@ -1,7 +1,5 @@
-import { sleep } from '@/utils/time'
 import chalk from 'chalk'
 import { Spinner } from 'cli-spinner'
-import { clear } from 'console'
 import { defaultSpinners, spinnerPattern } from './spinnerList'
 
 export module Logger {
@@ -120,6 +118,18 @@ Go To : http://127.0.0.1:4000/`
       throw new Error(`Project ID ${projectId} does not exist`)
     } catch (error) {
       throw new Error(`projectIdNotExistsLog: ${error}`)
+    }
+  }
+
+  export const billingNotEnabledError = (projectId: string) => {
+    try {
+      Logger.warning('⚠️ Billing is not enabled for this project ⚠️\n')
+      Logger.normal(
+        `Please enable billing from Google Cloud. \n\nPlease Visit: https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project\n`
+      )
+      throw new Error(`Billing is not enabled for ${projectId}`)
+    } catch (error) {
+      throw new Error(`billingNotEnabledLog: ${error}`)
     }
   }
 
