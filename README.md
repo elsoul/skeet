@@ -38,7 +38,7 @@ Start developing and deploying serverless apps quickly.
 
 Get ready to use scalable Cloud Firestore and Cloud Functions securely right away.
 
-![https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
+![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif)
 
 ## 🧪 Dependency 🧪
 
@@ -93,7 +93,9 @@ Add Firebase Project
 
 - [https://console.firebase.google.com/](https://console.firebase.google.com/)
 
-### ③ Activate Firebase Authentication
+### ③ Activate Firebase Build
+
+#### - Activate Firebase Authentication
 
 - Activate Firebase Authentication
   ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-auth.png)
@@ -101,7 +103,7 @@ Add Firebase Project
 - Activate Google Sign-in
   ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/enable-fb-auth.png)
 
-### ④ Activate Firebase Firestore
+#### - Activate Firebase Firestore
 
 - Activate Firestore
   ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-firestore.png)
@@ -112,9 +114,22 @@ Add Firebase Project
 - Select Region
   ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-firestore.png)
 
-### ⑤Skeet init to setup project
+#### - Firebase Storage
+
+- Activate Firebase Storage
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-storage.png)
+
+- Select Native Mode
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-env-storage.png)
+
+- Select Region
+  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-storage.png)
+
+### ④ Skeet init to setup project
 
 Run _skeet init_ command and select your GCP Project ID and Regions to setup.
+
+Then, please visit the URL to authenticate your Firebase account.
 
 ```bash
 $ skeet init --only-dev
@@ -127,27 +142,52 @@ $ skeet init --only-dev
   northamerica-northeast1
   southamerica-east1
   us-central1
+
+Visit this URL on this device to log in:
+
+https://accounts.google.com/o/oauth2/auth?project...
+
+Waiting for authentication...
 ```
 
-### ⑥ Create OpenAI API Key
+### ⑤ How to setup Secret Key
 
-Create OpenAI API Key
+#### - Set Secret Key in Cloud Secret Manager
+
+Skeet Framework uses [Cloud Secret Manager](https://firebase.google.com/docs/functions/config-env?hl=en&gen=2nd) environment variables to manage sensitive information such as API keys.
+
+This command requires a Firebase Blaze or higher plan.
+
+![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/firebase-plan-en.png)
+
+From the Firebase console's bottom left menu, select _Upgrade_.
+
+- [Firebase Console](https://console.firebase.google.com/u/0/project/_/usage/details)
+
+using the _skeet add secret <secretKey>_ command
+
+Set the OpenAI API key as an environment variable.
+
+```bash
+$ skeet add secret CHAT_GPT_ORG
+? Enter value for CHAT_GPT_ORG: <yourOpenAIKey>
+```
+
+Set CHAT_GPT_KEY as well.
+
+```bash
+$ skeet add secret CHAT_GPT_KEY
+? Enter value for CHAT_GPT_KEY: <yourOpenAIKey>
+```
+
+You can also write it in _functions/openai/.env_ to try it easily,
+This method does not translate to production environments.
+
+#### - Create OpenAI API Key
 
 - [https://beta.openai.com/](https://beta.openai.com/)
 
 ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
-
-Add your OpenAI API Key and Org to _.env_ file
-
-_./functions/openai/.env_
-
-```bash
-SKEET_APP_NAME=skeet-demo
-PROJECT_ID=skeet-demo-12356
-REGION=europe-west6
-CHAT_GPT_KEY=your-openai-api-key
-CHAT_GPT_ORG=your-openai-api-org
-```
 
 📕 [OpenAI API Document](https://platform.openai.com/docs/introduction)
 
@@ -203,10 +243,6 @@ OpenAI Chat Room Settings
 Now you are all set 🎉
 
 ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/skeet-chat-stream.gif)
-
-Please check the [Skeet Doc](https://skeet.dev/) for more details.
-
-📗 [Skeet Doc](https://skeet.dev/)
 
 ## Skeet CLI
 

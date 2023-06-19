@@ -41,6 +41,7 @@ export const skeetCreate = async (appName: string) => {
 }
 
 export const generateInitFiles = async (appName: string) => {
+  Logger.normal('Generating init files...')
   // const tsconfigJson = await fileDataOf.tsconfigJson(appName)
   // fs.writeFileSync(
   //   tsconfigJson.filePath,

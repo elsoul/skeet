@@ -346,12 +346,15 @@ async function main() {
             curlOptions
           )
         } else {
-          console.log(options)
+          const curlOptions = {
+            isRaw: options.raw,
+          }
           await curl<Record<any, any>>(
             config.app.projectId,
             config.app.region,
             methodName,
-            options.data
+            options.data,
+            curlOptions
           )
         }
       })

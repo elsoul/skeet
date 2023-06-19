@@ -44,7 +44,7 @@ export const addFirebaseApp = async (
 
     return true
   } catch (error) {
-    Logger.warning(`⚠️ addFirebaseApp: ${error}`)
+    // Logger.warning(`⚠️ addFirebaseApp: ${error}`)
   }
 }
 
