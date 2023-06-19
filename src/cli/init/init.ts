@@ -22,6 +22,7 @@ import {
   enablePermission,
   addRole,
   createServiceAccount,
+  firebaseLogin,
 } from '@/cli'
 import { SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
@@ -34,9 +35,7 @@ export const init = async (isOnlyDev = false) => {
     Logger.projectIdNotExistsError(projectId)
 
   if (!region) throw new Error('region is undefined')
-  const config = await importConfig()
-  const billing = await checkBillingAccount(projectId, config.app.name)
-  if (!billing) Logger.billingNotEnabledError(projectId)
+  await firebaseLogin()
 
   const defaultFunctionName = 'openai'
   await firebaseUseAdd(projectId)

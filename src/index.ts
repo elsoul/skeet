@@ -28,6 +28,7 @@ import {
   addFirebaseApp,
   getZone,
   addWebAppDomain,
+  firebaseLogin,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
@@ -358,7 +359,7 @@ async function main() {
       .command('test')
       .description('Skeet Jest Test Command')
       .action(async () => {
-        await skeetTest()
+        await firebaseLogin()
       })
 
     await program.parseAsync(process.argv)
