@@ -13,14 +13,14 @@ import { pubsubDefaultOption } from '@/routings/options'
 import { parsePubSubMessage } from '@/lib/pubsub'
 import { ${pascalMethodName} } from '@/types/pubsub/${camelMethodName}'
 
-export const pubsubTopic = '${camelMethodName}'
+export const ${camelMethodName}Topic = '${camelMethodName}'
 
 export const ${camelMethodName} = onMessagePublished(
   pubsubDefaultOption(pubsubTopic),
   async (event) => {
     try {
       const pubsubObject = parsePubSubMessage<${pascalMethodName}>(event)
-      console.log({ status: 'success', topic: pubsubTopic, event, pubsubObject })
+      console.log({ status: 'success', topic: ${camelMethodName}Topic, event, pubsubObject })
     } catch (error) {
       console.error({ status: 'error', message: String(error) })
     }

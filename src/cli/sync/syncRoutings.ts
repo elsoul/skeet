@@ -10,7 +10,7 @@ export const syncRoutings = async () => {
   await setGcloudProject(app.projectId)
   const files = await getHTTPRoutingFiles()
   const paths = []
-  Logger.sync('⏳ syncRoutings...')
+  const spinner = await Logger.syncSpinner('syncRoutings...')
   for (const file of files) {
     for (const path of file.httpEndpoints) {
       const kebab = convertToKebabCase(path)
@@ -26,4 +26,5 @@ export const syncRoutings = async () => {
     config.app.name
   )
   await addRounting(pathMatcherName, paths)
+  spinner.stop()
 }
