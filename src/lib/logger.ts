@@ -11,22 +11,16 @@ export module Logger {
   export const indigoHex = chalk.hex('#3950A0')
   export const pinkHex = chalk.hex('#D8A1C4')
 
-  export const syncSpinner = async (
-    text: string,
-    asyncFunc: () => Promise<void>
-  ) => {
+  export const syncSpinner = async (text: string) => {
     const spinnerEmoji =
       spinnerPattern[Math.floor(Math.random() * spinnerPattern.length)]
     const spinner = new Spinner(
-      `%s ${spinnerEmoji.left} ` + chalk.white(text) + ` ${spinnerEmoji.right}`
+      ` ${spinnerEmoji.left} ` + chalk.white(text) + ` %s`
     )
-    const spList = defaultSpinners[9]
-    spinner.setSpinnerString(spList)
-    spinner.start()
-
     try {
-      await asyncFunc()
-      spinner.stop(true)
+      spinner.setSpinnerString(18)
+      spinner.start()
+      return spinner
     } catch (error) {
       spinner.stop(true)
       throw new Error(`syncSpinner Error: ${error}`)
@@ -79,7 +73,7 @@ export module Logger {
     const row4T = Logger.errorHex(' / /    ')
     const row5SKEE = Logger.syncHex('/____/_/ |_/_____/_____/')
     const row5T = Logger.errorHex(' /_/    🛠️🛠️')
-    console.log(`${row1SKEE}${row1T}`)
+    console.log(`\n${row1SKEE}${row1T}`)
     console.log(`${row2SKEE}${row2T}`)
     console.log(`${row3SKEE}${row3T}`)
     console.log(`${row4SKEE}${row4T}`)

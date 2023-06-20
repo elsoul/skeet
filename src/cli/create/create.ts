@@ -3,11 +3,7 @@ import fs from 'fs'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
-import {
-  APP_REPO_URL,
-  FUNCTIONS_PATH,
-  ROUTE_PACKAGE_JSON_PATH,
-} from '@/lib/getSkeetConfig'
+import { APP_REPO_URL, FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
 
 export const create = async (initAppName: string) => {
@@ -27,7 +23,7 @@ export const skeetCreate = async (appName: string) => {
   await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/openai`)
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
-  await sleep(2000)
+  await sleep(1000)
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
 
@@ -41,7 +37,7 @@ export const skeetCreate = async (appName: string) => {
 }
 
 export const generateInitFiles = async (appName: string) => {
-  Logger.normal('Generating init files...')
+  const spinner = await Logger.syncSpinner('Generating init files...')
   // const tsconfigJson = await fileDataOf.tsconfigJson(appName)
   // fs.writeFileSync(
   //   tsconfigJson.filePath,
@@ -82,6 +78,7 @@ export const generateInitFiles = async (appName: string) => {
   fs.writeFileSync(prettierignore.filePath, prettierignore.body)
   const gitignore = await fileDataOf.gitignore(appName)
   fs.writeFileSync(gitignore.filePath, gitignore.body)
+  spinner.stop()
 }
 
 export const initPackageJson = async (appName: string) => {
@@ -112,7 +109,6 @@ export const initAppJson = async (appName: string) => {
   newAppJson.expo.android.package = `com.skeet.${appNameLowerCase}`
   newAppJson.expo.ios.bundleIdentifier = `com.skeet.${appNameLowerCase}`
   fs.writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
-  Logger.successCheck('Successfully Updated ./app.json')
 }
 
 export const addAppNameToSkeetOptions = async (

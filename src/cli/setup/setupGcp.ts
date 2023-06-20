@@ -12,7 +12,7 @@ import { Logger } from '@/lib/logger'
 import { sleep } from '@/utils/time'
 import fs from 'fs'
 export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
-  Logger.sync('👷 Setting up GCP...')
+  const spinner = await Logger.syncSpinner('Setting up GCP...')
   await setGcloudProject(config.app.projectId)
   await runEnableAllPermission(config.app.projectId)
   await createServiceAccount(config.app.projectId, config.app.name)
@@ -22,4 +22,5 @@ export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   await sleep(2000)
   fs.rmSync(KEYFILE_PATH)
   await runAddAllRole(config.app.projectId, config.app.name)
+  spinner.stop()
 }
