@@ -1,6 +1,7 @@
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
-import { appendLineToFile, toCamelCase } from '@/templates/instanceTypes'
+import { appendLineToFile } from '@/templates/instanceTypes'
+import { toCamelCase } from '@/utils/string'
 import fs from 'fs'
 
 export const genModel = (functionsName: string, modelName: string) => {

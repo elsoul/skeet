@@ -1,5 +1,5 @@
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
-import { toCamelCase } from './genPubSubMethod'
+import { toCamelCase } from '@/utils/string'
 
 export const genFirestoreMethod = async (
   functionsName: string,

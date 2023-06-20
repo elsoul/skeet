@@ -1,25 +1,25 @@
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { toCamelCase, toPascalCase } from '@/utils/string'
 
 export const genPubSubMethod = async (
   functionsName: string,
   methodName: string
 ) => {
-  const pascalMethodName = toCamelCase(methodName)
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/pubsub/${pascalMethodName}.ts`
-  const pubsubParamsName = `${pascalMethodName}Params`
-  const pubsubParamsPathName = `${pascalMethodName}Params`
+  const pascalMethodName = toPascalCase(methodName)
+  const camelMethodName = toCamelCase(methodName)
+  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/pubsub/${camelMethodName}.ts`
   const body = `import { onMessagePublished } from 'firebase-functions/v2/pubsub'
 import { pubsubDefaultOption } from '@/routings/options'
 import { parsePubSubMessage } from '@/lib/pubsub'
-import { ${pubsubParamsName} } from '@/types/pubsub/${pubsubParamsPathName}'
+import { ${pascalMethodName} } from '@/types/pubsub/${camelMethodName}'
 
-export const pubsubTopic = '${pascalMethodName}'
+export const pubsubTopic = '${camelMethodName}'
 
-export const ${pascalMethodName} = onMessagePublished(
+export const ${camelMethodName} = onMessagePublished(
   pubsubDefaultOption(pubsubTopic),
   async (event) => {
     try {
-      const pubsubObject = parsePubSubMessage<${pubsubParamsName}>(event)
+      const pubsubObject = parsePubSubMessage<${pascalMethodName}>(event)
       console.log({ status: 'success', topic: pubsubTopic, event, pubsubObject })
     } catch (error) {
       console.error({ status: 'error', message: String(error) })
@@ -30,23 +30,4 @@ export const ${pascalMethodName} = onMessagePublished(
     filePath,
     body,
   }
-}
-
-export const toPascalCase = (str: string) => {
-  return str
-    .split(/(?=[A-Z])|[-_\s]/)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join('')
-}
-
-export const toCamelCase = (str: string) => {
-  return str
-    .split(/(?=[A-Z])|[-_\s]/)
-    .map((word, index) => {
-      if (index === 0) {
-        return word.toLowerCase()
-      }
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-    })
-    .join('')
 }

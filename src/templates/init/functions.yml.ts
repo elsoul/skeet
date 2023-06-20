@@ -1,10 +1,12 @@
 import fs from 'fs'
+import { convertToKebabCase, toCamelCase } from '@/utils/string'
 
 export const functionsYml = async (functionName: string) => {
   fs.mkdirSync('.github/workflows', { recursive: true })
   const nodeVersion = '18.16.0'
-  const name = functionName.toLocaleUpperCase()
-  const ymlName = `functions-${functionName}.yml`
+  const name = toCamelCase(functionName)
+  const kebabName = convertToKebabCase(functionName)
+  const ymlName = `functions-${kebabName}.yml`
   const filePath = `.github/workflows/${ymlName}`
   const body = `name: ${name}
 on:
@@ -12,7 +14,7 @@ on:
     branches:
       - main
     paths:
-      - 'functions/${functionName}/**'
+      - 'functions/${kebabName}/**'
       - '.github/workflows/${ymlName}'
 
 jobs:
@@ -27,9 +29,9 @@ jobs:
         with:
           node-version: '${nodeVersion}'
       - id: auth
-          uses: google-github-actions/auth@v0
-          with:
-            credentials_json: \${{ secrets.SKEET_GCP_SA_KEY }}
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: \${{ secrets.SKEET_GCP_SA_KEY }}
       - name: Install yarn and firebase tools
         run: npm i -g npm yarn firebase-tools
       - name: GitHub repository setting
@@ -39,7 +41,7 @@ jobs:
       - name: Build App
         run: cd ./functions/${functionName} && yarn build
       - name: Deploy to Firebase
-        run: firebase deploy --only functions
+        run: firebase deploy --only functions:${functionName}
 `
   return {
     filePath,
