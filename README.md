@@ -39,7 +39,7 @@ Start developing and deploying serverless apps quickly.
 
 Get ready to use scalable Cloud Firestore and Cloud Functions securely right away.
 
-![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif](https://user-images.githubusercontent.com/20677823/221215449-93a7b5a8-5f33-4da8-9dd4-d0713db0a280.png)
+![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif)
 
 ## 🧪 Dependency 🧪
 
