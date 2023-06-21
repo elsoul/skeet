@@ -34,6 +34,7 @@ export const serviceList = [
   'dns.googleapis.com',
   'servicenetworking.googleapis.com',
   'containerregistry.googleapis.com',
+  'artifactregistry.googleapis.com',
   'run.googleapis.com',
   'vpcaccess.googleapis.com',
   'cloudscheduler.googleapis.com',
@@ -44,4 +45,5 @@ export const serviceList = [
   'cloudbuild.googleapis.com',
   'firebasehosting.googleapis.com',
   'secretmanager.googleapis.com',
+  'firebaserules.googleapis.com',
 ]

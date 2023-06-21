@@ -34,6 +34,7 @@ export const addRole = async (
 
 export const roleList = [
   'roles/containerregistry.ServiceAgent',
+  'roles/artifactregistry.admin',
   'roles/pubsub.editor',
   'roles/datastore.user',
   'roles/iam.serviceAccountUser',
@@ -48,4 +49,5 @@ export const roleList = [
   'roles/cloudfunctions.admin',
   'roles/firebasehosting.admin',
   'roles/secretmanager.admin',
+  'roles/firebaserules.admin',
 ]
