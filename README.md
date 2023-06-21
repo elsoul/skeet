@@ -27,6 +27,10 @@ TypeScript, Firebase Cloud FireStore, Jest Test, Google Cloud Functions 2nd Gene
 
 📗 Doc: https://skeet.dev/
 
+📱 Demo App: https://skeeter.app/
+
+With Skeet's tutorial, you can quickly build and deploy web, iOS, and Android apps using the Firebase.
+
 ## 💃 What's Skeet? 🕺
 
 ⚡️ Reduce App Development and Maintenance Costs ⚡️
