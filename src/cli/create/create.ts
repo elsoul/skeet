@@ -96,7 +96,10 @@ export const generateInitFiles = async (appName: string, template: string) => {
     prettierrc.filePath,
     JSON.stringify(prettierrc.body, null, 2)
   )
-  const skeetCloudConfigGen = await fileDataOf.skeetCloudConfigGen(appName)
+  const skeetCloudConfigGen = await fileDataOf.skeetCloudConfigGen(
+    appName,
+    template
+  )
   fs.writeFileSync(skeetCloudConfigGen.filePath, skeetCloudConfigGen.body)
   const prettierignore = await fileDataOf.prettierignore(appName, template)
   fs.writeFileSync(prettierignore.filePath, prettierignore.body)
