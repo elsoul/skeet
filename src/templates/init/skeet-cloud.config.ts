@@ -1,12 +1,16 @@
 import fetch from 'node-fetch'
 
-export const skeetCloudConfigGen = async (appName: string) => {
+export const skeetCloudConfigGen = async (
+  appName: string,
+  template: string
+) => {
   const filePath = `${appName}/skeet-cloud.config.json`
   const homeIp = await getHomeIp()
   const body = `{
   "app": {
     "name": "${appName}",
     "projectId": "${appName}",
+    "template": "${template}",
     "region": "europe-west4",
     "appDomain": "your-app-url.com",
     "functionsDomain": "functions.your-app-url.com"

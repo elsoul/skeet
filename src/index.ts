@@ -43,6 +43,7 @@ export type SkeetCloudConfig = {
 export type AppConfig = {
   name: string
   projectId: string
+  template: string
   region: string
   appDomain: string
   functionsDomain: string
