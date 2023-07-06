@@ -54,13 +54,11 @@ export const eslintrcJson = async (appName: string, template: string) => {
       env: {
         browser: true,
         es2021: true,
-        'react-native/react-native': true,
       },
       rules: {
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
         '@typescript-eslint/no-explicit-any': 0,
-        'react-native/no-raw-text': 0,
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/no-unused-vars': 0,
         '@typescript-eslint/ban-ts-comment': [
