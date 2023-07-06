@@ -8,7 +8,7 @@ export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const ROUTE_PACKAGE_JSON_PATH = './package.json'
 export const FUNCTIONS_REPO_URL = 'https://github.com/elsoul/skeet-functions'
 export const APP_REPO_URL = 'https://github.com/elsoul/skeet-app'
-export const FRONT_APP_REPO_URL = 'https://github.com/elsoul/skeet-app-template'
+export const NEXT_REPO_URL = 'https://github.com/elsoul/skeet-next'
 export const FRONT_APP_PATH = './src'
 export const KEYFILE_PATH = './keyfile.json'
 

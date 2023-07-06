@@ -47,6 +47,25 @@ export module InitQuestions {
     },
   ]
 
+  export const templateQuestions = [
+    {
+      type: 'list',
+      message: 'Select Template of Skeet',
+      name: 'template',
+      choices: [
+        new inquirer.Separator(' Templates '),
+        { name: 'Next.js' },
+        { name: 'React Native (Expo)' },
+      ],
+      validate(answer: string) {
+        if (answer.length < 1) {
+          return 'You must choose at least one template.'
+        }
+        return true
+      },
+    },
+  ]
+
   export const needDomainQuestions = [
     {
       type: 'list',

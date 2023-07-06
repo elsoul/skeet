@@ -3,20 +3,41 @@ import fs from 'fs'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
-import { APP_REPO_URL, FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import {
+  APP_REPO_URL,
+  NEXT_REPO_URL,
+  FUNCTIONS_PATH,
+} from '@/lib/getSkeetConfig'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
+import inquirer from 'inquirer'
+import { InitQuestions } from '@/cli/init/initQuestions'
 
 export const create = async (initAppName: string) => {
-  await skeetCreate(initAppName)
+  const { template } = await askForTemplate()
+  await skeetCreate(initAppName, template)
 }
 
-export const skeetCreate = async (appName: string) => {
+const askForTemplate = async () => {
+  const projectInquirer = inquirer.prompt(InitQuestions.templateQuestions)
+  let template = ''
+  await projectInquirer.then(async (answer) => {
+    template = answer.template
+  })
+  return { template }
+}
+
+export const skeetCreate = async (appName: string, template: string) => {
   const appDir = './' + appName
   if (fs.existsSync(appDir)) {
     Logger.error(`Directory ${appName} already exists.`)
     process.exit(0)
   }
-  const gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
+  let gitCloneCmd = null
+  if (template === 'Next.js') {
+    gitCloneCmd = ['git', 'clone', NEXT_REPO_URL, appName]
+  } else {
+    gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
+  }
   await execSyncCmd(gitCloneCmd)
   const yarnApiCmd = ['yarn']
   await execSyncCmd(yarnApiCmd, appDir)
@@ -27,7 +48,7 @@ export const skeetCreate = async (appName: string) => {
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
 
-  await generateInitFiles(appName)
+  await generateInitFiles(appName, template)
   Logger.skeetAA()
   Logger.welcomText(appName)
   const nmb = Math.floor(Math.random() * 4 + 1)
@@ -36,7 +57,7 @@ export const skeetCreate = async (appName: string) => {
   }
 }
 
-export const generateInitFiles = async (appName: string) => {
+export const generateInitFiles = async (appName: string, template: string) => {
   const spinner = await Logger.syncSpinner('Generating init files...')
   // const tsconfigJson = await fileDataOf.tsconfigJson(appName)
   // fs.writeFileSync(
@@ -45,16 +66,19 @@ export const generateInitFiles = async (appName: string) => {
   // )
   const defaultFunctionName = 'openai'
   await initPackageJson(appName)
-  await initAppJson(appName)
+  if (template === 'React Native (Expo)') {
+    await initAppJson(appName)
+  }
+
   await addAppNameToSkeetOptions(appName, defaultFunctionName)
 
-  const eslintrcJson = await fileDataOf.eslintrcJson(appName)
+  const eslintrcJson = await fileDataOf.eslintrcJson(appName, template)
   fs.writeFileSync(
     eslintrcJson.filePath,
     JSON.stringify(eslintrcJson.body, null, 2)
   )
 
-  const eslintignore = await fileDataOf.eslintignore(appName)
+  const eslintignore = await fileDataOf.eslintignore(appName, template)
   fs.writeFileSync(eslintignore.filePath, eslintignore.body)
 
   const firebaserc = await fileDataOf.firebaserc(appName)
@@ -74,9 +98,9 @@ export const generateInitFiles = async (appName: string) => {
   )
   const skeetCloudConfigGen = await fileDataOf.skeetCloudConfigGen(appName)
   fs.writeFileSync(skeetCloudConfigGen.filePath, skeetCloudConfigGen.body)
-  const prettierignore = await fileDataOf.prettierignore(appName)
+  const prettierignore = await fileDataOf.prettierignore(appName, template)
   fs.writeFileSync(prettierignore.filePath, prettierignore.body)
-  const gitignore = await fileDataOf.gitignore(appName)
+  const gitignore = await fileDataOf.gitignore(appName, template)
   fs.writeFileSync(gitignore.filePath, gitignore.body)
   spinner.stop()
 }
