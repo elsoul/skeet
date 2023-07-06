@@ -50,7 +50,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
         sourceType: 'module',
       },
       parser: '@typescript-eslint/parser',
-      plugins: ['react-native', '@typescript-eslint', 'react-hooks'],
+      plugins: ['@typescript-eslint', 'react-hooks'],
       env: {
         browser: true,
         es2021: true,
