@@ -28,6 +28,7 @@ import { SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import fs from 'fs'
 import { execSync } from 'child_process'
 import { copyFileWithOverwrite } from '@/lib/copyFiles'
+import * as fileDataOf from '@/templates/init'
 
 export const init = async (isOnlyDev = false) => {
   const { projectId, region } = await askForProjectId()
@@ -43,6 +44,8 @@ export const init = async (isOnlyDev = false) => {
   const defaultAppDisplayName = projectId
   await addFirebaseApp(projectId, defaultAppDisplayName)
   await copyDefaultFirebaseConfig(defaultAppDisplayName)
+  const firebaserc = await fileDataOf.firebasercInit(projectId)
+  fs.writeFileSync(firebaserc.filePath, firebaserc.body)
   if (isOnlyDev) return
 
   await setupProject(projectId)
