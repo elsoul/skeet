@@ -1,4 +1,3 @@
-import { execCmd } from '@/lib/execCmd'
 import { execSync, spawnSync } from 'child_process'
 
 export const server = async () => {
@@ -19,7 +18,9 @@ export const server = async () => {
       }
     }
     const skeetS = ['yarn', 'skeet']
-    await execCmd(skeetS)
+    spawnSync(skeetS[0], skeetS.slice(1), {
+      stdio: 'inherit',
+    })
   } catch (error) {
     console.log(error)
   }
