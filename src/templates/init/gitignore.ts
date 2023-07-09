@@ -2,7 +2,7 @@ export const gitignore = async (appName: string, template: string) => {
   const filePath = `${appName}/.gitignore`
 
   let body = ''
-  if (template === 'React Native (Expo)') {
+  if (template === 'Expo (React Native)') {
     body = `
 # Compiled JavaScript files
 lib/**/*.js
@@ -102,7 +102,7 @@ gcloud-key.json
 .firebase
 firebase-debug.log
   `
-  } else if (template === 'Next.js') {
+  } else if (template === 'Next.js (React)') {
     body = `
 # Compiled JavaScript files
 lib/**/*.js

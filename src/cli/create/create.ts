@@ -33,7 +33,7 @@ export const skeetCreate = async (appName: string, template: string) => {
     process.exit(0)
   }
   let gitCloneCmd = null
-  if (template === 'Next.js') {
+  if (template === 'Next.js (React)') {
     gitCloneCmd = ['git', 'clone', NEXT_REPO_URL, appName]
   } else {
     gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
@@ -66,7 +66,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
   // )
   const defaultFunctionName = 'openai'
   await initPackageJson(appName)
-  if (template === 'React Native (Expo)') {
+  if (template === 'Expo (React Native)') {
     await initAppJson(appName)
   }
 

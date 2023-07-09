@@ -1,7 +1,7 @@
 export const eslintrcJson = async (appName: string, template: string) => {
   const filePath = `${appName}/.eslintrc.json`
   let body = {}
-  if (template === 'React Native (Expo)') {
+  if (template === 'Expo (React Native)') {
     body = {
       extends: [
         'eslint:recommended',
@@ -37,7 +37,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
         ],
       },
     }
-  } else if (template === 'Next.js') {
+  } else if (template === 'Next.js (React)') {
     body = {
       extends: [
         'next/core-web-vitals',
