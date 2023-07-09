@@ -132,7 +132,7 @@ export const setupCloud = async (
   await gitInit()
   await gitCommit()
   await createGitRepo(repoName)
-  if (skeetConfig.app.template === 'React Native (Expo)') {
+  if (skeetConfig.app.template === 'Expo (React Native)') {
     addAppJson(repoName)
   }
   await setupGcp(skeetConfig, region)

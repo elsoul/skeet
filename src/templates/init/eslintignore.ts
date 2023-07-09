@@ -1,7 +1,7 @@
 export const eslintignore = async (appName: string, template: string) => {
   const filePath = `${appName}/.eslintignore`
   let body = ''
-  if (template === 'React Native (Expo)') {
+  if (template === 'Expo (React Native)') {
     body = `
 out
 dist
@@ -9,7 +9,7 @@ build
 node_modules
 web-build  
   `
-  } else if (template === 'Next.js') {
+  } else if (template === 'Next.js (React)') {
     body = `
 out
 dist

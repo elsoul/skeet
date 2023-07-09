@@ -54,8 +54,8 @@ export module InitQuestions {
       name: 'template',
       choices: [
         new inquirer.Separator(' Templates '),
-        { name: 'Next.js' },
-        { name: 'React Native (Expo)' },
+        { name: 'Next.js (React)' },
+        { name: 'Expo (React Native)' },
       ],
       validate(answer: string) {
         if (answer.length < 1) {

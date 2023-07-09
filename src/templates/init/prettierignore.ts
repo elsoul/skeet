@@ -1,7 +1,7 @@
 export const prettierignore = async (appName: string, template: string) => {
   const filePath = `${appName}/.prettierignore`
   let body = ''
-  if (template === 'React Native (Expo)') {
+  if (template === 'Expo (React Native)') {
     body = `
 .next
 out
@@ -10,7 +10,7 @@ build
 src/__generated__
 src/schema.graphql
   `
-  } else if (template === 'Next.js') {
+  } else if (template === 'Next.js (React)') {
     body = `
 out
 dist
