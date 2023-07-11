@@ -89,6 +89,8 @@ You can choose a template for the frontend.
 - [Next.js (React) template](https://github.com/elsoul/skeet-next)
 - [Expo (React Native) template](https://github.com/elsoul/skeet-app)
 
+※ This tutorial uses the Expo version, but you can use the same procedure even using the Next.js version.
+
 ### ③ Run Skeet App
 
 ```bash
