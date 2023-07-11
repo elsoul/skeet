@@ -21,27 +21,37 @@
   </a>
 </p>
 
-## ⚡️ Skeet TypeScript Serverless Framework ⚡️
+## Skeet - Full-stack Serverless App Framework for efficient development
 
-TypeScript, Firebase Cloud FireStore, Jest Test, Google Cloud Functions 2nd Generation
+Skeet is Full-stack Serverless App Framework for zero-maintenance apps on Firebase🔥
+
+- [TypeScript - TypeCheck](https://www.typescriptlang.org/)
+- [Firebase - Serverless Platform](https://firebase.google.com/)
+- [Firestore - NoSQL Database](https://firebase.google.com/docs/firestore)
+- [Firebase Cloud Functions 2nd Gen - FaaS](https://firebase.google.com/docs/functions)
+- [Firebase Storage - Cloud Storage](https://firebase.google.com/docs/storage)
+- [Firebase Authentication - Auth](https://firebase.google.com/docs/auth)
+- [Jest - Test](https://jestjs.io/)
+- [ESLint - Linter](https://eslint.org/)
+- [Prettier - Formatter](https://prettier.io/)
+- [Next.js (React) - Web Frontend(SSG)](https://nextjs.org/)
+- [Expo (React Native) - Mobile App](https://expo.dev/)
 
 📗 Doc: https://skeet.dev/
 
-📱 Demo App: https://skeeter.app/
+📱 Demo App: https://skeeter.dev/
 
-With Skeet's tutorial, you can quickly build and deploy web, iOS, and Android apps using the Firebase.
+With Skeet's tutorial, you can quickly build and deploy web, iOS, and Android apps using Firebase.
 
 ## 💃 What's Skeet? 🕺
 
-⚡️ Reduce App Development and Maintenance Costs ⚡️
+⚡️ Do more, manage less ⚡️
 
-Skeet is an Open-Source Full-stack Serverless Application Framework.
+Reduce app development and operation costs and realize more plans.
 
-Skeet was born to reduce the cost of software development and operation.
+Skeet is an open-source full-stack app development solution.
 
-Start developing and deploying serverless apps quickly.
-
-Get ready to use scalable Cloud Firestore and Cloud Functions securely right away.
+You can start writing app logic immediately without worrying about infrastructure.
 
 ![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif)
 
@@ -53,6 +63,9 @@ Get ready to use scalable Cloud Firestore and Cloud Functions securely right awa
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
 - [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0
 - [GitHub CLI](https://cli.github.com/) ^2.29.0
+- [Java](https://www.java.com/en/download/)
+
+※ We don't write Java but we need it for mobile apps working
 
 ## 📗 Usage 📗
 
@@ -69,6 +82,13 @@ $ npm install -g firebase-tools
 $ skeet create <appName>
 ```
 
+![Skeet Create Command](https://storage.googleapis.com/skeet-assets/imgs/samples/SkeetCreateSelectTemplate.png)
+
+You can choose a template for the frontend.
+
+- [Next.js (React) template](https://github.com/elsoul/skeet-next)
+- [Expo (React Native) template](https://github.com/elsoul/skeet-app)
+
 ### ③ Run Skeet App
 
 ```bash
@@ -78,7 +98,9 @@ $ skeet s
 
 Now you have both frontend and backend running locally ⭐️
 
-📲 Frontend - [http://localhost:19006/](http://localhost:19006/)
+📲 Frontend(Next.js) - [http://localhost:4200/](http://localhost:4200/)
+
+📲 Frontend(Expo) - [http://localhost:19006/](http://localhost:19006/)
 
 💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
 
@@ -103,32 +125,32 @@ Add Firebase Project
 #### - Activate Firebase Authentication
 
 - Activate Firebase Authentication
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-auth.png)
+  ![Firebase Authentication](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-auth.png)
 
 - Activate Google Sign-in
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/enable-fb-auth.png)
+  ![Google Sign in](https://storage.googleapis.com/skeet-assets/imgs/backend/enable-fb-auth.png)
 
 #### - Activate Firebase Firestore
 
 - Activate Firestore
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-firestore.png)
+  ![Firestore](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-firestore.png)
 
 - Select Native Mode
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-env-firestore.png)
+  ![Firestore](https://storage.googleapis.com/skeet-assets/imgs/backend/select-env-firestore.png)
 
 - Select Region
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-firestore.png)
+  ![Firestore](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-firestore.png)
 
 #### - Firebase Storage
 
 - Activate Firebase Storage
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-storage.png)
+  ![Firebase Storage](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-storage.png)
 
 - Select Native Mode
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-env-storage.png)
+  ![Firebase Storage](https://storage.googleapis.com/skeet-assets/imgs/backend/select-env-storage.png)
 
 - Select Region
-  ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-storage.png)
+  ![Firebase Storage](https://storage.googleapis.com/skeet-assets/imgs/backend/select-region-storage.png)
 
 ### ④ Skeet init to setup project
 
@@ -163,7 +185,7 @@ Skeet Framework uses [Cloud Secret Manager](https://firebase.google.com/docs/fun
 
 This command requires a Firebase Blaze or higher plan.
 
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/firebase-plan-en.png)
+![Firebase](https://storage.googleapis.com/skeet-assets/imgs/backend/firebase-plan-en.png)
 
 From the Firebase console's bottom left menu, select _Upgrade_.
 
@@ -192,7 +214,7 @@ This method does not translate to production environments.
 
 - [https://beta.openai.com/](https://beta.openai.com/)
 
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
+![OpenAI ChatGPT API](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
 
 📕 [OpenAI API Document](https://platform.openai.com/docs/introduction)
 
@@ -210,11 +232,11 @@ Run Skeet App locally and access to
 
 Let's create a new user account with your email address and password.
 
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/user-register.png)
+![User Register](https://storage.googleapis.com/skeet-assets/imgs/backend/user-register.png)
 
 After registration, you will see the console log like below.
 
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/email-validation.png)
+![Email Validation](https://storage.googleapis.com/skeet-assets/imgs/backend/email-validation.png)
 
 Click the link in the console log to verify your email address.
 
@@ -224,7 +246,7 @@ To verify the email address epics.dev@gmail.com, follow this link: <Link>
 
 Successfully verified your email address.
 
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/email-validation-clicked.png)
+![Firebase Auth](https://storage.googleapis.com/skeet-assets/imgs/backend/email-validation-clicked.png)
 
 ## ✉️ Create AI Chat Room ✉️
 
@@ -243,11 +265,11 @@ OpenAI Chat Room Settings
 | Temperature      | Set OpenAI API's Temperature      | number              |
 | System Charactor | Set OpenAI API's System Charactor | string              |
 
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/create-chatroom.png)
+![OpenAI ChatGPT AI Chat](https://storage.googleapis.com/skeet-assets/imgs/backend/create-chatroom.png)
 
 Now you are all set 🎉
 
-![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/skeet-chat-stream.gif)
+![OpenAI ChatGPT AI Chat](https://storage.googleapis.com/skeet-assets/imgs/backend/skeet-chat-stream.gif)
 
 ## Skeet CLI
 
