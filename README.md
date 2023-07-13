@@ -21,9 +21,9 @@
   </a>
 </p>
 
-## Skeet - Full-stack Serverless App Framework for efficient development
+## Skeet - Open-Source Serverless App Framework for efficient development
 
-Skeet is Full-stack Serverless App Framework for zero-maintenance apps on Firebase🔥
+Skeet is an Open-Source Serverless Framework for zero-maintenance apps on Firebase 🔥
 
 - [TypeScript - TypeCheck](https://www.typescriptlang.org/)
 - [Firebase - Serverless Platform](https://firebase.google.com/)
