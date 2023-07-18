@@ -33,6 +33,7 @@ import {
 } from '@/cli'
 import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
+import { runPsql } from './cli/docker/runPsql'
 
 export type SkeetCloudConfig = {
   app: AppConfig
@@ -96,7 +97,7 @@ export const importFirebaseConfig = async () => {
   }
 }
 
-const program = new Command()
+export const program = new Command()
 
 program
   .name('skeet')
@@ -108,6 +109,15 @@ Dotenv.config()
 async function main() {
   // Please check the descriptions if they are correct.
   try {
+    const docker = program.command('docker').description('docker commands')
+
+    docker
+      .command('psql')
+      .description('docker psql container')
+      .action(async () => {
+        await runPsql()
+      })
+
     program
       .command('create')
       .argument('<appName>', 'Name of the app')
