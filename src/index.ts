@@ -35,6 +35,13 @@ import { Logger } from '@/lib/logger'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
 import { runPsql } from './cli/docker/runPsql'
 
+export const GRAPHQL_PATH = './graphql/src/graphql'
+export const PRISMA_SCHEMA_PATH = './graphql/prisma/schema.prisma'
+export const API_PATH = './graphql'
+export const API_TYPE_PATH = API_PATH + '/src/types'
+export const API_ENV_PRODUCTION_PATH = './graphql/.env.production'
+export const API_ENV_BUILD_PATH = './graphql/.env.build'
+
 export type SkeetCloudConfig = {
   app: AppConfig
   functions: FunctionConfig[]
