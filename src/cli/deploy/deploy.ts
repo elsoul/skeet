@@ -1,12 +1,9 @@
-import { getFunctions } from '@/lib/getDirs'
 import inquirer from 'inquirer'
-import {
-  yarnBuild,
-  deployWebApp,
-  deployRules,
-  firebaseFunctionsDeploy,
-} from '@/cli'
-import { importConfig } from '@/index'
+import { importConfig, getFunctions } from '@/lib'
+import { deployWebApp } from './deployWebApp'
+import { deployRules } from './deployRules'
+import { firebaseFunctionsDeploy } from './firebaseDeploy'
+import { yarnBuild } from '../yarn/yarnBuild'
 
 export const deploy = async () => {
   const functions = await getFunctions()

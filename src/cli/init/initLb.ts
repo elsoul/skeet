@@ -1,17 +1,17 @@
-import { SkeetCloudConfig, importConfig } from '@/index'
 import inquirer from 'inquirer'
 import {
-  syncArmors,
+  importConfig,
   setupLoadBalancer,
   getZone,
   initArmor,
   runVpcNat,
-  genGithubActions,
-  setupCloud,
-  InitQuestions,
-  firebaseFunctionsDeploy,
-} from '@/cli'
-import { Logger } from '@/lib/logger'
+} from '@/lib'
+import { Logger } from '@/lib'
+import { InitQuestions } from './initQuestions'
+import { genGithubActions, setupCloud } from './init'
+import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
+import { syncArmors } from '../sub/sync/syncArmors'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const initLb = async () => {
   const skeetConfig: SkeetCloudConfig = await importConfig()

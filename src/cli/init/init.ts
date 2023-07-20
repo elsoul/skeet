@@ -1,7 +1,7 @@
 import inquirer from 'inquirer'
-import { Logger } from '@/lib/logger'
-import { importConfig, SkeetCloudConfig } from '@/index'
 import {
+  Logger,
+  importConfig,
   initArmor,
   setupGcp,
   setupLoadBalancer,
@@ -10,25 +10,26 @@ import {
   gitCommit,
   checkRepoExists,
   createGitRepo,
-  syncArmors,
   getZone,
   firebaseUseAdd,
   runVpcNat,
-  InitQuestions,
-  addFirebaseApp,
-  deployRules,
-  firebaseFunctionsDeploy,
-  yarnBuild,
   enablePermission,
   addRole,
   createServiceAccount,
   firebaseLogin,
-} from '@/cli'
-import { SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
-import fs from 'fs'
+  SKEET_CONFIG_PATH,
+  copyFileWithOverwrite,
+} from '@/lib'
 import { execSync } from 'child_process'
-import { copyFileWithOverwrite } from '@/lib/copyFiles'
 import * as fileDataOf from '@/templates/init'
+import { addFirebaseApp } from '../sub/add/addFirebaseApp'
+import { InitQuestions } from './initQuestions'
+import { yarnBuild } from '../yarn/yarnBuild'
+import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
+import { deployRules } from '../deploy/deployRules'
+import { syncArmors } from '../sub/sync/syncArmors'
+import { readFileSync, writeFileSync } from 'fs'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const init = async (isOnlyDev = false) => {
   const { projectId, region } = await askForProjectId()
@@ -45,7 +46,7 @@ export const init = async (isOnlyDev = false) => {
   await addFirebaseApp(projectId, defaultAppDisplayName)
   await copyDefaultFirebaseConfig(defaultAppDisplayName)
   const firebaserc = await fileDataOf.firebasercInit(projectId)
-  fs.writeFileSync(firebaserc.filePath, firebaserc.body)
+  writeFileSync(firebaserc.filePath, firebaserc.body)
   if (isOnlyDev) return
 
   await setupProject(projectId)
@@ -140,10 +141,10 @@ export const setupCloud = async (
 
 const addAppJson = (repoName: string) => {
   const filePath = `./app.json`
-  const appJson = fs.readFileSync(filePath)
+  const appJson = readFileSync(filePath)
   const newAppJson = JSON.parse(String(appJson))
   newAppJson.expo.githubUrl = `https://github.com/${repoName}`
-  fs.writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
+  writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
   Logger.successCheck(`Successfully Updated ${filePath}`)
 }
 
@@ -154,15 +155,15 @@ export const addDomainToConfig = async (
 ) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
   const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
-  const jsonFile = fs.readFileSync(skeetOptionsFile)
+  const jsonFile = readFileSync(skeetOptionsFile)
   const newJsonFile = JSON.parse(String(jsonFile))
   newJsonFile.nsDomain = nsDomain
   newJsonFile.functionsDomain = functionsDomain
-  fs.writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
+  writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 
   skeetConfig.app.appDomain = nsDomain
   skeetConfig.app.functionsDomain = functionsDomain
-  fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
@@ -177,13 +178,13 @@ export const addProjectRegionToSkeetOptions = async (
   skeetConfig.app.projectId = projectId
 
   const filePath = `./functions/${functionName}/skeetOptions.json`
-  const jsonFile = fs.readFileSync(filePath)
+  const jsonFile = readFileSync(filePath)
   const newJsonFile = JSON.parse(String(jsonFile))
   newJsonFile.name = skeetConfig.app.name
   newJsonFile.projectId = skeetConfig.app.projectId
   newJsonFile.region = skeetConfig.app.region
-  fs.writeFileSync(filePath, JSON.stringify(newJsonFile, null, 2))
-  fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+  writeFileSync(filePath, JSON.stringify(newJsonFile, null, 2))
+  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.successCheck('Successfully Updated skeet-cloud.config.json')
 }
 

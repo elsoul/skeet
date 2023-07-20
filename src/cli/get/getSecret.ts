@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execSyncCmd } from '@/lib'
 
 export const getSecret = async (secretKey: string) => {
   try {

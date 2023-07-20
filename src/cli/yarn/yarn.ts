@@ -1,7 +1,5 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
 import inquirer from 'inquirer'
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
-import { getFunctions } from '@/lib/getDirs'
+import { execSyncCmd, getFunctions, FUNCTIONS_PATH } from '@/lib'
 
 export type YarnService = {
   yarn: Array<string>

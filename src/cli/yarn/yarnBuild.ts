@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execSyncCmd } from '@/lib'
 
 export const yarnBuild = async (functionName: string) => {
   try {

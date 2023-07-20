@@ -1,8 +1,8 @@
-import fs from 'fs'
 import { convertToKebabCase, toCamelCase } from '@/utils/string'
+import { mkdirSync } from 'fs'
 
 export const functionsYml = async (functionName: string) => {
-  fs.mkdirSync('.github/workflows', { recursive: true })
+  mkdirSync('.github/workflows', { recursive: true })
   const nodeVersion = '18.16.0'
   const name = toCamelCase(functionName)
   const kebabName = convertToKebabCase(functionName)

@@ -1,13 +1,12 @@
-import { Logger } from '@/lib/logger'
+import { Logger, FUNCTIONS_PATH } from '@/lib'
 import { genAuthMethod } from './genAuthMethod'
 import { genFirestoreMethod } from './genFirestoreMethod'
 import { genHttpMethod } from './genHttpMethod'
 import { genHttpMethodParams } from './genHttpMethodParams'
 import { genPubSubMethod } from './genPubSubMethod'
 import { genScheduleMethod } from './genScheduleMethod'
-import fs from 'fs'
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 import { genPubSubMethodParams } from './genPubSubMethodParams'
+import { readFileSync, writeFileSync } from 'fs'
 
 export const genInstanceMethod = async (
   instanceType: string,
@@ -28,7 +27,7 @@ export const genInstanceMethod = async (
           functionsName,
           methodName
         )
-        fs.writeFileSync(pubsubParams.filePath, pubsubParams.body)
+        writeFileSync(pubsubParams.filePath, pubsubParams.body)
         Logger.successCheck(`${pubsubParams.filePath} created`)
         return await genPubSubMethod(functionsName, methodName)
       case 'schedule':
@@ -37,7 +36,7 @@ export const genInstanceMethod = async (
       default:
         addImportToIndex(instanceType, functionsName, methodName)
         const params = await genHttpMethodParams(functionsName, methodName)
-        fs.writeFileSync(params.filePath, params.body)
+        writeFileSync(params.filePath, params.body)
         Logger.successCheck(`${params.filePath} created`)
         return await genHttpMethod(functionsName, methodName)
     }
@@ -48,11 +47,11 @@ export const genInstanceMethod = async (
 
 export const appendLineToFile = (filePath: string, line: string) => {
   try {
-    const fileContent = fs.readFileSync(filePath, 'utf8')
+    const fileContent = readFileSync(filePath, 'utf8')
     const updatedContent = fileContent.endsWith('\n')
       ? fileContent + line
       : fileContent + '\n' + line
-    fs.writeFileSync(filePath, updatedContent)
+    writeFileSync(filePath, updatedContent)
   } catch (error) {
     throw new Error(`appendLineToFile: ${error}`)
   }

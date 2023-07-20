@@ -1,7 +1,7 @@
 import inquirer from 'inquirer'
 import { regionList } from './regionList'
 import chalk from 'chalk'
-import { Logger } from '@/lib/logger'
+import { Logger } from '@/lib'
 
 export module InitQuestions {
   export const requireRepoName = (value: string) => {

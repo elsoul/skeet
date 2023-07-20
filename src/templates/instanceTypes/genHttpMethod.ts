@@ -1,4 +1,4 @@
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { FUNCTIONS_PATH } from '@/lib'
 
 export const genHttpMethod = async (
   functionsName: string,
