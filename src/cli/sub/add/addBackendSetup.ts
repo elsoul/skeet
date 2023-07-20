@@ -1,5 +1,5 @@
 import { addBackend, createBackend, createNeg, updateBackend } from '@/cli'
-import { importConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { isNegExists } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'
 

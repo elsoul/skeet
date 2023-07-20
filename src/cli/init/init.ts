@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 import { Logger } from '@/lib/logger'
-import { importConfig, SkeetCloudConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import {
   initArmor,
   setupGcp,
@@ -29,6 +29,7 @@ import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
 import { deployRules } from '../deploy/deployRules'
 import { syncArmors } from '../sub/sync/syncArmors'
 import { readFileSync, writeFileSync } from 'fs'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const init = async (isOnlyDev = false) => {
   const { projectId, region } = await askForProjectId()

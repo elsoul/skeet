@@ -1,9 +1,9 @@
-import fs from 'fs'
 import readline from 'readline'
 import { addEnv } from './addEnv'
+import { createReadStream } from 'fs'
 
 export const addEnvSync = async (filePath: string) => {
-  const stream = fs.createReadStream(filePath)
+  const stream = createReadStream(filePath)
   const rl = readline.createInterface({
     input: stream,
     output: process.stdout,

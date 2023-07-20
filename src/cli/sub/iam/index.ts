@@ -1,4 +1,5 @@
-import { importConfig, program } from '@/index'
+import { program } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { setupIam, createServiceAccountKey, addJsonEnv } from '@/cli'
 
 export const iamSubCommands = async () => {

@@ -1,4 +1,4 @@
-import { importConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { deleteBackend } from './deleteBackend'
 import { deleteNeg } from './deleteNeg'
 

@@ -2,7 +2,7 @@ import {
   addDomainToConfig,
   addProjectRegionToSkeetOptions,
 } from '@/cli/init/init'
-import { SkeetCloudConfig, importConfig, importFirebaseConfig } from '@/index'
+import { importConfig, importFirebaseConfig } from '@/lib/importConfig'
 import { copyFileWithOverwrite } from '@/lib/copyFiles'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import { getModelFiles } from '@/lib/getModelFiles'
@@ -15,6 +15,7 @@ import {
 import { Logger } from '@/lib/logger'
 import { skeetError } from '@/lib/skeetError'
 import { functionsYml } from '@/templates/init'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { existsSync, mkdir, readFileSync, writeFileSync } from 'fs'
 
 export const addFunctions = async (functionName: string) => {

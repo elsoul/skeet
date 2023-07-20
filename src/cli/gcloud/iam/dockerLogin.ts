@@ -1,6 +1,7 @@
 import { execSync } from 'node:child_process'
 import { getContainerRegion } from '@/lib/getSkeetConfig'
-import { importConfig, SkeetCloudConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const dockerLogin = async () => {
   const config: SkeetCloudConfig = await importConfig()

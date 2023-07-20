@@ -1,4 +1,4 @@
-import { importConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { Logger } from '@/lib/logger'
 import { updateBackendSecurityPolicy, updateSecurityPolicy } from '@/cli'
 

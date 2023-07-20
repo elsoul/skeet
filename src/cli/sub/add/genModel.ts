@@ -2,7 +2,7 @@ import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
 import { appendLineToFile } from '@/templates/instanceTypes'
 import { toCamelCase } from '@/utils/string'
-import fs from 'fs'
+import { writeFileSync } from 'fs'
 
 export const genModel = (functionsName: string, modelName: string) => {
   try {
@@ -38,7 +38,7 @@ export type GrandChild = {
   createdAt?: string
   updatedAt?: string
 }`
-    fs.writeFileSync(filePath, body)
+    writeFileSync(filePath, body)
     const indexLine = `export * from './${camel}Models'`
     appendLineToFile(modelIndexPath, indexLine)
     Logger.successCheck(`Successfully ${filePath} created`)

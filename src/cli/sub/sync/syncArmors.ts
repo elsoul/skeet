@@ -1,4 +1,4 @@
-import { importConfig, SkeetCloudConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { execSync } from 'child_process'
 import { getNetworkConfig } from '@/lib/getSkeetConfig'
 import {
@@ -7,6 +7,7 @@ import {
   updateSecurityPolicyRule,
 } from '@/cli'
 import { Logger } from '@/lib/logger'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const syncArmors = async () => {
   const config = await importConfig()

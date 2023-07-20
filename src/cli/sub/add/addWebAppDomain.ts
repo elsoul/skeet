@@ -1,9 +1,9 @@
 import { createRecord } from '@/cli'
-import { importConfig } from '@/index'
-import fs from 'fs'
+import { importConfig } from '@/lib/importConfig'
 import { SKEET_CONFIG_PATH, getNetworkConfig } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
 import { getFunctions } from '@/lib/getDirs'
+import { readFileSync, writeFileSync } from 'fs'
 
 export const addWebAppDomain = async (appDomain: string, ip: string) => {
   try {
@@ -25,10 +25,10 @@ export const addWebAppDomain = async (appDomain: string, ip: string) => {
 
 const addAppDomainToSkeetConfig = async (appDomain: string) => {
   try {
-    const appJson = fs.readFileSync(SKEET_CONFIG_PATH)
+    const appJson = readFileSync(SKEET_CONFIG_PATH)
     const newAppJson = JSON.parse(String(appJson))
     newAppJson.app.appDomain = appDomain
-    fs.writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(newAppJson, null, 2))
+    writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(newAppJson, null, 2))
     Logger.successCheck(`Successfully Updated ${SKEET_CONFIG_PATH}`)
   } catch (error) {
     throw new Error(`addAppDomainToSkeetConfig: ${error}`)
@@ -41,10 +41,10 @@ const addAppNameToSkeetOptions = async (
 ) => {
   try {
     const filePath = `./functions/${functionName}/skeetOptions.json`
-    const jsonFile = fs.readFileSync(filePath)
+    const jsonFile = readFileSync(filePath)
     const skeetOptions = JSON.parse(String(jsonFile))
     skeetOptions.name = appName
-    fs.writeFileSync(filePath, JSON.stringify(skeetOptions, null, 2))
+    writeFileSync(filePath, JSON.stringify(skeetOptions, null, 2))
   } catch (error) {
     throw new Error(`addAppNameToSkeetOptions: ${error}`)
   }

@@ -1,9 +1,9 @@
 import { functionsInstanceTypes, getFunctions } from '@/lib/getDirs'
 import { genInstanceMethod } from '@/templates/instanceTypes'
 import inquirer from 'inquirer'
-import fs from 'fs'
 import { Logger } from '@/lib/logger'
 import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { readFileSync, writeFileSync } from 'fs'
 
 export const addMethod = async (methodName: string) => {
   try {
@@ -47,7 +47,7 @@ export const addMethod = async (methodName: string) => {
           functionsName.functions,
           methodName
         )
-        fs.writeFileSync(genFile.filePath, genFile.body)
+        writeFileSync(genFile.filePath, genFile.body)
         Logger.successCheck(`${genFile.filePath} created`)
         const indexFile = `${FUNCTIONS_PATH}/${functionsName.functions}/src/index.ts`
         insertFunction(indexFile, methodName)
@@ -62,7 +62,7 @@ export const addMethod = async (methodName: string) => {
 
 const insertFunction = (filePath: string, functionName: string) => {
   try {
-    const data = fs.readFileSync(filePath, 'utf-8')
+    const data = readFileSync(filePath, 'utf-8')
     let lines = data.split('\n')
     const targetLine = "} from '@/routings'"
     const insertionPoint = lines.findIndex((line) => line.includes(targetLine))
@@ -76,7 +76,7 @@ const insertFunction = (filePath: string, functionName: string) => {
 
     lines.splice(insertionPoint, 0, `  ${functionName},`)
     const newData = lines.join('\n')
-    fs.writeFileSync(filePath, newData, 'utf-8')
+    writeFileSync(filePath, newData, 'utf-8')
     Logger.successCheck(`Successfully exported to ${filePath}`)
     return true
   } catch (error) {

@@ -1,9 +1,9 @@
 import { FIREBASE_CONFIG_PATH } from '@/lib/getSkeetConfig'
 import { Logger } from '@/lib/logger'
-import fs from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 
 export const updateFirebaseJson = async (appDisplayName: string) => {
-  const firebaseJson = fs.readFileSync(FIREBASE_CONFIG_PATH)
+  const firebaseJson = readFileSync(FIREBASE_CONFIG_PATH)
   const newFirebaseJson = JSON.parse(String(firebaseJson))
   if (!newFirebaseJson.hosting) {
     newFirebaseJson.hosting = []
@@ -20,9 +20,6 @@ export const updateFirebaseJson = async (appDisplayName: string) => {
     ],
   }
   newFirebaseJson.hosting.push(hosting)
-  fs.writeFileSync(
-    FIREBASE_CONFIG_PATH,
-    JSON.stringify(newFirebaseJson, null, 2)
-  )
+  writeFileSync(FIREBASE_CONFIG_PATH, JSON.stringify(newFirebaseJson, null, 2))
   Logger.successCheck('Successfully Updated firebase.json')
 }

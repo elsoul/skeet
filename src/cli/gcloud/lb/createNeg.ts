@@ -1,4 +1,4 @@
-import { importConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { execSyncCmd } from '@/lib/execSyncCmd'
 import { getFunctionInfo } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'

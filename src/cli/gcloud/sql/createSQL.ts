@@ -1,6 +1,5 @@
 import prompt from 'prompt'
 import percentEncode from '@stdlib/string-percent-encode'
-import fs from 'fs'
 import { Logger } from '@/lib/logger'
 import { execSync, spawnSync } from 'child_process'
 import {
@@ -11,6 +10,7 @@ import {
 } from '@/lib/getSkeetConfig'
 import { patchSQL } from './patchSQL'
 import { API_ENV_BUILD_PATH, API_ENV_PRODUCTION_PATH } from '@/index'
+import { writeFileSync } from 'fs'
 
 export const runSqlCreate = async (
   projectId: string,
@@ -77,7 +77,7 @@ export const generateEnvBuild = async (
   const databaseUrl = `DATABASE_URL=postgresql://postgres:${encodedPassword}@${databaseIp}:5432/skeet-${appName}-production?schema=public\n`
   const nodeSetting = 'NO_PEER_DEPENDENCY_CHECK=1\nSKEET_ENV=production'
   const envFile = databaseUrl + nodeSetting
-  fs.writeFileSync(filePath, envFile, { flag: 'w' })
+  writeFileSync(filePath, envFile, { flag: 'w' })
   Logger.success(`successfully exported! - ${filePath}`)
 }
 
@@ -110,7 +110,7 @@ export const generateEnvProduction = async (
     `TZ=${timeZone}`,
   ]
   envProduction.forEach((keyValue) => {
-    fs.writeFileSync(filePath, keyValue, { flag: 'a' })
+    writeFileSync(filePath, keyValue, { flag: 'a' })
   })
   Logger.success(`successfully exported! - ${filePath}`)
 }

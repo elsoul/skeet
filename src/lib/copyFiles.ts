@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { createReadStream, createWriteStream, existsSync, unlinkSync } from 'fs'
 import { Logger } from './logger'
 
 const copyFile = (
@@ -6,8 +6,8 @@ const copyFile = (
   destinationFilePath: string
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const readStream = fs.createReadStream(sourceFilePath)
-    const writeStream = fs.createWriteStream(destinationFilePath)
+    const readStream = createReadStream(sourceFilePath)
+    const writeStream = createWriteStream(destinationFilePath)
 
     readStream.on('error', (error) => reject(error))
     writeStream.on('error', (error) => reject(error))
@@ -23,8 +23,8 @@ export const copyFileWithOverwrite = async (
   destinationFilePath: string
 ): Promise<void> => {
   try {
-    if (fs.existsSync(destinationFilePath)) {
-      fs.unlinkSync(destinationFilePath) // 既存のファイルを削除
+    if (existsSync(destinationFilePath)) {
+      unlinkSync(destinationFilePath) // 既存のファイルを削除
     }
     await copyFile(sourceFilePath, destinationFilePath)
     Logger.success(`✔️ File copied: ${destinationFilePath}`)

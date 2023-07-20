@@ -1,14 +1,14 @@
-import fs from 'fs'
+import { readdirSync, statSync } from 'fs'
 import path from 'path'
 
 export const getFilesInDirectory = (directoryPath: string) => {
   try {
     const files: { name: string; lastModified: Date }[] = []
-    const fileNames = fs.readdirSync(directoryPath)
+    const fileNames = readdirSync(directoryPath)
 
     fileNames.forEach((fileName) => {
       const filePath = path.join(directoryPath, fileName)
-      const stats = fs.statSync(filePath)
+      const stats = statSync(filePath)
 
       if (stats.isFile() && fileName !== 'index.ts') {
         files.push({ name: fileName, lastModified: stats.mtime })

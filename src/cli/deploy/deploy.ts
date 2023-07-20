@@ -1,6 +1,6 @@
 import { getFunctions } from '@/lib/getDirs'
 import inquirer from 'inquirer'
-import { importConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { deployWebApp } from './deployWebApp'
 import { deployRules } from './deployRules'
 import { firebaseFunctionsDeploy } from './firebaseDeploy'

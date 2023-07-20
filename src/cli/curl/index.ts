@@ -1,5 +1,6 @@
-import { importConfig, program } from '@/index'
+import { program } from '@/index'
 import { curl } from './curl'
+import { importConfig } from '@/lib/importConfig'
 
 export const curlCommands = async () => {
   program

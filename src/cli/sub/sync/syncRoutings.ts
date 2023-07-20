@@ -1,7 +1,7 @@
 import { getHTTPRoutingFiles } from '@/lib/getHttpRountings'
 import { getFunctionInfo, getNetworkConfig } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'
-import { importConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
 import { Logger } from '@/lib/logger'
 import { setGcloudProject } from '@/cli'
 import { addBackendSetup } from '../add/addBackendSetup'

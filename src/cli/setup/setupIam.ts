@@ -5,7 +5,8 @@ import {
   runEnableAllPermission,
   setGcloudProject,
 } from '@/cli'
-import { importConfig, SkeetCloudConfig } from '@/index'
+import { importConfig } from '@/lib/importConfig'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const setupIam = async () => {
   const config: SkeetCloudConfig = await importConfig()
