@@ -1,4 +1,4 @@
-import { Logger } from '@/lib/logger'
+import { Logger } from '@/lib'
 import { existsSync } from 'fs'
 
 export const skeetCloudConfigAppGen = async () => {

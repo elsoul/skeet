@@ -2,18 +2,18 @@ import {
   addDomainToConfig,
   addProjectRegionToSkeetOptions,
 } from '@/cli/init/init'
-import { importConfig, importFirebaseConfig } from '@/lib/importConfig'
-import { copyFileWithOverwrite } from '@/lib/copyFiles'
-import { execSyncCmd } from '@/lib/execSyncCmd'
-import { getModelFiles } from '@/lib/getModelFiles'
 import {
+  Logger,
   FIREBASE_CONFIG_PATH,
   FUNCTIONS_PATH,
   FUNCTIONS_REPO_URL,
   ROUTE_PACKAGE_JSON_PATH,
-} from '@/lib/getSkeetConfig'
-import { Logger } from '@/lib/logger'
-import { skeetError } from '@/lib/skeetError'
+  execSyncCmd,
+  importConfig,
+  importFirebaseConfig,
+  getModelFiles,
+  copyFileWithOverwrite,
+} from '@/lib'
 import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { existsSync, mkdir, readFileSync, writeFileSync } from 'fs'
@@ -60,7 +60,7 @@ export const addFunctions = async (functionName: string) => {
       writeFileSync(githubAction.filePath, githubAction.body)
     }
   } catch (error) {
-    await skeetError('addFunctions', error)
+    throw new Error(`Error in addFunctions: ${error}`)
   }
 }
 

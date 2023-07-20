@@ -1,6 +1,8 @@
 import { program } from '@/index'
-import { importConfig } from '@/lib/importConfig'
-import { setupIam, createServiceAccountKey, addJsonEnv } from '@/cli'
+import { importConfig } from '@/lib'
+import { createServiceAccountKey } from '@/lib/gcloud'
+import { setupIam } from '@/lib/setup'
+import { addJsonEnv } from '@/lib/git'
 
 export const iamSubCommands = async () => {
   const iam = program

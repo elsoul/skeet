@@ -1,9 +1,7 @@
 import { program } from '@/index'
 import { listFunctions, listHttps } from '../sub/list'
-import { getZone } from '../gcloud'
-import { Logger } from '@/lib/logger'
 import { getSecret } from './getSecret'
-import { importConfig } from '@/lib/importConfig'
+import { Logger, importConfig, getZone } from '@/lib'
 
 export const listSubCommands = async () => {
   const list = program.command('list').description('Get Skeet App List')

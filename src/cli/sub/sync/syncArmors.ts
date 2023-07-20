@@ -1,12 +1,11 @@
-import { importConfig } from '@/lib/importConfig'
+import { importConfig, getNetworkConfig } from '@/lib'
 import { execSync } from 'child_process'
-import { getNetworkConfig } from '@/lib/getSkeetConfig'
 import {
   createSecurityPolicyRule,
   setGcloudProject,
   updateSecurityPolicyRule,
-} from '@/cli'
-import { Logger } from '@/lib/logger'
+} from '@/lib/gcloud'
+import { Logger } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const syncArmors = async () => {

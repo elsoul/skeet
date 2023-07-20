@@ -1,4 +1,4 @@
-import { getFunctions } from '@/lib/getDirs'
+import { getFunctions } from '@/lib'
 import inquirer from 'inquirer'
 import { genModel } from './genModel'
 

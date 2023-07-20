@@ -1,5 +1,4 @@
-import { addPathMatcher } from '@/cli/gcloud/lb/addPathMatcher'
-import { importConfig } from '@/lib/importConfig'
+import { importConfig, addPathMatcher } from '@/lib'
 
 export const addRounting = async (methodName: string, paths: string[]) => {
   const config = await importConfig()

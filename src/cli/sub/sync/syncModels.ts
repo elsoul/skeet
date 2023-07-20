@@ -1,6 +1,4 @@
-import { copyFileWithOverwrite } from '@/lib/copyFiles'
-import { getModelFiles } from '@/lib/getModelFiles'
-import { Logger } from '@/lib/logger'
+import { Logger, copyFileWithOverwrite, getModelFiles } from '@/lib'
 import { existsSync, mkdirSync } from 'fs'
 import inquirer from 'inquirer'
 

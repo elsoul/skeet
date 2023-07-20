@@ -1,6 +1,4 @@
-import { copyFileWithOverwrite } from '@/lib/copyFiles'
-import { getTypeFiles } from '@/lib/getTypeFiles'
-import { Logger } from '@/lib/logger'
+import { Logger, getTypeFiles, copyFileWithOverwrite } from '@/lib'
 import { existsSync, mkdirSync } from 'fs'
 
 export const syncTypes = async () => {

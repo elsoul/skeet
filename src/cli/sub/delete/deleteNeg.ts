@@ -1,5 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
-import { getFunctionInfo } from '@/lib/getSkeetConfig'
+import { execSyncCmd, getFunctionInfo } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 
 export const deleteNeg = async (

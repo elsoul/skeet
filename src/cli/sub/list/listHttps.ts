@@ -1,9 +1,8 @@
-import { getHTTPRoutingFiles } from '@/lib/getHttpRountings'
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { FUNCTIONS_PATH, getHttpRoutings } from '@/lib'
 import * as cli from 'cli-table3'
 
 export const listHttps = async () => {
-  const https = await getHTTPRoutingFiles()
+  const https = await getHttpRoutings()
   const table = new cli.default({
     head: ['Function', 'Endpoint', 'ParamsPath'],
     style: {

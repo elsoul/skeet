@@ -1,8 +1,11 @@
-import { createRecord } from '@/cli'
-import { importConfig } from '@/lib/importConfig'
-import { SKEET_CONFIG_PATH, getNetworkConfig } from '@/lib/getSkeetConfig'
-import { Logger } from '@/lib/logger'
-import { getFunctions } from '@/lib/getDirs'
+import {
+  Logger,
+  importConfig,
+  SKEET_CONFIG_PATH,
+  getNetworkConfig,
+  getFunctions,
+  createRecord,
+} from '@/lib'
 import { readFileSync, writeFileSync } from 'fs'
 
 export const addWebAppDomain = async (appDomain: string, ip: string) => {

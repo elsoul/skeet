@@ -1,6 +1,11 @@
-import { addBackend, createBackend, createNeg, updateBackend } from '@/cli'
-import { importConfig } from '@/lib/importConfig'
-import { isNegExists } from '@/lib/getSkeetConfig'
+import {
+  addBackend,
+  createBackend,
+  createNeg,
+  updateBackend,
+  importConfig,
+  isNegExists,
+} from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 
 export const addBackendSetup = async (methodName: string) => {

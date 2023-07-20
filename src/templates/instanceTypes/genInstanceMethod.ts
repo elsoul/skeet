@@ -1,11 +1,10 @@
-import { Logger } from '@/lib/logger'
+import { Logger, FUNCTIONS_PATH } from '@/lib'
 import { genAuthMethod } from './genAuthMethod'
 import { genFirestoreMethod } from './genFirestoreMethod'
 import { genHttpMethod } from './genHttpMethod'
 import { genHttpMethodParams } from './genHttpMethodParams'
 import { genPubSubMethod } from './genPubSubMethod'
 import { genScheduleMethod } from './genScheduleMethod'
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
 import { genPubSubMethodParams } from './genPubSubMethodParams'
 import { readFileSync, writeFileSync } from 'fs'
 

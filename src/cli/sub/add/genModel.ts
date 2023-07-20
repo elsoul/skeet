@@ -1,5 +1,4 @@
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
-import { Logger } from '@/lib/logger'
+import { FUNCTIONS_PATH, Logger } from '@/lib'
 import { appendLineToFile } from '@/templates/instanceTypes'
 import { toCamelCase } from '@/utils/string'
 import { writeFileSync } from 'fs'

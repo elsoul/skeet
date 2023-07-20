@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth'
 import dotenv from 'dotenv'
-import { Logger } from '@/lib/logger'
+import { Logger } from '@/lib'
 dotenv.config()
 
 export const login = async (

@@ -1,4 +1,4 @@
-import { Logger } from '@/lib/logger'
+import { Logger } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 import { execSync } from 'child_process'
 

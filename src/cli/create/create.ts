@@ -1,12 +1,12 @@
-import { Logger } from '@/lib/logger'
-import { execSyncCmd } from '@/lib/execSyncCmd'
 import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
 import {
+  Logger,
+  execSyncCmd,
   APP_REPO_URL,
   NEXT_REPO_URL,
   FUNCTIONS_PATH,
-} from '@/lib/getSkeetConfig'
+} from '@/lib'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
 import inquirer from 'inquirer'
 import { InitQuestions } from '@/cli/init/initQuestions'

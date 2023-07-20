@@ -1,4 +1,4 @@
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import { FUNCTIONS_PATH } from '@/lib'
 import { toCamelCase } from '@/utils/string'
 
 export const genScheduleMethod = async (

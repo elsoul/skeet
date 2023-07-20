@@ -1,5 +1,5 @@
 import { program } from '@/index'
-import { importConfig } from '@/lib/importConfig'
+import { importConfig } from '@/lib'
 import { addFunctions } from './addFunctions'
 import { addMethod } from './addMethod'
 import { addModel } from './addModel'

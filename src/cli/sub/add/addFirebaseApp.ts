@@ -1,4 +1,3 @@
-import { Logger } from '@/lib/logger'
 import {
   readFileSync,
   writeFileSync,
@@ -8,12 +7,13 @@ import {
   mkdirSync,
 } from 'fs'
 import {
+  Logger,
   firebaseSdkConfig,
   firebaseCreateWebProject,
   firebaseApplyWebProject,
   updateFirebaseJson,
   firebaseAppList,
-} from '@/cli'
+} from '@/lib'
 
 export const addFirebaseApp = async (
   projectId: string,

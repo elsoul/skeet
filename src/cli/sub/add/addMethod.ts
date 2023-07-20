@@ -1,8 +1,11 @@
-import { functionsInstanceTypes, getFunctions } from '@/lib/getDirs'
 import { genInstanceMethod } from '@/templates/instanceTypes'
 import inquirer from 'inquirer'
-import { Logger } from '@/lib/logger'
-import { FUNCTIONS_PATH } from '@/lib/getSkeetConfig'
+import {
+  Logger,
+  FUNCTIONS_PATH,
+  functionsInstanceTypes,
+  getFunctions,
+} from '@/lib'
 import { readFileSync, writeFileSync } from 'fs'
 
 export const addMethod = async (methodName: string) => {

@@ -1,5 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
-import { getFunctionInfo } from '@/lib/getSkeetConfig'
+import { execSyncCmd, getFunctionInfo } from '@/lib'
 
 export const deleteBackend = async (projectId: string, methodName: string) => {
   try {

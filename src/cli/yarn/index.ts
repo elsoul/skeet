@@ -1,5 +1,5 @@
 import { program } from '@/index'
-import { Logger } from '@/lib/logger'
+import { Logger } from '@/lib'
 import { yarn } from './yarn'
 
 export const yarnCommands = async () => {

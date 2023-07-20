@@ -1,7 +1,12 @@
-import { importConfig } from '@/lib/importConfig'
 import inquirer from 'inquirer'
-import { setupLoadBalancer, getZone, initArmor, runVpcNat } from '@/cli'
-import { Logger } from '@/lib/logger'
+import {
+  importConfig,
+  setupLoadBalancer,
+  getZone,
+  initArmor,
+  runVpcNat,
+} from '@/lib'
+import { Logger } from '@/lib'
 import { InitQuestions } from './initQuestions'
 import { genGithubActions, setupCloud } from './init'
 import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'

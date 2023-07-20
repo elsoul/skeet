@@ -1,7 +1,7 @@
 import inquirer from 'inquirer'
-import { Logger } from '@/lib/logger'
-import { importConfig } from '@/lib/importConfig'
 import {
+  Logger,
+  importConfig,
   initArmor,
   setupGcp,
   setupLoadBalancer,
@@ -17,10 +17,10 @@ import {
   addRole,
   createServiceAccount,
   firebaseLogin,
-} from '@/cli'
-import { SKEET_CONFIG_PATH } from '@/lib/getSkeetConfig'
+  SKEET_CONFIG_PATH,
+  copyFileWithOverwrite,
+} from '@/lib'
 import { execSync } from 'child_process'
-import { copyFileWithOverwrite } from '@/lib/copyFiles'
 import * as fileDataOf from '@/templates/init'
 import { addFirebaseApp } from '../sub/add/addFirebaseApp'
 import { InitQuestions } from './initQuestions'

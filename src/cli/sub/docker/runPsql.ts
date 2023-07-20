@@ -1,4 +1,4 @@
-import { Logger } from '@/lib/logger'
+import { Logger } from '@/lib'
 import { sleep } from '@/utils/time'
 import { execSync, spawnSync } from 'child_process'
 
