@@ -23,7 +23,7 @@ export const createModelCodes = async (modelName: string) => {
   const modelNameLower = await toLowerCase(modelName)
   let codeArray = [
     `import { extendType, nonNull, stringArg, intArg, floatArg } from 'nexus'`,
-    `import { fromGlobalId } from 'graphql-relay'`,
+    `import { toPrismaId } from '@skeet-framework/utils'`,
     `import { ${modelNameUpper} } from 'nexus-prisma'\n`,
     `export const ${modelNameUpper}Mutation = extendType({`,
     `  type: 'Mutation',`,
@@ -66,7 +66,7 @@ export const updateModelCodes = async (modelName: string) => {
   codeArray.push(
     '      },',
     `      async resolve(_, args, ctx) {`,
-    '        const id = Number(fromGlobalId(args.id).id)',
+    '        const id = toPrismaId(args.id)',
     '        let data = JSON.parse(JSON.stringify(args))',
     '        delete data.id',
     '        try {',
@@ -99,7 +99,7 @@ export const deleteModelCodes = async (modelName: string) => {
     '        try {',
     `          return await ctx.prisma.${modelNameLower}.delete({`,
     '            where: {',
-    '              id: Number(fromGlobalId(id).id),',
+    '              id: toPrismaId(id),',
     '            },',
     '          })',
     '        } catch (error) {',

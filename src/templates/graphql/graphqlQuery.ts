@@ -15,7 +15,7 @@ export const queryCodes = async (modelName: string) => {
   const modelNameLower = await toLowerCase(modelName)
   let codeArray = [
     `import { extendType, nonNull, stringArg } from 'nexus'`,
-    `import { connectionFromArray, fromGlobalId } from 'graphql-relay'`,
+    `import { toPrismaId, connectionFromArray } from '@skeet-framework/utils'`,
     `import { ${modelNameUpper} } from 'nexus-prisma'\n`,
     `export const ${modelNameUpper}sQuery = extendType({`,
     `  type: 'Query',`,
@@ -41,7 +41,7 @@ export const queryCodes = async (modelName: string) => {
     `      async resolve(_, { id }, ctx) {`,
     `        return await ctx.prisma.${modelNameLower}.findUnique({`,
     `          where: {`,
-    `            id: Number(fromGlobalId(id).id),`,
+    `            id: toPrismaId(id),`,
     `          },`,
     `        })`,
     `      },`,
