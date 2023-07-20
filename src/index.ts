@@ -1,4 +1,4 @@
-import Dotenv from 'dotenv'
+import dotenv from 'dotenv'
 import { Command } from 'commander'
 import { VERSION } from '@/lib/version'
 import {
@@ -16,6 +16,7 @@ import {
   yarnCommands,
   loginCommands,
   curlCommands,
+  genCommands,
 } from '@/cli'
 
 export const GRAPHQL_PATH = './graphql/src/graphql'
@@ -32,10 +33,9 @@ program
   .description('CLI for Skeet - Full-stack TypeScript Serverless framework')
   .version(VERSION)
 
-Dotenv.config()
+dotenv.config()
 
 async function main() {
-  // Please check the descriptions if they are correct.
   try {
     await createCommands()
     await serverCommands()
@@ -44,6 +44,7 @@ async function main() {
     await yarnCommands()
     await loginCommands()
     await curlCommands()
+    await genCommands()
 
     await dockerSubCommands()
     await dbSubCommands()

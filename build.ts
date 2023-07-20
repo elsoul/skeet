@@ -7,6 +7,6 @@ import { build } from 'esbuild'
     outfile: './dist/index.js',
     platform: 'node',
     format: 'cjs',
-    external: ['graphql', '@prisma/client'],
+    external: ['@prisma/client'],
   })
 })()
