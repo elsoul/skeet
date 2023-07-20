@@ -9,12 +9,12 @@ export const curl = async <T>(
   params: T = false as T,
   options: {
     isProduction?: boolean
-    functionsDomain?: string
+    lbDomain?: string
     functionsName?: string
     isRaw?: boolean
   } = {
     isProduction: false,
-    functionsDomain: '',
+    lbDomain: '',
     functionsName: '',
     isRaw: false,
   }
@@ -22,7 +22,7 @@ export const curl = async <T>(
   try {
     const kebab = convertToKebabCase(methodName)
     const url = options.isProduction
-      ? `https://${options.functionsDomain}/${options.functionsName}/${kebab}`
+      ? `https://${options.lbDomain}/${options.functionsName}/${kebab}`
       : `http://127.0.0.1:5001/${projectId}/${region}/${methodName}`
     const accessToken = process.env.ACCESS_TOKEN
     let curlCmd = `curl --location --request POST ${url} --header "Authorization: Bearer ${accessToken}"`

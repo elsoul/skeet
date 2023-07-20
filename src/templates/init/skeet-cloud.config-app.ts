@@ -14,7 +14,7 @@ export const skeetCloudConfigAppGen = async () => {
     "projectId": "${appName}",
     "region": "europe-west4",
     "appDomain": "your-app-url.com",
-    "functionsDomain": "functions.your-app-url.com"
+    "lbDomain": "loadbalancer.your-app-url.com"
   },
   "functions": [],
   "cloudArmor": []

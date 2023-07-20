@@ -31,7 +31,7 @@ export const runPsql = async () => {
     '-e',
     'POSTGRES_PASSWORD=rabbit',
     '-e',
-    'POSTGRES_DB=skeet-api-dev',
+    'POSTGRES_DB=skeet-graphql-dev',
     'postgres:14-alpine',
   ]
   spawnSync(psqlCmd[0], psqlCmd.slice(1), {

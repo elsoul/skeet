@@ -26,10 +26,10 @@ export const curlCommands = async () => {
       if (options.production) {
         if (!options.functions) throw new Error('Need to define functionsName')
 
-        const functionsDomain = config.app.functionsDomain
+        const lbDomain = config.app.lbDomain
         const curlOptions = {
           isProduction: options.production,
-          functionsDomain,
+          lbDomain,
           functionsName: options.functions,
           isRaw: options.raw,
         }
