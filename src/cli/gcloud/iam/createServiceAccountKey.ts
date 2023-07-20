@@ -1,5 +1,5 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
 import { KEYFILE_PATH } from '@/lib/getSkeetConfig'
+import { spawnSync } from 'child_process'
 
 export const createServiceAccountKey = async (
   projectId: string,
@@ -17,5 +17,7 @@ export const createServiceAccountKey = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(createServiceAccountCmd)
+  spawnSync(createServiceAccountCmd[0], createServiceAccountCmd.slice(1), {
+    stdio: 'inherit',
+  })
 }

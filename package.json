@@ -28,6 +28,7 @@
     "skeet:openai": "yarn --cwd ./functions/openai dev"
   },
   "dependencies": {
+    "@stdlib/string-percent-encode": "^0.0.9",
     "@types/cli-spinner": "0.2.1",
     "@types/node-fetch": "2.6.4",
     "chalk": "5.2.0",

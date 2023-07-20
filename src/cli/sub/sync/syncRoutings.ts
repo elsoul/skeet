@@ -3,7 +3,9 @@ import { getFunctionInfo, getNetworkConfig } from '@/lib/getSkeetConfig'
 import { convertToKebabCase } from '@/utils/string'
 import { importConfig } from '@/index'
 import { Logger } from '@/lib/logger'
-import { setGcloudProject, addRounting, addBackendSetup } from '@/cli'
+import { setGcloudProject } from '@/cli'
+import { addBackendSetup } from '../add/addBackendSetup'
+import { addRounting } from '../add/routing'
 
 export const syncRoutings = async () => {
   const { app } = await importConfig()

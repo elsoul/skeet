@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { spawnSync } from 'child_process'
 
 export const runEnableAllPermission = async (projectId: string) => {
   await enableServiceListPermission(projectId, serviceList)
@@ -25,7 +25,9 @@ export const enablePermission = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(serviceEnableCmd)
+  spawnSync(serviceEnableCmd[0], serviceEnableCmd.slice(1), {
+    stdio: 'inherit',
+  })
 }
 
 export const serviceList = [

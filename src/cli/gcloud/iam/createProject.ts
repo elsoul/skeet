@@ -1,6 +1,6 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { spawnSync } from 'child_process'
 
 export const createProject = async (projectName: string) => {
   const shCmd = ['gcloud', 'projects', 'create', projectName]
-  await execSyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit' })
 }

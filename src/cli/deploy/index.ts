@@ -1,4 +1,9 @@
-export * from './deploy'
-export * from './deployWebApp'
-export * from './deployRules'
-export * from './firebaseDeploy'
+import { program } from '@/index'
+import { deploy } from './deploy'
+
+export const deployCommands = async () => {
+  program
+    .command('deploy')
+    .description('Deploy Skeet APP to Firebase')
+    .action(deploy)
+}

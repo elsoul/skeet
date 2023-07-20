@@ -1,3 +1,7 @@
+import {
+  addDomainToConfig,
+  addProjectRegionToSkeetOptions,
+} from '@/cli/init/init'
 import { SkeetCloudConfig, importConfig, importFirebaseConfig } from '@/index'
 import { copyFileWithOverwrite } from '@/lib/copyFiles'
 import { execSyncCmd } from '@/lib/execSyncCmd'
@@ -11,21 +15,20 @@ import {
 import { Logger } from '@/lib/logger'
 import { skeetError } from '@/lib/skeetError'
 import { functionsYml } from '@/templates/init'
-import fs from 'fs'
-import { addDomainToConfig, addProjectRegionToSkeetOptions } from '../init'
+import { existsSync, mkdir, readFileSync, writeFileSync } from 'fs'
 
 export const addFunctions = async (functionName: string) => {
   try {
     const skeetConfig: SkeetCloudConfig = await importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}`
-    if (fs.existsSync(functionDir)) {
+    if (existsSync(functionDir)) {
       Logger.error(`Already exist functionName: ${functionName}!`)
       return ''
     } else {
       const functions = await getModelFiles()
       const latestModel = functions[0]
 
-      fs.mkdir(functionDir, { recursive: true }, (err) => {
+      mkdir(functionDir, { recursive: true }, (err) => {
         if (err) throw err
       })
 
@@ -53,7 +56,7 @@ export const addFunctions = async (functionName: string) => {
       await updateFirebaseConfig(functionName)
       await addFunctionsToPackageJson(functionName)
       const githubAction = await functionsYml(functionName)
-      fs.writeFileSync(githubAction.filePath, githubAction.body)
+      writeFileSync(githubAction.filePath, githubAction.body)
     }
   } catch (error) {
     await skeetError('addFunctions', error)
@@ -73,20 +76,17 @@ export const updateFirebaseConfig = async (functionName: string) => {
     ],
   }
   firebaseConfig.functions.push(newFunction)
-  fs.writeFileSync(
-    FIREBASE_CONFIG_PATH,
-    JSON.stringify(firebaseConfig, null, 2)
-  )
+  writeFileSync(FIREBASE_CONFIG_PATH, JSON.stringify(firebaseConfig, null, 2))
   Logger.successCheck('Successfully Updated firebase.json')
 }
 
 export const addFunctionsToPackageJson = async (functionName: string) => {
-  const packageJson = fs.readFileSync(ROUTE_PACKAGE_JSON_PATH)
+  const packageJson = readFileSync(ROUTE_PACKAGE_JSON_PATH)
   const newPackageJson = JSON.parse(String(packageJson))
   newPackageJson.scripts[
     `skeet:${functionName}`
   ] = `yarn --cwd ./functions/${functionName} dev`
-  fs.writeFileSync(
+  writeFileSync(
     ROUTE_PACKAGE_JSON_PATH,
     JSON.stringify(newPackageJson, null, 2)
   )

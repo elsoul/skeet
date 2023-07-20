@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { spawnSync } from 'child_process'
 
 export const appCreate = async (projectId: string, region: string) => {
   const shCmd = [
@@ -11,5 +11,5 @@ export const appCreate = async (projectId: string, region: string) => {
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit' })
 }

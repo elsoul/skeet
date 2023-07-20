@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { spawnSync } from 'child_process'
 
 export const runAddAllRole = async (projectId: string, appName: string) => {
   await addAllRoles(projectId, appName, roleList)
@@ -29,7 +29,7 @@ export const addRole = async (
     '--role',
     roleName,
   ]
-  await execSyncCmd(addRoleCmd)
+  spawnSync(addRoleCmd[0], addRoleCmd.slice(1), { stdio: 'inherit' })
 }
 
 export const roleList = [

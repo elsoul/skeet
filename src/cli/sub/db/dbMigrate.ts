@@ -1,7 +1,7 @@
 import { API_PATH } from '@/index'
 import { spawnSync } from 'child_process'
 
-export const dbInit = async (name: string, production: boolean = false) => {
+export const dbMigrate = async (name: string, production: boolean = false) => {
   try {
     const prismaMigrateCmd = production
       ? [

@@ -1,7 +1,6 @@
-import { addBillingRole, enableBillingIam } from '@/cli/init'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { addBillingRole, enableBillingIam } from '@/cli/init/init'
 import { Logger } from '@/lib/logger'
-import { execSync } from 'child_process'
+import { execSync, spawnSync } from 'child_process'
 
 export const createServiceAccount = async (
   projectId: string,
@@ -35,7 +34,9 @@ export const createServiceAccount = async (
       '--project',
       projectId,
     ]
-    await execSyncCmd(createServiceAccountCmd)
+    spawnSync(createServiceAccountCmd[0], createServiceAccountCmd.slice(1), {
+      stdio: 'inherit',
+    })
     await enableBillingIam(projectId)
     await addBillingRole(projectId, appName)
     Logger.successCheck('Service account created successfully')

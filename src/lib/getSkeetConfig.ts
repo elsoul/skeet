@@ -40,6 +40,7 @@ export const getNetworkConfig = async (projectId: string, appName: string) => {
     projectId,
     appName,
     cloudRunName: `${skeetHd}-api`,
+    instanceName: skeetHd + '-db',
     networkName: skeetHd + '-network',
     firewallTcpName: skeetHd + '-fw-tcp',
     firewallSshName: skeetHd + '-fw-ssh',
