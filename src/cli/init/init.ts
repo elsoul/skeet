@@ -150,7 +150,7 @@ const addAppJson = (repoName: string) => {
 
 export const addDomainToConfig = async (
   nsDomain: string,
-  functionsDomain: string,
+  lbDomain: string,
   functionName: string
 ) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
@@ -158,11 +158,11 @@ export const addDomainToConfig = async (
   const jsonFile = readFileSync(skeetOptionsFile)
   const newJsonFile = JSON.parse(String(jsonFile))
   newJsonFile.nsDomain = nsDomain
-  newJsonFile.functionsDomain = functionsDomain
+  newJsonFile.lbDomain = lbDomain
   writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 
   skeetConfig.app.appDomain = nsDomain
-  skeetConfig.app.functionsDomain = functionsDomain
+  skeetConfig.app.lbDomain = lbDomain
   writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }

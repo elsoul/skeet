@@ -4,7 +4,7 @@
     "region": "asia-east1",
     "appUrl": "",
     "appDomain": "skeet.dev",
-    "functionsDomain": "lb.skeet.dev",
+    "lbDomain": "lb.skeet.dev",
     "projectId": "skeet-app",
     "secretKeys": []
   },

@@ -12,9 +12,27 @@ export const skeetCloudConfigGen = async (
     "projectId": "${appName}",
     "template": "${template}",
     "region": "europe-west4",
-    "appDomain": "your-app-url.com",
-    "functionsDomain": "functions.your-app-url.com"
+    "appDomain": "app.your-app-url.com",
+    "nsDomain": "your-nameserver.com",
+    "lbDomain": "loadbalancer.your-app-url.com",
   },
+  "cloudRun": {
+    "name": "skeet-${appName}-graphql",
+    "url": "",
+    "cpu": 1,
+    "maxConcurrency": 80,
+    "maxInstances": 100,
+    "minInstances": 0,
+    "memory": "4Gi"
+  },
+  "db": {
+    "databaseVersion": "POSTGRES_14",
+    "cpu": 1,
+    "memory": "3840MiB",
+    "storageSize": 10,
+    "whiteList": ""
+  },
+  "taskQueues": [],
   "cloudArmor": [
     {
       "securityPolicyName": "skeet-${appName}-armor",

@@ -25,6 +25,7 @@ export const API_PATH = './graphql'
 export const API_TYPE_PATH = API_PATH + '/src/types'
 export const API_ENV_PRODUCTION_PATH = './graphql/.env.production'
 export const API_ENV_BUILD_PATH = './graphql/.env.build'
+export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 
 export const program = new Command()
 

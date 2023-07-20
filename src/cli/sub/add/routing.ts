@@ -5,7 +5,7 @@ export const addRounting = async (methodName: string, paths: string[]) => {
   await addPathMatcher(
     config.app.projectId,
     config.app.name,
-    config.app.functionsDomain,
+    config.app.lbDomain,
     paths
   )
 }

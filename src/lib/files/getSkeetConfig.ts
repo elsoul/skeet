@@ -1,5 +1,7 @@
 import { createHash } from 'crypto'
 import { execSync } from 'child_process'
+import { API_ENV_PRODUCTION_PATH } from '@/index'
+import { readFileSync } from 'fs'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -76,6 +78,39 @@ export const getContainerRegion = async (region: string) => {
   }
 }
 
+export const getContainerImageUrl = async (
+  projectId: string,
+  appName: string,
+  region: string,
+  workerName: string = '',
+  isPlugin: boolean = false
+) => {
+  const cRegion = await getContainerRegion(region)
+
+  let imageName = ''
+  if (workerName !== '' && isPlugin) {
+    imageName = 'skeet-worker-' + workerName
+  } else if (workerName !== '') {
+    imageName = 'skeet-' + appName + '-worker-' + workerName
+  } else {
+    imageName = 'skeet-' + appName + '-api'
+  }
+
+  let containerProjectName = isPlugin ? 'skeet-framework' : projectId
+  return cRegion + '/' + containerProjectName + '/' + imageName + ':latest'
+}
+
+export const getContainerImageName = async (
+  appName: string,
+  workerName: string = ''
+) => {
+  const imageName =
+    workerName !== ''
+      ? 'skeet-' + appName + '-worker-' + workerName
+      : 'skeet-' + appName + '-api'
+  return imageName
+}
+
 export const regionToTimezone = async (region: string) => {
   switch (true) {
     case region.includes('asia'):
@@ -124,4 +159,46 @@ export const isNegExists = async (
   } catch (error) {
     return false
   }
+}
+
+export const getBuidEnvArray = async (
+  projectId: string,
+  fbProjectId: string,
+  databaseUrl: string,
+  tz: string
+) => {
+  return [
+    'NO_PEER_DEPENDENCY_CHECK=1',
+    `SKEET_GCP_PROJECT_ID=${projectId}`,
+    `SKEET_FB_PROJECT_ID=${fbProjectId}`,
+    `TZ=${tz}`,
+    `DATABASE_URL=${databaseUrl}`,
+  ]
+}
+
+export const getBuidEnvString = async () => {
+  const stream = readFileSync(API_ENV_PRODUCTION_PATH)
+  const envArray: Array<string> = String(stream).split('\n')
+  let hash: { [key: string]: string } = {}
+  for await (const line of envArray) {
+    const value = line.split('=')
+    hash[value[0]] = value[1]
+  }
+  const dabaseUrl = `postgresql://postgres:${hash['SKEET_GCP_DB_PASSWORD']}@${hash['SKEET_GCP_DB_PRIVATE_IP']}:5432/skeet-${hash['SKEET_APP_NAME']}-production?schema=public`
+  const buildEnvArray = await getBuidEnvArray(
+    hash['SKEET_GCP_PROJECT_ID'],
+    hash['GOOGLE_CLOUD_PROJECT'],
+    dabaseUrl,
+    hash['TZ']
+  )
+  const newEnv = envArray.filter((value) => {
+    if (
+      !value.match('SKEET_GCP_PROJECT_ID') &&
+      !value.match('SKEET_GCP_DB_PASSWORD')
+    ) {
+      return value
+    }
+  })
+  const returnArray = buildEnvArray.concat(newEnv)
+  return returnArray.join(',')
 }

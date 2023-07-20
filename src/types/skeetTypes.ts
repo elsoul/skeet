@@ -1,7 +1,9 @@
 export type SkeetCloudConfig = {
   app: AppConfig
-  functions: FunctionConfig[]
-  cloudArmor?: CloudArmor
+  cloudRun: CloudRunConfig
+  db: DbConfig
+  taskQueues?: TaskQueue[]
+  cloudArmor?: CloudArmor[]
 }
 
 export type AppConfig = {
@@ -10,30 +12,45 @@ export type AppConfig = {
   template: string
   region: string
   appDomain: string
-  functionsDomain: string
+  nsDomain: string
+  lbDomain: string
+  hasLoadBalancer: boolean
 }
 
-export type FunctionConfig = {
-  name: string
-  methods: FunctionMethods[]
-}
-
-export type FunctionMethods = {
+export type CloudRunConfig = {
   name: string
   url: string
-  pubsub: boolean
-  scheduler: string
+  cpu: number
+  memory: string
+  maxConcurrency: number
+  minInstances: number
+  maxInstances: number
 }
 
-export type CloudArmor = Array<SecurityPolicy>
+export type DbConfig = {
+  databaseVersion: string
+  cpu: number
+  memory: string
+  storageSize: number
+  whiteList?: string
+}
 
-export type SecurityPolicy = {
+export type TaskQueue = {
+  queueName: string
+  location: string
+  maxAttempts: number
+  maxInterval: string
+  minInterval: string
+  maxConcurrent: number
+  maxRate: number
+}
+
+export type Rules = {
+  priority: string
+  description: string
+  options: { [key: string]: string }
+}
+export type CloudArmor = {
   securityPolicyName: string
-  rules: [
-    {
-      priority: string
-      description: string
-      options: { [key: string]: string }
-    }
-  ]
+  rules: Rules[]
 }
