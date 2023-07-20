@@ -1,3 +1,4 @@
+import { dockerLogin } from '@/cli/sub/docker/dockerLogin'
 import {
   createServiceAccount,
   createServiceAccountKey,
@@ -20,6 +21,7 @@ export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   await createServiceAccountKey(config.app.projectId, config.app.name)
   await sleep(2000)
   await addJsonEnv()
+  await dockerLogin()
   await sleep(2000)
   rmSync(KEYFILE_PATH)
   await runAddAllRole(config.app.projectId, config.app.name)
