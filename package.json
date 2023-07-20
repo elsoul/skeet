@@ -28,6 +28,7 @@
     "skeet:openai": "yarn --cwd ./functions/openai dev"
   },
   "dependencies": {
+    "@skeet-framework/utils": "^0.1.8",
     "@stdlib/string-percent-encode": "^0.0.9",
     "@types/cli-spinner": "0.2.1",
     "@types/node-fetch": "2.6.4",
@@ -39,6 +40,7 @@
     "dotenv": "16.0.3",
     "dotenv-cli": "7.2.1",
     "firebase": "9.22.1",
+    "graphql": "^16.7.1",
     "inquirer": "9.2.6",
     "jest": "29.5.0",
     "node-fetch": "3.3.1",
