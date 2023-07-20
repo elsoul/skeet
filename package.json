@@ -25,7 +25,7 @@
     "publish": "npm publish",
     "dev": "nodemon",
     "start": "node dist/index.js",
-    "skeet:openai": "yarn --cwd ./functions/openai dev"
+    "skeet:skeet": "yarn --cwd ./functions/skeet dev"
   },
   "dependencies": {
     "@skeet-framework/utils": "^0.1.8",

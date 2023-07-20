@@ -4,10 +4,14 @@ import { deployWebApp } from './deployWebApp'
 import { deployRules } from './deployRules'
 import { firebaseFunctionsDeploy } from './firebaseDeploy'
 import { yarnBuild } from '../yarn/yarnBuild'
+import { deployGraphql } from './deployGraphql'
 
 export const deploy = async () => {
   const functions = await getFunctions()
-  const functionsArray: Array<{ [key: string]: string }> = [{ name: 'webApp' }]
+  const functionsArray: Array<{ [key: string]: string }> = [
+    { name: 'graphql' },
+    { name: 'webApp' },
+  ]
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }
@@ -34,6 +38,8 @@ export const deploy = async () => {
           if (service === 'webApp') {
             await deployWebApp()
             await deployRules(config.app.projectId)
+          } else if (service === 'graphql') {
+            await deployGraphql(config)
           } else {
             await yarnBuild(service)
             await firebaseFunctionsDeploy(config.app.projectId, service)

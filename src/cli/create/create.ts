@@ -41,7 +41,7 @@ export const skeetCreate = async (appName: string, template: string) => {
   await execSyncCmd(gitCloneCmd)
   const yarnApiCmd = ['yarn']
   await execSyncCmd(yarnApiCmd, appDir)
-  await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/openai`)
+  await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/skeet`)
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
   await sleep(1000)
@@ -64,7 +64,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
   //   tsconfigJson.filePath,
   //   JSON.stringify(tsconfigJson.body, null, 2)
   // )
-  const defaultFunctionName = 'openai'
+  const defaultFunctionName = 'skeet'
   await initPackageJson(appName)
   if (template === 'Expo (React Native)') {
     await initAppJson(appName)

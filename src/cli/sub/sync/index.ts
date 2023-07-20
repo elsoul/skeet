@@ -5,6 +5,7 @@ import { syncRoutings } from './syncRoutings'
 import { syncArmors } from './syncArmors'
 import { syncSql } from './syncSql'
 import { syncTaskQueue } from './syncTaskQueue'
+import { syncRunUrl } from './syncRunUrl'
 
 export const syncSubCommands = async () => {
   const sync = program
@@ -46,5 +47,11 @@ export const syncSubCommands = async () => {
     .description('Skeet Sync Task Queue')
     .action(async () => {
       await syncTaskQueue()
+    })
+  sync
+    .command('runUrl')
+    .description('Skeet Sync Run Url')
+    .action(async () => {
+      await syncRunUrl()
     })
 }

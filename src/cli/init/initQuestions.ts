@@ -20,11 +20,27 @@ export module InitQuestions {
     return 'This is not Domain Name!It must be example.com'
   }
 
+  export const requireLetterAndNumber = (value: string) => {
+    if (/\w/.test(value) && /\d/.test(value)) {
+      return true
+    }
+
+    return 'Password need to have at least a letter and a number'
+  }
+
   export const projectQuestions = [
     {
       type: 'input',
       name: 'projectId',
       message: "What's your GCP Project ID",
+      default() {
+        return 'skeet-app-123456'
+      },
+    },
+    {
+      type: 'input',
+      name: 'fbProjectId',
+      message: "What's your Firebase Project ID",
       default() {
         return 'skeet-app-123456'
       },
@@ -78,7 +94,7 @@ export module InitQuestions {
     },
   ]
 
-  export const domainQuestions = [
+  export const githubRepoQuestions = [
     {
       type: 'input',
       name: 'githubRepo',
@@ -88,10 +104,22 @@ export module InitQuestions {
         return 'elsoul/skeet-app'
       },
     },
+  ]
+
+  export const domainQuestions = [
+    {
+      type: 'input',
+      name: 'appDomain',
+      message: "What's your domain address for App",
+      validate: InitQuestions.requireDomainName,
+      default() {
+        return 'app.skeet.dev'
+      },
+    },
     {
       type: 'input',
       name: 'nsDomain',
-      message: "What's your domain address for DNS",
+      message: "What's your domain address for Domain Name Server",
       validate: InitQuestions.requireDomainName,
       default() {
         return 'skeet.dev'
@@ -105,6 +133,23 @@ export module InitQuestions {
       default() {
         return 'lb.skeet.dev'
       },
+    },
+  ]
+
+  export const sqlPasswordQuestions = [
+    {
+      type: 'password',
+      message: 'Enter your CloudSQL password',
+      name: 'password1',
+      mask: '*',
+      validate: requireLetterAndNumber,
+    },
+    {
+      type: 'password',
+      message: 'Confirm your password',
+      name: 'password2',
+      mask: '*',
+      validate: requireLetterAndNumber,
     },
   ]
 

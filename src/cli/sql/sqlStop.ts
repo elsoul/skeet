@@ -1,12 +1,11 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { patchSQL } from '@/cli'
-import { importConfig } from '@/index'
+import { importConfig, patchSQL } from '@/lib'
 
 export const sqlStop = async () => {
   const skeetCloudConfig: SkeetCloudConfig = await importConfig()
   await patchSQL(
-    skeetCloudConfig.api.projectId,
-    skeetCloudConfig.api.appName,
+    skeetCloudConfig.app.projectId,
+    skeetCloudConfig.app.name,
     'NEVER'
   )
 }

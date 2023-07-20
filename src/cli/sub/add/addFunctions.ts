@@ -40,10 +40,12 @@ export const addFunctions = async (functionName: string) => {
       await addProjectRegionToSkeetOptions(
         skeetConfig.app.region,
         skeetConfig.app.projectId,
+        skeetConfig.app.fbProjectId,
         functionName
       )
       await addDomainToConfig(
         skeetConfig.app.appDomain,
+        skeetConfig.app.nsDomain,
         skeetConfig.app.lbDomain,
         functionName
       )

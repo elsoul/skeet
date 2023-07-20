@@ -19,6 +19,8 @@ import {
   firebaseLogin,
   SKEET_CONFIG_PATH,
   copyFileWithOverwrite,
+  addEnvSync,
+  setupActions,
 } from '@/lib'
 import { execSync } from 'child_process'
 import * as fileDataOf from '@/templates/init'
@@ -30,26 +32,38 @@ import { deployRules } from '../deploy/deployRules'
 import { syncArmors } from '../sub/sync/syncArmors'
 import { readFileSync, writeFileSync } from 'fs'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
+import { deployGraphql } from '../deploy/deployGraphql'
+import { initSql } from './initSql'
+import { sqlIp } from '../sql'
+import { addIp } from '../sub/add/addIp'
+import { dbDeploy } from '../sub/db/dbDeploy'
+import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
+import { syncRunUrl } from '../sub/sync/syncRunUrl'
 
 export const init = async (isOnlyDev = false) => {
-  const { projectId, region } = await askForProjectId()
+  const { projectId, fbProjectId, region } = await askForProjectId()
   if (await projectIdNotExists(projectId))
     Logger.projectIdNotExistsError(projectId)
 
   if (!region) throw new Error('region is undefined')
   await firebaseLogin()
 
-  const defaultFunctionName = 'openai'
-  await firebaseUseAdd(projectId)
-  await addProjectRegionToSkeetOptions(region, projectId, defaultFunctionName)
-  const defaultAppDisplayName = projectId
-  await addFirebaseApp(projectId, defaultAppDisplayName)
+  const defaultFunctionName = 'skeet'
+  await firebaseUseAdd(fbProjectId)
+  await addProjectRegionToSkeetOptions(
+    region,
+    projectId,
+    fbProjectId,
+    defaultFunctionName
+  )
+  const defaultAppDisplayName = fbProjectId
+  await addFirebaseApp(fbProjectId, defaultAppDisplayName)
   await copyDefaultFirebaseConfig(defaultAppDisplayName)
-  const firebaserc = await fileDataOf.firebasercInit(projectId)
+  const firebaserc = await fileDataOf.firebasercInit(fbProjectId)
   writeFileSync(firebaserc.filePath, firebaserc.body)
   if (isOnlyDev) return
 
-  await setupProject(projectId)
+  await setupProject(fbProjectId)
   const isNeedDomain = await askForNeedDomain()
   await setupCloudIfNeeded(isNeedDomain)
 }
@@ -149,6 +163,7 @@ const addAppJson = (repoName: string) => {
 }
 
 export const addDomainToConfig = async (
+  appDomain: string,
   nsDomain: string,
   lbDomain: string,
   functionName: string
@@ -157,11 +172,13 @@ export const addDomainToConfig = async (
   const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = readFileSync(skeetOptionsFile)
   const newJsonFile = JSON.parse(String(jsonFile))
+  newJsonFile.appDomain = appDomain
   newJsonFile.nsDomain = nsDomain
   newJsonFile.lbDomain = lbDomain
   writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 
-  skeetConfig.app.appDomain = nsDomain
+  skeetConfig.app.appDomain = appDomain
+  newJsonFile.nsDomain = nsDomain
   skeetConfig.app.lbDomain = lbDomain
   writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.success('Successfully Updated skeet-cloud.config.json!')
@@ -170,18 +187,21 @@ export const addDomainToConfig = async (
 export const addProjectRegionToSkeetOptions = async (
   region: string,
   projectId: string,
+  fbProjectId: string,
   functionName: string
 ) => {
   const skeetConfig: SkeetCloudConfig = await importConfig()
 
   skeetConfig.app.region = region
   skeetConfig.app.projectId = projectId
+  skeetConfig.app.fbProjectId = fbProjectId
 
   const filePath = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = readFileSync(filePath)
   const newJsonFile = JSON.parse(String(jsonFile))
   newJsonFile.name = skeetConfig.app.name
   newJsonFile.projectId = skeetConfig.app.projectId
+  newJsonFile.fbProjectId = skeetConfig.app.fbProjectId
   newJsonFile.region = skeetConfig.app.region
   writeFileSync(filePath, JSON.stringify(newJsonFile, null, 2))
   writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
@@ -191,12 +211,36 @@ export const addProjectRegionToSkeetOptions = async (
 const askForProjectId = async () => {
   const projectInquirer = inquirer.prompt(InitQuestions.projectQuestions)
   let projectId = ''
+  let fbProjectId = ''
   let region = ''
   await projectInquirer.then(async (answer) => {
     projectId = answer.projectId
     region = answer.region
+    fbProjectId = answer.fbProjectId
   })
-  return { projectId, region }
+  return { projectId, region, fbProjectId }
+}
+
+export const askForSqlPassword = async () => {
+  const sqlPasswordInquirer = inquirer.prompt(
+    InitQuestions.sqlPasswordQuestions
+  )
+  let sqlPassword = ''
+  await sqlPasswordInquirer.then(async (sqlPasswordAnswer) => {
+    if (sqlPasswordAnswer.password1 !== sqlPasswordAnswer.password2)
+      throw new Error("password doesn't match!")
+    sqlPassword = sqlPasswordAnswer.password1
+  })
+  return sqlPassword
+}
+
+export const askForGithubRepo = async () => {
+  const githubRepoInquirer = inquirer.prompt(InitQuestions.githubRepoQuestions)
+  let githubRepo = ''
+  await githubRepoInquirer.then(async (githubAnswer) => {
+    githubRepo = githubAnswer.githubRepo
+  })
+  return githubRepo
 }
 
 const askForNeedDomain = async () => {
@@ -208,63 +252,67 @@ const askForNeedDomain = async () => {
   return isNeedDomain
 }
 
-const setupProject = async (projectId: string) => {
-  Logger.confirmIfFirebaseSetupLog(projectId)
-  await InitQuestions.checkIfFirebaseSetup(projectId)
+const setupProject = async (fbProjectId: string) => {
+  Logger.confirmIfFirebaseSetupLog(fbProjectId)
+  await InitQuestions.checkIfFirebaseSetup(fbProjectId)
 }
 
 const setupCloudIfNeeded = async (isNeedDomain: string) => {
   const skeetConfig = await importConfig()
+  const githubRepo = await askForGithubRepo()
+  const sqlPassword = await askForSqlPassword()
+  await setupCloud(skeetConfig, githubRepo, skeetConfig.app.region)
+  await runVpcNat(
+    skeetConfig.app.projectId,
+    skeetConfig.app.name,
+    skeetConfig.app.region
+  )
+  await initSql(skeetConfig, sqlPassword)
+  await sqlIp()
+  await addIp()
+  await dbDeploy(true)
+  await addEnvSync(GRAPHQL_ENV_PRODUCTION_PATH)
+  await yarnBuild('skeet')
+  await firebaseFunctionsDeploy(skeetConfig.app.fbProjectId)
+  await deployRules(skeetConfig.app.fbProjectId)
+  await deployGraphql(skeetConfig)
+  await syncRunUrl()
+  await genGithubActions()
+  await setupActions()
   if (isNeedDomain !== 'no') {
     const domainAnswer = await askForDomain()
-    const defaultFunctionName = 'openai'
+    const defaultFunctionName = 'skeet'
     await addDomainToConfig(
+      domainAnswer.appDomain,
       domainAnswer.nsDomain,
       domainAnswer.lbDomain,
       defaultFunctionName
     )
-    await setupCloud(
-      skeetConfig,
-      domainAnswer.githubRepo,
-      skeetConfig.app.region
-    )
-    await runVpcNat(
-      skeetConfig.app.projectId,
-      skeetConfig.app.name,
-      skeetConfig.app.region
-    )
-    await yarnBuild('openai')
-    await firebaseFunctionsDeploy(skeetConfig.app.projectId)
-    await deployRules(skeetConfig.app.projectId)
     await setupLoadBalancer(
       skeetConfig,
       domainAnswer.lbDomain,
       domainAnswer.nsDomain
     )
-    await additionalSetup(skeetConfig.app.projectId, skeetConfig.app.name)
-  } else {
-    await firebaseFunctionsDeploy(skeetConfig.app.projectId)
-    await deployRules(skeetConfig.app.projectId)
+    await setupArmor(skeetConfig.app.projectId, skeetConfig.app.name)
   }
 }
 
-const askForDomain = async () => {
+export const askForDomain = async () => {
   const domainInquirer = inquirer.prompt(InitQuestions.domainQuestions)
   let isDomain = false
-  let githubRepo = ''
+  let appDomain = ''
   let nsDomain = ''
   let lbDomain = ''
   await domainInquirer.then(async (domain) => {
     isDomain = domain.isDomain
-    githubRepo = domain.githubRepo
+    appDomain = domain.appDomain
     nsDomain = domain.nsDomain
     lbDomain = domain.lbDomain
   })
-  return { isDomain, githubRepo, nsDomain, lbDomain }
+  return { isDomain, appDomain, nsDomain, lbDomain }
 }
 
-const additionalSetup = async (projectId: string, appName: string) => {
-  await genGithubActions()
+const setupArmor = async (projectId: string, appName: string) => {
   await initArmor()
   await syncArmors()
   const ips = await getZone(projectId, appName)

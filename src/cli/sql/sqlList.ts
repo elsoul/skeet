@@ -1,8 +1,7 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { listSQL } from '@/cli'
-import { importConfig } from '@/index'
+import { importConfig, listSQL } from '@/lib'
 
 export const sqlList = async () => {
   const skeetCloudConfig: SkeetCloudConfig = await importConfig()
-  await listSQL(skeetCloudConfig.api.projectId)
+  await listSQL(skeetCloudConfig.app.projectId)
 }

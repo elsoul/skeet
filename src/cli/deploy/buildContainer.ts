@@ -1,4 +1,4 @@
-import { API_PATH } from '@/index'
+import { GRAPHQL_ROOT } from '@/index'
 import { execSyncCmd, getContainerImageName } from '@/lib'
 
 export const buildContainer = async (appName: string) => {
@@ -9,8 +9,8 @@ export const buildContainer = async (appName: string) => {
     '--platform',
     'linux/amd64',
     '-f',
-    `${API_PATH}/Dockerfile`,
-    API_PATH,
+    `${GRAPHQL_ROOT}/Dockerfile`,
+    GRAPHQL_ROOT,
     '-t',
     imageName,
   ]

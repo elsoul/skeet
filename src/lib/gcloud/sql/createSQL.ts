@@ -9,7 +9,7 @@ import {
   regionToTimezone,
 } from '@/lib'
 import { patchSQL } from './patchSQL'
-import { API_ENV_BUILD_PATH, API_ENV_PRODUCTION_PATH } from '@/index'
+import { GRAPHQL_ENV_BUILD_PATH, GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
 import { writeFileSync } from 'fs'
 
 export const runSqlCreate = async (
@@ -73,7 +73,7 @@ export const generateEnvBuild = async (
   databaseIp: string,
   encodedPassword: string
 ) => {
-  const filePath = API_ENV_BUILD_PATH
+  const filePath = GRAPHQL_ENV_BUILD_PATH
   const databaseUrl = `DATABASE_URL=postgresql://postgres:${encodedPassword}@${databaseIp}:5432/skeet-${appName}-production?schema=public\n`
   const nodeSetting = 'NO_PEER_DEPENDENCY_CHECK=1\nSKEET_ENV=production'
   const envFile = databaseUrl + nodeSetting
@@ -88,7 +88,7 @@ export const generateEnvProduction = async (
   databaseIp: string,
   encodedPassword: string
 ) => {
-  const filePath = API_ENV_PRODUCTION_PATH
+  const filePath = GRAPHQL_ENV_PRODUCTION_PATH
   const cRegion = await getContainerRegion(region)
   const secretKey = await genSecret(appName)
   const secretKeyPW = await genSecret(appName)

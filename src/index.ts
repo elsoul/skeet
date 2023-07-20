@@ -19,12 +19,11 @@ import {
   genCommands,
 } from '@/cli'
 
-export const GRAPHQL_PATH = './graphql/src/graphql'
-export const PRISMA_SCHEMA_PATH = './graphql/prisma/schema.prisma'
-export const API_PATH = './graphql'
-export const API_TYPE_PATH = API_PATH + '/src/types'
-export const API_ENV_PRODUCTION_PATH = './graphql/.env.production'
-export const API_ENV_BUILD_PATH = './graphql/.env.build'
+export const GRAPHQL_ROOT = './graphql'
+export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
+export const GRAPHQL_ENV_BUILD_PATH = GRAPHQL_ROOT + '/.env.build'
+export const GRAPHQL_PATH = GRAPHQL_ROOT + '/src/graphql'
+export const PRISMA_SCHEMA_PATH = GRAPHQL_ROOT + '/prisma/schema.prisma'
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 
 export const program = new Command()

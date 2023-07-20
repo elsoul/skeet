@@ -7,7 +7,7 @@ export const packageJson = async (appName: string) => {
     private: true,
     scripts: {
       skeet: 'run-p skeet:*',
-      'skeet:openai': 'yarn --cwd functions/openai dev',
+      'skeet:skeet': 'yarn --cwd functions/skeet dev',
       'skeet:dev': 'firebase emulators:start',
       deploy: 'firebase deploy',
       'functions:deploy': 'firebase deploy --only functions',

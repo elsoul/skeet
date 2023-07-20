@@ -6,7 +6,6 @@ import { addModel } from './addModel'
 import { addFirebaseApp } from './addFirebaseApp'
 import { addSecret } from './addSecret'
 import { addWebAppDomain } from './addWebAppDomain'
-import { addSql } from './addSql'
 
 export const addSubCommands = async () => {
   const add = program
@@ -14,7 +13,7 @@ export const addSubCommands = async () => {
     .description('Skeet Add Comannd to add new functions')
   add
     .command('functions')
-    .argument('<functionsName>', 'Functions Name - e.g. openai')
+    .argument('<functionsName>', 'Functions Name - e.g. skeet')
     .action(async (functionsName: string) => {
       await addFunctions(functionsName)
     })
@@ -53,14 +52,5 @@ export const addSubCommands = async () => {
     .option('-i, --ip <ip>', 'IP Address - e.g. 2.2.2.2', '')
     .action(async (options) => {
       await addWebAppDomain(options.domain, options.ip)
-    })
-
-  add
-    .command('sql')
-    .description('Add Cloud SQL')
-    .action(async () => {
-      const skeetCloudConfig = await importConfig()
-      const password = 'skeet'
-      await addSql(skeetCloudConfig, password)
     })
 }

@@ -1,16 +1,9 @@
 import inquirer from 'inquirer'
 import { execSyncCmd, getFunctions, FUNCTIONS_PATH } from '@/lib'
+import { GRAPHQL_ROOT } from '@/index'
 
 export type YarnService = {
   yarn: Array<string>
-}
-
-export enum YarnCmd {
-  DEV = 'dev',
-  INSTALL = 'install',
-  BUILD = 'build',
-  START = 'start',
-  ADD = 'add',
 }
 
 export const yarn = async (
@@ -19,7 +12,7 @@ export const yarn = async (
   isDev: boolean = false
 ) => {
   const functions = await getFunctions()
-  const functionsArray: Array<{ [key: string]: string }> = []
+  const functionsArray: Array<{ [key: string]: string }> = [{ name: 'graphql' }]
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }
@@ -74,9 +67,17 @@ const getYarnShCmd = async (
   isDev: boolean = false
 ) => {
   let shCmd = []
+  let cmd = yarnCmd
+  if (yarnCmd === 'i') cmd = 'install'
+  if (yarnCmd === 'r') cmd = 'remove'
+  if (yarnCmd === 'a') cmd = 'add'
+  if (yarnCmd === 'b') cmd = 'build'
   switch (functionName) {
+    case 'graphql':
+      shCmd = ['yarn', '--cwd', `${GRAPHQL_ROOT}`, cmd]
+      break
     default:
-      shCmd = ['yarn', '--cwd', `${FUNCTIONS_PATH}/${functionName}`, yarnCmd]
+      shCmd = ['yarn', '--cwd', `${FUNCTIONS_PATH}/${functionName}`, cmd]
       break
   }
   if (packageName !== '' && isDev) {

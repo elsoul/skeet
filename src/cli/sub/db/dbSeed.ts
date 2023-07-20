@@ -1,4 +1,4 @@
-import { API_ENV_BUILD_PATH, API_PATH } from '@/index'
+import { GRAPHQL_ENV_BUILD_PATH, GRAPHQL_ROOT } from '@/index'
 import { spawnSync } from 'child_process'
 
 export const dbSeed = async (production: boolean = false) => {
@@ -8,7 +8,7 @@ export const dbSeed = async (production: boolean = false) => {
       shCmd = [
         'dotenv',
         '-e',
-        API_ENV_BUILD_PATH,
+        GRAPHQL_ENV_BUILD_PATH,
         'npx',
         'prisma',
         'db',
@@ -18,7 +18,7 @@ export const dbSeed = async (production: boolean = false) => {
       shCmd = ['npx', 'prisma', 'db', 'seed']
     }
     spawnSync(shCmd[0], shCmd.slice(1), {
-      cwd: API_PATH,
+      cwd: GRAPHQL_ROOT,
       stdio: 'inherit',
     })
   } catch (error) {

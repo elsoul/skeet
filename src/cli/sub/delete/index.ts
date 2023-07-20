@@ -7,7 +7,7 @@ export const deleteSubCommands = async () => {
     .alias('d')
     .description('Skeet Delete Command')
   d.command('routings')
-    .argument('<methodName>', 'Functions Name - e.g. openai')
+    .argument('<methodName>', 'Functions Name - e.g. skeet')
     .description('Delete Routings')
     .action(async (methodName: string) => {
       await deleteRoutings(methodName)

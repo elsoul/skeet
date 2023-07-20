@@ -9,6 +9,7 @@ export type SkeetCloudConfig = {
 export type AppConfig = {
   name: string
   projectId: string
+  fbProjectId: string
   template: string
   region: string
   appDomain: string

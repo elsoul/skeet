@@ -1,6 +1,6 @@
 import { createHash } from 'crypto'
 import { execSync } from 'child_process'
-import { API_ENV_PRODUCTION_PATH } from '@/index'
+import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
 import { readFileSync } from 'fs'
 
 export const TYPE_PATH = './types'
@@ -8,6 +8,7 @@ export const FUNCTIONS_PATH = './functions'
 export const FIREBASE_CONFIG_PATH = './firebase.json'
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const ROUTE_PACKAGE_JSON_PATH = './package.json'
+export const GRAPHQL_REPO_URL = 'https://github.com/elsoul/skeet-graphql'
 export const FUNCTIONS_REPO_URL = 'https://github.com/elsoul/skeet-functions'
 export const APP_REPO_URL = 'https://github.com/elsoul/skeet-app'
 export const NEXT_REPO_URL = 'https://github.com/elsoul/skeet-next'
@@ -161,6 +162,20 @@ export const isNegExists = async (
   }
 }
 
+export const defaultProductionEnvArray = [
+  'NO_PEER_DEPENDENCY_CHECK=1',
+  'DATABASE_URL=postgresql://postgres:${{ secrets.SKEET_GCP_DB_PASSWORD }}@${{ secrets.SKEET_GCP_DB_PRIVATE_IP }}:5432/skeet-${{ secrets.SKEET_APP_NAME }}-production?schema=public',
+  'SKEET_JWT_SALT=${{ secrets.SKEET_JWT_SALT }}',
+  'SKEET_BASE_URL=${{ secrets.SKEET_BASE_URL }}',
+  'SKEET_CRYPTO_SALT=${{ secrets.SKEET_CRYPTO_SALT }}',
+  'SKEET_PW_SALT=${{ secrets.SKEET_PW_SALT }}',
+  'SKEET_GCP_PROJECT_ID=${{ secrets.SKEET_GCP_PROJECT_ID }}',
+  'SKEET_GCP_TASK_REGION=${{ secrets.SKEET_GCP_TASK_REGION }}',
+  'GOOGLE_CLOUD_PROJECT=${{ secrets.SKEET_FB_PROJECT_ID }}',
+  'SKEET_API_ENDPOINT_URL=${{ secrets.SKEET_API_ENDPOINT_URL }}',
+  'TZ=${{ secrets.TZ }}',
+]
+
 export const getBuidEnvArray = async (
   projectId: string,
   fbProjectId: string,
@@ -176,8 +191,26 @@ export const getBuidEnvArray = async (
   ]
 }
 
+export const getActionsEnvString = async (filePath: string) => {
+  const stream = readFileSync(filePath)
+  const envArray: Array<string> = String(stream).split('\n')
+  let newEnv: Array<string> = []
+  for await (const envLine of envArray) {
+    let keyAndValue = envLine.match(/([A-Z_]+)="?([^"]*)"?/)
+    if (keyAndValue) {
+      if (keyAndValue[1].match('SKEET_')) continue
+      if (keyAndValue[1] === 'TZ') continue
+      const envString =
+        `${keyAndValue[1]}=$` + '{{ ' + `secrets.${keyAndValue[1]}` + ' }}'
+      newEnv.push(envString)
+    }
+  }
+  const returnArray = defaultProductionEnvArray.concat(newEnv)
+  return returnArray.join(',')
+}
+
 export const getBuidEnvString = async () => {
-  const stream = readFileSync(API_ENV_PRODUCTION_PATH)
+  const stream = readFileSync(GRAPHQL_ENV_PRODUCTION_PATH)
   const envArray: Array<string> = String(stream).split('\n')
   let hash: { [key: string]: string } = {}
   for await (const line of envArray) {
