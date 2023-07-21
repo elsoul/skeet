@@ -42,7 +42,7 @@ export const deploy = async () => {
             await deployGraphql(config)
           } else {
             await yarnBuild(service)
-            await firebaseFunctionsDeploy(config.app.projectId, service)
+            await firebaseFunctionsDeploy(config.app.fbProjectId, service)
           }
         })
       }

@@ -4,15 +4,7 @@ import { spawnSync } from 'child_process'
 export const dbDeploy = async (production: boolean = false) => {
   let shCmd = []
   if (production) {
-    shCmd = [
-      'dotenv',
-      '-e',
-      GRAPHQL_ENV_BUILD_PATH,
-      'npx',
-      'prisma',
-      'migrate',
-      'deploy',
-    ]
+    shCmd = ['dotenv', '-e', '.env.build', 'npx', 'prisma', 'migrate', 'deploy']
   } else {
     shCmd = ['npx', 'prisma', 'migrate', 'deploy']
   }

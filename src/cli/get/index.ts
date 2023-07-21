@@ -1,7 +1,7 @@
 import { program } from '@/index'
 import { listFunctions, listHttps } from '../sub/list'
 import { getSecret } from './getSecret'
-import { Logger, importConfig, getZone } from '@/lib'
+import { Logger, importConfig, getZone, getModels, getColumns } from '@/lib'
 
 export const listSubCommands = async () => {
   const list = program.command('list').description('Get Skeet App List')
@@ -31,5 +31,18 @@ export const listSubCommands = async () => {
     .description('Get Skeet Secret Value')
     .action(async (secretKey: string) => {
       await getSecret(secretKey)
+    })
+  list
+    .command('models')
+    .description('Show Skeet Models List')
+    .action(async () => {
+      await getModels()
+    })
+  list
+    .command('columns')
+    .argument('<modelName>', 'Model Name - e.g. User')
+    .description('Show Skeet Models columns')
+    .action(async (modelName: string) => {
+      await getColumns(modelName)
     })
 }

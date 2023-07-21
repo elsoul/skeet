@@ -1,8 +1,8 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { deployCloudRun } from './deployCloudRun'
-import { buildContainer } from './buildContainer'
-import { tagContainer } from './tagContainer'
-import { pushContainer } from './pushContainer'
+import { buildContainer } from '../sub/docker/buildContainer'
+import { tagContainer } from '../sub/docker/tagContainer'
+import { pushContainer } from '../sub/docker/pushContainer'
 
 export const deployGraphql = async (skeetConfig: SkeetCloudConfig) => {
   await buildContainer(skeetConfig.app.name)

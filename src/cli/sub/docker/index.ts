@@ -2,6 +2,10 @@ import { program } from '@/index'
 import { runPsql } from './runPsql'
 import { dockerLogin } from './dockerLogin'
 export * from './runPsql'
+export * from './dockerLogin'
+export * from './buildContainer'
+export * from './tagContainer'
+export * from './pushContainer'
 
 export const dockerSubCommands = async () => {
   const docker = program.command('docker').description('Docker commands')

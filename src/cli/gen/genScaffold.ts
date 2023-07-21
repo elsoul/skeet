@@ -1,7 +1,7 @@
-import { GRAPHQL_PATH, PRISMA_SCHEMA_PATH } from '@/index'
-import { Logger, syncEnumFile } from '@/lib'
+import { GRAPHQL_PATH } from '@/index'
+import { Logger, getModels, syncEnumFile } from '@/lib'
 import * as Skeet from '.'
-import { readFileSync, readdirSync, writeFileSync } from 'fs'
+import { readdirSync, writeFileSync } from 'fs'
 
 export const genScaffoldAll = async () => {
   const newModels = await getNewModels()
@@ -48,7 +48,7 @@ export const genmodelManagerIndex = async () => {
 
 export const getNewModels = async () => {
   const apiModels = await getApiModels()
-  const prismaModels = await getPrismaModels()
+  const prismaModels = await getModels()
   const newMoldes = prismaModels.filter((x) => apiModels.indexOf(x) === -1)
   return newMoldes
 }
@@ -61,17 +61,4 @@ export const getApiModels = async () => {
     .map((item) => item.name)
 
   return apiModels
-}
-
-export const getPrismaModels = async () => {
-  const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH)
-  let splitSchema = String(prismaSchema).split('model ')
-  splitSchema.shift()
-  let modelNames: Array<string> = []
-  for await (const line of splitSchema) {
-    const firstLine = line.split('\n')[0]
-    const modelName = firstLine.replace(' {', '')
-    modelNames.push(modelName)
-  }
-  return modelNames
 }

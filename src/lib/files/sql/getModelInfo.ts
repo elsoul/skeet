@@ -80,53 +80,64 @@ export const syncEnumFile = async () => {
   })
 }
 
-export const getModelCols = async (modelName: string) => {
-  try {
-    const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH)
-    let splitSchema = String(prismaSchema).split(`model `)
-    splitSchema = splitSchema.filter((model) => model.match(`\^${modelName} `))
-    let modelCols = splitSchema[0].split('\n')
-    let schemaArray: Array<string> = []
-    for await (const line of modelCols) {
-      if (line !== '' && !line.includes(' {') && !line.includes('}')) {
-        schemaArray.push(line)
-      } else if (line === '}') {
-        break
-      }
+export const getModels = async () => {
+  const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH, 'utf-8')
+  const lines = prismaSchema.split('\n')
+  const models: Array<string> = []
+  for await (const line of lines) {
+    if (line.includes('model') && line.includes('{')) {
+      const modelName = line.split('model ')[1].replace(' {', '')
+      models.push(modelName)
     }
-    let modelSchema: Array<ModelSchema> = []
-    for await (const line of schemaArray) {
-      let splitArray = line.split(' ')
-      splitArray = splitArray.filter((item) => item !== '')
-      if (splitArray[0] == 'id') continue
-      if (splitArray[0].includes('@@')) continue
+  }
+  return models
+}
 
-      let getColTypeResult = await getColType(splitArray[1])
-      if (getColTypeResult === ColType.Bytes) continue
-      const type =
-        getColTypeResult === ColType.Enum
-          ? `${splitArray[1]}Enum`
-          : splitArray[1]
+export const getColumns = async (modelName: string) => {
+  const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH, 'utf-8')
+  const lines = prismaSchema.split('\n')
+  const modelSchema: Array<ModelSchema> = []
+  let isModel = false
+  let isEnd = false
 
-      if (splitArray[2]) {
-        if (splitArray[2].includes('@relation')) {
+  for await (const line of lines) {
+    if (isEnd) break
+    if (isModel) {
+      if (line.includes('}')) {
+        isEnd = true
+      } else {
+        let splitArray = line.split(' ')
+        splitArray = splitArray.filter((item) => item !== '')
+        if (splitArray[0] == undefined) continue
+        if (splitArray[0] == 'id') continue
+        if (splitArray[0].includes('@@')) continue
+        let getColTypeResult = await getColType(splitArray[1])
+        if (getColTypeResult === ColType.Bytes) continue
+        const type =
+          getColTypeResult === ColType.Enum
+            ? `${splitArray[1]}Enum`
+            : splitArray[1]
+
+        if (splitArray[2]) {
+          if (splitArray[2].includes('@relation')) {
+          } else {
+            modelSchema.push({
+              name: splitArray[0],
+              type,
+            })
+          }
         } else {
           modelSchema.push({
             name: splitArray[0],
             type,
           })
         }
-      } else {
-        modelSchema.push({
-          name: splitArray[0],
-          type,
-        })
       }
     }
-    return modelSchema
-  } catch (error) {
-    let errorMsg = `error: can't find ${modelName}`
-    Logger.error(errorMsg)
-    return []
+    if (line.includes(`model ${modelName}`) && line.includes('{')) {
+      isModel = true
+    }
   }
+  console.log(modelSchema)
+  return modelSchema
 }

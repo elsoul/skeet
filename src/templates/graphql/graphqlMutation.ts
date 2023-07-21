@@ -1,4 +1,4 @@
-import { getModelCols, getColType, ColType } from '@/lib'
+import { getColType, ColType, getColumns } from '@/lib'
 import { GRAPHQL_PATH } from '@/index'
 import { toUpperCase, toLowerCase } from '@skeet-framework/utils'
 
@@ -118,7 +118,7 @@ export const createInputArgs = async (
   withId: boolean = false,
   isUpdate: boolean = false
 ) => {
-  const modelCols = await getModelCols(modelName)
+  const modelCols = await getColumns(modelName)
   let stringArray: Array<string> = []
   for await (const model of modelCols) {
     const valueType = await getColType(model.type)
@@ -142,7 +142,7 @@ export const createParamStr = async (
   modelName: string,
   withId: boolean = false
 ) => {
-  const modelCols = await getModelCols(modelName)
+  const modelCols = await getColumns(modelName)
   let modelArray: Array<string> = []
   modelCols.forEach((model) => {
     if (model.name === 'id') {

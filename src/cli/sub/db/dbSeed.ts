@@ -5,15 +5,7 @@ export const dbSeed = async (production: boolean = false) => {
   try {
     let shCmd = []
     if (production) {
-      shCmd = [
-        'dotenv',
-        '-e',
-        GRAPHQL_ENV_BUILD_PATH,
-        'npx',
-        'prisma',
-        'db',
-        'seed',
-      ]
+      shCmd = ['dotenv', '-e', '.env.build', 'npx', 'prisma', 'db', 'seed']
     } else {
       shCmd = ['npx', 'prisma', 'db', 'seed']
     }

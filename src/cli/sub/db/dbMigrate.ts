@@ -7,7 +7,7 @@ export const dbMigrate = async (name: string, production: boolean = false) => {
       ? [
           'dotenv',
           '-e',
-          `${GRAPHQL_ROOT}/.env.build`,
+          `.env.build`,
           'npx',
           'prisma',
           'migrate',

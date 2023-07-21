@@ -2,7 +2,7 @@ import { program } from '@/index'
 import { genScaffoldAll } from '.'
 
 export * from './genScaffold'
-export * from './getModels'
+export * from './genModels'
 export * from './genIndex'
 export * from './genDir'
 export * from './genQuery'

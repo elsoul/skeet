@@ -1,4 +1,4 @@
-import { getEnumCols, getModelCols, ModelSchema } from '@/lib'
+import { getColumns, getEnumCols, ModelSchema } from '@/lib'
 import { toLowerCase } from '@skeet-framework/utils'
 import { GRAPHQL_PATH } from '@/index'
 
@@ -39,7 +39,7 @@ export const normalImport = async (modelName: string) => {
 }
 
 export const modelCodes = async (modelName: string) => {
-  const modelCols: ModelSchemaArray = await getModelCols(modelName)
+  const modelCols: ModelSchemaArray = await getColumns(modelName)
   const enumNames = await getEnumCols(modelCols)
   let importArray = []
   let modelCodeArray = [
