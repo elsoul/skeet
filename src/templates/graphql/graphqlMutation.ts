@@ -24,7 +24,8 @@ export const createModelCodes = async (modelName: string) => {
   let codeArray = [
     `import { extendType, nonNull, stringArg, intArg, floatArg } from 'nexus'`,
     `import { toPrismaId } from '@skeet-framework/utils'`,
-    `import { ${modelNameUpper} } from 'nexus-prisma'\n`,
+    `import { ${modelNameUpper} } from 'nexus-prisma'`,
+    `import { GraphQLError } from 'graphql'\n`,
     `export const ${modelNameUpper}Mutation = extendType({`,
     `  type: 'Mutation',`,
     `  definition(t) {`,
@@ -43,7 +44,7 @@ export const createModelCodes = async (modelName: string) => {
     '          })',
     '        } catch (error) {',
     '          console.log(error)',
-    '          throw new Error(`error: ${error}`)',
+    '          throw new GraphQLError(`error: ${error}`)',
     '        }',
     '      },',
     '    })'
@@ -78,7 +79,7 @@ export const updateModelCodes = async (modelName: string) => {
     '          })',
     '        } catch (error) {',
     '          console.log(error)',
-    '          throw new Error(`error: ${error}`)',
+    '          throw new GraphQLError(`error: ${error}`)',
     '        }',
     '      },',
     '    })'
@@ -103,7 +104,7 @@ export const deleteModelCodes = async (modelName: string) => {
     '            },',
     '          })',
     '        } catch (error) {',
-    '          throw new Error(`error: ${error}`)',
+    '          throw new GraphQLError(`error: ${error}`)',
     '        }',
     '      },',
     '    })',
@@ -172,6 +173,10 @@ export const typeToInputMethodCreate = (type: string) => {
       return 'nonNull(floatArg())'
     case 'Float?':
       return 'floatArg()'
+    case 'Boolean':
+      return 'nonNull(booleanArg())'
+    case 'Boolean?':
+      return 'booleanArg()'
     default:
       return 'stringArg()'
   }
@@ -193,6 +198,10 @@ export const typeToInputMethodUpdate = (type: string) => {
       return 'floatArg()'
     case 'Float?':
       return 'floatArg()'
+    case 'Boolean':
+      return 'booleanArg()'
+    case 'Boolean?':
+      return 'booleanArg()'
     default:
       return 'stringArg()'
   }
