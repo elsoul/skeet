@@ -1,4 +1,4 @@
-import { FirebaseOptions, initializeApp } from 'firebase/app'
+import { initializeApp } from 'firebase/app'
 import {
   connectAuthEmulator,
   createUserWithEmailAndPassword,
@@ -14,11 +14,12 @@ export const login = async (
   password = 'ELSOUL-LABO-B.V.'
 ) => {
   try {
-    // @ts-ignore
-    const firebaseConfig = (await import(
-      `./lib/firebaseConfig`
-    )) as FirebaseOptions
-    // @ts-ignore
+    const configPath = process.env.FIREBASE_CONFIG_PATH
+    if (configPath === undefined) {
+      throw new Error('FIREBASE_CONFIG_PATH is not set')
+    }
+
+    const firebaseConfig = await import(`${configPath}.mjs`)
     const firebaseApp = initializeApp(firebaseConfig.default)
     const auth = getAuth(firebaseApp)
     const SkeetEnv = process.env.NODE_ENV || 'development'

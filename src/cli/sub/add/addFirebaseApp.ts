@@ -14,6 +14,7 @@ import {
   updateFirebaseJson,
   firebaseAppList,
 } from '@/lib'
+import { GRAPHQL_ENV_BUILD_PATH } from '@/index'
 
 export const addFirebaseApp = async (
   projectId: string,
@@ -22,7 +23,7 @@ export const addFirebaseApp = async (
   try {
     let sourceFilePath = './firebaseConfig.js'
     const firebaseConfigDir = './lib/firebaseAppConfig'
-    const targetFilePath = `${firebaseConfigDir}/${appDisplayName}.ts`
+    const targetFilePath = `${firebaseConfigDir}/${appDisplayName}.mjs`
 
     if (existsSync(sourceFilePath)) {
       rmSync(sourceFilePath)
@@ -41,11 +42,18 @@ export const addFirebaseApp = async (
     await firebaseSdkConfig(appId)
     await updateFirebaseJson(appDisplayName)
     await rewriteFirebaseConfig(sourceFilePath, targetFilePath)
+    await addFirebaseConfigEnv()
 
     return true
   } catch (error) {
     // Logger.warning(`⚠️ addFirebaseApp: ${error}`)
   }
+}
+
+const addFirebaseConfigEnv = async () => {
+  const filePath = GRAPHQL_ENV_BUILD_PATH
+  const envString = `FIREBASE_CONFIG_PATH=${process.cwd()}/lib/firebaseAppConfig`
+  writeFileSync(filePath, envString, { flag: 'w' })
 }
 
 const rewriteFirebaseConfig = async (

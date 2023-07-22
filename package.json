@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "0.19.1",
+  "version": "0.19.3",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "repository": "https://github.com/elsoul/skeet-cli",
@@ -40,6 +40,7 @@
     "dotenv": "16.0.3",
     "dotenv-cli": "7.2.1",
     "firebase": "9.22.1",
+    "firebase-admin": "^11.10.1",
     "graphql": "^16.7.1",
     "inquirer": "9.2.6",
     "jest": "29.5.0",

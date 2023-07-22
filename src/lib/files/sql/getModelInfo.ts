@@ -138,6 +138,5 @@ export const getColumns = async (modelName: string) => {
       isModel = true
     }
   }
-  console.log(modelSchema)
   return modelSchema
 }
