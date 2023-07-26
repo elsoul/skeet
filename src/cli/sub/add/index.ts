@@ -6,6 +6,7 @@ import { addModel } from './addModel'
 import { addFirebaseApp } from './addFirebaseApp'
 import { addSecret } from './addSecret'
 import { addWebAppDomain } from './addWebAppDomain'
+import { addIp } from './addIp'
 
 export const addSubCommands = async () => {
   const add = program
@@ -53,4 +54,7 @@ export const addSubCommands = async () => {
     .action(async (options) => {
       await addWebAppDomain(options.domain, options.ip)
     })
+  add.command('ip').action(async () => {
+    await addIp()
+  })
 }

@@ -54,7 +54,7 @@ export const login = async (
     const successLog = `💃Let's try \`$ skeet curl <MethodName>\` to test request🕺\n`
     Logger.normal(successLog)
     const curlText =
-      '$ skeet curl createUserChatRoom\n     or     \n$ skeet curl createUserChatRoom --data \'{ "model": "gpt-4-32k", "maxTokens": 4200 }\''
+      '$ skeet curl createUserChatRoom\n     or     \n$ skeet curl createUserChatRoom --data \'{ "model": "gpt-4", "maxTokens": 420 }\''
     Logger.normal(curlText)
     return true
   } catch (error) {

@@ -48,7 +48,7 @@ export const init = async (isOnlyDev = false) => {
   if (!region) throw new Error('region is undefined')
   await firebaseLogin()
 
-  const defaultFunctionName = 'skeet'
+  const defaultFunctionName = 'openai'
   await firebaseUseAdd(fbProjectId)
   await addProjectRegionToSkeetOptions(
     region,
@@ -272,16 +272,18 @@ const setupCloudIfNeeded = async (isNeedDomain: string) => {
   await addIp()
   await dbDeploy(true)
   await addEnvSync(GRAPHQL_ENV_PRODUCTION_PATH)
-  await yarnBuild('skeet')
+  await yarnBuild('openai')
   await firebaseFunctionsDeploy(skeetConfig.app.fbProjectId)
   await deployRules(skeetConfig.app.fbProjectId)
-  await deployGraphql(skeetConfig)
+  if (skeetConfig.app.template.includes('GraphQL')) {
+    await deployGraphql(skeetConfig)
+  }
   await syncRunUrl()
   await genGithubActions()
   await setupActions()
   if (isNeedDomain !== 'no') {
     const domainAnswer = await askForDomain()
-    const defaultFunctionName = 'skeet'
+    const defaultFunctionName = 'openai'
     await addDomainToConfig(
       domainAnswer.appDomain,
       domainAnswer.nsDomain,
@@ -320,8 +322,8 @@ const setupArmor = async (projectId: string, appName: string) => {
 }
 
 const copyDefaultFirebaseConfig = async (appDisplayName: string) => {
-  const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}.ts`
-  const defaultFirebaseConfigPath = `./lib/firebaseConfig.ts`
+  const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}.mjs`
+  const defaultFirebaseConfigPath = `./lib/firebaseConfig.mjs`
   await copyFileWithOverwrite(
     originalFirebaseConfigPath,
     defaultFirebaseConfigPath

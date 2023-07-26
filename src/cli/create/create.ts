@@ -64,7 +64,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
   //   tsconfigJson.filePath,
   //   JSON.stringify(tsconfigJson.body, null, 2)
   // )
-  const defaultFunctionName = 'skeet'
+  const defaultFunctionName = 'openai'
   await initPackageJson(appName)
   if (template === 'Expo (React Native)') {
     await initAppJson(appName)
@@ -128,7 +128,7 @@ export const initAppJson = async (appName: string) => {
   newAppJson.expo.name = appName
   newAppJson.expo.slug = appName
   newAppJson.expo.scheme = appNameLowerCase
-  newAppJson.expo.owner = 'skeet'
+  newAppJson.expo.owner = 'openai'
   newAppJson.expo.githubUrl = `https://github.com/YOUR_ACCOUNT/${appName}`
   newAppJson.expo.android.package = `com.skeet.${appNameLowerCase}`
   newAppJson.expo.ios.bundleIdentifier = `com.skeet.${appNameLowerCase}`

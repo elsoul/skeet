@@ -2,7 +2,7 @@ import { execSyncCmd } from '@/lib'
 
 export const firebaseFunctionsDeploy = async (
   projectId: string,
-  functionName: string = 'skeet'
+  functionName: string = 'openai'
 ) => {
   try {
     const shCmd = [
