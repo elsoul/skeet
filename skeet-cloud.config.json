@@ -6,6 +6,7 @@
     "appDomain": "skeet.dev",
     "lbDomain": "lb.skeet.dev",
     "projectId": "skeet-app",
+    "hasLoadBalancer": false,
     "secretKeys": []
   },
   "cloudArmor": [

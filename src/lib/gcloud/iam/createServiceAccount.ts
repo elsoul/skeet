@@ -1,6 +1,9 @@
-import { addBillingRole, enableBillingIam } from '@/cli/init/init'
 import { Logger } from '@/lib'
 import { execSync, spawnSync } from 'child_process'
+import {
+  addBillingRole,
+  enableBillingIam,
+} from '../billing/checkBillingAccount'
 
 export const createServiceAccount = async (
   projectId: string,

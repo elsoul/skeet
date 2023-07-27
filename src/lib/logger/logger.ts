@@ -1,6 +1,7 @@
 import chalk from 'chalk'
 import { Spinner } from 'cli-spinner'
 import { spinnerPattern } from './spinnerList'
+import { questionList } from '@/cli/init/questionList'
 
 export module Logger {
   export const successHex = chalk.hex('#39A845')
@@ -157,5 +158,10 @@ Go To : http://127.0.0.1:4000/`
       `Cloud Storage: https://console.firebase.google.com/project/${projectId}/storage\n`
     )
     Logger.normal(`📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`)
+  }
+
+  export const confirmFirebaseSetup = async (fbProjectId: string) => {
+    Logger.confirmIfFirebaseSetupLog(fbProjectId)
+    await questionList.checkIfFirebaseSetup(fbProjectId)
   }
 }

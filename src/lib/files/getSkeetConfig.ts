@@ -108,7 +108,7 @@ export const getContainerImageName = async (
   const imageName =
     workerName !== ''
       ? 'skeet-' + appName + '-worker-' + workerName
-      : 'skeet-' + appName + '-api'
+      : 'skeet-' + appName + '-graphql'
   return imageName
 }
 

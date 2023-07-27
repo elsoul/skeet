@@ -8,6 +8,7 @@ export * from './createFixIp'
 export * from './createNat'
 export * from './createIpRange'
 export * from './connectVpc'
-export * from './runVpcNat'
+export * from './createVpcNetwork'
+export * from './createLoadBalancer'
 
 export const GCP_IP_RANGE = '10.124.0.0/28'

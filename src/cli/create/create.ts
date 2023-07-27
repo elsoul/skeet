@@ -9,8 +9,9 @@ import {
 } from '@/lib'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
 import inquirer from 'inquirer'
-import { InitQuestions } from '@/cli/init/initQuestions'
+import { questionList } from '@/cli/init/questionList'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { DEFAULT_FUNCTION_NAME } from '@/index'
 
 export const create = async (initAppName: string) => {
   const { template } = await askForTemplate()
@@ -18,7 +19,7 @@ export const create = async (initAppName: string) => {
 }
 
 const askForTemplate = async () => {
-  const projectInquirer = inquirer.prompt(InitQuestions.templateQuestions)
+  const projectInquirer = inquirer.prompt(questionList.templateQuestions)
   let template = ''
   await projectInquirer.then(async (answer) => {
     template = answer.template
@@ -64,13 +65,12 @@ export const generateInitFiles = async (appName: string, template: string) => {
   //   tsconfigJson.filePath,
   //   JSON.stringify(tsconfigJson.body, null, 2)
   // )
-  const defaultFunctionName = 'openai'
   await initPackageJson(appName)
   if (template === 'Expo (React Native)') {
     await initAppJson(appName)
   }
 
-  await addAppNameToSkeetOptions(appName, defaultFunctionName)
+  await addAppNameToSkeetOptions(appName, DEFAULT_FUNCTION_NAME)
 
   const eslintrcJson = await fileDataOf.eslintrcJson(appName, template)
   writeFileSync(

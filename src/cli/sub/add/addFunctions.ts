@@ -1,8 +1,4 @@
 import {
-  addDomainToConfig,
-  addProjectRegionToSkeetOptions,
-} from '@/cli/init/init'
-import {
   Logger,
   FIREBASE_CONFIG_PATH,
   FUNCTIONS_PATH,
@@ -14,6 +10,10 @@ import {
   getModelFiles,
   copyFileWithOverwrite,
 } from '@/lib'
+import {
+  addDomainToConfig,
+  addProjectRegionToSkeetOptions,
+} from '@/lib/files/addJson'
 import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { existsSync, mkdir, readFileSync, writeFileSync } from 'fs'

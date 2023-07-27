@@ -1,3 +1,4 @@
+import { addBackendSetup } from '@/cli/sub/add/addBackendSetup'
 import {
   addBackend,
   addPathMatcher,
@@ -17,6 +18,7 @@ import {
   setGcloudProject,
   getNetworkConfig,
   Logger,
+  getFunctionInfo,
 } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 
@@ -48,15 +50,26 @@ export const setupLoadBalancer = async (
       config.app.region,
       true
     )
+
     await createLb(config.app.projectId, config.app.name)
     await createSsl(config.app.projectId, config.app.name, lbDomain)
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
+    let paths = []
+
+    // Create GraphQL Endpoint if template includes graphql
+    if (config.app.template.includes('GraphQL')) {
+      const graphqlInfo = await getFunctionInfo('graphql')
+      await addBackendSetup('graphql')
+      const graphqlPath = `/graphql=${graphqlInfo.backendService}`
+      paths.push(graphqlPath)
+    }
+
     await addPathMatcher(
       config.app.projectId,
       config.app.name,
       lbDomain,
-      [],
+      paths,
       true
     )
     await createSecurityPolicy(config.app.projectId, config.app.name)

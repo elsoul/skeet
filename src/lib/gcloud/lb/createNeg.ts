@@ -14,7 +14,10 @@ export const createNeg = async (
   const negName = init
     ? `skeet-${config.app.name}-default-neg`
     : functionInfo.neg
-  const cloudRunName = kebab.replace(/-/g, '')
+  let cloudRunName = kebab.replace(/-/g, '')
+  if (methodName === 'graphql') {
+    cloudRunName = 'skeet-graphql'
+  }
   const shCmd = [
     'gcloud',
     'compute',

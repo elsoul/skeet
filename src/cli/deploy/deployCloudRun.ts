@@ -71,6 +71,7 @@ export const deployCloudRun = async (
   ]
   if (hasBalancer && workerName === '') {
     shCmd.push('--ingress', 'internal-and-cloud-load-balancing')
+    shCmd.push('--allow-unauthenticated')
   } else if (!hasBalancer && workerName === '') {
     shCmd.push('--allow-unauthenticated')
   } else {

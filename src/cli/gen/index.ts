@@ -7,6 +7,7 @@ export * from './genIndex'
 export * from './genDir'
 export * from './genQuery'
 export * from './genMutation'
+export * from './genGithubActions'
 
 export const genCommands = async () => {
   const gen = program

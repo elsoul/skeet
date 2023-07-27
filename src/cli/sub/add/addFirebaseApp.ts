@@ -54,6 +54,10 @@ const addFirebaseConfigEnv = async () => {
   const filePath = GRAPHQL_ENV_BUILD_PATH
   const envString = `FIREBASE_CONFIG_PATH=${process.cwd()}/lib/firebaseAppConfig`
   writeFileSync(filePath, envString, { flag: 'w' })
+  Logger.warning('🚸 === Copy & Paste below command to your terminal  === 🚸\n')
+  const exportLog = `export ${envString}\n`
+  Logger.normal(exportLog)
+  Logger.warning('🚸 =========           END           ========= 🚸\n\n')
 }
 
 const rewriteFirebaseConfig = async (

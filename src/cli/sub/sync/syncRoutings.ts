@@ -25,11 +25,12 @@ export const syncRoutings = async () => {
       paths.push(pathString)
     }
   }
-  const config = await importConfig()
-  const { pathMatcherName } = await getNetworkConfig(
-    config.app.projectId,
-    config.app.name
-  )
+  if (app.template.includes('GraphQL')) {
+    const graphqlInfo = await getFunctionInfo('graphql')
+    const graphqlPath = `/graphql=${graphqlInfo.backendService}`
+    paths.push(graphqlPath)
+  }
+  const { pathMatcherName } = await getNetworkConfig(app.projectId, app.name)
   await addRounting(pathMatcherName, paths)
   spinner.stop()
 }
