@@ -1,9 +1,15 @@
+export enum SkeetTemplate {
+  NextJsGraphQL = 'Next.js (React) - GraphQL',
+  NextJsFirestore = 'Next.js (React) - Firestore',
+  ExpoFirestore = 'Expo (React Native) - Firestore',
+}
+
 export type SkeetCloudConfig = {
   app: AppConfig
   cloudRun: CloudRunConfig
   db: DbConfig
-  taskQueues?: TaskQueue[]
-  cloudArmor?: CloudArmor[]
+  taskQueues: TaskQueue[]
+  cloudArmor: CloudArmor[]
 }
 
 export type AppConfig = {

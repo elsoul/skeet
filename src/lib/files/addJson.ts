@@ -38,7 +38,10 @@ export const addProjectRegionToSkeetOptions = async (
   skeetConfig.app.region = region
   skeetConfig.app.projectId = projectId
   skeetConfig.app.fbProjectId = fbProjectId
-
+  if (skeetConfig.taskQueues.length !== 0) {
+    skeetConfig.taskQueues[0].location = region
+    skeetConfig.taskQueues[1].location = region
+  }
   const filePath = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = readFileSync(filePath)
   const newJsonFile = JSON.parse(String(jsonFile))

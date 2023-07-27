@@ -6,12 +6,16 @@ import {
   APP_REPO_URL,
   NEXT_REPO_URL,
   FUNCTIONS_PATH,
+  GRAPHQL_REPO_PATH,
 } from '@/lib'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
 import inquirer from 'inquirer'
 import { questionList } from '@/cli/init/questionList'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
+import { SkeetTemplate } from '@/types/skeetTypes'
+import { dbGen } from '../sub/db/dbGen'
+import { dbDeploy } from '../sub/db/dbDeploy'
 
 export const create = async (initAppName: string) => {
   const { template } = await askForTemplate()
@@ -34,15 +38,20 @@ export const skeetCreate = async (appName: string, template: string) => {
     process.exit(0)
   }
   let gitCloneCmd = null
-  if (template === 'Next.js (React)') {
+  if (template === SkeetTemplate.NextJsFirestore) {
     gitCloneCmd = ['git', 'clone', NEXT_REPO_URL, appName]
+  } else if (template === SkeetTemplate.NextJsGraphQL) {
+    gitCloneCmd = ['git', 'clone', GRAPHQL_REPO_PATH, appName]
   } else {
     gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
   }
   await execSyncCmd(gitCloneCmd)
   const yarnApiCmd = ['yarn']
   await execSyncCmd(yarnApiCmd, appDir)
-  await execSyncCmd(yarnApiCmd, `${appDir}/${FUNCTIONS_PATH}/skeet`)
+  await execSyncCmd(
+    yarnApiCmd,
+    `${appDir}/${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`
+  )
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
   await sleep(1000)
@@ -66,8 +75,18 @@ export const generateInitFiles = async (appName: string, template: string) => {
   //   JSON.stringify(tsconfigJson.body, null, 2)
   // )
   await initPackageJson(appName)
-  if (template === 'Expo (React Native)') {
+  if (template === SkeetTemplate.ExpoFirestore) {
     await initAppJson(appName)
+  }
+  if (template === SkeetTemplate.NextJsGraphQL) {
+    const env = await fileDataOf.graphqlEnv(appName)
+    writeFileSync(env.filePath, env.body)
+
+    const appGraphqlPath = `./${appName}/graphql`
+    const yarnApiCmd = ['yarn']
+    await execSyncCmd(yarnApiCmd, appGraphqlPath)
+    await dbGen(appGraphqlPath)
+    await dbDeploy(false, appGraphqlPath)
   }
 
   await addAppNameToSkeetOptions(appName, DEFAULT_FUNCTION_NAME)

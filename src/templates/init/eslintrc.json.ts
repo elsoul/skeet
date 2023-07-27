@@ -1,7 +1,9 @@
+import { SkeetTemplate } from '@/types/skeetTypes'
+
 export const eslintrcJson = async (appName: string, template: string) => {
   const filePath = `${appName}/.eslintrc.json`
   let body = {}
-  if (template === 'Expo (React Native)') {
+  if (template === SkeetTemplate.ExpoFirestore) {
     body = {
       extends: [
         'eslint:recommended',
@@ -37,7 +39,10 @@ export const eslintrcJson = async (appName: string, template: string) => {
         ],
       },
     }
-  } else if (template === 'Next.js (React)') {
+  } else if (
+    template === SkeetTemplate.ExpoFirestore ||
+    template === SkeetTemplate.NextJsGraphQL
+  ) {
     body = {
       extends: [
         'next/core-web-vitals',

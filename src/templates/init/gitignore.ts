@@ -1,8 +1,10 @@
+import { SkeetTemplate } from '@/types/skeetTypes'
+
 export const gitignore = async (appName: string, template: string) => {
   const filePath = `${appName}/.gitignore`
 
   let body = ''
-  if (template === 'Expo (React Native)') {
+  if (template === SkeetTemplate.ExpoFirestore) {
     body = `
 # Compiled JavaScript files
 lib/**/*.js
@@ -102,7 +104,10 @@ gcloud-key.json
 .firebase
 firebase-debug.log
   `
-  } else if (template === 'Next.js (React)') {
+  } else if (
+    template === SkeetTemplate.NextJsFirestore ||
+    template === SkeetTemplate.NextJsGraphQL
+  ) {
     body = `
 # Compiled JavaScript files
 lib/**/*.js

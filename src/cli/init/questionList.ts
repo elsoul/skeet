@@ -2,6 +2,7 @@ import inquirer from 'inquirer'
 import { regionList } from './regionList'
 import chalk from 'chalk'
 import { Logger } from '@/lib'
+import { SkeetTemplate } from '@/types/skeetTypes'
 
 export module questionList {
   export const requireRepoName = (value: string) => {
@@ -70,8 +71,9 @@ export module questionList {
       name: 'template',
       choices: [
         new inquirer.Separator(' Templates '),
-        { name: 'Next.js (React)' },
-        { name: 'Expo (React Native)' },
+        { name: SkeetTemplate.NextJsGraphQL },
+        { name: SkeetTemplate.NextJsFirestore },
+        { name: SkeetTemplate.ExpoFirestore },
       ],
       validate(answer: string) {
         if (answer.length < 1) {

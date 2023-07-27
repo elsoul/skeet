@@ -24,6 +24,7 @@ export const addFirebaseApp = async (
     let sourceFilePath = './firebaseConfig.js'
     const firebaseConfigDir = './lib/firebaseAppConfig'
     const targetFilePath = `${firebaseConfigDir}/${appDisplayName}.mjs`
+    const targetFilePathTs = `${firebaseConfigDir}/${appDisplayName}.ts`
 
     if (existsSync(sourceFilePath)) {
       rmSync(sourceFilePath)
@@ -41,6 +42,7 @@ export const addFirebaseApp = async (
     await firebaseApplyWebProject(projectId, appDisplayName)
     await firebaseSdkConfig(appId)
     await updateFirebaseJson(appDisplayName)
+    await rewriteFirebaseConfig(sourceFilePath, targetFilePathTs)
     await rewriteFirebaseConfig(sourceFilePath, targetFilePath)
     await addFirebaseConfigEnv()
 

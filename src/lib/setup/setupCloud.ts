@@ -1,4 +1,4 @@
-import { SkeetCloudConfig } from '@/types/skeetTypes'
+import { SkeetCloudConfig, SkeetTemplate } from '@/types/skeetTypes'
 import { setGcloudProject } from '../gcloud'
 import { checkRepoExists, createGitRepo, gitCommit, gitInit } from '../git'
 import { Logger } from '../logger'
@@ -21,7 +21,7 @@ export const setupCloud = async (
   await gitInit()
   await gitCommit()
   await createGitRepo(repoName)
-  if (skeetConfig.app.template === 'Expo (React Native)') {
+  if (skeetConfig.app.template === SkeetTemplate.ExpoFirestore) {
     addAppJson(repoName)
   }
   await setupGcp(skeetConfig, region)

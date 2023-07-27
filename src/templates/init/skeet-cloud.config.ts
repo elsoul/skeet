@@ -1,3 +1,4 @@
+import { SkeetTemplate } from '@/types/skeetTypes'
 import fetch from 'node-fetch'
 
 export const skeetCloudConfigGen = async (
@@ -6,15 +7,38 @@ export const skeetCloudConfigGen = async (
 ) => {
   const filePath = `${appName}/skeet-cloud.config.json`
   const homeIp = await getHomeIp()
+  const taskQueues =
+    template === SkeetTemplate.NextJsGraphQL
+      ? [
+          {
+            queueName: 'createUser',
+            location: 'asia-northeast1',
+            maxAttempts: 3,
+            maxConcurrent: 1,
+            maxRate: 1,
+            maxInterval: '10s',
+            minInterval: '1s',
+          },
+          {
+            queueName: 'createChatRoomMessage',
+            location: 'asia-northeast1',
+            maxAttempts: 3,
+            maxConcurrent: 1,
+            maxRate: 1,
+            maxInterval: '10s',
+            minInterval: '1s',
+          },
+        ]
+      : []
   const body = `{
   "app": {
     "name": "${appName}",
     "projectId": "${appName}",
     "template": "${template}",
-    "region": "europe-west4",
+    "region": "europe-west6",
     "appDomain": "app.your-app-url.com",
     "nsDomain": "your-nameserver.com",
-    "lbDomain": "loadbalancer.your-app-url.com",
+    "lbDomain": "loadbalancer.your-app-url.com"
   },
   "cloudRun": {
     "name": "skeet-${appName}-graphql",
@@ -26,13 +50,13 @@ export const skeetCloudConfigGen = async (
     "memory": "4Gi"
   },
   "db": {
-    "databaseVersion": "POSTGRES_14",
+    "databaseVersion": "POSTGRES_15",
     "cpu": 1,
     "memory": "3840MiB",
     "storageSize": 10,
     "whiteList": ""
   },
-  "taskQueues": [],
+  "taskQueues": ${JSON.stringify(taskQueues)},
   "cloudArmor": [
     {
       "securityPolicyName": "skeet-${appName}-armor",
