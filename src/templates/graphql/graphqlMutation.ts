@@ -22,7 +22,7 @@ export const createModelCodes = async (modelName: string) => {
   const modelNameUpper = await toUpperCase(modelName)
   const modelNameLower = await toLowerCase(modelName)
   let codeArray = [
-    `import { extendType, nonNull, stringArg, intArg, floatArg } from 'nexus'`,
+    `import { extendType,  stringArg, ntArg, floatArg } from 'nexus'`,
     `import { toPrismaId } from '@skeet-framework/utils'`,
     `import { ${modelNameUpper} } from 'nexus-prisma'`,
     `import { GraphQLError } from 'graphql'\n`,
@@ -59,7 +59,7 @@ export const updateModelCodes = async (modelName: string) => {
     `    t.field('update${modelNameUpper}', {`,
     `      type: ${modelNameUpper}.$name,`,
     `      args: {`,
-    `        id: nonNull(stringArg()),`,
+    `        id: stringArg(),`,
   ]
   let createInputArray = await createInputArgs(modelName + '?', true, true)
   createInputArray.shift()
@@ -94,7 +94,7 @@ export const deleteModelCodes = async (modelName: string) => {
     `    t.field('delete${modelNameUpper}', {`,
     `      type: ${modelNameUpper}.$name,`,
     `      args: {`,
-    `        id: nonNull(stringArg()),`,
+    `        id: stringArg(),`,
     `      },`,
     '      async resolve(_, { id }, ctx) {',
     '        try {',
@@ -160,21 +160,21 @@ export const createParamStr = async (
 export const typeToInputMethodCreate = (type: string) => {
   switch (type) {
     case 'String':
-      return 'nonNull(stringArg())'
+      return 'stringArg()'
     case 'String?':
       return 'stringArg()'
     case 'Int':
-      return 'nonNull(intArg())'
+      return 'intArg()'
     case 'Int?':
       return 'intArg()'
     case 'DateTime':
       return 'stringArg()'
     case 'Float':
-      return 'nonNull(floatArg())'
+      return 'floatArg()'
     case 'Float?':
       return 'floatArg()'
     case 'Boolean':
-      return 'nonNull(booleanArg())'
+      return 'booleanArg()'
     case 'Boolean?':
       return 'booleanArg()'
     default:

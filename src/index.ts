@@ -17,6 +17,7 @@ import {
   loginCommands,
   curlCommands,
   genCommands,
+  postCommands,
 } from '@/cli'
 
 export const GRAPHQL_ROOT = './graphql'
@@ -45,6 +46,7 @@ async function main() {
     await yarnCommands()
     await loginCommands()
     await curlCommands()
+    await postCommands()
     await genCommands()
 
     await dockerSubCommands()

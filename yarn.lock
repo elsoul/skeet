@@ -1099,10 +1099,10 @@
     teeny-request "^8.0.0"
     uuid "^8.0.0"
 
-"@google-cloud/tasks@3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@google-cloud/tasks/-/tasks-3.1.2.tgz#53de7a3ba9011ec65a4996f8bf8858efd4de8103"
-  integrity sha512-oIjcYMP8JNY80XZIQCGNfS57rktunfF3bivLiuTZdSUyptTcsbItT0DMxTdkbbWxHxsa0F1uGMxb2vVhYP07mQ==
+"@google-cloud/tasks@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/tasks/-/tasks-3.2.0.tgz#1f2b4e87cce004ad547fc7969b84a0151e607eee"
+  integrity sha512-PsJnIBNulElxPGvD94Q4ItcZ+wP2iYawcSJac1trYRq65r3IeDcFr4JAEL9XBYQhNY6OE7qzDXRoj61h7kJf5A==
   dependencies:
     google-gax "^3.5.8"
 
@@ -1744,16 +1744,15 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/utils@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/utils/-/utils-0.7.0.tgz#d6521da589a575f43a522dae07ad5abd2e774702"
-  integrity sha512-05nvCOKeno+2X0aJ/LaS0eTbXrWFt6g8PRDuTCI73jJWySIgJae6LyoDMrZdjpnPpVvI7c8trfkiFQ97LK15UA==
+"@skeet-framework/utils@^0.8.3":
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/utils/-/utils-0.8.3.tgz#5361f756bd64fc415f8c8a7cae00025587030bdd"
+  integrity sha512-3t+f/LIsoDJejnxIovydMq+oNRM9K5zh/XKGXVq+XymQrxHhZm/W2Q00QOvfXuk+YXd1BZQbD2335bq8GFeNIw==
   dependencies:
     "@apollo/server" "4.8.1"
-    "@google-cloud/tasks" "3.1.2"
+    "@google-cloud/tasks" "3.2.0"
     "@jcm/nexus-plugin-relay-global-id" "0.2.0"
     "@jcm/nexus-plugin-relay-node-interface" "0.2.0"
-    crypto "1.0.1"
     date-fns "2.30.0"
     date-fns-tz "2.0.0"
     dotenv "16.3.1"
@@ -3487,11 +3486,6 @@ crypto-random-string@^4.0.0:
   integrity sha512-x8dy3RnvYdlUcPOjkEHqozhiwzKNSq7GcPuXFbnyMOCHxX8V3OgIg/pYuabl2sbUPfIJaeAQB7PMOK8DFIdoRA==
   dependencies:
     type-fest "^1.0.1"
-
-crypto@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
-  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
 csv-parse@^5.0.4:
   version "5.4.0"

@@ -1,7 +1,6 @@
 import { program } from '@/index'
 import { curl } from './curl'
 import { importConfig } from '@/lib'
-
 export const curlCommands = async () => {
   program
     .command('curl')
