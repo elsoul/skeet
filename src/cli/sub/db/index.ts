@@ -4,6 +4,7 @@ import { dbGen } from './dbGen'
 import { dbDeploy } from './dbDeploy'
 import { dbReset } from './dbReset'
 import { dbSeed } from './dbSeed'
+import { dbStudio } from './dbStudio'
 
 export const dbSubCommands = async () => {
   const db = program.command('db').description('Database commands')
@@ -45,6 +46,6 @@ export const dbSubCommands = async () => {
     .description('Prisma DB Studio command')
     .option('-p, --production', 'Production mode', false)
     .action(async (options) => {
-      await dbSeed(options.production)
+      await dbStudio(options.production)
     })
 }
