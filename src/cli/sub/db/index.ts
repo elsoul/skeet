@@ -40,4 +40,11 @@ export const dbSubCommands = async () => {
     .action(async (options) => {
       await dbSeed(options.production)
     })
+
+  db.command('studio')
+    .description('Prisma DB Studio command')
+    .option('-p, --production', 'Production mode', false)
+    .action(async (options) => {
+      await dbSeed(options.production)
+    })
 }
