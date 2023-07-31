@@ -1,7 +1,6 @@
-import { Logger } from '@/lib/logger'
 import { GRAPHQL_PATH, PRISMA_SCHEMA_PATH } from '@/index'
-import { toLowerCase } from '@skeet-framework/utils'
 import { readFileSync, writeFileSync } from 'fs'
+import { convertFromKebabCaseToLowerCase } from '@/utils/string'
 
 export type ModelSchema = {
   name: string
@@ -72,7 +71,9 @@ export const syncEnumFile = async () => {
   ]
   for await (const enumName of enums) {
     fileBody.push(
-      `export const ${await toLowerCase(enumName)}Enum = enumType(${enumName})`
+      `export const ${convertFromKebabCaseToLowerCase(
+        enumName
+      )}Enum = enumType(${enumName})`
     )
   }
   writeFileSync(`${GRAPHQL_PATH}/enums.ts`, fileBody.join('\n'), {

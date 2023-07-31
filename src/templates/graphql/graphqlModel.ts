@@ -1,6 +1,6 @@
 import { getColumns, getEnumCols, ModelSchema } from '@/lib'
-import { toLowerCase } from '@skeet-framework/utils'
 import { GRAPHQL_PATH } from '@/index'
+import { toLowerCase } from '@/utils/string'
 
 export type ModelSchemaArray = Array<ModelSchema>
 

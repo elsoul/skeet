@@ -1,6 +1,6 @@
 import { getColType, ColType, getColumns } from '@/lib'
 import { GRAPHQL_PATH } from '@/index'
-import { toUpperCase, toLowerCase } from '@skeet-framework/utils'
+import { toLowerCase, toUpperCase } from '@/utils/string'
 
 export const graphqlMutation = async (modelName: string) => {
   const filePath = GRAPHQL_PATH + '/modelManager/' + modelName + '/mutation.ts'

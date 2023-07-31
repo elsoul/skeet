@@ -24,3 +24,11 @@ export const toCamelCase = (str: string) => {
     })
     .join('')
 }
+
+export const toUpperCase = async (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export const toLowerCase = async (str: string) => {
+  return str.charAt(0).toLowerCase() + str.slice(1)
+}

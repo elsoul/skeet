@@ -2,7 +2,8 @@ import { program } from '@/index'
 import { Logger, importConfig } from '@/lib'
 import { inspect } from 'util'
 import { sendGraphqlRequest } from './post'
-import { QueryType } from '@skeet-framework/utils'
+
+type QueryType = 'query' | 'mutation'
 
 export const postCommands = async () => {
   program

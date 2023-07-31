@@ -1,5 +1,5 @@
 import { GRAPHQL_PATH } from '@/index'
-import { toUpperCase, toLowerCase } from '@skeet-framework/utils'
+import { toUpperCase, toLowerCase } from '@/utils/string'
 
 export const graphqlQuery = async (modelName: string) => {
   const filePath = GRAPHQL_PATH + '/modelManager/' + modelName + '/query.ts'
