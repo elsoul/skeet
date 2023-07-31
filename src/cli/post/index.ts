@@ -7,7 +7,7 @@ import { QueryType } from '@skeet-framework/utils'
 export const postCommands = async () => {
   program
     .command('post')
-    .description('Skeet Post Command - Call Skeet GraphQL Endpoint for Dev')
+    .description('Skeet Post Command - Call Skeet GraphQL Endpoint')
     .argument('<queryType>', 'Query Type - e.g. mutation or query')
     .option('-q,--queryName [queryName]', 'Query Name - e.g. createUser')
     .option(

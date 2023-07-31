@@ -8,10 +8,11 @@ import { deployGraphql } from './deployGraphql'
 
 export const deploy = async () => {
   const functions = await getFunctions()
-  const functionsArray: Array<{ [key: string]: string }> = [
-    { name: 'graphql' },
-    { name: 'webApp' },
-  ]
+  const functionsArray: Array<{ [key: string]: string }> = [{ name: 'webApp' }]
+  const { app } = await importConfig()
+  if (app.template.includes('GraphQL')) {
+    functionsArray.push({ name: 'graphql' })
+  }
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }

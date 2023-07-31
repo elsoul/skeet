@@ -4,7 +4,7 @@ import { importConfig } from '@/lib'
 export const curlCommands = async () => {
   program
     .command('curl')
-    .description('Skeet Curl Command - Call Cloud Functions Endpoint for Dev')
+    .description('Skeet Curl Command - Call Firebase Functions Endpoint')
     .argument(
       '<methodName>',
       'Method Name - e.g. skeet curl createUserChatRoom'

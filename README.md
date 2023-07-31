@@ -86,8 +86,9 @@ $ skeet create <appName>
 
 You can choose a template for the frontend.
 
-- [Next.js (React) template](https://github.com/elsoul/skeet-next)
-- [Expo (React Native) template](https://github.com/elsoul/skeet-app)
+- [Next.js (React) with GraphQL template](https://github.com/elsoul/skeet-graphql)
+- [Next.js (React) with Firestore template](https://github.com/elsoul/skeet-next)
+- [Expo (React Native) with Firestore template](https://github.com/elsoul/skeet-app)
 
 ※ This tutorial uses the Expo version, but you can use the same procedure even using the Next.js version.
 
@@ -287,18 +288,21 @@ Options:
 
 Commands:
   create <appName>             Create Skeet Framework App
-  server|s                     Run Firebase Emulator for Skeet APP
-  deploy                       Deploy Skeet APP to Firebase Cloud Functions
+  server|s                     Run Skeet App
+  deploy                       Deploy Skeet APP to Firebase
   init [options]               Initialize Google Cloud Setups for Skeet APP
-  iam                          Skeet IAM Comannd to setup Google Cloud Platform
   yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
+  login [options]              Skeet Login Command - Create Firebase Login Token
+  curl [options] <methodName>  Skeet Curl Command - Call Cloud Functions Endpoint for Dev
+  post [options] <queryType>   Skeet Post Command - Call Skeet GraphQL Endpoint for Dev
+  g|generate                   Skeet Generate Comannd
+  docker                       Docker commands
+  db                           Database commands
+  iam                          Skeet IAM Comannd to setup Google Cloud Platform
   add                          Skeet Add Comannd to add new functions
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
-  login [options]              Skeet Login Command - Create Firebase Login Token
-  get                          Get Skeet App List
-  curl [options] <methodName>  Skeet Curl Command - Call Cloud Functions Endpoint for Dev
-  test                         Skeet Jest Test Command
+  list                         Get Skeet App List
   help [command]               display help for command
 ```
 

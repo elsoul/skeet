@@ -69,15 +69,17 @@ export const init = async (loginMode = false) => {
     nsDomain: '',
     lbDomain: '',
   }
+
   let sqlPassword = ''
+  const hasGraphQL = skeetConfig.app.template.includes('GraphQL')
 
   // Ask SQL Password if SQL is not exists
   const { instanceName } = await getNetworkConfig(
     skeetConfig.app.projectId,
     skeetConfig.app.name
   )
-  const isDbExists = await isSQLexists(projectId, instanceName)
-  if (!isDbExists) {
+
+  if (hasGraphQL && !(await isSQLexists(projectId, instanceName))) {
     sqlPassword = await askForSqlPassword()
   }
 
@@ -90,7 +92,7 @@ export const init = async (loginMode = false) => {
   await setupCloud(skeetConfig, githubRepo, skeetConfig.app.region)
 
   // Setup Cloud SQL
-  if (!isDbExists) await setupSQL(skeetConfig, sqlPassword)
+  if (sqlPassword !== '') await setupSQL(skeetConfig, sqlPassword)
 
   // Deploy Default Firebase Functions
   await yarnBuild(DEFAULT_FUNCTION_NAME)
@@ -101,7 +103,7 @@ export const init = async (loginMode = false) => {
   await genGithubActions()
 
   // Deploy GraphQL if template includes GraphQL
-  if (skeetConfig.app.template.includes('GraphQL')) {
+  if (hasGraphQL) {
     await deployGraphql(skeetConfig)
     await syncRunUrl()
     await setupActions()
