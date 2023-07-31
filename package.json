@@ -9,7 +9,8 @@
     "firestore",
     "firebase",
     "GCP",
-    "TypeScript"
+    "TypeScript",
+    "GraphQL"
   ],
   "author": "ELSOUL LABO B.V.",
   "private": false,
