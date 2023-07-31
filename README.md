@@ -82,7 +82,7 @@ $ npm install -g firebase-tools
 $ skeet create <appName>
 ```
 
-![Skeet Create Command](https://storage.googleapis.com/skeet-assets/imgs/samples/SkeetCreateSelectTemplate.png)
+![Skeet Create Command](https://storage.googleapis.com/skeet-assets/imgs/backend/skeet-createv0.21.png)
 
 You can choose a template for the frontend.
 
@@ -106,6 +106,12 @@ Now you have both frontend and backend running locally ⭐️
 📲 Frontend(Expo) - [http://localhost:19006/](http://localhost:19006/)
 
 💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
+
+If you choose GraphQL template, you can use GraphQL Playground
+
+📊 GraphQL Playground - [http://localhost:3000/graphql](http://localhost:3000/graphql)
+
+![Skeet Create GraphQL](https://storage.googleapis.com/skeet-assets/animation/skeet-create-v0.21.gif)
 
 **⚠️ You need to finish _Activate Skeet ChatApp_ step to fully use default Skeet App ⚠️**
 
@@ -162,7 +168,7 @@ Run _skeet init_ command and select your GCP Project ID and Regions to setup.
 Then, please visit the URL to authenticate your Firebase account.
 
 ```bash
-$ skeet init --only-dev
+$ skeet init --login
 ? What's your GCP Project ID skeet-demo
 ? Select Regions to deploy
   europe-west1
@@ -212,6 +218,13 @@ $ skeet add secret CHAT_GPT_KEY
 
 You can also write it in _functions/openai/.env_ to try it easily,
 This method does not translate to production environments.
+
+If you chose GraphQL template, you need to set the GraphQL Endpoint as well.
+
+```bash
+$ skeet add secret SKEET_GRAPHQL_ENDPOINT_URL
+? Enter value for SKEET_GRAPHQL_ENDPOINT_URL: https://your.domain.com/graphql
+```
 
 #### - Create OpenAI API Key
 

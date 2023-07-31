@@ -30,6 +30,28 @@ export const skeetCloudConfigGen = async (
           },
         ]
       : []
+  const cloudRunBody =
+    template === SkeetTemplate.NextJsGraphQL
+      ? {
+          name: `skeet-${appName}-graphql`,
+          url: '',
+          cpu: 1,
+          maxConcurrency: 80,
+          maxInstances: 100,
+          minInstances: 0,
+          memory: '4Gi',
+        }
+      : {}
+  const dbBody =
+    template === SkeetTemplate.NextJsGraphQL
+      ? {
+          databaseVersion: 'POSTGRES_15',
+          cpu: 1,
+          memory: '3840MiB',
+          storageSize: 10,
+          whiteList: '',
+        }
+      : {}
   const body = `{
   "app": {
     "name": "${appName}",
@@ -40,22 +62,8 @@ export const skeetCloudConfigGen = async (
     "nsDomain": "your-nameserver.com",
     "lbDomain": "loadbalancer.your-app-url.com"
   },
-  "cloudRun": {
-    "name": "skeet-${appName}-graphql",
-    "url": "",
-    "cpu": 1,
-    "maxConcurrency": 80,
-    "maxInstances": 100,
-    "minInstances": 0,
-    "memory": "4Gi"
-  },
-  "db": {
-    "databaseVersion": "POSTGRES_15",
-    "cpu": 1,
-    "memory": "3840MiB",
-    "storageSize": 10,
-    "whiteList": ""
-  },
+  "cloudRun": ${cloudRunBody},
+  "db": ${dbBody},
   "taskQueues": ${JSON.stringify(taskQueues)},
   "cloudArmor": [
     {
