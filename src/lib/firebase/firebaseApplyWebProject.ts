@@ -1,4 +1,4 @@
-import { execSync } from 'child_process'
+import { spawnSync } from 'child_process'
 
 export const firebaseApplyWebProject = async (
   projectId: string,
@@ -12,7 +12,7 @@ export const firebaseApplyWebProject = async (
       projectId,
       appDisplayName,
     ]
-    execSync(shCmd.join(' '))
+    spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit' })
     return true
   } catch (error) {
     throw new Error(`firebaseApplyWebProject: ${error}`)

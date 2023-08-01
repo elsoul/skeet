@@ -25,10 +25,7 @@ import {
   askForProjectId,
   askForSqlPassword,
 } from './askQuestions'
-import {
-  addProjectRegionToSkeetOptions,
-  copyDefaultFirebaseConfig,
-} from '@/lib/files/addJson'
+import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { genGithubActions } from '../gen'
 import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
@@ -52,9 +49,6 @@ export const init = async (loginMode = false) => {
   )
   const defaultAppDisplayName = fbProjectId
   await addFirebaseApp(fbProjectId, defaultAppDisplayName)
-  await copyDefaultFirebaseConfig(defaultAppDisplayName)
-  const firebaserc = await fileDataOf.firebasercInit(fbProjectId)
-  writeFileSync(firebaserc.filePath, firebaserc.body)
   if (loginMode) return
 
   const skeetConfig = await importConfig()

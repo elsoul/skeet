@@ -1,40 +1,62 @@
 {
   "app": {
-    "name": "skeet-app",
-    "region": "asia-east1",
-    "appUrl": "",
-    "appDomain": "skeet.dev",
-    "lbDomain": "lb.skeet.dev",
-    "projectId": "skeet-app",
+    "name": "nextjs-graphql",
+    "projectId": "nextjs-graphql-394610",
+    "template": "Next.js (React) - GraphQL",
+    "region": "europe-west6",
+    "appDomain": "app.your-app-url.com",
+    "nsDomain": "your-nameserver.com",
+    "lbDomain": "loadbalancer.your-app-url.com",
+    "functionsDomain": "functions.your-app-url.com",
     "hasLoadBalancer": false,
-    "secretKeys": []
+    "fbProjectId": "nextjs-graphql-394610"
   },
+  "cloudRun": {
+    "name": "skeet-nextjs-graphql-graphql",
+    "url": "",
+    "cpu": 1,
+    "maxConcurrency": 80,
+    "maxInstances": 100,
+    "minInstances": 0,
+    "memory": "4Gi"
+  },
+  "db": {
+    "databaseVersion": "POSTGRES_15",
+    "cpu": 1,
+    "memory": "3840MiB",
+    "storageSize": 10,
+    "whiteList": ""
+  },
+  "taskQueues": [
+    {
+      "queueName": "createUser",
+      "location": "europe-west6",
+      "maxAttempts": 3,
+      "maxConcurrent": 1,
+      "maxRate": 1,
+      "maxInterval": "10s",
+      "minInterval": "1s"
+    },
+    {
+      "queueName": "createChatRoomMessage",
+      "location": "europe-west6",
+      "maxAttempts": 3,
+      "maxConcurrent": 1,
+      "maxRate": 1,
+      "maxInterval": "10s",
+      "minInterval": "1s"
+    }
+  ],
   "cloudArmor": [
     {
-      "securityPolicyName": "skeet-skeet-example-armor",
+      "securityPolicyName": "skeet-nextjs-graphql-armor",
       "rules": [
         {
           "priority": "10",
           "description": "Allow Your Home IP addresses",
           "options": {
-            "src-ip-ranges": "x.x.x.x",
+            "src-ip-ranges": "212.123.218.234",
             "action": "allow"
-          }
-        },
-        {
-          "priority": "100",
-          "description": "Defense from SQLi attack",
-          "options": {
-            "action": "deny-403",
-            "expression": "evaluatePreconfiguredExpr('sqli-stable')"
-          }
-        },
-        {
-          "priority": "200",
-          "description": "Defense from XSS attack",
-          "options": {
-            "action": "deny-403",
-            "expression": "evaluatePreconfiguredExpr('xss-stable')"
           }
         },
         {

@@ -64,10 +64,19 @@ export const addAppJson = (repoName: string) => {
 }
 
 export const copyDefaultFirebaseConfig = async (appDisplayName: string) => {
-  const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}.mjs`
-  const defaultFirebaseConfigPath = `./lib/firebaseConfig.mjs`
-  await copyFileWithOverwrite(
-    originalFirebaseConfigPath,
-    defaultFirebaseConfigPath
-  )
+  try {
+    const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}.ts`
+    const defaultFirebaseConfigPath = `./lib/firebaseConfig.mjs`
+    const defaultFirebaseTsConfigPath = `./lib/firebaseConfig.ts`
+    await copyFileWithOverwrite(
+      originalFirebaseConfigPath,
+      defaultFirebaseConfigPath
+    )
+    await copyFileWithOverwrite(
+      originalFirebaseConfigPath,
+      defaultFirebaseTsConfigPath
+    )
+  } catch (error) {
+    throw new Error(`Error copying default firebase config: ${error}`)
+  }
 }
