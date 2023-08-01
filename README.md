@@ -23,14 +23,19 @@
 
 ## Skeet - Open-Source Serverless App Framework for efficient development
 
-Skeet is an Open-Source Serverless Framework for zero-maintenance apps on Firebase 🔥
+Skeet is an Open-Source Serverless Framework for zero-maintenance apps on Firebase and Google Cloud 🔥
 
-- [TypeScript - TypeCheck](https://www.typescriptlang.org/)
 - [Firebase - Serverless Platform](https://firebase.google.com/)
 - [Firestore - NoSQL Database](https://firebase.google.com/docs/firestore)
 - [Firebase Cloud Functions 2nd Gen - FaaS](https://firebase.google.com/docs/functions)
 - [Firebase Storage - Cloud Storage](https://firebase.google.com/docs/storage)
 - [Firebase Authentication - Auth](https://firebase.google.com/docs/auth)
+- [Cloud SQL - Relational Database](https://cloud.google.com/sql)
+- [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
+- [Prisma - ORM](https://www.prisma.io/)
+- [GraphQL - Query Language](https://graphql.org/)
+- [Apollo - GraphQL Server](https://www.apollographql.com/)
+- [TypeScript - TypeCheck](https://www.typescriptlang.org/)
 - [Jest - Test](https://jestjs.io/)
 - [ESLint - Linter](https://eslint.org/)
 - [Prettier - Formatter](https://prettier.io/)
@@ -245,6 +250,7 @@ $ skeet s
 Run Skeet App locally and access to
 
 [http://localhost:19006/register](http://localhost:19006/register)
+(with Next.js: [http://localhost:4200/auth/register](http://localhost:4200/auth/register))
 
 Let's create a new user account with your email address and password.
 
@@ -268,7 +274,8 @@ Successfully verified your email address.
 
 After login, access this page to create a chat room.
 
-[http://localhost:19006/rooms](http://localhost:19006/rooms)
+[http://localhost:19006/user/open-ai-chat](http://localhost:19006/user/open-ai-chat)
+(with Next.js: [http://localhost:4200/user/chat](http://localhost:4200/user/chat))
 
 Let's create a chat room with the following settings.
 
