@@ -9,12 +9,10 @@ import {
   getNetworkConfig,
   setupCloud,
 } from '@/lib'
-import * as fileDataOf from '@/templates/init'
 import { addFirebaseApp } from '../sub/add/addFirebaseApp'
 import { yarnBuild } from '../yarn/yarnBuild'
 import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
 import { deployRules } from '../deploy/deployRules'
-import { writeFileSync } from 'fs'
 import { deployGraphql } from '../deploy/deployGraphql'
 import { syncRunUrl } from '../sub/sync/syncRunUrl'
 import { setupSQL } from '@/lib/setup/setupSQL'
@@ -72,7 +70,7 @@ export const init = async (loginMode = false) => {
     skeetConfig.app.name
   )
 
-  if (hasGraphQL && !(await isSQLexists(projectId, instanceName))) {
+  if (hasGraphQL && !(await isSQLexists())) {
     sqlPassword = await askForSqlPassword()
   }
 

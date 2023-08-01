@@ -7,7 +7,7 @@ import { writeFileSync } from 'fs'
 export const addIp = async () => {
   const homeIp = await getHomeIp()
   await addHomeIpToSkeetConfig(homeIp)
-  Logger.success(`Successfully added ${homeIp} to DB white list!\n`)
+  Logger.successCheck(`Successfully added ${homeIp} to DB white list`)
 }
 
 export const getHomeIp = async () => {

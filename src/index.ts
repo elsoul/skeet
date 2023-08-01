@@ -19,6 +19,9 @@ import {
   genCommands,
   postCommands,
 } from '@/cli'
+import { isSQLexists } from './lib'
+import { addIp } from './cli/sub/add/addIp'
+import { skeetTest } from './cli/test/test'
 
 export const GRAPHQL_ROOT = './graphql'
 export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
@@ -56,6 +59,10 @@ async function main() {
     await syncSubCommands()
     await deleteSubCommands()
     await listSubCommands()
+    program.command('test').action(async () => {
+      console.log('test start')
+      await skeetTest()
+    })
 
     await program.parseAsync(process.argv)
   } catch (error) {

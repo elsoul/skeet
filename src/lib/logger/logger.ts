@@ -151,7 +151,7 @@ Go To : http://127.0.0.1:4000/`
       `\n⚠️ Please make sure if you create Firestore & FirebaseAuth ⚠️\n`
     )
     Logger.normal(`Click the link to check 👇`)
-    if (template.includes('GraphQL')) {
+    if (!template.includes('GraphQL')) {
       Logger.normal(
         `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`
       )

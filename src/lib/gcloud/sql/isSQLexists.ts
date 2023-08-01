@@ -1,10 +1,11 @@
-import { execSync } from 'child_process'
+import { importConfig } from '@/lib/files'
 
-export const isSQLexists = async (projectId: string, instanceName: string) => {
+export const isSQLexists = async () => {
   try {
-    const cmd = `gcloud sql instances describe ${instanceName} --project ${projectId}`
-    const dbExists = String(execSync(cmd))
-    return dbExists.includes('state: RUNNABLE')
+    const { db } = await importConfig()
+    if (db.whiteList !== '') return true
+
+    return false
   } catch (error) {
     return false
   }

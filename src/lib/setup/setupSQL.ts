@@ -7,7 +7,6 @@ import { addIp } from '@/cli/sub/add/addIp'
 import { dbDeploy } from '@/cli/sub/db/dbDeploy'
 import { addEnvSync } from '../git'
 import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
-import { setupCloud } from './setupCloud'
 
 export const setupSQL = async (
   skeetConfig: SkeetCloudConfig,
@@ -20,8 +19,8 @@ export const setupSQL = async (
       skeetConfig.app.region
     )
     await initSql(skeetConfig, sqlPassword)
-    await sqlIp()
     await addIp()
+    await sqlIp()
     await dbDeploy(true)
     await addEnvSync(GRAPHQL_ENV_PRODUCTION_PATH)
     return true
