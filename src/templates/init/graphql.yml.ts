@@ -66,7 +66,7 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/skeet-graphql-test?schema=public
         run: |
           sudo apt-get -yqq install libpq-dev
-          cd apps/api
+          cd graphql
           rm -f .env
           yarn install --jobs 4 --retry 3
           npx prisma generate
