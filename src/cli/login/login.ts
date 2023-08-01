@@ -74,11 +74,11 @@ export const graphqlLogExport = async (accessToken: string) => {
   Logger.normal(exportLog)
   Logger.warning('🚸 =========           END           ========= 🚸\n\n')
 
-  const successLog = `💃Let's try \`$ skeet post <QueryType>\` to test request🕺\n`
-  Logger.normal(successLog)
-  const curlText =
-    '$ skeet post mutation -q createChatRoom\n     or     \n$ skeet post mutation -q createChatRoom -b \'{ "model": "gpt-3.5-turbo", "maxTokens": 420 }\' -r \'id,model\''
-  Logger.normal(curlText)
+  // const successLog = `💃Let's try \`$ skeet post <QueryType>\` to test request🕺\n`
+  // Logger.normal(successLog)
+  // const curlText =
+  //   '$ skeet post mutation -q createChatRoom\n     or     \n$ skeet post mutation -q createChatRoom -b \'{ "model": "gpt-3.5-turbo", "maxTokens": 420 }\' -r \'id,model\''
+  // Logger.normal(curlText)
 }
 
 export const firebaseConfigLogExport = async () => {

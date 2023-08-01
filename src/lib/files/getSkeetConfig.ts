@@ -55,7 +55,7 @@ export const getNetworkConfig = async (projectId: string, appName: string) => {
     ipName: skeetHd + '-external-ip',
     loadBalancerIpName: skeetHd + '-lb-ip',
     ipRangeName: skeetHd + '-ip-range',
-    serviceAccountName: `${projectId}@${projectId}.iam.gserviceaccount.com`,
+    serviceAccountName: `${appName}@${projectId}.iam.gserviceaccount.com`,
     networkEndpointGroupName: `${skeetHd}-neg`,
     defaultBackendServiceName: `${skeetHd}-default-bs`,
     backendServiceName: `${skeetHd}-bs`,

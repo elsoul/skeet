@@ -17,11 +17,8 @@ import {
   loginCommands,
   curlCommands,
   genCommands,
-  postCommands,
+  testCommands,
 } from '@/cli'
-import { isSQLexists } from './lib'
-import { addIp } from './cli/sub/add/addIp'
-import { skeetTest } from './cli/test/test'
 
 export const GRAPHQL_ROOT = './graphql'
 export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
@@ -42,6 +39,7 @@ dotenv.config()
 
 async function main() {
   try {
+    await testCommands()
     await createCommands()
     await serverCommands()
     await deployCommands()
@@ -49,7 +47,6 @@ async function main() {
     await yarnCommands()
     await loginCommands()
     await curlCommands()
-    await postCommands()
     await genCommands()
 
     await dockerSubCommands()
@@ -59,10 +56,6 @@ async function main() {
     await syncSubCommands()
     await deleteSubCommands()
     await listSubCommands()
-    program.command('test').action(async () => {
-      console.log('test start')
-      await skeetTest()
-    })
 
     await program.parseAsync(process.argv)
   } catch (error) {

@@ -19,8 +19,11 @@ import {
   getNetworkConfig,
   Logger,
   getFunctionInfo,
+  importConfig,
+  SKEET_CONFIG_PATH,
 } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
+import { writeFileSync } from 'fs'
 
 export const setupLoadBalancer = async (
   config: SkeetCloudConfig,
@@ -55,6 +58,14 @@ export const setupLoadBalancer = async (
     await createSsl(config.app.projectId, config.app.name, lbDomain)
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
+
+    await createSecurityPolicy(config.app.projectId, config.app.name)
+    await updateBackend(
+      config.app.projectId,
+      config.app.name,
+      defaultBackendServiceName
+    )
+
     let paths = []
 
     // Create GraphQL Endpoint if template includes graphql
@@ -72,12 +83,8 @@ export const setupLoadBalancer = async (
       paths,
       true
     )
-    await createSecurityPolicy(config.app.projectId, config.app.name)
-    await updateBackend(
-      config.app.projectId,
-      config.app.name,
-      defaultBackendServiceName
-    )
+
+    await hasLoadBalancerTrue()
 
     const ip = await getIp(config.app.projectId, networkConf.loadBalancerIpName)
     await createZone(config.app.projectId, config.app.name, nsDomain)
@@ -86,5 +93,15 @@ export const setupLoadBalancer = async (
   } catch (error) {
     Logger.error(`setupLoadBalancer error: ${JSON.stringify(error)}`)
     process.exit(1)
+  }
+}
+
+const hasLoadBalancerTrue = async () => {
+  try {
+    let skeetConfig: SkeetCloudConfig = await importConfig()
+    skeetConfig.app.hasLoadBalancer = true
+    writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+  } catch (error) {
+    throw new Error(`hasLoadBalancerTrue error: ${JSON.stringify(error)}`)
   }
 }
