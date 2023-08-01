@@ -62,10 +62,11 @@ export const skeetCloudConfigGen = async (
     "nsDomain": "your-nameserver.com",
     "lbDomain": "loadbalancer.your-app-url.com",
     "functionsDomain": "functions.your-app-url.com",
+    "hasLoadBalancer": false
   },
-  "cloudRun": ${JSON.stringify(cloudRunBody)},
-  "db": ${JSON.stringify(dbBody)},
-  "taskQueues": ${JSON.stringify(taskQueues)},
+  "cloudRun": ${JSON.stringify(cloudRunBody, null, 2)},
+  "db": ${JSON.stringify(dbBody, null, 2)},
+  "taskQueues": ${JSON.stringify(taskQueues, null, 2)},
   "cloudArmor": [
     {
       "securityPolicyName": "skeet-${appName}-armor",
