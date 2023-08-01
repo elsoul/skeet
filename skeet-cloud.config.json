@@ -55,7 +55,7 @@
           "priority": "10",
           "description": "Allow Your Home IP addresses",
           "options": {
-            "src-ip-ranges": "212.123.218.234",
+            "src-ip-ranges": "",
             "action": "allow"
           }
         },

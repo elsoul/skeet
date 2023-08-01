@@ -65,12 +65,6 @@ export const init = async (loginMode = false) => {
   let sqlPassword = ''
   const hasGraphQL = skeetConfig.app.template.includes('GraphQL')
 
-  // Ask SQL Password if SQL is not exists
-  const { instanceName } = await getNetworkConfig(
-    skeetConfig.app.projectId,
-    skeetConfig.app.name
-  )
-
   if (hasGraphQL && !(await isSQLexists())) {
     sqlPassword = await askForSqlPassword()
   }

@@ -111,7 +111,7 @@ If you choose GraphQL template, you can use GraphQL Playground
 
 📊 GraphQL Playground - [http://localhost:3000/graphql](http://localhost:3000/graphql)
 
-![Skeet Create GraphQL](https://storage.googleapis.com/skeet-assets/animation/skeet-create-v0.21.gif)
+![Skeet GraphQL](https://storage.googleapis.com/skeet-assets/animation/skeet-db-studio.gif)
 
 **⚠️ You need to finish _Activate Skeet ChatApp_ step to fully use default Skeet App ⚠️**
 
