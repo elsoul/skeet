@@ -21,6 +21,7 @@ export type AppConfig = {
   appDomain: string
   nsDomain: string
   lbDomain: string
+  functionsDomain: string
   hasLoadBalancer: boolean
 }
 

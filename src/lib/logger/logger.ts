@@ -143,14 +143,19 @@ Go To : http://127.0.0.1:4000/`
     Logger.normal(`\n📗 Doc: https://skeet.dev`)
   }
 
-  export const confirmIfFirebaseSetupLog = (projectId: string) => {
+  export const confirmIfFirebaseSetupLog = (
+    projectId: string,
+    template: string
+  ) => {
     Logger.warning(
       `\n⚠️ Please make sure if you create Firestore & FirebaseAuth ⚠️\n`
     )
     Logger.normal(`Click the link to check 👇`)
-    Logger.normal(
-      `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`
-    )
+    if (template.includes('GraphQL')) {
+      Logger.normal(
+        `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`
+      )
+    }
     Logger.normal(
       `Firebase Auth: https://console.firebase.google.com/project/${projectId}/authentication\n`
     )
@@ -160,8 +165,11 @@ Go To : http://127.0.0.1:4000/`
     Logger.normal(`📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`)
   }
 
-  export const confirmFirebaseSetup = async (fbProjectId: string) => {
-    Logger.confirmIfFirebaseSetupLog(fbProjectId)
+  export const confirmFirebaseSetup = async (
+    fbProjectId: string,
+    template: string
+  ) => {
+    Logger.confirmIfFirebaseSetupLog(fbProjectId, template)
     await questionList.checkIfFirebaseSetup(fbProjectId)
   }
 }

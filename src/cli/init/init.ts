@@ -57,9 +57,8 @@ export const init = async (loginMode = false) => {
   writeFileSync(firebaserc.filePath, firebaserc.body)
   if (loginMode) return
 
-  await Logger.confirmFirebaseSetup(fbProjectId)
-
   const skeetConfig = await importConfig()
+  await Logger.confirmFirebaseSetup(fbProjectId, skeetConfig.app.template)
 
   const githubRepo = await askForGithubRepo()
 
