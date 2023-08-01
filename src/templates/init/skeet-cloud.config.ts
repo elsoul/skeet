@@ -63,8 +63,8 @@ export const skeetCloudConfigGen = async (
     "lbDomain": "loadbalancer.your-app-url.com",
     "functionsDomain": "functions.your-app-url.com",
   },
-  "cloudRun": ${cloudRunBody},
-  "db": ${dbBody},
+  "cloudRun": ${JSON.stringify(cloudRunBody)},
+  "db": ${JSON.stringify(dbBody)},
   "taskQueues": ${JSON.stringify(taskQueues)},
   "cloudArmor": [
     {

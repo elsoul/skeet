@@ -82,7 +82,7 @@ $ npm install -g firebase-tools
 $ skeet create <appName>
 ```
 
-![Skeet Create Command](https://storage.googleapis.com/skeet-assets/imgs/backend/skeet-createv0.21.png)
+![Skeet Create Command](https://storage.googleapis.com/skeet-assets/imgs/backend/skeet-create-v0.22.png)
 
 You can choose a template for the frontend.
 
