@@ -81,11 +81,17 @@ export module Logger {
     console.log(`${row5SKEE}${row5T}`)
   }
 
-  export const welcomText = (appName: string) => {
+  export const welcomText = (appName: string, template: string) => {
     const title = warningHex(
       '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡'
     )
-    const text = `
+    const text = template.includes('GraphQL')
+      ? `
+$ cd ${appName}
+$ skeet docker psql
+$ skeet s
+Go To : http://127.0.0.1:4000/`
+      : `
 $ cd ${appName}
 $ skeet s
 Go To : http://127.0.0.1:4000/`
