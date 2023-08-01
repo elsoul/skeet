@@ -27,6 +27,7 @@ import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { genGithubActions } from '../gen'
 import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
+import { syncRoutings } from '../sub/sync/syncRoutings'
 
 export const init = async (loginMode = false) => {
   // Setup Google Cloud Project
@@ -100,6 +101,8 @@ export const init = async (loginMode = false) => {
     await setupActions()
   }
   // Create Load Balancer if not exists
-  if (!skeetConfig.app.hasLoadBalancer)
+  if (!skeetConfig.app.hasLoadBalancer) {
     await createLoadBalancer(skeetConfig, domainAnswer)
+    await syncRoutings()
+  }
 }
