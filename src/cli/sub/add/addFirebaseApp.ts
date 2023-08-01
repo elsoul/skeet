@@ -44,6 +44,7 @@ export const addFirebaseApp = async (
     await updateFirebaseJson(appDisplayName)
     await rewriteFirebaseConfig(sourceFilePath, targetFilePathTs)
     await rewriteFirebaseConfig(sourceFilePath, targetFilePath)
+    unlinkSync(sourceFilePath)
     await addFirebaseConfigEnv()
 
     return true
@@ -85,7 +86,6 @@ const rewriteFirebaseConfig = async (
     const finalData = `const firebaseConfig = {\n${formattedConfig}\n}\nexport default firebaseConfig;`
 
     writeFileSync(targetFilePath, finalData, 'utf8')
-    unlinkSync(sourceFilePath)
 
     Logger.successCheck(
       `File '${targetFilePath}' has been created successfully`
