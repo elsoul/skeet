@@ -60,7 +60,8 @@ export const skeetCloudConfigGen = async (
     "region": "europe-west6",
     "appDomain": "app.your-app-url.com",
     "nsDomain": "your-nameserver.com",
-    "lbDomain": "loadbalancer.your-app-url.com"
+    "lbDomain": "loadbalancer.your-app-url.com",
+    "functionsDomain": "functions.your-app-url.com",
   },
   "cloudRun": ${cloudRunBody},
   "db": ${dbBody},
