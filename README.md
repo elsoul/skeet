@@ -141,8 +141,8 @@ Add Firebase Project
 - Activate Firebase Authentication
   ![Firebase Authentication](https://storage.googleapis.com/skeet-assets/imgs/backend/create-fb-auth.png)
 
-- Activate Google Sign-in
-  ![Google Sign in](https://storage.googleapis.com/skeet-assets/imgs/backend/enable-fb-auth.png)
+- Activate Email/Password Sign-in
+  ![Email/Password Sign in](https://storage.googleapis.com/skeet-assets/imgs/backend/enable-fb-auth.png)
 
 #### - Activate Firebase Firestore
 
@@ -173,6 +173,9 @@ Run _skeet init_ command and select your GCP Project ID and Regions to setup.
 Then, please visit the URL to authenticate your Firebase account.
 
 ```bash
+// Please login to Google Cloud if you have not
+$ gcloud auth login
+
 $ skeet init --login
 ? What's your GCP Project ID skeet-demo
 ? Select Regions to deploy
