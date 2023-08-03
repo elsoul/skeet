@@ -52,4 +52,5 @@ export const roleList = [
   'roles/secretmanager.admin',
   'roles/cloudtasks.admin',
   'roles/firebaserules.admin',
+  'roles/aiplatform.admin',
 ]
