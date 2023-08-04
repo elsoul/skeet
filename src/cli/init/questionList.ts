@@ -64,6 +64,33 @@ export module questionList {
     },
   ]
 
+  export const projectRegionQuestions = [
+    {
+      type: 'input',
+      name: 'projectId',
+      message: "What's your GCP Project ID",
+      default() {
+        return 'skeet-app-123456'
+      },
+    },
+    {
+      type: 'list',
+      message: 'Select Regions to deploy',
+      name: 'region',
+      choices: [
+        new inquirer.Separator(' 🌏 Regions 🌏 '),
+        ...regionList.map((value) => ({ name: value })),
+      ],
+      validate(answer: string) {
+        if (answer.length < 1) {
+          return 'You must choose at least one service.'
+        }
+
+        return true
+      },
+    },
+  ]
+
   export const templateQuestions = [
     {
       type: 'list',

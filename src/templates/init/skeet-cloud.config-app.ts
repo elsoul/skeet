@@ -1,8 +1,8 @@
 import { Logger } from '@/lib'
 import { existsSync } from 'fs'
 
-export const skeetCloudConfigAppGen = async () => {
-  const appName = process.cwd().split('/')[0]
+export const skeetCloudConfigAppGen = async (app = '') => {
+  const appName = app === '' ? process.cwd().split('/')[0] : app
   const filePath = './skeet-cloud.config.json'
   if (existsSync(filePath)) {
     Logger.error(`File skeet-cloud.config.json already exists.`)

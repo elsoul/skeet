@@ -4,14 +4,23 @@ export const runAddAllRole = async (projectId: string, appName: string) => {
   await addAllRoles(projectId, appName, roleList)
 }
 
+export const runAiRole = async (projectId: string, appName: string) => {
+  const aiRoleList = [
+    'roles/aiplatform.admin',
+    'roles/cloudtranslate.admin',
+    'roles/iam.serviceAccountUser',
+  ]
+  await addAllRoles(projectId, appName, aiRoleList)
+}
+
 export const addAllRoles = async (
   projectId: string,
   appName: string,
   roleList: Array<string>
 ) => {
-  roleList.forEach(async (roleName) => {
+  for await (const roleName of roleList) {
     await addRole(projectId, appName, roleName)
-  })
+  }
 }
 
 export const addRole = async (
@@ -52,4 +61,5 @@ export const roleList = [
   'roles/secretmanager.admin',
   'roles/cloudtasks.admin',
   'roles/firebaserules.admin',
+  'roles/aiplatform.admin',
 ]
