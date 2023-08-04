@@ -1,9 +1,10 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { importConfig } from './importConfig'
-import { readFileSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { SKEET_CONFIG_PATH } from './getSkeetConfig'
 import { Logger } from '../logger'
 import { copyFileWithOverwrite } from './copyFiles'
+import { askForProjectIdAndRegion } from '@/cli'
 
 export const addDomainToConfig = async (
   appDomain: string,
@@ -52,6 +53,30 @@ export const addProjectRegionToSkeetOptions = async (
   writeFileSync(filePath, JSON.stringify(newJsonFile, null, 2))
   writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.successCheck('Successfully Updated skeet-cloud.config.json')
+}
+
+export type SkeetConfigMin = {
+  app: {
+    name: string
+    projectId: string
+    region: string
+  }
+}
+
+export const addProjectRegionToSkeetConfig = async () => {
+  if (existsSync(SKEET_CONFIG_PATH))
+    throw new Error('skeet-cloud.config.json already exists')
+
+  const { projectId, region } = await askForProjectIdAndRegion()
+  const skeetConfigMin: SkeetConfigMin = {
+    app: {
+      name: projectId,
+      projectId,
+      region,
+    },
+  }
+  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfigMin, null, 2))
+  Logger.successCheck('Successfully created ./skeet-cloud.config.json')
 }
 
 export const addAppJson = (repoName: string) => {

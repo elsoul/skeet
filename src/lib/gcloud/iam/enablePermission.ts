@@ -4,13 +4,22 @@ export const runEnableAllPermission = async (projectId: string) => {
   await enableServiceListPermission(projectId, serviceList)
 }
 
+export const enableAiPermissions = async (projectId: string) => {
+  const aiServiceList = [
+    'aiplatform.googleapis.com',
+    'translate.googleapis.com',
+    'secretmanager.googleapis.com',
+  ]
+  await enableServiceListPermission(projectId, aiServiceList)
+}
+
 export const enableServiceListPermission = async (
   projectId: string,
   serviceList: Array<string>
 ) => {
-  serviceList.forEach(async (serviceName) => {
+  for await (const serviceName of serviceList) {
     await enablePermission(projectId, serviceName)
-  })
+  }
 }
 
 export const enablePermission = async (
