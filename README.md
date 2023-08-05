@@ -224,7 +224,7 @@ $ skeet add secret CHAT_GPT_KEY
 ? Enter value for CHAT_GPT_KEY: <yourOpenAIKey>
 ```
 
-You can also write it in _functions/openai/.env_ to try it easily,
+You can also write it in _functions/skeet/.env_ to try it easily,
 This method does not translate to production environments.
 
 If you chose GraphQL template, you need to set the GraphQL Endpoint as well.

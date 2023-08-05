@@ -15,7 +15,8 @@ export const queryCodes = async (modelName: string) => {
   const modelNameLower = await toLowerCase(modelName)
   let codeArray = [
     `import { extendType, nonNull, stringArg } from 'nexus'`,
-    `import { toPrismaId, connectionFromArray } from '@skeet-framework/utils'`,
+    `import { connectionFromArray } from 'graphql-relay'`,
+    `import { toPrismaId } from '@/lib/toPrismaId'`,
     `import { ${modelNameUpper} } from 'nexus-prisma'\n`,
     `export const ${modelNameUpper}sQuery = extendType({`,
     `  type: 'Query',`,

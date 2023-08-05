@@ -9,11 +9,15 @@ import {
 } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { addProjectRegionToSkeetConfig } from '../files/addJson'
+import { projectIdNotExists } from '../gcloud/billing/checkBillingAccount'
 
 export const setupIamAi = async () => {
   try {
     await addProjectRegionToSkeetConfig()
     const config: SkeetCloudConfig = await importConfig()
+    if (await projectIdNotExists(config.app.projectId))
+      Logger.projectIdNotExistsError(config.app.projectId)
+
     await setGcloudProject(config.app.projectId)
     await enableAiPermissions(config.app.projectId)
     await createServiceAccount(config.app.projectId, config.app.name)
@@ -27,10 +31,8 @@ export const setupIamAi = async () => {
 
 export const aiConfigLogExport = async (projectId: string, region: string) => {
   Logger.warning('🚸 === Copy & Paste below command to your terminal === 🚸\n')
-  const exportLog1 = `export GOOGLE_APPLICATION_CREDENTIALS=${process.cwd()}/keyfile.json`
   const exportLog2 = `export GCLOUD_PROJECT=${projectId}`
-  const exportLog3 = `export REGION=${region}\n`
-  Logger.normal(exportLog1)
+  const exportLog3 = `export FIREBASE_CONFIG='{ "locationId": "${region}" }'\n`
   Logger.normal(exportLog2)
   Logger.normal(exportLog3)
   Logger.warning('🚸 =========           END           ========= 🚸\n\n')
