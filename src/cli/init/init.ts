@@ -8,6 +8,9 @@ import {
   isSQLexists,
   getNetworkConfig,
   setupCloud,
+  enableAiPermissions,
+  createServiceAccount,
+  runAiRole,
 } from '@/lib'
 import { addFirebaseApp } from '../sub/add/addFirebaseApp'
 import { yarnBuild } from '../yarn/yarnBuild'
@@ -48,6 +51,10 @@ export const init = async (loginMode = false) => {
   )
   const defaultAppDisplayName = fbProjectId
   await addFirebaseApp(fbProjectId, defaultAppDisplayName)
+  const { app } = await importConfig()
+  await createServiceAccount(projectId, app.name)
+  await enableAiPermissions(projectId)
+  await runAiRole(projectId, app.name)
   if (loginMode) return
 
   const skeetConfig = await importConfig()

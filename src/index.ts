@@ -26,7 +26,7 @@ export const GRAPHQL_ENV_BUILD_PATH = GRAPHQL_ROOT + '/.env.build'
 export const GRAPHQL_PATH = GRAPHQL_ROOT + '/src/graphql'
 export const PRISMA_SCHEMA_PATH = GRAPHQL_ROOT + '/prisma/schema.prisma'
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
-export const DEFAULT_FUNCTION_NAME = 'openai'
+export const DEFAULT_FUNCTION_NAME = 'skeet'
 
 export const program = new Command()
 

@@ -47,3 +47,4 @@ firebase-debug.log
 keyfile.json
 /functions/
 graphql/
+.firebase*
