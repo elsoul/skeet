@@ -11,7 +11,8 @@
     "GCP",
     "TypeScript",
     "GraphQL",
-    "Prisma"
+    "Prisma",
+    "framework"
   ],
   "author": "ELSOUL LABO B.V.",
   "private": false,
