@@ -1,10 +1,11 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { importConfig } from './importConfig'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { SKEET_CONFIG_PATH } from './getSkeetConfig'
+import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from './getSkeetConfig'
 import { Logger } from '../logger'
 import { copyFileWithOverwrite } from './copyFiles'
 import { askForProjectIdAndRegion } from '@/cli'
+import { DEFAULT_FUNCTION_NAME } from '@/index'
 
 export const addDomainToConfig = async (
   appDomain: string,
@@ -91,15 +92,15 @@ export const addAppJson = (repoName: string) => {
 export const copyDefaultFirebaseConfig = async (appDisplayName: string) => {
   try {
     const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}.ts`
-    const defaultFirebaseConfigPath = `./lib/firebaseConfig.mjs`
     const defaultFirebaseTsConfigPath = `./lib/firebaseConfig.ts`
-    await copyFileWithOverwrite(
-      originalFirebaseConfigPath,
-      defaultFirebaseConfigPath
-    )
+    const functionsTsConfigPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/lib/firebaseConfig.ts`
     await copyFileWithOverwrite(
       originalFirebaseConfigPath,
       defaultFirebaseTsConfigPath
+    )
+    await copyFileWithOverwrite(
+      originalFirebaseConfigPath,
+      functionsTsConfigPath
     )
   } catch (error) {
     throw new Error(`Error copying default firebase config: ${error}`)
