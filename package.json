@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "repository": "https://github.com/elsoul/skeet-cli",
@@ -39,7 +39,6 @@
     "commander": "10.0.1",
     "dotenv": "16.0.3",
     "dotenv-cli": "7.2.1",
-    "firebase": "10.1.0",
     "inquirer": "9.2.6",
     "jest": "29.5.0",
     "node-fetch": "2.6.9",
@@ -47,7 +46,7 @@
   },
   "devDependencies": {
     "@stdlib/string-percent-encode": "0.0.9",
-    "@types/cli-spinner": "0.2.1",
+    "@types/cli-spinner": "^0.2.1",
     "@types/inquirer": "9.0.3",
     "@types/jest": "29.5.1",
     "@types/node": "20.2.5",
