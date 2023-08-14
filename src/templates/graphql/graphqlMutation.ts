@@ -22,7 +22,7 @@ export const createModelCodes = async (modelName: string) => {
   const modelNameUpper = await toUpperCase(modelName)
   const modelNameLower = await toLowerCase(modelName)
   let codeArray = [
-    `import { extendType,  stringArg, intArg, floatArg } from 'nexus'`,
+    `import { extendType,  stringArg, intArg, floatArg, BooleanArg } from 'nexus'`,
     `import { toPrismaId } from '@/lib/toPrismaId'`,
     `import { ${modelNameUpper} } from 'nexus-prisma'`,
     `import { GraphQLError } from 'graphql'\n`,
@@ -67,8 +67,9 @@ export const updateModelCodes = async (modelName: string) => {
   codeArray.push(
     '      },',
     `      async resolve(_, args, ctx) {`,
+    `        if (!args.id) throw new GraphQLError('id is required')\n`,
     '        const id = toPrismaId(args.id)',
-    '        let data = JSON.parse(JSON.stringify(args))',
+    '        const data = JSON.parse(JSON.stringify(args))',
     '        delete data.id',
     '        try {',
     `          return await ctx.prisma.${modelNameLower}.update({`,
@@ -98,6 +99,7 @@ export const deleteModelCodes = async (modelName: string) => {
     `      },`,
     '      async resolve(_, { id }, ctx) {',
     '        try {',
+    `          if (!id) throw new GraphQLError('id is required')\n`,
     `          return await ctx.prisma.${modelNameLower}.delete({`,
     '            where: {',
     '              id: toPrismaId(id),',
