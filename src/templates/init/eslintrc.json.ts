@@ -3,7 +3,10 @@ import { SkeetTemplate } from '@/types/skeetTypes'
 export const eslintrcJson = async (appName: string, template: string) => {
   const filePath = `${appName}/.eslintrc.json`
   let body = {}
-  if (template === SkeetTemplate.ExpoFirestore) {
+  if (
+    template === SkeetTemplate.ExpoFirestore ||
+    template === SkeetTemplate.SolanaFirestore
+  ) {
     body = {
       extends: [
         'eslint:recommended',

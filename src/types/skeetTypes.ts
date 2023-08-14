@@ -2,6 +2,7 @@ export enum SkeetTemplate {
   NextJsGraphQL = 'Next.js (React) - GraphQL',
   NextJsFirestore = 'Next.js (React) - Firestore',
   ExpoFirestore = 'Expo (React Native) - Firestore',
+  SolanaFirestore = 'Solana Mobile Stack (Expo) + Web (Next.js) - Firestore',
 }
 
 export type SkeetCloudConfig = {

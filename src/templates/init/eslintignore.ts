@@ -11,10 +11,27 @@ build
 node_modules
 web-build  
   `
-  } else if (
-    template === SkeetTemplate.NextJsFirestore ||
-    template === SkeetTemplate.NextJsGraphQL
-  ) {
+  } else if (template === SkeetTemplate.NextJsFirestore) {
+    body = `
+out
+dist
+build
+node_modules
+web-build
+.next
+  `
+  } else if (template === SkeetTemplate.NextJsGraphQL) {
+    body = `
+out
+dist
+build
+node_modules
+web-build
+.next
+src/__generated__
+src/schema.graphql
+  `
+  } else if (template === SkeetTemplate.SolanaFirestore) {
     body = `
 out
 dist
