@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import { execSyncCmd, getFunctions, FUNCTIONS_PATH } from '@/lib'
+import { execSyncCmd, getFunctions, FUNCTIONS_PATH, WEB_APP_PATH } from '@/lib'
 import { GRAPHQL_ROOT } from '@/index'
 
 export type YarnService = {
@@ -12,7 +12,11 @@ export const yarn = async (
   isDev: boolean = false
 ) => {
   const functions = await getFunctions()
-  const functionsArray: Array<{ [key: string]: string }> = [{ name: 'graphql' }]
+  const functionsArray: Array<{ [key: string]: string }> = [
+    { name: 'graphql' },
+    { name: 'webapp' },
+    { name: 'root' },
+  ]
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }
@@ -75,6 +79,12 @@ const getYarnShCmd = async (
   switch (functionName) {
     case 'graphql':
       shCmd = ['yarn', '--cwd', `${GRAPHQL_ROOT}`, cmd]
+      break
+    case 'webapp':
+      shCmd = ['yarn', '--cwd', `${WEB_APP_PATH}`, cmd]
+      break
+    case 'root':
+      shCmd = ['yarn', cmd]
       break
     default:
       shCmd = ['yarn', '--cwd', `${FUNCTIONS_PATH}/${functionName}`, cmd]
