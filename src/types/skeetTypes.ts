@@ -3,6 +3,7 @@ export enum SkeetTemplate {
   NextJsFirestore = 'Next.js (React) - Firestore',
   ExpoFirestore = 'Expo (React Native) - Firestore',
   SolanaFirestore = 'Solana Mobile Stack (Expo) + Web (Next.js) - Firestore',
+  // SolanaValidator = 'Solana Validator Monitoring Tools',
 }
 
 export type SkeetCloudConfig = {

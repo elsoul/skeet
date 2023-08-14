@@ -22,8 +22,8 @@ export const createModelCodes = async (modelName: string) => {
   const modelNameUpper = await toUpperCase(modelName)
   const modelNameLower = await toLowerCase(modelName)
   let codeArray = [
-    `import { extendType,  stringArg, ntArg, floatArg } from 'nexus'`,
-    `import { toPrismaId } from '@skeet-framework/utils'`,
+    `import { extendType,  stringArg, intArg, floatArg } from 'nexus'`,
+    `import { toPrismaId } from '@/lib/toPrismaId'`,
     `import { ${modelNameUpper} } from 'nexus-prisma'`,
     `import { GraphQLError } from 'graphql'\n`,
     `export const ${modelNameUpper}Mutation = extendType({`,
