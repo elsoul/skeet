@@ -10,9 +10,9 @@ export const login = async () => {
       `yarn`,
       `--cwd`,
       `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`,
-      `yarn`,
       `dev:login`,
     ]
+    console.log(cmd)
     spawnSync(cmd[0], cmd.slice(1), { stdio: 'inherit' })
     return true
   } catch (error) {
