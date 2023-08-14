@@ -3,19 +3,18 @@ import { SkeetTemplate } from '@/types/skeetTypes'
 export const prettierignore = async (appName: string, template: string) => {
   const filePath = `${appName}/.prettierignore`
   let body = ''
-  if (template === SkeetTemplate.ExpoFirestore) {
+  if (
+    template === SkeetTemplate.ExpoFirestore ||
+    template == SkeetTemplate.SolanaFirestore
+  ) {
     body = `
-.next
 out
 dist
 build
-src/__generated__
-src/schema.graphql
-  `
-  } else if (
-    template === SkeetTemplate.NextJsFirestore ||
-    template === SkeetTemplate.NextJsGraphQL
-  ) {
+.expo
+web-build
+`
+  } else if (template === SkeetTemplate.NextJsFirestore) {
     body = `
 out
 dist
@@ -23,6 +22,15 @@ build
 web-build
 .next
   `
+  } else if (template === SkeetTemplate.NextJsGraphQL) {
+    body = `
+.next
+out
+dist
+build
+src/__generated__
+src/schema.graphql
+`
   }
   return {
     filePath,

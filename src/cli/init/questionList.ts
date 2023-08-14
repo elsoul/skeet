@@ -101,6 +101,7 @@ export module questionList {
         { name: SkeetTemplate.NextJsGraphQL },
         { name: SkeetTemplate.NextJsFirestore },
         { name: SkeetTemplate.ExpoFirestore },
+        { name: SkeetTemplate.SolanaFirestore },
       ],
       validate(answer: string) {
         if (answer.length < 1) {

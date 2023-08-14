@@ -24,5 +24,8 @@ export const setupCloud = async (
   if (skeetConfig.app.template === SkeetTemplate.ExpoFirestore) {
     addAppJson(repoName)
   }
+  if (skeetConfig.app.template === SkeetTemplate.SolanaFirestore) {
+    addAppJson(repoName)
+  }
   await setupGcp(skeetConfig, region)
 }

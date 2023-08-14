@@ -13,7 +13,10 @@ export const FUNCTIONS_REPO_URL = 'https://github.com/elsoul/skeet-functions'
 export const APP_REPO_URL = 'https://github.com/elsoul/skeet-app'
 export const GRAPHQL_REPO_PATH = 'https://github.com/elsoul/skeet-graphql'
 export const NEXT_REPO_URL = 'https://github.com/elsoul/skeet-next'
+export const SOLANA_REPO_URL =
+  'https://github.com/elsoul/skeet-solana-mobile-stack'
 export const FRONT_APP_PATH = './src'
+export const WEB_APP_PATH = './webapp'
 export const KEYFILE_PATH = './keyfile.json'
 
 export const genSecret = async (name: string) => {

@@ -7,6 +7,8 @@ import {
   NEXT_REPO_URL,
   FUNCTIONS_PATH,
   GRAPHQL_REPO_PATH,
+  SOLANA_REPO_URL,
+  WEB_APP_PATH,
 } from '@/lib'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
 import inquirer from 'inquirer'
@@ -42,6 +44,8 @@ export const skeetCreate = async (appName: string, template: string) => {
     gitCloneCmd = ['git', 'clone', NEXT_REPO_URL, appName]
   } else if (template === SkeetTemplate.NextJsGraphQL) {
     gitCloneCmd = ['git', 'clone', GRAPHQL_REPO_PATH, appName]
+  } else if (template === SkeetTemplate.SolanaFirestore) {
+    gitCloneCmd = ['git', 'clone', SOLANA_REPO_URL, appName]
   } else {
     gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
   }
@@ -52,6 +56,9 @@ export const skeetCreate = async (appName: string, template: string) => {
     yarnApiCmd,
     `${appDir}/${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`
   )
+  if (template === SkeetTemplate.SolanaFirestore) {
+    await execSyncCmd(yarnApiCmd, `${appDir}/${WEB_APP_PATH}`)
+  }
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
   await sleep(1000)
@@ -76,6 +83,9 @@ export const generateInitFiles = async (appName: string, template: string) => {
   // )
   await initPackageJson(appName)
   if (template === SkeetTemplate.ExpoFirestore) {
+    await initAppJson(appName)
+  }
+  if (template === SkeetTemplate.SolanaFirestore) {
     await initAppJson(appName)
   }
   if (template === SkeetTemplate.NextJsGraphQL) {
