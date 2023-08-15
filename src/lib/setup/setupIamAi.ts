@@ -6,14 +6,19 @@ import {
   enableAiPermissions,
   runAiRole,
   Logger,
+  SKEET_CONFIG_PATH,
 } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { addProjectRegionToSkeetConfig } from '../files/addJson'
 import { projectIdNotExists } from '../gcloud/billing/checkBillingAccount'
+import { existsSync } from 'node:fs'
 
 export const setupIamAi = async () => {
   try {
-    await addProjectRegionToSkeetConfig()
+    if (!existsSync(SKEET_CONFIG_PATH)) {
+      await addProjectRegionToSkeetConfig()
+    }
+    Logger.normal(`Generating AI Permissions...`)
     const config: SkeetCloudConfig = await importConfig()
     if (await projectIdNotExists(config.app.projectId))
       Logger.projectIdNotExistsError(config.app.projectId)
