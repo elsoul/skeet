@@ -1,5 +1,11 @@
 import inquirer from 'inquirer'
-import { execSyncCmd, getFunctions, FUNCTIONS_PATH, WEB_APP_PATH } from '@/lib'
+import {
+  execSyncCmd,
+  getFunctions,
+  FUNCTIONS_PATH,
+  WEB_APP_PATH,
+  importConfig,
+} from '@/lib'
 import { GRAPHQL_ROOT } from '@/index'
 
 export type YarnService = {
@@ -13,10 +19,14 @@ export const yarn = async (
 ) => {
   const functions = await getFunctions()
   const functionsArray: Array<{ [key: string]: string }> = [
-    { name: 'graphql' },
     { name: 'webapp' },
     { name: 'root' },
   ]
+  const { app } = await importConfig()
+  if (app.template.includes('GraphQL')) {
+    functionsArray.push({ name: 'graphql' })
+  }
+
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }

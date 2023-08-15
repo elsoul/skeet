@@ -65,9 +65,6 @@ export type SkeetConfigMin = {
 }
 
 export const addProjectRegionToSkeetConfig = async () => {
-  if (existsSync(SKEET_CONFIG_PATH))
-    throw new Error('skeet-cloud.config.json already exists')
-
   const { projectId, region } = await askForProjectIdAndRegion()
   const skeetConfigMin: SkeetConfigMin = {
     app: {
