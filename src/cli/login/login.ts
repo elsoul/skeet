@@ -10,7 +10,7 @@ export const login = async () => {
       `yarn`,
       `--cwd`,
       `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`,
-      `dev:login`,
+      `fb:login`,
     ]
     console.log(cmd)
     spawnSync(cmd[0], cmd.slice(1), { stdio: 'inherit' })

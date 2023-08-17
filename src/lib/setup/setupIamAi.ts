@@ -37,7 +37,7 @@ export const setupIamAi = async () => {
 export const aiConfigLogExport = async (projectId: string, region: string) => {
   Logger.warning('🚸 === Copy & Paste below command to your terminal === 🚸\n')
   const exportLog2 = `export GCLOUD_PROJECT=${projectId}`
-  const exportLog3 = `export FIREBASE_CONFIG='{ "locationId": "${region}" }'\n`
+  const exportLog3 = `export REGION="${region}"\n`
   Logger.normal(exportLog2)
   Logger.normal(exportLog3)
   Logger.warning('🚸 =========           END           ========= 🚸\n\n')
