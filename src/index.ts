@@ -19,6 +19,7 @@ import {
   genCommands,
   testCommands,
 } from '@/cli'
+import { aiCommands } from './cli/ai'
 
 export const GRAPHQL_ROOT = './graphql'
 export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
@@ -56,6 +57,7 @@ async function main() {
     await syncSubCommands()
     await deleteSubCommands()
     await listSubCommands()
+    aiCommands()
 
     await program.parseAsync(process.argv)
   } catch (error) {
