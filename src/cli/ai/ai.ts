@@ -4,6 +4,7 @@ import * as readline from 'readline'
 import { Readable } from 'stream'
 import { skeetOpenAiPrompt, skeetVertexAiPrompt } from './skeetPrompt'
 import { spawnSync } from 'child_process'
+import { PRISMA_SCHEMA_PATH } from '@/index'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -32,13 +33,19 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
         console.log(chalk.green('You:'), chalk.white(input))
         console.log(chalk.blue('Skeet:'))
         if (input.toLowerCase().match(/^prisma$/)) {
-          console.log(chalk.cyan('Prisma Scheme Generating Mode 🤖'))
-          console.log(`Please describe your Database use case.`)
+          console.log(chalk.cyan('🤖 Prisma Scheme Generating Mode 🤖'))
+          console.log(chalk.white(`Please describe your Database use case.`))
 
           rl.question(chalk.green('\nYou: '), async (prismaInput: string) => {
             const skeetAi = new SkeetAI({ ai: 'VertexAI' })
             const prismaSchema = await skeetAi.prisma(prismaInput)
-            console.log(chalk.blue('Skeet:\n') + chalk.white(prismaSchema))
+            console.log(
+              chalk.blue('Skeet:' + chalk.white(' How about this one?\n\n')) +
+                `${chalk.white('```prisma.schema\n')}` +
+                chalk.white(prismaSchema) +
+                `${chalk.white('\n```')}`
+            )
+            console.log(chalk.white(`\nEdit: ${PRISMA_SCHEMA_PATH}`))
             promptUser({
               ai: aiOptions.ai,
             })
