@@ -36,7 +36,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
         const vertexAi = new VertexAI({
           maxOutputTokens: aiOptions.maxTokens,
         })
-        console.log(chalk.green('You:'), chalk.white(input))
+        //console.log(chalk.green('You:'), chalk.white(input))
         console.log(chalk.blue('Skeet:'))
         if (input.toLowerCase().match(/^prisma$/)) {
           console.log(chalk.cyan('🤖 Prisma Scheme Generating Mode 🤖'))
@@ -59,7 +59,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
           return
         }
 
-        if (input.toLowerCase().match(/^$ skeet/)) {
+        if (input.toLowerCase().match(/^\$ skeet/)) {
           console.log(
             chalk.white('Skeet:'),
             chalk.white(`Running skeet command...`)
