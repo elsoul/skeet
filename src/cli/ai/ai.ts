@@ -64,9 +64,9 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
             chalk.white('Skeet:'),
             chalk.white(`Running skeet command...`)
           )
-          const cmd = `${input}`
-          const res = String(spawnSync(cmd, { shell: true, stdio: 'inherit' }))
-          console.log(res)
+
+          const cmd = `${input.replace(/^\$ skeet/, 'skeet')}`
+          spawnSync(cmd, { shell: true, stdio: 'inherit' })
           promptUser({
             ai: aiOptions.ai,
           })

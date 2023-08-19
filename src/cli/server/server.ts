@@ -1,4 +1,4 @@
-import { execSync, spawnSync } from 'child_process'
+import { execSync, spawn } from 'child_process'
 
 export const server = async () => {
   try {
@@ -13,19 +13,27 @@ export const server = async () => {
         for await (const line of pidId.split('\n')) {
           try {
             const shCmd = ['kill', '-9', line]
-            spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'ignore' })
+            spawn(shCmd[0], shCmd.slice(1), { stdio: 'ignore' })
           } catch (error) {
             // エラーログを出力
+            console.error(`Error killing process with pid: ${line}`, error)
           }
         }
       }
     }
 
     const skeetS = ['yarn', 'skeet']
-    spawnSync(skeetS[0], skeetS.slice(1), {
+    const childProcess = spawn(skeetS[0], skeetS.slice(1), {
       stdio: 'inherit',
     })
+
+    // シグナルハンドリング
+    process.on('SIGINT', function () {
+      console.log('\nGracefully shutting down from SIGINT (Ctrl+C)')
+      childProcess.kill('SIGINT') // 子プロセスも終了させる
+      process.exit()
+    })
   } catch (error) {
-    console.log(error)
+    console.error('Error in server function:', error)
   }
 }
