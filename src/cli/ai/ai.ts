@@ -24,6 +24,12 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
       rl.close()
       return
     }
+    if (input.toLowerCase() === '') {
+      promptUser({
+        ai: aiOptions.ai,
+      })
+      return
+    }
 
     if (aiOptions.ai === 'VertexAI') {
       try {
@@ -53,7 +59,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
           return
         }
 
-        if (input.toLowerCase().match(/^skeet/)) {
+        if (input.toLowerCase().match(/^$ skeet/)) {
           console.log(
             chalk.white('Skeet:'),
             chalk.white(`Running skeet command...`)
