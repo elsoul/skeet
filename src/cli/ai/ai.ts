@@ -6,12 +6,11 @@ import { skeetOpenAiPrompt, skeetVertexAiPrompt } from './skeetPrompt'
 import { spawnSync } from 'child_process'
 import { PRISMA_SCHEMA_PATH } from '@/index'
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-})
-
 export async function promptUser(options = { ai: '' }): Promise<void> {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  })
   const aiOptions = {
     ai: options.ai || 'VertexAI',
     maxTokens: 1000,

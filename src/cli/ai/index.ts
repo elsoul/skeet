@@ -8,7 +8,7 @@ export const aiCommands = () => {
     .description('AI Playground')
     .option('-v, --vertex', 'Vertex AI')
     .option('-o, --openai', 'OpenAI')
-    .action((options) => {
+    .action(async (options) => {
       let aiType = 'VertexAI'
       if (options.openai) aiType = 'OpenAI'
       console.log(
