@@ -38,28 +38,28 @@ program
 
 dotenv.config()
 
-async function main() {
+function main() {
   try {
-    await testCommands()
-    await createCommands()
-    await serverCommands()
-    await deployCommands()
-    await initCommands()
-    await yarnCommands()
-    await loginCommands()
-    await curlCommands()
-    await genCommands()
+    testCommands()
+    createCommands()
+    serverCommands()
+    deployCommands()
+    initCommands()
+    yarnCommands()
+    loginCommands()
+    curlCommands()
+    genCommands()
 
-    await dockerSubCommands()
-    await dbSubCommands()
-    await iamSubCommands()
-    await addSubCommands()
-    await syncSubCommands()
-    await deleteSubCommands()
-    await listSubCommands()
+    dockerSubCommands()
+    dbSubCommands()
+    iamSubCommands()
+    addSubCommands()
+    syncSubCommands()
+    deleteSubCommands()
+    listSubCommands()
     aiCommands()
 
-    await program.parseAsync(process.argv)
+    program.parseAsync(process.argv)
   } catch (error) {
     console.log(error)
   }
