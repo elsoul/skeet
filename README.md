@@ -119,6 +119,133 @@ If you choose GraphQL template, you can use GraphQL Playground
 
 ![Skeet GraphQL](https://storage.googleapis.com/skeet-assets/animation/skeet-db-studio.gif)
 
+## Enabling Google Cloud VertexAI
+
+Skeet is integrated with Google Cloud VertexAI. Use the following command to enable VertexAI:
+
+```bash
+$ skeet iam ai
+```
+
+## Launching Skeet AI Assistant
+
+The Skeet AI Assistant is an interactive tool designed to handle various queries:
+
+```bash
+$ skeet ai
+```
+
+Upon launching, you'll see a prompt like the one below. Try asking it something:
+
+````
+VertexAI is selected 🤖 (type "q" to quit)
+
+You: How to install skeet?
+Skeet:
+To install Skeet, you can use the following command:
+
+```bash
+$ npm install -g @skeet-framework/cli
+```
+
+This will install the Skeet CLI tool globally on your machine.
+
+You:
+
+````
+
+## Launching Skeet AI Prisma
+
+While _skeet ai_ is running, entering _$ prisma_ will switch to database schema generation mode. Upon launching, you'll be prompted to describe your database use case. For instance, try entering, "I want to create a blog site."
+
+```bash
+$ skeet ai
+VertexAI is selected 🤖 (type "q" to quit)
+
+You: $ prisma
+🤖 Prisma Scheme Generating Mode 🤖
+Please describe your Database use case.
+
+You: I want to create a blog site.
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Comment   Comment[]
+  User      User      @relation(fields: [userId], references: [id])
+  userId    Int
+
+  @@unique([userId, title])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  postId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Post      Post     @relation(fields: [postId], references: [id])
+}
+
+Edit: ./graphql/prisma/schema.prisma
+```
+
+A Prisma schema has been generated.
+
+![skeet-prisma](https://storage.googleapis.com/skeet-assets/animation/skeet-prisma.gif)
+
+## Editing Prisma Schema
+
+The Prisma schema is saved in _./graphql/prisma/schema.prisma_. Edit the schema outputted earlier as required.
+
+If you haven't used the skeet template yet, create it with the following command:
+
+```bash
+$ skeet create <appName>
+```
+
+Use this schema to migrate your database.
+
+## Creating/Running DB Migration
+
+With Skeet, you can perform database migrations using Prisma:
+
+```bash
+$ skeet db migrate <migrationName>
+```
+
+Your database migration is now complete.
+
+## Creating GraphQL API
+
+Skeet can automatically generate a GraphQL API from the schema:
+
+```bash
+$ skeet g scaffold
+```
+
+## Launching the GraphQL API
+
+Skeet allows you to run the GraphQL API locally:
+
+```bash
+$ skeet s
+```
+
+You can access the GraphQL API at:
+
+- [http://localhost:3000/graphql](http://localhost:3000/graphql)
+
+## Synchronizing Types
+
+Skeet can automatically generate TypeScript type definitions from the GraphQL API:
+
+```bash
+$ skeet sync types
+```
+
 ## Skeet Docment
 
 - [https://skeet.dev/](https://skeet.dev/)
