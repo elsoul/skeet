@@ -6,11 +6,15 @@ import { skeetOpenAiPrompt, skeetVertexAiPrompt } from './skeetPrompt'
 import { spawnSync } from 'child_process'
 import { PRISMA_SCHEMA_PATH } from '@/index'
 
+let rl: readline.Interface | null = null
+
 export async function promptUser(options = { ai: '' }): Promise<void> {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
+  if (!rl) {
+    rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    })
+  }
   const aiOptions = {
     ai: options.ai || 'VertexAI',
     maxTokens: 1000,
@@ -20,7 +24,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
       console.log(
         chalk.white(`⭐️ ${chalk.blue(aiOptions.ai)} is shutting down...`)
       )
-      rl.close()
+      rl?.close()
       return
     }
     if (input.toLowerCase() === '') {
@@ -41,7 +45,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
           console.log(chalk.cyan('🤖 Prisma Scheme Generating Mode 🤖'))
           console.log(chalk.white(`Please describe your Database use case.`))
 
-          rl.question(chalk.green('\nYou: '), async (prismaInput: string) => {
+          rl?.question(chalk.green('\nYou: '), async (prismaInput: string) => {
             const skeetAi = new SkeetAI({ ai: 'VertexAI' })
             const prismaSchema = await skeetAi.prisma(prismaInput)
             console.log(
@@ -98,7 +102,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
         })
       } catch (error) {
         console.error('Error:', error)
-        rl.close()
+        rl?.close()
       }
     } else {
       try {
@@ -145,10 +149,21 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
         })
       } catch (error) {
         console.error('Error:', error)
-        rl.close()
+        rl?.close()
       }
     }
   })
+}
+
+export async function promptUser2(options = { ai: '' }): Promise<void> {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  })
+  const aiOptions = {
+    ai: options.ai || 'VertexAI',
+    maxTokens: 1000,
+  }
 }
 
 function stringToStream(str: string): Readable {
