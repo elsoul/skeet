@@ -1,4 +1,5 @@
 import { GRAPHQL_ROOT } from '@/index'
+import chalk from 'chalk'
 import { spawnSync } from 'child_process'
 
 export const dbMigrate = async (name: string, production: boolean = false) => {
@@ -20,6 +21,7 @@ export const dbMigrate = async (name: string, production: boolean = false) => {
       cwd: GRAPHQL_ROOT,
       stdio: 'inherit',
     })
+    console.log(chalk.white(`\nThen run: `), chalk.green(`$ skeet g scaffold`))
   } catch (error) {
     throw new Error(`Error initializing database: ${error}`)
   }

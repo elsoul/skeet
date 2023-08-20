@@ -1,4 +1,4 @@
-import { program } from '@/index'
+import { PRISMA_SCHEMA_PATH, program } from '@/index'
 import { syncModels } from './syncModels'
 import { syncTypes } from './syncTypes'
 import { syncRoutings } from './syncRoutings'
@@ -6,6 +6,8 @@ import { syncArmors } from './syncArmors'
 import { syncSql } from './syncSql'
 import { syncTaskQueue } from './syncTaskQueue'
 import { syncRunUrl } from './syncRunUrl'
+import { readFileSync } from 'node:fs'
+import { prismaSchemaToTypeScriptTypes } from './prismaSchemaToTypeScriptType'
 
 export const syncSubCommands = async () => {
   const sync = program
@@ -13,24 +15,32 @@ export const syncSubCommands = async () => {
     .description('Skeet Sync Comannd to sync backend and frontend')
   sync
     .command('models')
+    .alias('m')
+    .alias('model')
     .description('Skeet Sync Models')
     .action(async () => {
       await syncModels()
     })
   sync
     .command('types')
+    .alias('t')
+    .alias('type')
     .description('Skeet Sync Types')
     .action(async () => {
       await syncTypes()
     })
   sync
     .command('routings')
+    .alias('r')
+    .alias('routing')
     .description('Skeet Sync Routings')
     .action(async () => {
       await syncRoutings()
     })
   sync
     .command('armors')
+    .alias('a')
+    .alias('armor')
     .description('Skeet Sync Cloud Armor Rules')
     .action(async () => {
       await syncArmors()
