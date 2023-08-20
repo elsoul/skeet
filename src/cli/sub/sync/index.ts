@@ -1,4 +1,4 @@
-import { program } from '@/index'
+import { PRISMA_SCHEMA_PATH, program } from '@/index'
 import { syncModels } from './syncModels'
 import { syncTypes } from './syncTypes'
 import { syncRoutings } from './syncRoutings'
@@ -6,6 +6,8 @@ import { syncArmors } from './syncArmors'
 import { syncSql } from './syncSql'
 import { syncTaskQueue } from './syncTaskQueue'
 import { syncRunUrl } from './syncRunUrl'
+import { readFileSync } from 'node:fs'
+import { prismaSchemaToTypeScriptTypes } from './prismaSchemaToTypeScriptType'
 
 export const syncSubCommands = async () => {
   const sync = program

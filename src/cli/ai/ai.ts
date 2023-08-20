@@ -41,7 +41,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
         })
         //console.log(chalk.green('You:'), chalk.white(input))
         console.log(chalk.blue('Skeet:'))
-        if (input.toLowerCase().match(/^prisma$/)) {
+        if (input.toLowerCase().match(/^\$ prisma$/)) {
           console.log(chalk.cyan('🤖 Prisma Scheme Generating Mode 🤖'))
           console.log(chalk.white(`Please describe your Database use case.`))
 
@@ -55,6 +55,10 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
                 `${chalk.white('\n```')}`
             )
             console.log(chalk.white(`\nEdit: ${PRISMA_SCHEMA_PATH}`))
+            console.log(
+              chalk.white(`\nThen run:`),
+              chalk.green(`$ skeet db migrate <migrationName>`)
+            )
             promptUser({
               ai: aiOptions.ai,
             })

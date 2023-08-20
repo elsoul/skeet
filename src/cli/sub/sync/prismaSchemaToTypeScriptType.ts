@@ -1,13 +1,31 @@
+import { PRISMA_SCHEMA_PATH } from '@/index'
+import { Logger } from '@/lib'
+import { readFileSync, writeFileSync } from 'node:fs'
+
 export type PrismaModel = {
   name: string
   fields: Array<{ name: string; type: string; isOptional: boolean }>
 }
 
+export const writePrismaSchemaToFunctions = (functionName: string) => {
+  try {
+    const yourPrismaSchemaHere = readFileSync(PRISMA_SCHEMA_PATH, 'utf-8')
+    const tsTypes = prismaSchemaToTypeScriptTypes(yourPrismaSchemaHere)
+    const outputPath = `./functions/${functionName}/src/models/sql/prisma.ts`
+    writeFileSync(outputPath, tsTypes)
+    Logger.successCheck(`Updated Prisma schema to ${outputPath}`)
+  } catch (error) {
+    throw new Error(`Error writing Prisma schema to functions: ${error}`)
+  }
+}
+
 export function prismaSchemaToTypeScriptTypes(prismaSchema: string): string {
   const models: PrismaModel[] = []
+  const enums: { name: string; values: string[] }[] = []
 
   const lines = prismaSchema.split('\n')
   let currentModel: PrismaModel | null = null
+  let currentEnum: { name: string; values: string[] } | null = null
 
   for (const line of lines) {
     const modelMatch = line.match(/^model (\w+) \{$/)
@@ -20,13 +38,14 @@ export function prismaSchemaToTypeScriptTypes(prismaSchema: string): string {
     }
 
     if (enumMatch) {
-      currentModel = null
-      // Handle enums (future improvement)
+      currentEnum = { name: enumMatch[1], values: [] }
+      enums.push(currentEnum)
       continue
     }
 
     if (line.includes('}')) {
       currentModel = null
+      currentEnum = null
       continue
     }
 
@@ -40,9 +59,25 @@ export function prismaSchemaToTypeScriptTypes(prismaSchema: string): string {
         })
       }
     }
+
+    if (currentEnum) {
+      const enumValueMatch = line.match(/(\w+)/)
+      if (enumValueMatch) {
+        currentEnum.values.push(enumValueMatch[1])
+      }
+    }
   }
 
-  let output = ''
+  let output = "import { Timestamp } from 'firebase-admin/firestore'\n\n"
+
+  for (const enumObj of enums) {
+    output += `export enum ${enumObj.name} {\n`
+    for (const value of enumObj.values) {
+      output += `  ${value},\n`
+    }
+    output += '}\n\n'
+  }
+
   for (const model of models) {
     output += `export type ${model.name} = {\n`
     for (const field of model.fields) {
@@ -65,11 +100,9 @@ function mapPrismaTypeToTsType(prismaType: string): string {
       return 'boolean'
     case 'DateTime':
       return 'Timestamp'
+    case 'Float':
+      return 'number'
     default:
       return prismaType // For enums and custom types
   }
 }
-
-// Example usage
-// const tsTypes = prismaSchemaToTypeScriptTypes(yourPrismaSchemaHere);
-// console.log(tsTypes);
