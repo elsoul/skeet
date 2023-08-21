@@ -49,7 +49,13 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
             const skeetAi = new SkeetAI({ ai: 'VertexAI' })
             const prismaSchema = await skeetAi.prisma(prismaInput)
             console.log(
-              chalk.blue('Skeet:' + chalk.white(' How about this one?\n\n')) +
+              chalk.blue(
+                'Skeet:' +
+                  chalk.white(' How about this one?\n\n') +
+                  chalk.gray(
+                    '(Showing only the new parts of the models. prisma format (also there is vscode plugin) will add the relations automatically to the existing models.)\n\n'
+                  )
+              ) +
                 `${chalk.white('```prisma.schema\n')}` +
                 chalk.white(prismaSchema) +
                 `${chalk.white('\n```')}`
