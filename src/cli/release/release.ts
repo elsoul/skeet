@@ -60,12 +60,12 @@ export const release = async (npmPublish = false) => {
 
   const changeLog = await getChangeLog()
   console.log(changeLog)
-  execSync(`gh release create v${newVersion} --notes "${changeLog}"`)
-  console.log(`gh v${newVersion} release created 🎉`)
-  if (npmPublish) {
-    execSync(`npm publish`)
-    console.log(`npm published 🎉`)
-  }
+  // execSync(`gh release create v${newVersion} --notes "${changeLog}"`)
+  // console.log(`gh v${newVersion} release created 🎉`)
+  // if (npmPublish) {
+  //   execSync(`npm publish`)
+  //   console.log(`npm published 🎉`)
+  // }
 }
 
 const updateVersionFile = (newVersion: string) => {
