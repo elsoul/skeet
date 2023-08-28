@@ -9,9 +9,9 @@ const VERSION_FILE = './src/lib/version.ts'
 export async function getChangeLog(): Promise<string> {
   try {
     const log = execSync(
-      `git log $(git describe --tags --abbrev=0)..HEAD --oneline --pretty=format:"- %s"`
+      `git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%s" | awk -F'#' '/Merge pull request #/{getline; print $2 " by @" $1 " in " "#" $3}'`
     ).toString()
-    return log
+    return `## What's Changed\n\n${log}`
   } catch (error) {
     return ''
   }
