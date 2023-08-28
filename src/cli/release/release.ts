@@ -54,18 +54,20 @@ export const release = async (npmPublish = false) => {
   execSync(`git add .`)
   execSync(`git commit -m "update: release v${newVersion}"`)
   execSync(`git push origin main`)
+
+  const changeLog = await getChangeLog()
+  console.log(`changeLog: ${changeLog}`)
+
   execSync(`git tag v${newVersion}`)
   execSync(`git push origin v${newVersion}`)
   console.log(`Updated to ${newVersion} and created git tag 🎉`)
 
-  const changeLog = await getChangeLog()
-  console.log(changeLog)
-  // execSync(`gh release create v${newVersion} --notes "${changeLog}"`)
-  // console.log(`gh v${newVersion} release created 🎉`)
-  // if (npmPublish) {
-  //   execSync(`npm publish`)
-  //   console.log(`npm published 🎉`)
-  // }
+  execSync(`gh release create v${newVersion} --notes "${changeLog}"`)
+  console.log(`gh v${newVersion} release created 🎉`)
+  if (npmPublish) {
+    execSync(`npm publish`)
+    console.log(`npm published 🎉`)
+  }
 }
 
 const updateVersionFile = (newVersion: string) => {
