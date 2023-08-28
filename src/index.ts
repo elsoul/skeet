@@ -18,8 +18,9 @@ import {
   curlCommands,
   genCommands,
   testCommands,
+  releaseCommands,
+  aiCommands,
 } from '@/cli'
-import { aiCommands } from './cli/ai'
 
 export const GRAPHQL_ROOT = './graphql'
 export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
@@ -49,6 +50,7 @@ function main() {
     loginCommands()
     curlCommands()
     genCommands()
+    releaseCommands()
 
     dockerSubCommands()
     dbSubCommands()
