@@ -1,8 +1,10 @@
-import { readFileSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { execSync } from 'child_process'
 import * as semver from 'semver'
 import inquirer from 'inquirer'
 import { ROUTE_PACKAGE_JSON_PATH } from '@/lib'
+
+const VERSION_FILE = './src/lib/version.ts'
 
 export async function getChangeLog(): Promise<string> {
   try {
@@ -47,6 +49,7 @@ export const release = async (npmPublish = false) => {
   )
   packageJson.version = newVersion!
   writeFileSync(ROUTE_PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2))
+  if (existsSync(VERSION_FILE)) updateVersionFile(newVersion!)
   execSync(`yarn build`)
   execSync(`git add .`)
   execSync(`git commit -m "update: release v${newVersion}"`)
@@ -63,4 +66,11 @@ export const release = async (npmPublish = false) => {
     execSync(`npm publish`)
     console.log(`npm published 🎉`)
   }
+}
+
+const updateVersionFile = (newVersion: string) => {
+  const versionString = `export const VERSION = '${newVersion}'`
+  writeFileSync(VERSION_FILE, versionString, {
+    flag: 'w',
+  })
 }
