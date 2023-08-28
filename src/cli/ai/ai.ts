@@ -1,10 +1,12 @@
-import { OpenAI, SkeetAI, VertexAI } from '@skeet-framework/ai'
+import { AIType, OpenAI, SkeetAI, generatePrompt } from '@skeet-framework/ai'
 import chalk from 'chalk'
 import * as readline from 'readline'
 import { Readable } from 'stream'
-import { skeetOpenAiPrompt, skeetVertexAiPrompt } from './skeetPrompt'
+import { skeetOpenAiPrompt, skeetAiPrompt } from './skeetPrompt'
 import { spawnSync } from 'child_process'
-import { PRISMA_SCHEMA_PATH } from '@/index'
+import { prismaMode } from './prisma'
+import { vertexStream } from './vertexStream'
+import { openaiStream } from './openaiStream'
 
 let rl: readline.Interface | null = null
 
@@ -16,7 +18,7 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
     })
   }
   const aiOptions = {
-    ai: options.ai || 'VertexAI',
+    ai: (options.ai as AIType) || ('VertexAI' as AIType),
     maxTokens: 1000,
   }
   rl.question(chalk.green('\nYou: '), async (input: string) => {
@@ -34,41 +36,17 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
       return
     }
 
+    const skeetAi = new SkeetAI({
+      ai: aiOptions.ai,
+      maxTokens: aiOptions.maxTokens,
+    })
+
     if (aiOptions.ai === 'VertexAI') {
       try {
-        const vertexAi = new VertexAI({
-          maxOutputTokens: aiOptions.maxTokens,
-        })
-        //console.log(chalk.green('You:'), chalk.white(input))
         console.log(chalk.blue('Skeet:'))
-        if (input.toLowerCase().match(/^\$ prisma$/)) {
-          console.log(chalk.cyan('🤖 Prisma Scheme Generating Mode 🤖'))
-          console.log(chalk.white(`Please describe your Database use case.`))
 
-          rl?.question(chalk.green('\nYou: '), async (prismaInput: string) => {
-            const skeetAi = new SkeetAI({ ai: 'VertexAI' })
-            const prismaSchema = await skeetAi.prisma(prismaInput)
-            console.log(
-              chalk.blue(
-                'Skeet:' +
-                  chalk.white(' How about this one?\n\n') +
-                  chalk.gray(
-                    '(Showing only the new parts of the models. prisma format (also there is vscode plugin) will add the relations automatically to the existing models.)\n\n'
-                  )
-              ) +
-                `${chalk.white('```prisma.schema\n')}` +
-                chalk.white(prismaSchema) +
-                `${chalk.white('\n```')}`
-            )
-            console.log(chalk.white(`\nEdit: ${PRISMA_SCHEMA_PATH}`))
-            console.log(
-              chalk.white(`\nThen run:`),
-              chalk.green(`$ skeet db migrate <migrationName>`)
-            )
-            promptUser({
-              ai: aiOptions.ai,
-            })
-          })
+        if (input.toLowerCase().match(/^\$ prisma$/)) {
+          await prismaMode(rl!, aiOptions.ai, skeetAi)
           return
         }
 
@@ -85,31 +63,15 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
           })
           return
         }
-        const response = await vertexAi.prompt(skeetVertexAiPrompt(input))
+        const prompt = generatePrompt(
+          skeetAiPrompt.context,
+          skeetAiPrompt.examples,
+          input,
+          aiOptions.ai
+        )
+        const response = await skeetAi.aiInstance.prompt(prompt)
         const stream = stringToStream(response)
-
-        let bufferedResponse = ''
-
-        stream.on('data', (chunk) => {
-          bufferedResponse += chunk.toString()
-
-          let separatorIndex
-          while ((separatorIndex = bufferedResponse.indexOf('\n')) >= 0) {
-            const messagePart = bufferedResponse.slice(0, separatorIndex).trim()
-            console.log(chalk.white(messagePart))
-
-            bufferedResponse = bufferedResponse.slice(separatorIndex + 1)
-          }
-        })
-
-        stream.on('end', () => {
-          if (bufferedResponse) {
-            console.log(chalk.white(bufferedResponse.trim()))
-          }
-          promptUser({
-            ai: aiOptions.ai,
-          })
-        })
+        vertexStream(stream)
       } catch (error) {
         console.error('Error:', error)
         rl?.close()
@@ -122,41 +84,8 @@ export async function promptUser(options = { ai: '' }): Promise<void> {
         })
         console.log(chalk.green('You:'), chalk.white(input))
         console.log(chalk.blue('Skeet:'))
-        let bufferedPayload = ''
-        let bufferedMessage = ''
         const stream = await openAi.promptStream(skeetOpenAiPrompt(input))
-        stream.on('data', (chunk: Buffer) => {
-          bufferedPayload += chunk.toString()
-
-          let separatorIndex
-          while ((separatorIndex = bufferedPayload.indexOf('\n')) >= 0) {
-            const completeData = bufferedPayload.slice(0, separatorIndex).trim()
-            const dataPart = completeData.replace(/^data:\s*/, '')
-
-            if (isValidJSON(dataPart)) {
-              const delta = JSON.parse(dataPart)
-              const messagePart = delta.choices[0].delta?.content || ''
-              bufferedMessage += bufferedMessage
-                ? messagePart
-                : messagePart.trimStart()
-
-              if (messagePart.includes('\n')) {
-                console.log(chalk.white(bufferedMessage.trimEnd()))
-                bufferedMessage = ''
-              }
-            }
-
-            bufferedPayload = bufferedPayload.slice(separatorIndex + 1)
-          }
-        })
-        stream.on('end', () => {
-          if (bufferedMessage) {
-            console.log(chalk.white(bufferedMessage))
-          }
-          promptUser({
-            ai: aiOptions.ai,
-          })
-        })
+        openaiStream(stream)
       } catch (error) {
         console.error('Error:', error)
         rl?.close()
