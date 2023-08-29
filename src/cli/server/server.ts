@@ -41,7 +41,7 @@ export const server = async () => {
 }
 
 const mkidrTmpDir = () => {
-  if (existsSync('/tmp/data')) return
+  if (existsSync('tmp/data')) return
   const cmd = `mkdir -p /tmp/data && mkdir -p /tmp/ai && chmod -R 777 /tmp`
   execSync(cmd)
 }
