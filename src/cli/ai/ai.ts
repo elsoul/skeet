@@ -58,7 +58,7 @@ export async function promptUser(options: SkeetAIOptions): Promise<void> {
       return
     }
     if (input.toLowerCase().match(/^\$ typedoc/)) {
-      // await typedocMode(skeetAi, rl!)
+      await typedocMode(skeetAi, rl!)
       return
     }
     if (input.toLowerCase().match(/^\$ debug/)) {
