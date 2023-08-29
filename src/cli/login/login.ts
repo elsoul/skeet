@@ -12,7 +12,6 @@ export const login = async () => {
       `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`,
       `fb:login`,
     ]
-    console.log(cmd)
     spawnSync(cmd[0], cmd.slice(1), { stdio: 'inherit' })
     return true
   } catch (error) {
