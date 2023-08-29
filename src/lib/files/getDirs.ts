@@ -1,14 +1,14 @@
-import * as fs from 'fs'
 import * as path from 'path'
 import { FUNCTIONS_PATH } from './getSkeetConfig'
+import { readdirSync, statSync } from 'fs'
 
 export const getDirectoryLastModified = (directoryPath: string): Date => {
-  const fileNames = fs.readdirSync(directoryPath)
+  const fileNames = readdirSync(directoryPath)
   let latestModified: Date = new Date(0)
 
   fileNames.forEach((fileName) => {
     const filePath = path.join(directoryPath, fileName)
-    const stats = fs.statSync(filePath)
+    const stats = statSync(filePath)
 
     if (stats.isDirectory()) {
       const directoryModified = getDirectoryLastModified(filePath)
@@ -25,8 +25,8 @@ export const getDirectoryLastModified = (directoryPath: string): Date => {
 
 export const getFunctions = async (isForModels = false): Promise<string[]> => {
   try {
-    const functionDirs = fs
-      .readdirSync(FUNCTIONS_PATH, { withFileTypes: true })
+    const functionDirs = 
+      readdirSync(FUNCTIONS_PATH, { withFileTypes: true })
       .filter((item) => item.isDirectory())
       .map((item) => {
         const dirPath = isForModels

@@ -1,5 +1,5 @@
 import { program } from '@/index'
-import { release } from './release'
+import { getChangeLog, release } from './release'
 
 export const releaseCommands = () => {
   program
@@ -8,6 +8,7 @@ export const releaseCommands = () => {
     .description('Release a new version')
     .option('-n, --npm', 'Release to npm', false)
     .action(async (options) => {
-      release(options.npm)
+      getChangeLog()
+      // release(options.npm)
     })
 }
