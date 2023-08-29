@@ -2,7 +2,7 @@ import { ChatCompletionChunk, Stream } from '@skeet-framework/ai'
 import { promptUser } from './ai'
 import chalk from 'chalk'
 import { ReadStream } from 'fs'
-import { SkeetAIOptions } from '@skeet-framework/ai/dist/esm/lib/skeetai'
+import { SkeetAIOptions } from '@skeet-framework/ai'
 
 export const openaiStream = (
   openaiStream: Stream<ChatCompletionChunk>,
