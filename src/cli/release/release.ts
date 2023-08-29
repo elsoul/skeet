@@ -1,10 +1,11 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { execSync } from 'child_process'
+import { execSync, spawnSync } from 'child_process'
 import * as semver from 'semver'
 import inquirer from 'inquirer'
 import { ROUTE_PACKAGE_JSON_PATH } from '@/lib'
+import { sleep } from '@/utils/time'
 
-const VERSION_FILE = './src/lib/version.ts'
+export const VERSION_FILE = './src/lib/version.ts'
 
 export function getChangeLog() {
   try {
@@ -79,34 +80,25 @@ export const release = async (npmPublish = false) => {
   packageJson.version = newVersion!
   writeFileSync(ROUTE_PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2))
   if (existsSync(VERSION_FILE)) updateVersionFile(newVersion!)
-  console.log(process.cwd())
-  console.log(process.env)
-  try {
-    execSync('yarn build')
-  } catch (error: any) {
-    console.log(error.stdout.toString())
-    console.log(error.stderr.toString())
-  }
-  execSync(`git add .`)
-  execSync(`git commit -m "update: release v${newVersion}"`)
-  execSync(`git push origin main`)
-
-  const changeLog = await getChangeLog()
+  await sleep(100)
+  spawnSync(`yarn build`)
+  spawnSync(`git add .`)
+  spawnSync(`git commit -m "update: release v${newVersion}"`)
+  spawnSync(`git push origin main`)
+  const changeLog = getChangeLog()
   console.log(`changeLog: ${changeLog}`)
-
-  execSync(`git tag v${newVersion}`)
-  execSync(`git push origin v${newVersion}`)
+  spawnSync(`git tag v${newVersion}`)
+  spawnSync(`git push origin v${newVersion}`)
   console.log(`Updated to ${newVersion} and created git tag 🎉`)
-
-  execSync(`gh release create v${newVersion} --notes "${changeLog}"`)
+  spawnSync(`gh release create v${newVersion} --notes "${changeLog}"`)
   console.log(`gh v${newVersion} release created 🎉`)
   if (npmPublish) {
-    execSync(`npm publish`)
+    spawnSync(`npm publish`)
     console.log(`npm published 🎉`)
   }
 }
 
-const updateVersionFile = (newVersion: string) => {
+export const updateVersionFile = (newVersion: string) => {
   const versionString = `export const VERSION = '${newVersion}'`
   writeFileSync(VERSION_FILE, versionString, {
     flag: 'w',
