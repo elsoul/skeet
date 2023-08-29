@@ -28,7 +28,7 @@
     "skeet-cloud.config.json",
     "src/cli/login/login.ts",
     "functions/**/*",
-    "graphql/**/*",
+    "graphql/**/*"
   ],
   "compileOnSave": false
 }
