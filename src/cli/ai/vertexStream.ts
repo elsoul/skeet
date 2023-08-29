@@ -1,7 +1,7 @@
 import { Stream } from 'stream'
 import { promptUser } from './ai'
 import chalk from 'chalk'
-import { SkeetAIOptions } from '@skeet-framework/ai/dist/esm/lib/skeetai'
+import { SkeetAIOptions } from '@skeet-framework/ai'
 
 export const vertexStream = (
   stream: Stream,

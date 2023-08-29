@@ -2,7 +2,7 @@ import { program } from '@/index'
 import { promptUser } from './ai'
 import chalk from 'chalk'
 import { AIType } from '@skeet-framework/ai'
-import { SkeetAIOptions } from '@skeet-framework/ai/dist/esm/lib/skeetai'
+import { SkeetAIOptions } from '@skeet-framework/ai'
 import Table from 'cli-table3'
 
 export const aiCommands = () => {
