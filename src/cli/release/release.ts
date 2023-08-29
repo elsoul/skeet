@@ -81,21 +81,25 @@ export const release = async (npmPublish = false) => {
   writeFileSync(ROUTE_PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2))
   if (existsSync(VERSION_FILE)) updateVersionFile(newVersion!)
   await sleep(100)
-  execSync(`yarn build`, { stdio: 'inherit' })
-  execSync(`git add .`, { stdio: 'inherit' })
-  execSync(`git commit -m "update: release v${newVersion}"`, {
+  spawnSync(`yarn build`, { stdio: 'inherit', shell: true })
+  spawnSync(`git add .`, { stdio: 'inherit', shell: true })
+  spawnSync(`git commit -m "update: release v${newVersion}"`, {
     stdio: 'inherit',
+    shell: true,
   })
-  execSync(`git push origin main`)
+  spawnSync(`git push origin main`, { stdio: 'inherit', shell: true })
   const changeLog = getChangeLog()
   console.log(`changeLog: ${changeLog}`)
-  execSync(`git tag v${newVersion}`)
-  execSync(`git push origin v${newVersion}`)
+  spawnSync(`git tag v${newVersion}`, { stdio: 'inherit', shell: true })
+  spawnSync(`git push origin v${newVersion}`, { stdio: 'inherit', shell: true })
   console.log(`Updated to ${newVersion} and created git tag 🎉`)
-  execSync(`gh release create v${newVersion} --notes "${changeLog}"`)
+  spawnSync(`gh release create v${newVersion} --notes "${changeLog}"`, {
+    stdio: 'inherit',
+    shell: true,
+  })
   console.log(`gh v${newVersion} release created 🎉`)
   if (npmPublish) {
-    execSync(`npm publish`)
+    spawnSync(`npm publish`, { stdio: 'inherit', shell: true })
     console.log(`npm published 🎉`)
   }
 }
