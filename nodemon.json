@@ -2,6 +2,6 @@
   "watch": ["src"],
   "ignore": ["src/**/*.test.ts", "node_modules"],
   "ext": "ts,js,json,graphql",
-  "exec": "npx ts-node build.ts && node ./dist/index.js",
+  "exec": "yarn start:dev",
   "legacyWatch": true
 }

@@ -1,8 +1,12 @@
 import { Stream } from 'stream'
 import { promptUser } from './ai'
 import chalk from 'chalk'
+import { SkeetAIOptions } from '@skeet-framework/ai/dist/esm/lib/skeetai'
 
-export const vertexStream = (stream: Stream) => {
+export const vertexStream = (
+  stream: Stream,
+  skeetAIOptions: SkeetAIOptions
+) => {
   let bufferedResponse = ''
   stream.on('data', (chunk) => {
     bufferedResponse += chunk.toString()
@@ -20,8 +24,6 @@ export const vertexStream = (stream: Stream) => {
     if (bufferedResponse) {
       console.log(chalk.white(bufferedResponse.trim()))
     }
-    promptUser({
-      ai: 'VertexAI',
-    })
+    promptUser(skeetAIOptions)
   })
 }
