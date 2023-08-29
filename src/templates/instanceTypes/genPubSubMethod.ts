@@ -11,15 +11,15 @@ export const genPubSubMethod = async (
   const body = `import { onMessagePublished } from 'firebase-functions/v2/pubsub'
 import { pubsubDefaultOption } from '@/routings/options'
 import { parsePubSubMessage } from '@/lib/pubsub'
-import { ${pascalMethodName} } from '@/types/pubsub/${camelMethodName}'
+import { ${pascalMethodName}Params } from '@/types/pubsub/${camelMethodName}Params'
 
 export const ${camelMethodName}Topic = '${camelMethodName}'
 
 export const ${camelMethodName} = onMessagePublished(
-  pubsubDefaultOption(pubsubTopic),
+  pubsubDefaultOption(${camelMethodName}Topic),
   async (event) => {
     try {
-      const pubsubObject = parsePubSubMessage<${pascalMethodName}>(event)
+      const pubsubObject = parsePubSubMessage<${pascalMethodName}Params>(event)
       console.log({ status: 'success', topic: ${camelMethodName}Topic, event, pubsubObject })
     } catch (error) {
       console.error({ status: 'error', message: String(error) })

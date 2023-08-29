@@ -5,5 +5,5 @@ import { writeFileSync } from 'fs'
 export const genIndex = async (modelName: string) => {
   const fileInfo = await graphqlIndex(modelName)
   writeFileSync(fileInfo.filePath, fileInfo.body)
-  Logger.success(`successfully created - ${fileInfo.filePath}`)
+  Logger.successCheck(`successfully created - ${fileInfo.filePath}`)
 }

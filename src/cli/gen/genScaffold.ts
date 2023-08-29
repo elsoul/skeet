@@ -31,7 +31,7 @@ export const genGraphqlIndex = async () => {
 
   const filePath = GRAPHQL_PATH + '/index.ts'
   writeFileSync(filePath, exportArray.join('\n'), { flag: 'w' })
-  Logger.success(`successfully created ✔ - ${filePath}`)
+  Logger.successCheck(`successfully created ✔ - ${filePath}`)
 }
 
 export const genmodelManagerIndex = async () => {
@@ -43,7 +43,7 @@ export const genmodelManagerIndex = async () => {
   }
   const filePath = GRAPHQL_PATH + '/modelManager/index.ts'
   writeFileSync(filePath, exportArray.join('\n'), { flag: 'w' })
-  Logger.success(`successfully created ✔ - ${filePath}`)
+  Logger.successCheck(`successfully created ✔ - ${filePath}`)
 }
 
 export const getNewModels = async () => {

@@ -59,9 +59,7 @@ export async function promptUser(options: SkeetAIOptions): Promise<void> {
       await typedocMode(skeetAi, rl!)
       return
     }
-    if (input.toLowerCase().match(/^\$ debug/)) {
-      return
-    }
+
     const prompt = generatePrompt(
       skeetAiPrompt.context,
       skeetAiPrompt.examples,
