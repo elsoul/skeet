@@ -3,6 +3,7 @@ import chalk from 'chalk'
 import * as readline from 'readline'
 import { promptUser } from '../ai'
 import { yesOrNoMode } from './yesOrNoMode'
+import { existsSync, readFile, readFileSync } from 'fs'
 
 export const typedocMode = async (skeetAi: SkeetAI, rl: readline.Interface) => {
   console.log(chalk.cyan('⚙️ TypeDoc Generation Mode ⚙️'))
@@ -12,7 +13,9 @@ export const typedocMode = async (skeetAi: SkeetAI, rl: readline.Interface) => {
     )
   )
   rl?.question(chalk.green('\nYou: '), async (input: string) => {
-    const aiResponse = await skeetAi.typedoc(input)
+    const fileString =
+      existsSync(input) === false ? input : readFileSync(input, 'utf8')
+    const aiResponse = await skeetAi.typedoc(fileString)
     console.log(
       chalk.blue('Skeet:' + chalk.white(' How about this one?\n\n')) +
         `${chalk.white('```typescript\n')}` +
