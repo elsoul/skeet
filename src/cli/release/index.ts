@@ -1,5 +1,6 @@
 import { program } from '@/index'
-import { getChangeLog, release } from './release'
+import { release } from './release'
+import { execSync } from 'child_process'
 
 export const releaseCommands = () => {
   program
@@ -7,8 +8,8 @@ export const releaseCommands = () => {
     .alias('r')
     .description('Release a new version')
     .option('-n, --npm', 'Release to npm', false)
-    .action(async (options) => {
-      getChangeLog()
-      // release(options.npm)
+    .action((options) => {
+      //execSync(`yarn build`)
+      release(options.npm)
     })
 }

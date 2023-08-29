@@ -6,41 +6,42 @@ import { ROUTE_PACKAGE_JSON_PATH } from '@/lib'
 
 const VERSION_FILE = './src/lib/version.ts'
 
-export async function getChangeLog() {
+export function getChangeLog() {
   try {
     const remoteURL = execSync('git remote get-url origin').toString().trim()
 
-    // URLからリポジトリの所有者（ユーザー名）とリポジトリ名を抽出
-    const matchResult = remoteURL.match(/github\.com\/([^/]+)\/([^/]+)\.git$/)
-    if (matchResult) {
-      const repositoryOwner = matchResult[1]
-      const repositoryName = matchResult[2]
+    console.log(`remoteURL: ${remoteURL}`)
+    const matchResult = remoteURL.match(
+      /github\.com[/:]([^/]+)\/([^/]+?)(?:\.git)?$/
+    )
+    console.log(`matchResult: ${matchResult}`)
+    if (!matchResult) {
+      throw new Error('Could not extract repository owner and name.')
+    }
 
-      const log = execSync(
-        `git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%s by @%an in #%h"`
-      ).toString()
+    const repositoryOwner = matchResult[1]
+    const repositoryName = matchResult[2]
 
-      // 正規表現を使用してショートハッシュを抽出し、URLに変換
-      const commitHashes = log.match(/#(\w+)/g)
-
-      if (commitHashes) {
-        const githubCommitURL = `https://github.com/${repositoryOwner}/${repositoryName}/commit`
-        const formattedLog = log.replace(/#(\w+)/g, (match) => {
-          const shortHash = match.substring(1) // #を削除
+    const log = execSync(
+      `git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%s by @%an in #%h"`
+    ).toString()
+    const lines = log.split('\n')
+    const githubCommitURL = `https://github.com/${repositoryOwner}/${repositoryName}/commit`
+    const formattedLines = lines.map((line) => {
+      if (line.startsWith('Merge pull request')) {
+        return line
+      } else {
+        return line.replace(/#(\w+)/g, (match) => {
+          const shortHash = match.substring(1)
           return `${githubCommitURL}/${shortHash}`
         })
-
-        console.log(formattedLog)
-        return `## What's Changed\n\n${formattedLog}`
-      } else {
-        throw new Error('No commit hashes found in the log.')
       }
-    } else {
-      throw new Error(
-        'Could not extract repository owner and name from the remote URL.'
-      )
-    }
+    })
+    const formattedLog = formattedLines.join('\n')
+
+    return `## What's Changed\n\n${formattedLog}`
   } catch (error) {
+    console.log(`Error in getChangeLog: ${error}`)
     return ''
   }
 }
@@ -78,7 +79,14 @@ export const release = async (npmPublish = false) => {
   packageJson.version = newVersion!
   writeFileSync(ROUTE_PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2))
   if (existsSync(VERSION_FILE)) updateVersionFile(newVersion!)
-  execSync(`yarn build`)
+  console.log(process.cwd())
+  console.log(process.env)
+  try {
+    execSync('yarn build')
+  } catch (error: any) {
+    console.log(error.stdout.toString())
+    console.log(error.stderr.toString())
+  }
   execSync(`git add .`)
   execSync(`git commit -m "update: release v${newVersion}"`)
   execSync(`git push origin main`)
