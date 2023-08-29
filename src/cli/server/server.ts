@@ -1,4 +1,5 @@
 import { execSync, spawn } from 'child_process'
+import { existsSync } from 'fs'
 
 export const server = async () => {
   try {
@@ -22,6 +23,7 @@ export const server = async () => {
       }
     }
 
+    mkidrTmpDir()
     const skeetS = ['yarn', 'skeet']
     const childProcess = spawn(skeetS[0], skeetS.slice(1), {
       stdio: 'inherit',
@@ -36,4 +38,10 @@ export const server = async () => {
   } catch (error) {
     console.error('Error in server function:', error)
   }
+}
+
+const mkidrTmpDir = () => {
+  if (existsSync('/tmp/data')) return
+  const cmd = `mkdir -p /tmp/data && /tmp/ai && chmod -R 777 /tmp`
+  execSync(cmd)
 }
