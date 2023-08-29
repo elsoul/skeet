@@ -24,7 +24,7 @@ export function getChangeLog() {
     const repositoryName = matchResult[2]
 
     const log = execSync(
-      `git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%s by @%an in #%h"`
+      `git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s by @%an in #%h"`
     ).toString()
     const lines = log.split('\n')
     const githubCommitURL = `https://github.com/${repositoryOwner}/${repositoryName}/commit`
