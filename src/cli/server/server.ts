@@ -1,7 +1,8 @@
 import { execSync, spawn } from 'child_process'
 import { existsSync } from 'fs'
+import { ServerOptions } from '.'
 
-export const server = async () => {
+export const server = async (options: ServerOptions) => {
   try {
     const ports = [9099, 5001, 8080, 8085, 8000, 9199] // Firebase Emulatorの各ポート番号
 
@@ -24,9 +25,23 @@ export const server = async () => {
     }
 
     mkidrTmpDir()
-    const skeetS = ['yarn', 'skeet']
-    const childProcess = spawn(skeetS[0], skeetS.slice(1), {
+
+    let cmd = []
+    if (options.backend) {
+      cmd = ['yarn', 'skeet:graphql', '&&', 'yarn skeet:dev']
+    } else if (options.functions) {
+      cmd = ['yarn', 'skeet:dev']
+    } else if (options.web) {
+      cmd = ['yarn', 'dev']
+    } else if (options.graphql) {
+      cmd = ['yarn', 'skeet:graphql']
+    } else {
+      cmd = ['yarn', 'skeet']
+    }
+
+    const childProcess = spawn(cmd[0], cmd.slice(1), {
       stdio: 'inherit',
+      shell: true,
     })
 
     // シグナルハンドリング
