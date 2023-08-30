@@ -278,7 +278,7 @@ Commands:
   add                          Skeet Add Comannd to add new functions
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
-  list                         Get Skeet App List
+  get                          Get Skeet App List
   help [command]               display help for command
 ```
 

@@ -1,10 +1,12 @@
-import chalk from 'chalk'
 import { readdirSync, statSync } from 'fs'
 import path from 'path'
 
+export type FileType = 'json' | 'md' | 'all'
+
 export const getRecentUpdatedFiles = async (
   dir: string,
-  limit: number = 5
+  limit: number = 5,
+  fileTypes: FileType[] = ['all']
 ): Promise<string[]> => {
   const getFiles = (dirPath: string): string[] => {
     const entries = readdirSync(dirPath, { withFileTypes: true })
@@ -12,8 +14,13 @@ export const getRecentUpdatedFiles = async (
     const files = entries
       .filter((fileDirent) => {
         const fullPath = path.join(dirPath, fileDirent.name)
+        const isDesiredFileType =
+          fileTypes.includes('all') ||
+          (fileTypes.includes('json') && fileDirent.name.endsWith('.json')) ||
+          (fileTypes.includes('md') && fileDirent.name.endsWith('.md'))
         return (
           fileDirent.isFile() &&
+          isDesiredFileType &&
           !fullPath.includes('.git') &&
           !fullPath.includes('/dist') &&
           !fileDirent.name.startsWith('.') &&
@@ -44,6 +51,5 @@ export const getRecentUpdatedFiles = async (
     return statSync(b).mtime.getTime() - statSync(a).mtime.getTime()
   })
   const result = sortedFiles.slice(0, limit)
-  console.log(result)
   return result
 }
