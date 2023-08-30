@@ -48,3 +48,4 @@ keyfile.json
 /functions/
 graphql/
 .firebase*
+tmp
