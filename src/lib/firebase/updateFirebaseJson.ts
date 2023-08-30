@@ -11,12 +11,6 @@ export const updateFirebaseJson = async (appDisplayName: string) => {
     target: appDisplayName,
     public: 'web-build',
     ignore: ['firebase.json', '**/.*', '**/node_modules/**'],
-    rewrites: [
-      {
-        source: '**',
-        destination: '/index.html',
-      },
-    ],
   }
   newFirebaseJson.hosting.push(hosting)
   writeFileSync(FIREBASE_CONFIG_PATH, JSON.stringify(newFirebaseJson, null, 2))
