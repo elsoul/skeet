@@ -43,7 +43,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
       },
     }
   } else if (
-    template === SkeetTemplate.ExpoFirestore ||
+    template === SkeetTemplate.NextJsFirestore ||
     template === SkeetTemplate.NextJsGraphQL
   ) {
     body = {
