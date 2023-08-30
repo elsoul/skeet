@@ -16,6 +16,7 @@ import { prismaMode } from './mode/prismaMode'
 import { SkeetAIOptions } from '@skeet-framework/ai'
 import { skeetMode } from './mode/skeetMode'
 import { typedocMode } from './mode/typedocMode'
+import { translateMode } from './mode/translateMode'
 
 let rl: readline.Interface | null = null
 
@@ -57,6 +58,11 @@ export async function promptUser(options: SkeetAIOptions): Promise<void> {
     }
     if (input.toLowerCase().match(/^\$ typedoc/)) {
       await typedocMode(skeetAi, rl!)
+      return
+    }
+    if (input.toLowerCase().match(/^\$ translate/)) {
+      await translateMode(skeetAi, rl!)
+      promptUser(aiOptions)
       return
     }
 

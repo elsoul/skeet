@@ -2,7 +2,7 @@ import { program } from '@/index'
 import { listFunctions, listHttps } from '../sub/list'
 import { getSecret } from './getSecret'
 import { Logger, importConfig, getZone, getModels, getColumns } from '@/lib'
-import { getRecentUpdatedFiles } from './getRecentUpdatedFiles'
+import { FileType, getRecentUpdatedFiles } from './getRecentUpdatedFiles'
 
 export const listSubCommands = async () => {
   const get = program.command('get').description('Get Skeet App List')
@@ -57,9 +57,18 @@ export const listSubCommands = async () => {
     .description('Show Recent Updated Files')
     .option('-d, --dir <dir>', 'Directory Path')
     .option('-l, --limit <limit>', 'Limit')
-    .action(async (options: { dir: string; limit: string }) => {
-      const dir = options.dir || process.cwd()
-      const limit = Number(options.limit) || 5
-      await getRecentUpdatedFiles(dir, limit)
-    })
+    .option('-t, --translate', 'Json and Markdown Only', false)
+    .action(
+      async (options: { dir: string; limit: string; translate: boolean }) => {
+        const dir = options.dir || process.cwd()
+        const limit = Number(options.limit) || 5
+        const type = options.translate ? ['json', 'md'] : ['all']
+        const result = await getRecentUpdatedFiles(
+          dir,
+          limit,
+          type as FileType[]
+        )
+        console.log(result)
+      }
+    )
 }

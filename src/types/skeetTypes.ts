@@ -64,3 +64,9 @@ export type CloudArmor = {
   securityPolicyName: string
   rules: Rules[]
 }
+
+export type TranslateJson = {
+  langFrom: string
+  langTo: string
+  paths: string[]
+}
