@@ -6,11 +6,11 @@ import {
   setupActions,
   createLoadBalancer,
   isSQLexists,
-  getNetworkConfig,
   setupCloud,
   enableAiPermissions,
   createServiceAccount,
   runAiRole,
+  setupNetwork,
 } from '@/lib'
 import { addFirebaseApp } from '../sub/add/addFirebaseApp'
 import { yarnBuild } from '../yarn/yarnBuild'
@@ -83,6 +83,9 @@ export const init = async (loginMode = false) => {
 
   // Setup Cloud
   await setupCloud(skeetConfig, githubRepo, skeetConfig.app.region)
+
+  // Setup Network
+  await setupNetwork()
 
   // Setup Cloud SQL
   if (sqlPassword !== '') await setupSQL(skeetConfig, sqlPassword)
