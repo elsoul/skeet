@@ -103,6 +103,9 @@ gcloud-key.json
 #firebase
 .firebase
 firebase-debug.log
+
+# tmp
+tmp/
   `
   } else if (
     template === SkeetTemplate.NextJsFirestore ||
@@ -422,6 +425,9 @@ firebase-debug.log
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 **/public/fallback-*.js
+
+# tmp
+tmp/
 `
   }
 
