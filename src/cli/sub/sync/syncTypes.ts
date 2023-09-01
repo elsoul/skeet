@@ -17,7 +17,8 @@ export const syncTypes = async () => {
     if (existsSync(frontTypeDir)) {
       rmSync(frontTypeDir, { recursive: true })
     }
-    if (isWebAppDir()) {
+    const isWebAppExist = isWebAppDir()
+    if (isWebAppExist) {
       rmSync(webAppDir, { recursive: true })
     }
 
@@ -28,12 +29,12 @@ export const syncTypes = async () => {
       if (!existsSync(frontTypeDir)) {
         mkdirSync(frontTypeDir, { recursive: true })
       }
-      if (isWebAppDir() && !existsSync(webAppDir)) {
-        mkdirSync(webAppDir, { recursive: true })
-      }
 
       await copyFileWithOverwrite(typeFilePath, frontTypePath)
-      if (isWebAppDir()) {
+      if (isWebAppExist) {
+        if (!existsSync(webAppDir)) {
+          mkdirSync(webAppDir, { recursive: true })
+        }
         await copyFileWithOverwrite(typeFilePath, webAppTypePath)
       }
     }
