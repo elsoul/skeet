@@ -78,14 +78,16 @@ const validEnv = (aiType: AIType) => {
     const org = process.env.CHAT_GPT_ORG
     const key = process.env.CHAT_GPT_KEY
     if (!org || !key) {
-      console.log(chalk.red('⚠️ Please set CHAT_GPT_ORG and CHAT_GPT_KEY ⚠️'))
+      console.log(
+        chalk.yellow('⚠️ Please set CHAT_GPT_ORG and CHAT_GPT_KEY ⚠️')
+      )
       process.exit(1)
     }
   } else {
     const org = process.env.PROJECT_ID
     const key = process.env.REGION
     if (!org || !key) {
-      console.log(chalk.red('⚠️ Please set PROJECT_ID and REGION ⚠️'))
+      console.log(chalk.yellow('⚠️ Please set PROJECT_ID and REGION ⚠️'))
       process.exit(1)
     }
   }
