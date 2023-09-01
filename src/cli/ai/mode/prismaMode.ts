@@ -37,7 +37,7 @@ export const prismaMode = async (skeetAi: SkeetAI, rl: readline.Interface) => {
     console.log(chalk.white(`\nEdit: ${PRISMA_SCHEMA_PATH}`))
     console.log(
       chalk.white(`\nThen run:`),
-      chalk.green(`skeet db migrate ${migrationName}`)
+      chalk.green(`$ skeet db migrate ${migrationName}`)
     )
     const migrateText =
       '\n❓ Do you want me to run the migration now? (Yes/No) '
@@ -48,7 +48,7 @@ export const prismaMode = async (skeetAi: SkeetAI, rl: readline.Interface) => {
         shell: true,
       })
 
-      console.log(chalk.white(`\nThen run:`), chalk.green(`skeet g scaffold`))
+      console.log(chalk.white(`\nThen run:`), chalk.green(`$ skeet g scaffold`))
 
       const scaffoldText = '\n❓ Do you want me to run scaffold now? (Yes/No) '
       const runScaffold = (await yesOrNoMode(rl, scaffoldText)) as boolean
