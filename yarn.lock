@@ -1022,10 +1022,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/ai@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.5.0.tgz#f404177b405288ffa2d9207023b8b312f6f15b78"
-  integrity sha512-YFG3wADRCgdamzNM/NO+Ss26fyXFN8Fhy55VvpqTfAxBynUv9FW6kV5sVHJ5sT6+c+sBZfatMZ/q23XDOAZaHQ==
+"@skeet-framework/ai@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.5.1.tgz#d4780929d114279e39ffe0715f7d624c7afd0be3"
+  integrity sha512-lRFgnB4GsljXrsGsDRHXL+pI3vmFTG5o62U5DtJgvkjyS0Iy6rN/5MDcPIg5Dlmjc0qru5/xKAUBPApGVAWgJQ==
   dependencies:
     "@google-cloud/aiplatform" "2.17.0"
     "@google-cloud/translate" "7.2.2"
