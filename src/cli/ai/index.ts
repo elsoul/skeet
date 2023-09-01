@@ -84,10 +84,10 @@ const validEnv = (aiType: AIType) => {
       process.exit(1)
     }
   } else {
-    const org = process.env.PROJECT_ID
+    const org = process.env.GCLOUD_PROJECT
     const key = process.env.REGION
     if (!org || !key) {
-      console.log(chalk.yellow('⚠️ Please set PROJECT_ID and REGION ⚠️'))
+      console.log(chalk.yellow('⚠️ Please set GCLOUD_PROJECT and REGION ⚠️'))
       process.exit(1)
     }
   }
