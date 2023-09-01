@@ -22,7 +22,7 @@ export const yarn = async (
     { name: 'webapp' },
     { name: 'root' },
   ]
-  const { app } = await importConfig()
+  const { app } = importConfig()
   if (app?.template?.includes('GraphQL')) {
     functionsArray.push({ name: 'graphql' })
   }

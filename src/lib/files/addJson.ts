@@ -13,7 +13,7 @@ export const addDomainToConfig = async (
   lbDomain: string,
   functionName: string
 ) => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetConfig: SkeetCloudConfig = importConfig()
   const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = readFileSync(skeetOptionsFile)
   const newJsonFile: SkeetOptions = JSON.parse(String(jsonFile))
@@ -36,7 +36,7 @@ export const addProjectRegionToSkeetOptions = async (
   fbProjectId: string,
   functionName: string
 ) => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetConfig: SkeetCloudConfig = importConfig()
 
   skeetConfig.app.region = region
   skeetConfig.app.projectId = projectId

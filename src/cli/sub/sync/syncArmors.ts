@@ -9,7 +9,7 @@ import { Logger } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const syncArmors = async () => {
-  const config = await importConfig()
+  const config = importConfig()
   await setGcloudProject(config.app.projectId)
   if (config.cloudArmor)
     for await (const rule of config.cloudArmor[0].rules) {

@@ -64,6 +64,15 @@ export const skeetCloudConfigGen = async (
     "lbDomain": "loadbalancer.your-app-url.com",
     "hasLoadBalancer": false
   },
+  "ai": {
+    "lang": "en",
+    "ais": [
+      {
+        "name": "VertexAI",
+        "availableModels": ["chat-bison@001"]
+      }
+    ]
+  },
   "cloudRun": ${JSON.stringify(cloudRunBody, null, 2)},
   "db": ${JSON.stringify(dbBody, null, 2)},
   "taskQueues": ${JSON.stringify(taskQueues, null, 2)},

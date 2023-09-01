@@ -98,7 +98,7 @@ export const setupLoadBalancer = async (
 
 const hasLoadBalancerTrue = async () => {
   try {
-    let skeetConfig: SkeetCloudConfig = await importConfig()
+    let skeetConfig: SkeetCloudConfig = importConfig()
     skeetConfig.app.hasLoadBalancer = true
     writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   } catch (error) {

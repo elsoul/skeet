@@ -20,7 +20,7 @@ import { existsSync, mkdir, readFileSync, writeFileSync } from 'fs'
 
 export const addFunctions = async (functionName: string) => {
   try {
-    const skeetConfig: SkeetCloudConfig = await importConfig()
+    const skeetConfig: SkeetCloudConfig = importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}`
     if (existsSync(functionDir)) {
       Logger.error(`Already exist functionName: ${functionName}!`)

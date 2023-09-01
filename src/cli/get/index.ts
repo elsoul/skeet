@@ -23,7 +23,7 @@ export const listSubCommands = async () => {
     .command('dns')
     .description('Show Skeet NameServer Records')
     .action(async () => {
-      const { app } = await importConfig()
+      const { app } = importConfig()
       const res = await getZone(app.projectId, app.name)
       Logger.dnsSetupLog(res)
     })
