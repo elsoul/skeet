@@ -106,6 +106,7 @@ firebase-debug.log
 
 # tmp
 tmp/
+firebase-export-*
   `
   } else if (
     template === SkeetTemplate.NextJsFirestore ||
@@ -267,6 +268,10 @@ firebase-debug.log
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 **/public/fallback-*.js
+
+# tmp
+tmp/
+firebase-export-*
   `
   } else if (template === SkeetTemplate.SolanaFirestore) {
     body = `
@@ -428,6 +433,7 @@ firebase-debug.log
 
 # tmp
 tmp/
+firebase-export-*
 `
   }
 
