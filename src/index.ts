@@ -29,6 +29,7 @@ export const GRAPHQL_PATH = GRAPHQL_ROOT + '/src/graphql'
 export const PRISMA_SCHEMA_PATH = GRAPHQL_ROOT + '/prisma/schema.prisma'
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
+export const FIREBASERC_PATH = './.firebaserc'
 
 export const program = new Command()
 

@@ -29,17 +29,27 @@ import {
 import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { genGithubActions } from '../gen'
 import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
-import { DEFAULT_FUNCTION_NAME } from '@/index'
+import { DEFAULT_FUNCTION_NAME, FIREBASERC_PATH } from '@/index'
 import { syncRoutings } from '../sub/sync/syncRoutings'
 import inquirer from 'inquirer'
 import { questionList } from './questionList'
 import { spawnSync } from 'child_process'
+import { readFileSync, writeFileSync } from 'fs'
+
+export type initialParams = {
+  projectId: string
+  fbProjectId: string
+  region: string
+}
 
 export const init = async (loginMode = false) => {
   // Setup Google Cloud Project
-  const { projectId, fbProjectId, region } = await askForProjectId()
+  const { projectId, fbProjectId, region } =
+    await inquirer.prompt<initialParams>(questionList.projectQuestions)
   if (await projectIdNotExists(projectId))
     Logger.projectIdNotExistsError(projectId)
+
+  updateFirebaserc(fbProjectId)
 
   if (!region) throw new Error('region is undefined')
 
@@ -121,4 +131,10 @@ export const init = async (loginMode = false) => {
     const cmd = `yarn deploy`
     spawnSync(cmd, { stdio: 'inherit', shell: true })
   }
+}
+
+const updateFirebaserc = (fbProjectId: string) => {
+  const firebaserc = JSON.parse(readFileSync(FIREBASERC_PATH, 'utf-8'))
+  firebaserc.projects.default = fbProjectId
+  writeFileSync(FIREBASERC_PATH, JSON.stringify(firebaserc, null, 2))
 }
