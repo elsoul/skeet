@@ -60,18 +60,3 @@ export type DomainAnswer = {
   nsDomain: string
   lbDomain: string
 }
-
-export const askForDomain = async () => {
-  const domainInquirer = inquirer.prompt(questionList.domainQuestions)
-  let isDomain = false
-  let appDomain = ''
-  let nsDomain = ''
-  let lbDomain = ''
-  await domainInquirer.then(async (domain) => {
-    isDomain = domain.isDomain
-    appDomain = domain.appDomain
-    nsDomain = domain.nsDomain
-    lbDomain = domain.lbDomain
-  })
-  return { isDomain, appDomain, nsDomain, lbDomain } as DomainAnswer
-}

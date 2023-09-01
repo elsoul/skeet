@@ -1,4 +1,4 @@
-import { SkeetCloudConfig } from '@/types/skeetTypes'
+import { SkeetCloudConfig, SkeetOptions } from '@/types/skeetTypes'
 import { importConfig } from './importConfig'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from './getSkeetConfig'
@@ -16,15 +16,18 @@ export const addDomainToConfig = async (
   const skeetConfig: SkeetCloudConfig = await importConfig()
   const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = readFileSync(skeetOptionsFile)
-  const newJsonFile = JSON.parse(String(jsonFile))
+  const newJsonFile: SkeetOptions = JSON.parse(String(jsonFile))
   newJsonFile.appDomain = appDomain
   newJsonFile.nsDomain = nsDomain
   newJsonFile.lbDomain = lbDomain
+  newJsonFile.functionsDomain = lbDomain
+
   writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 
   skeetConfig.app.appDomain = appDomain
   skeetConfig.app.nsDomain = nsDomain
   skeetConfig.app.lbDomain = lbDomain
+  skeetConfig.app.functionsDomain = lbDomain
   writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }

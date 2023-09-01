@@ -6,6 +6,17 @@ export enum SkeetTemplate {
   // SolanaValidator = 'Solana Validator Monitoring Tools',
 }
 
+export type SkeetOptions = {
+  name: string
+  projectId: string
+  region: string
+  fbProjectId: string
+  appDomain: string
+  nsDomain: string
+  lbDomain: string
+  functionsDomain: string
+}
+
 export type SkeetCloudConfig = {
   app: AppConfig
   cloudRun: CloudRunConfig
