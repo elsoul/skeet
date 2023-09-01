@@ -14,7 +14,6 @@ export type SkeetOptions = {
   appDomain: string
   nsDomain: string
   lbDomain: string
-  functionsDomain: string
 }
 
 export type SkeetCloudConfig = {
@@ -34,7 +33,6 @@ export type AppConfig = {
   appDomain: string
   nsDomain: string
   lbDomain: string
-  functionsDomain: string
   hasLoadBalancer: boolean
 }
 

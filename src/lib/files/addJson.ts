@@ -20,14 +20,12 @@ export const addDomainToConfig = async (
   newJsonFile.appDomain = appDomain
   newJsonFile.nsDomain = nsDomain
   newJsonFile.lbDomain = lbDomain
-  newJsonFile.functionsDomain = lbDomain
 
   writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 
   skeetConfig.app.appDomain = appDomain
   skeetConfig.app.nsDomain = nsDomain
   skeetConfig.app.lbDomain = lbDomain
-  skeetConfig.app.functionsDomain = lbDomain
   writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
