@@ -11,6 +11,7 @@ import {
   createServiceAccount,
   runAiRole,
   setupNetwork,
+  getZone,
 } from '@/lib'
 import { addFirebaseApp } from '../sub/add/addFirebaseApp'
 import { yarnBuild } from '../yarn/yarnBuild'
@@ -108,5 +109,7 @@ export const init = async (loginMode = false) => {
   if (!skeetConfig.app.hasLoadBalancer) {
     await createLoadBalancer(skeetConfig, domainAnswer)
     await syncRoutings()
+    const ips = await getZone(projectId, skeetConfig.app.name)
+    Logger.dnsSetupLog(ips)
   }
 }

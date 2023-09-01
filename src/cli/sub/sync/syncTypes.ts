@@ -13,20 +13,36 @@ export const syncTypes = async () => {
   const { app } = await importConfig()
   for await (const type of types) {
     const frontTypeDir = `src/types/http/${type.functionName}`
+    const webAppDir = `webapp/src/types/http/${type.functionName}`
     if (existsSync(frontTypeDir)) {
       rmSync(frontTypeDir, { recursive: true })
     }
+    if (isWebAppDir()) {
+      rmSync(webAppDir, { recursive: true })
+    }
+
     for await (const typePath of type.modelsPath) {
       const typeFilePath = `functions/${type.functionName}/src/types/http/${typePath}`
       const frontTypePath = `${frontTypeDir}/${typePath}`
+      const webAppTypePath = `${webAppDir}/${typePath}`
       if (!existsSync(frontTypeDir)) {
         mkdirSync(frontTypeDir, { recursive: true })
       }
+      if (isWebAppDir() && !existsSync(webAppDir)) {
+        mkdirSync(webAppDir, { recursive: true })
+      }
 
       await copyFileWithOverwrite(typeFilePath, frontTypePath)
+      if (isWebAppDir()) {
+        await copyFileWithOverwrite(typeFilePath, webAppTypePath)
+      }
     }
     if (app.template.includes('GraphQL')) {
       writePrismaSchemaToFunctions(type.functionName)
     }
   }
+}
+
+const isWebAppDir = () => {
+  return existsSync('webapp')
 }

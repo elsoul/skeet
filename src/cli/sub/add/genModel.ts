@@ -1,42 +1,43 @@
 import { FUNCTIONS_PATH, Logger } from '@/lib'
 import { appendLineToFile } from '@/templates/instanceTypes'
 import { toCamelCase } from '@/utils/string'
+import { toUpperCase } from '@skeet-framework/utils'
 import { writeFileSync } from 'fs'
 
 export const genModel = (functionsName: string, modelName: string) => {
   try {
     const camel = toCamelCase(modelName)
+    const capital = toUpperCase(modelName)
     const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/models/${camel}Models.ts`
     const modelIndexPath = `${FUNCTIONS_PATH}/${functionsName}/src/models/index.ts`
-    const body = `import { Ref } from '@skeet-framework/firestore'
+    const body = `import { Timestamp, FieldValue } from '@skeet-framework/firestore''
 
 // ⚡️ This is a Skeet Framework Sample Models ⚡️
 // Define Your Model Types
 // CollectionId & DocumentId are custamizable
 
-// CollectionId: Parent
-// DocumentId: uid
-export type Parent = {
-  createdAt?: string
-  updatedAt?: string
+// Define Collection Name
+export const ${capital}CN = '${capital}'
+export const ${capital}ChildCN = '${capital}Child'
+
+// CollectionId: ${capital}
+// ${capital}Id: auto
+// Path: \${${capital}CN}
+export type ${capital} = {
+  id?: string
+  createdAt?: Timestamp | FieldValue
+  updatedAt?: Timestamp | FieldValue
 }
 
-// CollectionId: Child
-// DocumentId: auto
-export type Child = {
-  parentRef: Ref<Parent>
-  createdAt?: string
-  updatedAt?: string
+// CollectionId: ${capital}Child
+// ${capital}ChildId: auto
+// Path: \${${capital}CN}/\${${capital}Id}/\${${capital}ChildCN}
+export type ${capital}Child = {
+  id?: string
+  createdAt?: Timestamp | FieldValue
+  updatedAt?: Timestamp | FieldValue
 }
-
-
-// CollectionId: GrandChild
-// DocumentId: auto
-export type GrandChild = {
-  childRef: Ref<Child>
-  createdAt?: string
-  updatedAt?: string
-}`
+`
     writeFileSync(filePath, body)
     const indexLine = `export * from './${camel}Models'`
     appendLineToFile(modelIndexPath, indexLine)
