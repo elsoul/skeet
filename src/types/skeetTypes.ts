@@ -18,6 +18,7 @@ export type SkeetOptions = {
 
 export type SkeetCloudConfig = {
   app: AppConfig
+  ai: AiConfig
   cloudRun: CloudRunConfig
   db: DbConfig
   taskQueues: TaskQueue[]
@@ -78,4 +79,14 @@ export type TranslateJson = {
   langFrom: string
   langTo: string
   paths: string[]
+}
+
+export type AiConfig = {
+  lang: string
+  ais: AI[]
+}
+
+export type AI = {
+  name: string
+  availableModels: string[]
 }

@@ -9,7 +9,7 @@ import {
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const setupIam = async () => {
-  const config: SkeetCloudConfig = await importConfig()
+  const config: SkeetCloudConfig = importConfig()
   await setGcloudProject(config.app.projectId)
   await runEnableAllPermission(config.app.projectId)
   await createServiceAccount(config.app.projectId, config.app.name)

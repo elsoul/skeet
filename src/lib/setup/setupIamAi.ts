@@ -19,7 +19,7 @@ export const setupIamAi = async () => {
       await addProjectRegionToSkeetConfig()
     }
     Logger.normal(`Generating AI Permissions...`)
-    const config: SkeetCloudConfig = await importConfig()
+    const config: SkeetCloudConfig = importConfig()
     if (await projectIdNotExists(config.app.projectId))
       Logger.projectIdNotExistsError(config.app.projectId)
 

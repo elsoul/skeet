@@ -16,7 +16,7 @@ import { askForGithubRepo } from './askQuestions'
 import { genGithubActions } from '../gen'
 
 export const initLb = async () => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetConfig: SkeetCloudConfig = importConfig()
   const githubRepo = await askForGithubRepo()
   const domainInquirer = inquirer.prompt(questionList.domainQuestions)
   await domainInquirer.then(async (domainAnswer) => {
