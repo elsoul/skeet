@@ -33,6 +33,7 @@ import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { syncRoutings } from '../sub/sync/syncRoutings'
 import inquirer from 'inquirer'
 import { questionList } from './questionList'
+import { spawnSync } from 'child_process'
 
 export const init = async (loginMode = false) => {
   // Setup Google Cloud Project
@@ -112,7 +113,12 @@ export const init = async (loginMode = false) => {
   if (!skeetConfig.app.hasLoadBalancer) {
     await createLoadBalancer(skeetConfig, domainAnswer)
     await syncRoutings()
+    const cmd = `yarn deploy`
+    spawnSync(cmd, { stdio: 'inherit', shell: true })
     const ips = await getZone(projectId, skeetConfig.app.name)
     Logger.dnsSetupLog(ips)
+  } else {
+    const cmd = `yarn deploy`
+    spawnSync(cmd, { stdio: 'inherit', shell: true })
   }
 }
