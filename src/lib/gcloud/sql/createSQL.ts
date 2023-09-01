@@ -2,12 +2,7 @@ import prompt from 'prompt'
 import percentEncode from '@stdlib/string-percent-encode'
 import { Logger } from '@/lib'
 import { execSync, spawnSync } from 'child_process'
-import {
-  getNetworkConfig,
-  getContainerRegion,
-  genSecret,
-  regionToTimezone,
-} from '@/lib'
+import { getNetworkConfig, getContainerRegion, regionToTimezone } from '@/lib'
 import { patchSQL } from './patchSQL'
 import { GRAPHQL_ENV_BUILD_PATH, GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
 import { writeFileSync } from 'fs'
@@ -90,9 +85,6 @@ export const generateEnvProduction = async (
 ) => {
   const filePath = GRAPHQL_ENV_PRODUCTION_PATH
   const cRegion = await getContainerRegion(region)
-  const secretKey = await genSecret(appName)
-  const secretKeyPW = await genSecret(appName)
-  const secretKeyCrypto = await genSecret(appName)
   const timeZone = await regionToTimezone(region)
   const envProduction = [
     `SKEET_APP_NAME=${appName}\n`,
@@ -103,10 +95,6 @@ export const generateEnvProduction = async (
     `SKEET_GCP_DB_PASSWORD=${encodedPassword}\n`,
     `SKEET_CONTAINER_REGION=${cRegion}\n`,
     `SKEET_GCP_DB_PRIVATE_IP=${databaseIp}\n`,
-    `SKEET_JWT_SALT=${secretKey}\n`,
-    `SKEET_BASE_URL=https://${appName}.com\n`,
-    `SKEET_PW_SALT=${secretKeyPW}\n`,
-    `SKEET_CRYPTO_SALT=${secretKeyCrypto}\n`,
     `TZ=${timeZone}`,
   ]
   envProduction.forEach((keyValue) => {

@@ -19,14 +19,6 @@ export const FRONT_APP_PATH = './src'
 export const WEB_APP_PATH = './webapp'
 export const KEYFILE_PATH = './keyfile.json'
 
-export const genSecret = async (name: string) => {
-  try {
-    return createHash('sha256').update(name).digest('hex')
-  } catch (error) {
-    throw new Error(`genSecret: ${error}`)
-  }
-}
-
 export const getNegName = async (functionName: string) => {
   return `skeet-${functionName}-neg`
 }
@@ -169,10 +161,6 @@ export const isNegExists = async (
 export const defaultProductionEnvArray = [
   'NO_PEER_DEPENDENCY_CHECK=1',
   'DATABASE_URL=postgresql://postgres:${{ secrets.SKEET_GCP_DB_PASSWORD }}@${{ secrets.SKEET_GCP_DB_PRIVATE_IP }}:5432/skeet-${{ secrets.SKEET_APP_NAME }}-production?schema=public',
-  'SKEET_JWT_SALT=${{ secrets.SKEET_JWT_SALT }}',
-  'SKEET_BASE_URL=${{ secrets.SKEET_BASE_URL }}',
-  'SKEET_CRYPTO_SALT=${{ secrets.SKEET_CRYPTO_SALT }}',
-  'SKEET_PW_SALT=${{ secrets.SKEET_PW_SALT }}',
   'SKEET_GCP_PROJECT_ID=${{ secrets.SKEET_GCP_PROJECT_ID }}',
   'SKEET_GCP_TASK_REGION=${{ secrets.SKEET_GCP_TASK_REGION }}',
   'GOOGLE_CLOUD_PROJECT=${{ secrets.SKEET_FB_PROJECT_ID }}',
