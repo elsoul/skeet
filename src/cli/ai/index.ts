@@ -16,6 +16,7 @@ export const aiCommands = () => {
     .option('-temp, --temperature <number>', 'Temperature')
     .action(async (options) => {
       let aiType = options.openai ? 'OpenAI' : 'VertexAI'
+      validEnv(aiType as AIType)
       let model = options.openai
         ? options.model || 'gpt-4'
         : options.model || 'chat-bison@001'
@@ -70,4 +71,22 @@ export const aiCommands = () => {
       )
       promptUser(aiOptions)
     })
+}
+
+const validEnv = (aiType: AIType) => {
+  if (aiType === 'OpenAI') {
+    const org = process.env.CHAT_GPT_ORG
+    const key = process.env.CHAT_GPT_KEY
+    if (!org || !key) {
+      console.log(chalk.red('⚠️ Please set CHAT_GPT_ORG and CHAT_GPT_KEY ⚠️'))
+      process.exit(1)
+    }
+  } else {
+    const org = process.env.PROJECT_ID
+    const key = process.env.REGION
+    if (!org || !key) {
+      console.log(chalk.red('⚠️ Please set PROJECT_ID and REGION ⚠️'))
+      process.exit(1)
+    }
+  }
 }

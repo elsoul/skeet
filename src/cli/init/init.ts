@@ -22,7 +22,6 @@ import { syncRunUrl } from '../sub/sync/syncRunUrl'
 import { setupSQL } from '@/lib/setup/setupSQL'
 import {
   DomainAnswer,
-  askForDomain,
   askForGithubRepo,
   askForProjectId,
   askForSqlPassword,
@@ -32,6 +31,8 @@ import { genGithubActions } from '../gen'
 import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { syncRoutings } from '../sub/sync/syncRoutings'
+import inquirer from 'inquirer'
+import { questionList } from './questionList'
 
 export const init = async (loginMode = false) => {
   // Setup Google Cloud Project
@@ -79,7 +80,9 @@ export const init = async (loginMode = false) => {
 
   // Ask Domain info if LB is not exists
   if (!skeetConfig.app.hasLoadBalancer) {
-    domainAnswer = await askForDomain()
+    domainAnswer = await inquirer.prompt<DomainAnswer>(
+      questionList.domainQuestions
+    )
   }
 
   // Setup Cloud
