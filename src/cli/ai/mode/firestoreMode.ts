@@ -5,7 +5,7 @@ import * as readline from 'readline'
 import { promptUser } from '../ai'
 import { yesOrNoMode } from './yesOrNoMode'
 import { spawnSync } from 'child_process'
-import { writeFileSync } from 'fs'
+import { appendFileSync, writeFileSync } from 'fs'
 import { FUNCTIONS_PATH } from '@/lib'
 import { NamingEnum } from '@skeet-framework/ai'
 
@@ -43,6 +43,8 @@ export const firestoreMode = async (
     }
 
     const modelFilePath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/models/${modelFileSuggestion}`
+    const modelIndexPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/models/index.ts`
+    appendFileSync(modelIndexPath, `\nexport * from './${modelFileSuggestion}'`)
     writeFileSync(modelFilePath, aiAnswer)
     console.log(chalk.white(`\nCreated: ${modelFilePath}`))
     console.log(chalk.white(`\nThen run:`), chalk.green(`skeet sync models`))
