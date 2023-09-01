@@ -5,6 +5,7 @@ import * as readline from 'readline'
 import { promptUser } from '../ai'
 import { yesOrNoMode } from './yesOrNoMode'
 import { spawnSync } from 'child_process'
+import { NamingEnum } from '@skeet-framework/ai'
 
 export const prismaMode = async (skeetAi: SkeetAI, rl: readline.Interface) => {
   console.log(chalk.cyan('🤖 Prisma Scheme Generating Mode 🤖'))
@@ -29,7 +30,10 @@ export const prismaMode = async (skeetAi: SkeetAI, rl: readline.Interface) => {
       prismaMode(skeetAi, rl)
       return
     }
-    const migrationName = await skeetAi.naming(prismaSchema, true)
+    const migrationName = await skeetAi.naming(
+      prismaSchema,
+      NamingEnum.MIGRATION
+    )
     console.log(chalk.white(`\nEdit: ${PRISMA_SCHEMA_PATH}`))
     console.log(
       chalk.white(`\nThen run:`),
