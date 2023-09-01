@@ -41,7 +41,10 @@ export const firestoreMode = async (
 
     const modelFilePath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/models/${modelFileSuggestion}`
     const modelIndexPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/models/index.ts`
-    appendFileSync(modelIndexPath, `\nexport * from './${modelFileSuggestion}'`)
+    appendFileSync(
+      modelIndexPath.replace('.ts', ''),
+      `export * from './${modelFileSuggestion}'`
+    )
     writeFileSync(modelFilePath, aiAnswer)
     console.log(chalk.white(`\nCreated: ${modelFilePath}`))
     console.log(chalk.white(`\nThen run:`), chalk.green(`$ skeet sync models`))
