@@ -10,7 +10,7 @@ export const genModel = (functionsName: string, modelName: string) => {
     const capital = toUpperCase(modelName)
     const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/models/${camel}Models.ts`
     const modelIndexPath = `${FUNCTIONS_PATH}/${functionsName}/src/models/index.ts`
-    const body = `import { Timestamp, FieldValue } from '@skeet-framework/firestore''
+    const body = `import { Timestamp, FieldValue } from '@skeet-framework/firestore'
 
 // ⚡️ This is a Skeet Framework Sample Models ⚡️
 // Define Your Model Types
