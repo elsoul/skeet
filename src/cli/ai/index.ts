@@ -87,7 +87,8 @@ const validEnv = (aiType: AIType) => {
     const org = process.env.GCLOUD_PROJECT
     const key = process.env.REGION
     if (!org || !key) {
-      console.log(chalk.yellow('⚠️ Please set GCLOUD_PROJECT and REGION ⚠️'))
+      console.log(chalk.yellow('⚠️ Did you run `$ skeet iam ai`? ⚠️'))
+      console.log(chalk.yellow('⚠️ Please export GCLOUD_PROJECT and REGION ⚠️'))
       process.exit(1)
     }
   }
