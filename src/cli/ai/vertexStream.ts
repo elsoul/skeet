@@ -2,12 +2,13 @@ import { Stream } from 'stream'
 import { promptUser } from './ai'
 import chalk from 'chalk'
 import { SkeetAIOptions } from '@skeet-framework/ai'
-import { logger } from '.'
 import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
+import { AiLog } from './aiLog'
 
 export const vertexStream = (
   stream: Stream,
-  skeetAIOptions: SkeetAIOptions
+  skeetAIOptions: SkeetAIOptions,
+  logger: AiLog
 ) => {
   let bufferedResponse = ''
   const messages: string[] = []
@@ -38,6 +39,6 @@ export const vertexStream = (
       skeetAIOptions.model || ''
     )
 
-    promptUser(skeetAIOptions)
+    promptUser(skeetAIOptions, logger)
   })
 }

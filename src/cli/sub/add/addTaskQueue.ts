@@ -53,7 +53,7 @@ export const addTaskQueue = async (
 }
 
 export const addTaskQueueToConf = async (taskQueue: TaskQueue) => {
-  const skeetConfig = importConfig()
+  const skeetConfig = await importConfig()
   if (skeetConfig.taskQueues) {
     skeetConfig.taskQueues.push(taskQueue)
     writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))

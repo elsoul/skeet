@@ -10,7 +10,7 @@ export const createNeg = async (
 ) => {
   const kebab = convertToKebabCase(methodName)
   const functionInfo = await getFunctionInfo(kebab)
-  const config = importConfig()
+  const config = await importConfig()
   const negName = init
     ? `skeet-${config.app.name}-default-neg`
     : functionInfo.neg

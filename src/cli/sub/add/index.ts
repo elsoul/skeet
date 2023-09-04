@@ -49,7 +49,7 @@ export const addSubCommands = async () => {
       'Firebase App Display Name - e.g. skeet-web-console'
     )
     .action(async (appDisplayName: string) => {
-      const { app } = importConfig()
+      const { app } = await importConfig()
       await addFirebaseApp(app.projectId, appDisplayName)
     })
   add

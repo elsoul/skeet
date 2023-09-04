@@ -25,7 +25,7 @@ export const iamSubCommands = async () => {
     .command('pull')
     .description('Download IAM Key for Google Cloud Platform')
     .action(async () => {
-      const config = importConfig()
+      const config = await importConfig()
       await createServiceAccountKey(config.app.projectId, config.app.name)
     })
   iam

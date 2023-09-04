@@ -6,12 +6,13 @@ import { spawnSync } from 'child_process'
 import { appendFileSync, writeFileSync } from 'fs'
 import { FUNCTIONS_PATH } from '@/lib'
 import { NamingEnum } from '@skeet-framework/ai'
-import { log, logger } from '..'
 import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
 import inquirer from 'inquirer'
 import { yesOrNo } from './yesOrNoMode'
+import { AiLog } from '../aiLog'
 
-export const firestoreMode = async (skeetAi: SkeetAI) => {
+export const firestoreMode = async (skeetAi: SkeetAI, logger: AiLog) => {
+  const log = logger.text() as SkeetLog
   console.log(chalk.cyan(log.firestoreMode.init))
   const model = String(skeetAi.initOptions.model)
   const inputMessage =
@@ -50,7 +51,7 @@ export const firestoreMode = async (skeetAi: SkeetAI) => {
   const isYes = (await yesOrNo(text)) as boolean
   if (!isYes) {
     logger.addJson(SkeetRole.USER, 'No', SkeetAiMode.Firestore, model)
-    firestoreMode(skeetAi)
+    firestoreMode(skeetAi, logger)
     return
   }
   logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Firestore, model)
@@ -82,11 +83,11 @@ export const firestoreMode = async (skeetAi: SkeetAI) => {
       shell: true,
     })
     logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Firestore, model)
-    promptUser(skeetAi.initOptions)
+    promptUser(skeetAi.initOptions, logger)
     return
   }
   logger.addJson(SkeetRole.USER, 'No', SkeetAiMode.Firestore, model)
   console.log(chalk.white(`\n${log.firestoreMode.ExitingMode}...\n`))
-  promptUser(skeetAi.initOptions)
+  promptUser(skeetAi.initOptions, logger)
   return
 }

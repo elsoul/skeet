@@ -1,12 +1,13 @@
 import { NamingEnum, SkeetAI } from '@skeet-framework/ai'
 import { promptUser } from '../ai'
 import inquirer from 'inquirer'
-import { log, logger } from '..'
 import { SkeetAiMode, SkeetInstanceType } from '@/types/skeetTypes'
 import { getFunctions } from '@/lib'
 import { spawnSync } from 'child_process'
+import { AiLog } from '../aiLog'
 
-export const functionMode = async (skeetAi: SkeetAI) => {
+export const functionMode = async (skeetAi: SkeetAI, logger: AiLog) => {
+  const log = logger.text() as SkeetLog
   console.log(log.functionMode.init)
   const functions = getFunctions()
   let functionName = ''
@@ -74,5 +75,5 @@ export const functionMode = async (skeetAi: SkeetAI) => {
     String(skeetAi.initOptions.model)
   )
   console.log(log.functionMode.ExitingMode + '...\n')
-  promptUser(skeetAi.initOptions)
+  promptUser(skeetAi.initOptions, logger)
 }

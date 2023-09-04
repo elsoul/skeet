@@ -6,9 +6,10 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { yesOrNo } from './yesOrNoMode'
 import { TranslateJson } from '@/types/skeetTypes'
 import { TRANSLATE_PATH } from '@/index'
-import { log } from '..'
+import { AiLog } from '../aiLog'
 
-export const translateMode = async (skeetAi: SkeetAI) => {
+export const translateMode = async (skeetAi: SkeetAI, logger: AiLog) => {
+  const log = logger.text() as SkeetLog
   const pathFile = TRANSLATE_PATH
   console.log(chalk.cyan(log.translateMode.init))
   console.log(chalk.white(log.translateMode.modeDesc))
@@ -44,7 +45,7 @@ export const translateMode = async (skeetAi: SkeetAI) => {
 
   const isYes = (await yesOrNo(log.common.areYouReady)) as boolean
   if (!isYes) {
-    promptUser(skeetAi.initOptions)
+    promptUser(skeetAi.initOptions, logger)
     return
   }
   for (const lang of initJson.langsTo) {
@@ -58,6 +59,6 @@ export const translateMode = async (skeetAi: SkeetAI) => {
     )
   }
   console.log(chalk.white(log.translateMode.ExitingMode + '...\n'))
-  promptUser(skeetAi.initOptions)
+  promptUser(skeetAi.initOptions, logger)
   return
 }

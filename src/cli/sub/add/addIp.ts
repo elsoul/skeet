@@ -32,7 +32,7 @@ export const sendGet = async (url: string) => {
 }
 
 export const addHomeIpToSkeetConfig = async (ip: string) => {
-  let skeetConfig: SkeetCloudConfig = importConfig()
+  let skeetConfig: SkeetCloudConfig = await importConfig()
   const whiteList = skeetConfig.db.whiteList || ''
   skeetConfig.db.whiteList =
     whiteList === '' ? whiteList + `${ip}` : whiteList + `,${ip}`

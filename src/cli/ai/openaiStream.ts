@@ -3,12 +3,13 @@ import { promptUser } from './ai'
 import chalk from 'chalk'
 import { ReadStream } from 'fs'
 import { SkeetAIOptions } from '@skeet-framework/ai'
-import { logger } from '.'
 import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
+import { AiLog } from './aiLog'
 
 export const openaiStream = (
   openaiStream: Stream<ChatCompletionChunk>,
-  skeetAIOptions: SkeetAIOptions
+  skeetAIOptions: SkeetAIOptions,
+  logger: AiLog
 ) => {
   let bufferedResponse = ''
   const messages: string[] = []
@@ -45,6 +46,6 @@ export const openaiStream = (
       SkeetAiMode.Skeet,
       skeetAIOptions.model || ''
     )
-    promptUser(skeetAIOptions)
+    promptUser(skeetAIOptions, logger)
   })
 }

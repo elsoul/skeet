@@ -4,7 +4,7 @@ import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { writeFileSync } from 'fs'
 
 export const syncRunUrl = async () => {
-  const skeetConfig: SkeetCloudConfig = importConfig()
+  const skeetConfig: SkeetCloudConfig = await importConfig()
   await syncGraphqlUrl(skeetConfig)
   Logger.successCheck(`successfully updated cloud run urls`)
 }

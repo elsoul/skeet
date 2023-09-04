@@ -4,10 +4,11 @@ import { readFileSync } from 'fs'
 import { getRecentUpdatedFiles } from '@/cli/get/getRecentUpdatedFiles'
 import inquirer from 'inquirer'
 import { SkeetAiMode } from '@/types/skeetTypes'
-import { log, logger } from '..'
 import { promptUser } from '../ai'
+import { AiLog } from '../aiLog'
 
-export const typedocMode = async (skeetAi: SkeetAI) => {
+export const typedocMode = async (skeetAi: SkeetAI, logger: AiLog) => {
+  const log = logger.text() as SkeetLog
   console.log(chalk.cyan(log.typedocMode.init))
   const recentPaths = await getRecentUpdatedFiles(process.cwd(), 5)
   const paths = await inquirer.prompt([
@@ -35,6 +36,6 @@ export const typedocMode = async (skeetAi: SkeetAI) => {
     String(skeetAi.initOptions.model)
   )
   console.log(chalk.white(log.typedocMode.ExitingMode + '...\n'))
-  promptUser(skeetAi.initOptions)
+  promptUser(skeetAi.initOptions, logger)
   return
 }
