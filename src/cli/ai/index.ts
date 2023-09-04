@@ -62,6 +62,7 @@ const validEnv = (aiType: AIType) => {
     const key = process.env.REGION
     if (!org || !key) {
       console.log(chalk.yellow(log.warning.gcpKey))
+      console.log(chalk.yellow('⚠️ Did you run `$ skeet iam ai`? ⚠️'))
       process.exit(1)
     }
   }
