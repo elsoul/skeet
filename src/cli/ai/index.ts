@@ -72,21 +72,27 @@ const validEnv = (aiType: AIType, logger: AiLog) => {
   }
 }
 
+const defaultAiConfig = {
+  lang: 'en',
+  ais: [
+    {
+      name: 'VertexAI',
+      availableModels: ['chat-bison@001'],
+    },
+  ],
+}
+
 const validateAiConfig = async () => {
   try {
-    const skeetConfig = {
-      ai: {
-        lang: 'en',
-        ais: [
-          {
-            name: 'VertexAI',
-            availableModels: ['chat-bison@001'],
-          },
-        ],
-      },
+    const skeetConfig = await importConfig()
+    if (!skeetConfig.ai) {
+      skeetConfig.ai = defaultAiConfig
     }
     writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   } catch (error) {
-    console.log(`validateAiConfig: ${error}`)
+    const skeetConfig = {
+      ai: defaultAiConfig,
+    }
+    writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   }
 }
