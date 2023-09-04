@@ -3,8 +3,31 @@ import { promptUser } from './ai'
 import chalk from 'chalk'
 import { AIType } from '@skeet-framework/ai'
 import { SkeetAIOptions } from '@skeet-framework/ai'
-import { importConfig } from '@/lib'
+import { SKEET_CONFIG_PATH, importConfig } from '@/lib'
 import { AiLog } from './aiLog'
+import { writeFileSync } from 'fs'
+
+const validateSkeetAiConfig = () => {
+  try {
+    const skeetConfig = importConfig()
+    if (!skeetConfig.ai) {
+      ;(skeetConfig.ai = {
+        lang: 'en',
+        ais: [
+          {
+            name: 'VertexAI',
+            availableModels: ['chat-bison@001'],
+          },
+        ],
+      }),
+        writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+validateSkeetAiConfig()
 
 const { ai } = importConfig()
 const lang = ai.lang || 'en'

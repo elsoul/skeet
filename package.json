@@ -23,8 +23,9 @@
   },
   "scripts": {
     "test": "jest --coverage=false --detectOpenHandles --maxWorkers=1",
+    "copy-assets": "copyfiles -u 4 src/cli/ai/locales/**/skeetAi.json dist/locales/",
     "update:packages": "ncu -u && yarn",
-    "build": "npx ts-node build.ts && npx ts-node add-line.ts",
+    "build": "npx ts-node build.ts && npx ts-node add-line.ts && yarn copy-assets",
     "publish": "npm publish",
     "dev": "nodemon",
     "start:dev": "npx ts-node build.ts && node ./dist/index.js",
@@ -57,6 +58,7 @@
     "@types/prompt": "1.1.5",
     "@types/semver": "^7.5.0",
     "babel-loader": "9.1.2",
+    "copyfiles": "^2.4.1",
     "esbuild": "0.17.19",
     "eslint": "8.41.0",
     "eslint-config-prettier": "8.8.0",

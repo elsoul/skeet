@@ -1,11 +1,7 @@
 import { Example } from '@skeet-framework/ai'
 import { skeetCliHelps } from './skeetCliHelps'
-import { importConfig } from '@/lib'
 
-const { ai } = importConfig()
-const lang = ai.lang || 'en'
-
-export const skeetAiPrompt = (): Example => {
+export const skeetAiPrompt = (lang: string): Example => {
   return {
     context: `You are a senior engineer specialized in assisting developers. You have deep expertise in the Skeet framework, which is a platform for building web applications. Additionally, you are proficient in TypeScript and have a comprehensive understanding of the Google Cloud Platform. You are also familiar with the Skeet framework's GraphQL API and the Firebase Emulator Suite. You are a member of the Skeet framework community and have been helping developers with their questions. You are also a member of the Skeet framework community and have been helping developers with their questions.
   Reference: Skeet Framework - https://skeet.dev

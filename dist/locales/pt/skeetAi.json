@@ -1,0 +1,86 @@
+{
+  "common": {
+    "you": "Você",
+    "start": "O que posso fazer por você?",
+    "aiType": "Tipo de IA",
+    "model": "Modelo",
+    "maxToken": "Token Máximo",
+    "temperature": "Temperatura",
+    "skeetAiModeText": "Modo Skeet AI\n `$ <mode>` para mudar o modo de IA",
+    "isSelected": "está selecionado 🤖 (digite 'q' para sair)",
+    "shutdown": "está desligando",
+    "howAboutThis": "Que tal isso?\n\n",
+    "updateFile": "Por favor, atualize seu arquivo",
+    "getFileDesc": "Este comando mostra os arquivos mais recentemente atualizados",
+    "currentSet": "Conjunto atual",
+    "areYouReady": "Você está pronto para executar?",
+    "firestoreMode": "🔥 Modo de Geração de Modelo Firestore 🔥",
+    "firestoreModeDesc": "Por favor, descreva seu caso de uso do Firestore.",
+    "MayICreateFile": "Posso criar este arquivo para você?",
+    "MayIUpdateFile": "Posso atualizar este arquivo para você?",
+    "MayIAddDoc": "Posso adicionar Typedoc para este método?",
+    "created": "✔️ Criado",
+    "thenRun": "\nEntão execute:",
+    "mayISyncModel": "Posso sincronizar os modelos agora?",
+    "confirmSyncModel": "❓ Posso sincronizar os modelos agora?",
+    "example": "ex. ",
+    "addedDoc": "✔️ Adicionado Typedoc"
+  },
+  "warning": {
+    "temperature": "⚠️ A temperatura deve estar entre 0 e 1 ⚠️",
+    "gptKey": "⚠️ Por favor, defina CHAT_GPT_ORG e CHAT_GPT_KEY ⚠️",
+    "gcpKey": "⚠️ Por favor, defina GCLOUD_PROJECT e REGION ⚠️"
+  },
+  "skeetMode": {},
+  "typedocMode": {
+    "init": "📚 Modo Typedoc 📚",
+    "modeDesc": "Por favor, selecione um caminho de arquivo para gerar typedoc.",
+    "ExitingMode": "Saindo do Modo Typedoc"
+  },
+  "translateMode": {
+    "init": "🌐 Modo de tradução 🌐",
+    "modeDesc": "Lendo tmp/ai/translate.json ...",
+    "currentSet": "Conjunto atual",
+    "ExitingMode": "Saindo do modo de tradução"
+  },
+  "firestoreMode": {
+    "init": "🔥 Modo de geração de modelo Firestore 🔥",
+    "modeDesc": "Por favor, descreva o seu caso de uso do Firestore.",
+    "example1": "Eu quero criar um aplicativo de blog.",
+    "example2": "Eu quero criar um novo modelo chamado Cliente com os seguintes campos: id, nome, email, senha, createdAt, updatedAt.",
+    "ExitingMode": "Saindo do modo Firestore"
+  },
+  "methodMode": {
+    "init": "📝 Modo de método 📝",
+    "modeDesc": "Por favor, descreva o caso de uso para o seu método",
+    "list1": "Selecione a função Firebase para adicionar um novo método",
+    "example1": "Crie uma função que encontre o maior número em uma matriz.",
+    "ExitingMode": "Saindo do modo de método"
+  },
+  "functionMode": {
+    "init": "🔥 Modo de Geração de Função Firebase 🔥",
+    "modeDesc": "Selecione o Tipo de Instância de Função Firebase",
+    "modeDesc2": "Por favor, descreva o uso da sua Função Firebase.",
+    "list1": "Selecione a Função Firebase para adicionar um novo método",
+    "http": "- Acionado por solicitação http",
+    "auth": "- Acionado por evento de Autenticação do Usuário",
+    "firestore": "- Acionado por evento Firestore",
+    "pubsub": "- Acionado por evento PubSub",
+    "schedule": "- Acionado por evento de Agendamento",
+    "example1": "Eu quero criar um aplicativo de blog.",
+    "example2": "Eu quero criar um novo modelo chamado Cliente com os seguintes campos: id, nome, email, senha, createdAt, updatedAt.",
+    "ExitingMode": "Saindo do Modo de Função"
+  },
+  "prismaMode": {
+    "init": "🤖 Modo de Geração de Esquema Prisma 🤖",
+    "mayISyncModel": "Posso sincronizar os modelos agora?",
+    "modeDesc": "Por favor, descreva o uso do seu Prisma.",
+    "example1": "Eu quero criar um aplicativo de blog.",
+    "example2": "Eu quero criar um novo modelo chamado Cliente com os seguintes campos: id, nome, email, senha, createdAt, updatedAt.",
+    "ExitingMode": "Saindo do Modo Prisma",
+    "warning": "(Mostrando apenas as novas partes dos modelos. O formato prisma (também há um plugin vscode) adicionará automaticamente as relações aos modelos existentes.)\n\n",
+    "schemaConfirm": "\n❓ Este esquema é bom para você?",
+    "migrationConfirm": "\n❓ Você quer que eu execute a migração agora?",
+    "scaffoldConfirm": "\n❓ Você quer que eu crie os modelos agora?"
+  }
+}

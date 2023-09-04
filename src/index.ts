@@ -17,7 +17,6 @@ import {
   loginCommands,
   curlCommands,
   genCommands,
-  testCommands,
   releaseCommands,
   aiCommands,
 } from '@/cli'
@@ -43,7 +42,6 @@ dotenv.config()
 
 function main() {
   try {
-    // testCommands()
     createCommands()
     serverCommands()
     deployCommands()
