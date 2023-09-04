@@ -11,7 +11,7 @@ import { addBackendSetup } from '../add/addBackendSetup'
 import { addRounting } from '../add/routing'
 
 export const syncRoutings = async () => {
-  const { app } = importConfig()
+  const { app } = await importConfig()
   await setGcloudProject(app.projectId)
   const files = await getHttpRoutings()
   const paths = []

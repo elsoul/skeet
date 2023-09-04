@@ -6,14 +6,14 @@ export const addSecret = async (key: string) => {
   try {
     const cmd = ['firebase', 'functions:secrets:set', key]
     execSyncCmd(cmd)
-    return addAiConfig(key)
+    return await addAiConfig(key)
   } catch (error) {
     throw new Error(`addSecret: ${error}`)
   }
 }
 
-const addAiConfig = (key: string) => {
-  let skeetConfig = importConfig()
+const addAiConfig = async (key: string) => {
+  let skeetConfig = await importConfig()
   if (key === 'CHAT_GPT_KEY') {
     skeetConfig.ai.ais.push({
       name: 'OpenAI',

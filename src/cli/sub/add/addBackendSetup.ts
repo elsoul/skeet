@@ -10,7 +10,7 @@ import { convertToKebabCase } from '@/utils/string'
 
 export const addBackendSetup = async (methodName: string) => {
   try {
-    const config = importConfig()
+    const config = await importConfig()
     const kebab = convertToKebabCase(methodName)
     const isNeg = await isNegExists(
       config.app.projectId,

@@ -7,7 +7,7 @@ import {
 
 export const initArmor = async () => {
   try {
-    const config = importConfig()
+    const config = await importConfig()
     await updateBackendSecurityPolicy(config.app.projectId, config.app.name)
     await updateSecurityPolicy(config.app.projectId, config.app.name)
     Logger.success(`successfully created Cloud Armor!`)

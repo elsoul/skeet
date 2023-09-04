@@ -2,7 +2,7 @@ import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { importConfig, patchSQL, getNetworkConfig } from '@/lib'
 
 export const sqlIp = async () => {
-  const skeetCloudConfig: SkeetCloudConfig = importConfig()
+  const skeetCloudConfig: SkeetCloudConfig = await importConfig()
   const { networkName } = await getNetworkConfig(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name

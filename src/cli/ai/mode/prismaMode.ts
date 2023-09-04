@@ -5,11 +5,12 @@ import { promptUser } from '../ai'
 import { spawnSync } from 'child_process'
 import { NamingEnum } from '@skeet-framework/ai'
 import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
-import { log, logger } from '..'
 import inquirer from 'inquirer'
 import { yesOrNo } from './yesOrNoMode'
+import { AiLog } from '../aiLog'
 
-export const prismaMode = async (skeetAi: SkeetAI) => {
+export const prismaMode = async (skeetAi: SkeetAI, logger: AiLog) => {
+  const log = logger.text() as SkeetLog
   console.log(chalk.cyan(log.prismaMode.init))
   const model = String(skeetAi.initOptions.model)
   const inputMessage =
@@ -49,7 +50,7 @@ export const prismaMode = async (skeetAi: SkeetAI) => {
   const isYes = await yesOrNo(text)
   if (!isYes) {
     logger.addJson(SkeetRole.USER, 'No', SkeetAiMode.Prisma, model)
-    prismaMode(skeetAi)
+    prismaMode(skeetAi, logger)
     return
   }
   logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Prisma, model)
@@ -86,6 +87,6 @@ export const prismaMode = async (skeetAi: SkeetAI) => {
   }
   logger.addJson(SkeetRole.USER, 'No', SkeetAiMode.Prisma, model)
   console.log(chalk.white(log.prismaMode.ExitingMode + '...\n'))
-  promptUser(skeetAi.initOptions)
+  promptUser(skeetAi.initOptions, logger)
   return
 }

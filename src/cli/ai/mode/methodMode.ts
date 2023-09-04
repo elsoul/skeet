@@ -10,13 +10,14 @@ import {
   getFunctions,
 } from '@/lib'
 import { NamingEnum } from '@skeet-framework/ai'
-import { log, logger } from '..'
 import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
 import inquirer from 'inquirer'
 import { writeFileSync } from 'fs'
 import { addStringTop } from '@/lib/files/addStringTop'
+import { AiLog } from '../aiLog'
 
-export const methodMode = async (skeetAi: SkeetAI) => {
+export const methodMode = async (skeetAi: SkeetAI, logger: AiLog) => {
+  const log = logger.text() as SkeetLog
   console.log(chalk.cyan(log.methodMode.init))
   const model = String(skeetAi.initOptions.model)
 
@@ -85,7 +86,7 @@ export const methodMode = async (skeetAi: SkeetAI) => {
   const isYes = await yesOrNo(text)
   if (!isYes) {
     logger.addJson(SkeetRole.USER, 'No', SkeetAiMode.Method, model)
-    methodMode(skeetAi)
+    methodMode(skeetAi, logger)
     return
   }
   logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Method, model)
@@ -103,6 +104,6 @@ export const methodMode = async (skeetAi: SkeetAI) => {
   console.log(chalk.white(createdText))
   logger.addJson(SkeetRole.USER, createdText, SkeetAiMode.Method, model)
   console.log(chalk.white(log.methodMode.ExitingMode + '...\n'))
-  promptUser(skeetAi.initOptions)
+  promptUser(skeetAi.initOptions, logger)
   return
 }

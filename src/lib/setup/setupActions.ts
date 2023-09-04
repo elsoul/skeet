@@ -7,7 +7,7 @@ import { graphqlYml } from '@/templates/init'
 
 export const setupActions = async () => {
   try {
-    const skeetConfig: SkeetCloudConfig = importConfig()
+    const skeetConfig: SkeetCloudConfig = await importConfig()
     const envString = await getActionsEnvString(GRAPHQL_ENV_PRODUCTION_PATH)
     const result = await graphqlYml(
       envString,

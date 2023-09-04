@@ -63,13 +63,13 @@ export const init = async (loginMode = false) => {
   )
   const defaultAppDisplayName = fbProjectId
   await addFirebaseApp(fbProjectId, defaultAppDisplayName)
-  const { app } = importConfig()
+  const { app } = await importConfig()
   await createServiceAccount(projectId, app.name)
   await enableAiPermissions(projectId)
   await runAiRole(projectId, app.name)
   if (loginMode) return
 
-  const skeetConfig = importConfig()
+  const skeetConfig = await importConfig()
   await Logger.confirmFirebaseSetup(fbProjectId, skeetConfig.app.template)
 
   const githubRepo = await askForGithubRepo()

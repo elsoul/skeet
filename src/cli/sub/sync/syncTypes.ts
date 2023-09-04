@@ -10,7 +10,7 @@ import { writePrismaSchemaToFunctions } from './prismaSchemaToTypeScriptType'
 export const syncTypes = async () => {
   const types = await getTypeFiles()
   Logger.sync(`⏳ Syncing ${types.map((type) => type.functionName)}...`)
-  const { app } = importConfig()
+  const { app } = await importConfig()
   for await (const type of types) {
     const frontTypeDir = `src/types/http/${type.functionName}`
     const webAppDir = `webapp/src/types/http/${type.functionName}`
