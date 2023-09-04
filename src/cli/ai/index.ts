@@ -5,7 +5,8 @@ import { AIType } from '@skeet-framework/ai'
 import { SkeetAIOptions } from '@skeet-framework/ai'
 import { SKEET_CONFIG_PATH, importConfig } from '@/lib'
 import { AiLog } from './aiLog'
-import { existsSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const aiCommands = () => {
   program
@@ -84,7 +85,8 @@ const defaultAiConfig = {
 
 const validateAiConfig = async () => {
   try {
-    const skeetConfig = await importConfig()
+    const config = readFileSync(`./skeet-cloud.config.json`)
+    const skeetConfig: SkeetCloudConfig = JSON.parse(String(config))
     if (!skeetConfig.ai) {
       skeetConfig.ai = defaultAiConfig
     }
