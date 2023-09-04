@@ -14,7 +14,7 @@ export class AiLog {
 
   text = () => {
     const localeFile = JSON.parse(
-      readFileSync(`src/cli/ai/locales/${this.lang}/skeetAi.json`, 'utf8')
+      readFileSync(`${__dirname}/locales/${this.lang}/skeetAi.json`, 'utf8')
     ) as SkeetLog
     return localeFile
   }

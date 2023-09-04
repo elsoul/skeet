@@ -88,7 +88,7 @@ export async function promptUser(options: SkeetAIOptions): Promise<void> {
     return
   }
 
-  const skeetPrompt = skeetAiPrompt()
+  const skeetPrompt = skeetAiPrompt('en')
 
   const prompt = generatePrompt(
     skeetPrompt.context,

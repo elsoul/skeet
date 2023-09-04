@@ -10,15 +10,6 @@
     "hasLoadBalancer": false,
     "fbProjectId": "nextjs-graphql-394610"
   },
-  "ai": {
-    "lang": "ja",
-    "ais": [
-      {
-        "name": "VertexAI",
-        "availableModels": ["chat-bison@001"]
-      }
-    ]
-  },
   "cloudRun": {
     "name": "skeet-nextjs-graphql-graphql",
     "url": "",
@@ -84,5 +75,16 @@
         }
       ]
     }
-  ]
+  ],
+  "ai": {
+    "lang": "en",
+    "ais": [
+      {
+        "name": "VertexAI",
+        "availableModels": [
+          "chat-bison@001"
+        ]
+      }
+    ]
+  }
 }

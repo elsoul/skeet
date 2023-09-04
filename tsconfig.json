@@ -20,7 +20,7 @@
       "@/*": ["src/*"]
     }
   },
-  "files": ["package.json"],
+  "files": ["package.json", "src/cli/ai/locales/**/skeetAi.json"],
   "include": ["src/**/*"],
   "exclude": [
     "dist",

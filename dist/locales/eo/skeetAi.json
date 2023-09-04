@@ -1,0 +1,86 @@
+{
+  "common": {
+    "you": "Vi",
+    "start": "Kion mi povas fari por vi?",
+    "aiType": "AI Tipo",
+    "model": "Modelo",
+    "maxToken": "Maksimuma Tokeno",
+    "temperature": "Temperaturo",
+    "skeetAiModeText": "Skeet AI Reĝimo\n `$ <mode>` por ŝanĝi AI reĝimon",
+    "isSelected": "estas elektita 🤖 (tajpu 'q' por ĉesi)",
+    "shutdown": "estas fermanta",
+    "howAboutThis": "Kiel pri tio?\n\n",
+    "updateFile": "Bonvolu ĝisdatigi vian dosieron",
+    "getFileDesc": "Tiu ĉi komando montras plej lastatempe ĝisdatigitajn dosierojn",
+    "currentSet": "Nuna aro",
+    "areYouReady": "Ĉu vi estas preta por kuro?",
+    "firestoreMode": "🔥 Firestore Modela Generanta Reĝimo 🔥",
+    "firestoreModeDesc": "Bonvolu priskribi vian Firestore uzokazon.",
+    "MayICreateFile": "Ĉu mi povas krei tiun ĉi dosieron por vi?",
+    "MayIUpdateFile": "Ĉu mi povas ĝisdatigi tiun ĉi dosieron por vi?",
+    "MayIAddDoc": "Ĉu mi povas aldoni Typedoc por ĉi tiu metodo?",
+    "created": "✔️ Kreita",
+    "thenRun": "\nPoste ekzekutu:",
+    "mayISyncModel": "Ĉu mi povas sinkronigi modelojn nun?",
+    "confirmSyncModel": "❓ Ĉu mi povas sinkronigi modelojn nun?",
+    "example": "ekz. ",
+    "addedDoc": "✔️ Aldonita Typedoc"
+  },
+  "warning": {
+    "temperature": "⚠️ Temperaturo devas esti inter 0 kaj 1 ⚠️",
+    "gptKey": "⚠️ Bonvolu agordi CHAT_GPT_ORG kaj CHAT_GPT_KEY ⚠️",
+    "gcpKey": "⚠️ Bonvolu agordi GCLOUD_PROJECT kaj REGION ⚠️"
+  },
+  "skeetMode": {},
+  "typedocMode": {
+    "init": "📚 Typedoc Reĝimo 📚",
+    "modeDesc": "Bonvolu elekti dosiervojo por generi typedoc.",
+    "ExitingMode": "Elirante Typedoc Reĝimon"
+  },
+  "translateMode": {
+    "init": "🌐 Traduka Reĝimo 🌐",
+    "modeDesc": "Legante tmp/ai/translate.json ...",
+    "currentSet": "Aktuala Aro",
+    "ExitingMode": "Elirante Traduka Reĝimo"
+  },
+  "firestoreMode": {
+    "init": "🔥 Firestore Modela Generanta Reĝimo 🔥",
+    "modeDesc": "Bonvolu priskribi vian Firestore uzokazon.",
+    "example1": "Mi volas krei blogan aplikaĵon.",
+    "example2": "Mi volas krei novan modelon nomatan Kliento kun la jenaj kampoj: id, nomo, retpoŝto, pasvorto, kreitaJe, ĝisdatigitaJe.",
+    "ExitingMode": "Elirante Firestore Reĝimo"
+  },
+  "methodMode": {
+    "init": "📝 Metodo Reĝimo 📝",
+    "modeDesc": "Bonvolu priskribi la uzokazon por via Metodo",
+    "list1": "Elektu Firebase Funkcion por aldoni novan metodon",
+    "example1": "Kreu funkcion, kiu trovas la plej grandan numeron en vico.",
+    "ExitingMode": "Elirante Metodo Reĝimo"
+  },
+  "functionMode": {
+    "init": "🔥 Firebase Function Generanta Reĝimo 🔥",
+    "modeDesc": "Elektu Firebase Function Instance Tipon",
+    "modeDesc2": "Bonvolu priskribi vian Firebase Function uzokazon.",
+    "list1": "Elektu Firebase Function por aldoni novan metodon",
+    "http": "- Aktivigita per http peto",
+    "auth": "- Aktivigita per User Auth evento",
+    "firestore": "- Aktivigita per Firestore evento",
+    "pubsub": "- Aktivigita per PubSub evento",
+    "schedule": "- Aktivigita per Horaro evento",
+    "example1": "Mi volas krei blogan aplikaĵon.",
+    "example2": "Mi volas krei novan modelon nomatan Kliento kun la jenaj kampoj: id, nomo, retpoŝto, pasvorto, kreitaĵo, ĝisdatigo.",
+    "ExitingMode": "Eliranta Funkcia Reĝimo"
+  },
+  "prismaMode": {
+    "init": "🤖 Prisma Skemo Generanta Reĝimo 🤖",
+    "mayISyncModel": "Ĉu mi povas sinkronigi modelojn nun?",
+    "modeDesc": "Bonvolu priskribi vian Prisma uzokazon.",
+    "example1": "Mi volas krei blogan aplikaĵon.",
+    "example2": "Mi volas krei novan modelon nomatan Kliento kun la jenaj kampoj: id, nomo, retpoŝto, pasvorto, kreitaĵo, ĝisdatigo.",
+    "ExitingMode": "Eliranta Prisma Reĝimo",
+    "warning": "(Montrante nur la novajn partojn de la modeloj. prisma format (ankaŭ ekzistas vscode kromaĵo) aŭtomate aldonos la rilatojn al la ekzistantaj modeloj.)\n\n",
+    "schemaConfirm": "\n❓ Ĉu ĉi tiu skemo estas bona por vi?",
+    "migrationConfirm": "\n❓ Ĉu vi volas, ke mi nun ekzekutu la migradon?",
+    "scaffoldConfirm": "\n❓ Ĉu vi volas, ke mi nun konstruu la modelojn?"
+  }
+}
