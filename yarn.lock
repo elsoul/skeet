@@ -1022,16 +1022,18 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/ai@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.5.1.tgz#d4780929d114279e39ffe0715f7d624c7afd0be3"
-  integrity sha512-lRFgnB4GsljXrsGsDRHXL+pI3vmFTG5o62U5DtJgvkjyS0Iy6rN/5MDcPIg5Dlmjc0qru5/xKAUBPApGVAWgJQ==
+"@skeet-framework/ai@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.6.0.tgz#d968102be6f29544cc01c9055afcb12eecd7fb84"
+  integrity sha512-zOZe4s8byQmLfOKbyNdllTR60REGVRQhQc0EGu8TmZbSH0QIAKhgO5Rr1QwTQMXfyRIgWdQkXrVZ8jzq+hknhw==
   dependencies:
     "@google-cloud/aiplatform" "2.17.0"
     "@google-cloud/translate" "7.2.2"
+    crypto-js "4.1.1"
     dotenv "16.3.1"
     node-fetch "2.6.9"
     openai "4.2.0"
+    pako "2.1.0"
 
 "@skeet-framework/utils@1.2.1":
   version "1.2.1"
@@ -2241,6 +2243,11 @@ crypt@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
   integrity sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==
+
+crypto-js@4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 crypto-random-string@^4.0.0:
   version "4.0.0"
@@ -4810,6 +4817,11 @@ pacote@15.1.1:
     sigstore "^1.0.0"
     ssri "^10.0.0"
     tar "^6.1.11"
+
+pako@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-2.1.0.tgz#266cc37f98c7d883545d11335c00fbd4062c9a86"
+  integrity sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==
 
 parent-module@^1.0.0:
   version "1.0.1"

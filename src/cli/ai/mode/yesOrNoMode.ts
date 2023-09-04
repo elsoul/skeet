@@ -1,10 +1,13 @@
-import chalk from 'chalk'
-import * as readline from 'readline'
+import inquirer from 'inquirer'
 
-export const yesOrNoMode = async (rl: readline.Interface, text: string) => {
-  return new Promise((resolve) => {
-    rl.question(chalk.white('\n' + text), (answer) => {
-      resolve(answer.trim().toLowerCase() === 'yes')
-    })
-  })
+export const yesOrNo = async (text: string) => {
+  const answer = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'answer',
+      message: text,
+      choices: ['Yes', 'No'],
+    },
+  ])
+  return answer.answer === 'Yes'
 }

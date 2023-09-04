@@ -17,7 +17,7 @@ export const yarn = async (
   packageName: string = '',
   isDev: boolean = false
 ) => {
-  const functions = await getFunctions()
+  const functions = getFunctions()
   const functionsArray: Array<{ [key: string]: string }> = [
     { name: 'webapp' },
     { name: 'root' },

@@ -1,6 +1,6 @@
-import { SkeetCloudConfig, SkeetOptions } from '@/types/skeetTypes'
+import { AiConfig, SkeetCloudConfig, SkeetOptions } from '@/types/skeetTypes'
 import { importConfig } from './importConfig'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from './getSkeetConfig'
 import { Logger } from '../logger'
 import { copyFileWithOverwrite } from './copyFiles'
@@ -63,6 +63,7 @@ export type SkeetConfigMin = {
     projectId: string
     region: string
   }
+  ai: AiConfig
 }
 
 export const addProjectRegionToSkeetConfig = async () => {
@@ -72,6 +73,15 @@ export const addProjectRegionToSkeetConfig = async () => {
       name: projectId,
       projectId,
       region,
+    },
+    ai: {
+      lang: 'en',
+      ais: [
+        {
+          name: 'VertexAI',
+          availableModels: ['chat-bison@001'],
+        },
+      ],
     },
   }
   writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfigMin, null, 2))

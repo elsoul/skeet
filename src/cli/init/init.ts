@@ -23,7 +23,6 @@ import { setupSQL } from '@/lib/setup/setupSQL'
 import {
   DomainAnswer,
   askForGithubRepo,
-  askForProjectId,
   askForSqlPassword,
 } from './askQuestions'
 import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
