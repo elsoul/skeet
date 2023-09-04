@@ -17,12 +17,9 @@ import {
   loginCommands,
   curlCommands,
   genCommands,
-  testCommands,
   releaseCommands,
   aiCommands,
 } from '@/cli'
-import { importConfig } from './lib'
-import { writeFileSync } from 'fs'
 
 export const GRAPHQL_ROOT = './graphql'
 export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
@@ -45,7 +42,6 @@ dotenv.config()
 
 function main() {
   try {
-    // testCommands()
     createCommands()
     serverCommands()
     deployCommands()
