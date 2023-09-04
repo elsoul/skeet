@@ -3,7 +3,6 @@ export enum SkeetTemplate {
   NextJsFirestore = 'Next.js (React) - Firestore',
   ExpoFirestore = 'Expo (React Native) - Firestore',
   SolanaFirestore = 'Solana Mobile Stack (Expo) + Web (Next.js) - Firestore',
-  // SolanaValidator = 'Solana Validator Monitoring Tools',
 }
 
 export type SkeetOptions = {
@@ -77,7 +76,7 @@ export type CloudArmor = {
 
 export type TranslateJson = {
   langFrom: string
-  langTo: string
+  langsTo: string[]
   paths: string[]
 }
 
@@ -89,4 +88,36 @@ export type AiConfig = {
 export type AI = {
   name: string
   availableModels: string[]
+}
+
+export enum SkeetInstanceType {
+  HTTP = 'http',
+  AUTH = 'auth',
+  FIRESTORE = 'firestore',
+  PUBSUB = 'pubsub',
+  SCHEDULE = 'schedule',
+}
+
+export enum SkeetAiMode {
+  Function = 'function',
+  Firestore = 'firestore',
+  Method = 'method',
+  Prisma = 'prisma',
+  Skeet = 'skeet',
+  Translate = 'translate',
+  Typedoc = 'typedoc',
+  YesOrNo = 'yesOrNo',
+}
+
+export type SkeetAiLog = {
+  role: string
+  content: string
+  mode: SkeetAiMode
+  model: string
+  createdAt: string
+}
+
+export enum SkeetRole {
+  AI = 'ai',
+  USER = 'user',
 }

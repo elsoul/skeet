@@ -23,10 +23,9 @@ export const getDirectoryLastModified = (directoryPath: string): Date => {
   return latestModified
 }
 
-export const getFunctions = async (isForModels = false): Promise<string[]> => {
+export const getFunctions = (isForModels = false): string[] => {
   try {
-    const functionDirs = 
-      readdirSync(FUNCTIONS_PATH, { withFileTypes: true })
+    const functionDirs = readdirSync(FUNCTIONS_PATH, { withFileTypes: true })
       .filter((item) => item.isDirectory())
       .map((item) => {
         const dirPath = isForModels

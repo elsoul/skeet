@@ -21,9 +21,20 @@ export const addSubCommands = async () => {
   add
     .command('method')
     .argument('<methodName>', 'Method Name - e.g. addStreamUserChat')
-    .action(async (methodName: string) => {
-      await addMethod(methodName)
-    })
+    .option('--instance <instance>', 'Instance Type - e.g. http')
+    .option('--function <function>', 'Function Name - e.g. skeet')
+    .action(
+      async (
+        methodName: string,
+        options: { function: string; instance: string }
+      ) => {
+        if (options.function !== '' && options.instance !== '') {
+          await addMethod(methodName, options.instance, options.function)
+        } else {
+          await addMethod(methodName)
+        }
+      }
+    )
   add
     .command('model')
     .argument('<modelName>', 'Model Name - e.g. Article')

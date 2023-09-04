@@ -3,12 +3,15 @@ import { promptUser } from './ai'
 import chalk from 'chalk'
 import { ReadStream } from 'fs'
 import { SkeetAIOptions } from '@skeet-framework/ai'
+import { logger } from '.'
+import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
 
 export const openaiStream = (
   openaiStream: Stream<ChatCompletionChunk>,
   skeetAIOptions: SkeetAIOptions
 ) => {
   let bufferedResponse = ''
+  const messages: string[] = []
   const stream = ReadStream.from(openaiStream)
   stream.on('data', (chunk) => {
     if (
@@ -22,6 +25,9 @@ export const openaiStream = (
       let separatorIndex
       while ((separatorIndex = bufferedResponse.indexOf('\n')) >= 0) {
         const messagePart = bufferedResponse.slice(0, separatorIndex).trim()
+        if (messagePart) {
+          messages.push(messagePart)
+        }
         console.log(chalk.white(messagePart))
 
         bufferedResponse = bufferedResponse.slice(separatorIndex + 1)
@@ -30,8 +36,15 @@ export const openaiStream = (
   })
   stream.on('end', () => {
     if (bufferedResponse) {
+      messages.push(bufferedResponse.trim())
       console.log(chalk.white(bufferedResponse))
     }
+    logger.addJson(
+      SkeetRole.AI,
+      messages.join(''),
+      SkeetAiMode.Skeet,
+      skeetAIOptions.model || ''
+    )
     promptUser(skeetAIOptions)
   })
 }

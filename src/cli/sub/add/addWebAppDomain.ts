@@ -17,7 +17,7 @@ export const addWebAppDomain = async (appDomain: string, ip: string) => {
     )
     await createRecord(skeetConfig.app.projectId, zoneName, appDomain, ip)
     await addAppDomainToSkeetConfig(appDomain)
-    const functions = await getFunctions()
+    const functions = getFunctions()
     for (const func of functions) {
       await addAppNameToSkeetOptions(skeetConfig.app.name, func)
     }

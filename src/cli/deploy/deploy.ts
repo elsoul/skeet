@@ -7,7 +7,7 @@ import { yarnBuild } from '../yarn/yarnBuild'
 import { deployGraphql } from './deployGraphql'
 
 export const deploy = async () => {
-  const functions = await getFunctions()
+  const functions = getFunctions()
   const functionsArray: Array<{ [key: string]: string }> = [{ name: 'webapp' }]
   const { app } = importConfig()
   if (app.template.includes('GraphQL')) {

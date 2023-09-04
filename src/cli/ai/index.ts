@@ -3,7 +3,13 @@ import { promptUser } from './ai'
 import chalk from 'chalk'
 import { AIType } from '@skeet-framework/ai'
 import { SkeetAIOptions } from '@skeet-framework/ai'
-import Table from 'cli-table3'
+import { importConfig } from '@/lib'
+import { AiLog } from './aiLog'
+
+const { ai } = importConfig()
+const lang = ai.lang || 'en'
+export const logger = new AiLog(lang)
+export const log = logger.text() as SkeetLog
 
 export const aiCommands = () => {
   program
@@ -20,11 +26,10 @@ export const aiCommands = () => {
       let model = options.openai
         ? options.model || 'gpt-4'
         : options.model || 'chat-bison@001'
-
       let maxTokens = options.token || '1000'
       let temperature = options.temperature || '0'
-      if (Number(temperature) > 1) {
-        console.log(chalk.yellow('⚠️ Temperature must be between 0 and 1 ⚠️'))
+      if (Number(temperature) > 1 || Number(temperature) < 0) {
+        console.log(chalk.yellow(log.warning.temperature))
         process.exit(1)
       }
 
@@ -35,39 +40,10 @@ export const aiCommands = () => {
         temperature,
       }
 
-      const table = new Table({
-        head: [chalk.blue('Option'), chalk.blue('Value')],
-        chars: {
-          top: '═',
-          'top-mid': '╤',
-          'top-left': '╔',
-          'top-right': '╗',
-          bottom: '═',
-          'bottom-mid': '╧',
-          'bottom-left': '╚',
-          'bottom-right': '╝',
-          left: '│',
-          'left-mid': '╟',
-          mid: '─',
-          'mid-mid': '┼',
-          right: '│',
-          'right-mid': '╢',
-          middle: '│',
-        }, // テーブルの罫線スタイルを指定
-      })
-
-      table.push(
-        ['AI Type', aiType],
-        ['Model', model],
-        ['Max Tokens', aiOptions.maxTokens],
-        ['Temperature', aiOptions.temperature]
-      )
-
-      console.log(table.toString())
+      logger.aiOptionTable(aiOptions)
+      logger.help()
       console.log(
-        `${chalk.white(
-          `${chalk.blue(aiType)} is selected 🤖 (type "q" to quit)`
-        )}`
+        `${chalk.white(`${chalk.blue(aiType)} ${log.common.isSelected}`)}`
       )
       promptUser(aiOptions)
     })
@@ -78,16 +54,14 @@ const validEnv = (aiType: AIType) => {
     const org = process.env.CHAT_GPT_ORG
     const key = process.env.CHAT_GPT_KEY
     if (!org || !key) {
-      console.log(
-        chalk.yellow('⚠️ Please set CHAT_GPT_ORG and CHAT_GPT_KEY ⚠️')
-      )
+      console.log(chalk.yellow(log.warning.gptKey))
       process.exit(1)
     }
   } else {
     const org = process.env.GCLOUD_PROJECT
     const key = process.env.REGION
     if (!org || !key) {
-      console.log(chalk.yellow('⚠️ Please set GCLOUD_PROJECT and REGION ⚠️'))
+      console.log(chalk.yellow(log.warning.gcpKey))
       process.exit(1)
     }
   }

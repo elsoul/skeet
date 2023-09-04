@@ -1,0 +1,86 @@
+{
+  "common": {
+    "you": "你",
+    "start": "我能为你做什么？",
+    "aiType": "AI 类型",
+    "model": "模型",
+    "maxToken": "最大令牌",
+    "temperature": "温度",
+    "skeetAiModeText": "Skeet AI 模式\n `$ <mode>` 更改 AI 模式",
+    "isSelected": "已选中 🤖 (输入 'q' 退出)",
+    "shutdown": "正在关闭",
+    "howAboutThis": "这样如何？\n\n",
+    "updateFile": "请更新您的文件",
+    "getFileDesc": "此命令显示最近更新的文件",
+    "currentSet": "当前设置",
+    "areYouReady": "你准备好运行了吗？",
+    "firestoreMode": "🔥 Firestore 模型生成模式 🔥",
+    "firestoreModeDesc": "请描述您的 Firestore 使用案例。",
+    "MayICreateFile": "我可以为你创建这个文件吗？",
+    "MayIUpdateFile": "我可以为你更新这个文件吗？",
+    "MayIAddDoc": "我可以为这个方法添加Typedoc吗？",
+    "created": "✔️ 已创建",
+    "thenRun": "\n然后运行：",
+    "mayISyncModel": "我现在可以同步模型吗？",
+    "confirmSyncModel": "❓ 我现在可以同步模型吗？",
+    "example": "例如 ",
+    "addedDoc": "✔️ 已添加Typedoc"
+  },
+  "warning": {
+    "temperature": "⚠️ 温度必须在0和1之间 ⚠️",
+    "gptKey": "⚠️ 请设置 CHAT_GPT_ORG 和 CHAT_GPT_KEY ⚠️",
+    "gcpKey": "⚠️ 请设置 GCLOUD_PROJECT 和 REGION ⚠️"
+  },
+  "skeetMode": {},
+  "typedocMode": {
+    "init": "📚 Typedoc 模式 📚",
+    "modeDesc": "请选择一个文件路径来生成typedoc。",
+    "ExitingMode": "退出 Typedoc 模式"
+  },
+  "translateMode": {
+    "init": "🌐 翻译模式 🌐",
+    "modeDesc": "正在读取 tmp/ai/translate.json ...",
+    "currentSet": "当前设置",
+    "ExitingMode": "退出翻译模式"
+  },
+  "firestoreMode": {
+    "init": "🔥 Firestore模型生成模式 🔥",
+    "modeDesc": "请描述您的Firestore使用案例。",
+    "example1": "我想创建一个博客应用。",
+    "example2": "我想创建一个名为Client的新模型，包含以下字段：id、name、email、password、createdAt、updatedAt。",
+    "ExitingMode": "退出Firestore模式"
+  },
+  "methodMode": {
+    "init": "📝 方法模式 📝",
+    "modeDesc": "请描述您的方法的使用案例",
+    "list1": "选择Firebase函数以添加新方法",
+    "example1": "创建一个函数，找出数组中的最大数。",
+    "ExitingMode": "退出方法模式"
+  },
+  "functionMode": {
+    "init": "🔥 Firebase Function Generating Mode 🔥",
+    "modeDesc": "Select Firebase Function Instance Type",
+    "modeDesc2": "Please describe your Firebase Function use case.",
+    "list1": "Select Firebase Function to add new method",
+    "http": "- Triggered by http request",
+    "auth": "- Triggered by User Auth event",
+    "firestore": "- Triggered by Firestore event",
+    "pubsub": "- Triggered by PubSub event",
+    "schedule": "- Triggered by Schedule event",
+    "example1": "I want to create a blog app.",
+    "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
+    "ExitingMode": "Exiting Function Mode"
+  },
+  "prismaMode": {
+    "init": "🤖 Prisma Scheme Generating Mode 🤖",
+    "mayISyncModel": "May I sync models now ?",
+    "modeDesc": "Please describe your Prisma use case.",
+    "example1": "I want to create a blog app.",
+    "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
+    "ExitingMode": "Exiting Prisma Mode",
+    "warning": "(只显示模型的新部分。prisma格式（还有vscode插件）将自动将关系添加到现有模型中。)\n\n",
+    "schemaConfirm": "\n❓ 这个模式对你来说合适吗？",
+    "migrationConfirm": "\n❓ 你希望我现在运行迁移吗？",
+    "scaffoldConfirm": "\n❓ 你希望我现在搭建模型吗？"
+  }
+}

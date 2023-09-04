@@ -33,6 +33,23 @@ export const getFunctionInfo = async (functionName: string) => {
   return functionInfo
 }
 
+export const getFunctionConfig = (functionName: string) => {
+  return {
+    package: readConfigFile(functionName, 'package.json'),
+    tsconfig: readConfigFile(functionName, 'tsconfig.json'),
+    prretierrc: readConfigFile(functionName, '.prettierrc'),
+  }
+}
+
+const readConfigFile = (functionName: string, file: string) => {
+  try {
+    const path = `${FUNCTIONS_PATH}/${functionName}/${file}`
+    return readFileSync(path, 'utf-8')
+  } catch (error) {
+    return ''
+  }
+}
+
 export const getNetworkConfig = async (projectId: string, appName: string) => {
   const skeetHd = 'skeet-' + appName
   return {
