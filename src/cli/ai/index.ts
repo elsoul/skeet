@@ -18,9 +18,7 @@ export const aiCommands = () => {
     .option('-token, --token <number>', 'Max Tokens')
     .option('-temp, --temperature <number>', 'Temperature')
     .action(async (options) => {
-      if (!existsSync(SKEET_CONFIG_PATH)) {
-        await validateAiConfig()
-      }
+      await validateAiConfig()
       const { ai } = await importConfig()
       const lang = ai.lang || 'en'
       const logger = new AiLog(lang)
