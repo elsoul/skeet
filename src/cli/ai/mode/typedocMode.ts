@@ -6,6 +6,8 @@ import inquirer from 'inquirer'
 import { SkeetAiMode } from '@/types/skeetTypes'
 import { promptUser } from '../ai'
 import { AiLog } from '../aiLog'
+import { yesOrNo } from './yesOrNoMode'
+import { addStringTop } from '@/lib/files/addStringTop'
 
 export const typedocMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   const log = logger.text() as SkeetLog
@@ -35,6 +37,14 @@ export const typedocMode = async (skeetAi: SkeetAI, logger: AiLog) => {
     SkeetAiMode.Typedoc,
     String(skeetAi.initOptions.model)
   )
+
+  const typedocText = ` ${log.common.MayIAddDoc}`
+  const isYesDoc = await yesOrNo(typedocText)
+  if (isYesDoc) {
+    const typedoc = await skeetAi.typedoc(aiResponse)
+    addStringTop(paths.path, typedoc + '\n')
+    console.log(chalk.white(`\n${log.common.addedDoc}`))
+  }
   console.log(chalk.white(log.typedocMode.ExitingMode + '...\n'))
   promptUser(skeetAi.initOptions, logger)
   return
