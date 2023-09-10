@@ -1022,7 +1022,7 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/ai@^1.6.5":
+"@skeet-framework/ai@1.6.5":
   version "1.6.5"
   resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.6.5.tgz#49e8abf2e6e96483981ba61c03fdb4df4c4f0d6f"
   integrity sha512-xmxhMVdHObl2s8ssk3TMnCzQTImgv6d2AuYX/XACJQVk5+b7FqjVKvTOOoq1dGnbifLeTSkQyKNHF3rPqASGDA==
