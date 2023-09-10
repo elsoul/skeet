@@ -229,6 +229,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
             '@typescript-eslint/no-var-requires': 0,
             '@typescript-eslint/no-unused-vars': 0,
             '@typescript-eslint/no-empty-function': 0,
+            'react-native/no-inline-styles': 0,
             '@typescript-eslint/ban-ts-comment': [
               'off',
               {
