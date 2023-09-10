@@ -41,6 +41,37 @@ export const eslintrcJson = async (appName: string, template: string) => {
           },
         ],
       },
+      overrides: [
+        {
+          files: ['./functions/**/*.ts', './graphql/**/*.ts'],
+          extends: [
+            'eslint:recommended',
+            'plugin:@typescript-eslint/recommended',
+            'prettier',
+          ],
+          parserOptions: {
+            sourceType: 'module',
+            ecmaVersion: 'latest',
+          },
+          parser: '@typescript-eslint/parser',
+          plugins: ['@typescript-eslint'],
+          env: {
+            es6: true,
+          },
+          rules: {
+            '@typescript-eslint/no-explicit-any': 0,
+            '@typescript-eslint/no-var-requires': 0,
+            '@typescript-eslint/no-unused-vars': 0,
+            '@typescript-eslint/no-empty-function': 0,
+            '@typescript-eslint/ban-ts-comment': [
+              'off',
+              {
+                'ts-ignore': 'allow-with-description',
+              },
+            ],
+          },
+        },
+      ],
     }
   } else if (
     template === SkeetTemplate.NextJsFirestore ||
@@ -78,6 +109,37 @@ export const eslintrcJson = async (appName: string, template: string) => {
           },
         ],
       },
+      overrides: [
+        {
+          files: ['./functions/**/*.ts', './graphql/**/*.ts'],
+          extends: [
+            'eslint:recommended',
+            'plugin:@typescript-eslint/recommended',
+            'prettier',
+          ],
+          parserOptions: {
+            sourceType: 'module',
+            ecmaVersion: 'latest',
+          },
+          parser: '@typescript-eslint/parser',
+          plugins: ['@typescript-eslint'],
+          env: {
+            es6: true,
+          },
+          rules: {
+            '@typescript-eslint/no-explicit-any': 0,
+            '@typescript-eslint/no-var-requires': 0,
+            '@typescript-eslint/no-unused-vars': 0,
+            '@typescript-eslint/no-empty-function': 0,
+            '@typescript-eslint/ban-ts-comment': [
+              'off',
+              {
+                'ts-ignore': 'allow-with-description',
+              },
+            ],
+          },
+        },
+      ],
     }
   }
 
