@@ -30,6 +30,7 @@ web-build
 src/__generated__
 src/schema.graphql
 tmp
+nexus-typegen.ts
   `
   } else if (template === SkeetTemplate.SolanaFirestore) {
     body = `out
