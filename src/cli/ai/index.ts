@@ -87,8 +87,8 @@ const validateAiConfig = async () => {
     const skeetConfig: SkeetCloudConfig = JSON.parse(String(config))
     if (!skeetConfig.ai) {
       skeetConfig.ai = defaultAiConfig
+      writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
     }
-    writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   } catch (error) {
     const skeetConfig = {
       ai: defaultAiConfig,
