@@ -1,6 +1,8 @@
 {
   "common": {
     "you": "You",
+    "option": "Option",
+    "value": "Value",
     "start": "What can I do for you?",
     "aiType": "AI Type",
     "model": "Model",
