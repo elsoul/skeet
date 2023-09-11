@@ -98,9 +98,9 @@ export const skeetCloudConfigGen = async (
         },
         {
           "priority": "2147483647",
-          "description": "Deny All IP addresses",
+          "description": "Allow/Deny All IP addresses. default: allow",
           "options": {
-            "action": "deny-403"
+            "action": "allow"
           }
         }
       ]

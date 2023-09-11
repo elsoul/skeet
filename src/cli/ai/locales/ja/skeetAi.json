@@ -1,6 +1,8 @@
 {
   "common": {
     "you": "あなた",
+    "option": "オプション",
+    "value": "値",
     "start": "何をお手伝いしましょうか？",
     "aiType": "AIの種類",
     "model": "モデル",
