@@ -121,8 +121,8 @@ type IpifyResponse = {
 export const getHomeIp = async () => {
   try {
     const url = 'https://api.ipify.org/?format=json'
-    let response = await sendGet(url)
-    let data = await response.json()
+    const response = await sendGet(url)
+    const data = await response.json()
     const ipifyResponse = data as IpifyResponse
     const ip = ipifyResponse.ip.replace(/\r?\n/g, '')
     return ip

@@ -21,14 +21,7 @@
     }
   },
   "files": ["package.json", "src/cli/ai/locales/**/skeetAi.json"],
-  "include": ["src/**/*"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "skeet-cloud.config.json",
-    "src/cli/login/login.ts",
-    "functions/**/*",
-    "graphql/**/*"
-  ],
+  "include": ["src/**/*", "add-line.ts", "build.ts", "cli.ts", "tests/**/*"],
+  "exclude": ["dist", "node_modules", "functions/**/*", "graphql/**/*"],
   "compileOnSave": false
 }

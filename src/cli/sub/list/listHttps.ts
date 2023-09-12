@@ -10,7 +10,7 @@ export const listHttps = async () => {
       border: [], //disable colors for the border
     },
   })
-  let functionsEndpoints: string[][] = []
+  const functionsEndpoints: string[][] = []
   for await (const file of https) {
     for await (const path of file.httpEndpoints) {
       const endpoint = `${path}`

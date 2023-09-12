@@ -110,7 +110,7 @@ export const getContainerImageUrl = async (
     imageName = 'skeet-' + appName + '-api'
   }
 
-  let containerProjectName = isPlugin ? 'skeet-framework' : projectId
+  const containerProjectName = isPlugin ? 'skeet-framework' : projectId
   return cRegion + '/' + containerProjectName + '/' + imageName + ':latest'
 }
 
@@ -203,9 +203,9 @@ export const getBuidEnvArray = async (
 export const getActionsEnvString = async (filePath: string) => {
   const stream = readFileSync(filePath)
   const envArray: Array<string> = String(stream).split('\n')
-  let newEnv: Array<string> = []
+  const newEnv: Array<string> = []
   for await (const envLine of envArray) {
-    let keyAndValue = envLine.match(/([A-Z_]+)="?([^"]*)"?/)
+    const keyAndValue = envLine.match(/([A-Z_]+)="?([^"]*)"?/)
     if (keyAndValue) {
       if (keyAndValue[1].match('SKEET_')) continue
       if (keyAndValue[1] === 'TZ') continue
@@ -221,7 +221,7 @@ export const getActionsEnvString = async (filePath: string) => {
 export const getBuidEnvString = async () => {
   const stream = readFileSync(GRAPHQL_ENV_PRODUCTION_PATH)
   const envArray: Array<string> = String(stream).split('\n')
-  let hash: { [key: string]: string } = {}
+  const hash: { [key: string]: string } = {}
   for await (const line of envArray) {
     const value = line.split('=')
     hash[value[0]] = value[1]

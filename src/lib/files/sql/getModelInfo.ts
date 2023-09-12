@@ -25,7 +25,7 @@ export enum ColType {
 }
 
 export const getColType = async (type: string) => {
-  let param = prismaSchemaType.filter(
+  const param = prismaSchemaType.filter(
     (typeName) => type === typeName || type === typeName + '?'
   )
   if (param.length == 0) {
@@ -42,7 +42,7 @@ export const getColType = async (type: string) => {
 }
 
 export const getEnumCols = async (modelCols: Array<ModelSchema>) => {
-  let enumCols = []
+  const enumCols = []
   for await (const model of modelCols) {
     if (model.type.match('Enum$')) {
       enumCols.push({ name: model.name, type: model.type })
@@ -53,11 +53,11 @@ export const getEnumCols = async (modelCols: Array<ModelSchema>) => {
 
 export const getEnums = async () => {
   const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH)
-  let splitSchema = String(prismaSchema).split(`enum `)
+  const splitSchema = String(prismaSchema).split(`enum `)
   splitSchema.shift()
-  let enums: Array<string> = []
+  const enums: Array<string> = []
   for await (const line of splitSchema) {
-    let enumName = line.match('(.+) {') || ''
+    const enumName = line.match('(.+) {') || ''
     enums.push(enumName[1])
   }
   return enums
@@ -112,7 +112,7 @@ export const getColumns = async (modelName: string) => {
         if (splitArray[0] == undefined) continue
         if (splitArray[0] == 'id') continue
         if (splitArray[0].includes('@@')) continue
-        let getColTypeResult = await getColType(splitArray[1])
+        const getColTypeResult = await getColType(splitArray[1])
         if (getColTypeResult === ColType.Bytes) continue
         const type =
           getColTypeResult === ColType.Enum

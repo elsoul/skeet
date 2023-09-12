@@ -53,7 +53,7 @@ export const addMethod = async (
 const insertFunction = (filePath: string, functionName: string) => {
   try {
     const data = readFileSync(filePath, 'utf-8')
-    let lines = data.split('\n')
+    const lines = data.split('\n')
     const targetLine = "} from '@/routings'"
     const insertionPoint = lines.findIndex((line) => line.includes(targetLine))
 

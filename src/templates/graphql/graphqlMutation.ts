@@ -7,7 +7,7 @@ export const graphqlMutation = async (modelName: string) => {
   const createModelArray = await createModelCodes(modelName)
   const updateModelArray = await updateModelCodes(modelName)
   const deleteModelArray = await deleteModelCodes(modelName)
-  let mutationArray = createModelArray.concat(
+  const mutationArray = createModelArray.concat(
     updateModelArray,
     deleteModelArray
   )
@@ -33,7 +33,7 @@ export const createModelCodes = async (modelName: string) => {
     `      type: ${modelNameUpper}.$name,`,
     `      args: {`,
   ]
-  let createInputArray = await createInputArgs(modelName)
+  const createInputArray = await createInputArgs(modelName)
   codeArray = codeArray.concat(createInputArray)
   codeArray.push('      },')
   codeArray.push(`      async resolve(_, args, ctx) {`)
@@ -61,7 +61,7 @@ export const updateModelCodes = async (modelName: string) => {
     `      args: {`,
     `        id: stringArg(),`,
   ]
-  let createInputArray = await createInputArgs(modelName + '?', true, true)
+  const createInputArray = await createInputArgs(modelName + '?', true, true)
   createInputArray.shift()
   codeArray = codeArray.concat(createInputArray)
   codeArray.push(
@@ -91,7 +91,7 @@ export const updateModelCodes = async (modelName: string) => {
 export const deleteModelCodes = async (modelName: string) => {
   const modelNameUpper = await toUpperCase(modelName)
   const modelNameLower = await toLowerCase(modelName)
-  let codeArray = [
+  const codeArray = [
     `    t.field('delete${modelNameUpper}', {`,
     `      type: ${modelNameUpper}.$name,`,
     `      args: {`,
@@ -122,7 +122,7 @@ export const createInputArgs = async (
   isUpdate: boolean = false
 ) => {
   const modelCols = await getColumns(modelName)
-  let stringArray: Array<string> = []
+  const stringArray: Array<string> = []
   for await (const model of modelCols) {
     const valueType = await getColType(model.type)
     if (
@@ -146,7 +146,7 @@ export const createParamStr = async (
   withId: boolean = false
 ) => {
   const modelCols = await getColumns(modelName)
-  let modelArray: Array<string> = []
+  const modelArray: Array<string> = []
   modelCols.forEach((model) => {
     if (model.name === 'id') {
       if (withId) {

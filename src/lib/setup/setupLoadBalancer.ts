@@ -66,7 +66,7 @@ export const setupLoadBalancer = async (
       defaultBackendServiceName
     )
 
-    let paths = []
+    const paths = []
 
     // Create GraphQL Endpoint if template includes graphql
     if (config.app.template.includes('GraphQL')) {
@@ -98,7 +98,7 @@ export const setupLoadBalancer = async (
 
 const hasLoadBalancerTrue = async () => {
   try {
-    let skeetConfig: SkeetCloudConfig = await importConfig()
+    const skeetConfig: SkeetCloudConfig = await importConfig()
     skeetConfig.app.hasLoadBalancer = true
     writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   } catch (error) {

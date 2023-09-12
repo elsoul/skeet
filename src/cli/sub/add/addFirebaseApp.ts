@@ -22,7 +22,7 @@ export const addFirebaseApp = async (
   appDisplayName: string
 ) => {
   try {
-    let sourceFilePath = './firebaseConfig.js'
+    const sourceFilePath = './firebaseConfig.js'
     const firebaseConfigDir = './lib/firebaseAppConfig'
     const targetFilePathTs = `${firebaseConfigDir}/${appDisplayName}.ts`
 
