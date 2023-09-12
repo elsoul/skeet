@@ -22,13 +22,13 @@ export const aiCommands = () => {
       const { ai } = await importConfig()
       const lang = ai.lang || 'en'
       const logger = new AiLog(lang)
-      let aiType = options.openai ? 'OpenAI' : 'VertexAI'
+      const aiType = options.openai ? 'OpenAI' : 'VertexAI'
       validEnv(aiType as AIType, logger)
-      let model = options.openai
+      const model = options.openai
         ? options.model || 'gpt-4'
         : options.model || 'chat-bison@001'
-      let maxTokens = options.token || '1000'
-      let temperature = options.temperature || '0'
+      const maxTokens = options.token || '1000'
+      const temperature = options.temperature || '0'
       if (Number(temperature) > 1 || Number(temperature) < 0) {
         console.log(chalk.yellow(logger.text().warning.temperature))
         process.exit(1)

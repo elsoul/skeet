@@ -13,6 +13,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
         'prettier',
       ],
       parserOptions: {
+        project: './tsconfig.json',
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
@@ -31,6 +32,13 @@ export const eslintrcJson = async (appName: string, template: string) => {
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/no-unused-vars': 0,
         '@typescript-eslint/no-empty-function': 0,
+        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/no-misused-promises': [
+          'error',
+          {
+            checksVoidReturn: false,
+          },
+        ],
         '@typescript-eslint/ban-ts-comment': [
           'off',
           {
@@ -40,13 +48,14 @@ export const eslintrcJson = async (appName: string, template: string) => {
       },
       overrides: [
         {
-          files: ['./functions/**/*.ts', './graphql/**/*.ts'],
+          files: ['./functions/**/*.ts'],
           extends: [
             'eslint:recommended',
             'plugin:@typescript-eslint/recommended',
             'prettier',
           ],
           parserOptions: {
+            project: './functions/skeet/tsconfig.json',
             sourceType: 'module',
             ecmaVersion: 'latest',
           },
@@ -60,6 +69,13 @@ export const eslintrcJson = async (appName: string, template: string) => {
             '@typescript-eslint/no-var-requires': 0,
             '@typescript-eslint/no-unused-vars': 0,
             '@typescript-eslint/no-empty-function': 0,
+            '@typescript-eslint/no-floating-promises': 'error',
+            '@typescript-eslint/no-misused-promises': [
+              'error',
+              {
+                checksVoidReturn: false,
+              },
+            ],
             '@typescript-eslint/ban-ts-comment': [
               'off',
               {
@@ -78,6 +94,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
             'prettier',
           ],
           parserOptions: {
+            project: './webapp/tsconfig.json',
             ecmaVersion: 'latest',
             sourceType: 'module',
           },
@@ -95,6 +112,13 @@ export const eslintrcJson = async (appName: string, template: string) => {
             '@typescript-eslint/no-unused-vars': 0,
             '@typescript-eslint/no-empty-function': 0,
             'react-native/no-inline-styles': 0,
+            '@typescript-eslint/no-floating-promises': 'error',
+            '@typescript-eslint/no-misused-promises': [
+              'error',
+              {
+                checksVoidReturn: false,
+              },
+            ],
             '@typescript-eslint/ban-ts-comment': [
               'off',
               {
@@ -115,6 +139,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
         'prettier',
       ],
       parserOptions: {
+        project: './tsconfig.json',
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
@@ -133,6 +158,13 @@ export const eslintrcJson = async (appName: string, template: string) => {
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/no-unused-vars': 0,
         '@typescript-eslint/no-empty-function': 0,
+        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/no-misused-promises': [
+          'error',
+          {
+            checksVoidReturn: false,
+          },
+        ],
         '@typescript-eslint/ban-ts-comment': [
           'off',
           {
@@ -142,13 +174,14 @@ export const eslintrcJson = async (appName: string, template: string) => {
       },
       overrides: [
         {
-          files: ['./functions/**/*.ts', './graphql/**/*.ts'],
+          files: ['./functions/**/*.ts'],
           extends: [
             'eslint:recommended',
             'plugin:@typescript-eslint/recommended',
             'prettier',
           ],
           parserOptions: {
+            project: './functions/skeet/tsconfig.json',
             sourceType: 'module',
             ecmaVersion: 'latest',
           },
@@ -162,6 +195,13 @@ export const eslintrcJson = async (appName: string, template: string) => {
             '@typescript-eslint/no-var-requires': 0,
             '@typescript-eslint/no-unused-vars': 0,
             '@typescript-eslint/no-empty-function': 0,
+            '@typescript-eslint/no-floating-promises': 'error',
+            '@typescript-eslint/no-misused-promises': [
+              'error',
+              {
+                checksVoidReturn: false,
+              },
+            ],
             '@typescript-eslint/ban-ts-comment': [
               'off',
               {
@@ -172,10 +212,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
         },
       ],
     }
-  } else if (
-    template === SkeetTemplate.NextJsFirestore ||
-    template === SkeetTemplate.NextJsGraphQL
-  ) {
+  } else if (template === SkeetTemplate.NextJsFirestore) {
     body = {
       extends: [
         'next/core-web-vitals',
@@ -185,6 +222,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
         'prettier',
       ],
       parserOptions: {
+        project: './tsconfig.json',
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
@@ -201,6 +239,13 @@ export const eslintrcJson = async (appName: string, template: string) => {
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/no-unused-vars': 0,
         '@typescript-eslint/no-empty-function': 0,
+        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/no-misused-promises': [
+          'error',
+          {
+            checksVoidReturn: false,
+          },
+        ],
         '@typescript-eslint/ban-ts-comment': [
           'off',
           {
@@ -210,13 +255,14 @@ export const eslintrcJson = async (appName: string, template: string) => {
       },
       overrides: [
         {
-          files: ['./functions/**/*.ts', './graphql/**/*.ts'],
+          files: ['./functions/**/*.ts'],
           extends: [
             'eslint:recommended',
             'plugin:@typescript-eslint/recommended',
             'prettier',
           ],
           parserOptions: {
+            project: './functions/skeet/tsconfig.json',
             sourceType: 'module',
             ecmaVersion: 'latest',
           },
@@ -230,6 +276,94 @@ export const eslintrcJson = async (appName: string, template: string) => {
             '@typescript-eslint/no-var-requires': 0,
             '@typescript-eslint/no-unused-vars': 0,
             '@typescript-eslint/no-empty-function': 0,
+            '@typescript-eslint/no-floating-promises': 'error',
+            '@typescript-eslint/no-misused-promises': [
+              'error',
+              {
+                checksVoidReturn: false,
+              },
+            ],
+            '@typescript-eslint/ban-ts-comment': [
+              'off',
+              {
+                'ts-ignore': 'allow-with-description',
+              },
+            ],
+          },
+        },
+      ],
+    }
+  } else if (template === SkeetTemplate.NextJsGraphQL) {
+    body = {
+      extends: [
+        'next/core-web-vitals',
+        'eslint:recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:@typescript-eslint/recommended',
+        'prettier',
+      ],
+      parserOptions: {
+        project: './tsconfig.json',
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+      parser: '@typescript-eslint/parser',
+      plugins: ['@typescript-eslint', 'react-hooks'],
+      env: {
+        browser: true,
+        es2021: true,
+      },
+      rules: {
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
+        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-var-requires': 0,
+        '@typescript-eslint/no-unused-vars': 0,
+        '@typescript-eslint/no-empty-function': 0,
+        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/no-misused-promises': [
+          'error',
+          {
+            checksVoidReturn: false,
+          },
+        ],
+        '@typescript-eslint/ban-ts-comment': [
+          'off',
+          {
+            'ts-ignore': 'allow-with-description',
+          },
+        ],
+      },
+      overrides: [
+        {
+          files: ['./graphql/**/*.ts'],
+          extends: [
+            'eslint:recommended',
+            'plugin:@typescript-eslint/recommended',
+            'prettier',
+          ],
+          parserOptions: {
+            project: './graphql/tsconfig.json',
+            sourceType: 'module',
+            ecmaVersion: 'latest',
+          },
+          parser: '@typescript-eslint/parser',
+          plugins: ['@typescript-eslint'],
+          env: {
+            es6: true,
+          },
+          rules: {
+            '@typescript-eslint/no-explicit-any': 0,
+            '@typescript-eslint/no-var-requires': 0,
+            '@typescript-eslint/no-unused-vars': 0,
+            '@typescript-eslint/no-empty-function': 0,
+            '@typescript-eslint/no-floating-promises': 'error',
+            '@typescript-eslint/no-misused-promises': [
+              'error',
+              {
+                checksVoidReturn: false,
+              },
+            ],
             '@typescript-eslint/ban-ts-comment': [
               'off',
               {

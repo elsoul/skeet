@@ -22,7 +22,7 @@ export const genScaffold = async (modelName: string) => {
 }
 
 export const genGraphqlIndex = async () => {
-  let exportArray = [
+  const exportArray = [
     `export * from './taskManager'`,
     `export * from './modelManager'`,
     `export * from './authManager'`,
@@ -36,7 +36,7 @@ export const genGraphqlIndex = async () => {
 
 export const genmodelManagerIndex = async () => {
   const apiModels = await getApiModels()
-  let exportArray: Array<string> = []
+  const exportArray: Array<string> = []
   for await (const model of apiModels) {
     const str = `export * from './${model}'`
     exportArray.push(str)

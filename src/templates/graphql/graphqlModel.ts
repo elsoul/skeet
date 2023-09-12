@@ -42,7 +42,7 @@ export const modelCodes = async (modelName: string) => {
   const modelCols: ModelSchemaArray = await getColumns(modelName)
   const enumNames = await getEnumCols(modelCols)
   let importArray = []
-  let modelCodeArray = [
+  const modelCodeArray = [
     `export const ${modelName}Object = objectType({`,
     `  name: ${modelName}.$name,`,
     `  description: ${modelName}.$description,`,
@@ -70,7 +70,7 @@ export const modelCodes = async (modelName: string) => {
     }
   }
 
-  let enumParams = []
+  const enumParams = []
   for await (const model of modelCols) {
     if (model.type.match('Enum$')) {
       const addLine = `    t.field(${modelName}.${
