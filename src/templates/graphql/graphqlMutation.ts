@@ -22,7 +22,7 @@ export const createModelCodes = async (modelName: string) => {
   const modelNameUpper = await toUpperCase(modelName)
   const modelNameLower = await toLowerCase(modelName)
   let codeArray = [
-    `import { extendType,  stringArg, intArg, floatArg, BooleanArg } from 'nexus'`,
+    `import { extendType,  stringArg, intArg, floatArg, booleanArg } from 'nexus'`,
     `import { toPrismaId } from '@/lib/toPrismaId'`,
     `import { ${modelNameUpper} } from 'nexus-prisma'`,
     `import { GraphQLError } from 'graphql'\n`,
