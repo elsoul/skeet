@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://skeet.dev/">
+  <a href="https://skeet.dev/en/">
     <img src="https://user-images.githubusercontent.com/20677823/221215449-93a7b5a8-5f33-4da8-9dd4-d0713db0a280.png" alt="Skeet" />
   </a>
 
@@ -51,11 +51,7 @@ $ skeet ai --openai
 
 Then you can ask Skeet AI Assistant to create a new function, method, typedoc and more.
 
-<p align="center">
-  <a href="https://skeet.dev/">
-    <img src="https://storage.googleapis.com/skeet-assets/animation/skeet-create-animation-method.gif" alt="Skeet AI" />
-  </a>
-</p>
+![SkeetAI](https://storage.googleapis.com/skeet-assets/animation/skeet-create-animation-method2.gif)
 
 ## 🧪 Dependency 🧪
 
