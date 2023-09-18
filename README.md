@@ -21,56 +21,50 @@
   </a>
 </p>
 
-## Skeet - Open-Source Serverless Full-stack App Development Solution
-
-Skeet is an Open-Source Serverless Framework for full-stack apps on Firebase and Google Cloud 🔥
-
-- [Firebase - Serverless Platform](https://firebase.google.com/)
-- [Firestore - NoSQL Database](https://firebase.google.com/docs/firestore)
-- [Firebase Cloud Functions 2nd Gen - FaaS](https://firebase.google.com/docs/functions)
-- [Firebase Storage - Cloud Storage](https://firebase.google.com/docs/storage)
-- [Firebase Authentication - Auth](https://firebase.google.com/docs/auth)
-- [Cloud SQL - Relational Database](https://cloud.google.com/sql)
-- [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
-- [Prisma - ORM](https://www.prisma.io/)
-- [GraphQL - Query Language](https://graphql.org/)
-- [Apollo - GraphQL Server](https://www.apollographql.com/)
-- [TypeScript - TypeCheck](https://www.typescriptlang.org/)
-- [Jest - Test](https://jestjs.io/)
-- [ESLint - Linter](https://eslint.org/)
-- [Prettier - Formatter](https://prettier.io/)
-- [Next.js (React) - Web Frontend(SSG)](https://nextjs.org/)
-- [Expo (React Native) - Mobile App](https://expo.dev/)
-
 📗 Doc: https://skeet.dev/
 
 📱 Demo App: https://skeeter.dev/
 
-With Skeet's tutorial, you can quickly build and deploy web, iOS, and Android apps using Firebase.
-
 ## 💃 What's Skeet? 🕺
 
-⚡️ Do more, manage less ⚡️
+⚡️ AI Auto-code Development ⚡️
 
-Reduce app development and operation costs and realize more plans.
+Skeet is an open-source app development solution capable of AI auto-code development.
 
-Skeet is an open-source full-stack app development solution.
+It allows for rapid development of Web/iOS/Android apps and supports a wide range of developments, including AI-powered chatbot apps, Web3 apps utilizing blockchain, and dApps.
 
-You can start writing app logic immediately without worrying about infrastructure.
+AI is also used in the development flow, overcoming the learning curve that is a challenge in software frameworks.
 
-![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif)
+Developers can quickly start building functional apps and publish them in the cloud.
+
+Lanch Skeet AI Assistant with the following command:
+
+```bash
+$ skeet ai
+```
+
+or you can choose AI engine by passing options
+
+```bash
+$ skeet ai --openai
+```
+
+Then you can ask Skeet AI Assistant to create a new function, method, typedoc and more.
+
+![https://storage.googleapis.com/skeet-assets/animation/skeet-create-animation-method.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-create-animation-method.gif)
 
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
 - [Node.js](https://nodejs.org/ja/) ^18.16.0
 - [Yarn](https://yarnpkg.com/) ^1.22.19
+- [GitHub CLI](https://cli.github.com/) ^2.29.0
+
+For Firebase Template
+
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
 - [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0
-- [GitHub CLI](https://cli.github.com/) ^2.29.0
 - [Java](https://www.java.com/en/download/)
-
-※ We don't write Java but we need it for mobile apps working
 
 ## 📗 Usage 📗
 
@@ -87,9 +81,7 @@ $ npm install -g firebase-tools
 $ skeet create <appName>
 ```
 
-![Skeet Create Command](https://storage.googleapis.com/skeet-assets/imgs/backend/skeet-create-v0.22.png)
-
-You can choose a template for the frontend.
+You can choose a template for the frontend and backend.
 
 - [Next.js (React) with GraphQL template](https://github.com/elsoul/skeet-graphql)
 - [Next.js (React) with Firestore template](https://github.com/elsoul/skeet-next)
@@ -98,11 +90,43 @@ You can choose a template for the frontend.
 
 ![Solana Mobile Stack](https://storage.googleapis.com/skeet-assets/animation/SkeetSolanaMobileStack.gif)
 
+or
+
+Create Skeet App with only backend
+
+```bash
+$ skeet create <appName> --backend
+```
+
+You can choose a template for the backend.
+
+- [Backend - GraphQL template](https://github.com/elsoul/skeet-graphql-only)
+- [Backend - Firestore template](https://github.com/elsoul/skeet-functions-only)
+
+![Chatbot](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
+
 ### ③ Run Skeet App
 
 ```bash
 $ cd <appName>
 $ skeet s
+```
+
+or
+
+put options to run only backend, frontend, or GraphQL server
+
+```bash
+Usage: skeet server|s [options]
+
+Run Skeet App
+
+Options:
+  -b, --backend    Run Backend only
+  -f, --functions  Run Firebase Functions only
+  -w, --web        Run Web App only
+  -g, --graphql    Run GraphQL Server only
+  -h, --help       display help for command
 ```
 
 Now you have both frontend and backend running locally ⭐️
@@ -117,8 +141,6 @@ If you choose GraphQL template, you can use GraphQL Playground
 
 📊 GraphQL Playground - [http://localhost:3000/graphql](http://localhost:3000/graphql)
 
-![Skeet GraphQL](https://storage.googleapis.com/skeet-assets/animation/skeet-db-studio.gif)
-
 ## Enabling Google Cloud VertexAI
 
 Skeet is integrated with Google Cloud VertexAI. Use the following command to enable VertexAI:
@@ -129,121 +151,53 @@ $ skeet iam ai
 
 ## Launching Skeet AI Assistant
 
-The Skeet AI Assistant is an interactive tool designed to handle various queries:
+The Skeet AI Assistant is an interactive tool designed to handle various queries.
 
 ```bash
-$ skeet ai
+$ skeet ai --help
+AI Playground
+
+Options:
+  -v, --vertex                   Vertex AI
+  -o, --openai                   OpenAI
+  -m, --model <string>           Model
+  -token, --token <number>       Max Tokens
+  -temp, --temperature <number>  Temperature
+  -h, --help                     display help for command
 ```
 
 Upon launching, you'll see a prompt like the one below. Try asking it something:
 
-````
-VertexAI is selected 🤖 (type "q" to quit)
-
-You: How to install skeet?
-Skeet:
-To install Skeet, you can use the following command:
-
 ```bash
-$ npm install -g @skeet-framework/cli
-```
+skeet ai --openai
+╔═════════════╤════════╗
+│ Option      │ Value  │
+╟─────────────┼────────╢
+│ AI Type     │ OpenAI │
+╟─────────────┼────────╢
+│ Model       │ gpt-4  │
+╟─────────────┼────────╢
+│ Max Token   │ 1000   │
+╟─────────────┼────────╢
+│ Temperature │ 0      │
+╚═════════════╧════════╝
 
-This will install the Skeet CLI tool globally on your machine.
+🤖 Skeet AI Mode
+ `$ <mode>` to change AI mode 🤖
+
+$ prisma
+$ typedoc
+$ translate
+$ firestore
+$ function
+$ method
+$ help
+$ q
+
+OpenAI is selected 🤖 (type 'q' to quit)
+? What can I do for you?
 
 You:
-
-````
-
-## Launching Skeet AI Prisma
-
-While _skeet ai_ is running, entering _$ prisma_ will switch to database schema generation mode. Upon launching, you'll be prompted to describe your database use case. For instance, try entering, "I want to create a blog site."
-
-```bash
-$ skeet ai
-VertexAI is selected 🤖 (type "q" to quit)
-
-You: $ prisma
-🤖 Prisma Scheme Generating Mode 🤖
-Please describe your Database use case.
-
-You: I want to create a blog site.
-model Post {
-  id        Int       @id @default(autoincrement())
-  title     String
-  content   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Comment   Comment[]
-  User      User      @relation(fields: [userId], references: [id])
-  userId    Int
-
-  @@unique([userId, title])
-}
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String
-  postId    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Post      Post     @relation(fields: [postId], references: [id])
-}
-
-Edit: ./graphql/prisma/schema.prisma
-```
-
-A Prisma schema has been generated.
-
-![skeet-prisma](https://storage.googleapis.com/skeet-assets/animation/skeet-prisma.gif)
-
-## Editing Prisma Schema
-
-The Prisma schema is saved in _./graphql/prisma/schema.prisma_. Edit the schema outputted earlier as required.
-
-If you haven't used the skeet template yet, create it with the following command:
-
-```bash
-$ skeet create <appName>
-```
-
-Use this schema to migrate your database.
-
-## Creating/Running DB Migration
-
-With Skeet, you can perform database migrations using Prisma:
-
-```bash
-$ skeet db migrate <migrationName>
-```
-
-Your database migration is now complete.
-
-## Creating GraphQL API
-
-Skeet can automatically generate a GraphQL API from the schema:
-
-```bash
-$ skeet g scaffold
-```
-
-## Launching the GraphQL API
-
-Skeet allows you to run the GraphQL API locally:
-
-```bash
-$ skeet s
-```
-
-You can access the GraphQL API at:
-
-- [http://localhost:3000/graphql](http://localhost:3000/graphql)
-
-## Synchronizing Types
-
-Skeet can automatically generate TypeScript type definitions from the GraphQL API:
-
-```bash
-$ skeet sync types
 ```
 
 ## Skeet Docment
@@ -263,7 +217,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Skeet Jest Test Command
   create <appName>             Create Skeet Framework App
   server|s                     Run Skeet App
   deploy                       Deploy Skeet APP to Firebase
@@ -281,6 +234,25 @@ Commands:
   get                          Get Skeet App List
   help [command]               display help for command
 ```
+
+## Powered by
+
+- [Firebase - Serverless Platform](https://firebase.google.com/)
+- [Firestore - NoSQL Database](https://firebase.google.com/docs/firestore)
+- [Firebase Cloud Functions 2nd Gen - FaaS](https://firebase.google.com/docs/functions)
+- [Firebase Storage - Cloud Storage](https://firebase.google.com/docs/storage)
+- [Firebase Authentication - Auth](https://firebase.google.com/docs/auth)
+- [Cloud SQL - Relational Database](https://cloud.google.com/sql)
+- [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
+- [Prisma - ORM](https://www.prisma.io/)
+- [GraphQL - Query Language](https://graphql.org/)
+- [Apollo - GraphQL Server](https://www.apollographql.com/)
+- [TypeScript - TypeCheck](https://www.typescriptlang.org/)
+- [Jest - Test](https://jestjs.io/)
+- [ESLint - Linter](https://eslint.org/)
+- [Prettier - Formatter](https://prettier.io/)
+- [Next.js (React) - Web Frontend(SSG)](https://nextjs.org/)
+- [Expo (React Native) - Mobile App](https://expo.dev/)
 
 ## Contributing
 
