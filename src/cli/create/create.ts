@@ -15,7 +15,7 @@ import inquirer from 'inquirer'
 import { questionList } from '@/cli/init/questionList'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
-import { SkeetTemplate } from '@/types/skeetTypes'
+import { SkeetTemplate, SkeetTemplateBackend } from '@/types/skeetTypes'
 import { dbGen } from '../sub/db/dbGen'
 import { dbDeploy } from '../sub/db/dbDeploy'
 
@@ -88,7 +88,10 @@ export const generateInitFiles = async (appName: string, template: string) => {
   if (template === SkeetTemplate.SolanaFirestore) {
     await initAppJson(appName)
   }
-  if (template === SkeetTemplate.NextJsGraphQL) {
+  if (
+    template === SkeetTemplate.NextJsGraphQL ||
+    template === SkeetTemplateBackend.GraphQL
+  ) {
     const env = await fileDataOf.graphqlEnv(appName)
     writeFileSync(env.filePath, env.body)
 
@@ -99,7 +102,9 @@ export const generateInitFiles = async (appName: string, template: string) => {
     await dbDeploy(false, appGraphqlPath)
   }
 
-  await addAppNameToSkeetOptions(appName, DEFAULT_FUNCTION_NAME)
+  if (template !== 'Backend Only - GraphQL') {
+    await addAppNameToSkeetOptions(appName, DEFAULT_FUNCTION_NAME)
+  }
 
   const eslintrcJson = await fileDataOf.eslintrcJson(appName, template)
   writeFileSync(
