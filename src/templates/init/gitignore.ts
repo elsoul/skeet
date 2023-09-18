@@ -437,6 +437,12 @@ firebase-debug.log
 tmp/
 firebase-export-*
 .secret*
+
+# Wallets
+*wallet.json
+*key.json
+*keyfile.json
+*keys.json
 `
   }
 
