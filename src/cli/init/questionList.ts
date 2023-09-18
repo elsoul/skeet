@@ -2,7 +2,7 @@ import inquirer from 'inquirer'
 import { regionList } from './regionList'
 import chalk from 'chalk'
 import { Logger } from '@/lib'
-import { SkeetTemplate } from '@/types/skeetTypes'
+import { SkeetTemplate, SkeetTemplateBackend } from '@/types/skeetTypes'
 
 export module questionList {
   export const requireRepoName = (value: string) => {
@@ -102,6 +102,25 @@ export module questionList {
         { name: SkeetTemplate.NextJsFirestore },
         { name: SkeetTemplate.ExpoFirestore },
         { name: SkeetTemplate.SolanaFirestore },
+      ],
+      validate(answer: string) {
+        if (answer.length < 1) {
+          return 'You must choose at least one template.'
+        }
+        return true
+      },
+    },
+  ]
+
+  export const backendTemplateQuestions = [
+    {
+      type: 'list',
+      message: 'Select Template of Skeet',
+      name: 'template',
+      choices: [
+        new inquirer.Separator(' Templates '),
+        { name: SkeetTemplateBackend.GraphQL },
+        { name: SkeetTemplateBackend.Firestore },
       ],
       validate(answer: string) {
         if (answer.length < 1) {

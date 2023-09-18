@@ -1,4 +1,3 @@
-import { createHash } from 'crypto'
 import { execSync } from 'child_process'
 import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
 import { readFileSync } from 'fs'
@@ -13,6 +12,10 @@ export const FUNCTIONS_REPO_URL = 'https://github.com/elsoul/skeet-functions'
 export const APP_REPO_URL = 'https://github.com/elsoul/skeet-app'
 export const GRAPHQL_REPO_PATH = 'https://github.com/elsoul/skeet-graphql'
 export const NEXT_REPO_URL = 'https://github.com/elsoul/skeet-next'
+export const BACKEND_GRAPHQL_REPO_URL =
+  'https://github.com/elsoul/skeet-graphql-only'
+export const BACKEND_FUNCTIONS_REPO_URL =
+  'https://github.com/elsoul/skeet-functions-only'
 export const SOLANA_REPO_URL =
   'https://github.com/elsoul/skeet-solana-mobile-stack'
 export const FRONT_APP_PATH = './src'

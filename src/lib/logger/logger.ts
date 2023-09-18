@@ -2,6 +2,7 @@ import chalk from 'chalk'
 import { Spinner } from 'cli-spinner'
 import { spinnerPattern } from './spinnerList'
 import { questionList } from '@/cli/init/questionList'
+import { SkeetTemplateBackend } from '@/types/skeetTypes'
 
 export module Logger {
   export const successHex = chalk.hex('#39A845')
@@ -95,8 +96,18 @@ Go To : http://127.0.0.1:4000/`
 $ cd ${appName}
 $ skeet s
 Go To : http://127.0.0.1:4000/`
+    const backendGraphqlText = `
+$ cd ${appName}
+$ skeet docker psql
+$ skeet s
+Go To : http://localhost:3000/graphql
+    `
     console.log(title)
-    console.log(greyHex(text))
+    if (template === SkeetTemplateBackend.GraphQL) {
+      console.log(backendGraphqlText)
+    } else {
+      console.log(greyHex(text))
+    }
   }
 
   export const cmText = () => {

@@ -18,18 +18,18 @@ export const yarn = async (
   isDev: boolean = false
 ) => {
   const functions = getFunctions()
-  const functionsArray: Array<{ [key: string]: string }> = [
-    { name: 'webapp' },
-    { name: 'root' },
-  ]
+  let functionsArray: Array<{ [key: string]: string }> = []
   const { app } = await importConfig()
   if (app?.template?.includes('GraphQL')) {
     functionsArray.push({ name: 'graphql' })
   }
-
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }
+  if (!app?.template?.includes('Backend')) {
+    functionsArray.push({ name: 'webapp' }, { name: 'root' })
+  }
+
   inquirer
     .prompt([
       {

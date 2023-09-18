@@ -5,6 +5,11 @@ export enum SkeetTemplate {
   SolanaFirestore = 'Solana Mobile Stack (Expo) + Web (Next.js) - Firestore',
 }
 
+export enum SkeetTemplateBackend {
+  GraphQL = 'Backend Only - GraphQL',
+  Firestore = 'Backend Only - Firestore',
+}
+
 export type SkeetOptions = {
   name: string
   projectId: string
