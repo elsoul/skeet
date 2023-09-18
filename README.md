@@ -51,7 +51,7 @@ $ skeet ai --openai
 
 Then you can ask Skeet AI Assistant to create a new function, method, typedoc and more.
 
-![SkeetAI](https://storage.googleapis.com/skeet-assets/animation/skeet-create-animation-method2.gif)
+![SkeetAI](https://storage.googleapis.com/skeet-assets/animation/skeet-ai-short.gif)
 
 ## 🧪 Dependency 🧪
 
