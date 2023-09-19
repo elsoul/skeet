@@ -34,7 +34,7 @@
     "skeet:skeet": "yarn --cwd ./functions/skeet dev"
   },
   "dependencies": {
-    "@skeet-framework/ai": "1.7.0",
+    "@skeet-framework/ai": "1.7.1",
     "@skeet-framework/utils": "1.2.1",
     "chalk": "5.2.0",
     "chalk-pipe": "6.0.0",
@@ -67,11 +67,11 @@
     "eslint-config-prettier": "8.8.0",
     "nodemon": "2.0.22",
     "npm-check-updates": "16.10.12",
-    "prettier": "2.8.8",
+    "prettier": "3.0.3",
     "ts-jest": "29.1.0",
     "ts-loader": "9.4.3",
     "ts-node": "10.9.1",
     "tsconfig-paths": "4.2.0",
-    "typescript": "5.0.4"
+    "typescript": "5.2.2"
   }
 }
