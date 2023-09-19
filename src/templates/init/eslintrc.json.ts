@@ -94,7 +94,7 @@ export const eslintrcJson = async (appName: string, template: string) => {
             'prettier',
           ],
           parserOptions: {
-            project: './webapp/tsconfig.json',
+            project: './tsconfig.json',
             ecmaVersion: 'latest',
             sourceType: 'module',
           },
