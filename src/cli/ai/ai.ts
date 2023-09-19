@@ -31,7 +31,7 @@ export async function promptUser(
   const aiOptions = {
     ai: (options.ai as AIType) || ('VertexAI' as AIType),
     maxTokens: 1000,
-    model: options.model || 'chat-bison@001',
+    model: options.model || 'chat-bison-32k',
   }
   console.log('\n')
   const userInput = await inquirer.prompt([
