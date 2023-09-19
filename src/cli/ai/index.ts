@@ -26,7 +26,7 @@ export const aiCommands = () => {
       validEnv(aiType as AIType, logger)
       const model = options.openai
         ? options.model || 'gpt-4'
-        : options.model || 'chat-bison@001'
+        : options.model || 'chat-bison-32k'
       const maxTokens = options.token || '1000'
       const temperature = options.temperature || '0'
       if (Number(temperature) > 1 || Number(temperature) < 0) {
@@ -76,7 +76,7 @@ const defaultAiConfig = {
   ais: [
     {
       name: 'VertexAI',
-      availableModels: ['chat-bison@001'],
+      availableModels: ['chat-bison@001', 'chat-bison-32k'],
     },
   ],
 }
