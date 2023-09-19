@@ -37,7 +37,16 @@ AI is also used in the development flow, overcoming the learning curve that is a
 
 Developers can quickly start building functional apps and publish them in the cloud.
 
-Lanch Skeet AI Assistant with the following command:
+## Enabling Google Cloud VertexAI/OpenAI
+
+Create a new project in Google Cloud Platform and enable VertexAI.
+You will need OpenAI API Key to use OpenAI.
+
+Use the following command to enable VertexAI:
+
+```bash
+$ skeet iam ai
+```
 
 ```bash
 $ skeet ai
@@ -48,6 +57,8 @@ or you can choose AI engine by passing options
 ```bash
 $ skeet ai --openai
 ```
+
+**You need to set CHAT_GPT_ORG/CHAT_GPT_KEY in your .env**
 
 Then you can ask Skeet AI Assistant to create a new function, method, typedoc and more.
 
@@ -140,14 +151,6 @@ Now you have both frontend and backend running locally ⭐️
 If you choose GraphQL template, you can use GraphQL Playground
 
 📊 GraphQL Playground - [http://localhost:3000/graphql](http://localhost:3000/graphql)
-
-## Enabling Google Cloud VertexAI
-
-Skeet is integrated with Google Cloud VertexAI. Use the following command to enable VertexAI:
-
-```bash
-$ skeet iam ai
-```
 
 ## Launching Skeet AI Assistant
 
