@@ -34,7 +34,7 @@
     "skeet:skeet": "yarn --cwd ./functions/skeet dev"
   },
   "dependencies": {
-    "@skeet-framework/ai": "1.7.1",
+    "@skeet-framework/ai": "^1.7.2",
     "@skeet-framework/utils": "1.2.1",
     "chalk": "5.2.0",
     "chalk-pipe": "6.0.0",

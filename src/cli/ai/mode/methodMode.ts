@@ -70,10 +70,7 @@ export const methodMode = async (skeetAi: SkeetAI, logger: AiLog) => {
       ?.replaceAll('```\n', '')
       .replaceAll('```', '') as string
 
-    const nameSuggestion = (await skeetAi.naming(
-      aiAnswer,
-      NamingEnum.FUNCTION,
-    )) as string
+    const nameSuggestion = extractFunctionName(aiAnswer)
 
     const skeetRes =
       'Skeet:' +
@@ -112,4 +109,9 @@ export const methodMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   } catch (error) {
     throw new Error(`methodMode: ${error}`)
   }
+}
+
+const extractFunctionName = (str: string) => {
+  const match = str.match(/export const (\w+) =/)
+  return match ? match[1] : null
 }
