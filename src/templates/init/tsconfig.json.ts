@@ -29,7 +29,7 @@ export const tsconfigJson = async (appName: string) => {
       },
     },
     include: ['next-env.d.ts', '**/*.ts', '**/*.tsx'],
-    exclude: ['node_modules', 'out', '.next', 'build', 'dist', 'functions'],
+    exclude: ['node_modules', 'out', '.next', 'build', 'dist'],
   }
   return {
     filePath,
