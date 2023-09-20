@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
 import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
-import { readFileSync } from 'fs'
+import fs from 'fs'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -37,19 +37,25 @@ export const getFunctionInfo = async (functionName: string) => {
 }
 
 export const getFunctionConfig = (functionName: string) => {
-  const tsconfig = readFileSync('./tsconfig.json', 'utf-8')
-  const prretierrc = readFileSync('./package.json', 'utf-8')
-  return {
-    package: readConfigFile(functionName, 'package.json'),
-    tsconfig,
-    prretierrc,
+  try {
+    const tsconfig = fs.readFileSync('./tsconfig.json', 'utf-8')
+    const prretierrc = fs.readFileSync('.prettierrc', 'utf-8')
+    const result = {
+      package: readConfigFile(functionName, 'package.json'),
+      tsconfig,
+      prretierrc,
+    }
+    return result
+  } catch (error) {
+    throw new Error(`getFunctionConfig: ${error}`)
   }
 }
 
 const readConfigFile = (functionName: string, file: string) => {
   try {
     const path = `${FUNCTIONS_PATH}/${functionName}/${file}`
-    return readFileSync(path, 'utf-8')
+    console.log(path)
+    return fs.readFileSync(path, 'utf-8')
   } catch (error) {
     return ''
   }
@@ -206,7 +212,7 @@ export const getBuidEnvArray = async (
 }
 
 export const getActionsEnvString = async (filePath: string) => {
-  const stream = readFileSync(filePath)
+  const stream = fs.readFileSync(filePath)
   const envArray: Array<string> = String(stream).split('\n')
   const newEnv: Array<string> = []
   for await (const envLine of envArray) {
@@ -224,7 +230,7 @@ export const getActionsEnvString = async (filePath: string) => {
 }
 
 export const getBuidEnvString = async () => {
-  const stream = readFileSync(GRAPHQL_ENV_PRODUCTION_PATH)
+  const stream = fs.readFileSync(GRAPHQL_ENV_PRODUCTION_PATH)
   const envArray: Array<string> = String(stream).split('\n')
   const hash: { [key: string]: string } = {}
   for await (const line of envArray) {
