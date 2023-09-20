@@ -33,6 +33,7 @@ export async function promptUser(
     maxTokens: 1000,
     model: options.model || 'chat-bison@001',
   }
+
   console.log('\n')
   const userInput = await inquirer.prompt([
     {
