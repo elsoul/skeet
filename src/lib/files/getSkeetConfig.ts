@@ -54,7 +54,6 @@ export const getFunctionConfig = (functionName: string) => {
 const readConfigFile = (functionName: string, file: string) => {
   try {
     const path = `${FUNCTIONS_PATH}/${functionName}/${file}`
-    console.log(path)
     return fs.readFileSync(path, 'utf-8')
   } catch (error) {
     return ''
