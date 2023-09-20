@@ -37,10 +37,12 @@ export const getFunctionInfo = async (functionName: string) => {
 }
 
 export const getFunctionConfig = (functionName: string) => {
+  const tsconfig = readFileSync('./tsconfig.json', 'utf-8')
+  const prretierrc = readFileSync('./package.json', 'utf-8')
   return {
     package: readConfigFile(functionName, 'package.json'),
-    tsconfig: readConfigFile(functionName, 'tsconfig.json'),
-    prretierrc: readConfigFile(functionName, '.prettierrc'),
+    tsconfig,
+    prretierrc,
   }
 }
 
@@ -100,7 +102,7 @@ export const getContainerImageUrl = async (
   appName: string,
   region: string,
   workerName: string = '',
-  isPlugin: boolean = false
+  isPlugin: boolean = false,
 ) => {
   const cRegion = await getContainerRegion(region)
 
@@ -119,7 +121,7 @@ export const getContainerImageUrl = async (
 
 export const getContainerImageName = async (
   appName: string,
-  workerName: string = ''
+  workerName: string = '',
 ) => {
   const imageName =
     workerName !== ''
@@ -155,7 +157,7 @@ export const getRunUrl = async (projectId: string, appName: string) => {
 export const isNegExists = async (
   projectId: string,
   region: string,
-  methodName: string
+  methodName: string,
 ) => {
   const { neg } = await getFunctionInfo(methodName)
   const shCmd = [
@@ -192,7 +194,7 @@ export const getBuidEnvArray = async (
   projectId: string,
   fbProjectId: string,
   databaseUrl: string,
-  tz: string
+  tz: string,
 ) => {
   return [
     'NO_PEER_DEPENDENCY_CHECK=1',
@@ -234,7 +236,7 @@ export const getBuidEnvString = async () => {
     hash['SKEET_GCP_PROJECT_ID'],
     hash['GOOGLE_CLOUD_PROJECT'],
     dabaseUrl,
-    hash['TZ']
+    hash['TZ'],
   )
   const newEnv = envArray.filter((value) => {
     if (

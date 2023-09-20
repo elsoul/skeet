@@ -25,13 +25,13 @@ import { AiLog } from './aiLog'
 
 export async function promptUser(
   options: SkeetAIOptions,
-  logger: AiLog
+  logger: AiLog,
 ): Promise<void> {
   const log = logger.text() as SkeetLog
   const aiOptions = {
     ai: (options.ai as AIType) || ('VertexAI' as AIType),
     maxTokens: 1000,
-    model: options.model || 'chat-bison-32k',
+    model: options.model || 'chat-bison@001',
   }
   console.log('\n')
   const userInput = await inquirer.prompt([
@@ -46,7 +46,7 @@ export async function promptUser(
 
   if (userInput.input.toLowerCase() === 'q') {
     console.log(
-      chalk.white(`⭐️ ${chalk.blue(aiOptions.ai)} ${log.common.shutdown}...`)
+      chalk.white(`⭐️ ${chalk.blue(aiOptions.ai)} ${log.common.shutdown}...`),
     )
     process.exit(0)
   }
@@ -98,13 +98,13 @@ export async function promptUser(
     skeetPrompt.context,
     skeetPrompt.examples,
     userInput.input,
-    aiOptions.ai
+    aiOptions.ai,
   )
   logger.addJson(
     SkeetRole.USER,
     userInput.input,
     SkeetAiMode.Skeet,
-    aiOptions.model
+    aiOptions.model,
   )
 
   if (aiOptions.ai === 'VertexAI') {
