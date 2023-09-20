@@ -20,8 +20,8 @@
       "@/*": ["src/*"]
     }
   },
-  "files": ["package.json", "src/cli/ai/locales/**/skeetAi.json"],
+  "files": ["package.json"],
   "include": ["src/**/*", "add-line.ts", "build.ts", "cli.ts", "tests/**/*"],
-  "exclude": ["dist", "node_modules", "functions/**/*", "graphql/**/*"],
+  "exclude": ["dist", "node_modules"],
   "compileOnSave": false
 }
