@@ -4,9 +4,18 @@ import { build } from 'esbuild'
     entryPoints: ['./src/index.ts'],
     bundle: true,
     minify: true,
+    keepNames: true,
+    sourcemap: 'inline',
+    sourcesContent: true,
     outfile: './dist/index.js',
     platform: 'node',
     format: 'cjs',
-    external: ['@prisma/client'],
+    define: {
+      'process.env.NODE_ENV': `"production"`,
+    },
+    metafile: true,
+    alias: {
+      '@': './src',
+    },
   })
 })()

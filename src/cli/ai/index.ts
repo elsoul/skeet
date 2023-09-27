@@ -5,7 +5,7 @@ import { AIType } from '@skeet-framework/ai'
 import { SkeetAIOptions } from '@skeet-framework/ai'
 import { SKEET_CONFIG_PATH, importConfig } from '@/lib'
 import { AiLog } from './aiLog'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const aiCommands = () => {
