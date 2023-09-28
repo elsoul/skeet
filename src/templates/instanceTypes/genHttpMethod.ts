@@ -2,7 +2,7 @@ import { FUNCTIONS_PATH } from '@/lib'
 
 export const genHttpMethod = async (
   functionsName: string,
-  methodName: string
+  methodName: string,
 ) => {
   const firstChar = methodName.charAt(0).toUpperCase()
   const httpParams = firstChar + methodName.slice(1) + 'Params'
@@ -20,8 +20,7 @@ export const ${methodName} = onRequest(publicHttpOption, async (req: TypedReques
   } catch (error) {
     res.status(500).json({ status: 'error', message: String(error) })
   }
-})
-  `
+})`
   return {
     filePath,
     body,

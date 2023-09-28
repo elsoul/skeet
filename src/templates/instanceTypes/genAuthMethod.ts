@@ -3,17 +3,17 @@ import { toCamelCase } from '@/utils/string'
 
 export const genAuthMethod = async (
   functionsName: string,
-  methodName: string
+  methodName: string,
 ) => {
   const camelMethodName = toCamelCase(methodName)
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/auth/${camelMethodName}.ts`
   const body = `import * as functions from 'firebase-functions/v1'
-import { authDefaultOption } from '@/routings'
+import { authPublicOption } from '@/routings/options'
 import skeetConfig from '../../../skeetOptions.json'
 const region = skeetConfig.region
 
 export const ${camelMethodName} = functions
-  .runWith(authDefaultOption)
+  .runWith(authPublicOption)
   .region(region)
   .auth.user()
   .onCreate(async (user) => {
