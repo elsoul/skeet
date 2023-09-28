@@ -40,6 +40,5 @@ export const saveSkeetSolanaTransfer = extendType({
       },
     })
   },
-})
-  `
+})`
 }
