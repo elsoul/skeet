@@ -64,6 +64,8 @@ Then you can ask Skeet AI Assistant to create a new function, method, typedoc an
 
 [![SkeetAI](https://storage.googleapis.com/skeet-assets/animation/skeet-ai-short.gif)](https://www.youtube.com/watch?v=e7J5HDhtpE4)
 
+YouTube Video Link: https://www.youtube.com/watch?v=e7J5HDhtpE4
+
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
