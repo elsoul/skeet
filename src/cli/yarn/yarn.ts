@@ -15,10 +15,10 @@ export type YarnService = {
 export const yarn = async (
   yarnCmd: string,
   packageName: string = '',
-  isDev: boolean = false
+  isDev: boolean = false,
 ) => {
   const functions = getFunctions()
-  let functionsArray: Array<{ [key: string]: string }> = []
+  const functionsArray: Array<{ [key: string]: string }> = []
   const { app } = await importConfig()
   if (app?.template?.includes('GraphQL')) {
     functionsArray.push({ name: 'graphql' })
@@ -60,7 +60,7 @@ export const yarnCmdRun = async (
   functionName: string,
   yarnCmd: string,
   packageName: string = '',
-  isDev: boolean = false
+  isDev: boolean = false,
 ) => {
   let shCmd: Array<string> = []
   switch (yarnCmd) {
@@ -78,7 +78,7 @@ const getYarnShCmd = async (
   functionName: string = '',
   yarnCmd: string,
   packageName: string = '',
-  isDev: boolean = false
+  isDev: boolean = false,
 ) => {
   let shCmd = []
   let cmd = yarnCmd
