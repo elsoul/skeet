@@ -1,5 +1,4 @@
 import { program } from '@/index'
-import { Logger } from '@/lib'
 import { yarn } from './yarn'
 
 export const yarnCommands = async () => {
@@ -17,8 +16,7 @@ export const yarnCommands = async () => {
       } else if (yarnCmd === 'add' && options.p !== '' && options.d === '') {
         await yarn(yarnCmd, options.p, false)
       } else {
-        Logger.error('Invalid yarn command')
-        process.exit(1)
+        await yarn(yarnCmd)
       }
     })
 }
