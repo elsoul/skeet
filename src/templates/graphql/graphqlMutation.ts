@@ -19,8 +19,8 @@ export const graphqlMutation = async (modelName: string) => {
 }
 
 export const createModelCodes = async (modelName: string) => {
-  const modelNameUpper = await toUpperCase(modelName)
-  const modelNameLower = await toLowerCase(modelName)
+  const modelNameUpper = toUpperCase(modelName)
+  const modelNameLower = toLowerCase(modelName)
   let codeArray = [
     `import { extendType,  stringArg, intArg, floatArg, booleanArg } from 'nexus'`,
     `import { toPrismaId } from '@/lib/toPrismaId'`,
@@ -53,8 +53,8 @@ export const createModelCodes = async (modelName: string) => {
 }
 
 export const updateModelCodes = async (modelName: string) => {
-  const modelNameUpper = await toUpperCase(modelName)
-  const modelNameLower = await toLowerCase(modelName)
+  const modelNameUpper = toUpperCase(modelName)
+  const modelNameLower = toLowerCase(modelName)
   let codeArray = [
     `    t.field('update${modelNameUpper}', {`,
     `      type: ${modelNameUpper}.$name,`,
@@ -89,8 +89,8 @@ export const updateModelCodes = async (modelName: string) => {
 }
 
 export const deleteModelCodes = async (modelName: string) => {
-  const modelNameUpper = await toUpperCase(modelName)
-  const modelNameLower = await toLowerCase(modelName)
+  const modelNameUpper = toUpperCase(modelName)
+  const modelNameLower = toLowerCase(modelName)
   const codeArray = [
     `    t.field('delete${modelNameUpper}', {`,
     `      type: ${modelNameUpper}.$name,`,

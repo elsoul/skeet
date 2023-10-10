@@ -11,8 +11,8 @@ export const graphqlQuery = async (modelName: string) => {
 }
 
 export const queryCodes = async (modelName: string) => {
-  const modelNameUpper = await toUpperCase(modelName)
-  const modelNameLower = await toLowerCase(modelName)
+  const modelNameUpper = toUpperCase(modelName)
+  const modelNameLower = toLowerCase(modelName)
   const codeArray = [
     `import { extendType, nonNull, stringArg } from 'nexus'`,
     `import { connectionFromArray } from 'graphql-relay'`,
