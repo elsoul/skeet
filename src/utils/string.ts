@@ -7,6 +7,11 @@ export const convertFromKebabCaseToLowerCase = (str: string) => {
 }
 
 export const toPascalCase = (str: string) => {
+  const isAllLettersUppercase = str.split(/(?=[A-Z])/).length === str.length
+  if (isAllLettersUppercase) {
+    str = str.toLowerCase()
+  }
+
   return str
     .split(/(?=[A-Z])|[-_\s]/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -14,6 +19,11 @@ export const toPascalCase = (str: string) => {
 }
 
 export const toCamelCase = (str: string) => {
+  const isAllLettersUppercase = str.split(/(?=[A-Z])/).length === str.length
+  if (isAllLettersUppercase) {
+    str = str.toLowerCase()
+  }
+  
   return str
     .split(/(?=[A-Z])|[-_\s]/)
     .map((word, index) => {
@@ -25,10 +35,10 @@ export const toCamelCase = (str: string) => {
     .join('')
 }
 
-export const toUpperCase = async (str: string) => {
+export const toUpperCase = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export const toLowerCase = async (str: string) => {
+export const toLowerCase = (str: string) => {
   return str.charAt(0).toLowerCase() + str.slice(1)
 }

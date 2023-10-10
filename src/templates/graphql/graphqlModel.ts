@@ -17,10 +17,7 @@ export const enumImport = async (
   modelName: string,
   enumArray: Array<string>
 ) => {
-  const lowerEnum = []
-  for await (const enumName of enumArray) {
-    lowerEnum.push(`${await toLowerCase(enumName)}`)
-  }
+  const lowerEnum = enumArray.map(enumName => toLowerCase(enumName))
   const enumString = lowerEnum.join(', ')
   const body = [
     `import { objectType } from 'nexus'`,
@@ -75,7 +72,7 @@ export const modelCodes = async (modelName: string) => {
     if (model.type.match('Enum$')) {
       const addLine = `    t.field(${modelName}.${
         model.name
-      }.name, { type: ${await toLowerCase(model.type)} })`
+      }.name, { type: ${toLowerCase(model.type)} })`
       modelCodeArray.push(addLine)
       enumParams.push(model.name)
     } else {
