@@ -7,8 +7,8 @@
     "aiType": "AIの種類",
     "model": "モデル",
     "maxToken": "最大トークン",
-    "temperature": "感情の大きさ",
-    "skeetAiModeText": "Skeet AIモード\n `$ <mode>` でAIモードを変更",
+    "temperature": "温度",
+    "skeetAiModeText": "Skeet AIモード\n `$ <mode>`でAIモードを変更",
     "isSelected": "が選択されました 🤖 ('q'を入力して終了)",
     "shutdown": "シャットダウン中",
     "howAboutThis": "これはいかがでしょうか？\n\n",
@@ -29,7 +29,7 @@
     "addedDoc": "✔️ Typedocを追加しました"
   },
   "warning": {
-    "temperature": "⚠️ 感情の大きさは0から1の間でなければなりません ⚠️",
+    "temperature": "⚠️ 温度は0から1の間でなければなりません ⚠️",
     "gptKey": "⚠️ CHAT_GPT_ORGとCHAT_GPT_KEYを設定してください ⚠️",
     "gcpKey": "⚠️ GCLOUD_PROJECTとREGIONを設定してください ⚠️",
     "mode": "⚠️ このモードは現在のテンプレートでは使用できません ⚠️"
