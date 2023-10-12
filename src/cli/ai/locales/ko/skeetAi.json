@@ -1,12 +1,14 @@
 {
   "common": {
     "you": "당신",
+    "option": "옵션",
+    "value": "값",
     "start": "무엇을 도와드릴까요?",
     "aiType": "AI 유형",
     "model": "모델",
     "maxToken": "최대 토큰",
     "temperature": "온도",
-    "skeetAiModeText": "Skeet AI 모드\n `$ <mode>` AI 모드 변경",
+    "skeetAiModeText": "Skeet AI 모드\n `$ <mode>`으로 AI 모드 변경",
     "isSelected": "선택되었습니다 🤖 (종료하려면 'q'를 입력하세요)",
     "shutdown": "종료 중입니다",
     "howAboutThis": "이것은 어떠신가요?\n\n",
@@ -16,8 +18,8 @@
     "areYouReady": "실행 준비가 되셨나요?",
     "firestoreMode": "🔥 Firestore 모델 생성 모드 🔥",
     "firestoreModeDesc": "Firestore 사용 사례를 설명해주세요.",
-    "MayICreateFile": "이 파일을 생성해드릴까요?",
-    "MayIUpdateFile": "이 파일을 업데이트해드릴까요?",
+    "MayICreateFile": "이 파일을 생성해 드릴까요?",
+    "MayIUpdateFile": "이 파일을 업데이트해 드릴까요?",
     "MayIAddDoc": "이 메소드에 Typedoc을 추가해도 될까요?",
     "created": "✔️ 생성됨",
     "thenRun": "\n그런 다음 실행:",
@@ -52,7 +54,7 @@
   },
   "methodMode": {
     "init": "📝 메소드 모드 📝",
-    "modeDesc": "메소드 사용 사례를 설명해주세요",
+    "modeDesc": "메소드 사용 사례를 설명해주세요.",
     "list1": "새 메소드를 추가할 Firebase Function을 선택하세요",
     "example1": "배열에서 가장 큰 숫자를 찾는 함수를 만드세요.",
     "ExitingMode": "메소드 모드 종료"
@@ -80,7 +82,7 @@
     "ExitingMode": "Prisma 모드 종료",
     "warning": "(모델의 새로운 부분만 표시합니다. prisma 형식(vscode 플러그인도 있습니다)은 기존 모델에 자동으로 관계를 추가합니다.)\n\n",
     "schemaConfirm": "\n❓ 이 스키마가 괜찮습니까?",
-    "migrationConfirm": "\n❓ 지금 마이그레이션을 실행하길 원하십니까?",
-    "scaffoldConfirm": "\n❓ 지금 모델을 스캐폴드하길 원하십니까?"
+    "migrationConfirm": "\n❓ 지금 마이그레이션을 실행하시겠습니까?",
+    "scaffoldConfirm": "\n❓ 지금 모델을 스캐폴드하시겠습니까?"
   }
 }
