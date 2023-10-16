@@ -10,7 +10,7 @@
     "temperature": "Temperature",
     "skeetAiModeText": "Skeet AI Mode\n `$ <mode>` to change AI mode",
     "isSelected": "is selected 🤖 (type 'q' to quit)",
-    "shutdown": "is shutting donw",
+    "shutdown": "is shutting down",
     "howAboutThis": "How about this?\n\n",
     "updateFile": "Please update your file",
     "getFileDesc": "This command shows most recent updated files",
