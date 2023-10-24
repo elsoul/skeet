@@ -19,7 +19,6 @@ export const deploy = async () => {
   if (app.template.includes('Backend Only')) {
     functionsArray = functionsArray.filter((f) => f.name !== 'webapp')
   }
-  console.log(functionsArray)
   if (functionsArray.length === 1) {
     await yarnBuild(functionsArray[0].name)
     await firebaseFunctionsDeploy(app.fbProjectId, functionsArray[0].name)
