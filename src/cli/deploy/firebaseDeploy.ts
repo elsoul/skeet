@@ -6,7 +6,7 @@ import inquirer from 'inquirer'
 export const firebaseFunctionsDeploy = async (
   projectId: string,
   functionName: string = DEFAULT_FUNCTION_NAME,
-  functionPath = null,
+  functionPath?: string | null,
 ) => {
   if (functionPath) {
     const shCmd = [
@@ -43,9 +43,7 @@ export const firebaseFunctionsDeploy = async (
         },
       },
     ])
-    console.log(answer.functions)
     const functions = `functions:${functionName}:` + answer.functions.join(`,`)
-    console.log(functions)
     const shCmd = [
       'firebase',
       'deploy',

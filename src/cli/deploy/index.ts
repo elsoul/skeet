@@ -15,7 +15,11 @@ export const deployCommands = async () => {
         const functionName = options.function.split(':')[0]
         const methodName = options.function.split(':')[1]
         await yarnBuild(functionName)
-        await firebaseFunctionsDeploy(app.fbProjectId, functionName, methodName)
+        await firebaseFunctionsDeploy(
+          app.fbProjectId,
+          functionName,
+          `functions:${functionName}:${methodName}`,
+        )
         return
       }
       await deploy()
