@@ -19,6 +19,7 @@ export const deploy = async () => {
   if (app.template.includes('Backend Only')) {
     functionsArray = functionsArray.filter((f) => f.name !== 'webapp')
   }
+  console.log(functionsArray)
   if (functionsArray.length === 1) {
     await yarnBuild(functionsArray[0].name)
     await firebaseFunctionsDeploy(app.fbProjectId, functionsArray[0].name)
@@ -40,7 +41,8 @@ export const deploy = async () => {
       },
     },
   ])
-  if (answer.functions.length > 1) {
+
+  if (answer.functions.length > 0) {
     for await (const service of answer.functions) {
       const config = await importConfig()
       if (service === 'webapp') {
