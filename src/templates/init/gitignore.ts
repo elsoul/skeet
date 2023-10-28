@@ -353,8 +353,12 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-# build
+# Expo
+.expo/
 web-build/
+*.apk
+android/
+ios/
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
@@ -373,72 +377,13 @@ gcloud-key.json
 .firebase
 firebase-debug.log
 
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-/web-build/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# local env files
-.env*.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# Gcloud key
-gcloud-key.json
-
-# env
-.env
-
-#firebase
-.firebase
-firebase-debug.log
-
-#PWA
-**/public/precache.*.*.js
-**/public/sw.js
-**/public/workbox-*.js
-**/public/worker-*.js
-**/public/fallback-*.js
-**/public/precache.*.*.js.map
-**/public/sw.js.map
-**/public/workbox-*.js.map
-**/public/worker-*.js.map
-**/public/fallback-*.js
-
 # tmp
 tmp/
 firebase-export-*
 .secret*
 
 # Wallets
+
 *wallet.json
 *key.json
 *keyfile.json
