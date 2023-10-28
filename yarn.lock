@@ -1025,7 +1025,7 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/ai@^1.7.3":
+"@skeet-framework/ai@1.7.3":
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.7.3.tgz#1b765e9185de274c0309d1f2a2fe6d933410f3e8"
   integrity sha512-kDQRyqVrMUfSgr5ju6FdZ9Tds6Xp7RdxTwS1cwbTItajBTW8K4JDKr+Ly10hhymaQvxCQxyyyQ3phVNjBz1rNg==
@@ -3350,7 +3350,7 @@ ini@^4.0.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-4.1.1.tgz#d95b3d843b1e906e56d6747d5447904ff50ce7a1"
   integrity sha512-QQnnxNyfvmHFIsj7gkPcYymR8Jdw/o7mp5ZFihxn6h8Ci6fh3Dx4E1gPjpQEpIuPo9XVNY/ZUwh4BPMjGyL01g==
 
-inquirer@^9.2.10:
+inquirer@9.2.10:
   version "9.2.10"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.2.10.tgz#495a846fd6722ffadba896bd9d93e1e5a7add5c7"
   integrity sha512-tVVNFIXU8qNHoULiazz612GFl+yqNfjMTbLuViNJE/d860Qxrd3NMrse8dm40VUQLOQeULvaQF8lpAhvysjeyA==
