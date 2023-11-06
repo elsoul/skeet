@@ -54,13 +54,15 @@ export const skeetCreate = async (appName: string, template: string) => {
   await execSyncCmd(yarnApiCmd, appDir)
   await execSyncCmd(
     yarnApiCmd,
-    `${appDir}/${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`
+    `${appDir}/${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`,
   )
   if (template === SkeetTemplate.SolanaFirestore) {
     await execSyncCmd(yarnApiCmd, `${appDir}/${WEB_APP_PATH}`)
   }
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
+  const rmDefaultGithubActions = ['rm', '-rf', '.github']
+  await execSyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
   const yarnCmd = ['yarn']
   await execSyncCmd(yarnCmd, `./${appName}`)
@@ -109,7 +111,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
   const eslintrcJson = await fileDataOf.eslintrcJson(appName, template)
   writeFileSync(
     eslintrcJson.filePath,
-    JSON.stringify(eslintrcJson.body, null, 2)
+    JSON.stringify(eslintrcJson.body, null, 2),
   )
 
   const eslintignore = await fileDataOf.eslintignore(appName, template)
@@ -129,7 +131,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
   writeFileSync(prettierrc.filePath, JSON.stringify(prettierrc.body, null, 2))
   const skeetCloudConfigGen = await fileDataOf.skeetCloudConfigGen(
     appName,
-    template
+    template,
   )
   writeFileSync(skeetCloudConfigGen.filePath, skeetCloudConfigGen.body)
   const prettierignore = await fileDataOf.prettierignore(appName, template)
@@ -171,7 +173,7 @@ export const initAppJson = async (appName: string) => {
 
 export const addAppNameToSkeetOptions = async (
   appName: string,
-  functionName: string
+  functionName: string,
 ) => {
   try {
     const filePath = `./${appName}/functions/${functionName}/skeetOptions.json`
