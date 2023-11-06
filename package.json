@@ -31,7 +31,8 @@
     "start:dev": "npx ts-node build.ts && node ./dist/index.js",
     "start": "node dist/index.js",
     "skeet:skeet": "yarn --cwd ./functions/skeet dev",
-    "discord": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts"
+    "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts labo",
+    "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts epics"
   },
   "dependencies": {
     "@skeet-framework/ai": "1.7.4",

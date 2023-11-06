@@ -21,10 +21,16 @@ jobs:
       - run: npm i -g yarn
       - run: yarn install
       - run: yarn test
-      - name: Disord Notification
-        run: yarn discord
+      - name: Disord Notification Epics
+        run: yarn discord:epics
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
           DISCORD_CHANNEL_ID_JA: ${{ secrets.DISCORD_CHANNEL_ID_JA }}
+      - name: Disord Notification LABO
+        run: yarn discord:labo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_TOKEN_LABO: ${{ secrets.DISCORD_TOKEN_LABO }}
           LABO_SKEET_CHANNEL_ID: ${{ secrets.LABO_SKEET_CHANNEL_ID }}
