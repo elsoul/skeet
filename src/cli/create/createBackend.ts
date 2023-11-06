@@ -15,7 +15,7 @@ import inquirer from 'inquirer'
 
 export const createBackend = async (appName: string) => {
   const { template } = await inquirer.prompt<{ template: string }>(
-    questionList.backendTemplateQuestions
+    questionList.backendTemplateQuestions,
   )
   const appDir = './' + appName
   if (existsSync(appDir)) {
@@ -38,6 +38,8 @@ export const createBackend = async (appName: string) => {
   await execSyncCmd(yarnApiCmd, backendRootPath)
   const rmDefaultGit = ['rm', '-rf', '.git']
   await execSyncCmd(rmDefaultGit, appDir)
+  const rmDefaultGithubActions = ['rm', '-rf', '.github']
+  await execSyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
 
   await generateInitFiles(appName, template)
