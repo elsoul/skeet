@@ -7,6 +7,8 @@ import { addFirebaseApp } from './addFirebaseApp'
 import { addSecret } from './addSecret'
 import { addWebAppDomain } from './addWebAppDomain'
 import { addIp } from './addIp'
+import { addGithubEnv } from './addGithubEnv'
+import chalk from 'chalk'
 
 export const addSubCommands = async () => {
   const add = program
@@ -26,14 +28,14 @@ export const addSubCommands = async () => {
     .action(
       async (
         methodName: string,
-        options: { function: string; instance: string }
+        options: { function: string; instance: string },
       ) => {
         if (options.function !== '' && options.instance !== '') {
           await addMethod(methodName, options.instance, options.function)
         } else {
           await addMethod(methodName)
         }
-      }
+      },
     )
   add
     .command('model')
@@ -46,7 +48,7 @@ export const addSubCommands = async () => {
     .command('app')
     .argument(
       '<appDisplayName>',
-      'Firebase App Display Name - e.g. skeet-web-console'
+      'Firebase App Display Name - e.g. skeet-web-console',
     )
     .action(async (appDisplayName: string) => {
       const { app } = await importConfig()
@@ -58,6 +60,14 @@ export const addSubCommands = async () => {
     .action(async (secretKey: string) => {
       await addSecret(secretKey)
     })
+
+  add
+    .command('ghSecret')
+    .argument('<secretKey>', 'Secret Key - e.g. API_KEY')
+    .action(async (secretKey: string) => {
+      await addGithubEnv(secretKey)
+    })
+
   add
     .command('webAppDomain')
     .option('-d, --domain <domain>', 'Web App Domain - e.g. skeet.dev', '')

@@ -30,10 +30,12 @@
     "dev": "nodemon",
     "start:dev": "npx ts-node build.ts && node ./dist/index.js",
     "start": "node dist/index.js",
-    "skeet:skeet": "yarn --cwd ./functions/skeet dev"
+    "skeet:skeet": "yarn --cwd ./functions/skeet dev",
+    "discord": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts"
   },
   "dependencies": {
     "@skeet-framework/ai": "1.7.4",
+    "@skeet-framework/discord-utils": "^0.2.2",
     "@skeet-framework/utils": "1.2.1",
     "chalk": "5.2.0",
     "chalk-pipe": "6.0.0",

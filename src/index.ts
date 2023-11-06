@@ -30,7 +30,7 @@ export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
 export const FIREBASERC_PATH = './.firebaserc'
 export const TRANSLATE_PATH = 'tmp/ai/translate.json'
-
+export { getChangeLog } from '@/cli/release/release'
 export const program = new Command()
 
 program
