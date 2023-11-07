@@ -37,6 +37,20 @@ AI is also used in the development flow, overcoming the learning curve that is a
 
 Developers can quickly start building functional apps and publish them in the cloud.
 
+## Overall Architecture Diagram
+
+![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/SkeetArchitecture.png)
+
+Skeet is an open-source framework for serverless app development crafted in TypeScript.
+
+It offers the flexibility to select functionalities and the ability to build additional web or mobile interfaces and sophisticated data analytics foundations later on.
+
+It supports Web3 development, eliminates complex infrastructure management, and facilitates auto-scaling and pay-as-you-go pricing.
+
+The Skeet CLI leverages generative AI to reduce overall development costs, is ready for CI/CD automation, and provides enhanced security features.
+
+Currently, it supports development on Google Cloud and Firebase.
+
 ## Enabling Google Cloud VertexAI/OpenAI
 
 Create a new project in Google Cloud Platform and enable VertexAI.
