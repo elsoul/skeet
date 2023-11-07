@@ -5,7 +5,7 @@ export const createSecurityPolicyRule = async (
   appName: string,
   description: string = 'description',
   priority: string = '1000',
-  options: { [key: string]: string } = {}
+  options: { [key: string]: string } = {},
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -27,5 +27,5 @@ export const createSecurityPolicyRule = async (
       shCmd.push(`--${key}=${value}`)
     }
   }
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

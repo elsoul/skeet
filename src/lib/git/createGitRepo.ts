@@ -2,7 +2,7 @@ import { execSyncCmd } from '@/lib'
 
 export const createGitRepo = async (
   repoName: string,
-  openSource: boolean = false
+  openSource: boolean = false,
 ) => {
   const publishType = openSource == true ? 'public' : 'private'
 
@@ -16,5 +16,5 @@ export const createGitRepo = async (
     '--source=./',
     '--remote=upstream',
   ]
-  await execSyncCmd(cmdLine)
+  execSyncCmd(cmdLine)
 }

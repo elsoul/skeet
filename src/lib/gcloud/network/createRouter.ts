@@ -3,7 +3,7 @@ import { execSyncCmd, getNetworkConfig } from '@/lib'
 export const createRouter = async (
   projectId: string,
   appName: string,
-  region: string
+  region: string,
 ) => {
   const networkNames = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -17,5 +17,5 @@ export const createRouter = async (
     '--region',
     region,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

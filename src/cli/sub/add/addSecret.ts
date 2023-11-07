@@ -13,7 +13,7 @@ export const addSecret = async (key: string) => {
 }
 
 const addAiConfig = async (key: string) => {
-  const skeetConfig = await importConfig()
+  const skeetConfig = importConfig()
   if (key === 'CHAT_GPT_KEY') {
     skeetConfig.ai.ais.push({
       name: 'OpenAI',

@@ -1,7 +1,7 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { readFileSync } from 'fs'
 
-export const importConfig = async () => {
+export const importConfig = () => {
   try {
     const config = readFileSync(`./skeet-cloud.config.json`)
     const json: SkeetCloudConfig = JSON.parse(String(config))
@@ -12,7 +12,7 @@ export const importConfig = async () => {
   }
 }
 
-export const importFirebaseConfig = async () => {
+export const importFirebaseConfig = () => {
   try {
     const config = readFileSync(`./firebase.json`)
     const json = JSON.parse(String(config))

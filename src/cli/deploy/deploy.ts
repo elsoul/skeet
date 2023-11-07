@@ -9,7 +9,7 @@ import { deployGraphql } from './deployGraphql'
 export const deploy = async () => {
   const functions = getFunctions()
   let functionsArray: Array<{ [key: string]: string }> = [{ name: 'webapp' }]
-  const { app } = await importConfig()
+  const { app } = importConfig()
   if (app.template.includes('GraphQL')) {
     functionsArray.push({ name: 'graphql' })
   }
@@ -43,7 +43,7 @@ export const deploy = async () => {
 
   if (answer.functions.length > 0) {
     for await (const service of answer.functions) {
-      const config = await importConfig()
+      const config = importConfig()
       if (service === 'webapp') {
         await deployWebApp()
         await deployRules(config.app.projectId)

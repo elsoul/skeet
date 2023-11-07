@@ -19,7 +19,7 @@ export const aiCommands = () => {
     .option('-temp, --temperature <number>', 'Temperature')
     .action(async (options) => {
       await validateAiConfig()
-      const { ai } = await importConfig()
+      const { ai } = importConfig()
       const lang = ai.lang || 'en'
       const logger = new AiLog(lang)
       const aiType = options.openai ? 'OpenAI' : 'VertexAI'

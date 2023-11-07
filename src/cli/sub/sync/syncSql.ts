@@ -6,11 +6,11 @@ import {
 } from '@/lib'
 
 export const syncSql = async () => {
-  const skeetConfig = await importConfig()
+  const skeetConfig = importConfig()
   await setGcloudProject(skeetConfig.app.projectId)
   const networkConfig = await getNetworkConfig(
     skeetConfig.app.projectId,
-    skeetConfig.app.name
+    skeetConfig.app.name,
   )
   const shCmd = [
     'gcloud',
@@ -27,5 +27,5 @@ export const syncSql = async () => {
     '--project',
     skeetConfig.app.projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

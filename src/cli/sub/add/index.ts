@@ -9,6 +9,7 @@ import { addWebAppDomain } from './addWebAppDomain'
 import { addIp } from './addIp'
 import { addGithubEnv } from './addGithubEnv'
 import chalk from 'chalk'
+import { addGraphQL } from './addGraphQL'
 
 export const addSubCommands = async () => {
   const add = program
@@ -51,7 +52,7 @@ export const addSubCommands = async () => {
       'Firebase App Display Name - e.g. skeet-web-console',
     )
     .action(async (appDisplayName: string) => {
-      const { app } = await importConfig()
+      const { app } = importConfig()
       await addFirebaseApp(app.projectId, appDisplayName)
     })
   add
@@ -78,4 +79,12 @@ export const addSubCommands = async () => {
   add.command('ip').action(async () => {
     await addIp()
   })
+
+  add
+    .command('graphql')
+    .alias('graphQL')
+    .description('Add GraphQL')
+    .action(async () => {
+      await addGraphQL()
+    })
 }

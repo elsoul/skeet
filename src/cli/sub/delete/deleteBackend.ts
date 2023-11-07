@@ -14,7 +14,7 @@ export const deleteBackend = async (projectId: string, methodName: string) => {
       projectId,
       '--quiet',
     ]
-    await execSyncCmd(shCmd)
+    execSyncCmd(shCmd)
   } catch (error) {
     throw new Error(`deleteBackend: ${error}`)
   }

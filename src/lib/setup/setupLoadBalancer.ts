@@ -28,19 +28,19 @@ import { writeFileSync } from 'fs'
 export const setupLoadBalancer = async (
   config: SkeetCloudConfig,
   lbDomain: string,
-  nsDomain: string
+  nsDomain: string,
 ) => {
   try {
     await setGcloudProject(config.app.projectId)
     const networkConf = await getNetworkConfig(
       config.app.projectId,
-      config.app.name
+      config.app.name,
     )
     await createFixIp(
       config.app.projectId,
       config.app.region,
       networkConf.loadBalancerIpName,
-      true
+      true,
     )
     const methodName = 'root'
     await createNeg(config.app.projectId, methodName, config.app.region, true)
@@ -51,7 +51,7 @@ export const setupLoadBalancer = async (
       config.app.name,
       defaultBackendServiceName,
       config.app.region,
-      true
+      true,
     )
 
     await createLb(config.app.projectId, config.app.name)
@@ -63,7 +63,7 @@ export const setupLoadBalancer = async (
     await updateBackend(
       config.app.projectId,
       config.app.name,
-      defaultBackendServiceName
+      defaultBackendServiceName,
     )
 
     const paths = []
@@ -81,7 +81,7 @@ export const setupLoadBalancer = async (
       config.app.name,
       lbDomain,
       paths,
-      true
+      true,
     )
 
     await hasLoadBalancerTrue()
@@ -98,7 +98,7 @@ export const setupLoadBalancer = async (
 
 const hasLoadBalancerTrue = async () => {
   try {
-    const skeetConfig: SkeetCloudConfig = await importConfig()
+    const skeetConfig: SkeetCloudConfig = importConfig()
     skeetConfig.app.hasLoadBalancer = true
     writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   } catch (error) {

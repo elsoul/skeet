@@ -6,7 +6,7 @@ export const addBackend = async (
   appName: string,
   methodName: string,
   region: string,
-  init = false
+  init = false,
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
   const functionInfo = await getFunctionInfo(methodName)
@@ -27,5 +27,5 @@ export const addBackend = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

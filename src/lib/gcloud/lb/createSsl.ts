@@ -3,7 +3,7 @@ import { execSyncCmd, getNetworkConfig } from '@/lib'
 export const createSsl = async (
   projectId: string,
   appName: string,
-  domain: string
+  domain: string,
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -17,5 +17,5 @@ export const createSsl = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

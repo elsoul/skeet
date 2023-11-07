@@ -11,9 +11,9 @@ export const addDomainToConfig = async (
   appDomain: string,
   nsDomain: string,
   lbDomain: string,
-  functionName: string
+  functionName: string,
 ) => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetConfig: SkeetCloudConfig = importConfig()
   const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
   const jsonFile = readFileSync(skeetOptionsFile)
   const newJsonFile: SkeetOptions = JSON.parse(String(jsonFile))
@@ -34,9 +34,9 @@ export const addProjectRegionToSkeetOptions = async (
   region: string,
   projectId: string,
   fbProjectId: string,
-  functionName: string
+  functionName: string,
 ) => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetConfig: SkeetCloudConfig = importConfig()
 
   skeetConfig.app.region = region
   skeetConfig.app.projectId = projectId
@@ -104,11 +104,11 @@ export const copyDefaultFirebaseConfig = async (appDisplayName: string) => {
     const functionsTsConfigPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/lib/firebaseConfig.ts`
     await copyFileWithOverwrite(
       originalFirebaseConfigPath,
-      defaultFirebaseTsConfigPath
+      defaultFirebaseTsConfigPath,
     )
     await copyFileWithOverwrite(
       originalFirebaseConfigPath,
-      functionsTsConfigPath
+      functionsTsConfigPath,
     )
   } catch (error) {
     throw new Error(`Error copying default firebase config: ${error}`)

@@ -20,7 +20,7 @@ import { existsSync, mkdir, readFileSync, writeFileSync } from 'fs'
 
 export const addFunctions = async (functionName: string) => {
   try {
-    const skeetConfig: SkeetCloudConfig = await importConfig()
+    const skeetConfig: SkeetCloudConfig = importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}`
     if (existsSync(functionDir)) {
       Logger.error(`Already exist functionName: ${functionName}!`)
@@ -34,20 +34,20 @@ export const addFunctions = async (functionName: string) => {
       })
 
       const gitCloneCmd = ['git', 'clone', FUNCTIONS_REPO_URL, functionDir]
-      await execSyncCmd(gitCloneCmd)
+      execSyncCmd(gitCloneCmd)
       const rmDefaultGit = ['rm', '-rf', '.git']
-      await execSyncCmd(rmDefaultGit, functionDir)
+      execSyncCmd(rmDefaultGit, functionDir)
       await addProjectRegionToSkeetOptions(
         skeetConfig.app.region,
         skeetConfig.app.projectId,
         skeetConfig.app.fbProjectId,
-        functionName
+        functionName,
       )
       await addDomainToConfig(
         skeetConfig.app.appDomain,
         skeetConfig.app.nsDomain,
         skeetConfig.app.lbDomain,
-        functionName
+        functionName,
       )
       const newModelPath = `${functionDir}/src/models`
       for await (const modelPath of latestModel.modelsPath) {
@@ -67,7 +67,7 @@ export const addFunctions = async (functionName: string) => {
 }
 
 export const updateFirebaseConfig = async (functionName: string) => {
-  const firebaseConfig = await importFirebaseConfig()
+  const firebaseConfig = importFirebaseConfig()
   const newFunction = {
     source: `functions/${functionName}`,
     codebase: functionName,
@@ -91,7 +91,7 @@ export const addFunctionsToPackageJson = async (functionName: string) => {
   ] = `yarn --cwd ./functions/${functionName} dev`
   writeFileSync(
     ROUTE_PACKAGE_JSON_PATH,
-    JSON.stringify(newPackageJson, null, 2)
+    JSON.stringify(newPackageJson, null, 2),
   )
   Logger.successCheck('Successfully Updated ./package.json')
 }

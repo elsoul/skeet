@@ -32,14 +32,14 @@ export const createBackend = async (appName: string) => {
     backendRootPath = `${appDir}/graphql`
   }
 
-  await execSyncCmd(gitCloneCmd)
+  execSyncCmd(gitCloneCmd)
   const yarnApiCmd = ['yarn']
-  await execSyncCmd(yarnApiCmd, appDir)
-  await execSyncCmd(yarnApiCmd, backendRootPath)
+  execSyncCmd(yarnApiCmd, appDir)
+  execSyncCmd(yarnApiCmd, backendRootPath)
   const rmDefaultGit = ['rm', '-rf', '.git']
-  await execSyncCmd(rmDefaultGit, appDir)
+  execSyncCmd(rmDefaultGit, appDir)
   const rmDefaultGithubActions = ['rm', '-rf', '.github']
-  await execSyncCmd(rmDefaultGithubActions, appDir)
+  execSyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
 
   await generateInitFiles(appName, template)

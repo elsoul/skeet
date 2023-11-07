@@ -16,7 +16,7 @@ import { askForGithubRepo } from './askQuestions'
 import { genGithubActions } from '../gen'
 
 export const initLb = async () => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetConfig: SkeetCloudConfig = importConfig()
   const githubRepo = await askForGithubRepo()
   const domainInquirer = inquirer.prompt(questionList.domainQuestions)
   await domainInquirer.then(async (domainAnswer) => {
@@ -24,7 +24,7 @@ export const initLb = async () => {
     await createVpcNetwork(
       skeetConfig.app.projectId,
       skeetConfig.app.name,
-      skeetConfig.app.region
+      skeetConfig.app.region,
     )
     await genGithubActions()
     await firebaseFunctionsDeploy(skeetConfig.app.fbProjectId)
@@ -32,7 +32,7 @@ export const initLb = async () => {
     await setupLoadBalancer(
       skeetConfig,
       domainAnswer.lbDomain,
-      domainAnswer.nsDomain
+      domainAnswer.nsDomain,
     )
     await initArmor()
     await syncArmors()

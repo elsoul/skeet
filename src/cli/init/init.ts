@@ -59,17 +59,17 @@ export const init = async (loginMode = false) => {
     region,
     projectId,
     fbProjectId,
-    DEFAULT_FUNCTION_NAME
+    DEFAULT_FUNCTION_NAME,
   )
   const defaultAppDisplayName = fbProjectId
   await addFirebaseApp(fbProjectId, defaultAppDisplayName)
-  const { app } = await importConfig()
+  const { app } = importConfig()
   await createServiceAccount(projectId, app.name)
   await enableAiPermissions(projectId)
   await runAiRole(projectId, app.name)
   if (loginMode) return
 
-  const skeetConfig = await importConfig()
+  const skeetConfig = importConfig()
   await Logger.confirmFirebaseSetup(fbProjectId, skeetConfig.app.template)
 
   const githubRepo = await askForGithubRepo()
@@ -91,7 +91,7 @@ export const init = async (loginMode = false) => {
   // Ask Domain info if LB is not exists
   if (!skeetConfig.app.hasLoadBalancer) {
     domainAnswer = await inquirer.prompt<DomainAnswer>(
-      questionList.domainQuestions
+      questionList.domainQuestions,
     )
   }
 

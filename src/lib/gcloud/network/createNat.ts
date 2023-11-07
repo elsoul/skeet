@@ -3,7 +3,7 @@ import { execSyncCmd, getNetworkConfig } from '@/lib'
 export const createNat = async (
   projectId: string,
   appName: string,
-  region: string
+  region: string,
 ) => {
   const networkNames = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -24,5 +24,5 @@ export const createNat = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

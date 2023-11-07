@@ -3,7 +3,7 @@ import { execSyncCmd, getNetworkConfig } from '@/lib'
 export const deleteSecurityPolicyRule = async (
   projectId: string,
   appName: string,
-  priority: string = '1000'
+  priority: string = '1000',
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -18,5 +18,5 @@ export const deleteSecurityPolicyRule = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

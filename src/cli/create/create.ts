@@ -49,23 +49,23 @@ export const skeetCreate = async (appName: string, template: string) => {
   } else {
     gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
   }
-  await execSyncCmd(gitCloneCmd)
+  execSyncCmd(gitCloneCmd)
   const yarnApiCmd = ['yarn']
-  await execSyncCmd(yarnApiCmd, appDir)
-  await execSyncCmd(
+  execSyncCmd(yarnApiCmd, appDir)
+  execSyncCmd(
     yarnApiCmd,
     `${appDir}/${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`,
   )
   if (template === SkeetTemplate.SolanaFirestore) {
-    await execSyncCmd(yarnApiCmd, `${appDir}/${WEB_APP_PATH}`)
+    execSyncCmd(yarnApiCmd, `${appDir}/${WEB_APP_PATH}`)
   }
   const rmDefaultGit = ['rm', '-rf', '.git']
-  await execSyncCmd(rmDefaultGit, appDir)
+  execSyncCmd(rmDefaultGit, appDir)
   const rmDefaultGithubActions = ['rm', '-rf', '.github']
-  await execSyncCmd(rmDefaultGithubActions, appDir)
+  execSyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
   const yarnCmd = ['yarn']
-  await execSyncCmd(yarnCmd, `./${appName}`)
+  execSyncCmd(yarnCmd, `./${appName}`)
 
   await generateInitFiles(appName, template)
   Logger.skeetAA()
@@ -99,7 +99,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
 
     const appGraphqlPath = `./${appName}/graphql`
     const yarnApiCmd = ['yarn']
-    await execSyncCmd(yarnApiCmd, appGraphqlPath)
+    execSyncCmd(yarnApiCmd, appGraphqlPath)
     await dbGen(appGraphqlPath)
     await dbDeploy(false, appGraphqlPath)
   }

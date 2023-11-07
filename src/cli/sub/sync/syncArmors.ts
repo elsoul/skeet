@@ -9,7 +9,7 @@ import { Logger } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const syncArmors = async () => {
-  const config = await importConfig()
+  const config = importConfig()
   await setGcloudProject(config.app.projectId)
   if (config.cloudArmor)
     for await (const rule of config.cloudArmor[0].rules) {
@@ -19,7 +19,7 @@ export const syncArmors = async () => {
           config.app.projectId,
           config.app.name,
           rule.priority,
-          rule.options
+          rule.options,
         )
       } else {
         console.log('creating...')
@@ -28,7 +28,7 @@ export const syncArmors = async () => {
           config.app.name,
           rule.description,
           rule.priority,
-          rule.options
+          rule.options,
         )
       }
     }
@@ -37,12 +37,12 @@ export const syncArmors = async () => {
 
 export const isRuleExist = async (
   config: SkeetCloudConfig,
-  priority: string
+  priority: string,
 ) => {
   try {
     const appConf = await getNetworkConfig(
       config.app.projectId,
-      config.app.name
+      config.app.name,
     )
     if (config.cloudArmor) {
       const cmd = `gcloud compute security-policies rules describe ${priority} --security-policy=${appConf.securityPolicyName} --project=${config.app.projectId}`
