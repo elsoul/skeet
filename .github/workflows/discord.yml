@@ -35,10 +35,8 @@ jobs:
           DISCORD_TOKEN_LABO: ${{ secrets.DISCORD_TOKEN_LABO }}
           LABO_SKEET_CHANNEL_ID: ${{ secrets.LABO_SKEET_CHANNEL_ID }}
       - name: Send package update notification
+        if: success()
         run: |
           curl --location ${{ secrets.TW_ENDPOINT }} \
           --header 'Content-Type: application/json' \
-          --data '{
-              "repo": "elsoul/skeet-cli",
-              "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"
-          }'
+          --data '{"repo": "elsoul/skeet-cli", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
