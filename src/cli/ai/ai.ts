@@ -1,5 +1,6 @@
 import {
   AIType,
+  ChatCompletionMessageParam,
   OpenAI,
   OpenAIPromptParams,
   SkeetAI,
@@ -120,7 +121,7 @@ export async function promptUser(
   } else {
     try {
       const ai = skeetAi.aiInstance as OpenAI
-      const stream = await ai.promptStream(prompt as OpenAIPromptParams)
+      const stream = await ai.promptStream(prompt.messages)
       openaiStream(stream, skeetAi.initOptions, logger)
     } catch (error) {
       console.error('Error:', error)

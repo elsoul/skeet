@@ -25,7 +25,7 @@ export const aiCommands = () => {
       const aiType = options.openai ? 'OpenAI' : 'VertexAI'
       validEnv(aiType as AIType, logger)
       const model = options.openai
-        ? options.model || 'gpt-4'
+        ? options.model || 'gpt-4-1106-preview'
         : options.model || 'chat-bison@001'
       const maxTokens = options.token || '1000'
       const temperature = options.temperature || '0'

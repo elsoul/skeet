@@ -523,10 +523,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.51.0.tgz#6d419c240cfb2b66da37df230f7e7eef801c32fa"
   integrity sha512-HxjQ8Qn+4SI3/AFv6sOrDB+g6PpUTDwSJiQqOrnneEk8L71161srI9gjzzZvYVbzHiVg/BvcH95+cK/zfIt4pg==
 
-"@google-cloud/aiplatform@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/aiplatform/-/aiplatform-3.2.0.tgz#361fb3548a6e85dc8e13857e5df1ea3be77154f4"
-  integrity sha512-PiACKKTO+t8U6sfAK9mvwCBYcPtIhYzFUxHwM80yCssj3nbKv9J7cnqCm6ph4b6S9WcJ4Og14QE0NQAoQNqO0g==
+"@google-cloud/aiplatform@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/aiplatform/-/aiplatform-3.5.0.tgz#c1cdd3986f83a5ea4619fd8705ab674f493c16ce"
+  integrity sha512-K+4/B183J9mql8Nhx5sDDlcaTzp2A/nGvg+sgksDED6kS5FVTXfcIR/GUAGu2xan2IXIPDjj0UDD6DIgn5EXfw==
   dependencies:
     google-gax "^4.0.3"
     protobuf.js "^1.1.2"
@@ -1095,17 +1095,17 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/ai@1.7.4":
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.7.4.tgz#bb5f1c24205c99fe73fa284a7b8a41c7018f3e6a"
-  integrity sha512-gaa6/pfStB9v5kOgJnc7q2pnUsr6CAbLUGNCiRAfHU+hhfBxe2EmamLCzI9w1AFsBLEug3FPHXwDuXfsSFkdyA==
+"@skeet-framework/ai@^1.7.8":
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.7.8.tgz#7183037909e7e61889c93b88394e89b4c6ac4036"
+  integrity sha512-yG2ZqLYZ4bPWsCaL9lPq3fhWuS1wA3YjGmcRAHqdh/ocGVikT9AbNH0pf8pifCWDXnyW1Jo/etbkoXrklVaGRg==
   dependencies:
-    "@google-cloud/aiplatform" "3.2.0"
+    "@google-cloud/aiplatform" "3.5.0"
     "@google-cloud/translate" "8.0.2"
-    crypto-js "4.1.1"
+    crypto-js "4.2.0"
     dotenv "16.3.1"
     node-fetch "2.6.9"
-    openai "4.12.1"
+    openai "4.16.1"
     pako "2.1.0"
 
 "@skeet-framework/discord-utils@^0.2.2":
@@ -2443,10 +2443,10 @@ crypt@0.0.2:
   resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
   integrity sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==
 
-crypto-js@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
-  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
+crypto-js@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.2.0.tgz#4d931639ecdfd12ff80e8186dba6af2c2e856631"
+  integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
 
 crypto-random-string@^4.0.0:
   version "4.0.0"
@@ -4827,10 +4827,10 @@ onetime@^5.1.0, onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
-openai@4.12.1:
-  version "4.12.1"
-  resolved "https://registry.yarnpkg.com/openai/-/openai-4.12.1.tgz#f1ef4283197cf2ef932abc55afeae8a2182d8fe6"
-  integrity sha512-EAoUwm4dtiWvFwBhOCK/VfF8sj1ZU8+aAIJnfT4NyeTfrt1DM/6Gdd6fOZWTjBYryTAqu9Vpb5+9Wu6JMtm/gA==
+openai@4.16.1:
+  version "4.16.1"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-4.16.1.tgz#6377682ad2af805affd1b401958fb6eb92a87d61"
+  integrity sha512-Gr+uqUN1ICSk6VhrX64E+zL7skjI1TgPr/XUN+ZQuNLLOvx15+XZulx/lSW4wFEAQzgjBDlMBbBeikguGIjiMg==
   dependencies:
     "@types/node" "^18.11.18"
     "@types/node-fetch" "^2.6.4"
@@ -4840,6 +4840,7 @@ openai@4.12.1:
     form-data-encoder "1.7.2"
     formdata-node "^4.3.2"
     node-fetch "^2.6.7"
+    web-streams-polyfill "^3.2.1"
 
 optionator@^0.9.3:
   version "0.9.3"
@@ -6104,6 +6105,11 @@ web-streams-polyfill@4.0.0-beta.3:
   version "4.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-4.0.0-beta.3.tgz#2898486b74f5156095e473efe989dcf185047a38"
   integrity sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==
+
+web-streams-polyfill@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz#71c2718c52b45fd49dbeee88634b3a60ceab42a6"
+  integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
