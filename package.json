@@ -35,7 +35,7 @@
     "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts epics"
   },
   "dependencies": {
-    "@skeet-framework/ai": "1.7.4",
+    "@skeet-framework/ai": "^1.7.8",
     "@skeet-framework/discord-utils": "^0.2.2",
     "@skeet-framework/utils": "1.2.1",
     "chalk": "5.2.0",
