@@ -2,7 +2,7 @@ import { execSyncCmd, getNetworkConfig } from '@/lib'
 
 export const updateBackendSecurityPolicy = async (
   projectId: string,
-  appName: string
+  appName: string,
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -17,5 +17,5 @@ export const updateBackendSecurityPolicy = async (
     projectId,
     '--global',
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

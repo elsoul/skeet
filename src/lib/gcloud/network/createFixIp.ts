@@ -5,7 +5,7 @@ export const createFixIp = async (
   projectId: string,
   region: string,
   ipName: string,
-  isGlobal: boolean = false
+  isGlobal: boolean = false,
 ) => {
   const ipRegion = isGlobal ? '--global' : `--region=${region}`
   const shCmd = [
@@ -18,7 +18,7 @@ export const createFixIp = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }
 
 export const getIp = async (projectId: string, ipName: string) => {

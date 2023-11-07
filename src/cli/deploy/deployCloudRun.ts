@@ -17,7 +17,7 @@ export const deployCloudRun = async (
   minInstances: string = '0',
   workerName: string = '',
   isWorkerPlugin: boolean = false,
-  hasBalancer: boolean = false
+  hasBalancer: boolean = false,
 ) => {
   let cloudRunName = ''
   let image = ''
@@ -31,12 +31,12 @@ export const deployCloudRun = async (
       appName,
       region,
       workerName,
-      isWorkerPlugin
+      isWorkerPlugin,
     )
   }
   const { connectorName, serviceAccountName } = await getNetworkConfig(
     projectId,
-    appName
+    appName,
   )
   const envString = await getBuidEnvString()
   const shCmd = [
@@ -77,5 +77,5 @@ export const deployCloudRun = async (
   } else {
     shCmd.push('--ingress', 'internal')
   }
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

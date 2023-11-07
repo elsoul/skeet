@@ -7,7 +7,7 @@ export const createRecord = async (
   loadBalancerIp: string,
   isUpdate: boolean = false,
   recordType: string = 'A',
-  ttl: string = '30'
+  ttl: string = '30',
 ) => {
   const method = isUpdate ? 'update' : 'create'
   const shCmd = [
@@ -27,13 +27,13 @@ export const createRecord = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }
 
 export const createCaaRecords = async (
   projectId: string,
   zone: string,
-  domain: string
+  domain: string,
 ) => {
   const defaultRecord = await caaSslDefaultConf(projectId, zone)
   await createRecord(
@@ -43,7 +43,7 @@ export const createCaaRecords = async (
     defaultRecord.rrdatas,
     false,
     defaultRecord.recordType,
-    defaultRecord.ttl
+    defaultRecord.ttl,
   )
 }
 

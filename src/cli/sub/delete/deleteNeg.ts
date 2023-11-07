@@ -4,7 +4,7 @@ import { convertToKebabCase } from '@/utils/string'
 export const deleteNeg = async (
   projectId: string,
   methodName: string,
-  region: string
+  region: string,
 ) => {
   try {
     const kebab = convertToKebabCase(methodName)
@@ -21,7 +21,7 @@ export const deleteNeg = async (
       projectId,
       '--quiet',
     ]
-    await execSyncCmd(shCmd)
+    execSyncCmd(shCmd)
   } catch (error) {
     throw new Error(`deleteNeg: ${error}`)
   }

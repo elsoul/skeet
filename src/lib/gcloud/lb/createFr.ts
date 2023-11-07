@@ -22,5 +22,5 @@ export const createFr = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

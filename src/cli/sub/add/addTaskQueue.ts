@@ -13,7 +13,7 @@ export const addTaskQueue = async (
   maxRate: number = 1,
   maxInterval: string = '10s',
   minInterval: string = '1s',
-  isUpdate: boolean = false
+  isUpdate: boolean = false,
 ) => {
   const method = isUpdate ? 'update' : 'create'
   const location = region.slice(0, -1) + '1'
@@ -47,13 +47,13 @@ export const addTaskQueue = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
   if (!isUpdate) await addTaskQueueToConf(taskQueue)
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
 export const addTaskQueueToConf = async (taskQueue: TaskQueue) => {
-  const skeetConfig = await importConfig()
+  const skeetConfig = importConfig()
   if (skeetConfig.taskQueues) {
     skeetConfig.taskQueues.push(taskQueue)
     writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))

@@ -3,7 +3,7 @@ import { execSyncCmd, getFunctionInfo, getNetworkConfig } from '@/lib'
 export const updateBackend = async (
   projectId: string,
   appName: string,
-  methodName: string
+  methodName: string,
 ) => {
   const functionInfo = await getFunctionInfo(methodName)
   const skeetConfig = await getNetworkConfig(projectId, appName)
@@ -19,5 +19,5 @@ export const updateBackend = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

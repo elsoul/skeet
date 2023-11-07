@@ -3,7 +3,7 @@ import { importConfig, setGcloudProject } from '@/lib'
 import { addTaskQueue } from '../add/addTaskQueue'
 
 export const syncTaskQueue = async () => {
-  const skeetConfig = await importConfig()
+  const skeetConfig = importConfig()
   await setGcloudProject(skeetConfig.app.projectId)
   if (skeetConfig.taskQueues) {
     for await (const taskQueue of skeetConfig.taskQueues) {
@@ -17,7 +17,7 @@ export const syncTaskQueue = async () => {
         taskQueue.maxRate,
         taskQueue.maxInterval,
         taskQueue.minInterval,
-        isUpdate
+        isUpdate,
       )
       await sleep(200)
     }

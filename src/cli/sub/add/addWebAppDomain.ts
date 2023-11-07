@@ -10,10 +10,10 @@ import { readFileSync, writeFileSync } from 'fs'
 
 export const addWebAppDomain = async (appDomain: string, ip: string) => {
   try {
-    const skeetConfig = await importConfig()
+    const skeetConfig = importConfig()
     const { zoneName } = await getNetworkConfig(
       skeetConfig.app.projectId,
-      skeetConfig.app.name
+      skeetConfig.app.name,
     )
     await createRecord(skeetConfig.app.projectId, zoneName, appDomain, ip)
     await addAppDomainToSkeetConfig(appDomain)
@@ -40,7 +40,7 @@ const addAppDomainToSkeetConfig = async (appDomain: string) => {
 
 const addAppNameToSkeetOptions = async (
   appName: string,
-  functionName: string
+  functionName: string,
 ) => {
   try {
     const filePath = `./functions/${functionName}/skeetOptions.json`

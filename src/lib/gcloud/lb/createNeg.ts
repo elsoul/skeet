@@ -6,11 +6,11 @@ export const createNeg = async (
   projectId: string,
   methodName: string,
   region: string,
-  init = false
+  init = false,
 ) => {
   const kebab = convertToKebabCase(methodName)
   const functionInfo = await getFunctionInfo(kebab)
-  const config = await importConfig()
+  const config = importConfig()
   const negName = init
     ? `skeet-${config.app.name}-default-neg`
     : functionInfo.neg
@@ -33,5 +33,5 @@ export const createNeg = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

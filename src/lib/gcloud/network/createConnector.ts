@@ -3,7 +3,7 @@ import { execSyncCmd, getNetworkConfig } from '@/lib'
 export const createConnector = async (
   projectId: string,
   appName: string,
-  region: string
+  region: string,
 ) => {
   const networkNames = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -21,5 +21,5 @@ export const createConnector = async (
     '--subnet',
     networkNames.subnetName,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

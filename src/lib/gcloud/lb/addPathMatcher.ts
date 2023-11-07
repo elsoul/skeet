@@ -5,7 +5,7 @@ export const addPathMatcher = async (
   appName: string,
   domain: string,
   paths?: Array<string>,
-  init = false
+  init = false,
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
   paths = paths || []
@@ -49,5 +49,5 @@ export const addPathMatcher = async (
       '--delete-orphaned-path-matcher',
     ]
   }
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

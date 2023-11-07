@@ -23,7 +23,7 @@ export const listSubCommands = async () => {
     .command('dns')
     .description('Show Skeet NameServer Records')
     .action(async () => {
-      const { app } = await importConfig()
+      const { app } = importConfig()
       const res = await getZone(app.projectId, app.name)
       Logger.dnsSetupLog(res)
     })
@@ -66,9 +66,9 @@ export const listSubCommands = async () => {
         const result = await getRecentUpdatedFiles(
           dir,
           limit,
-          type as FileType[]
+          type as FileType[],
         )
         console.log(result)
-      }
+      },
     )
 }

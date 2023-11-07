@@ -14,5 +14,5 @@ export const createBackend = async (projectId: string, methodName: string) => {
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

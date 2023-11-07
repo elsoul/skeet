@@ -17,5 +17,5 @@ export const createFirewallTcp = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }

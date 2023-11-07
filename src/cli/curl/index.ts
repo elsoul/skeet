@@ -7,21 +7,21 @@ export const curlCommands = async () => {
     .description('Skeet Curl Command - Call Firebase Functions Endpoint')
     .argument(
       '<methodName>',
-      'Method Name - e.g. skeet curl createUserChatRoom'
+      'Method Name - e.g. skeet curl createUserChatRoom',
     )
     .option(
       '-d,--data [data]',
-      'JSON Request Body - e.g. \'{ "model": "gpt4", "maxTokens": 420 }\''
+      'JSON Request Body - e.g. \'{ "model": "gpt4", "maxTokens": 420 }\'',
     )
     .option('-r, --raw', 'Show chunk data', false)
     .option('-p, --production', 'For Production', false)
     .option(
       '-f,--functions [functions]',
       'For Production Functions Name',
-      false
+      false,
     )
     .action(async (methodName: string, options) => {
-      const config = await importConfig()
+      const config = importConfig()
       if (options.production) {
         if (!options.functions) throw new Error('Need to define functionsName')
 
@@ -37,7 +37,7 @@ export const curlCommands = async () => {
           config.app.region,
           methodName,
           options.data,
-          curlOptions
+          curlOptions,
         )
       } else {
         const curlOptions = {
@@ -48,7 +48,7 @@ export const curlCommands = async () => {
           config.app.region,
           methodName,
           options.data,
-          curlOptions
+          curlOptions,
         )
       }
     })

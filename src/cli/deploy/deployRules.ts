@@ -10,7 +10,7 @@ export const deployRules = async (projectId: string) => {
       '--project',
       `${projectId}`,
     ]
-    await execSyncCmd(shCmd)
+    execSyncCmd(shCmd)
     return true
   } catch (error) {
     throw new Error(`deployRules: ${error}`)

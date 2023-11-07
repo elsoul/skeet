@@ -18,7 +18,7 @@ export const firebaseFunctionsDeploy = async (
       '-P',
       `${projectId}`,
     ]
-    await execSyncCmd(shCmd)
+    execSyncCmd(shCmd)
     return
   }
   try {

@@ -11,7 +11,7 @@ export const deployCommands = async () => {
     .description('Deploy Skeet APP to Firebase')
     .action(async (options) => {
       if (options.function) {
-        const { app } = await importConfig()
+        const { app } = importConfig()
         const functionName = options.function.split(':')[0]
         const methodName = options.function.split(':')[1]
         await yarnBuild(functionName)

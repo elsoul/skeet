@@ -4,7 +4,7 @@ import { execSync } from 'child_process'
 export const createZone = async (
   projectId: string,
   appName: string,
-  domain: string
+  domain: string,
 ) => {
   const appConf = await getNetworkConfig(projectId, appName)
   const shCmd = [
@@ -22,7 +22,7 @@ export const createZone = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  execSyncCmd(shCmd)
 }
 
 export const getZone = async (projectId: string, appName: string) => {

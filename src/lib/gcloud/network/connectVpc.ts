@@ -17,7 +17,7 @@ export const connectVpc = async (projectId: string, appName: string) => {
       '--project',
       projectId,
     ]
-    await execSyncCmd(shCmd)
+    execSyncCmd(shCmd)
   } catch (error) {
     throw new Error(`connectVpc: ${error}`)
   }

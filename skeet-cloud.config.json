@@ -2,7 +2,7 @@
   "app": {
     "name": "nextjs-graphql",
     "projectId": "nextjs-graphql-394610",
-    "template": "Next.js (React) - GraphQL",
+    "template": "Next.js (React) - Firestore + GraphQL",
     "region": "europe-west6",
     "appDomain": "app.your-app-url.com",
     "nsDomain": "your-nameserver.com",
@@ -81,7 +81,10 @@
     "ais": [
       {
         "name": "VertexAI",
-        "availableModels": ["chat-bison@001", "chat-bison-32k"]
+        "availableModels": [
+          "chat-bison@001",
+          "chat-bison-32k"
+        ]
       }
     ]
   }
