@@ -16,7 +16,7 @@ export const runAiRole = async (projectId: string, appName: string) => {
 export const addAllRoles = async (
   projectId: string,
   appName: string,
-  roleList: Array<string>
+  roleList: Array<string>,
 ) => {
   for await (const roleName of roleList) {
     await addRole(projectId, appName, roleName)
@@ -26,7 +26,7 @@ export const addAllRoles = async (
 export const addRole = async (
   projectId: string,
   appName: string,
-  roleName: string
+  roleName: string,
 ) => {
   const addRoleCmd = [
     'gcloud',
@@ -62,4 +62,5 @@ export const roleList = [
   'roles/cloudtasks.admin',
   'roles/firebaserules.admin',
   'roles/aiplatform.admin',
+  'roles/artifactregistry.admin',
 ]

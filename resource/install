@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# Constants and configurable variables
+NODE_VERSION=18.18.1
+
+# This ensures the entire script is downloaded
+{
+set -e  # exit immediately if a command exits with a non-zero status
+
+usage() {
+    cat 1>&2 <<EOF
+Custom Install Script
+Installs nodenv, node $NODE_VERSION, and sets it as the global version.
+Additionally, installs the @skeet-framework/cli package globally.
+
+USAGE:
+    custom-install-script.sh [FLAGS]
+
+FLAGS:
+    -h, --help              Prints help information
+EOF
+}
+
+install_nodenv_and_node() {
+    echo "Installing nodenv..."
+    git clone https://github.com/nodenv/nodenv.git ~/.nodenv
+    echo 'export PATH="\$HOME/.nodenv/bin:\$PATH"' >> ~/.profile
+    echo 'eval "\$(nodenv init -)"' >> ~/.profile
+    source ~/.profile
+
+    echo "Installing node-build..."
+    git clone https://github.com/nodenv/node-build.git "\$(nodenv root)"/plugins/node-build
+
+    echo "Installing node $NODE_VERSION..."
+    nodenv install $NODE_VERSION
+    nodenv global $NODE_VERSION
+    echo "Node installation completed!"
+
+    echo "Installing @skeet-framework/cli..."
+    npm i -g @skeet-framework/cli
+
+    echo "Sourcing ~/.profile..."
+    source ~/.profile
+}
+
+main() {
+    for arg in "$@"; do
+      case "$arg" in
+        -h|--help)
+          usage
+          exit 0
+          ;;
+        *)
+          ;;
+      esac
+    done
+
+    install_nodenv_and_node
+    skeet --help
+}
+
+main "$@"
+
+} # this ensures the entire script is downloaded
