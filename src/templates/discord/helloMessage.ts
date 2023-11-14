@@ -15,7 +15,7 @@ export const helloMessage = () => {
 
 export const helloMessage = () => {
   const body = {
-    content: 'hello world',
+    content: 'hello button',
     components: [
       {
         type: MessageComponentTypes.ACTION_ROW,

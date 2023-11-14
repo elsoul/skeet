@@ -12,10 +12,8 @@ import chalk from 'chalk'
 import { addGraphQL } from './addGraphQL'
 import { addScriptToPackageJson } from '@/lib/files/addScriptToPackageJson'
 import { addDiscordWebhook } from './addDiscordWebhook'
-import { addDiscordCmd } from './addDiscordCmds'
 import { addDependencyToPackageJson } from '@/lib/files/addDependencyToPackageJson'
 import inquirer from 'inquirer'
-import { yarnCmdRun } from '@/cli/yarn/yarn'
 import { spawnSync } from 'child_process'
 
 export const addSubCommands = async () => {
@@ -115,7 +113,6 @@ export const addSubCommands = async () => {
           console.log(chalk.yellow('⚠️ Discord Webhook already exists'))
           return
         }
-        addDiscordCmd()
         const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
         addScriptToPackageJson(
           packageJsonPath,

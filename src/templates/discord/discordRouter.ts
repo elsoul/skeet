@@ -12,7 +12,6 @@ import {
   ActionData,
   CommandData,
   DiscordRouterParams,
-  InteractionResponseType,
   InteractionType,
   verifyKey,
 } from '@skeet-framework/discord-utils'
@@ -54,23 +53,14 @@ export const discordRouter = onRequest(
         const options = req.body.data as CommandData
         if (options.name.match(/^hello$/)) {
           await helloAction(res, db, DISCORD_TOKEN.value(), req.body)
-          return
         }
       } else {
         // Button action
         const { custom_id } = req.body.data as ActionData
         if (custom_id.match(/^hello-button$/)) {
           await helloAction(res, db, DISCORD_TOKEN.value(), req.body)
-          return
         }
-        res.send({
-          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        })
-        return
       }
-      res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      })
     } catch (error) {
       console.log(\`discordRouter: \${error}\`)
       res.status(500).json({ status: 'error', message: String(error) })

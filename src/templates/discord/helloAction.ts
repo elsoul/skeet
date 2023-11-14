@@ -10,9 +10,11 @@ export const helloAction = () => {
   const filePath = `${fileDir}/helloAction.ts`
   const body = `import {
   DiscordRouterParams,
-  InteractionResponseType,
+  deferResponse,
+  updateResponse,
 } from '@skeet-framework/discord-utils'
 import { Response } from 'firebase-functions/v1'
+import { inspect } from 'util'
 
 export const helloAction = async (
   res: Response,
@@ -21,8 +23,12 @@ export const helloAction = async (
   body: DiscordRouterParams,
 ) => {
   console.log('helloAction')
-  res.send({
-    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+  console.log(inspect(body))
+  await deferResponse(discordToken, body.id, body.token)
+  // define your logic here
+  await updateResponse(discordToken, body.application_id, body.token, {
+    content: 'hello response!',
+    flags: 64,
   })
   return true
 }`
