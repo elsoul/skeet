@@ -48,6 +48,7 @@ export const roleList = [
   'roles/pubsub.editor',
   'roles/datastore.user',
   'roles/iam.serviceAccountUser',
+  'roles/iam.serviceAccountTokenCreator',
   'roles/run.admin',
   'roles/storage.admin',
   'roles/storage.objectAdmin',
