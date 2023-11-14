@@ -11,7 +11,7 @@ import { readFileSync, writeFileSync } from 'fs'
 export const addMethod = async (
   methodName: string,
   instanceType = '',
-  functionName = ''
+  functionName = '',
 ) => {
   try {
     const functions = getFunctions()
@@ -19,7 +19,7 @@ export const addMethod = async (
       await genFunction(methodName, instanceType, functionName)
     } else {
       const question = await inquirer.prompt<{ instanceType: string }>(
-        instanceTypeList()
+        instanceTypeList(),
       )
       const instanceTypeValue = question.instanceType || ''
 
@@ -50,7 +50,7 @@ export const addMethod = async (
   }
 }
 
-const insertFunction = (filePath: string, functionName: string) => {
+export const insertFunction = (filePath: string, functionName: string) => {
   try {
     const data = readFileSync(filePath, 'utf-8')
     const lines = data.split('\n')
@@ -59,7 +59,7 @@ const insertFunction = (filePath: string, functionName: string) => {
 
     if (insertionPoint === -1) {
       console.log(
-        `Couldn't find the target line ("${targetLine}") in the file.`
+        `Couldn't find the target line ("${targetLine}") in the file.`,
       )
       return false
     }
@@ -77,12 +77,12 @@ const insertFunction = (filePath: string, functionName: string) => {
 const genFunction = async (
   methodName: string,
   instanceType: string,
-  functionName: string
+  functionName: string,
 ) => {
   const genFile = await genInstanceMethod(
     instanceType,
     functionName,
-    methodName
+    methodName,
   )
   writeFileSync(genFile.filePath, genFile.body)
   Logger.successCheck(`${genFile.filePath} created`)
