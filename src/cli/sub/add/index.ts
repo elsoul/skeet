@@ -1,5 +1,5 @@
-import { program } from '@/index'
-import { importConfig } from '@/lib'
+import { DEFAULT_FUNCTION_NAME, program } from '@/index'
+import { FUNCTIONS_PATH, importConfig } from '@/lib'
 import { addFunctions } from './addFunctions'
 import { addMethod } from './addMethod'
 import { addModel } from './addModel'
@@ -10,6 +10,13 @@ import { addIp } from './addIp'
 import { addGithubEnv } from './addGithubEnv'
 import chalk from 'chalk'
 import { addGraphQL } from './addGraphQL'
+import { addScriptToPackageJson } from '@/lib/files/addScriptToPackageJson'
+import { addDiscordWebhook } from './addDiscordWebhook'
+import { addDiscordCmd } from './addDiscordCmds'
+import { addDependencyToPackageJson } from '@/lib/files/addDependencyToPackageJson'
+import inquirer from 'inquirer'
+import { yarnCmdRun } from '@/cli/yarn/yarn'
+import { spawnSync } from 'child_process'
 
 export const addSubCommands = async () => {
   const add = program
@@ -86,5 +93,44 @@ export const addSubCommands = async () => {
     .description('Add GraphQL')
     .action(async () => {
       await addGraphQL()
+    })
+
+  add
+    .command('webhook')
+    .alias('webHook')
+    .alias('wh')
+    .description('Add Webhook Endpoint')
+    .action(async () => {
+      const webhookType = await inquirer.prompt<{ webhookType: string }>([
+        {
+          type: 'list',
+          name: 'webhookType',
+          message: 'Select Webhook Type',
+          choices: ['discord', 'stripe'],
+        },
+      ])
+      if (webhookType.webhookType === 'discord') {
+        const isDirExist = addDiscordWebhook()
+        if (!isDirExist) {
+          console.log(chalk.yellow('⚠️ Discord Webhook already exists'))
+          return
+        }
+        addDiscordCmd()
+        const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
+        addScriptToPackageJson(
+          packageJsonPath,
+          'discord:deploy',
+          'npx ts-node -r tsconfig-paths/register --transpile-only src/lib/discord/deploy-commands.ts',
+        )
+        addDependencyToPackageJson(
+          packageJsonPath,
+          '@skeet-framework/discord-utils',
+          '0.2.13',
+        )
+        const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} install`
+        spawnSync(cmd, { shell: true, stdio: 'inherit' })
+      } else {
+        console.log(chalk.blue('Coming Soon!'))
+      }
     })
 }
