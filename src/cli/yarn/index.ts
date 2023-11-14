@@ -1,5 +1,6 @@
 import { program } from '@/index'
 import { yarn } from './yarn'
+import chalk from 'chalk'
 
 export const yarnCommands = async () => {
   program
@@ -15,6 +16,13 @@ export const yarnCommands = async () => {
         await yarn(yarnCmd, options.d, true)
       } else if (yarnCmd === 'add' && options.p !== '' && options.d === '') {
         await yarn(yarnCmd, options.p, false)
+      } else if (yarnCmd === 'add' && options.p === '' && options.d === '') {
+        console.log(chalk.yellow('⚠️ Please specify either -p or -D option\n'))
+        console.log(
+          chalk.white('skeet yarn add -p @skeet-framework/utils\n\nor\n'),
+        )
+        console.log(chalk.white('skeet yarn add -D @skeet-framework/utils\n'))
+        return
       } else {
         await yarn(yarnCmd)
       }
