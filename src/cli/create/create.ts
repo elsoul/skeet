@@ -78,11 +78,6 @@ export const skeetCreate = async (appName: string, template: string) => {
 
 export const generateInitFiles = async (appName: string, template: string) => {
   const spinner = await Logger.syncSpinner('Generating init files...')
-  // const tsconfigJson = await fileDataOf.tsconfigJson(appName)
-  // writeFileSync(
-  //   tsconfigJson.filePath,
-  //   JSON.stringify(tsconfigJson.body, null, 2)
-  // )
   await initPackageJson(appName)
   if (template === SkeetTemplate.ExpoFirestore) {
     await initAppJson(appName)
@@ -108,36 +103,17 @@ export const generateInitFiles = async (appName: string, template: string) => {
     await addAppNameToSkeetOptions(appName, DEFAULT_FUNCTION_NAME)
   }
 
-  const eslintrcJson = await fileDataOf.eslintrcJson(appName, template)
-  writeFileSync(
-    eslintrcJson.filePath,
-    JSON.stringify(eslintrcJson.body, null, 2),
-  )
-
-  const eslintignore = await fileDataOf.eslintignore(appName, template)
-  writeFileSync(eslintignore.filePath, eslintignore.body)
-
   const firebaserc = await fileDataOf.firebaserc(appName)
   writeFileSync(firebaserc.filePath, firebaserc.body)
 
   const firestoreIndexesJson = await fileDataOf.firestoreIndexesJson(appName)
   writeFileSync(firestoreIndexesJson.filePath, firestoreIndexesJson.body)
 
-  // Generate firestore.rules
-  // const firestoreRules = await fileDataOf.firestoreRules(appName)
-  // writeFileSync(firestoreRules.filePath, firestoreRules.body)
-
-  const prettierrc = await fileDataOf.prettierrc(appName)
-  writeFileSync(prettierrc.filePath, JSON.stringify(prettierrc.body, null, 2))
   const skeetCloudConfigGen = await fileDataOf.skeetCloudConfigGen(
     appName,
     template,
   )
   writeFileSync(skeetCloudConfigGen.filePath, skeetCloudConfigGen.body)
-  const prettierignore = await fileDataOf.prettierignore(appName, template)
-  writeFileSync(prettierignore.filePath, prettierignore.body)
-  const gitignore = await fileDataOf.gitignore(appName, template)
-  writeFileSync(gitignore.filePath, gitignore.body)
   spinner.stop()
 }
 
