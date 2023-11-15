@@ -17,6 +17,7 @@ import inquirer from 'inquirer'
 import { spawnSync } from 'child_process'
 import { addGhActions } from './addGhActions'
 import { genGithubActions } from '@/cli/gen'
+import { addStripeWebhook } from './addStripeWebhook'
 
 export const addSubCommands = async () => {
   const add = program
@@ -139,7 +140,15 @@ export const addSubCommands = async () => {
         const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
       } else {
-        console.log(chalk.blue('Coming Soon!'))
+        const isDirExist = addStripeWebhook()
+        if (!isDirExist) {
+          console.log(chalk.yellow('⚠️ Stripe Webhook already exists'))
+          return
+        }
+        const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
+        addDependencyToPackageJson(packageJsonPath, 'stripe', '14.4.0')
+        const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} install`
+        spawnSync(cmd, { shell: true, stdio: 'inherit' })
       }
     })
 }
