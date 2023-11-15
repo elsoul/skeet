@@ -15,6 +15,8 @@ import { addDiscordWebhook } from './addDiscordWebhook'
 import { addDependencyToPackageJson } from '@/lib/files/addDependencyToPackageJson'
 import inquirer from 'inquirer'
 import { spawnSync } from 'child_process'
+import { addGhActions } from './addGhActions'
+import { genGithubActions } from '@/cli/gen'
 
 export const addSubCommands = async () => {
   const add = program
@@ -72,6 +74,16 @@ export const addSubCommands = async () => {
     .argument('<secretKey>', 'Secret Key - e.g. API_KEY')
     .action(async (secretKey: string) => {
       await addGithubEnv(secretKey)
+    })
+
+  add
+    .command('ghActions')
+    .description('Add Github Actions')
+    .action(async () => {
+      console.log(chalk.blue(`👷 Creating Github Repository...`))
+      addGhActions()
+      await genGithubActions()
+      console.log(chalk.green(`✅ Github Repository/Actions Created`))
     })
 
   add
