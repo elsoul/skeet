@@ -82,8 +82,8 @@ export const addSubCommands = async () => {
     .description('Add Github Actions')
     .action(async () => {
       console.log(chalk.blue(`👷 Creating Github Repository...`))
-      addGhActions()
       await genGithubActions()
+      addGhActions()
       console.log(chalk.green(`✅ Github Repository/Actions Created`))
     })
 
