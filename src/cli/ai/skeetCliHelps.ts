@@ -7,13 +7,16 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  create <appName>             Create Skeet Framework App
+  create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
-  deploy                       Deploy Skeet APP to Firebase
+  deploy [options]             Deploy Skeet APP to Firebase
   init [options]               Initialize Google Cloud Setups for Skeet APP
-  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
-  login                        Skeet Login Command - Create Firebase Login Token
-  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
+  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for
+                               multiple functions
+  login                        Skeet Login Command - Create Firebase Login
+                               Token
+  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
+                               Endpoint
   g|generate                   Skeet Generate Comannd
   release|r [options]          Release a new version
   docker                       Docker commands
@@ -32,12 +35,20 @@ Usage: skeet create [options] <appName>
 Create Skeet Framework App
 
 Arguments:
-  appName     Name of the app
+  appName        Name of the app
+
+Options:
+  -b, --backend  Create Backend Only (default: false)
+  -h, --help     display help for command
 
 
 Usage: skeet deploy [options]
 
 Deploy Skeet APP to Firebase
+
+Options:
+  -f, --function <function>  Function Name. e.g. skeet:root
+  -h, --help                 display help for command
 
 
 Usage: skeet init [options]
@@ -61,28 +72,136 @@ Arguments:
 
 Options:
   -p, --p <packageName>  npm package name (default: "")
-  -D                     Dependency environment (default: false)
+  -D, --d <packageName>  npm package name (default: "")
   -h, --help             display help for command
+
+
+Usage: skeet [options] [command]
+
+CLI for Skeet - Full-stack TypeScript Serverless framework
+
+Options:
+  -V, --version                output the version number
+  -h, --help                   display help for command
+
+Commands:
+  create [options] <appName>   Create Skeet Framework App
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
+  init [options]               Initialize Google Cloud Setups for Skeet APP
+  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for
+                               multiple functions
+  login                        Skeet Login Command - Create Firebase Login
+                               Token
+  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
+                               Endpoint
+  g|generate                   Skeet Generate Comannd
+  release|r [options]          Release a new version
+  docker                       Docker commands
+  db                           Database commands
+  iam                          Skeet IAM Comannd to setup Google Cloud Platform
+  add                          Skeet Add Comannd to add new functions
+  sync                         Skeet Sync Comannd to sync backend and frontend
+  delete|d                     Skeet Delete Command
+  get                          Get Skeet App List
+  ai [options]                 AI Playground
+  help [command]               display help for command
 
 
 Usage: skeet login [options]
 
 Skeet Login Command - Create Firebase Login Token
 
+Options:
+  -h, --help  display help for command
+
+
+Usage: skeet [options] [command]
+
+CLI for Skeet - Full-stack TypeScript Serverless framework
+
+Options:
+  -V, --version                output the version number
+  -h, --help                   display help for command
+
+Commands:
+  create [options] <appName>   Create Skeet Framework App
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
+  init [options]               Initialize Google Cloud Setups for Skeet APP
+  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for
+                               multiple functions
+  login                        Skeet Login Command - Create Firebase Login
+                               Token
+  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
+                               Endpoint
+  g|generate                   Skeet Generate Comannd
+  release|r [options]          Release a new version
+  docker                       Docker commands
+  db                           Database commands
+  iam                          Skeet IAM Comannd to setup Google Cloud Platform
+  add                          Skeet Add Comannd to add new functions
+  sync                         Skeet Sync Comannd to sync backend and frontend
+  delete|d                     Skeet Delete Command
+  get                          Get Skeet App List
+  ai [options]                 AI Playground
+  help [command]               display help for command
+
+
+Usage: skeet [options] [command]
+
+CLI for Skeet - Full-stack TypeScript Serverless framework
+
+Options:
+  -V, --version                output the version number
+  -h, --help                   display help for command
+
+Commands:
+  create [options] <appName>   Create Skeet Framework App
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
+  init [options]               Initialize Google Cloud Setups for Skeet APP
+  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for
+                               multiple functions
+  login                        Skeet Login Command - Create Firebase Login
+                               Token
+  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
+                               Endpoint
+  g|generate                   Skeet Generate Comannd
+  release|r [options]          Release a new version
+  docker                       Docker commands
+  db                           Database commands
+  iam                          Skeet IAM Comannd to setup Google Cloud Platform
+  add                          Skeet Add Comannd to add new functions
+  sync                         Skeet Sync Comannd to sync backend and frontend
+  delete|d                     Skeet Delete Command
+  get                          Get Skeet App List
+  ai [options]                 AI Playground
+  help [command]               display help for command
+
 
 Usage: skeet docker [options] [command]
 
 Docker commands
 
+Options:
+  -h, --help      display help for command
+
 Commands:
   psql            Run psql in docker container
   login           Login to docker - ./keyfile.json is required
+  run             Run Skeet GraphQL Backend Container
+  build           Build Skeet GraphQL Backend Container
+  rm              Remove Skeet GraphQL Backend Container
   help [command]  display help for command
 
 
 Usage: skeet db [options] [command]
 
 Database commands
+
+Options:
+  -h, --help                display help for command
 
 Commands:
   migrate [options] <name>  Initialize database
@@ -98,6 +217,9 @@ Usage: skeet iam [options] [command]
 
 Skeet IAM Comannd to setup Google Cloud Platform
 
+Options:
+  -h, --help      display help for command
+
 Commands:
   ai              Setup AI for Google Cloud Platform
   init            Setup IAM for Google Cloud Platform
@@ -110,20 +232,28 @@ Usage: skeet add [options] [command]
 
 Skeet Add Comannd to add new functions
 
+Options:
+  -h, --help                     display help for command
+
 Commands:
   functions <functionsName>
-  method <methodName>
+  method [options] <methodName>
   model <modelName>
   app <appDisplayName>
   secret <secretKey>
+  ghSecret <secretKey>
   webAppDomain [options]
   ip
-  help [command]             display help for command
+  graphql|graphQL                Add GraphQL
+  help [command]                 display help for command
 
 
 Usage: skeet sync [options] [command]
 
 Skeet Sync Comannd to sync backend and frontend
+
+Options:
+  -h, --help      display help for command
 
 Commands:
   models|m        Skeet Sync Models
@@ -139,6 +269,9 @@ Commands:
 Usage: skeet get [options] [command]
 
 Get Skeet App List
+
+Options:
+  -h, --help             display help for command
 
 Commands:
   functions|function     Show Skeet Functions List
@@ -162,4 +295,36 @@ Options:
   -token, --token <number>       Max Tokens
   -temp, --temperature <number>  Temperature
   -h, --help                     display help for command
+
+
+Usage: skeet [options] [command]
+
+CLI for Skeet - Full-stack TypeScript Serverless framework
+
+Options:
+  -V, --version                output the version number
+  -h, --help                   display help for command
+
+Commands:
+  create [options] <appName>   Create Skeet Framework App
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
+  init [options]               Initialize Google Cloud Setups for Skeet APP
+  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for
+                               multiple functions
+  login                        Skeet Login Command - Create Firebase Login
+                               Token
+  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
+                               Endpoint
+  g|generate                   Skeet Generate Comannd
+  release|r [options]          Release a new version
+  docker                       Docker commands
+  db                           Database commands
+  iam                          Skeet IAM Comannd to setup Google Cloud Platform
+  add                          Skeet Add Comannd to add new functions
+  sync                         Skeet Sync Comannd to sync backend and frontend
+  delete|d                     Skeet Delete Command
+  get                          Get Skeet App List
+  ai [options]                 AI Playground
+  help [command]               display help for command
 `

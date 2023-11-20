@@ -81,7 +81,7 @@ export const skeetAiPrompt = (lang: string): Example => {
           '- $ skeet s -w コマンドを実行することで、Skeet App のフロントエンドのみを起動できます。',
       },
       {
-        input: 'Skeet App のバックエンドのみを起動する方法は？',
+        input: 'Skeet WhatApp のバックエンドのみを起動する方法は？',
         output:
           '- $ skeet s -b コマンドを実行することで、Skeet App のバックエンドのみを起動できます。',
       },

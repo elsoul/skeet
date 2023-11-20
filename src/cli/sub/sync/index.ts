@@ -8,6 +8,7 @@ import { syncTaskQueue } from './syncTaskQueue'
 import { syncRunUrl } from './syncRunUrl'
 import { readFileSync } from 'node:fs'
 import { prismaSchemaToTypeScriptTypes } from './prismaSchemaToTypeScriptType'
+import { addEnvSync } from '@/lib'
 
 export const syncSubCommands = async () => {
   const sync = program
@@ -63,5 +64,13 @@ export const syncSubCommands = async () => {
     .description('Skeet Sync Run Url')
     .action(async () => {
       await syncRunUrl()
+    })
+
+  sync
+    .command('ghEnv')
+    .option('-p, --path <path>', 'Path to env file', '.env')
+    .description('Sync Env File to Github Secret')
+    .action(async (option) => {
+      await addEnvSync(option.path)
     })
 }
