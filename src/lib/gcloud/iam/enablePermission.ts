@@ -61,4 +61,5 @@ export const serviceList = [
   'secretmanager.googleapis.com',
   'firebaserules.googleapis.com',
   'aiplatform.googleapis.com',
+  'sheets.googleapis.com',
 ]
