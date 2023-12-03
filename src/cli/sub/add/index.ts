@@ -155,6 +155,7 @@ export const addSubCommands = async () => {
 
   add
     .command('taskQueue')
+    .alias('tq')
     .argument('<queueName>', 'CloudTask Queue Name')
     .action(async (queueName: string) => {
       const { app } = importConfig()

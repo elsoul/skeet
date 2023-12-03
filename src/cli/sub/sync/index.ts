@@ -55,6 +55,7 @@ export const syncSubCommands = async () => {
     })
   sync
     .command('taskQueue')
+    .alias('tq')
     .description('Skeet Sync Task Queue')
     .action(async () => {
       await syncTaskQueue()

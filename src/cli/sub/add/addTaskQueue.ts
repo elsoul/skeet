@@ -48,11 +48,11 @@ export const addTaskQueue = async (
     projectId,
   ]
   execSyncCmd(shCmd)
-  if (!isUpdate) await addTaskQueueToConf(taskQueue)
+  if (!isUpdate) addTaskQueueToConf(taskQueue)
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
-export const addTaskQueueToConf = async (taskQueue: TaskQueue) => {
+export const addTaskQueueToConf = (taskQueue: TaskQueue) => {
   const skeetConfig = importConfig()
   if (skeetConfig.taskQueues) {
     skeetConfig.taskQueues.push(taskQueue)
