@@ -18,6 +18,7 @@ import { spawnSync } from 'child_process'
 import { addGhActions } from './addGhActions'
 import { genGithubActions } from '@/cli/gen'
 import { addStripeWebhook } from './addStripeWebhook'
+import { addTaskQueue } from './addTaskQueue'
 
 export const addSubCommands = async () => {
   const add = program
@@ -150,5 +151,13 @@ export const addSubCommands = async () => {
         const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
       }
+    })
+
+  add
+    .command('taskQueue')
+    .argument('<queueName>', 'CloudTask Queue Name')
+    .action(async (queueName: string) => {
+      const { app } = importConfig()
+      await addTaskQueue(app.projectId, queueName, app.region)
     })
 }
