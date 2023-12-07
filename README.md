@@ -219,7 +219,7 @@ OpenAI is selected 🤖 (type 'q' to quit)
 You:
 ```
 
-## Skeet Docment
+## Skeet Document
 
 - [https://skeet.dev/](https://skeet.dev/)
 
