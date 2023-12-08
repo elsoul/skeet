@@ -533,10 +533,10 @@
   resolved "https://registry.yarnpkg.com/@fastify/busboy/-/busboy-2.1.0.tgz#0709e9f4cb252351c609c6e6d8d6779a8d25edff"
   integrity sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==
 
-"@google-cloud/aiplatform@3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/aiplatform/-/aiplatform-3.7.0.tgz#424b270f2a7a82074fe333c0da743d8b7561a045"
-  integrity sha512-ufCzposTr3CSn6JhH8j/ninGVKvj03vc9ymivzKbAoy0Z0j3QvTiMB5tSuk5OXjvEgKHCjwuFJNPxh9qFsxiow==
+"@google-cloud/aiplatform@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/aiplatform/-/aiplatform-3.8.0.tgz#61611b1cca071df6fa3a2e1a434354b752dea10a"
+  integrity sha512-/yFInKgg29uyGuOJL6s3kT6kNahWWtVKAEX2vT/4NPmkxCls31/6gNy/ITX8T8Kr5nS/2MB/eOtfSHYQTh98Ig==
   dependencies:
     google-gax "^4.0.3"
     protobuf.js "^1.1.2"
@@ -1105,20 +1105,20 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/ai@^1.7.9":
-  version "1.7.9"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.7.9.tgz#f343e576a3602832a86dee0a8cdf611392dd555e"
-  integrity sha512-1m4Dk6pXy1vZGqL2y82bfMbFQIYfZgo+K6GuPphSX3YX/0j2O53Dn2WwZ/h+4QoSCipNOmHqQbJH3IU4J8rqMA==
+"@skeet-framework/ai@1.7.10":
+  version "1.7.10"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.7.10.tgz#aba4e17fe106f77c8b4044de73df606998f111ea"
+  integrity sha512-GJu6a+zdVPDAAr28FS9hYo86BiDXEz6dTQh/UnGVSZiTZPtR4CoGPYCrUSFe+s3GjT77+XABdYMpk4sqombs4Q==
   dependencies:
-    "@google-cloud/aiplatform" "3.7.0"
+    "@google-cloud/aiplatform" "3.8.0"
     "@google-cloud/translate" "8.0.2"
     crypto-js "4.2.0"
     dotenv "16.3.1"
     node-fetch "2.6.9"
-    openai "4.19.1"
+    openai "4.20.1"
     pako "2.1.0"
 
-"@skeet-framework/discord-utils@^0.2.13":
+"@skeet-framework/discord-utils@0.2.13":
   version "0.2.13"
   resolved "https://registry.yarnpkg.com/@skeet-framework/discord-utils/-/discord-utils-0.2.13.tgz#07a0da0b3243ea2cddfc6709044b45a16debd28a"
   integrity sha512-kJgO1e4bE65BoxayEBDwuOFITn7ljSTtQG3lelf4Ec+i+YkYna5EFm21RzsiC0TzfbXvuADgG2vbzYuW9RYNCg==
@@ -1326,7 +1326,7 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
-"@types/cli-spinner@^0.2.3":
+"@types/cli-spinner@0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@types/cli-spinner/-/cli-spinner-0.2.3.tgz#5bc57d561a7a6a01690a72c324764136b26a562d"
   integrity sha512-TMO6mWltW0lCu1de8DMRq9+59OP/tEjghS+rs8ZEQ2EgYP5yV3bGw0tS14TMyJGqFaoVChNvhkVzv9RC1UgX+w==
@@ -4703,10 +4703,10 @@ onetime@^5.1.0, onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
-openai@4.19.1:
-  version "4.19.1"
-  resolved "https://registry.yarnpkg.com/openai/-/openai-4.19.1.tgz#229d6e994248966f255f6a5b849dcec28e3b3439"
-  integrity sha512-9TddzuZBn2xxhghGGTHLZ4EeNBGTLs3xVzh266NiSJvtUsCsZQ5yVV6H5NhnhyAkKK8uUiZOUUlUAk3HdV+4xg==
+openai@4.20.1:
+  version "4.20.1"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-4.20.1.tgz#afa0d496d125b5a0f6cebcb4b9aeabf71e00214e"
+  integrity sha512-Dd3q8EvINfganZFtg6V36HjrMaihqRgIcKiHua4Nq9aw/PxOP48dhbsk8x5klrxajt5Lpnc1KTOG5i1S6BKAJA==
   dependencies:
     "@types/node" "^18.11.18"
     "@types/node-fetch" "^2.6.4"
