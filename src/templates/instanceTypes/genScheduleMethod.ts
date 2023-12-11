@@ -1,9 +1,9 @@
 import { FUNCTIONS_PATH } from '@/lib'
-import { toCamelCase } from '@/utils/string'
+import { toCamelCase } from '@skeet-framework/utils'
 
-export const genScheduleMethod = async (
+export const genScheduleMethod = (
   functionsName: string,
-  methodName: string
+  methodName: string,
 ) => {
   const camelMethodName = toCamelCase(methodName)
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/schedule/${camelMethodName}.ts`

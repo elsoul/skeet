@@ -1,0 +1,5 @@
+{
+  "SUCCESS_CREATE": "Successfully created",
+  "SUCCESS_UPDATE": "Successfully updated",
+  "ALREADY_EXISTS": "⚠️ Already exists"
+}

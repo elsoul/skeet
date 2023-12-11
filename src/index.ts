@@ -41,6 +41,8 @@ program
 
 dotenv.config()
 
+export const lang = process.env.SKEET_LANG || 'en'
+
 function main() {
   try {
     createCommands()

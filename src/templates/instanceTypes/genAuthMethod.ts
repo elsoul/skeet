@@ -1,10 +1,7 @@
 import { FUNCTIONS_PATH } from '@/lib'
-import { toCamelCase } from '@/utils/string'
+import { toCamelCase } from '@skeet-framework/utils'
 
-export const genAuthMethod = async (
-  functionsName: string,
-  methodName: string,
-) => {
+export const genAuthMethod = (functionsName: string, methodName: string) => {
   const camelMethodName = toCamelCase(methodName)
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/auth/${camelMethodName}.ts`
   const body = `import * as functions from 'firebase-functions/v1'
