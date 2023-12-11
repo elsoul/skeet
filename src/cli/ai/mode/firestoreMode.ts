@@ -1,15 +1,13 @@
-import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { SkeetAI } from '@skeet-framework/ai'
 import chalk from 'chalk'
 import { promptUser } from '../ai'
-import { spawnSync } from 'child_process'
 import { appendFileSync, writeFileSync } from 'fs'
-import { FUNCTIONS_PATH } from '@/lib'
 import { NamingEnum } from '@skeet-framework/ai'
 import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
 import inquirer from 'inquirer'
 import { yesOrNo } from './yesOrNoMode'
 import { AiLog } from '../aiLog'
+import { PATH } from '@/cli/config/path'
 
 export const firestoreMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   const log = logger.text() as SkeetLog
@@ -34,7 +32,7 @@ export const firestoreMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   const aiAnswer = (await skeetAi.firestore(answer.input)) as string
   const modelFileSuggestion = (await skeetAi.naming(
     aiAnswer,
-    NamingEnum.MODEL
+    NamingEnum.MODEL,
   )) as string
   console.log(
     chalk.blue(
@@ -42,8 +40,8 @@ export const firestoreMode = async (skeetAi: SkeetAI, logger: AiLog) => {
         chalk.white(` ${log.common.howAboutThis}\n\n`) +
         `${chalk.white(`\`\`\`${modelFileSuggestion}\n`)}` +
         chalk.white(aiAnswer) +
-        `${chalk.white('\n```')}`
-    )
+        `${chalk.white('\n```')}`,
+    ),
   )
 
   const text = ` ${log.common.MayICreateFile}: \n ${modelFileSuggestion}`
@@ -56,37 +54,15 @@ export const firestoreMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   }
   logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Firestore, model)
 
-  const modelFilePath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/models/${modelFileSuggestion}`
-  const modelIndexPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/models/index.ts`
+  const modelFilePath = `${PATH.MODEL_PATH}/${modelFileSuggestion}`
+  const modelIndexPath = `${PATH.MODEL_PATH}/index.ts`
   appendFileSync(
     modelIndexPath.replace('.ts', ''),
-    `export * from './${modelFileSuggestion}'`
+    `export * from './${modelFileSuggestion}'`,
   )
   writeFileSync(modelFilePath, aiAnswer)
   const createdText = `\n${log.common.created}: ${modelFilePath}`
   console.log(chalk.white(createdText))
-  console.log(
-    chalk.white(`${log.common.thenRun}`),
-    chalk.green(`$ skeet sync models`)
-  )
-  const syncText = log.common.mayISyncModel
-  logger.addJson(
-    SkeetRole.AI,
-    createdText + syncText,
-    SkeetAiMode.Firestore,
-    model
-  )
-  const runSync = (await yesOrNo(syncText)) as boolean
-  if (runSync) {
-    spawnSync(`skeet sync models`, {
-      stdio: 'inherit',
-      shell: true,
-    })
-    logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Firestore, model)
-    promptUser(skeetAi.initOptions, logger)
-    return
-  }
-  logger.addJson(SkeetRole.USER, 'No', SkeetAiMode.Firestore, model)
   console.log(chalk.white(`\n${log.firestoreMode.ExitingMode}...\n`))
   promptUser(skeetAi.initOptions, logger)
   return

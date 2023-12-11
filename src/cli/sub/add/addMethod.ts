@@ -7,6 +7,9 @@ import {
   getFunctions,
 } from '@/lib'
 import { readFileSync, writeFileSync } from 'fs'
+import { msg } from '@/lib/msg'
+import { LOG } from '@/cli/config/log'
+import { lang } from '@/index'
 
 export const addMethod = async (
   methodName: string,
@@ -16,7 +19,7 @@ export const addMethod = async (
   try {
     const functions = getFunctions()
     if (instanceType !== '' && functionName !== '') {
-      await genFunction(methodName, instanceType, functionName)
+      genFunction(methodName, instanceType, functionName)
     } else {
       const question = await inquirer.prompt<{ instanceType: string }>(
         instanceTypeList(),
@@ -25,7 +28,7 @@ export const addMethod = async (
 
       if (functions.length === 1) {
         functionName = functions[0]
-        await genFunction(methodName, instanceTypeValue, functionName)
+        genFunction(methodName, instanceTypeValue, functionName)
       } else {
         const answer2 = await inquirer.prompt<{ functionName: string }>([
           {
@@ -41,7 +44,7 @@ export const addMethod = async (
           },
         ])
         functionName = answer2.functionName || ''
-        await genFunction(methodName, instanceTypeValue, functionName)
+        genFunction(methodName, instanceTypeValue, functionName)
       }
     }
     return { status: 'success' }
@@ -74,18 +77,14 @@ export const insertFunction = (filePath: string, functionName: string) => {
   }
 }
 
-const genFunction = async (
+const genFunction = (
   methodName: string,
   instanceType: string,
   functionName: string,
 ) => {
-  const genFile = await genInstanceMethod(
-    instanceType,
-    functionName,
-    methodName,
-  )
+  const genFile = genInstanceMethod(instanceType, functionName, methodName)
   writeFileSync(genFile.filePath, genFile.body)
-  Logger.successCheck(`${genFile.filePath} created`)
+  Logger.successCheck(`${msg(LOG.SUCCESS_CREATE, lang)} - ${genFile.filePath}`)
   const indexFile = `${FUNCTIONS_PATH}/${functionName}/src/index.ts`
   insertFunction(indexFile, methodName)
 }

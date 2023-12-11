@@ -1,12 +1,14 @@
-import { FUNCTIONS_PATH } from '@/lib'
+import { PATH } from '@/cli/config/path'
+import { existsSync, mkdirSync } from 'fs'
 
-export const genHttpMethodParams = async (
-  functionsName: string,
-  methodName: string,
-) => {
+export const genHttpMethodParams = (methodName: string) => {
   const firstChar = methodName.charAt(0).toUpperCase()
   const capitalizedMethodName = firstChar + methodName.slice(1)
-  const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/types/http/${methodName}Params.ts`
+  const httpPath = `${PATH.TYPE_PATH}/http`
+  if (!existsSync(httpPath)) {
+    mkdirSync(httpPath)
+  }
+  const filePath = `${httpPath}/${methodName}Params.ts`
   const body = `export type ${capitalizedMethodName}Params = {
   name?: string
 }`

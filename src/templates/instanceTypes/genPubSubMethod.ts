@@ -1,17 +1,14 @@
 import { FUNCTIONS_PATH } from '@/lib'
-import { toCamelCase, toPascalCase } from '@/utils/string'
+import { toCamelCase, toPascalCase } from '@skeet-framework/utils'
 
-export const genPubSubMethod = async (
-  functionsName: string,
-  methodName: string
-) => {
+export const genPubSubMethod = (functionsName: string, methodName: string) => {
   const pascalMethodName = toPascalCase(methodName)
   const camelMethodName = toCamelCase(methodName)
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/pubsub/${camelMethodName}.ts`
   const body = `import { onMessagePublished } from 'firebase-functions/v2/pubsub'
 import { pubsubDefaultOption } from '@/routings/options'
 import { parsePubSubMessage } from '@/lib/pubsub'
-import { ${pascalMethodName}Params } from '@/types/pubsub/${camelMethodName}Params'
+import { ${pascalMethodName}Params } from '@common/types/pubsub/${camelMethodName}Params'
 
 export const ${camelMethodName}Topic = '${camelMethodName}'
 

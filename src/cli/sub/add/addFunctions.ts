@@ -7,8 +7,6 @@ import {
   execSyncCmd,
   importConfig,
   importFirebaseConfig,
-  getModelFiles,
-  copyFileWithOverwrite,
 } from '@/lib'
 import {
   addDomainToConfig,
@@ -26,9 +24,6 @@ export const addFunctions = async (functionName: string) => {
       Logger.error(`Already exist functionName: ${functionName}!`)
       return ''
     } else {
-      const functions = await getModelFiles()
-      const latestModel = functions[0]
-
       mkdir(functionDir, { recursive: true }, (err) => {
         if (err) throw err
       })
@@ -49,13 +44,7 @@ export const addFunctions = async (functionName: string) => {
         skeetConfig.app.lbDomain,
         functionName,
       )
-      const newModelPath = `${functionDir}/src/models`
-      for await (const modelPath of latestModel.modelsPath) {
-        const latestModelFileName = modelPath.split('/').pop()
-        const newModelFileName = `${newModelPath}/${latestModelFileName}`
-        Logger.sync(`📃 Copying ${modelPath} to ${newModelFileName}...`)
-        await copyFileWithOverwrite(modelPath, `${newModelFileName}`)
-      }
+
       await updateFirebaseConfig(functionName)
       await addFunctionsToPackageJson(functionName)
       const githubAction = await functionsYml(functionName)
@@ -86,9 +75,8 @@ export const updateFirebaseConfig = async (functionName: string) => {
 export const addFunctionsToPackageJson = async (functionName: string) => {
   const packageJson = readFileSync(ROUTE_PACKAGE_JSON_PATH)
   const newPackageJson = JSON.parse(String(packageJson))
-  newPackageJson.scripts[
-    `skeet:${functionName}`
-  ] = `yarn --cwd ./functions/${functionName} dev`
+  newPackageJson.scripts[`skeet:${functionName}`] =
+    `yarn --cwd ./functions/${functionName} dev`
   writeFileSync(
     ROUTE_PACKAGE_JSON_PATH,
     JSON.stringify(newPackageJson, null, 2),

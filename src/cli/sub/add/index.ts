@@ -51,7 +51,6 @@ export const addSubCommands = async () => {
     .command('model')
     .argument('<modelName>', 'Model Name - e.g. Article')
     .action(async (modelName: string) => {
-      console.log(modelName)
       await addModel(modelName)
     })
   add
