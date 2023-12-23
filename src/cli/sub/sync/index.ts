@@ -14,22 +14,7 @@ export const syncSubCommands = async () => {
   const sync = program
     .command('sync')
     .description('Skeet Sync Comannd to sync backend and frontend')
-  sync
-    .command('models')
-    .alias('m')
-    .alias('model')
-    .description('Skeet Sync Models')
-    .action(async () => {
-      await syncModels()
-    })
-  sync
-    .command('types')
-    .alias('t')
-    .alias('type')
-    .description('Skeet Sync Types')
-    .action(async () => {
-      await syncTypes()
-    })
+
   sync
     .command('routings')
     .alias('r')

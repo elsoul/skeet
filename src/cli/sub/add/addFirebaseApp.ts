@@ -14,12 +14,11 @@ import {
   updateFirebaseJson,
   firebaseAppList,
 } from '@/lib'
-import { GRAPHQL_ENV_BUILD_PATH } from '@/index'
 import { copyDefaultFirebaseConfig } from '@/lib/files/addJson'
 
 export const addFirebaseApp = async (
   projectId: string,
-  appDisplayName: string
+  appDisplayName: string,
 ) => {
   try {
     const sourceFilePath = './firebaseConfig.js'
@@ -35,7 +34,7 @@ export const addFirebaseApp = async (
     const appList = await firebaseAppList()
     if (checkAppExistence(appList, appDisplayName))
       throw new Error(
-        `Default Firebase App '${appDisplayName}' already exists. Skipping the firebase config creating process... Delete the Firebase webapp on the web console if you want to create a new one. Then run 'skeet init' again. It will create the new webapp and the firebaseConfig files.`
+        `Default Firebase App '${appDisplayName}' already exists. Skipping the firebase config creating process... Delete the Firebase webapp on the web console if you want to create a new one. Then run 'skeet init' again. It will create the new webapp and the firebaseConfig files.`,
       )
 
     const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
@@ -54,7 +53,7 @@ export const addFirebaseApp = async (
 
 const rewriteFirebaseConfig = async (
   sourceFilePath: string,
-  targetFilePath: string
+  targetFilePath: string,
 ) => {
   try {
     const data = readFileSync(sourceFilePath, 'utf8')
@@ -77,7 +76,7 @@ const rewriteFirebaseConfig = async (
     writeFileSync(targetFilePath, finalData, 'utf8')
 
     Logger.successCheck(
-      `File '${targetFilePath}' has been created successfully`
+      `File '${targetFilePath}' has been created successfully`,
     )
     return true
   } catch (error) {

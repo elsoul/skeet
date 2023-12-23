@@ -1,9 +1,9 @@
 import { FUNCTIONS_PATH } from '@/lib'
-import { toCamelCase } from '@/utils/string'
+import { toCamelCase } from '@skeet-framework/utils'
 
-export const genFirestoreMethod = async (
+export const genFirestoreMethod = (
   functionsName: string,
-  methodName: string
+  methodName: string,
 ) => {
   const pascalMethodName = toCamelCase(methodName)
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/firestore/${pascalMethodName}.ts`
