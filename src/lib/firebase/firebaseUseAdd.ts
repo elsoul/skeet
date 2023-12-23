@@ -15,3 +15,18 @@ export const firebaseUseAdd = async (projectId: string) => {
     throw new Error(`firebase project not found - ${error}`)
   }
 }
+
+export const firebaseUseAddAlias = async (projectId: string, alias: string) => {
+  try {
+    const cmd = ['firebase', 'use', '--add', projectId, '--alias', alias]
+    const result = execSync(cmd.join(' '))
+    console.log(result.toString())
+    return true
+  } catch (error) {
+    Logger.warning(`\n⚠️ You need to create a firebase project first ⚠️\n`)
+    Logger.normal(
+      `Please check if your project exsists.\n\n👉 https://console.firebase.google.com/project/${projectId}\n`
+    )
+    throw new Error(`firebase project not found - ${error}`)
+  }
+}

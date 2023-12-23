@@ -242,6 +242,7 @@ Commands:
   init [options]               Initialize Google Cloud Setups for Skeet APP
   yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
   login                        Skeet Login Command - Create Firebase Login Token
+  profile                      Skeet Profile Command - Manage Profile for Google Cloud Platform and Firebase 
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
   g|generate                   Skeet Generate Comannd
   docker                       Docker commands

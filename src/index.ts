@@ -19,6 +19,7 @@ import {
   genCommands,
   releaseCommands,
   aiCommands,
+  profileCommands,
 } from '@/cli'
 import { logCommands } from './cli/log'
 
@@ -61,7 +62,7 @@ function main() {
     deleteSubCommands()
     listSubCommands()
     aiCommands()
-
+    profileCommands()
     program.parseAsync(process.argv)
   } catch (error) {
     console.log(error)
