@@ -1,28 +1,34 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { importConfig } from '../files'
 import { createVpcNetwork } from '../gcloud'
 import { initSql } from '@/cli/init/initSql'
-import { askForGithubRepo, askForSqlPassword, sqlIp } from '@/cli'
+import { sqlIp } from '@/cli'
 import { addIp } from '@/cli/sub/add/addIp'
 import { dbDeploy } from '@/cli/sub/db/dbDeploy'
 import { addEnvSync } from '../git'
-import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
+import { FILE_NAME, PATH } from '@/config/path'
 
 export const setupSQL = async (
   skeetConfig: SkeetCloudConfig,
-  sqlPassword: string
+  sqlPassword: string,
+  needVpc = true,
 ) => {
   try {
-    await createVpcNetwork(
-      skeetConfig.app.projectId,
-      skeetConfig.app.name,
-      skeetConfig.app.region
-    )
+    if (needVpc) {
+      await createVpcNetwork(
+        skeetConfig.app.projectId,
+        skeetConfig.app.name,
+        skeetConfig.app.region,
+      )
+    }
+
     await initSql(skeetConfig, sqlPassword)
     await addIp()
     await sqlIp()
     await dbDeploy(true)
-    await addEnvSync(GRAPHQL_ENV_PRODUCTION_PATH)
+    const envProductionPath = skeetConfig.app.template.includes('GraphQL')
+      ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
+      : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
+    await addEnvSync(envProductionPath)
     return true
   } catch (error) {
     throw new Error(`setupSQL error: ${error}`)

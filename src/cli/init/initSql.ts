@@ -11,11 +11,11 @@ import percentEncode from '@stdlib/string-percent-encode'
 
 export const initSql = async (
   skeetCloudConfig: SkeetCloudConfig,
-  password: string
+  password: string,
 ) => {
   const { networkName } = await getNetworkConfig(
     skeetCloudConfig.app.projectId,
-    skeetCloudConfig.app.name
+    skeetCloudConfig.app.name,
   )
   await createSQL(
     skeetCloudConfig.app.projectId,
@@ -24,32 +24,32 @@ export const initSql = async (
     password,
     skeetCloudConfig.db.databaseVersion,
     String(skeetCloudConfig.db.cpu),
-    skeetCloudConfig.db.memory
+    skeetCloudConfig.db.memory,
   )
   const encodedPassword = percentEncode(password)
   const databaseIp = await getDatabaseIp(
     skeetCloudConfig.app.projectId,
-    skeetCloudConfig.app.name
+    skeetCloudConfig.app.name,
   )
-  await generateEnvBuild(skeetCloudConfig.app.name, databaseIp, encodedPassword)
+  generateEnvBuild(skeetCloudConfig.app.name, databaseIp, encodedPassword)
 
   await patchSQL(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
     '',
     '',
-    networkName
+    networkName,
   )
   const databasePrivateIp = await getDatabaseIp(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
-    true
+    true,
   )
   await generateEnvProduction(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
     skeetCloudConfig.app.region,
     databasePrivateIp,
-    encodedPassword
+    encodedPassword,
   )
 }

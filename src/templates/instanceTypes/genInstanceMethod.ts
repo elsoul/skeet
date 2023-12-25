@@ -8,9 +8,9 @@ import { genScheduleMethod } from './genScheduleMethod'
 import { genPubSubMethodParams } from './genPubSubMethodParams'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { msg } from '@/lib/msg'
-import { LOG } from '@/cli/config/log'
+import { LOG } from '@/config/log'
 import { lang } from '@/index'
-import { PATH } from '@/cli/config/path'
+import { PATH } from '@/config/path'
 
 export const genInstanceMethod = (
   instanceType: string,
@@ -18,8 +18,8 @@ export const genInstanceMethod = (
   methodName: string,
 ) => {
   try {
-    if (!existsSync(PATH.TYPE_PATH)) {
-      mkdirSync(PATH.TYPE_PATH)
+    if (!existsSync(PATH.TYPE)) {
+      mkdirSync(PATH.TYPE)
     }
     switch (instanceType) {
       case 'auth':

@@ -1,5 +1,5 @@
-import { LOG } from '@/cli/config/log'
-import { PATH } from '@/cli/config/path'
+import { LOG } from '@/config/log'
+import { PATH } from '@/config/path'
 import { lang } from '@/index'
 import { Logger } from '@/lib'
 import { msg } from '@/lib/msg'
@@ -13,17 +13,17 @@ export const genModel = (modelName: string) => {
   try {
     const camel = toCamelCase(modelName)
     const capital = toUpperCase(modelName)
-    if (!existsSync(PATH.MODEL_PATH)) {
-      mkdirSync(PATH.MODEL_PATH, { recursive: true })
+    if (!existsSync(PATH.MODEL)) {
+      mkdirSync(PATH.MODEL, { recursive: true })
     }
-    const filePath = `${PATH.MODEL_PATH}/${modelName}Models.ts`
+    const filePath = `${PATH.MODEL}/${modelName}Models.ts`
     if (existsSync(filePath)) {
       console.log(
         chalk.yellow(`${msg(LOG.ALREADY_EXISTS, lang)} - ${filePath}`),
       )
       return false
     }
-    const modelIndexPath = `${PATH.MODEL_PATH}/index.ts`
+    const modelIndexPath = `${PATH.MODEL}/index.ts`
     if (!existsSync(modelIndexPath)) {
       writeFileSync(modelIndexPath, '')
     }

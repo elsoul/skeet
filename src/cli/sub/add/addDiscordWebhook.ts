@@ -39,6 +39,6 @@ export const addDiscordWebhook = () => {
     insertFunction(indexFile, methodName)
     return true
   } catch (error) {
-    throw new Error(`addBackendSetup: ${error}`)
+    throw new Error(`addDiscordWebhook: ${error}`)
   }
 }

@@ -8,7 +8,7 @@ import {
 } from '@/lib'
 import { readFileSync, writeFileSync } from 'fs'
 import { msg } from '@/lib/msg'
-import { LOG } from '@/cli/config/log'
+import { LOG } from '@/config/log'
 import { lang } from '@/index'
 
 export const addMethod = async (

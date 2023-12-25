@@ -27,8 +27,8 @@ export const addSubCommands = async () => {
   add
     .command('functions')
     .argument('<functionsName>', 'Functions Name - e.g. skeet')
-    .action(async (functionsName: string) => {
-      await addFunctions(functionsName)
+    .action((functionsName: string) => {
+      addFunctions(functionsName)
     })
   add
     .command('method')

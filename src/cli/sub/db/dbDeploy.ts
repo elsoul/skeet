@@ -1,9 +1,9 @@
-import { GRAPHQL_ENV_BUILD_PATH, GRAPHQL_ROOT } from '@/index'
+import { GRAPHQL_ROOT } from '@/index'
 import { spawnSync } from 'child_process'
 
 export const dbDeploy = async (
   production: boolean = false,
-  cwd = GRAPHQL_ROOT
+  cwd = GRAPHQL_ROOT,
 ) => {
   let shCmd = []
   if (production) {

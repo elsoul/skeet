@@ -7,19 +7,19 @@ import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const createLoadBalancer = async (
   skeetConfig: SkeetCloudConfig,
-  domainAnswer: DomainAnswer
+  domainAnswer: DomainAnswer,
 ) => {
   try {
-    await addDomainToConfig(
+    addDomainToConfig(
       domainAnswer.appDomain,
       domainAnswer.nsDomain,
       domainAnswer.lbDomain,
-      DEFAULT_FUNCTION_NAME
+      DEFAULT_FUNCTION_NAME,
     )
     await setupLoadBalancer(
       skeetConfig,
       domainAnswer.lbDomain,
-      domainAnswer.nsDomain
+      domainAnswer.nsDomain,
     )
     await setupArmor(skeetConfig.app.projectId, skeetConfig.app.name)
     return true

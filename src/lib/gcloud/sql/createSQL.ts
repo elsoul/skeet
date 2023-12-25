@@ -1,11 +1,12 @@
 import prompt from 'prompt'
 import percentEncode from '@stdlib/string-percent-encode'
-import { Logger } from '@/lib'
+import { Logger, importConfig } from '@/lib'
 import { execSync, spawnSync } from 'child_process'
 import { getNetworkConfig, getContainerRegion, regionToTimezone } from '@/lib'
 import { patchSQL } from './patchSQL'
 import { GRAPHQL_ENV_BUILD_PATH, GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
 import { writeFileSync } from 'fs'
+import { FILE_NAME, PATH } from '@/config/path'
 
 export const runSqlCreate = async (
   projectId: string,
@@ -13,7 +14,7 @@ export const runSqlCreate = async (
   region: string,
   databaseVersion: string,
   cpu: string,
-  memory: string
+  memory: string,
 ) => {
   const dbPassPrompt = {
     properties: {
@@ -44,11 +45,11 @@ export const runSqlCreate = async (
         password,
         databaseVersion,
         cpu,
-        memory
+        memory,
       )
       const encodedPassword = percentEncode(password)
       const databaseIp = await getDatabaseIp(projectId, appName)
-      await generateEnvBuild(appName, databaseIp, encodedPassword)
+      generateEnvBuild(appName, databaseIp, encodedPassword)
 
       await patchSQL(projectId, appName, '', '', networkName)
       const databasePrivateIp = await getDatabaseIp(projectId, appName, true)
@@ -57,18 +58,21 @@ export const runSqlCreate = async (
         appName,
         region,
         databasePrivateIp,
-        encodedPassword
+        encodedPassword,
       )
     }
   })
 }
 
-export const generateEnvBuild = async (
+export const generateEnvBuild = (
   appName: string,
   databaseIp: string,
-  encodedPassword: string
+  encodedPassword: string,
 ) => {
-  const filePath = GRAPHQL_ENV_BUILD_PATH
+  const skeetConfig = importConfig()
+  const filePath = skeetConfig.app.template.includes('GraphQL')
+    ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_BUILD
+    : PATH.SQL + '/' + FILE_NAME.ENV_BUILD
   const databaseUrl = `DATABASE_URL=postgresql://postgres:${encodedPassword}@${databaseIp}:5432/skeet-${appName}-production?schema=public\n`
   const nodeSetting = 'NO_PEER_DEPENDENCY_CHECK=1\nSKEET_ENV=production'
   const envFile = databaseUrl + nodeSetting
@@ -81,10 +85,13 @@ export const generateEnvProduction = async (
   appName: string,
   region: string,
   databaseIp: string,
-  encodedPassword: string
+  encodedPassword: string,
 ) => {
-  const filePath = GRAPHQL_ENV_PRODUCTION_PATH
-  const cRegion = await getContainerRegion(region)
+  const skeetConfig = importConfig()
+  const filePath = skeetConfig.app.template.includes('GraphQL')
+    ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
+    : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
+  const cRegion = getContainerRegion(region)
   const timeZone = await regionToTimezone(region)
   const envProduction = [
     `SKEET_APP_NAME=${appName}\n`,
@@ -106,7 +113,7 @@ export const generateEnvProduction = async (
 export const getDatabaseIp = async (
   projectId: string,
   appName: string,
-  privateIp: boolean = false
+  privateIp: boolean = false,
 ) => {
   try {
     const ipCol = privateIp === true ? '$6' : '$5'
@@ -126,7 +133,7 @@ export const createSQL = async (
   dbPassword: string = 'postgres',
   databaseVersion: string = 'POSTGRES_15',
   cpu: string = '1',
-  memory: string = '4096MB'
+  memory: string = '4096MB',
 ) => {
   const instanceName = (await getNetworkConfig(projectId, appName)).instanceName
   const shCmd = [

@@ -26,14 +26,13 @@ export const askForProjectIdAndRegion = async () => {
 }
 
 export const askForSqlPassword = async () => {
-  const sqlPasswordInquirer = inquirer.prompt(questionList.sqlPasswordQuestions)
-  let sqlPassword = ''
-  await sqlPasswordInquirer.then(async (sqlPasswordAnswer) => {
-    if (sqlPasswordAnswer.password1 !== sqlPasswordAnswer.password2)
-      throw new Error("password doesn't match!")
-    sqlPassword = sqlPasswordAnswer.password1
-  })
-  return sqlPassword
+  const { password1, password2 } = await inquirer.prompt<{
+    password1: string
+    password2: string
+  }>(questionList.sqlPasswordQuestions)
+  if (password1 !== password2) throw new Error("password doesn't match!")
+
+  return password1
 }
 
 export const askForGithubRepo = async () => {
