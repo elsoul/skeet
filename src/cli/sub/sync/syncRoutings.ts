@@ -30,6 +30,12 @@ export const syncRoutings = async () => {
     const graphqlPath = `/graphql=${graphqlInfo.backendService}`
     paths.push(graphqlPath)
   }
+  if (app.template.includes('SQL')) {
+    const sqlInfo = await getFunctionInfo('sql')
+    await addBackendSetup('sql')
+    const sqlPath = `/sql/=${sqlInfo.backendService}`
+    paths.push(sqlPath)
+  }
   const { pathMatcherName } = await getNetworkConfig(app.projectId, app.name)
   await addRounting(pathMatcherName, paths)
   spinner.stop()

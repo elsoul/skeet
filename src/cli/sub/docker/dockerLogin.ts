@@ -6,7 +6,7 @@ export const dockerLogin = async () => {
   try {
     const config: SkeetCloudConfig = importConfig()
     const region = config.app.region
-    const cRegion = await getContainerRegion(region)
+    const cRegion = getContainerRegion(region)
     const shCmd = `cat ./keyfile.json | docker login -u _json_key --password-stdin https://${cRegion}`
     execSync(shCmd)
   } catch (error) {

@@ -22,10 +22,10 @@ export const deployCloudRun = async (
   let cloudRunName = ''
   let image = ''
   if (workerName === '') {
-    cloudRunName = await getContainerImageName(appName)
+    cloudRunName = getContainerImageName(appName)
     image = await getContainerImageUrl(projectId, appName, region)
   } else {
-    cloudRunName = await getContainerImageName(appName, workerName)
+    cloudRunName = getContainerImageName(appName, workerName)
     image = await getContainerImageUrl(
       projectId,
       appName,

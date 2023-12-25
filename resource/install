@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Constants and configurable variables
-NODE_VERSION=18.18.1
+NODE_VERSION=20.10.0
 
 # This ensures the entire script is downloaded
 {

@@ -1,4 +1,4 @@
-import { LOG } from '@/cli/config/log'
+import { LOG } from '@/config/log'
 import i18n from 'i18n'
 
 i18n.configure({

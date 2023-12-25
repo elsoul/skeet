@@ -55,7 +55,7 @@ export const init = async (loginMode = false) => {
   // Setup Firebase Project
   await firebaseLogin()
   await firebaseUseAdd(fbProjectId)
-  await addProjectRegionToSkeetOptions(
+  addProjectRegionToSkeetOptions(
     region,
     projectId,
     fbProjectId,

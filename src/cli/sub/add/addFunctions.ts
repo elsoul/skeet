@@ -14,9 +14,9 @@ import {
 } from '@/lib/files/addJson'
 import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { existsSync, mkdir, readFileSync, writeFileSync } from 'fs'
+import { existsSync, mkdir, mkdirSync, readFileSync, writeFileSync } from 'fs'
 
-export const addFunctions = async (functionName: string) => {
+export const addFunctions = (functionName: string) => {
   try {
     const skeetConfig: SkeetCloudConfig = importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}`
@@ -24,30 +24,28 @@ export const addFunctions = async (functionName: string) => {
       Logger.error(`Already exist functionName: ${functionName}!`)
       return ''
     } else {
-      mkdir(functionDir, { recursive: true }, (err) => {
-        if (err) throw err
-      })
+      mkdirSync(functionDir, { recursive: true })
 
       const gitCloneCmd = ['git', 'clone', FUNCTIONS_REPO_URL, functionDir]
       execSyncCmd(gitCloneCmd)
-      const rmDefaultGit = ['rm', '-rf', '.git']
+      const rmDefaultGit = ['rm', '-rf', '.git', '.github']
       execSyncCmd(rmDefaultGit, functionDir)
-      await addProjectRegionToSkeetOptions(
+      addProjectRegionToSkeetOptions(
         skeetConfig.app.region,
         skeetConfig.app.projectId,
         skeetConfig.app.fbProjectId,
         functionName,
       )
-      await addDomainToConfig(
+      addDomainToConfig(
         skeetConfig.app.appDomain,
         skeetConfig.app.nsDomain,
         skeetConfig.app.lbDomain,
         functionName,
       )
 
-      await updateFirebaseConfig(functionName)
-      await addFunctionsToPackageJson(functionName)
-      const githubAction = await functionsYml(functionName)
+      updateFirebaseConfig(functionName)
+      addFunctionsToPackageJson(functionName)
+      const githubAction = functionsYml(functionName)
       writeFileSync(githubAction.filePath, githubAction.body)
     }
   } catch (error) {
@@ -55,7 +53,7 @@ export const addFunctions = async (functionName: string) => {
   }
 }
 
-export const updateFirebaseConfig = async (functionName: string) => {
+export const updateFirebaseConfig = (functionName: string) => {
   const firebaseConfig = importFirebaseConfig()
   const newFunction = {
     source: `functions/${functionName}`,
@@ -72,7 +70,7 @@ export const updateFirebaseConfig = async (functionName: string) => {
   Logger.successCheck('Successfully Updated firebase.json')
 }
 
-export const addFunctionsToPackageJson = async (functionName: string) => {
+export const addFunctionsToPackageJson = (functionName: string) => {
   const packageJson = readFileSync(ROUTE_PACKAGE_JSON_PATH)
   const newPackageJson = JSON.parse(String(packageJson))
   newPackageJson.scripts[`skeet:${functionName}`] =

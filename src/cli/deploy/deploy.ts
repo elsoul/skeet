@@ -13,6 +13,9 @@ export const deploy = async () => {
   if (app.template.includes('GraphQL')) {
     functionsArray.push({ name: 'graphql' })
   }
+  if (app.template.includes('SQL')) {
+    functionsArray.push({ name: 'sql' })
+  }
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }
@@ -47,7 +50,7 @@ export const deploy = async () => {
       if (service === 'webapp') {
         await deployWebApp()
         await deployRules(config.app.projectId)
-      } else if (service === 'graphql') {
+      } else if (service === 'graphql' || service === 'sql') {
         await deployGraphql(config)
       } else {
         await yarnBuild(service)

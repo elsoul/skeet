@@ -7,7 +7,7 @@ import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
 import inquirer from 'inquirer'
 import { yesOrNo } from './yesOrNoMode'
 import { AiLog } from '../aiLog'
-import { PATH } from '@/cli/config/path'
+import { PATH } from '@/config/path'
 
 export const firestoreMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   const log = logger.text() as SkeetLog
@@ -54,8 +54,8 @@ export const firestoreMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   }
   logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Firestore, model)
 
-  const modelFilePath = `${PATH.MODEL_PATH}/${modelFileSuggestion}`
-  const modelIndexPath = `${PATH.MODEL_PATH}/index.ts`
+  const modelFilePath = `${PATH.MODEL}/${modelFileSuggestion}`
+  const modelIndexPath = `${PATH.MODEL}/index.ts`
   appendFileSync(
     modelIndexPath.replace('.ts', ''),
     `export * from './${modelFileSuggestion}'`,

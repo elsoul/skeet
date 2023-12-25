@@ -1,6 +1,8 @@
 import { execSync } from 'child_process'
-import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
 import fs from 'fs'
+import { CONTAINER_REGIONS } from '@/config/region'
+import { importConfig } from './importConfig'
+import { FILE_NAME, PATH } from '@/config/path'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -91,14 +93,14 @@ export const getNetworkConfig = async (projectId: string, appName: string) => {
   }
 }
 
-export const getContainerRegion = async (region: string) => {
+export const getContainerRegion = (region: string) => {
   switch (region) {
     case region.match('asia')?.input:
-      return 'asia.gcr.io'
+      return CONTAINER_REGIONS.ASIA
     case region.match('eu')?.input:
-      return 'eu.gcr.io'
+      return CONTAINER_REGIONS.EU
     default:
-      return 'gcr.io'
+      return CONTAINER_REGIONS.US
   }
 }
 
@@ -109,7 +111,7 @@ export const getContainerImageUrl = async (
   workerName: string = '',
   isPlugin: boolean = false,
 ) => {
-  const cRegion = await getContainerRegion(region)
+  const cRegion = getContainerRegion(region)
 
   let imageName = ''
   if (workerName !== '' && isPlugin) {
@@ -124,14 +126,16 @@ export const getContainerImageUrl = async (
   return cRegion + '/' + containerProjectName + '/' + imageName + ':latest'
 }
 
-export const getContainerImageName = async (
+export const getContainerImageName = (
   appName: string,
   workerName: string = '',
 ) => {
+  const skeetConfig = importConfig()
+  const db = skeetConfig.app.template.includes('GraphQL') ? 'graphql' : 'sql'
   const imageName =
     workerName !== ''
       ? 'skeet-' + appName + '-worker-' + workerName
-      : 'skeet-' + appName + '-graphql'
+      : 'skeet-' + appName + '-' + db
   return imageName
 }
 
@@ -229,7 +233,11 @@ export const getActionsEnvString = async (filePath: string) => {
 }
 
 export const getBuidEnvString = async () => {
-  const stream = fs.readFileSync(GRAPHQL_ENV_PRODUCTION_PATH)
+  const skeetConfig = importConfig()
+  const envProductionPath = skeetConfig.app.template.includes('GraphQL')
+    ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
+    : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
+  const stream = fs.readFileSync(envProductionPath)
   const envArray: Array<string> = String(stream).split('\n')
   const hash: { [key: string]: string } = {}
   for await (const line of envArray) {
