@@ -6,7 +6,7 @@ export const tagContainer = async (
   region: string,
 ) => {
   const imageName = getContainerImageName(appName)
-  const imageUrl = await getContainerImageUrl(projectId, appName, region)
+  const imageUrl = getContainerImageUrl(projectId, appName, region)
   const shCmd = ['docker', 'tag', imageName, imageUrl]
   execSyncCmd(shCmd)
 }

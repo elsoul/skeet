@@ -1,7 +1,7 @@
 import { execSyncCmd, getFunctionInfo } from '@/lib'
 
-export const createBackend = async (projectId: string, methodName: string) => {
-  const functionInfo = await getFunctionInfo(methodName)
+export const createBackend = (projectId: string, methodName: string) => {
+  const functionInfo = getFunctionInfo(methodName)
   const shCmd = [
     'gcloud',
     'compute',

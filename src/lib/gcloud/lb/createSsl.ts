@@ -5,7 +5,7 @@ export const createSsl = async (
   appName: string,
   domain: string,
 ) => {
-  const appConf = await getNetworkConfig(projectId, appName)
+  const appConf = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',

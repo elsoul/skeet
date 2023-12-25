@@ -24,11 +24,7 @@ export const FRONT_APP_PATH = './src'
 export const WEB_APP_PATH = './webapp'
 export const KEYFILE_PATH = './keyfile.json'
 
-export const getNegName = async (functionName: string) => {
-  return `skeet-${functionName}-neg`
-}
-
-export const getFunctionInfo = async (functionName: string) => {
+export const getFunctionInfo = (functionName: string) => {
   const functionInfo = {
     name: `skeet-functions-${functionName}`,
     neg: `skeet-${functionName}-neg`,
@@ -62,7 +58,7 @@ const readConfigFile = (functionName: string, file: string) => {
   }
 }
 
-export const getNetworkConfig = async (projectId: string, appName: string) => {
+export const getNetworkConfig = (projectId: string, appName: string) => {
   const skeetHd = 'skeet-' + appName
   return {
     projectId,
@@ -104,7 +100,7 @@ export const getContainerRegion = (region: string) => {
   }
 }
 
-export const getContainerImageUrl = async (
+export const getContainerImageUrl = (
   projectId: string,
   appName: string,
   region: string,
@@ -152,7 +148,7 @@ export const regionToTimezone = async (region: string) => {
 
 export const getRunUrl = async (projectId: string, appName: string) => {
   try {
-    const runName = (await getNetworkConfig(projectId, appName)).cloudRunName
+    const runName = getNetworkConfig(projectId, appName).cloudRunName
     console.log(runName)
     const cmd = `gcloud run services list --project=${projectId} | grep ${runName} | awk '{print $4}'`
     const res = String(execSync(cmd)).replace(/\r?\n/g, '')
@@ -163,12 +159,12 @@ export const getRunUrl = async (projectId: string, appName: string) => {
   }
 }
 
-export const isNegExists = async (
+export const isNegExists = (
   projectId: string,
   region: string,
   methodName: string,
 ) => {
-  const { neg } = await getFunctionInfo(methodName)
+  const { neg } = getFunctionInfo(methodName)
   const shCmd = [
     'gcloud',
     'compute',

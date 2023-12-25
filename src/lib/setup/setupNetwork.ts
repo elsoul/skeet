@@ -3,7 +3,7 @@ import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const setupNetwork = async () => {
   const config: SkeetCloudConfig = importConfig()
-  await setGcloudProject(config.app.projectId)
+  setGcloudProject(config.app.projectId)
   await createVpcNetwork(
     config.app.projectId,
     config.app.name,

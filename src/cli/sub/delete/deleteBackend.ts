@@ -2,7 +2,7 @@ import { execSyncCmd, getFunctionInfo } from '@/lib'
 
 export const deleteBackend = async (projectId: string, methodName: string) => {
   try {
-    const functionInfo = await getFunctionInfo(methodName)
+    const functionInfo = getFunctionInfo(methodName)
     const shCmd = [
       'gcloud',
       'compute',

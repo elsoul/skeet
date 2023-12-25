@@ -4,7 +4,7 @@ export const updateBackendSecurityPolicy = async (
   projectId: string,
   appName: string,
 ) => {
-  const appConf = await getNetworkConfig(projectId, appName)
+  const appConf = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',

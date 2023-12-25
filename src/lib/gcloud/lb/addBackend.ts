@@ -1,15 +1,15 @@
 import { execSyncCmd } from '@/lib'
 import { getFunctionInfo, getNetworkConfig } from '@/lib'
 
-export const addBackend = async (
+export const addBackend = (
   projectId: string,
   appName: string,
   methodName: string,
   region: string,
   init = false,
 ) => {
-  const appConf = await getNetworkConfig(projectId, appName)
-  const functionInfo = await getFunctionInfo(methodName)
+  const appConf = getNetworkConfig(projectId, appName)
+  const functionInfo = getFunctionInfo(methodName)
   const backendName = init
     ? appConf.defaultBackendServiceName
     : functionInfo.backendService

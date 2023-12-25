@@ -1,53 +1,54 @@
-import { importConfig, getNetworkConfig } from '@/lib'
+import { importConfig } from '@/lib'
 import { execSync } from 'child_process'
 import {
+  createSecurityPolicy,
   createSecurityPolicyRule,
   setGcloudProject,
   updateSecurityPolicyRule,
 } from '@/lib/gcloud'
 import { Logger } from '@/lib'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 
-export const syncArmors = async () => {
+export const syncArmors = () => {
   const config = importConfig()
-  await setGcloudProject(config.app.projectId)
-  if (config.cloudArmor)
-    for await (const rule of config.cloudArmor[0].rules) {
-      const result = await isRuleExist(config, rule.priority)
+  setGcloudProject(config.app.projectId)
+  for (const cloudArmor of config.cloudArmor)
+    for (const rule of cloudArmor.rules) {
+      const securityPolicyName = cloudArmor.securityPolicyName
+      const result = isRuleExist(
+        config.app.projectId,
+        cloudArmor.securityPolicyName,
+        rule.priority,
+      )
       if (result) {
-        await updateSecurityPolicyRule(
+        updateSecurityPolicyRule(
           config.app.projectId,
-          config.app.name,
+          securityPolicyName,
           rule.priority,
           rule.options,
         )
       } else {
-        console.log('creating...')
-        await createSecurityPolicyRule(
+        console.log(`✅ Creating security policry rule: ${securityPolicyName}`)
+        createSecurityPolicy(config.app.projectId, securityPolicyName)
+        createSecurityPolicyRule(
           config.app.projectId,
-          config.app.name,
+          securityPolicyName,
           rule.description,
           rule.priority,
           rule.options,
         )
       }
     }
-  Logger.success(`successfully updated Cloud Armor!`)
+  Logger.successCheck(`successfully updated Cloud Armor`)
 }
 
-export const isRuleExist = async (
-  config: SkeetCloudConfig,
+export const isRuleExist = (
+  projectId: string,
+  securityPolicyName: string,
   priority: string,
 ) => {
   try {
-    const appConf = await getNetworkConfig(
-      config.app.projectId,
-      config.app.name,
-    )
-    if (config.cloudArmor) {
-      const cmd = `gcloud compute security-policies rules describe ${priority} --security-policy=${appConf.securityPolicyName} --project=${config.app.projectId}`
-      execSync(cmd, { stdio: 'ignore' })
-    }
+    const cmd = `gcloud compute security-policies rules describe ${priority} --security-policy=${securityPolicyName} --project=${projectId}`
+    execSync(cmd, { stdio: 'ignore' })
     return true
   } catch (error) {
     return false

@@ -12,9 +12,9 @@ export const patchSQL = async (
   appName: string,
   activation: string = '',
   ips: string = '',
-  network: string = ''
+  network: string = '',
 ) => {
-  const networkConfig = await getNetworkConfig(projectId, appName)
+  const networkConfig = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'sql',
@@ -40,7 +40,7 @@ export const patchSQL = async (
       '--assign-ip',
       '--authorized-networks',
       patchOption.ips,
-      '--quiet'
+      '--quiet',
     )
   }
   if (patchOption.network !== '') {

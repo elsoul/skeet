@@ -4,7 +4,7 @@ import { addTaskQueue } from '../add/addTaskQueue'
 
 export const syncTaskQueue = async () => {
   const skeetConfig = importConfig()
-  await setGcloudProject(skeetConfig.app.projectId)
+  setGcloudProject(skeetConfig.app.projectId)
   if (skeetConfig.taskQueues) {
     for await (const taskQueue of skeetConfig.taskQueues) {
       const isUpdate = true

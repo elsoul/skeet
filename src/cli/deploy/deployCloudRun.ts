@@ -23,10 +23,10 @@ export const deployCloudRun = async (
   let image = ''
   if (workerName === '') {
     cloudRunName = getContainerImageName(appName)
-    image = await getContainerImageUrl(projectId, appName, region)
+    image = getContainerImageUrl(projectId, appName, region)
   } else {
     cloudRunName = getContainerImageName(appName, workerName)
-    image = await getContainerImageUrl(
+    image = getContainerImageUrl(
       projectId,
       appName,
       region,
@@ -34,7 +34,7 @@ export const deployCloudRun = async (
       isWorkerPlugin,
     )
   }
-  const { connectorName, serviceAccountName } = await getNetworkConfig(
+  const { connectorName, serviceAccountName } = getNetworkConfig(
     projectId,
     appName,
   )

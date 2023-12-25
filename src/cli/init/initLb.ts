@@ -34,8 +34,8 @@ export const initLb = async () => {
       domainAnswer.lbDomain,
       domainAnswer.nsDomain,
     )
-    await initArmor()
-    await syncArmors()
+    initArmor()
+    syncArmors()
     const ips = await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
     Logger.dnsSetupLog(ips)
   })

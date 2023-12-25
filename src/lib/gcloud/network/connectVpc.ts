@@ -2,7 +2,7 @@ import { execSyncCmd, getNetworkConfig } from '@/lib'
 
 export const connectVpc = async (projectId: string, appName: string) => {
   try {
-    const networkConfig = await getNetworkConfig(projectId, appName)
+    const networkConfig = getNetworkConfig(projectId, appName)
     const shCmd = [
       'gcloud',
       'services',

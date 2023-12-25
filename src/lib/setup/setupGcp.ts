@@ -15,7 +15,7 @@ import { rmSync } from 'fs'
 
 export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   const spinner = await Logger.syncSpinner('Setting up GCP...')
-  await setGcloudProject(config.app.projectId)
+  setGcloudProject(config.app.projectId)
   await runEnableAllPermission(config.app.projectId)
   await createServiceAccount(config.app.projectId, config.app.name)
   await createServiceAccountKey(config.app.projectId, config.app.name)

@@ -2,8 +2,7 @@ import { GCP_IP_RANGE } from '.'
 import { execSyncCmd, getNetworkConfig } from '@/lib'
 
 export const createFirewallTcp = async (projectId: string, appName: string) => {
-  const firewallTcpName = (await getNetworkConfig(projectId, appName))
-    .firewallTcpName
+  const firewallTcpName = getNetworkConfig(projectId, appName).firewallTcpName
   const shCmd = [
     'gcloud',
     'compute',

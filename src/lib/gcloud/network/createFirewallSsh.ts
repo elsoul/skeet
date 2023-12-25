@@ -1,7 +1,7 @@
 import { execSyncCmd, getNetworkConfig } from '@/lib'
 
 export const createFirewallSsh = async (projectId: string, appName: string) => {
-  const networkNames = await getNetworkConfig(projectId, appName)
+  const networkNames = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',

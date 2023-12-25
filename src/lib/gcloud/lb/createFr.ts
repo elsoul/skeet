@@ -1,7 +1,7 @@
 import { execSyncCmd, getNetworkConfig } from '@/lib'
 
 export const createFr = async (projectId: string, appName: string) => {
-  const appConf = await getNetworkConfig(projectId, appName)
+  const appConf = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',
