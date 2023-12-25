@@ -35,8 +35,7 @@ export const runSqlCreate = async (
     if (result.password !== result.passwordConfirm) {
       console.log('password does not match!')
     } else {
-      const networkName = (await getNetworkConfig(projectId, appName))
-        .networkName
+      const networkName = getNetworkConfig(projectId, appName).networkName
       const password = String(result.password)
       await createSQL(
         projectId,
@@ -135,7 +134,7 @@ export const createSQL = async (
   cpu: string = '1',
   memory: string = '4096MB',
 ) => {
-  const instanceName = (await getNetworkConfig(projectId, appName)).instanceName
+  const instanceName = getNetworkConfig(projectId, appName).instanceName
   const shCmd = [
     'gcloud',
     'sql',

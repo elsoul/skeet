@@ -6,7 +6,7 @@ export const createSubnet = async (
   appName: string,
   region: string,
 ) => {
-  const networkNames = await getNetworkConfig(projectId, appName)
+  const networkNames = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',

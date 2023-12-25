@@ -28,8 +28,8 @@ export const syncSubCommands = async () => {
     .alias('a')
     .alias('armor')
     .description('Skeet Sync Cloud Armor Rules')
-    .action(async () => {
-      await syncArmors()
+    .action(() => {
+      syncArmors()
     })
 
   sync

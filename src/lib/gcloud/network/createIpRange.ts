@@ -1,7 +1,7 @@
 import { execSyncCmd, getNetworkConfig } from '@/lib'
 
 export const createIpRange = async (projectId: string, appName: string) => {
-  const networkConfig = await getNetworkConfig(projectId, appName)
+  const networkConfig = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',

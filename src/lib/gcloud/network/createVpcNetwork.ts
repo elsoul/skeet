@@ -13,7 +13,7 @@ import { createIpRange } from './createIpRange'
 export const createVpcNetwork = async (
   projectId: string,
   appName: string,
-  region: string
+  region: string,
 ) => {
   await createNetwork(projectId, appName)
   await createFirewallTcp(projectId, appName)
@@ -21,7 +21,7 @@ export const createVpcNetwork = async (
   await createSubnet(projectId, appName, region)
   await createConnector(projectId, appName, region)
   await createRouter(projectId, appName, region)
-  const { ipName } = await getNetworkConfig(projectId, appName)
+  const { ipName } = getNetworkConfig(projectId, appName)
   await createFixIp(projectId, region, ipName)
   await createNat(projectId, appName, region)
   await createIpRange(projectId, appName)

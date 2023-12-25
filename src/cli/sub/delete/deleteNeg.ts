@@ -8,7 +8,7 @@ export const deleteNeg = async (
 ) => {
   try {
     const kebab = convertToKebabCase(methodName)
-    const functionInfo = await getFunctionInfo(kebab)
+    const functionInfo = getFunctionInfo(kebab)
     const shCmd = [
       'gcloud',
       'compute',

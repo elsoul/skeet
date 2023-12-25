@@ -3,6 +3,6 @@ import { getZone, initArmor } from '../gcloud'
 import { Logger } from '../logger'
 
 export const setupArmor = async (projectId: string, appName: string) => {
-  await initArmor()
-  await syncArmors()
+  initArmor()
+  syncArmors()
 }

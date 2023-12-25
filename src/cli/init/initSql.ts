@@ -13,7 +13,7 @@ export const initSql = async (
   skeetCloudConfig: SkeetCloudConfig,
   password: string,
 ) => {
-  const { networkName } = await getNetworkConfig(
+  const { networkName } = getNetworkConfig(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
   )

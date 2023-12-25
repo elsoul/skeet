@@ -23,7 +23,7 @@ export const setupIamAi = async () => {
     if (await projectIdNotExists(config.app.projectId))
       Logger.projectIdNotExistsError(config.app.projectId)
 
-    await setGcloudProject(config.app.projectId)
+    setGcloudProject(config.app.projectId)
     await enableAiPermissions(config.app.projectId)
     await createServiceAccount(config.app.projectId, config.app.name)
     await createServiceAccountKey(config.app.projectId, config.app.name)

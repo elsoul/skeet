@@ -8,13 +8,13 @@ import { addAppJson } from '../files/addJson'
 export const setupCloud = async (
   skeetConfig: SkeetCloudConfig,
   repoName: string,
-  region: string
+  region: string,
 ) => {
-  await setGcloudProject(skeetConfig.app.projectId)
+  setGcloudProject(skeetConfig.app.projectId)
 
   if (await checkRepoExists(repoName)) {
     Logger.warning(
-      `⚠️ Repository ${repoName} already exists. Please choose a new repository name. ⚠️\n`
+      `⚠️ Repository ${repoName} already exists. Please choose a new repository name. ⚠️\n`,
     )
     process.exit(0)
   }

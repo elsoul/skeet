@@ -7,7 +7,7 @@ export const addPathMatcher = async (
   paths?: Array<string>,
   init = false,
 ) => {
-  const appConf = await getNetworkConfig(projectId, appName)
+  const appConf = getNetworkConfig(projectId, appName)
   paths = paths || []
   paths.push(`/=${appConf.defaultBackendServiceName}`)
   let shCmd = []

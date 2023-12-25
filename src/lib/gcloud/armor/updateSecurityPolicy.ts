@@ -1,10 +1,7 @@
 import { execSyncCmd, getNetworkConfig } from '@/lib'
 
-export const updateSecurityPolicy = async (
-  projectId: string,
-  appName: string,
-) => {
-  const appConf = await getNetworkConfig(projectId, appName)
+export const updateSecurityPolicy = (projectId: string, appName: string) => {
+  const appConf = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',

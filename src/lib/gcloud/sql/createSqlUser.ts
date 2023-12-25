@@ -37,9 +37,9 @@ export const createSqlUser = async (
   projectId: string,
   appName: string,
   userName: string,
-  password: string
+  password: string,
 ) => {
-  const instanceName = (await getNetworkConfig(projectId, appName)).instanceName
+  const instanceName = getNetworkConfig(projectId, appName).instanceName
   const shCmd = [
     'gcloud',
     'sql',

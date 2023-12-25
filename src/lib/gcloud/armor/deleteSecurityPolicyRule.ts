@@ -1,11 +1,11 @@
 import { execSyncCmd, getNetworkConfig } from '@/lib'
 
-export const deleteSecurityPolicyRule = async (
+export const deleteSecurityPolicyRule = (
   projectId: string,
   appName: string,
   priority: string = '1000',
 ) => {
-  const appConf = await getNetworkConfig(projectId, appName)
+  const appConf = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',

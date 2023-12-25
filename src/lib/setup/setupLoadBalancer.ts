@@ -31,11 +31,8 @@ export const setupLoadBalancer = async (
   nsDomain: string,
 ) => {
   try {
-    await setGcloudProject(config.app.projectId)
-    const networkConf = await getNetworkConfig(
-      config.app.projectId,
-      config.app.name,
-    )
+    setGcloudProject(config.app.projectId)
+    const networkConf = getNetworkConfig(config.app.projectId, config.app.name)
     await createFixIp(
       config.app.projectId,
       config.app.region,
@@ -43,10 +40,10 @@ export const setupLoadBalancer = async (
       true,
     )
     const methodName = 'root'
-    await createNeg(config.app.projectId, methodName, config.app.region, true)
+    createNeg(config.app.projectId, methodName, config.app.region, true)
     const defaultBackendServiceName = `${config.app.name}-default`
-    await createBackend(config.app.projectId, defaultBackendServiceName)
-    await addBackend(
+    createBackend(config.app.projectId, defaultBackendServiceName)
+    addBackend(
       config.app.projectId,
       config.app.name,
       defaultBackendServiceName,
@@ -59,8 +56,12 @@ export const setupLoadBalancer = async (
     await createProxy(config.app.projectId, config.app.name)
     await createFr(config.app.projectId, config.app.name)
 
-    await createSecurityPolicy(config.app.projectId, config.app.name)
-    await updateBackend(
+    const securityPolicyName = getNetworkConfig(
+      config.app.projectId,
+      config.app.name,
+    ).securityPolicyName
+    createSecurityPolicy(config.app.projectId, securityPolicyName)
+    updateBackend(
       config.app.projectId,
       config.app.name,
       defaultBackendServiceName,
@@ -70,8 +71,8 @@ export const setupLoadBalancer = async (
 
     // Create GraphQL Endpoint if template includes graphql
     if (config.app.template.includes('GraphQL')) {
-      const graphqlInfo = await getFunctionInfo('graphql')
-      await addBackendSetup('graphql')
+      const graphqlInfo = getFunctionInfo('graphql')
+      addBackendSetup('graphql')
       const graphqlPath = `/graphql=${graphqlInfo.backendService}`
       paths.push(graphqlPath)
     }
