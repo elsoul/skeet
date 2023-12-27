@@ -9,15 +9,16 @@ export const logCommands = async () => {
     .option('-aa, --AA', 'Show AA logs', false)
     .description('Deploy Skeet APP to Firebase')
     .action(async (options) => {
-      const { app } = importConfig()
-      if (options.function) {
+      if (options.AA) {
+        Logger.skeetAA()
+        Logger.welcomText('', 'install')
+      } else if (options.function) {
+        const { app } = importConfig()
         const functionName = options.function
         fuctionsLog(app.projectId, functionName)
         return
-      } else if (options.AA) {
-        Logger.skeetAA()
-        Logger.welcomText('', 'install')
       } else {
+        const { app } = importConfig()
         fuctionsLog(app.projectId)
       }
     })
