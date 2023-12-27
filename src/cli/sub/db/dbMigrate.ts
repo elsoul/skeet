@@ -1,11 +1,15 @@
-import { GRAPHQL_ROOT } from '@/index'
-import chalk from 'chalk'
+import { PATH } from '@/config/path'
 import { spawnSync } from 'child_process'
 
-export const dbMigrate = async (name: string, production: boolean = false) => {
+export const dbMigrate = (
+  name: string,
+  production: boolean = false,
+  cwd = PATH.GRAPHQL,
+) => {
   try {
     const prismaMigrateCmd = production
       ? [
+          'npx',
           'dotenv',
           '-e',
           `.env.build`,
@@ -18,7 +22,7 @@ export const dbMigrate = async (name: string, production: boolean = false) => {
         ]
       : ['npx', 'prisma', 'migrate', 'dev', '--name', name]
     spawnSync(prismaMigrateCmd[0], prismaMigrateCmd.slice(1), {
-      cwd: GRAPHQL_ROOT,
+      cwd,
       stdio: 'inherit',
     })
   } catch (error) {

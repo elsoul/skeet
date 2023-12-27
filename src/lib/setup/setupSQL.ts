@@ -24,7 +24,7 @@ export const setupSQL = async (
     await initSql(skeetConfig, sqlPassword)
     await addIp()
     await sqlIp()
-    await dbDeploy(true)
+    dbDeploy(true)
     const envProductionPath = skeetConfig.app.template.includes('GraphQL')
       ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
       : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION

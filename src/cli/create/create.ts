@@ -18,6 +18,7 @@ import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { SkeetTemplate, SkeetTemplateBackend } from '@/types/skeetTypes'
 import { dbGen } from '../sub/db/dbGen'
 import { dbDeploy } from '../sub/db/dbDeploy'
+import { PATH } from '@/config/path'
 
 export const create = async (initAppName: string) => {
   const { template } = await askForTemplate()
@@ -96,7 +97,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
     const yarnApiCmd = ['yarn']
     execSyncCmd(yarnApiCmd, appGraphqlPath)
     dbGen(appGraphqlPath)
-    await dbDeploy(false, appGraphqlPath)
+    dbDeploy(false, appGraphqlPath)
   }
 
   if (template !== 'Backend Only - GraphQL') {

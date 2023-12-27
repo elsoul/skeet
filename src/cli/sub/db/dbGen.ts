@@ -1,7 +1,7 @@
-import { GRAPHQL_ROOT } from '@/index'
+import { PATH } from '@/config/path'
 import { spawnSync } from 'child_process'
 
-export const dbGen = (cwd = GRAPHQL_ROOT) => {
+export const dbGen = (cwd = PATH.GRAPHQL as string) => {
   try {
     const prismaMigrateCmd = ['npx', 'prisma', 'generate']
     spawnSync(prismaMigrateCmd[0], prismaMigrateCmd.slice(1), {
