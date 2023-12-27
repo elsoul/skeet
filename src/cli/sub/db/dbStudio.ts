@@ -1,16 +1,16 @@
-import { GRAPHQL_ROOT } from '@/index'
+import { PATH } from '@/config/path'
 import { spawnSync } from 'child_process'
 
-export const dbStudio = async (production: boolean = false) => {
+export const dbStudio = (production: boolean = false, cwd = PATH.GRAPHQL) => {
   try {
     let shCmd = []
     if (production) {
-      shCmd = ['dotenv', '-e', '.env.build', 'npx', 'prisma', 'studio']
+      shCmd = ['npx', 'dotenv', '-e', '.env.build', 'npx', 'prisma', 'studio']
     } else {
       shCmd = ['npx', 'prisma', 'studio']
     }
     spawnSync(shCmd[0], shCmd.slice(1), {
-      cwd: GRAPHQL_ROOT,
+      cwd,
       stdio: 'inherit',
     })
   } catch (error) {

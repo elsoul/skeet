@@ -1,11 +1,44 @@
-import { GRAPHQL_ROOT } from '@/index'
+import { PATH } from '@/config/path'
 import { spawnSync } from 'child_process'
+import inquirer from 'inquirer'
 
-export const dbReset = async () => {
+type ResetComfirmation = {
+  confirm: boolean
+}
+
+export const dbReset = async (
+  production: boolean = false,
+  cwd = PATH.GRAPHQL,
+) => {
   try {
-    const prismaMigrateCmd = ['npx', 'prisma', 'migrate', 'reset']
-    spawnSync(prismaMigrateCmd[0], prismaMigrateCmd.slice(1), {
-      cwd: GRAPHQL_ROOT,
+    let shCmd = []
+    if (production) {
+      const confirmation = await inquirer.prompt<ResetComfirmation>([
+        {
+          type: 'confirm',
+          name: 'confirm',
+          message: 'Are you sure you want to reset the database?',
+          default: false,
+        },
+      ])
+      if (!confirmation.confirm) {
+        return
+      }
+      shCmd = [
+        'npx',
+        'dotenv',
+        '-e',
+        '.env.build',
+        'npx',
+        'prisma',
+        'migrate',
+        'reset',
+      ]
+    } else {
+      shCmd = ['npx', 'prisma', 'migrate', 'reset']
+    }
+    spawnSync(shCmd[0], shCmd.slice(1), {
+      cwd,
       stdio: 'inherit',
     })
   } catch (error) {
