@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Constants and configurable variables
 NODE_VERSION=20.10.0
@@ -22,25 +22,35 @@ EOF
 }
 
 install_nodenv_and_node() {
+    CURRENT_USER=$(whoami)
+    USER_HOME=$(eval echo ~$CURRENT_USER)
+    echo "Current user: $CURRENT_USER"
+    echo "User home directory: $USER_HOME"
+
+    PROFILE_PATH="$USER_HOME/.profile"
+    if [[ $SHELL == */zsh ]]; then
+        PROFILE_PATH="$USER_HOME/.zshrc"
+    fi
+
     echo "Installing nodenv..."
-    git clone https://github.com/nodenv/nodenv.git ~/.nodenv
-    echo 'export PATH="\$HOME/.nodenv/bin:\$PATH"' >> ~/.profile
-    echo 'eval "\$(nodenv init -)"' >> ~/.profile
-    source ~/.profile
+    git clone https://github.com/nodenv/nodenv.git $USER_HOME/.nodenv
+    echo 'export PATH="'$USER_HOME'/.nodenv/bin:$PATH"' >> $PROFILE_PATH
+    echo 'eval "$('$USER_HOME'/.nodenv/bin/nodenv init -)"' >> $PROFILE_PATH
+    . $PROFILE_PATH
 
     echo "Installing node-build..."
-    git clone https://github.com/nodenv/node-build.git "\$(nodenv root)"/plugins/node-build
+    git clone https://github.com/nodenv/node-build.git "$($USER_HOME/.nodenv/bin/nodenv root)"/plugins/node-build
 
     echo "Installing node $NODE_VERSION..."
-    nodenv install $NODE_VERSION
-    nodenv global $NODE_VERSION
+    $USER_HOME/.nodenv/bin/nodenv install $NODE_VERSION
+    $USER_HOME/.nodenv/bin/nodenv global $NODE_VERSION
     echo "Node installation completed!"
 
     echo "Installing @skeet-framework/cli..."
     npm i -g @skeet-framework/cli
 
-    echo "Sourcing ~/.profile..."
-    source ~/.profile
+    echo "Sourcing $PROFILE_PATH..."
+    . $PROFILE_PATH
 }
 
 main() {
@@ -56,9 +66,8 @@ main() {
     done
 
     install_nodenv_and_node
-    skeet --help
+    skeet log -aa
 }
 
 main "$@"
-
 } # this ensures the entire script is downloaded
