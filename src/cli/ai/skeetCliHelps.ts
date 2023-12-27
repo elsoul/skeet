@@ -256,8 +256,6 @@ Options:
   -h, --help      display help for command
 
 Commands:
-  models|m        Skeet Sync Models
-  types|t         Skeet Sync Types
   routings|r      Skeet Sync Routings
   armors|a        Skeet Sync Cloud Armor Rules
   sql             Skeet Sync SQL

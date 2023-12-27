@@ -18,8 +18,8 @@ export const dbSubCommands = async () => {
 
   db.command('generate')
     .description('Prisma Generate command')
-    .action(async () => {
-      await dbGen()
+    .action(() => {
+      dbGen()
     })
 
   db.command('deploy')

@@ -95,7 +95,7 @@ export const generateInitFiles = async (appName: string, template: string) => {
     const appGraphqlPath = `./${appName}/graphql`
     const yarnApiCmd = ['yarn']
     execSyncCmd(yarnApiCmd, appGraphqlPath)
-    await dbGen(appGraphqlPath)
+    dbGen(appGraphqlPath)
     await dbDeploy(false, appGraphqlPath)
   }
 
