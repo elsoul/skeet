@@ -86,7 +86,7 @@ export module Logger {
     const title = warningHex(
       '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡',
     )
-    const text = template.includes('GraphQL')
+    let text = template.includes('GraphQL')
       ? `
 $ cd ${appName}
 $ skeet docker psql
@@ -96,18 +96,25 @@ Go To : http://127.0.0.1:4000/`
 $ cd ${appName}
 $ skeet s
 Go To : http://127.0.0.1:4000/`
-    const backendGraphqlText = `
-$ cd ${appName}
-$ skeet docker psql
-$ skeet s
-Go To : http://localhost:3000/graphql
-    `
+
     console.log(title)
     if (template === SkeetTemplateBackend.GraphQL) {
-      console.log(backendGraphqlText)
-    } else {
-      console.log(greyHex(text))
+      text = `
+      $ cd ${appName}
+      $ skeet docker psql
+      $ skeet s
+      Go To : http://localhost:3000/graphql
+          `
     }
+    if (template === 'install') {
+      text = `
+$ skeet create testApp
+$ cd testApp
+$ skeet s
+Go To : http://localhost:4000
+      `
+    }
+    console.log(greyHex(text))
   }
 
   export const cmText = () => {

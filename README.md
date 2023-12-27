@@ -51,6 +51,22 @@ The Skeet CLI leverages generative AI to reduce overall development costs, is re
 
 Currently, it supports development on Google Cloud and Firebase.
 
+## Installation
+
+If you already have Node.js installed, you can install Skeet CLI with npm:
+
+```bash
+$ npm i -g @skeet-framework/cli
+```
+
+Or
+
+Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
+
+```bash
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v1.0.0)"
+```
+
 ## Enabling Google Cloud VertexAI/OpenAI
 
 Create a new project in Google Cloud Platform and enable VertexAI.
