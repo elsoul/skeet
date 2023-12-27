@@ -121,10 +121,10 @@ export const init = async (loginMode = false) => {
   // Create Load Balancer if not exists
   if (!skeetConfig.app.hasLoadBalancer) {
     await createLoadBalancer(skeetConfig, domainAnswer)
-    await syncRoutings()
+    syncRoutings()
     const cmd = `yarn deploy`
     spawnSync(cmd, { stdio: 'inherit', shell: true })
-    const ips = await getZone(projectId, skeetConfig.app.name)
+    const ips = getZone(projectId, skeetConfig.app.name)
     Logger.dnsSetupLog(ips)
   } else {
     const cmd = `yarn deploy`

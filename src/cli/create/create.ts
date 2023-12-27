@@ -77,7 +77,7 @@ export const skeetCreate = async (appName: string, template: string) => {
 }
 
 export const generateInitFiles = async (appName: string, template: string) => {
-  const spinner = await Logger.syncSpinner('Generating init files...')
+  const spinner = Logger.syncSpinner('Generating init files...')
   await initPackageJson(appName)
   if (template === SkeetTemplate.ExpoFirestore) {
     await initAppJson(appName)

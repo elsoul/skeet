@@ -1,12 +1,11 @@
-import { execSyncCmd, getFunctionInfo, getNetworkConfig } from '@/lib'
+import { execSyncCmd, getFunctionInfo } from '@/lib'
 
 export const updateBackend = (
   projectId: string,
-  appName: string,
+  securityPolicyName: string,
   methodName: string,
 ) => {
   const functionInfo = getFunctionInfo(methodName)
-  const skeetConfig = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
     'compute',
@@ -14,7 +13,7 @@ export const updateBackend = (
     'update',
     functionInfo.backendService,
     '--security-policy',
-    skeetConfig.securityPolicyName,
+    securityPolicyName,
     '--global',
     '--project',
     projectId,

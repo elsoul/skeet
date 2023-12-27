@@ -76,15 +76,26 @@
       ]
     }
   ],
+  "routings": [
+    {
+      "methodName": "getCards",
+      "securityPolicyName": "skeet-sql-armor"
+    },
+    {
+      "methodName": "createCards",
+      "securityPolicyName": "skeet-sql-armor"
+    },
+    {
+      "methodName": "addUserChatRoomMessage",
+      "securityPolicyName": "skeet-sql-armor"
+    }
+  ],
   "ai": {
     "lang": "ja",
     "ais": [
       {
         "name": "VertexAI",
-        "availableModels": [
-          "chat-bison@001",
-          "chat-bison-32k"
-        ]
+        "availableModels": ["chat-bison@001", "chat-bison-32k"]
       }
     ]
   }

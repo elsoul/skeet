@@ -1,6 +1,6 @@
 import { execSyncCmd, getNetworkConfig } from '@/lib'
 
-export const addPathMatcher = async (
+export const addPathMatcher = (
   projectId: string,
   appName: string,
   domain: string,
