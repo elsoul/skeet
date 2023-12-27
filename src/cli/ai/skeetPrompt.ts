@@ -1,5 +1,6 @@
 import { Example } from '@skeet-framework/ai'
 import { skeetCliHelps } from './skeetCliHelps'
+import { LINKS } from '@/config/links'
 
 export const skeetAiPrompt = (lang: string): Example => {
   return {
@@ -126,6 +127,22 @@ export const skeetAiPrompt = (lang: string): Example => {
         input: '新しいモデルを追加するには？',
         output:
           '$ skeet ai コマンドを実行後、 $ prisma モードでSQLのモデル作成をすることができます。Firestoreの場合は $ firestore モードでNoSQLのモデル作成をすることができます。',
+      },
+      {
+        input: 'Discord Bot を作成するには？',
+        output: `Discord Bot を作成するには以下のリンクを参考にしてください。\n\n- [Discord Bot を作成する](${LINKS.DISCORD_BOT_JA})`,
+      },
+      {
+        input: 'Stripe App を作成するには？',
+        output: `Stripe App を作成するには以下のリンクを参考にしてください。\n\n- [Stripe App を作成する](${LINKS.STRIPE_APP_JA})`,
+      },
+      {
+        input: 'How to create a Discord Bot?',
+        output: `You can create a Discord Bot by following the link below.\n\n- [How to create a Discord Bot](${LINKS.DISCORD_BOT_EN})`,
+      },
+      {
+        input: 'How to create a Stripe App?',
+        output: `You can create a Stripe App by following the link below.\n\n- [How to create a Stripe App](${LINKS.STRIPE_APP_EN})`,
       },
     ],
   }

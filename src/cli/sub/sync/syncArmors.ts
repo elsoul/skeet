@@ -16,7 +16,7 @@ export const syncArmors = () => {
       const securityPolicyName = cloudArmor.securityPolicyName
       const result = isRuleExist(
         config.app.projectId,
-        cloudArmor.securityPolicyName,
+        securityPolicyName,
         rule.priority,
       )
       if (result) {
