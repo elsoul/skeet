@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 
 export const skeetCloudConfigGen = async (
   appName: string,
-  template: string
+  template: string,
 ) => {
   const filePath = `${appName}/skeet-cloud.config.json`
   const homeIp = await getHomeIp()
@@ -105,7 +105,8 @@ export const skeetCloudConfigGen = async (
         }
       ]
     }
-  ]
+  ],
+  "routings": []
 }  
 `
   return {

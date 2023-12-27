@@ -21,7 +21,7 @@ export const syncSubCommands = async () => {
     .alias('routing')
     .description('Skeet Sync Routings')
     .action(async () => {
-      await syncRoutings()
+      syncRoutings()
     })
   sync
     .command('armors')

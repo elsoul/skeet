@@ -27,6 +27,7 @@ export type SkeetCloudConfig = {
   db: DbConfig
   taskQueues: TaskQueue[]
   cloudArmor: CloudArmor[]
+  routings: Routing[]
 }
 
 export type AppConfig = {
@@ -77,6 +78,12 @@ export type Rules = {
 export type CloudArmor = {
   securityPolicyName: string
   rules: Rules[]
+}
+
+export type Routing = {
+  methodName: string
+  securityPolicyName: string
+  path?: string
 }
 
 export type TranslateJson = {

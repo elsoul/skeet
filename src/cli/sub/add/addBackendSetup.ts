@@ -5,10 +5,14 @@ import {
   updateBackend,
   importConfig,
   isNegExists,
+  getNetworkConfig,
 } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 
-export const addBackendSetup = (methodName: string) => {
+export const addBackendSetup = (
+  methodName: string,
+  securityPolicyName?: string | null,
+) => {
   try {
     const config = importConfig()
     const kebab = convertToKebabCase(methodName)
@@ -18,7 +22,14 @@ export const addBackendSetup = (methodName: string) => {
     createNeg(config.app.projectId, methodName, config.app.region)
     createBackend(config.app.projectId, kebab)
     addBackend(config.app.projectId, config.app.name, kebab, config.app.region)
-    updateBackend(config.app.projectId, config.app.name, kebab)
+    let securityPolicyNameValue = getNetworkConfig(
+      config.app.projectId,
+      config.app.name,
+    ).securityPolicyName
+    if (securityPolicyName) {
+      securityPolicyNameValue = securityPolicyName
+    }
+    updateBackend(config.app.projectId, securityPolicyNameValue, kebab)
     return { status: 'success' }
   } catch (error) {
     throw new Error(`addBackendSetup: ${error}`)

@@ -13,11 +13,11 @@ export module Logger {
   export const indigoHex = chalk.hex('#3950A0')
   export const pinkHex = chalk.hex('#D8A1C4')
 
-  export const syncSpinner = async (text: string) => {
+  export const syncSpinner = (text: string) => {
     const spinnerEmoji =
       spinnerPattern[Math.floor(Math.random() * spinnerPattern.length)]
     const spinner = new Spinner(
-      ` ${spinnerEmoji.left} ` + chalk.white(text) + ` %s`
+      ` ${spinnerEmoji.left} ` + chalk.white(text) + ` %s`,
     )
     try {
       spinner.setSpinnerString(18)
@@ -84,7 +84,7 @@ export module Logger {
 
   export const welcomText = (appName: string, template: string) => {
     const title = warningHex(
-      '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡'
+      '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡',
     )
     const text = template.includes('GraphQL')
       ? `
@@ -125,7 +125,7 @@ Go To : http://localhost:3000/graphql
     try {
       Logger.warning('⚠️ Project ID with that name does not exist ⚠️\n')
       Logger.normal(
-        `Please check the project ID from Google Cloud. \n\nex) \`skeet-app\` might be \`skeet-app-123456\`.`
+        `Please check the project ID from Google Cloud. \n\nex) \`skeet-app\` might be \`skeet-app-123456\`.`,
       )
       throw new Error(`Project ID ${projectId} does not exist`)
     } catch (error) {
@@ -137,7 +137,7 @@ Go To : http://localhost:3000/graphql
     try {
       Logger.warning('⚠️ Billing is not enabled for this project ⚠️\n')
       Logger.normal(
-        `Please enable billing from Google Cloud. \n\nPlease Visit: https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project\n`
+        `Please enable billing from Google Cloud. \n\nPlease Visit: https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project\n`,
       )
       throw new Error(`Billing is not enabled for ${projectId}`)
     } catch (error) {
@@ -147,14 +147,14 @@ Go To : http://localhost:3000/graphql
 
   export const dnsSetupLog = (nameServerAddresses: Array<string>) => {
     Logger.warning(
-      '🚸 === Copy & Paste below nameServer addresses to your DNS Setting === 🚸\n'
+      '🚸 === Copy & Paste below nameServer addresses to your DNS Setting === 🚸\n',
     )
     const exportLog = `${nameServerAddresses.join('\n')}\n`
     Logger.normal(exportLog)
     // Logger.warning('🚸 =========           END           ========= 🚸\n\n')
 
     Logger.warning(
-      '👷 === https will be ready in about an hour after your DNS settings === 👷\n'
+      '👷 === https will be ready in about an hour after your DNS settings === 👷\n',
     )
     Logger.successCheck(`You are all set`)
     Logger.normal(`\n📗 Doc: https://skeet.dev`)
@@ -162,29 +162,29 @@ Go To : http://localhost:3000/graphql
 
   export const confirmIfFirebaseSetupLog = (
     projectId: string,
-    template: string
+    template: string,
   ) => {
     Logger.warning(
-      `\n⚠️ Please make sure if you create Firestore & FirebaseAuth ⚠️\n`
+      `\n⚠️ Please make sure if you create Firestore & FirebaseAuth ⚠️\n`,
     )
     Logger.normal(`Click the link to check 👇`)
     if (!template.includes('GraphQL')) {
       Logger.normal(
-        `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`
+        `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`,
       )
     }
     Logger.normal(
-      `Firebase Auth: https://console.firebase.google.com/project/${projectId}/authentication\n`
+      `Firebase Auth: https://console.firebase.google.com/project/${projectId}/authentication\n`,
     )
     Logger.normal(
-      `Cloud Storage: https://console.firebase.google.com/project/${projectId}/storage\n`
+      `Cloud Storage: https://console.firebase.google.com/project/${projectId}/storage\n`,
     )
     Logger.normal(`📗 Doc: https://skeet.dev/doc/backend/initial-deploy/\n`)
   }
 
   export const confirmFirebaseSetup = async (
     fbProjectId: string,
-    template: string
+    template: string,
   ) => {
     Logger.confirmIfFirebaseSetupLog(fbProjectId, template)
     await questionList.checkIfFirebaseSetup(fbProjectId)

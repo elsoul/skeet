@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { getFunctions } from './getDirs'
 
-export const getHttpRoutings = async () => {
+export const getHttpRoutings = () => {
   const functions = getFunctions()
   const data = []
   for (const functionName of functions) {
@@ -12,7 +12,7 @@ export const getHttpRoutings = async () => {
       functionName,
       'src',
       'routings',
-      'http'
+      'http',
     )
     const files = fs
       .readdirSync(httpRoutingPath)

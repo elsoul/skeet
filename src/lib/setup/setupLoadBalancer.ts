@@ -77,13 +77,7 @@ export const setupLoadBalancer = async (
       paths.push(graphqlPath)
     }
 
-    await addPathMatcher(
-      config.app.projectId,
-      config.app.name,
-      lbDomain,
-      paths,
-      true,
-    )
+    addPathMatcher(config.app.projectId, config.app.name, lbDomain, paths, true)
 
     await hasLoadBalancerTrue()
 

@@ -25,7 +25,7 @@ export const createZone = async (
   execSyncCmd(shCmd)
 }
 
-export const getZone = async (projectId: string, appName: string) => {
+export const getZone = (projectId: string, appName: string) => {
   try {
     const appConf = getNetworkConfig(projectId, appName)
     const shCmd = [

@@ -4,7 +4,7 @@ import * as cli from 'cli-table3'
 
 export const listHttps = async () => {
   const { app } = importConfig()
-  const https = await getHttpRoutings()
+  const https = getHttpRoutings()
   const table = new cli.default({
     head: ['Function', 'Endpoint', 'ParamsPath'],
     style: {
