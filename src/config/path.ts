@@ -4,6 +4,8 @@ export enum PATH {
   FUNCTION = './functions',
   SQL = './sql',
   GRAPHQL = './graphql',
+  FIREBASE_USERS = './tmp/users.json',
+  TMP = './tmp',
 }
 
 export enum FILE_NAME {
@@ -13,4 +15,12 @@ export enum FILE_NAME {
   FIREBASE_CONFIG = 'firebase.json',
   FIREBASE_RC = '.firebaserc',
   PRISMA_SCHEMA = 'schema.prisma',
+}
+
+export const getPrismaPath = (db: string) => {
+  const path = db.includes('GraphQL') ? PATH.GRAPHQL : PATH.SQL
+  if (db === 'GraphQL') {
+    return `${path}/prisma/${FILE_NAME.PRISMA_SCHEMA}`
+  }
+  return `${path}/prisma/${FILE_NAME.PRISMA_SCHEMA}`
 }

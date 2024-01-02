@@ -35,7 +35,7 @@ export const genGraphqlIndex = async () => {
 }
 
 export const genmodelManagerIndex = async () => {
-  const apiModels = await getApiModels()
+  const apiModels = getApiModels()
   const exportArray: Array<string> = []
   for await (const model of apiModels) {
     const str = `export * from './${model}'`
@@ -46,14 +46,14 @@ export const genmodelManagerIndex = async () => {
   Logger.successCheck(`successfully created ✔ - ${filePath}`)
 }
 
-export const getNewModels = async () => {
-  const apiModels = await getApiModels()
-  const prismaModels = await getModels()
+export const getNewModels = () => {
+  const apiModels = getApiModels()
+  const prismaModels = getModels()
   const newMoldes = prismaModels.filter((x) => apiModels.indexOf(x) === -1)
   return newMoldes
 }
 
-export const getApiModels = async () => {
+export const getApiModels = () => {
   const apiModels = readdirSync(GRAPHQL_PATH + '/modelManager/', {
     withFileTypes: true,
   })

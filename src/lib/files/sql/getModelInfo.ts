@@ -1,6 +1,8 @@
 import { GRAPHQL_PATH, PRISMA_SCHEMA_PATH } from '@/index'
 import { readFileSync, writeFileSync } from 'fs'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
+import { importConfig } from '../importConfig'
+import { getPrismaPath } from '@/config/path'
 
 export type ModelSchema = {
   name: string
@@ -24,9 +26,9 @@ export enum ColType {
   Bytes,
 }
 
-export const getColType = async (type: string) => {
+export const getColType = (type: string) => {
   const param = prismaSchemaType.filter(
-    (typeName) => type === typeName || type === typeName + '?'
+    (typeName) => type === typeName || type === typeName + '?',
   )
   if (param.length == 0) {
     if (type.includes('?') || type.includes('[]')) {
@@ -72,8 +74,8 @@ export const syncEnumFile = async () => {
   for await (const enumName of enums) {
     fileBody.push(
       `export const ${convertFromKebabCaseToLowerCase(
-        enumName
-      )}Enum = enumType(${enumName})`
+        enumName,
+      )}Enum = enumType(${enumName})`,
     )
   }
   writeFileSync(`${GRAPHQL_PATH}/enums.ts`, fileBody.join('\n'), {
@@ -81,11 +83,13 @@ export const syncEnumFile = async () => {
   })
 }
 
-export const getModels = async () => {
-  const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH, 'utf-8')
+export const getModels = () => {
+  const { app } = importConfig()
+  const prismaPath = getPrismaPath(app.template)
+  const prismaSchema = readFileSync(prismaPath, 'utf-8')
   const lines = prismaSchema.split('\n')
   const models: Array<string> = []
-  for await (const line of lines) {
+  for (const line of lines) {
     if (line.includes('model') && line.includes('{')) {
       const modelName = line.split('model ')[1].replace(' {', '')
       models.push(modelName)
@@ -94,14 +98,16 @@ export const getModels = async () => {
   return models
 }
 
-export const getColumns = async (modelName: string) => {
-  const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH, 'utf-8')
+export const getColumns = (modelName: string) => {
+  const { app } = importConfig()
+  const prismaPath = getPrismaPath(app.template)
+  const prismaSchema = readFileSync(prismaPath, 'utf-8')
   const lines = prismaSchema.split('\n')
   const modelSchema: Array<ModelSchema> = []
   let isModel = false
   let isEnd = false
 
-  for await (const line of lines) {
+  for (const line of lines) {
     if (isEnd) break
     if (isModel) {
       if (line.includes('}')) {
@@ -112,7 +118,7 @@ export const getColumns = async (modelName: string) => {
         if (splitArray[0] == undefined) continue
         if (splitArray[0] == 'id') continue
         if (splitArray[0].includes('@@')) continue
-        const getColTypeResult = await getColType(splitArray[1])
+        const getColTypeResult = getColType(splitArray[1])
         if (getColTypeResult === ColType.Bytes) continue
         const type =
           getColTypeResult === ColType.Enum

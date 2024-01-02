@@ -1,6 +1,6 @@
 import { execSyncCmd } from '@/lib'
 
-export const getSecret = async (secretKey: string) => {
+export const getSecret = (secretKey: string) => {
   try {
     const cmd = ['firebase', 'functions:secrets:access', secretKey]
     execSyncCmd(cmd)
