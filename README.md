@@ -53,18 +53,16 @@ Currently, it supports development on Google Cloud and Firebase.
 
 ## Installation
 
+Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
+
+```bash
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/v1.0.2-install)"
+```
+
 If you already have Node.js installed, you can install Skeet CLI with npm:
 
 ```bash
 $ npm i -g @skeet-framework/cli
-```
-
-Or
-
-Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
-
-```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v1.0.0)"
 ```
 
 ## Enabling Google Cloud VertexAI/OpenAI

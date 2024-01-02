@@ -19,6 +19,7 @@ import {
   genCommands,
   releaseCommands,
   aiCommands,
+  configCommands,
 } from '@/cli'
 import { logCommands } from './cli/log'
 
@@ -63,6 +64,7 @@ function main() {
     deleteSubCommands()
     listSubCommands()
     aiCommands()
+    configCommands()
 
     program.parseAsync(process.argv)
   } catch (error) {
