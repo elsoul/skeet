@@ -1,9 +1,19 @@
 import { Logger } from '@/lib'
 import { execSync } from 'child_process'
 
-export const firebaseUseAdd = async (projectId: string) => {
+/**
+ * Sets the Firebase project to be used for the CLI commands.
+ * If an alias is provided, it sets the project with the given alias.
+ * If no alias is provided, it sets the project without an alias.
+ * 
+ * @param projectId - The ID of the Firebase project.
+ * @param alias - (Optional) The alias to be used for the project.
+ * @returns A boolean indicating whether the project was set successfully.
+ * @throws An error if the Firebase project is not found or if there is an error executing the command.
+ */
+export const firebaseUseAdd = async (projectId: string, alias?: string) => {
   try {
-    const cmd = ['firebase', 'use', '--add', projectId]
+    const cmd = (!alias) ? ['firebase', 'use', '--add', projectId] : ['firebase', 'use', '--add', projectId, '--alias', alias]
     const result = execSync(cmd.join(' '))
     console.log(result.toString())
     return true

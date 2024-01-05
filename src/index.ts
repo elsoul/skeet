@@ -19,6 +19,7 @@ import {
   genCommands,
   releaseCommands,
   aiCommands,
+  profileCommands,
 } from '@/cli'
 import { logCommands } from './cli/log'
 
@@ -41,6 +42,8 @@ program
 
 dotenv.config()
 
+export const lang = process.env.SKEET_LANG || 'en'
+
 function main() {
   try {
     createCommands()
@@ -61,7 +64,7 @@ function main() {
     deleteSubCommands()
     listSubCommands()
     aiCommands()
-
+    profileCommands()
     program.parseAsync(process.argv)
   } catch (error) {
     console.log(error)
