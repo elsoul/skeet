@@ -1,9 +1,9 @@
 import { Logger } from '@/lib'
 import { execSync } from 'child_process'
 
-export const firebaseUseAdd = async (projectId: string) => {
+export const firebaseUseAdd = async (projectId: string, alias?: string) => {
   try {
-    const cmd = ['firebase', 'use', '--add', projectId]
+    const cmd = (alias) ? ['firebase', 'use', '--add', projectId, '--alias', alias] : ['firebase', 'use', '--add', projectId]
     const result = execSync(cmd.join(' '))
     console.log(result.toString())
     return true

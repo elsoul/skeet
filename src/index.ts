@@ -20,6 +20,7 @@ import {
   releaseCommands,
   aiCommands,
   configCommands,
+  profileCommands,
 } from '@/cli'
 import { logCommands } from './cli/log'
 
@@ -65,7 +66,7 @@ function main() {
     listSubCommands()
     aiCommands()
     configCommands()
-
+    profileCommands()
     program.parseAsync(process.argv)
   } catch (error) {
     console.log(error)
