@@ -52,3 +52,5 @@ keyfile.json
 graphql/
 .firebase*
 tmp
+/common/
+firebase.json
