@@ -8,10 +8,10 @@ CURRENT_USER=$(whoami)
 USER_HOME=$(eval echo ~"$CURRENT_USER")
 
 # Determine if the user is using bash or zsh
-if [[ "$SHELL" == */bash ]]; then
+if [ "$SHELL" == */bash ]; then
     PROFILE_PATH="$USER_HOME/.profile"
     echo "Using bash, setting up in .profile"
-elif [[ "$SHELL" == */zsh ]]; then
+elif [ "$SHELL" == */zsh ]; then
     PROFILE_PATH="$USER_HOME/.zshrc"
     echo "Using zsh, setting up in .zshrc"
 else
