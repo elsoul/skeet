@@ -54,3 +54,4 @@ graphql/
 tmp
 /common/
 firebase.json
+/sql/

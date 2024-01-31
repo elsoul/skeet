@@ -9,6 +9,8 @@ import {
 import { convertToKebabCase } from '@/utils/string'
 import { addBackendSetup } from '../add/addBackendSetup'
 import { addRounting } from '../add/routing'
+import { readdirSync } from 'node:fs'
+import * as path from 'path'
 
 export const syncRoutings = () => {
   const { app } = importConfig()
@@ -42,13 +44,16 @@ export const syncRoutings = () => {
     paths.push(graphqlPath)
   }
   if (app.template.includes('SQL')) {
-    const methodName = 'sql'
-    const sqlInfo = getFunctionInfo(methodName)
-    const sqlRouting = findMethod(methodName)
-    const securityPolicyName = sqlRouting ? sqlRouting.securityPolicyName : null
-    addBackendSetup(methodName, securityPolicyName)
-    const sqlPath = `/sql/*=${sqlInfo.backendService}`
-    paths.push(sqlPath)
+    for (const methodName of sqlDirs()) {
+      const sqlInfo = getFunctionInfo(methodName)
+      const sqlRouting = findMethod(methodName)
+      const securityPolicyName = sqlRouting
+        ? sqlRouting.securityPolicyName
+        : null
+      addBackendSetup(methodName, securityPolicyName)
+      const sqlPath = `/${methodName}/*=${sqlInfo.backendService}`
+      paths.push(sqlPath)
+    }
   }
   const { pathMatcherName } = getNetworkConfig(app.projectId, app.name)
   addRounting(pathMatcherName, paths)
@@ -60,4 +65,14 @@ const findMethod = (methodName: string) => {
   const method = routings.find((routing) => routing.methodName === methodName)
   if (!method) return null
   return method
+}
+
+const sqlDirs = () => {
+  return readdirSync('sql', { withFileTypes: true })
+    .filter((item) => item.isDirectory())
+    .map((item) => {
+      const dirPath = path.join('sql', item.name)
+      const methodName = dirPath.replace('/', '-')
+      return methodName
+    })
 }

@@ -22,6 +22,7 @@ import {
   configCommands,
 } from '@/cli'
 import { logCommands } from './cli/log'
+import { setupActions } from './lib'
 
 export const GRAPHQL_ROOT = './graphql'
 export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
@@ -65,6 +66,12 @@ function main() {
     listSubCommands()
     aiCommands()
     configCommands()
+    program
+      .command('setup-actions')
+      .description('Setup GitHub Actions')
+      .action(() => {
+        setupActions()
+      })
 
     program.parseAsync(process.argv)
   } catch (error) {
