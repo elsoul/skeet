@@ -39,7 +39,7 @@ export const getFunctions = (isForModels = false): string[] => {
       })
 
     functionDirs.sort(
-      (a, b) => b.lastModified.getTime() - a.lastModified.getTime()
+      (a, b) => b.lastModified.getTime() - a.lastModified.getTime(),
     )
 
     return functionDirs.map((dir) => dir.name)
