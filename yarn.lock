@@ -1629,7 +1629,7 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/ai@^1.7.12":
+"@skeet-framework/ai@1.7.12":
   version "1.7.12"
   resolved "https://registry.yarnpkg.com/@skeet-framework/ai/-/ai-1.7.12.tgz#1d4625977f56f22263bf1cfef4011f2c5159f05f"
   integrity sha512-9YMvKZYaPyoMdV7vgCEntSU2yheCgoOvEsWH0o5QMfx6Fuzh3VuaQoOqauo5uuPx9lA8BKpSanTgxhwsTC6UWQ==
@@ -1661,7 +1661,7 @@
     jest "29.4.3"
     node-fetch "2.6.9"
 
-"@skeet-framework/utils@^1.2.4":
+"@skeet-framework/utils@1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@skeet-framework/utils/-/utils-1.2.4.tgz#fce235db6fe75faccf977c090e588bae6ded9110"
   integrity sha512-74rNMQMjZXtxfQn24xOLPo52nIpEVme1Rx35tuHx9oSmmxE46rkyDoY85QV68txH0Ic/Nmtsc3hnpkmNetoKqw==
