@@ -3,13 +3,13 @@ import { importConfig, patchSQL, getNetworkConfig } from '@/lib'
 
 export const sqlIp = async () => {
   const skeetCloudConfig: SkeetCloudConfig = importConfig()
-  const { networkName } = getNetworkConfig(
+  const { networkName, instanceName } = getNetworkConfig(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
   )
   await patchSQL(
     skeetCloudConfig.app.projectId,
-    skeetCloudConfig.app.name,
+    instanceName,
     '',
     skeetCloudConfig.db.whiteList,
     networkName,

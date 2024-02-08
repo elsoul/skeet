@@ -30,7 +30,10 @@ export const askForSqlPassword = async () => {
     password1: string
     password2: string
   }>(questionList.sqlPasswordQuestions)
-  if (password1 !== password2) throw new Error("password doesn't match!")
+  if (password1 !== password2) {
+    console.log('Password does not match!\nPlease try again.')
+    await askForSqlPassword()
+  }
 
   return password1
 }

@@ -1,7 +1,7 @@
 import { PATH } from '@/config/path'
 import { spawnSync } from 'child_process'
 
-export const dbSeed = (production: boolean = false, cwd = PATH.GRAPHQL) => {
+export const dbSeed = (production: boolean = false, cwd = './graphql') => {
   try {
     let shCmd = []
     if (production) {

@@ -4,12 +4,14 @@ import { yarnBuild } from '../yarn/yarnBuild'
 import { FUNCTIONS_PATH, importConfig } from '@/lib'
 import { firebaseFunctionsDeploy } from './firebaseDeploy'
 import { spawnSync } from 'node:child_process'
+import { sqlDeploy } from './sqlDeploy'
 
 export const deployCommands = async () => {
   program
     .command('deploy')
     .option('-f, --function <function>', 'Function Name. e.g. skeet:root')
     .option('-d, --discord', 'Deploy Discord Commands', false)
+    .option('--sql', 'Deploy SQL', false)
     .description('Deploy Skeet APP to Firebase')
     .action(async (options) => {
       if (options.function) {
@@ -26,6 +28,9 @@ export const deployCommands = async () => {
       } else if (options.discord) {
         const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} discord:deploy`
         spawnSync(cmd, { stdio: 'inherit', shell: true })
+        return
+      } else if (options.sql) {
+        sqlDeploy()
         return
       }
       await deploy()

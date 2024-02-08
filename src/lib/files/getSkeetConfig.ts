@@ -16,6 +16,7 @@ export const GRAPHQL_REPO_PATH = 'https://github.com/elsoul/skeet-graphql'
 export const NEXT_REPO_URL = 'https://github.com/elsoul/skeet-next'
 export const BACKEND_GRAPHQL_REPO_URL =
   'https://github.com/elsoul/skeet-graphql-only'
+export const BACKEND_SQL_REPO_URL = 'https://github.com/elsoul/skeet-sql'
 export const BACKEND_FUNCTIONS_REPO_URL =
   'https://github.com/elsoul/skeet-functions-only'
 export const SOLANA_REPO_URL =
@@ -135,7 +136,7 @@ export const getContainerImageName = (
   return imageName
 }
 
-export const regionToTimezone = async (region: string) => {
+export const regionToTimezone = (region: string) => {
   switch (true) {
     case region.includes('asia'):
       return 'Asia/Tokyo'

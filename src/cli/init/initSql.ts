@@ -17,9 +17,13 @@ export const initSql = async (
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
   )
-  await createSQL(
+  const instanceName = getNetworkConfig(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
+  ).instanceName
+  await createSQL(
+    skeetCloudConfig.app.projectId,
+    instanceName,
     skeetCloudConfig.app.region,
     password,
     skeetCloudConfig.db.databaseVersion,
@@ -35,7 +39,7 @@ export const initSql = async (
 
   await patchSQL(
     skeetCloudConfig.app.projectId,
-    skeetCloudConfig.app.name,
+    instanceName,
     '',
     '',
     networkName,

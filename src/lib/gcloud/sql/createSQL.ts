@@ -4,7 +4,6 @@ import { Logger, importConfig } from '@/lib'
 import { execSync, spawnSync } from 'child_process'
 import { getNetworkConfig, getContainerRegion, regionToTimezone } from '@/lib'
 import { patchSQL } from './patchSQL'
-import { GRAPHQL_ENV_BUILD_PATH, GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
 import { writeFileSync } from 'fs'
 import { FILE_NAME, PATH } from '@/config/path'
 
@@ -49,8 +48,8 @@ export const runSqlCreate = async (
       const encodedPassword = percentEncode(password)
       const databaseIp = await getDatabaseIp(projectId, appName)
       generateEnvBuild(appName, databaseIp, encodedPassword)
-
-      await patchSQL(projectId, appName, '', '', networkName)
+      const { instanceName } = getNetworkConfig(projectId, appName)
+      await patchSQL(projectId, instanceName, '', '', networkName)
       const databasePrivateIp = await getDatabaseIp(projectId, appName, true)
       await generateEnvProduction(
         projectId,
@@ -91,7 +90,7 @@ export const generateEnvProduction = async (
     ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
     : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
   const cRegion = getContainerRegion(region)
-  const timeZone = await regionToTimezone(region)
+  const timeZone = regionToTimezone(region)
   const envProduction = [
     `SKEET_APP_NAME=${appName}\n`,
     `SKEET_GCP_PROJECT_ID=${projectId}\n`,
@@ -111,12 +110,12 @@ export const generateEnvProduction = async (
 
 export const getDatabaseIp = async (
   projectId: string,
-  appName: string,
+  instanceName: string,
   privateIp: boolean = false,
 ) => {
   try {
     const ipCol = privateIp === true ? '$6' : '$5'
-    const cmd = `gcloud sql instances list --project=${projectId} | grep ${appName} | awk '{print ${ipCol}}'`
+    const cmd = `gcloud sql instances list --project=${projectId} | grep ${instanceName} | awk '{print ${ipCol}}'`
     const res = execSync(cmd)
     const databaseIp = String(res).replace(/\r?\n/g, '')
     return databaseIp
@@ -127,14 +126,13 @@ export const getDatabaseIp = async (
 
 export const createSQL = async (
   projectId: string,
-  appName: string,
+  instanceName: string,
   region: string = 'europe-west4-b',
   dbPassword: string = 'postgres',
   databaseVersion: string = 'POSTGRES_15',
   cpu: string = '1',
   memory: string = '4096MB',
 ) => {
-  const instanceName = getNetworkConfig(projectId, appName).instanceName
   const shCmd = [
     'gcloud',
     'sql',
