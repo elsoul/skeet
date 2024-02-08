@@ -34,7 +34,7 @@
     "skeet:skeet": "yarn --cwd ./functions/skeet dev",
     "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts labo",
     "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts epics",
-    "skeet:yoo": "yarn --cwd ./functions/yoo dev"
+    "skeet:sql-kom": "yarn --cwd sql/kom-db dev"
   },
   "dependencies": {
     "@skeet-framework/ai": "1.7.13",

@@ -19,6 +19,7 @@ import { addGhActions } from './addGhActions'
 import { genGithubActions } from '@/cli/gen'
 import { addStripeWebhook } from './addStripeWebhook'
 import { addTaskQueue } from './addTaskQueue'
+import { addCloudSQL } from './addCloudSQL'
 
 export const addSubCommands = async () => {
   const add = program
@@ -104,6 +105,15 @@ export const addSubCommands = async () => {
     .description('Add GraphQL')
     .action(async () => {
       await addGraphQL()
+    })
+
+  add
+    .command('sql')
+    .alias('SQL')
+    .description('Add Cloud SQL')
+    .action(async () => {
+      const config = importConfig()
+      await addCloudSQL(config)
     })
 
   add

@@ -1650,7 +1650,7 @@
     discord-interactions "3.4.0"
     discord.js "14.14.1"
 
-"@skeet-framework/firestore@^2.4.2":
+"@skeet-framework/firestore@2.4.2":
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/@skeet-framework/firestore/-/firestore-2.4.2.tgz#23c3205a75ba401f5f9b988daa8cc1d6dc91f04a"
   integrity sha512-MWvOKAi43wrl+MMR3SbASVcEVEejTCsLNWcbTsNug54wmqPhhB3hz+obxJb4vQLAXecdj7+PebhyoEzM0Raytw==
@@ -1928,7 +1928,7 @@
   resolved "https://registry.yarnpkg.com/@types/http-errors/-/http-errors-2.0.4.tgz#7eb47726c391b7345a6ec35ad7f4de469cf5ba4f"
   integrity sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==
 
-"@types/i18n@^0.13.10":
+"@types/i18n@0.13.10":
   version "0.13.10"
   resolved "https://registry.yarnpkg.com/@types/i18n/-/i18n-0.13.10.tgz#3637272fb8a3a6b9013c1cfcd86df0be36dcd198"
   integrity sha512-V5uwFXEzC1BRvDSQkd5zWB7ktZa1yfLKFimlluTFrgBGeFJQNNaLk3J67Sje+c0+m2C7r1BU47cItOk/WRfJcQ==

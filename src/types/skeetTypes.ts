@@ -24,6 +24,8 @@ export type SkeetCloudConfig = {
   app: AppConfig
   ai: AiConfig
   cloudRun: CloudRunConfig
+  cloudRuns: CloudRunConfig[]
+  SQLs: DbConfig[]
   db: DbConfig
   taskQueues: TaskQueue[]
   cloudArmor: CloudArmor[]
@@ -53,11 +55,13 @@ export type CloudRunConfig = {
 }
 
 export type DbConfig = {
+  instanceName: string
   databaseVersion: string
-  cpu: number
+  cpu: string
   memory: string
   storageSize: number
   whiteList?: string
+  isCreated: boolean
 }
 
 export type TaskQueue = {

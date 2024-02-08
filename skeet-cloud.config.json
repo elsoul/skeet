@@ -22,10 +22,57 @@
   "db": {
     "databaseVersion": "POSTGRES_15",
     "cpu": 1,
-    "memory": "3840MiB",
+    "memory": "4GiB",
     "storageSize": 10,
     "whiteList": ""
   },
+  "SQLs": [
+    {
+      "instanceName": "sql-nextjs-graphql-db",
+      "databaseVersion": "POSTGRES_15",
+      "cpu": 1,
+      "memory": "3840MiB",
+      "storageSize": 10,
+      "whiteList": "",
+      "isCreated": false
+    },
+    {
+      "instanceName": "sql-tet-db",
+      "databaseVersion": "POSTGRES_15",
+      "cpu": 1,
+      "memory": "3840MiB",
+      "storageSize": 10,
+      "whiteList": "",
+      "isCreated": false
+    },
+    {
+      "instanceName": "sql-man-db",
+      "databaseVersion": "POSTGRES_15",
+      "cpu": 1,
+      "memory": "3840MiB",
+      "storageSize": 10,
+      "whiteList": "",
+      "isCreated": false
+    },
+    {
+      "instanceName": "sql-test-db",
+      "databaseVersion": "POSTGRES_15",
+      "cpu": 1,
+      "memory": "3840MiB",
+      "storageSize": 10,
+      "whiteList": "",
+      "isCreated": false
+    },
+    {
+      "instanceName": "sql-kom-db",
+      "databaseVersion": "POSTGRES_15",
+      "cpu": 1,
+      "memory": "4GiB",
+      "storageSize": 10,
+      "whiteList": "",
+      "isCreated": false
+    }
+  ],
   "taskQueues": [
     {
       "queueName": "createUser",

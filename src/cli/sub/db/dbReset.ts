@@ -8,7 +8,7 @@ type ResetComfirmation = {
 
 export const dbReset = async (
   production: boolean = false,
-  cwd = PATH.GRAPHQL,
+  cwd = './graphql' as string,
 ) => {
   try {
     let shCmd = []
