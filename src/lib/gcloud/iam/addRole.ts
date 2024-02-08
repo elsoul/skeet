@@ -63,4 +63,7 @@ export const roleList = [
   'roles/cloudtasks.admin',
   'roles/firebaserules.admin',
   'roles/aiplatform.admin',
+  'roles/iam.serviceAccountTokenCreator',
+  'roles/run.invoker',
+  'roles/eventarc.eventReceiver',
 ]
