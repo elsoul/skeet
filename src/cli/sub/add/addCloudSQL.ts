@@ -1,22 +1,10 @@
-import { askForSqlPassword } from '@/cli/init'
-import {
-  addEnvSync,
-  createSQL,
-  getDatabaseIp,
-  getNetworkConfig,
-  importConfig,
-  patchSQL,
-} from '@/lib'
+import { importConfig } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import percentEncode from '@stdlib/string-percent-encode'
 import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import inquirer from 'inquirer'
 import { cloneSQL } from './cloneSQL'
-import { genEnvBuild } from '@/lib/files/genEnvBuild'
-import { genEnvProduction } from '@/lib/files/genEnvProduction'
-import { setupSQLActions } from '@/lib/setup/setupSQLActions'
-import { readFileSync, readSync, writeFileSync } from 'node:fs'
+import { writeFileSync } from 'node:fs'
 import { SKEET_CONFIG_PATH } from '@/index'
 import { deployCloudSQL } from './deployCloudSQL'
 

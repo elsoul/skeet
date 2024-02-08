@@ -15,7 +15,9 @@ export const setupSQLActions = (
   minInstances: string,
 ) => {
   try {
-    const upperCaseInstanceName = instanceName.toUpperCase()
+    const upperCaseInstanceName = instanceName
+      .toUpperCase()
+      .replaceAll('-', '_')
     const databaseUrl = `DATABASE_URL=postgresql://postgres\${{ secrets.${upperCaseInstanceName}_PASSWORD }}@\${{ secrets.${upperCaseInstanceName}_PRIVATE_IP }}:5432/${instanceName}?schema=public`
     const envString = databaseUrl
     const result = sqlYml(
