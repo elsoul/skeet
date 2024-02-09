@@ -24,7 +24,7 @@ on:
     branches:
       - main
     paths:
-      - 'sql/${sqlDir}'
+      - 'sql/${sqlDir}/**'
       - '.github/workflows/${instanceName}.yml'
 
 jobs:
