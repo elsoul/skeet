@@ -4,135 +4,197 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@skeet-framework/ai':
-    specifier: 1.7.13
-    version: 1.7.13
-  '@skeet-framework/utils':
-    specifier: 1.2.4
-    version: 1.2.4
-  chalk:
-    specifier: 5.3.0
-    version: 5.3.0
-  chalk-pipe:
-    specifier: 6.0.0
-    version: 6.0.0
-  cli-spinner:
-    specifier: 0.2.10
-    version: 0.2.10
-  cli-table3:
-    specifier: 0.6.3
-    version: 0.6.3
-  commander:
-    specifier: 12.0.0
-    version: 12.0.0
-  dotenv:
-    specifier: 16.4.1
-    version: 16.4.1
-  dotenv-cli:
-    specifier: 7.3.0
-    version: 7.3.0
-  i18n:
-    specifier: 0.15.1
-    version: 0.15.1
-  inquirer:
-    specifier: 9.2.14
-    version: 9.2.14
-  jest:
-    specifier: 29.7.0
-    version: 29.7.0(@types/node@20.11.16)(ts-node@10.9.2)
-  node-fetch:
-    specifier: 2.6.9
-    version: 2.6.9
-  prompt:
-    specifier: 1.3.0
-    version: 1.3.0
-  semver:
-    specifier: 7.6.0
-    version: 7.6.0
+importers:
 
-devDependencies:
-  '@changesets/cli':
-    specifier: 2.27.1
-    version: 2.27.1
-  '@skeet-framework/discord-utils':
-    specifier: 0.2.14
-    version: 0.2.14
-  '@skeet-framework/firestore':
-    specifier: 2.4.2
-    version: 2.4.2(@types/node@20.11.16)(ts-node@10.9.2)
-  '@stdlib/string-percent-encode':
-    specifier: 0.1.1
-    version: 0.1.1
-  '@types/cli-spinner':
-    specifier: 0.2.3
-    version: 0.2.3
-  '@types/i18n':
-    specifier: 0.13.10
-    version: 0.13.10
-  '@types/inquirer':
-    specifier: 9.0.7
-    version: 9.0.7
-  '@types/jest':
-    specifier: 29.5.12
-    version: 29.5.12
-  '@types/node':
-    specifier: 20.11.16
-    version: 20.11.16
-  '@types/node-fetch':
-    specifier: 2.6.11
-    version: 2.6.11
-  '@types/prompt':
-    specifier: 1.1.8
-    version: 1.1.8
-  '@types/semver':
-    specifier: 7.5.6
-    version: 7.5.6
-  '@typescript-eslint/eslint-plugin':
-    specifier: 6.21.0
-    version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
-  '@typescript-eslint/parser':
-    specifier: 6.21.0
-    version: 6.21.0(eslint@8.56.0)(typescript@5.3.3)
-  babel-loader:
-    specifier: 9.1.3
-    version: 9.1.3(@babel/core@7.23.9)(webpack@5.90.1)
-  copyfiles:
-    specifier: 2.4.1
-    version: 2.4.1
-  esbuild:
-    specifier: 0.20.0
-    version: 0.20.0
-  eslint:
-    specifier: 8.56.0
-    version: 8.56.0
-  eslint-config-prettier:
-    specifier: 9.1.0
-    version: 9.1.0(eslint@8.56.0)
-  nodemon:
-    specifier: 3.0.3
-    version: 3.0.3
-  npm-check-updates:
-    specifier: 16.14.14
-    version: 16.14.14
-  prettier:
-    specifier: 3.2.5
-    version: 3.2.5
-  ts-jest:
-    specifier: 29.1.2
-    version: 29.1.2(@babel/core@7.23.9)(esbuild@0.20.0)(jest@29.7.0)(typescript@5.3.3)
-  ts-loader:
-    specifier: 9.5.1
-    version: 9.5.1(typescript@5.3.3)(webpack@5.90.1)
-  ts-node:
-    specifier: 10.9.2
-    version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
-  tsconfig-paths:
-    specifier: 4.2.0
-    version: 4.2.0
-  typescript:
-    specifier: 5.3.3
-    version: 5.3.3
+  .:
+    devDependencies:
+      '@changesets/cli':
+        specifier: ^2.27.1
+        version: 2.27.1
+      '@skeet-framework/discord-utils':
+        specifier: 0.2.14
+        version: 0.2.14
+      '@types/node':
+        specifier: 20.11.16
+        version: 20.11.16
+      '@types/node-fetch':
+        specifier: 2.6.11
+        version: 2.6.11
+      '@types/semver':
+        specifier: 7.5.6
+        version: 7.5.6
+      '@typescript-eslint/eslint-plugin':
+        specifier: 6.21.0
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser':
+        specifier: 6.21.0
+        version: 6.21.0(eslint@8.56.0)(typescript@5.3.3)
+      babel-loader:
+        specifier: 9.1.3
+        version: 9.1.3(@babel/core@7.23.9)(webpack@5.90.1)
+      copyfiles:
+        specifier: 2.4.1
+        version: 2.4.1
+      esbuild:
+        specifier: 0.20.0
+        version: 0.20.0
+      eslint:
+        specifier: 8.56.0
+        version: 8.56.0
+      eslint-config-prettier:
+        specifier: 9.1.0
+        version: 9.1.0(eslint@8.56.0)
+      nodemon:
+        specifier: 3.0.3
+        version: 3.0.3
+      npm-check-updates:
+        specifier: 16.14.14
+        version: 16.14.14
+      prettier:
+        specifier: 3.2.5
+        version: 3.2.5
+      ts-loader:
+        specifier: 9.5.1
+        version: 9.5.1(typescript@5.3.3)(webpack@5.90.1)
+      ts-node:
+        specifier: 10.9.2
+        version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
+      tsconfig-paths:
+        specifier: 4.2.0
+        version: 4.2.0
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+
+  packages/cli:
+    dependencies:
+      '@skeet-framework/ai':
+        specifier: 1.7.13
+        version: 1.7.13
+      '@skeet-framework/utils':
+        specifier: 1.2.4
+        version: 1.2.4
+      chalk:
+        specifier: 5.3.0
+        version: 5.3.0
+      chalk-pipe:
+        specifier: 6.0.0
+        version: 6.0.0
+      cli-spinner:
+        specifier: 0.2.10
+        version: 0.2.10
+      cli-table3:
+        specifier: 0.6.3
+        version: 0.6.3
+      commander:
+        specifier: 12.0.0
+        version: 12.0.0
+      dotenv:
+        specifier: 16.4.1
+        version: 16.4.1
+      dotenv-cli:
+        specifier: 7.3.0
+        version: 7.3.0
+      i18n:
+        specifier: 0.15.1
+        version: 0.15.1
+      inquirer:
+        specifier: 9.2.14
+        version: 9.2.14
+      jest:
+        specifier: 29.7.0
+        version: 29.7.0(@types/node@20.11.16)(ts-node@10.9.2)
+      node-fetch:
+        specifier: 2.6.9
+        version: 2.6.9
+      prompt:
+        specifier: 1.3.0
+        version: 1.3.0
+      semver:
+        specifier: 7.6.0
+        version: 7.6.0
+    devDependencies:
+      '@changesets/cli':
+        specifier: 2.27.1
+        version: 2.27.1
+      '@skeet-framework/discord-utils':
+        specifier: 0.2.14
+        version: 0.2.14
+      '@skeet-framework/firestore':
+        specifier: 2.4.2
+        version: 2.4.2(@types/node@20.11.16)(ts-node@10.9.2)
+      '@stdlib/string-percent-encode':
+        specifier: 0.1.1
+        version: 0.1.1
+      '@types/cli-spinner':
+        specifier: 0.2.3
+        version: 0.2.3
+      '@types/i18n':
+        specifier: 0.13.10
+        version: 0.13.10
+      '@types/inquirer':
+        specifier: 9.0.7
+        version: 9.0.7
+      '@types/jest':
+        specifier: 29.5.12
+        version: 29.5.12
+      '@types/node':
+        specifier: 20.11.16
+        version: 20.11.16
+      '@types/node-fetch':
+        specifier: 2.6.11
+        version: 2.6.11
+      '@types/prompt':
+        specifier: 1.1.8
+        version: 1.1.8
+      '@types/semver':
+        specifier: 7.5.6
+        version: 7.5.6
+      '@typescript-eslint/eslint-plugin':
+        specifier: 6.21.0
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser':
+        specifier: 6.21.0
+        version: 6.21.0(eslint@8.56.0)(typescript@5.3.3)
+      babel-loader:
+        specifier: 9.1.3
+        version: 9.1.3(@babel/core@7.23.9)(webpack@5.90.1)
+      copyfiles:
+        specifier: 2.4.1
+        version: 2.4.1
+      esbuild:
+        specifier: 0.20.0
+        version: 0.20.0
+      eslint:
+        specifier: 8.56.0
+        version: 8.56.0
+      eslint-config-prettier:
+        specifier: 9.1.0
+        version: 9.1.0(eslint@8.56.0)
+      nodemon:
+        specifier: 3.0.3
+        version: 3.0.3
+      npm-check-updates:
+        specifier: 16.14.14
+        version: 16.14.14
+      prettier:
+        specifier: 3.2.5
+        version: 3.2.5
+      ts-jest:
+        specifier: 29.1.2
+        version: 29.1.2(@babel/core@7.23.9)(esbuild@0.20.0)(jest@29.7.0)(typescript@5.3.3)
+      ts-loader:
+        specifier: 9.5.1
+        version: 9.5.1(typescript@5.3.3)(webpack@5.90.1)
+      ts-node:
+        specifier: 10.9.2
+        version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
+      tsconfig-paths:
+        specifier: 4.2.0
+        version: 4.2.0
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
 
 packages:
 
@@ -196,7 +258,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.23.5
       '@babel/helper-validator-option': 7.23.5
-      browserslist: 4.23.0
+      browserslist: 4.22.3
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -632,6 +694,7 @@ packages:
   /@colors/colors@1.5.0:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
+    requiresBuild: true
 
   /@cspotcode/source-map-support@0.8.1:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -1572,8 +1635,8 @@ packages:
       - supports-color
     dev: false
 
-  /@grpc/grpc-js@1.10.0:
-    resolution: {integrity: sha512-tx+eoEsqkMkLCHR4OOplwNIaJ7SVZWzeVKzEMBz8VR+TbssgBYOP4a0P+KQiQ6LaTG4SGaIEu7YTS8xOmkOWLA==}
+  /@grpc/grpc-js@1.10.1:
+    resolution: {integrity: sha512-55ONqFytZExfOIjF1RjXPcVmT/jJqFzbbDqxK9jmRV4nxiYWtL9hENSW1Jfx0SdZfrvoqd44YJ/GJTqfRrawSQ==}
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
@@ -2602,8 +2665,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node@18.19.15:
-    resolution: {integrity: sha512-AMZ2UWx+woHNfM11PyAEQmfSxi05jm9OlkxczuHeEqmvwPkYj6MWv44gbzDPefYOLysTOFyI3ziiy2ONmUZfpA==}
+  /@types/node@18.19.17:
+    resolution: {integrity: sha512-SzyGKgwPzuWp2SHhlpXKzCX0pIOfcI4V2eF37nNBJOhwlegQ83omtVQ1XxZpDE06V/d6AQvfQdPfnw0tRC//Ng==}
     dependencies:
       undici-types: 5.26.5
     dev: false
@@ -3316,6 +3379,7 @@ packages:
 
   /bignumber.js@9.1.2:
     resolution: {integrity: sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==}
+    requiresBuild: true
 
   /binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
@@ -3378,15 +3442,15 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
-  /browserslist@4.23.0:
-    resolution: {integrity: sha512-QW8HiM1shhT2GuzkvklfjcKDiWFXHOeFCIA/huJPwHsslwcydgk7X+z2zXpEijP98UCY7HbubZt5J2Zgvf0CaQ==}
+  /browserslist@4.22.3:
+    resolution: {integrity: sha512-UAp55yfwNv0klWNapjs/ktHoguxuQNGnOzxYmfnXIS+8AsRDZkSDxg7R1AX3GKzn078SBI5dzwzj/Yx0Or0e3A==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001587
-      electron-to-chromium: 1.4.668
+      electron-to-chromium: 1.4.667
       node-releases: 2.0.14
-      update-browserslist-db: 1.0.13(browserslist@4.23.0)
+      update-browserslist-db: 1.0.13(browserslist@4.22.3)
 
   /bs-logger@0.2.6:
     resolution: {integrity: sha512-pd8DCoxmbgc7hyPKOvxtqNcjYoOsABPQdcCUjGp3d42VR2CX1ORhk2A87oqqu5R1kk+76nsxZupkmyd+MVtCog==}
@@ -4086,8 +4150,8 @@ packages:
     dependencies:
       safe-buffer: 5.2.1
 
-  /electron-to-chromium@1.4.668:
-    resolution: {integrity: sha512-ZOBocMYCehr9W31+GpMclR+KBaDZOoAEabLdhpZ8oU1JFDwIaFY0UDbpXVEUFc0BIP2O2Qn3rkfCjQmMR4T/bQ==}
+  /electron-to-chromium@1.4.667:
+    resolution: {integrity: sha512-66L3pLlWhTNVUhnmSA5+qDM3fwnXsM6KAqE36e2w4KN0g6pkEtlT5bs41FQtQwVwKnfhNBXiWRLPs30HSxd7Kw==}
 
   /emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -4830,7 +4894,7 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       extend: 3.0.2
-      https-proxy-agent: 7.0.3
+      https-proxy-agent: 7.0.4
       is-stream: 2.0.1
       node-fetch: 2.6.9
     transitivePeerDependencies:
@@ -5056,7 +5120,7 @@ packages:
     resolution: {integrity: sha512-qpSfslpwqToIgQ+Tf3MjWIDjYK4UFIZ0uz6nLtttlW9N1NQA4PhGf9tlGo6KDYJ4rgL2w4CjXVd0z5yeNpN/Iw==}
     engines: {node: '>=14'}
     dependencies:
-      '@grpc/grpc-js': 1.10.0
+      '@grpc/grpc-js': 1.10.1
       '@grpc/proto-loader': 0.7.10
       '@types/long': 4.0.2
       abort-controller: 3.0.0
@@ -5258,8 +5322,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /https-proxy-agent@7.0.3:
-    resolution: {integrity: sha512-kCnwztfX0KZJSLOBrcL0emLeFako55NWMovvyPP2AjsghNk9RB1yjSI+jVumPHYZsNXegNoqupSW9IY3afSH8w==}
+  /https-proxy-agent@7.0.4:
+    resolution: {integrity: sha512-wlwpilI7YdjSkWaQ/7omYBMTliDcmCN8OLihO6I9B86g06lMyAoqgoDpV0XqoaPOKj+0DIdAvnsWfyAAhmimcg==}
     engines: {node: '>= 14'}
     dependencies:
       agent-base: 7.1.0
@@ -6293,6 +6357,7 @@ packages:
 
   /jwa@2.0.0:
     resolution: {integrity: sha512-jrZ2Qx916EA+fq9cEAeCROWPTfCwi1IVHqT2tapuqLEVVDKFDENFw1oL+MwrTvH6msKxsd1YTDVw6uKEcsrLEA==}
+    requiresBuild: true
     dependencies:
       buffer-equal-constant-time: 1.0.1
       ecdsa-sig-formatter: 1.0.11
@@ -6751,7 +6816,6 @@ packages:
   /minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
     engines: {node: '>=10'}
-    requiresBuild: true
     dependencies:
       brace-expansion: 2.0.1
     dev: true
@@ -7188,7 +7252,7 @@ packages:
     resolution: {integrity: sha512-DvWbjhWbappsFRatOWmu4Dp1/Q4RG9oOz6CfOSjy0/Drb8G+5iAiqWAO4PfpGIkhOOKtvvNfQri2SItl+U7LhQ==}
     hasBin: true
     dependencies:
-      '@types/node': 18.19.15
+      '@types/node': 18.19.17
       '@types/node-fetch': 2.6.11
       abort-controller: 3.0.0
       agentkeepalive: 4.5.0
@@ -8910,13 +8974,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /update-browserslist-db@1.0.13(browserslist@4.23.0):
+  /update-browserslist-db@1.0.13(browserslist@4.22.3):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
-      browserslist: 4.23.0
+      browserslist: 4.22.3
       escalade: 3.1.2
       picocolors: 1.0.0
 
@@ -9038,7 +9102,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.6
       acorn: 8.11.3
       acorn-import-assertions: 1.9.0(acorn@8.11.3)
-      browserslist: 4.23.0
+      browserslist: 4.22.3
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
       es-module-lexer: 1.4.1
@@ -9325,7 +9389,6 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    requiresBuild: true
 
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}

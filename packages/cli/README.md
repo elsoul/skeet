@@ -97,8 +97,8 @@ YouTube Video Link: https://www.youtube.com/watch?v=e7J5HDhtpE4
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
-- [Node.js](https://nodejs.org/ja/) ^18.16.0
-- [Yarn](https://yarnpkg.com/) ^1.22.19
+- [Node.js](https://nodejs.org/ja/) ^20.11.0
+- [PNPM](https://pnpm.io/) ^8.0.0
 - [GitHub CLI](https://cli.github.com/) ^2.29.0
 
 For Firebase Template
@@ -109,11 +109,17 @@ For Firebase Template
 
 ## 📗 Usage 📗
 
+### ① Install pnpm
+
+```bash
+$ curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
 ### ① Install Skeet/Firebase CLI
 
 ```bash
-$ npm i -g @skeet-framework/cli
-$ npm install -g firebase-tools
+$ pnpm i -g @skeet-framework/cli
+$ pnpm install -g firebase-tools
 ```
 
 ### ② Create Skeet App
@@ -254,7 +260,6 @@ Commands:
   server|s                     Run Skeet App
   deploy                       Deploy Skeet APP to Firebase
   init [options]               Initialize Google Cloud Setups for Skeet APP
-  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
   login                        Skeet Login Command - Create Firebase Login Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
   g|generate                   Skeet Generate Comannd

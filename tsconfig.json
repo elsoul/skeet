@@ -1,27 +1,6 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "outDir": "./dist",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "strict": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "lib": ["esnext"],
-    "sourceMap": true,
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "files": ["package.json"],
-  "include": ["src/**/*", "add-line.ts", "build.ts", "cli.ts", "tests/**/*"],
-  "exclude": ["dist", "node_modules"],
-  "compileOnSave": false
+  "extends": "./tsconfig.utils.typecheck.json",
+  "include": ["./**/*", ".eslintrc.js"],
+  // same list as in tsconfig.regular.json, minus extra test exclusion and sandbox
+  "exclude": ["**/dist", "**/build", "**/fixtures", "**/node_modules"]
 }
