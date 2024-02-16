@@ -28,15 +28,15 @@ export const server = async (options: ServerOptions) => {
 
     let cmd = []
     if (options.backend) {
-      cmd = ['yarn', 'skeet:graphql', '&&', 'yarn skeet:dev']
+      cmd = ['pnpm', 'skeet:graphql', '&&', 'pnpm skeet:dev']
     } else if (options.functions) {
-      cmd = ['yarn', 'skeet:dev']
+      cmd = ['pnpm', 'skeet:dev']
     } else if (options.web) {
-      cmd = ['yarn', 'dev']
+      cmd = ['pnpm', 'dev']
     } else if (options.graphql) {
-      cmd = ['yarn', 'skeet:graphql']
+      cmd = ['pnpm', 'skeet:graphql']
     } else {
-      cmd = ['yarn', 'skeet']
+      cmd = ['pnpm', 'skeet']
     }
 
     const childProcess = spawn(cmd[0], cmd.slice(1), {

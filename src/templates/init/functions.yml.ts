@@ -1,12 +1,13 @@
+import { SKEET_CONFIG } from '@/config/config'
 import { convertToKebabCase, toCamelCase } from '@/utils/string'
 import { mkdirSync } from 'fs'
 
 export const functionsYml = (functionName: string) => {
   mkdirSync('.github/workflows', { recursive: true })
-  const nodeVersion = '18.16.0'
-  const name = toCamelCase(functionName)
+  const nodeVersion = SKEET_CONFIG.NODE_VERSION
+  const name = toCamelCase(functionName) + 'Func'
   const kebabName = convertToKebabCase(functionName)
-  const ymlName = `functions-${kebabName}.yml`
+  const ymlName = `${kebabName}-func.yml`
   const filePath = `.github/workflows/${ymlName}`
   const body = `name: ${name}
 on:
@@ -20,26 +21,48 @@ on:
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '${nodeVersion}'
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: \${{ env.STORE_PATH }}
+          key: \${{ runner.os }}-pnpm-store-\${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            \${{ runner.os }}-pnpm-store-
+
+      - name: Use Node.js \${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: \${{ matrix.node-version }}
+          cache: 'pnpm'
       - id: auth
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: \${{ secrets.SKEET_GCP_SA_KEY }}
-      - name: Install yarn and firebase tools
-        run: npm i -g npm yarn firebase-tools
+      - name: Install firebase tools
+        run: pnpm i -g firebase-tools
       - name: GitHub repository setting
         run: git config --global url."https://github.com".insteadOf ssh://git@github.com
       - name: Install dependencies
-        run: cd ./functions/${functionName} && yarn install --frozen-lockfile
+        run: pnpm -F ${functionName}-func install --frozen-lockfile
       - name: Build App
-        run: cd ./functions/${functionName} && yarn build
+        run: pnpm -F ${functionName}-func  build
       - name: Deploy to Firebase
         run: firebase deploy --only functions:${functionName}
 `

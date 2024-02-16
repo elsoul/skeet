@@ -1,9 +1,9 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "1.14.7",
+  "version": "1.14.99",
   "description": "Skeet CLI",
   "main": "dist/index.js",
-  "repository": "https://github.com/elsoul/skeet-cli",
+  "repository": "https://github.com/elsoul/skeet",
   "keywords": [
     "openai",
     "firestore",
@@ -17,24 +17,26 @@
   ],
   "author": "ELSOUL LABO B.V.",
   "license": "Apache-2.0",
+  "engines": {
+    "pnpm": "8.15.3",
+    "npm": "please_use_pnpm_instead"
+  },
+  "packageManager": "pnpm@8.15.3",
   "bin": {
     "skeet": "./dist/index.js"
   },
   "scripts": {
     "lint": "eslint --ext .ts,.tsx --fix .",
     "test": "jest --coverage=false --detectOpenHandles --maxWorkers=1",
-    "copy-assets": "copyfiles -u 4 src/cli/ai/locales/**/skeetAi.json dist/locales/",
-    "update:packages": "ncu -u --reject node-fetch && yarn",
-    "build": "npx ts-node build.ts && npx ts-node add-line.ts && yarn copy-assets && yarn postbuild",
-    "postbuild": "copyfiles -u 1 src/lib/locales/*.json dist/",
-    "publish": "npm publish",
+    "update:packages": "ncu -u --reject node-fetch && pnpm i",
+    "build": "npx ts-node build.ts && npx ts-node add-line.ts",
+    "publish": "pnpm publish",
     "dev": "nodemon",
     "start:dev": "npx ts-node build.ts && node ./dist/index.js",
     "start": "node dist/index.js",
-    "skeet:skeet": "yarn --cwd ./functions/skeet dev",
+    "skeet:skeet": "pnpm -F skeet-func dev",
     "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts labo",
-    "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts epics",
-    "skeet:sql-kom": "yarn --cwd sql/kom-db dev"
+    "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts epics"
   },
   "dependencies": {
     "@skeet-framework/ai": "1.7.13",
@@ -54,6 +56,7 @@
     "semver": "7.6.0"
   },
   "devDependencies": {
+    "@changesets/cli": "2.27.1",
     "@skeet-framework/discord-utils": "0.2.14",
     "@skeet-framework/firestore": "2.4.2",
     "@stdlib/string-percent-encode": "0.1.1",

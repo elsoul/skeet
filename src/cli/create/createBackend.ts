@@ -33,9 +33,9 @@ export const createBackend = async (appName: string) => {
   }
 
   execSyncCmd(gitCloneCmd)
-  const yarnApiCmd = ['yarn']
-  execSyncCmd(yarnApiCmd, appDir)
-  execSyncCmd(yarnApiCmd, backendRootPath)
+  const cmd = ['pnpm', 'install']
+  execSyncCmd(cmd, appDir)
+  execSyncCmd(cmd, backendRootPath)
   const rmDefaultGit = ['rm', '-rf', '.git']
   execSyncCmd(rmDefaultGit, appDir)
   const rmDefaultGithubActions = ['rm', '-rf', '.github']

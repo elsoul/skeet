@@ -1,22 +1,28 @@
-import { SkeetAiMode } from '@/types/skeetTypes'
 import { SkeetAIOptions } from '@skeet-framework/ai'
 import { utcNow } from '@skeet-framework/utils'
 import chalk from 'chalk'
 import CliTable3 from 'cli-table3'
-import { appendFileSync, existsSync, mkdirSync, readFileSync } from 'fs'
+import { appendFileSync, existsSync, mkdirSync } from 'fs'
+import { SkeetAiMode } from '../../types/skeetTypes'
+import SkeetLangJA from './locales/ja/skeetAi.json'
+import SkeetLangEN from './locales/en/skeetAi.json'
+
+const SkeetLangs = {
+  ja: SkeetLangJA,
+  en: SkeetLangEN,
+}
 
 export class AiLog {
-  lang: string
+  lang: 'ja' | 'en'
+  localeFile: SkeetLog
 
-  constructor(lang = 'en') {
+  constructor(lang = 'en' as 'ja' | 'en') {
     this.lang = lang
+    this.localeFile = SkeetLangs[lang]
   }
 
   text = () => {
-    const localeFile = JSON.parse(
-      readFileSync(`${__dirname}/locales/${this.lang}/skeetAi.json`, 'utf8')
-    ) as SkeetLog
-    return localeFile
+    return this.localeFile
   }
 
   help = () => {
@@ -30,8 +36,8 @@ export class AiLog {
           '$ function\n' +
           '$ method\n' +
           '$ help\n' +
-          '$ q\n'
-      )
+          '$ q\n',
+      ),
     )
   }
 
@@ -61,7 +67,7 @@ export class AiLog {
       [this.text().common.aiType, aiOptions.ai],
       [this.text().common.model, aiOptions.model],
       [this.text().common.maxToken, aiOptions.maxTokens],
-      [this.text().common.temperature, aiOptions.temperature]
+      [this.text().common.temperature, aiOptions.temperature],
     )
 
     console.log(table.toString())
@@ -71,7 +77,7 @@ export class AiLog {
     role: string,
     content: string,
     mode: SkeetAiMode,
-    model: string
+    model: string,
   ) => {
     const tmpJson = `tmp/ai/history-${this.lang}.jsonl`
     if (!existsSync('tmp/ai')) {

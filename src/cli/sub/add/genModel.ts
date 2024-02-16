@@ -2,7 +2,6 @@ import { LOG } from '@/config/log'
 import { PATH } from '@/config/path'
 import { lang } from '@/index'
 import { Logger } from '@/lib'
-import { msg } from '@/lib/msg'
 import { appendLineToFile } from '@/templates/instanceTypes'
 import { toCamelCase } from '@/utils/string'
 import { toUpperCase } from '@skeet-framework/utils'
@@ -18,9 +17,7 @@ export const genModel = (modelName: string) => {
     }
     const filePath = `${PATH.MODEL}/${modelName}Models.ts`
     if (existsSync(filePath)) {
-      console.log(
-        chalk.yellow(`${msg(LOG.ALREADY_EXISTS, lang)} - ${filePath}`),
-      )
+      console.log(chalk.yellow(`⚠️ Already Exist - ${filePath}`))
       return false
     }
     const modelIndexPath = `${PATH.MODEL}/index.ts`
@@ -85,7 +82,7 @@ export type ${capital}Child = {
     writeFileSync(filePath, body)
     const indexLine = `export * from './${camel}Models'`
     appendLineToFile(modelIndexPath, indexLine)
-    Logger.successCheck(`${msg(LOG.SUCCESS_CREATE, lang)} - ${filePath}`)
+    Logger.successCheck(`successfully created - ${filePath}`)
     return true
   } catch (error) {
     throw new Error(`genModel: ${error}`)

@@ -50,6 +50,7 @@ export const getFunctions = (isForModels = false): string[] => {
 }
 
 export const functionsInstanceTypes = [
+  'onCall',
   'http',
   'firestore',
   'pubsub',

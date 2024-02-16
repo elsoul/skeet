@@ -59,7 +59,6 @@ local.properties
 #
 node_modules/
 npm-debug.log
-yarn-error.log
 
 # BUCK
 buck-out/
@@ -166,7 +165,6 @@ local.properties
 #
 node_modules/
 npm-debug.log
-yarn-error.log
 
 # BUCK
 buck-out/
@@ -234,8 +232,6 @@ firebase-debug.log
 
 # debug
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
@@ -329,7 +325,6 @@ local.properties
 #
 node_modules/
 npm-debug.log
-yarn-error.log
 
 # BUCK
 buck-out/

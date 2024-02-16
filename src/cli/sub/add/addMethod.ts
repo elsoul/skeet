@@ -7,9 +7,6 @@ import {
   getFunctions,
 } from '@/lib'
 import { readFileSync, writeFileSync } from 'fs'
-import { msg } from '@/lib/msg'
-import { LOG } from '@/config/log'
-import { lang } from '@/index'
 
 export const addMethod = async (
   methodName: string,
@@ -84,7 +81,7 @@ const genFunction = (
 ) => {
   const genFile = genInstanceMethod(instanceType, functionName, methodName)
   writeFileSync(genFile.filePath, genFile.body)
-  Logger.successCheck(`${msg(LOG.SUCCESS_CREATE, lang)} - ${genFile.filePath}`)
+  Logger.successCheck(`successfully generated - ${genFile.filePath}`)
   const indexFile = `${FUNCTIONS_PATH}/${functionName}/src/index.ts`
   insertFunction(indexFile, methodName)
 }

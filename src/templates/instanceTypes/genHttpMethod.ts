@@ -1,8 +1,9 @@
 import { FUNCTIONS_PATH } from '@/lib'
+import { toPascalCase } from '@skeet-framework/utils'
 
 export const genHttpMethod = (functionsName: string, methodName: string) => {
-  const firstChar = methodName.charAt(0).toUpperCase()
-  const httpParams = firstChar + methodName.slice(1) + 'Params'
+  const pascalMethodName = toPascalCase(methodName)
+  const httpParams = pascalMethodName + 'Params'
   const filePath = `${FUNCTIONS_PATH}/${functionsName}/src/routings/http/${methodName}.ts`
   const body = `import { onRequest } from 'firebase-functions/v2/https'
 import { publicHttpOption } from '@/routings/options'

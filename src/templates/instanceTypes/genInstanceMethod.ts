@@ -1,4 +1,4 @@
-import { Logger, FUNCTIONS_PATH } from '@/lib'
+import { FUNCTIONS_PATH } from '@/lib'
 import { genAuthMethod } from './genAuthMethod'
 import { genFirestoreMethod } from './genFirestoreMethod'
 import { genHttpMethod } from './genHttpMethod'
@@ -7,10 +7,9 @@ import { genPubSubMethod } from './genPubSubMethod'
 import { genScheduleMethod } from './genScheduleMethod'
 import { genPubSubMethodParams } from './genPubSubMethodParams'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
-import { msg } from '@/lib/msg'
-import { LOG } from '@/config/log'
-import { lang } from '@/index'
 import { PATH } from '@/config/path'
+import { genOncallMethod } from './genOnCallMethod'
+import { genOnCallMethodTypes } from './genOnCallMethodTypes'
 
 export const genInstanceMethod = (
   instanceType: string,
@@ -22,6 +21,11 @@ export const genInstanceMethod = (
       mkdirSync(PATH.TYPE)
     }
     switch (instanceType) {
+      case 'onCall':
+        addImportToIndex(instanceType, functionsName, methodName)
+        const onCallParams = genOnCallMethodTypes(methodName)
+        writeFileSync(onCallParams.filePath, onCallParams.body)
+        return genOncallMethod(functionsName, methodName)
       case 'auth':
         addImportToIndex(instanceType, functionsName, methodName)
         return genAuthMethod(functionsName, methodName)
@@ -32,9 +36,6 @@ export const genInstanceMethod = (
         addImportToIndex(instanceType, functionsName, methodName)
         const pubsubParams = genPubSubMethodParams(methodName)
         writeFileSync(pubsubParams.filePath, pubsubParams.body)
-        Logger.successCheck(
-          `${msg(LOG.SUCCESS_CREATE, lang)} - ${pubsubParams.filePath}`,
-        )
         return genPubSubMethod(functionsName, methodName)
       case 'schedule':
         addImportToIndex(instanceType, functionsName, methodName)
@@ -43,9 +44,6 @@ export const genInstanceMethod = (
         addImportToIndex(instanceType, functionsName, methodName)
         const params = genHttpMethodParams(methodName)
         writeFileSync(params.filePath, params.body)
-        Logger.successCheck(
-          `${msg(LOG.SUCCESS_CREATE, lang)} - ${params.filePath}`,
-        )
         return genHttpMethod(functionsName, methodName)
     }
   } catch (error) {

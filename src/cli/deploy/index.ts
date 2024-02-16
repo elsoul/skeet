@@ -1,10 +1,10 @@
 import { DEFAULT_FUNCTION_NAME, program } from '@/index'
 import { deploy } from './deploy'
-import { yarnBuild } from '../yarn/yarnBuild'
 import { FUNCTIONS_PATH, importConfig } from '@/lib'
 import { firebaseFunctionsDeploy } from './firebaseDeploy'
 import { spawnSync } from 'node:child_process'
 import { sqlDeploy } from './sqlDeploy'
+import { pnpmBuild } from '../../lib/pnpmBuild'
 
 export const deployCommands = async () => {
   program
@@ -18,7 +18,7 @@ export const deployCommands = async () => {
         const { app } = importConfig()
         const functionName = options.function.split(':')[0]
         const methodName = options.function.split(':')[1]
-        await yarnBuild(functionName)
+        pnpmBuild(functionName)
         await firebaseFunctionsDeploy(
           app.fbProjectId,
           functionName,
@@ -26,8 +26,7 @@ export const deployCommands = async () => {
         )
         return
       } else if (options.discord) {
-        const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} discord:deploy`
-        spawnSync(cmd, { stdio: 'inherit', shell: true })
+        pnpmBuild(DEFAULT_FUNCTION_NAME)
         return
       } else if (options.sql) {
         sqlDeploy()

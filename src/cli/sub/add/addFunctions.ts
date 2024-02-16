@@ -74,7 +74,7 @@ export const addFunctionsToPackageJson = (functionName: string) => {
   const packageJson = readFileSync(ROUTE_PACKAGE_JSON_PATH)
   const newPackageJson = JSON.parse(String(packageJson))
   newPackageJson.scripts[`skeet:${functionName}`] =
-    `yarn --cwd ./functions/${functionName} dev`
+    `pnpm -F ${functionName}-func dev`
   writeFileSync(
     ROUTE_PACKAGE_JSON_PATH,
     JSON.stringify(newPackageJson, null, 2),

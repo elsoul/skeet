@@ -1,15 +1,16 @@
 import { PATH } from '@/config/path'
+import { toCamelCase, toPascalCase } from '@skeet-framework/utils'
 import { existsSync, mkdirSync } from 'fs'
 
 export const genHttpMethodParams = (methodName: string) => {
-  const firstChar = methodName.charAt(0).toUpperCase()
-  const capitalizedMethodName = firstChar + methodName.slice(1)
+  const pascalMethodName = toPascalCase(methodName)
+  const camelMethodName = toCamelCase(methodName)
   const httpPath = `${PATH.TYPE}/http`
   if (!existsSync(httpPath)) {
     mkdirSync(httpPath)
   }
-  const filePath = `${httpPath}/${methodName}Params.ts`
-  const body = `export type ${capitalizedMethodName}Params = {
+  const filePath = `${httpPath}/${camelMethodName}Params.ts`
+  const body = `export type ${pascalMethodName}Params = {
   name?: string
 }`
   return {

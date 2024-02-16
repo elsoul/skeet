@@ -13,23 +13,23 @@ jobs:
         node-version: [20.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i -g yarn
-      - run: yarn install
-      - run: yarn test
+      - run: pnpm install
+      - run: pnpm test
       - name: Disord Notification Epics
-        run: yarn discord:epics
+        run: pnpm discord:epics
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
           DISCORD_CHANNEL_ID_JA: ${{ secrets.DISCORD_CHANNEL_ID_JA }}
       - name: Disord Notification LABO
-        run: yarn discord:labo
+        run: pnpm discord:labo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_TOKEN_LABO: ${{ secrets.DISCORD_TOKEN_LABO }}

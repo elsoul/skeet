@@ -31,23 +31,27 @@ export const addSubCommands = async () => {
     .action((functionsName: string) => {
       addFunctions(functionsName)
     })
+
   add
     .command('method')
-    .argument('<methodName>', 'Method Name - e.g. addStreamUserChat')
     .option('--instance <instance>', 'Instance Type - e.g. http')
     .option('--function <function>', 'Function Name - e.g. skeet')
-    .action(
-      async (
-        methodName: string,
-        options: { function: string; instance: string },
-      ) => {
-        if (options.function !== '' && options.instance !== '') {
-          await addMethod(methodName, options.instance, options.function)
-        } else {
-          await addMethod(methodName)
-        }
-      },
-    )
+    .action(async (options: { function: string; instance: string }) => {
+      const answer = await inquirer.prompt<{ methodName: string }>([
+        {
+          type: 'input',
+          name: 'methodName',
+          message: 'Enter Method Name',
+          default: 'methodName',
+        },
+      ])
+      const methodNameString = answer.methodName || 'methodName'
+      if (options.function !== '' && options.instance !== '') {
+        await addMethod(methodNameString, options.instance, options.function)
+      } else {
+        await addMethod(methodNameString)
+      }
+    })
   add
     .command('model')
     .argument('<modelName>', 'Model Name - e.g. Article')
@@ -147,7 +151,7 @@ export const addSubCommands = async () => {
           '@skeet-framework/discord-utils',
           '0.2.13',
         )
-        const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} install`
+        const cmd = `pnpm -F ${DEFAULT_FUNCTION_NAME}-func install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
       } else {
         const isDirExist = addStripeWebhook()
@@ -157,7 +161,7 @@ export const addSubCommands = async () => {
         }
         const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
         addDependencyToPackageJson(packageJsonPath, 'stripe', '14.4.0')
-        const cmd = `yarn --cwd ${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME} install`
+        const cmd = `pnpm -F ${DEFAULT_FUNCTION_NAME}-func install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
       }
     })

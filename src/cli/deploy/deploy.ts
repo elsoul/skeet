@@ -3,8 +3,9 @@ import { importConfig, getFunctions } from '@/lib'
 import { deployWebApp } from './deployWebApp'
 import { deployRules } from './deployRules'
 import { firebaseFunctionsDeploy } from './firebaseDeploy'
-import { yarnBuild } from '../yarn/yarnBuild'
 import { deployGraphql } from './deployGraphql'
+import { spawnSync } from 'child_process'
+import { pnpmBuild } from '@/lib/pnpmBuild'
 
 export const deploy = async () => {
   const functions = getFunctions()
@@ -23,7 +24,9 @@ export const deploy = async () => {
     functionsArray = functionsArray.filter((f) => f.name !== 'webapp')
   }
   if (functionsArray.length === 1) {
-    await yarnBuild(functionsArray[0].name)
+    spawnSync(`pnpm -F ${functionsArray[0].name}-func build`, {
+      stdio: 'inherit',
+    })
     await firebaseFunctionsDeploy(app.fbProjectId, functionsArray[0].name)
     return
   }
@@ -53,7 +56,7 @@ export const deploy = async () => {
       } else if (service === 'graphql' || service === 'sql') {
         await deployGraphql(config)
       } else {
-        await yarnBuild(service)
+        pnpmBuild(service)
         await firebaseFunctionsDeploy(config.app.fbProjectId, service)
       }
     }

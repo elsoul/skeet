@@ -1,7 +1,6 @@
 export * from './deploy'
 export * from './init'
 export * from './create'
-export * from './yarn'
 export * from './server'
 export * from './login'
 export * from './curl'

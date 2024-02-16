@@ -15,6 +15,8 @@ export const setupSQLActions = (
   minInstances: string,
 ) => {
   try {
+    const config = importConfig()
+    const region = config.app.region
     const upperCaseInstanceName = instanceName
       .toUpperCase()
       .replaceAll('-', '_')
@@ -28,6 +30,7 @@ export const setupSQLActions = (
       maxInstances,
       minInstances,
       envString,
+      region,
     )
     writeFileSync(result.filePath, result.body, { flag: 'w' })
     Logger.success(`Successfully updated ${result.filePath}!`)

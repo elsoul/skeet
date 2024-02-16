@@ -14,7 +14,7 @@ import {
   runEnableAllPermission,
 } from '@/lib'
 import { addFirebaseApp } from '../sub/add/addFirebaseApp'
-import { yarnBuild } from '../yarn/yarnBuild'
+import { pnpmBuild } from '../../lib/pnpmBuild'
 import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
 import { deployRules } from '../deploy/deployRules'
 import { deployGraphql } from '../deploy/deployGraphql'
@@ -105,7 +105,7 @@ export const init = async (loginMode = false) => {
   if (sqlPassword !== '') await setupSQL(skeetConfig, sqlPassword)
 
   // Deploy Default Firebase Functions
-  await yarnBuild(DEFAULT_FUNCTION_NAME)
+  pnpmBuild(DEFAULT_FUNCTION_NAME)
   await firebaseFunctionsDeploy(skeetConfig.app.fbProjectId)
   await deployRules(skeetConfig.app.fbProjectId)
 
@@ -122,12 +122,12 @@ export const init = async (loginMode = false) => {
   if (!skeetConfig.app.hasLoadBalancer) {
     await createLoadBalancer(skeetConfig, domainAnswer)
     syncRoutings()
-    const cmd = `yarn deploy`
+    const cmd = `pnpm deploy`
     spawnSync(cmd, { stdio: 'inherit', shell: true })
     const ips = getZone(projectId, skeetConfig.app.name)
     Logger.dnsSetupLog(ips)
   } else {
-    const cmd = `yarn deploy`
+    const cmd = `pnpm deploy`
     spawnSync(cmd, { stdio: 'inherit', shell: true })
   }
 }

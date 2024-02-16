@@ -13,7 +13,6 @@ import {
   serverCommands,
   deployCommands,
   initCommands,
-  yarnCommands,
   loginCommands,
   curlCommands,
   genCommands,
@@ -51,7 +50,6 @@ function main() {
     serverCommands()
     deployCommands()
     initCommands()
-    yarnCommands()
     loginCommands()
     curlCommands()
     genCommands()

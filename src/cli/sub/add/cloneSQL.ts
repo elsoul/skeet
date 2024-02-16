@@ -3,6 +3,7 @@ import { spawnSync } from 'child_process'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import { updateDefaultIndex } from './updateDefaultIndex'
 import { addScriptToPackageJson } from '@/lib/files/addScriptToPackageJson'
+import { pnpmBuild } from '@/lib/pnpmBuild'
 
 export const cloneSQL = (sqlName: string) => {
   const config = importConfig()
@@ -19,14 +20,15 @@ export const cloneSQL = (sqlName: string) => {
     shell: true,
     stdio: 'inherit',
   })
-  spawnSync('yarn', { shell: true, stdio: 'inherit', cwd: sqlRoot })
+  spawnSync(`rm -rf ${sqlRoot}/.git`, { shell: true, stdio: 'inherit' })
+  pnpmBuild(sqlRoot)
   const instanceName = 'sql-' + sqlName
   const sqlCmd = instanceName.replace('-db', '')
   updateDefaultIndex(instanceName)
   addScriptToPackageJson(
     './package.json',
     `skeet:${sqlCmd}`,
-    'yarn --cwd sql/' + sqlName + ' dev',
+    `pnpm -F ${sqlName} dev`,
   )
   const defaultSQLconfig = {
     instanceName,
