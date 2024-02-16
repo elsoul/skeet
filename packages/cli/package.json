@@ -26,6 +26,7 @@
     "skeet": "./dist/index.js"
   },
   "scripts": {
+    "ci:publish": "pnpm publish -r",
     "lint": "eslint --ext .ts,.tsx --fix .",
     "test": "jest --coverage=false --detectOpenHandles --maxWorkers=1",
     "update:packages": "ncu -u --reject node-fetch && pnpm i",

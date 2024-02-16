@@ -23,6 +23,7 @@
   },
   "packageManager": "pnpm@8.15.3",
   "scripts": {
+    "ci:publish": "pnpm publish -r",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cli": "pnpm -F \"@skeet-framework/cli\""
   },
