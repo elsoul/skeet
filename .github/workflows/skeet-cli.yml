@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    paths:
+      - "packages/cli/**"
 
 jobs:
   build:
@@ -22,5 +24,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: pnpm install
-      - run: pnpm build
-      - run: pnpm test
+      - run: pnpm cli build
+      - run: pnpm cli test
