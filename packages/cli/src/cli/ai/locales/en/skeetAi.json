@@ -1,0 +1,88 @@
+{
+  "common": {
+    "you": "You",
+    "option": "Option",
+    "value": "Value",
+    "start": "What can I do for you?",
+    "aiType": "AI Type",
+    "model": "Model",
+    "maxToken": "Max Token",
+    "temperature": "Temperature",
+    "skeetAiModeText": "Skeet AI Mode\n `$ <mode>` to change AI mode",
+    "isSelected": "is selected 🤖 (type 'q' to quit)",
+    "shutdown": "is shutting down",
+    "howAboutThis": "How about this?\n\n",
+    "updateFile": "Please update your file",
+    "getFileDesc": "This command shows most recent updated files",
+    "currentSet": "Current set",
+    "areYouReady": "Are you ready for run ?",
+    "firestoreMode": "🔥 Firestore Model Generating Mode 🔥",
+    "firestoreModeDesc": "Please describe your Firestore use case.",
+    "MayICreateFile": "May I create this file for you?",
+    "MayIUpdateFile": "May I update this file for you?",
+    "MayIAddDoc": "May I add Typedoc for this method?",
+    "created": "✔️ Created",
+    "thenRun": "\nThen run:",
+    "mayISyncModel": "May I sync models now ?",
+    "confirmSyncModel": "❓ May I sync models now ?",
+    "example": "e.g. ",
+    "addedDoc": "✔️ Added Typedoc"
+  },
+  "warning": {
+    "temperature": "⚠️ Temperature must be between 0 and 1 ⚠️",
+    "gptKey": "⚠️ Please set CHAT_GPT_ORG and CHAT_GPT_KEY ⚠️",
+    "gcpKey": "⚠️ Please set GCLOUD_PROJECT and REGION ⚠️"
+  },
+  "skeetMode": {},
+  "typedocMode": {
+    "init": "📚 Typedoc Mode 📚",
+    "modeDesc": "Please select a filePath to generate typedoc.",
+    "ExitingMode": "Exiting Typedoc Mode"
+  },
+  "translateMode": {
+    "init": "🌐 Translate Mode 🌐",
+    "modeDesc": "Reading tmp/ai/translate.json ...",
+    "currentSet": "Current Set",
+    "ExitingMode": "Exiting Translate Mode"
+  },
+  "firestoreMode": {
+    "init": "🔥 Firestore Model Generating Mode 🔥",
+    "modeDesc": "Please describe your Firestore use case.",
+    "example1": "I want to create a blog app.",
+    "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
+    "ExitingMode": "Exiting Firestore Mode"
+  },
+  "methodMode": {
+    "init": "📝 Method Mode 📝",
+    "modeDesc": "Please describe the use case for your Method",
+    "list1": "Select Firebase Function to add new method",
+    "example1": "Create a function that finds the largest number in an array.",
+    "ExitingMode": "Exiting Method Mode"
+  },
+  "functionMode": {
+    "init": "🔥 Firebase Function Generating Mode 🔥",
+    "modeDesc": "Select Firebase Function Instance Type",
+    "modeDesc2": "Please describe your Firebase Function use case.",
+    "list1": "Select Firebase Function to add new method",
+    "http": "- Triggered by http request",
+    "auth": "- Triggered by User Auth event",
+    "firestore": "- Triggered by Firestore event",
+    "pubsub": "- Triggered by PubSub event",
+    "schedule": "- Triggered by Schedule event",
+    "example1": "I want to create a blog app.",
+    "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
+    "ExitingMode": "Exiting Function Mode"
+  },
+  "prismaMode": {
+    "init": "🤖 Prisma Scheme Generating Mode 🤖",
+    "mayISyncModel": "May I sync models now ?",
+    "modeDesc": "Please describe your Prisma use case.",
+    "example1": "I want to create a blog app.",
+    "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
+    "ExitingMode": "Exiting Prisma Mode",
+    "warning": "(Showing only the new parts of the models. prisma format (also there is vscode plugin) will add the relations automatically to the existing models.)\n\n",
+    "schemaConfirm": "\n❓ Is this schema good for you?",
+    "migrationConfirm": "\n❓ Do you want me to run the migration now?",
+    "scaffoldConfirm": "\n❓ Do you want me to scaffold the models now?"
+  }
+}

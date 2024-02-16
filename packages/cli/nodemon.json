@@ -1,0 +1,7 @@
+{
+  "watch": ["src"],
+  "ignore": ["src/**/*.test.ts", "node_modules"],
+  "ext": "ts,js,json,graphql",
+  "exec": "pnpm start:dev",
+  "legacyWatch": true
+}

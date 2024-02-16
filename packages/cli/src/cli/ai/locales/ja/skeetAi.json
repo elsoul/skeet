@@ -1,0 +1,89 @@
+{
+  "common": {
+    "you": "あなた",
+    "option": "オプション",
+    "value": "値",
+    "start": "何をお手伝いしましょうか？",
+    "aiType": "AIの種類",
+    "model": "モデル",
+    "maxToken": "最大トークン",
+    "temperature": "感情の大きさ",
+    "skeetAiModeText": "Skeet AIモード\n `$ <mode>` でAIモードを変更",
+    "isSelected": "が選択されました 🤖 ('q'を入力して終了)",
+    "shutdown": "シャットダウン中",
+    "howAboutThis": "これはいかがでしょうか？\n\n",
+    "updateFile": "ファイルを更新してください",
+    "getFileDesc": "このコマンドは最も最近更新されたファイルを表示します",
+    "currentSet": "現在の設定",
+    "areYouReady": "実行する準備はできていますか？",
+    "firestoreMode": "🔥 Firestoreモデル生成モード 🔥",
+    "firestoreModeDesc": "Firestoreの使用ケースを説明してください。",
+    "MayICreateFile": "このファイルを作成してもよろしいですか？",
+    "MayIUpdateFile": "このファイルを更新してもよろしいですか？",
+    "MayIAddDoc": "このメソッドにTypedocを追加してもよろしいですか？",
+    "created": "✔️ 作成完了",
+    "thenRun": "\n次に実行:",
+    "mayISyncModel": "モデルを同期してもよろしいですか？",
+    "confirmSyncModel": "❓ モデルを同期してもよろしいですか？",
+    "example": "例： ",
+    "addedDoc": "✔️ Typedocを追加しました"
+  },
+  "warning": {
+    "temperature": "⚠️ 感情の大きさは0から1の間でなければなりません ⚠️",
+    "gptKey": "⚠️ CHAT_GPT_ORGとCHAT_GPT_KEYを設定してください ⚠️",
+    "gcpKey": "⚠️ GCLOUD_PROJECTとREGIONを設定してください ⚠️",
+    "mode": "⚠️ このモードは現在のテンプレートでは使用できません ⚠️"
+  },
+  "skeetMode": {},
+  "typedocMode": {
+    "init": "📚 Typedoc モード 📚",
+    "modeDesc": "Typedocを生成するためのファイルパスを選択してください。",
+    "ExitingMode": "Typedoc モードを終了"
+  },
+  "translateMode": {
+    "init": "🌐 翻訳モード 🌐",
+    "modeDesc": "tmp/ai/translate.json を読み込んでいます...",
+    "currentSet": "現在のセット",
+    "ExitingMode": "翻訳モードを終了します"
+  },
+  "firestoreMode": {
+    "init": "🔥 Firestore モデル生成モード 🔥",
+    "modeDesc": "Firestoreの使用ケースを説明してください。",
+    "example1": "ブログアプリを作りたい。",
+    "example2": "次のフィールドを持つ新しいモデル「Client」を作りたい：id、name、email、password、createdAt、updatedAt。",
+    "ExitingMode": "Firestoreモードを終了します"
+  },
+  "methodMode": {
+    "init": "📝 メソッド生成モード 📝",
+    "modeDesc": "メソッドの使用ケースを説明してください",
+    "list1": "新しいメソッドを追加するためのFirebase Functionを選択します",
+    "example1": "配列の中で最大の数を見つける関数を作りたい。",
+    "ExitingMode": "メソッドモードを終了します"
+  },
+  "functionMode": {
+    "init": "🔥 Firebase Function 生成モード 🔥",
+    "modeDesc": "Firebase Function インスタンスタイプを選択",
+    "modeDesc2": "Firebase Functionの使用ケースを説明してください。",
+    "list1": "新しいメソッドを追加するためのFirebase Functionを選択してください。",
+    "http": "- HTTPリクエストによってトリガーされます",
+    "auth": "- ユーザー認証イベントによってトリガーされます",
+    "firestore": "- Firestoreイベントによってトリガーされます",
+    "pubsub": "- PubSubイベントによってトリガーされます",
+    "schedule": "- スケジュールイベントによってトリガーされます",
+    "example1": "ブログアプリを作りたい。",
+    "example2": "次のフィールドを持つ新しいモデル、Clientを作りたい：id、名前、メール、パスワード、作成日、更新日。",
+    "ExitingMode": "Functionモードを終了"
+  },
+  "prismaMode": {
+    "init": "🤖 Prismaスキーマ生成モード 🤖",
+    "mayISyncModel": "今すぐモデルを同期してもよろしいですか？",
+    "modeDesc": "あなたのPrismaの使用例を説明してください。",
+    "example1": "ブログアプリを作りたい。",
+    "example2": "次のフィールドを持つ新しいモデル、Clientを作りたい：id、名前、メール、パスワード、作成日、更新日。",
+    "ExitingMode": "Prismaモードを終了",
+    "warning": "(モデルの新しい部分のみを表示。prisma format（vscodeプラグインもあります）は既存のモデルに自動的に関連を追加します。)\n\n",
+    "schemaConfirm": "\n❓ このスキーマはあなたにとって適していますか？",
+    "migrationConfirm": "\n❓ 今すぐマイグレーションを実行してもよろしいですか？",
+    "scaffoldConfirm": "\n❓ 今すぐモデルをスキャフォールドしてもよろしいですか？"
+  }
+}

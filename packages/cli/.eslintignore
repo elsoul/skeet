@@ -1,0 +1,7 @@
+.next
+out
+dist
+build
+src/__generated__
+src/schema.graphql
+src/cli/login/login.ts

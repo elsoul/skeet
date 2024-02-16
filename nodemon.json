@@ -1,7 +1,0 @@
-{
-  "watch": ["src"],
-  "ignore": ["src/**/*.test.ts", "node_modules"],
-  "ext": "ts,js,json,graphql",
-  "exec": "yarn start:dev",
-  "legacyWatch": true
-}

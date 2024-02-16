@@ -55,3 +55,4 @@ tmp
 /common/
 firebase.json
 /sql/
+dist/
