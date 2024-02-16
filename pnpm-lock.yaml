@@ -47,9 +47,6 @@ importers:
       nodemon:
         specifier: 3.0.3
         version: 3.0.3
-      npm-check-updates:
-        specifier: 16.14.14
-        version: 16.14.14
       prettier:
         specifier: 3.2.5
         version: 3.2.5
