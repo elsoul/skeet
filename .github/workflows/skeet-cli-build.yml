@@ -1,0 +1,22 @@
+name: SkeetCliBuild
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - "packages/cli/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: pnpm -F cli install --frozen-lockfile
+      - run: pnpm -F cli test && pnpm -F cli build
