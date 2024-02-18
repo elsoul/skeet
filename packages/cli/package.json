@@ -3,7 +3,6 @@
   "version": "1.15.0",
   "description": "Skeet CLI",
   "main": "dist/index.js",
-  "repository": "https://github.com/elsoul/skeet",
   "keywords": [
     "openai",
     "firestore",
@@ -16,6 +15,14 @@
     "AI"
   ],
   "author": "ELSOUL LABO B.V.",
+  "homepage": "https://labo.elsoul.nl",
+  "bugs": {
+    "url": "https://discord.gg/ausnBvAM38"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elsoul/skeet.git"
+  },
   "license": "Apache-2.0",
   "engines": {
     "pnpm": "8.15.3",
@@ -25,8 +32,13 @@
   "bin": {
     "skeet": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
+  "private": false,
   "scripts": {
-    "ci:publish": "pnpm publish -r",
+    "ci:version": "pnpm changesets version",
+    "ci:publish": "pnpm build && pnpm publish -r",
     "lint": "eslint --ext .ts,.tsx --fix .",
     "test": "jest --coverage=false --detectOpenHandles --maxWorkers=1",
     "update:packages": "ncu -u --reject node-fetch && pnpm i",
@@ -35,7 +47,6 @@
     "dev": "nodemon",
     "start:dev": "npx ts-node build.ts && node ./dist/index.js",
     "start": "node dist/index.js",
-    "skeet:skeet": "pnpm -F skeet-func dev",
     "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts labo",
     "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts epics"
   },
