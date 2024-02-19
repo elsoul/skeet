@@ -34,8 +34,14 @@ jobs:
           node-version: "20.11.0"
           cache: "pnpm"
 
+      - name: Setup .npmrc file
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
       - name: install dependencies
         run: pnpm install
+
+      - name: Build
+        run: pnpm -F cli build
 
       - name: create and publish versions
         id: changesets
