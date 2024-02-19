@@ -1,5 +1,6 @@
 import { build } from 'esbuild'
 import path from 'path'
+import { aliasPath } from 'esbuild-plugin-alias-path' // Adjust the import based on the actual plugin name
 ;(async () => {
   await build({
     entryPoints: [path.resolve(__dirname, 'src/index.ts')],
@@ -15,8 +16,12 @@ import path from 'path'
       'process.env.NODE_ENV': `"production"`,
     },
     metafile: true,
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
+    plugins: [
+      aliasPath({
+        alias: {
+          '@/*': path.resolve(__dirname, './src'),
+        },
+      }),
+    ],
   })
 })()
