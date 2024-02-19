@@ -33,8 +33,9 @@ jobs:
         run: |
           cd packages/cli
           export TS_NODE_PROJECT=$(pwd)/tsconfig.json
-          npx ts-node -r tsconfig-paths/register --transpile-only build.ts
-          npx ts-node -r tsconfig-paths/register --transpile-only add-line.ts
+          export DEBUG=tsconfig-paths:*
+          pnpm run build:cli
+          pnpm run add-line:cli
 
       - name: Run Tests
         run: |

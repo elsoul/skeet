@@ -27,7 +27,9 @@
     "ci:publish": "pnpm publish -r",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cli": "pnpm -F \"@skeet-framework/cli\"",
-    "discord:send": "echo hey"
+    "discord:send": "echo hey",
+    "build:cli": "ts-node -r tsconfig-paths/register --transpile-only ./packages/cli/build.ts",
+    "add-line:cli": "ts-node -r tsconfig-paths/register --transpile-only ./packages/cli/add-line.ts"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
