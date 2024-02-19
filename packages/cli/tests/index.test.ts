@@ -7,7 +7,7 @@ import util from 'util'
 const execPromise = util.promisify(exec)
 
 describe('CLI app', () => {
-  it('should return Hello, World! on "hello" command', async () => {
+  it('should return CLI for Skeet - Full-stack TypeScript Serverless framework', async () => {
     // CLIコマンドの実行
     const command = 'node ./dist/index.js help'
     const { stdout, stderr } = await execPromise(command)

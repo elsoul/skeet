@@ -20,16 +20,17 @@ jobs:
       - uses: pnpm/action-setup@v3
         with:
           version: 8
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: "20.11.0"
+          node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm -F cli install --frozen-lockfile
 
       - name: Build
-        run: pnpm -F cli build
+        run: pnpm -F cli ci:build
 
-      - name: Run tests
+      - name: Run Tests
         run: pnpm -F cli test

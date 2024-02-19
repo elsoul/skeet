@@ -16,5 +16,12 @@ import path from 'path'
       'process.env.NODE_ENV': `"production"`,
     },
     metafile: true,
+    plugins: [
+      aliasPath({
+        alias: {
+          '@': path.resolve(__dirname, './src'),
+        },
+      }),
+    ],
   })
 })()

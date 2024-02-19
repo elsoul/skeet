@@ -38,7 +38,8 @@
   "private": false,
   "scripts": {
     "ci:version": "pnpm changesets version",
-    "ci:publish": "pnpm build && pnpm publish -r",
+    "ci:publish": "pnpm publish -r",
+    "ci:build": "npx ts-node build.ts && npx ts-node add-line.ts",
     "lint": "eslint --ext .ts,.tsx --fix .",
     "test": "vitest",
     "update:packages": "ncu -u --reject node-fetch && pnpm i",
