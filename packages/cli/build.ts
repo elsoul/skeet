@@ -2,13 +2,13 @@ import { build } from 'esbuild'
 import path from 'path'
 ;(async () => {
   await build({
-    entryPoints: ['./src/index.ts'],
+    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     bundle: true,
     minify: true,
     keepNames: true,
     sourcemap: 'inline',
     sourcesContent: true,
-    outfile: './dist/index.js',
+    outfile: path.resolve(__dirname, 'dist/index.js'),
     platform: 'node',
     format: 'cjs',
     define: {
