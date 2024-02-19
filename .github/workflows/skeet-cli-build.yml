@@ -31,8 +31,8 @@ jobs:
 
       - name: Build and Add Line
         run: |
-          export TS_NODE_PROJECT=./packages/cli/tsconfig.json
           cd packages/cli
+          export TS_NODE_PROJECT=tsconfig.json
           pnpm build
 
       - name: Run Tests
