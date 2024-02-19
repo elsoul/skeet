@@ -29,11 +29,15 @@ jobs:
       - name: Install dependencies
         run: pnpm -F cli install --frozen-lockfile
 
-      - name: Build
+      - name: Build and Add Line
         run: |
           cd packages/cli
+          export TS_NODE_PROJECT=$(pwd)/tsconfig.json
           npx ts-node -r tsconfig-paths/register --transpile-only build.ts
           npx ts-node -r tsconfig-paths/register --transpile-only add-line.ts
+        shell: /usr/bin/bash -e {0}
+        env:
+          PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
 
       - name: Run Tests
         run: |
