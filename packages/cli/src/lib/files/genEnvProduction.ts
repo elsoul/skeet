@@ -15,13 +15,15 @@ export const genEnvProduction = (
   const timeZone = regionToTimezone(region)
   const upperCaseInstanceName = instanceName.toUpperCase().replaceAll('-', '_')
   const filePath = `${generateDir}/.env.production`
+  const instanceNameSplit = instanceName.split('-')
+  const dbName = instanceNameSplit[1].toUpperCase()
   const envProduction = [
     `SKEET_APP_NAME=${app.name}\n`,
     `SKEET_GCP_PROJECT_ID=${app.projectId}\n`,
     `SKEET_GCP_REGION=${region}\n`,
-    `${upperCaseInstanceName}_PASSWORD=${encodedPassword}\n`,
     `SKEET_CONTAINER_REGION=${cRegion}\n`,
     `${upperCaseInstanceName}_PRIVATE_IP=${databaseIp}\n`,
+    `DATABASE_URL_${dbName}="postgresql://postgres:$${encodedPassword}@${databaseIp}:5432/${instanceName}?schema=public"\n`,
     `TZ=${timeZone}`,
   ]
   envProduction.forEach((keyValue) => {
