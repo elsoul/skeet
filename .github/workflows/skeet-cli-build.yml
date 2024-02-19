@@ -28,8 +28,8 @@ jobs:
       - name: Install dependencies
         run: pnpm -F cli install --frozen-lockfile
 
-      - name: Run tests
-        run: pnpm -F cli test
-
       - name: Build
         run: pnpm -F cli build
+
+      - name: Run tests
+        run: pnpm -F cli test
