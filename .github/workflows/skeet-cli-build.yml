@@ -1,4 +1,5 @@
 name: SkeetCliBuild
+
 on:
   push:
     branches: [main]
@@ -10,13 +11,29 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
+
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 8
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - run: pnpm -F cli install --frozen-lockfile
-      - run: pnpm -F cli test && pnpm -F cli build
+
+      - name: Install dependencies
+        run: pnpm -F cli install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm -F cli test
+
+      - name: Build
+        run: pnpm -F cli build

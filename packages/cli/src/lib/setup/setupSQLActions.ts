@@ -1,9 +1,6 @@
-import { importConfig, getActionsEnvString } from '@/lib'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { GRAPHQL_ENV_PRODUCTION_PATH } from '@/index'
+import { importConfig } from '@/lib'
 import { Logger } from '@/lib/logger'
 import { writeFileSync } from 'fs'
-import { graphqlYml } from '@/templates/init'
 import { sqlYml } from '@/templates/init/sql.yml'
 
 export const setupSQLActions = (
@@ -17,10 +14,9 @@ export const setupSQLActions = (
   try {
     const config = importConfig()
     const region = config.app.region
-    const upperCaseInstanceName = instanceName
-      .toUpperCase()
-      .replaceAll('-', '_')
-    const databaseUrl = `DATABASE_URL=postgresql://postgres\${{ secrets.${upperCaseInstanceName}_PASSWORD }}@\${{ secrets.${upperCaseInstanceName}_PRIVATE_IP }}:5432/${instanceName}?schema=public`
+    const splitInstanceName = instanceName.split('-')
+    const dbName = splitInstanceName[1].toUpperCase()
+    const databaseUrl = `DATABASE_URL=\${{ secrets.DATABASE_URL_${dbName} }}`
     const envString = databaseUrl
     const result = sqlYml(
       instanceName,

@@ -1,5 +1,5 @@
-import { graphqlModel } from '@/templates/graphql'
 import { Logger } from '@/lib/logger'
+import { graphqlModel } from '@/templates/graphql'
 import { writeFileSync } from 'fs'
 
 export const genModel = async (modelName: string) => {

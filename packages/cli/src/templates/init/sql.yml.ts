@@ -33,7 +33,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-
+    env:
+      PGHOST: 127.0.0.1
+      PGUSER: postgres
+      RACK_ENV: test
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/skeet-sql-test?schema=public
     services:
       db:
         image: postgres:15
@@ -45,67 +49,36 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v3
         with:
           version: 8
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '${NODE_VERSION}'
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: \${{ env.STORE_PATH }}
-          key: \${{ runner.os }}-pnpm-store-\${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            \${{ runner.os }}-pnpm-store-
-
-      - name: Use Node.js \${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: \${{ matrix.node-version }}
           cache: 'pnpm'
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
+      - name: Install dependencies
+        run: pnpm -F ${sqlDir} install
+      - name: Generate Prisma client
+        run: pnpm -F ${sqlDir} db:generate
+      - name: Apply migrations
+        run: pnpm -F ${sqlDir} db:dev
+      - name: Execute tests
+        run: pnpm -F ${sqlDir} test
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: \${{ secrets.SKEET_GCP_SA_KEY }}
-
-      - name: Build and test
-        env:
-          PGHOST: 127.0.0.1
-          PGUSER: postgres
-          RACK_ENV: test
-          DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/skeet-sql-test?schema=public
-        run: |
-          sudo apt-get -yqq install libpq-dev
-          cd sql/${sqlDir}
-          rm -f .env
-          pnpm install
-          npx prisma generate
-          npx prisma migrate dev --skip-seed
-
       - name: Configure Docker
         run: gcloud auth configure-docker ${cRegion}-docker.pkg.dev --quiet
-
-      - name: Build Docker container
-        run: docker build -f ./sql/${sqlDir}/Dockerfile ./sql/${sqlDir} -t ${instanceName}
-
-      - name: Tag Docker container
-        run: docker tag ${instanceName} ${cRegion}-docker.pkg.dev/\${{ secrets.SKEET_GCP_PROJECT_ID }}/\${{ secrets.SKEET_CONTAINER_REGION }}/${instanceName}
-
-      - name: Push to Artifact Resistory
-        run: docker push ${cRegion}-docker.pkg.dev/\${{ secrets.SKEET_GCP_PROJECT_ID }}/\${{ secrets.SKEET_CONTAINER_REGION }}/${instanceName}
+      - name: Build and Push Docker container
+        uses: docker/build-push-action@v2
+        with:
+          context: ./sql/${sqlDir}
+          file: ./sql/${sqlDir}/Dockerfile
+          push: true
+          tags: ${cRegion}-docker.pkg.dev/\${{ secrets.SKEET_GCP_PROJECT_ID }}/\${{ secrets.SKEET_CONTAINER_REGION }}/${instanceName}
 
       - name: Deploy to Cloud Run
         run: |
@@ -119,6 +92,7 @@ jobs:
             --min-instances=${minInstances} \\
             --region=\${{ secrets.SKEET_GCP_REGION }} \\
             --ingress=internal-and-cloud-load-balancing \\
+            --allow-unauthenticated \\
             --platform=managed \\
             --quiet \\
             --port=8080 \\

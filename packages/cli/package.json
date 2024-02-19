@@ -40,12 +40,11 @@
     "ci:version": "pnpm changesets version",
     "ci:publish": "pnpm build && pnpm publish -r",
     "lint": "eslint --ext .ts,.tsx --fix .",
-    "test": "jest --coverage=false --detectOpenHandles --maxWorkers=1",
+    "test": "vitest",
     "update:packages": "ncu -u --reject node-fetch && pnpm i",
     "build": "npx ts-node build.ts && npx ts-node add-line.ts",
     "publish": "pnpm publish",
-    "dev": "nodemon",
-    "start:dev": "npx ts-node build.ts && node ./dist/index.js",
+    "dev": "npx ts-node build.ts && node ./dist/index.js",
     "start": "node dist/index.js",
     "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts labo",
     "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts epics"
@@ -85,6 +84,7 @@
     "babel-loader": "9.1.3",
     "copyfiles": "2.4.1",
     "esbuild": "0.20.0",
+    "esbuild-plugin-alias-path": "^2.0.2",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
     "nodemon": "3.0.3",
@@ -94,6 +94,8 @@
     "ts-loader": "9.5.1",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.3.0"
   }
 }

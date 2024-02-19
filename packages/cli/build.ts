@@ -1,6 +1,8 @@
 import { build } from 'esbuild'
+import { aliasPath } from 'esbuild-plugin-alias-path'
+import path from 'path'
 ;(async () => {
-  const res = await build({
+  await build({
     entryPoints: ['./src/index.ts'],
     bundle: true,
     minify: true,
@@ -14,8 +16,5 @@ import { build } from 'esbuild'
       'process.env.NODE_ENV': `"production"`,
     },
     metafile: true,
-    alias: {
-      '@': './src',
-    },
   })
 })()
