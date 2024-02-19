@@ -2,8 +2,7 @@ name: SkeetCliRelease
 on:
   workflow_run:
     workflows: ["SkeetCliBuild"]
-    types:
-      - completed
+    types: [completed]
   push:
     branches:
       - main
@@ -19,31 +18,21 @@ permissions:
   pull-requests: write
   packages: write
 
-env:
-  CI: true
-  PNPM_CACHE_FOLDER: .pnpm-store
-
 jobs:
   version:
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: checkout code repository
         uses: actions/checkout@v3
-
-      - name: Setup Node.js 20.x
-        uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v3
         with:
-          node-version: 20.x
-
-      - name: install pnpm
-        run: npm add pnpm@latest -g
-
-      - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
-      - name: setup pnpm config
-        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20.11.0"
+          cache: "pnpm"
 
       - name: install dependencies
         run: pnpm install
