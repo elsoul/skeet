@@ -1,4 +1,3 @@
 {
-  "extends": "./tsconfig.build.regular.json",
-  "compilerOptions": {}
+  "extends": "./tsconfig.build.regular.json"
 }
