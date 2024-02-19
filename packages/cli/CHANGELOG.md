@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 1.15.0
+
+### Minor Changes
+
+- [`5f117b1`](https://github.com/elsoul/skeet/commit/5f117b1c380530b1aa34e902c5db5eec83b17fd1) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Migrate to PNPM
+
 ## 1.14.100
 
 ### Patch Changes
