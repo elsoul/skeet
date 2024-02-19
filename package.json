@@ -23,8 +23,8 @@
   },
   "packageManager": "pnpm@8.15.3",
   "scripts": {
-    "ci:version": "pnpm changeset version",
-    "ci:publish": "pnpm publish -r",
+    "ci:version": "changeset version",
+    "ci:publish": "changeset publish",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cli": "pnpm -F \"@skeet-framework/cli\"",
     "discord:send": "echo hey",
