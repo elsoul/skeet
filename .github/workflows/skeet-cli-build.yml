@@ -30,7 +30,10 @@ jobs:
         run: pnpm -F cli install --frozen-lockfile
 
       - name: Build
-        run: pnpm -F cli ci:build
+        run: |
+          export TS_NODE_PROJECT='./packages/cli/tsconfig.json'
+          npx ts-node -r tsconfig-paths/register --transpile-only build.ts
+          npx ts-node -r tsconfig-paths/register --transpile-only add-line.ts
 
       - name: Run Tests
         run: pnpm -F cli test
