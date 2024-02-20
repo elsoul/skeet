@@ -41,7 +41,7 @@ jobs:
 
       - name: Creating .npmrc
         run: |
-          echo "@fumi:registry=https://registry.npmjs.org/" >> "$HOME/.npmrc"
+          echo "@skeet-framework:registry=https://registry.npmjs.org/" >> "$HOME/.npmrc"
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> "$HOME/.npmrc"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
