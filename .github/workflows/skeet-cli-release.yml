@@ -48,10 +48,10 @@ jobs:
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            registry=https://registry.npmjs.org/
+            @skeet-framework:registry=https://registry.npmjs.org/
+            //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish packages
         run: |
