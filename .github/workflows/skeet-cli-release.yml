@@ -37,6 +37,7 @@ jobs:
         with:
           node-version: "20.11.0"
           cache: "pnpm"
+          scope: "@skeet-framework"
 
       - name: Creating .npmrc
         run: |
@@ -59,10 +60,11 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
-          publish: pnpm -F cli publish
+          publish: pnpm ci:publish
           title: "[ci] release"
           commit: "[ci] release"
           createGithubReleases: true
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
