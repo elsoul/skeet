@@ -45,7 +45,7 @@ jobs:
       - name: install dependencies
         run: pnpm install
 
-        - name: Creating .npmrc
+      - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
             //registry.npmjs.org/:_authToken=$NPM_TOKEN
