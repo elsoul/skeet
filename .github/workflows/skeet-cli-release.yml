@@ -45,19 +45,32 @@ jobs:
       - name: install dependencies
         run: pnpm install
 
-      - name: Creating .npmrc
+        - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
-            registry=https://registry.npmjs.org/
-            @skeet-framework:registry=https://registry.npmjs.org/
-            //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
           EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish packages
-        run: |
-          pnpm -F @skeet-framework/cli build
-          NPM_TOKEN=${{ secrets.NPM_TOKEN }} pnpm -F @skeet-framework/cli publish -r --access public
+      - name: Build
+        run: pnpm -F @skeet-framework/cli build
+
+      - name: create and publish versions
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm ci:version
+          publish: pnpm ci:publish
+          title: "[ci] release"
+          commit: "[ci] release"
+          createGithubReleases: true
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Send a Discord notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        # You can do something when a publish happens.
+        run: discord:send --message "A new version of ${GITHUB_REPOSITORY} was published!"
