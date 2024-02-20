@@ -10,6 +10,10 @@ on:
       - "packages/cli/**"
       - ".github/workflows/skeet-cli-release.yml"
 
+env:
+  CI: true
+  PNPM_CACHE_FOLDER: .pnpm-store
+
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
@@ -36,6 +40,8 @@ jobs:
 
       - name: Setup .npmrc file
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      - name: setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
 
       - name: install dependencies
         run: pnpm install
