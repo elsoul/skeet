@@ -56,13 +56,8 @@ jobs:
       - name: Publish packages
         run: |
           pnpm -F @skeet-framework/cli build
-          pnpm -F @skeet-framework/cli publish -r --access public
+          NPM_TOKEN=${{ secrets.NPM_TOKEN }} pnpm -F @skeet-framework/cli publish -r --access public
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Send a Discord notification if a publish happens
-        if: steps.changesets.outputs.published == 'true'
-        # You can do something when a publish happens.
-        run: discord:send --message "A new version of ${GITHUB_REPOSITORY} was published!"
