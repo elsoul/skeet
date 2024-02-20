@@ -4,6 +4,7 @@
   "description": "Skeet Serverless Framework",
   "main": "dist/index.js",
   "repository": "https://github.com/elsoul/skeet",
+  "private": false,
   "keywords": [
     "openai",
     "firestore",
