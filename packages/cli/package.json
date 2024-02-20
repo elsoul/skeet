@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "1.15.9",
+  "version": "1.15.7",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "keywords": [
@@ -18,10 +18,7 @@
   "bugs": {
     "url": "https://discord.gg/ausnBvAM38"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/elsoul/skeet.git"
-  },
+  "repository": "https://github.com/elsoul/skeet.git",
   "license": "Apache-2.0",
   "engines": {
     "pnpm": "8.15.3",
