@@ -18,10 +18,7 @@
   "bugs": {
     "url": "https://discord.gg/ausnBvAM38"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/elsoul/skeet.git"
-  },
+  "repository": "https://github.com/elsoul/skeet.git",
   "license": "Apache-2.0",
   "engines": {
     "pnpm": "8.15.3",
@@ -36,9 +33,6 @@
   ],
   "private": false,
   "scripts": {
-    "ci:version": "pnpm changesets version",
-    "ci:publish": "pnpm publish -r",
-    "ci:build": "npx ts-node -r tsconfig-paths/register --transpile-only build.ts && npx ts-node -r tsconfig-paths/register --transpile-only add-line.ts",
     "lint": "eslint --ext .ts,.tsx --fix .",
     "test": "vitest",
     "update:packages": "ncu -u --reject node-fetch && pnpm i",
