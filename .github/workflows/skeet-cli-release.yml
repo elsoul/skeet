@@ -39,13 +39,6 @@ jobs:
           cache: "pnpm"
           scope: "@skeet-framework"
 
-      - name: Creating .npmrc
-        run: |
-          echo "@skeet-framework:registry=https://registry.npmjs.org/" >> "$HOME/.npmrc"
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> "$HOME/.npmrc"
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
 
@@ -53,7 +46,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm -F @skeet-framework/cli build
+        run: pnpm build
 
       - name: create and publish versions
         id: changesets
@@ -67,6 +60,7 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Send a Discord notification if a publish happens
         if: steps.changesets.outputs.published == 'true'
