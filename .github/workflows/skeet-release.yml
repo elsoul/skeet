@@ -8,7 +8,7 @@ on:
       - main
     paths:
       - "packages/cli/**"
-      - ".github/workflows/skeet-cli-release.yml"
+      - ".github/workflows/skeet-release.yml"
 
 env:
   CI: true
