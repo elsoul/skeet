@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 1.15.9
+
+### Patch Changes
+
+- [`81c7240`](https://github.com/elsoul/skeet/commit/81c7240ce49a39142865b12bd75e5cc5d3a68e8f) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - migrate
+
 ## 1.15.8
 
 ### Patch Changes
