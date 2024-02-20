@@ -37,7 +37,6 @@
     "test": "vitest",
     "update:packages": "ncu -u --reject node-fetch && pnpm i",
     "build": "npx ts-node -r tsconfig-paths/register --transpile-only build.ts && npx ts-node -r tsconfig-paths/register --transpile-only add-line.ts",
-    "publish": "pnpm publish",
     "dev": "npx ts-node build.ts && node ./dist/index.js",
     "start": "node dist/index.js",
     "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/runDiscordChangeLog.ts labo",
