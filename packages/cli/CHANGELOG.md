@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 1.15.9
+
+### Patch Changes
+
+- version
+
 ## 1.15.8
 
 ### Patch Changes
