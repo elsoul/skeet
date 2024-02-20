@@ -56,13 +56,13 @@ Currently, it supports development on Google Cloud and Firebase.
 Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
 
 ```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/v1.0.2-install)"
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v1.5.0)"
 ```
 
-If you already have Node.js installed, you can install Skeet CLI with npm:
+If you already have pnpm installed, you can install Skeet CLI with pnpm:
 
 ```bash
-$ npm i -g @skeet-framework/cli
+$ pnpm add -g @skeet-framework/cli
 ```
 
 ## Enabling Google Cloud VertexAI/OpenAI
@@ -98,7 +98,7 @@ YouTube Video Link: https://www.youtube.com/watch?v=e7J5HDhtpE4
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
 - [Node.js](https://nodejs.org/ja/) ^18.16.0
-- [Yarn](https://yarnpkg.com/) ^1.22.19
+- [PNPM](https://pnpm.io) ^8.0.0
 - [GitHub CLI](https://cli.github.com/) ^2.29.0
 
 For Firebase Template
@@ -109,11 +109,17 @@ For Firebase Template
 
 ## 📗 Usage 📗
 
+Install PNPM
+
+```bash
+$ curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
 ### ① Install Skeet/Firebase CLI
 
 ```bash
-$ npm i -g @skeet-framework/cli
-$ npm install -g firebase-tools
+$ pnpm add -g @skeet-framework/cli
+$ pnpm add -g firebase-tools
 ```
 
 ### ② Create Skeet App
@@ -124,25 +130,12 @@ $ skeet create <appName>
 
 You can choose a template for the frontend and backend.
 
-- [Next.js (React) with GraphQL template](https://github.com/elsoul/skeet-graphql)
 - [Next.js (React) with Firestore template](https://github.com/elsoul/skeet-next)
 - [Expo (React Native) with Firestore template](https://github.com/elsoul/skeet-app)
 - [Solana Mobile Stack (Expo) + Web (Next.js) with Firestore template](https://github.com/elsoul/skeet-solana-mobile-stack)
+- [Backend Only - Firestore template](https://github.com/elsoul/skeet-functions-only)
 
 ![Solana Mobile Stack](https://storage.googleapis.com/skeet-assets/animation/SkeetSolanaMobileStack.gif)
-
-or
-
-Create Skeet App with only backend
-
-```bash
-$ skeet create <appName> --backend
-```
-
-You can choose a template for the backend.
-
-- [Backend - GraphQL template](https://github.com/elsoul/skeet-graphql-only)
-- [Backend - Firestore template](https://github.com/elsoul/skeet-functions-only)
 
 ![Chatbot](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
 
@@ -166,7 +159,6 @@ Options:
   -b, --backend    Run Backend only
   -f, --functions  Run Firebase Functions only
   -w, --web        Run Web App only
-  -g, --graphql    Run GraphQL Server only
   -h, --help       display help for command
 ```
 
@@ -177,10 +169,6 @@ Now you have both frontend and backend running locally ⭐️
 📲 Frontend(Expo) - [http://localhost:19006/](http://localhost:19006/)
 
 💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
-
-If you choose GraphQL template, you can use GraphQL Playground
-
-📊 GraphQL Playground - [http://localhost:3000/graphql](http://localhost:3000/graphql)
 
 ## Launching Skeet AI Assistant
 
@@ -250,14 +238,15 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  create <appName>             Create Skeet Framework App
-  server|s                     Run Skeet App
-  deploy                       Deploy Skeet APP to Firebase
+  create [options] <appName>   Create Skeet Framework App
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
   init [options]               Initialize Google Cloud Setups for Skeet APP
-  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
   login                        Skeet Login Command - Create Firebase Login Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
   g|generate                   Skeet Generate Comannd
+  release|r [options]          Release a new version
+  log [options]                Deploy Skeet APP to Firebase
   docker                       Docker commands
   db                           Database commands
   iam                          Skeet IAM Comannd to setup Google Cloud Platform
@@ -265,6 +254,9 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
+  ai [options]                 AI Playground
+  config                       Config commands
+  run [options]                Run commands
   help [command]               display help for command
 ```
 
@@ -278,14 +270,14 @@ Commands:
 - [Cloud SQL - Relational Database](https://cloud.google.com/sql)
 - [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
 - [Prisma - ORM](https://www.prisma.io/)
-- [GraphQL - Query Language](https://graphql.org/)
-- [Apollo - GraphQL Server](https://www.apollographql.com/)
 - [TypeScript - TypeCheck](https://www.typescriptlang.org/)
 - [Jest - Test](https://jestjs.io/)
 - [ESLint - Linter](https://eslint.org/)
 - [Prettier - Formatter](https://prettier.io/)
 - [Next.js (React) - Web Frontend(SSG)](https://nextjs.org/)
 - [Expo (React Native) - Mobile App](https://expo.dev/)
+- [Hono - API Server](https://hono.dev/)
+- [Neon - Serverless Postgres](https://neon.tech/)
 
 ## Contributing
 
@@ -297,4 +289,4 @@ The package is available as open source under the terms of the [Apache-2.0 Licen
 
 ## Code of Conduct
 
-Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet-cli/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet/blob/master/CODE_OF_CONDUCT.md).
