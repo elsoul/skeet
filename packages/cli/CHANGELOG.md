@@ -1,5 +1,17 @@
 # @skeet-framework/cli
 
+## 1.15.10
+
+### Patch Changes
+
+- [`0fbfcc7`](https://github.com/elsoul/skeet/commit/0fbfcc7285482a8ae38bca1262545dd07a0313b3) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update
+
+- [`6625206`](https://github.com/elsoul/skeet/commit/6625206bb2b520c1b470cab20e42862a5277d362) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update
+
+- [`08f66c5`](https://github.com/elsoul/skeet/commit/08f66c5d49e8092b2dc78b423b1d57ce68b8df98) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update actions 5
+
+- [`83d50ab`](https://github.com/elsoul/skeet/commit/83d50ab1ca86c63bef242c91f285d4fbe71134aa) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - migrate
+
 ## 1.15.9
 
 ### Patch Changes
