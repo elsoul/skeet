@@ -3,7 +3,10 @@
   "version": "2.0.0-rc",
   "description": "Skeet Serverless Framework",
   "main": "dist/index.js",
-  "repository": "https://github.com/elsoul/skeet",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elsoul/skeet.git"
+  },
   "private": false,
   "keywords": [
     "openai",
