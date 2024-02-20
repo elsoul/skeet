@@ -56,7 +56,7 @@ jobs:
       - name: Publish packages
         run: |
           pnpm -F @skeet-framework/cli build
-          pnpm -F @skeet-framework/cli publish -r
+          pnpm -F @skeet-framework/cli publish -r --access public
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
