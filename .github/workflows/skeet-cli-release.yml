@@ -53,18 +53,10 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Build
-        run: pnpm -F @skeet-framework/cli build
-
-      - name: create and publish versions
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          version: pnpm ci:version
-          publish: pnpm ci:publish
-          title: "[ci] release"
-          commit: "[ci] release"
-          createGithubReleases: true
+      - name: Publish packages
+        run: |
+          pnpm -F @skeet-framework/cli build
+          pnpm -F @skeet-framework/cli publish -r
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
