@@ -13,7 +13,7 @@ export function getChangeLog() {
 
     console.log(`remoteURL: ${remoteURL}`)
     const matchResult = remoteURL.match(
-      /github\.com[/:]([^/]+)\/([^/]+?)(?:\.git)?$/
+      /github\.com[/:]([^/]+)\/([^/]+?)(?:\.git)?$/,
     )
     console.log(`matchResult: ${matchResult}`)
     if (!matchResult) {
@@ -24,7 +24,7 @@ export function getChangeLog() {
     const repositoryName = matchResult[2]
 
     const log = execSync(
-      `git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s by @%an in #%h"`
+      `git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s by @%an in #%h"`,
     ).toString()
     const lines = log.split('\n')
     const githubCommitURL = `https://github.com/${repositoryOwner}/${repositoryName}/commit`
@@ -75,13 +75,13 @@ export const release = async (npmPublish = false) => {
 
   const newVersion = semver.inc(
     currentVersion,
-    responses.version as semver.ReleaseType
+    responses.version as semver.ReleaseType,
   )
   packageJson.version = newVersion!
   writeFileSync(ROUTE_PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2))
   if (existsSync(VERSION_FILE)) updateVersionFile(newVersion!)
   await sleep(100)
-  spawnSync(`yarn build`, { stdio: 'inherit', shell: true })
+  spawnSync(`pnpm build`, { stdio: 'inherit', shell: true })
   spawnSync(`git add .`, { stdio: 'inherit', shell: true })
   spawnSync(`git commit -m "update: release v${newVersion}"`, {
     stdio: 'inherit',
@@ -99,8 +99,8 @@ export const release = async (npmPublish = false) => {
   })
   console.log(`gh v${newVersion} release created 🎉`)
   if (npmPublish) {
-    spawnSync(`npm publish`, { stdio: 'inherit', shell: true })
-    console.log(`npm published 🎉`)
+    spawnSync(`pnpm publish`, { stdio: 'inherit', shell: true })
+    console.log(`pnpm published 🎉`)
   }
 }
 
