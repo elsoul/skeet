@@ -46,7 +46,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: pnpm -F @skeet-framework/cli build
 
       - name: create and publish versions
         id: changesets
