@@ -1,0 +1,82 @@
+name: SkeetCliRelease
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/cli/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+      - name: checkout code repository
+        uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm -F cli install --frozen-lockfile
+
+      - name: Build and Add Line
+        run: |
+          cd packages/cli
+          export TS_NODE_PROJECT=$(pwd)/tsconfig.json
+          pnpm build
+
+      - name: Run Tests
+        run: |
+          cd packages/cli
+          pnpm test
+
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Get version
+        id: get_version
+        run: echo "CLI_VERSION=$(pnpm -F cli version)" >> $GITHUB_ENV
+
+      - name: create and publish versions
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm ci:version
+          publish: pnpm ci:publish
+          title: "[cli] release - v${{ env.CLI_VERSION }}"
+          commit: "[cli] release - v${{ env.CLI_VERSION }}"
+          createGithubReleases: true
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Send a Discord/X Notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm -F cli discord:epics
+          pnpm -F cli discord:labo
+          curl --location ${{ secrets.TW_ENDPOINT }} \
+          --header 'Content-Type: application/json' \
+          --data '{"repo": "elsoul/skeet-cli", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
+          DISCORD_CHANNEL_ID_JA: ${{ secrets.DISCORD_CHANNEL_ID_JA }}
+          DISCORD_TOKEN_LABO: ${{ secrets.DISCORD_TOKEN_LABO }}
+          LABO_SKEET_CHANNEL_ID: ${{ secrets.LABO_SKEET_CHANNEL_ID }}

@@ -4,12 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-.pnp*
-.yarn
 
 # testing
 /coverage
-/coverage_dir
 
 # next.js
 /.next/
@@ -48,9 +45,3 @@ firebase-debug.log
 
 /apps/
 keyfile.json
-/functions/
-.firebase*
-tmp
-firebase.json
-/sql/
-dist/

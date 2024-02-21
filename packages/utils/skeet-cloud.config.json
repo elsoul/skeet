@@ -1,0 +1,14 @@
+{
+  "ai": {
+    "lang": "en",
+    "ais": [
+      {
+        "name": "VertexAI",
+        "availableModels": [
+          "chat-bison@001",
+          "chat-bison-32k"
+        ]
+      }
+    ]
+  }
+}

@@ -31,6 +31,7 @@
     "ci:publish": "changeset publish",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cli": "pnpm -F \"@skeet-framework/cli\"",
+    "utils": "pnpm -F \"@skeet-framework/utils\"",
     "discord:send": "echo hey",
     "build:cli": "ts-node -r tsconfig-paths/register --transpile-only ./packages/cli/build.ts",
     "add-line:cli": "ts-node -r tsconfig-paths/register --transpile-only ./packages/cli/add-line.ts"
@@ -39,6 +40,7 @@
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "2.27.1",
     "@skeet-framework/discord-utils": "0.2.14",
+    "@skeet-framework/utils": "workspace:1.2.4",
     "@types/node": "20.11.16",
     "@types/node-fetch": "2.6.11",
     "@typescript-eslint/eslint-plugin": "6.21.0",
