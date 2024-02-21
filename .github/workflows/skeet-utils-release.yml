@@ -1,12 +1,10 @@
-name: SkeetCliBuild
+name: SkeetUtilsRelease
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
     paths:
-      - "packages/cli/**"
+      - "packages/utils/**"
 
 jobs:
   build:
@@ -28,17 +26,17 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm -F cli install --frozen-lockfile
+        run: pnpm -F utils install --frozen-lockfile
 
       - name: Build and Add Line
         run: |
-          cd packages/cli
+          cd packages/utils
           export TS_NODE_PROJECT=$(pwd)/tsconfig.json
           pnpm build
 
       - name: Run Tests
         run: |
-          cd packages/cli
+          cd packages/utils
           pnpm test
 
       - name: Creating .npmrc
@@ -51,7 +49,7 @@ jobs:
 
       - name: Get version
         id: get_version
-        run: echo "::set-output name=VERSION::$(pnpm -F cli version)"
+        run: echo "CLI_VERSION=$(pnpm -F utils version)" >> $GITHUB_ENV
 
       - name: create and publish versions
         id: changesets
@@ -59,8 +57,8 @@ jobs:
         with:
           version: pnpm ci:version
           publish: pnpm ci:publish
-          title: "[cli] release - v${{ steps.get_version.outputs.VERSION }}"
-          commit: "[cli] release - v${{ steps.get_version.outputs.VERSION }}"
+          title: "[utils] release - v${{ env.CLI_VERSION }}"
+          commit: "[utils] release - v${{ env.CLI_VERSION }}"
           createGithubReleases: true
 
         env:
@@ -70,11 +68,11 @@ jobs:
       - name: Send a Discord/X Notification if a publish happens
         if: steps.changesets.outputs.published == 'true'
         run: |
-          pnpm -F cli discord:epics
-          pnpm -F cli discord:labo
+          pnpm -F utils discord:epics
+          pnpm -F utils discord:labo
           curl --location ${{ secrets.TW_ENDPOINT }} \
           --header 'Content-Type: application/json' \
-          --data '{"repo": "elsoul/skeet-cli", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
+          --data '{"repo": "elsoul/skeet-utils", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
