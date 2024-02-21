@@ -43,8 +43,6 @@ export const skeetCreate = async (appName: string, template: string) => {
   let gitCloneCmd = null
   if (template === SkeetTemplate.NextJsFirestore) {
     gitCloneCmd = ['git', 'clone', NEXT_REPO_URL, appName]
-  } else if (template === SkeetTemplate.NextJsGraphQL) {
-    gitCloneCmd = ['git', 'clone', GRAPHQL_REPO_PATH, appName]
   } else if (template === SkeetTemplate.SolanaFirestore) {
     gitCloneCmd = ['git', 'clone', SOLANA_REPO_URL, appName]
   } else {
@@ -81,19 +79,6 @@ export const generateInitFiles = async (appName: string, template: string) => {
   }
   if (template === SkeetTemplate.SolanaFirestore) {
     await initAppJson(appName)
-  }
-  if (
-    template === SkeetTemplate.NextJsGraphQL ||
-    template === SkeetTemplateBackend.GraphQL
-  ) {
-    const env = await fileDataOf.graphqlEnv(appName)
-    writeFileSync(env.filePath, env.body)
-
-    const appGraphqlPath = `./${appName}/graphql`
-    const cmd = ['pnpm', 'install']
-    execSyncCmd(cmd, appGraphqlPath)
-    dbGen(appGraphqlPath)
-    dbDeploy(false, appGraphqlPath)
   }
 
   if (template !== 'Backend Only - GraphQL') {
