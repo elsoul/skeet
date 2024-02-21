@@ -7,6 +7,7 @@
     "baseUrl": ".",
     "strict": true,
     "esModuleInterop": true,
+    "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
@@ -20,7 +21,7 @@
     }
   },
   "files": ["package.json"],
-  "include": ["src/**/*", "build.ts", "tests/**/*"],
-  "exclude": ["dist", "node_modules"],
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["dist", "node_modules", "build.ts"],
   "compileOnSave": false
 }
