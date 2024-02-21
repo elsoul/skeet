@@ -1,7 +1,7 @@
 name: SkeetCliRelease
 on:
   workflow_run:
-    workflows: ["SkeetCliBuild"]
+    workflows: ["SkeetCliBuild", "SkeetUtil"]
     types: [completed]
   push:
     branches:
@@ -73,4 +73,4 @@ jobs:
       - name: Send a Discord notification if a publish happens
         if: steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
-        run: discord:send --message "A new version of ${GITHUB_REPOSITORY} was published!"
+        run: pnpm discord:send

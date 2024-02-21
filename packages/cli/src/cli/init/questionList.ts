@@ -98,7 +98,6 @@ export module questionList {
       name: 'template',
       choices: [
         new inquirer.Separator(' Templates '),
-        { name: SkeetTemplate.NextJsGraphQL },
         { name: SkeetTemplate.NextJsFirestore },
         { name: SkeetTemplate.ExpoFirestore },
         { name: SkeetTemplate.SolanaFirestore },
@@ -215,7 +214,7 @@ export module questionList {
       await firebaseSettingsCheck.then(async (answers) => {
         if (answers.firebase === 'no') {
           Logger.error(
-            'Please setup Firestore before running this command. \nhttps://console.firebase.google.com/project/${projectId}/firestore'
+            'Please setup Firestore before running this command. \nhttps://console.firebase.google.com/project/${projectId}/firestore',
           )
           throw new Error('Firestore is not setup')
         }
