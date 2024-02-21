@@ -1,5 +1,13 @@
 # @skeet-framework/cli
 
+## 1.15.13
+
+### Patch Changes
+
+- [#249](https://github.com/elsoul/skeet/pull/249) [`d93c17b`](https://github.com/elsoul/skeet/commit/d93c17bdfff4842bc7de9d9b123c351fa1308027) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Actions - add Discord/X Notifications
+
+  Discord/X Notifications run on every release and will notify the Discord server of the release.
+
 ## 1.15.12
 
 ### Patch Changes
