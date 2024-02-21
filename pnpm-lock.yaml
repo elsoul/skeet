@@ -12,7 +12,7 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0
       '@changesets/cli':
-        specifier: ^2.27.1
+        specifier: 2.27.1
         version: 2.27.1
       '@skeet-framework/discord-utils':
         specifier: 0.2.14
@@ -23,9 +23,6 @@ importers:
       '@types/node-fetch':
         specifier: 2.6.11
         version: 2.6.11
-      '@types/semver':
-        specifier: 7.5.6
-        version: 7.5.6
       '@typescript-eslint/eslint-plugin':
         specifier: 6.21.0
         version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
