@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://skeet.dev/en/">
-    <img src="https://user-images.githubusercontent.com/20677823/221215449-93a7b5a8-5f33-4da8-9dd4-d0713db0a280.png" alt="Skeet" />
+    <img src="https://storage.googleapis.com/skeet-assets/imgs/v2/SkeetV2EN.jpg" alt="Skeet" />
   </a>
 
   <a href="https://twitter.com/intent/follow?screen_name=ELSOUL_LABO2">
@@ -39,7 +39,7 @@ Developers can quickly start building functional apps and publish them in the cl
 
 ## Overall Architecture Diagram
 
-![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/SkeetArchitecture.png)
+![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/v2/SkeetArchitectureV2.jpg)
 
 Skeet is an open-source framework for serverless app development crafted in TypeScript.
 
@@ -148,7 +148,7 @@ $ skeet s
 
 or
 
-put options to run only backend, frontend, or GraphQL server
+put options to run only backend, frontend or functions
 
 ```bash
 Usage: skeet server|s [options]
