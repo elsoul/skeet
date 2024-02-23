@@ -33,10 +33,6 @@ jobs:
           cd packages/cli
           export TS_NODE_PROJECT=$(pwd)/tsconfig.json
           pnpm build
-
-      - name: Run Tests
-        run: |
-          cd packages/cli
           pnpm test
 
       - name: Creating .npmrc
