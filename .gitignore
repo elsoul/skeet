@@ -54,3 +54,4 @@ tmp
 firebase.json
 /sql/
 dist/
+./functions

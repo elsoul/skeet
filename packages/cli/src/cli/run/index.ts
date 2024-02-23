@@ -1,5 +1,6 @@
 import { program } from '@/index'
-import { spawnSync } from 'child_process'
+import { getAllApps } from '@/lib/files/getAllApps'
+import { spawn, spawnSync } from 'child_process'
 import inquirer from 'inquirer'
 
 export type RunOptions = {
@@ -19,15 +20,16 @@ export const runCommands = () => {
         const pnpmCmd = `pnpm ${options.filter} ${options.cmd}`
         spawnSync(pnpmCmd, { stdio: 'inherit', shell: true })
       } else {
+        const choices = getAllApps()
         const answer = await inquirer.prompt<{
           packageName: string
           cmd: string
         }>([
           {
-            type: 'input',
+            type: 'checkbox',
             name: 'packageName',
-            message: 'Package Name:',
-            default: 'skeet-func',
+            message: 'Package Name to Run Cmd:',
+            choices,
           },
           {
             type: 'input',
@@ -36,8 +38,10 @@ export const runCommands = () => {
             default: 'install',
           },
         ])
-        const pnpmCmd = `pnpm ${answer.packageName} ${answer.cmd}`
-        spawnSync(pnpmCmd, { stdio: 'inherit', shell: true })
+        for (const packageName of answer.packageName) {
+          const pnpmCmd = `pnpm -F ${packageName} ${answer.cmd}`
+          spawn(pnpmCmd, { stdio: 'inherit', shell: true })
+        }
       }
     })
 }
