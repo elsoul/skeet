@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'packages/cli/**'
+      - '.github/workflows/skeet-cli-release.yml'
 
 jobs:
   build:
