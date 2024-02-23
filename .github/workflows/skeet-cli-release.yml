@@ -27,7 +27,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm install
+          pnpm -r run build
 
       - name: Build and Add Line
         run: |
