@@ -7,7 +7,6 @@ import { getFunctions } from '@/lib/files/getFunctions'
 describe('Method: getFunctions/getSQLs', () => {
   it('should return functions array', async () => {
     const functions = getFunctions()
-    console.log(functions)
 
     // return Functions Name array
     expect(functions).toBeInstanceOf(Array)
