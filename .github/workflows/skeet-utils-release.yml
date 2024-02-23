@@ -26,17 +26,15 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm -F utils install --frozen-lockfile
+        run: |
+          pnpm install
+          pnpm -r run build
 
       - name: Build and Add Line
         run: |
           cd packages/utils
           export TS_NODE_PROJECT=$(pwd)/tsconfig.json
           pnpm build
-
-      - name: Run Tests
-        run: |
-          cd packages/utils
           pnpm test
 
       - name: Creating .npmrc

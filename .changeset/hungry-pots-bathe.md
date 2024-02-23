@@ -1,5 +1,5 @@
 ---
-"@skeet-framework/cli": major
+'@skeet-framework/cli': patch
 ---
 
 fix - cli
