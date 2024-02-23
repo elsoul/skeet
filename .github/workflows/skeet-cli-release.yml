@@ -27,7 +27,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm -F cli install --frozen-lockfile
+        run: pnpm install
 
       - name: Build and Add Line
         run: |
