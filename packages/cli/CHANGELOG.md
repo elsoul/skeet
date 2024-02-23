@@ -1,5 +1,41 @@
 # @skeet-framework/cli
 
+## 1.15.14
+
+### Patch Changes
+
+- [#255](https://github.com/elsoul/skeet/pull/255) [`2503741`](https://github.com/elsoul/skeet/commit/2503741f9695ab734b5db5b36f73d629b818c1a3) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## Update - skeet db/run cmd
+
+  Now you can select multiple databases/packages to run the command on.
+
+  - skeet db command
+
+  e.g.
+
+  ```bash
+  skeet db migrate
+  ? Select Database (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
+  ❯◯ card-db
+   ◯ point-db
+   ◯ staking-db
+  ```
+
+  - skeet run command
+
+  e.g.
+
+  ```bash
+  skeet run
+  ? Package Name to Run Cmd: (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
+  ❯◯ staking-db
+   ◯ point-db
+   ◯ skeet-func
+   ◯ webapp
+  ```
+
+- Updated dependencies [[`97534cc`](https://github.com/elsoul/skeet/commit/97534cc8bc043b76bd9d4708a5c1cb1af5f90811)]:
+  - @skeet-framework/utils@1.3.0
+
 ## 1.15.13
 
 ### Patch Changes
