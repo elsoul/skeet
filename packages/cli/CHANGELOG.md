@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.0.0
+
+### Major Changes
+
+- [`569169f`](https://github.com/elsoul/skeet/commit/569169fcf4be2ed9c4c40b3c9ce869d34dc8cbcf) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - fix - cli
+
 ## 1.15.14
 
 ### Patch Changes
