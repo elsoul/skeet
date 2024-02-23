@@ -34,6 +34,7 @@ jobs:
           cd packages/cli
           export TS_NODE_PROJECT=$(pwd)/tsconfig.json
           pnpm build
+          pnpm add @skeet-framework/cli
           pnpm test
 
       - name: Creating .npmrc
