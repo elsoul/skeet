@@ -16,7 +16,14 @@ import { aliasPath } from 'esbuild-plugin-alias-path'
       'process.env.NODE_ENV': `"production"`,
     },
     metafile: true,
-    external: ['path'],
+    external: [
+      'path',
+      '@skeet-framework/utils',
+      'fs',
+      'inquirer',
+      'child_process',
+      'util',
+    ],
     plugins: [
       aliasPath({
         alias: {
