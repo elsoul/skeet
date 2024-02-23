@@ -1,5 +1,11 @@
 # @skeet-framework/utils
 
+## 1.3.1
+
+### Patch Changes
+
+- [`1bf5431`](https://github.com/elsoul/skeet/commit/1bf5431e4ec44de7750309376caefade39cc4bb0) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update build
+
 ## 1.3.0
 
 ### Minor Changes
