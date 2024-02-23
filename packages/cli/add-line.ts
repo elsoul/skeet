@@ -1,14 +1,18 @@
-import { appendFile, readFile, writeFile } from 'fs/promises'
+import { appendFile, readFile, writeFile } from 'node:fs/promises'
 
-const writer = (file: string) => {
+const writer = async (file: string) => {
   try {
-    const currentFile = readFile(file)
+    const currentFile = await readFile(file)
     const currentFileString = String(currentFile)
-    writeFile(file, '#!/usr/bin/env node\n', { flag: 'w' })
-    appendFile(file, currentFileString)
+    await writeFile(file, '#!/usr/bin/env node\n', { flag: 'w' })
+    await appendFile(file, currentFileString)
   } catch (e) {
     console.log(e)
   }
 }
 
-writer('./dist/index.js')
+const run = async () => {
+  await writer('./dist/index.js')
+}
+
+void run()

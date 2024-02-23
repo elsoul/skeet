@@ -25,5 +25,10 @@ describe('CLI app', () => {
 
     // 標準エラーに何も出力されないことを確認
     expect(stderr).toBe('')
+
+    // 標準出力に期待される文字列が含まれていることを確認
+    expect(stdout).toContain(
+      'CLI for Skeet - Full-stack TypeScript Serverless framework',
+    )
   })
 })

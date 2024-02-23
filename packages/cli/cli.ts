@@ -27,5 +27,9 @@ for (const command of commands) {
   detailedHelpArray.push(detailedHelp)
 }
 
-writeFile('detailedHelpArray.txt', detailedHelpArray.join('\n\n'))
-console.log(detailedHelpArray)
+const run = async () => {
+  await writeFile('commands.txt', commands.join('\n'))
+  console.log(detailedHelpArray)
+}
+
+void run()
