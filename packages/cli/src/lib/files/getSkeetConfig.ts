@@ -1,5 +1,5 @@
 import { execSync } from 'child_process'
-import fs from 'fs'
+import { readFile } from 'fs/promises'
 import { CONTAINER_REGIONS } from '@/config/region'
 import { importConfig } from './importConfig'
 import { FILE_NAME, PATH } from '@/config/path'
@@ -37,8 +37,8 @@ export const getFunctionInfo = (functionName: string) => {
 
 export const getFunctionConfig = (functionName: string) => {
   try {
-    const tsconfig = fs.readFileSync('./tsconfig.json', 'utf-8')
-    const prretierrc = fs.readFileSync('.prettierrc', 'utf-8')
+    const tsconfig = readFile('./tsconfig.json', 'utf-8')
+    const prretierrc = readFile('.prettierrc', 'utf-8')
     const result = {
       package: readConfigFile(functionName, 'package.json'),
       tsconfig,
@@ -53,7 +53,7 @@ export const getFunctionConfig = (functionName: string) => {
 const readConfigFile = (functionName: string, file: string) => {
   try {
     const path = `${FUNCTIONS_PATH}/${functionName}/${file}`
-    return fs.readFileSync(path, 'utf-8')
+    return readFile(path, 'utf-8')
   } catch (error) {
     return ''
   }
@@ -212,7 +212,7 @@ export const getBuidEnvArray = async (
 }
 
 export const getActionsEnvString = async (filePath: string) => {
-  const stream = fs.readFileSync(filePath)
+  const stream = readFile(filePath)
   const envArray: Array<string> = String(stream).split('\n')
   const newEnv: Array<string> = []
   for await (const envLine of envArray) {
@@ -234,7 +234,7 @@ export const getBuidEnvString = async () => {
   const envProductionPath = skeetConfig.app.template.includes('GraphQL')
     ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
     : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
-  const stream = fs.readFileSync(envProductionPath)
+  const stream = readFile(envProductionPath)
   const envArray: Array<string> = String(stream).split('\n')
   const hash: { [key: string]: string } = {}
   for await (const line of envArray) {

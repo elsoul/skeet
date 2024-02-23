@@ -1,5 +1,5 @@
 import { execSync } from 'child_process'
-import { writeFileSync } from 'fs'
+import { writeFile } from 'fs/promises'
 
 // `$ skeet --help`からコマンドのリストを取得
 function getCommands(): string[] {
@@ -27,5 +27,5 @@ for (const command of commands) {
   detailedHelpArray.push(detailedHelp)
 }
 
-writeFileSync('detailedHelpArray.txt', detailedHelpArray.join('\n\n'))
+writeFile('detailedHelpArray.txt', detailedHelpArray.join('\n\n'))
 console.log(detailedHelpArray)

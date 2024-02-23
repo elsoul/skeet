@@ -2,6 +2,7 @@ import { build } from 'esbuild'
 import path from 'path'
 import { aliasPath } from 'esbuild-plugin-alias-path'
 ;(async () => {
+  console.log('Building...')
   await build({
     entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     bundle: true,
@@ -16,14 +17,7 @@ import { aliasPath } from 'esbuild-plugin-alias-path'
       'process.env.NODE_ENV': `"production"`,
     },
     metafile: true,
-    external: [
-      'path',
-      '@skeet-framework/utils',
-      'fs',
-      'inquirer',
-      'child_process',
-      'util',
-    ],
+    external: ['path', '@skeet-framework/utils', 'fs', 'child_process', 'util'],
     plugins: [
       aliasPath({
         alias: {
