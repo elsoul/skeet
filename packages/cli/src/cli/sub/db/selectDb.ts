@@ -14,9 +14,9 @@ export const selectDb = async () => {
   if (hasGraphql) {
     choices.push('GraphQL')
   }
-  const answer = await inquirer.prompt<{ db: string }>([
+  const answer = await inquirer.prompt<{ db: string[] }>([
     {
-      type: 'list',
+      type: 'checkbox',
       message: 'Select Database',
       name: 'db',
       choices,
