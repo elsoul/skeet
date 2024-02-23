@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "packages/cli/**"
+      - 'packages/cli/**'
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm -F cli install --frozen-lockfile
@@ -47,18 +47,14 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Get version
-        id: get_version
-        run: echo "CLI_VERSION=$(pnpm -F cli version)" >> $GITHUB_ENV
-
       - name: create and publish versions
         id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
           publish: pnpm ci:publish
-          title: "[cli] release - v${{ env.CLI_VERSION }}"
-          commit: "[cli] release - v${{ env.CLI_VERSION }}"
+          title: '[cli] release'
+          commit: '[cli] release'
           createGithubReleases: true
 
         env:
