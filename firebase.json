@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "skeet-utils",
+      "public": "packages/utils/docs",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    }
+  ]
+}
