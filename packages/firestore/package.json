@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/firestore",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "Skeet Framework Plugin - Firestore",
   "main": "./dist/cjs/src/index.js",
   "module": "./dist/esm/src/index.js",

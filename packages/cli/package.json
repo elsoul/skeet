@@ -63,7 +63,7 @@
   "devDependencies": {
     "@changesets/cli": "2.27.1",
     "@skeet-framework/discord-utils": "0.3.0",
-    "@skeet-framework/firestore": "2.4.2",
+    "@skeet-framework/firestore": "2.5.0",
     "@stdlib/string-percent-encode": "0.1.1",
     "@types/cli-spinner": "0.2.3",
     "@types/i18n": "0.13.10",
