@@ -216,7 +216,7 @@ importers:
         specifier: 0.3.0
         version: link:../discord-utils
       '@skeet-framework/firestore':
-        specifier: 2.4.2
+        specifier: 2.5.0
         version: link:../firestore
       '@stdlib/string-percent-encode':
         specifier: 0.1.1
