@@ -26,4 +26,5 @@ import { aliasPath } from 'esbuild-plugin-alias-path'
       }),
     ],
   })
+  console.log('Build complete ⭐️')
 })()

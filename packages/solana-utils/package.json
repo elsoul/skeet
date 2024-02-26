@@ -29,7 +29,7 @@
   "homepage": "https://skeet.dev",
   "scripts": {
     "test": "vitest",
-    "build": "rm -rf dist/ && npx ts-node -r tsconfig-paths/register --transpile-only build.ts && tsc --emitDeclarationOnly",
+    "build": "rm -rf dist/ && npx ts-node -r tsconfig-paths/register --transpile-only build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/",
     "build-doc": "typedoc src/index.ts --out docs",
     "publish": "npm publish",
     "dev": "npx ts-node -r tsconfig-paths/register --transpile-only src/index.ts",
