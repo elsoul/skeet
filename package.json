@@ -32,9 +32,8 @@
     "build": "pnpm run -r build",
     "cli": "pnpm -F \"@skeet-framework/cli\"",
     "utils": "pnpm -F \"@skeet-framework/utils\"",
-    "discord:send": "echo hey",
-    "build:cli": "ts-node -r tsconfig-paths/register --transpile-only ./packages/cli/build.ts",
-    "add-line:cli": "ts-node -r tsconfig-paths/register --transpile-only ./packages/cli/add-line.ts"
+    "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only ./common/runDiscordChangeLog.ts labo",
+    "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only ./common/runDiscordChangeLog.ts epics"
   },
   "dependencies": {
     "@skeet-framework/cli": "workspace:*",
@@ -49,7 +48,6 @@
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
     "babel-loader": "9.1.3",
-    "copyfiles": "2.4.1",
     "esbuild": "0.20.0",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
