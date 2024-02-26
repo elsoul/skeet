@@ -44,7 +44,7 @@
     "date-fns": "3.3.1",
     "date-fns-tz": "1.2.2",
     "dotenv": "16.4.5",
-    "node-fetch": "3.3.2"
+    "node-fetch": "2.6.9"
   },
   "devDependencies": {
     "vite": "5.1.4",

@@ -2,8 +2,8 @@ import { NftMetadata } from '../solanaUtilsTypes'
 import { fetchDigitalAssetWithTokenByMint } from '@metaplex-foundation/mpl-token-metadata'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters'
+import { sendGet } from '@skeet-framework/utils'
 import { PublicKey } from '@solana/web3.js'
-import fetch from 'node-fetch'
 /**
  * Retrieves the attributes of an NFT by its mint address.
  *
@@ -57,7 +57,7 @@ export const getNftAttributes = async (
  */
 export const getJson = async (url: string) => {
   try {
-    const res = await fetch(url)
+    const res = await sendGet(url)
     const json = await res.json()
     return json as NftMetadata
   } catch (error) {

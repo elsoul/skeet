@@ -1,5 +1,4 @@
-import { SkeetTemplate } from '@/types/skeetTypes'
-import fetch from 'node-fetch'
+import { sendGet } from '@skeet-framework/utils'
 
 export const skeetCloudConfigGen = async (
   appName: string,
@@ -7,51 +6,9 @@ export const skeetCloudConfigGen = async (
 ) => {
   const filePath = `${appName}/skeet-cloud.config.json`
   const homeIp = await getHomeIp()
-  const taskQueues =
-    template === SkeetTemplate.NextJsGraphQL
-      ? [
-          {
-            queueName: 'createUser',
-            location: 'asia-northeast1',
-            maxAttempts: 3,
-            maxConcurrent: 1,
-            maxRate: 1,
-            maxInterval: '10s',
-            minInterval: '1s',
-          },
-          {
-            queueName: 'createChatRoomMessage',
-            location: 'asia-northeast1',
-            maxAttempts: 3,
-            maxConcurrent: 1,
-            maxRate: 1,
-            maxInterval: '10s',
-            minInterval: '1s',
-          },
-        ]
-      : []
-  const cloudRunBody =
-    template === SkeetTemplate.NextJsGraphQL
-      ? {
-          name: `skeet-${appName}-graphql`,
-          url: '',
-          cpu: 1,
-          maxConcurrency: 80,
-          maxInstances: 100,
-          minInstances: 0,
-          memory: '4Gi',
-        }
-      : {}
-  const dbBody =
-    template === SkeetTemplate.NextJsGraphQL
-      ? {
-          databaseVersion: 'POSTGRES_15',
-          cpu: 1,
-          memory: '3840MiB',
-          storageSize: 10,
-          whiteList: '',
-        }
-      : {}
+  const taskQueues = [] as any[]
+  const cloudRunBody = {}
+  const dbBody = {}
   const body = `{
   "app": {
     "name": "${appName}",
@@ -129,18 +86,5 @@ export const getHomeIp = async () => {
     return ip
   } catch (error) {
     return ''
-  }
-}
-
-const sendGet = async (url: string) => {
-  try {
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-    return res
-  } catch (e) {
-    console.log({ e })
-    throw new Error('sendGET failed')
   }
 }

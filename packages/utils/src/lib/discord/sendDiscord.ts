@@ -1,5 +1,5 @@
-import fetch from 'node-fetch'
 import * as dotenv from 'dotenv'
+import { sendPost } from '../http'
 dotenv.config()
 
 /**
@@ -56,11 +56,7 @@ export const sendDiscord = async (
       content,
       username: discordOptions.username,
     }
-    const res = await fetch(discordOptions.webhookUrl, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' },
-    })
+    const res = await sendPost(discordOptions.webhookUrl, body)
 
     if (res.status !== 204) return false
     return true
