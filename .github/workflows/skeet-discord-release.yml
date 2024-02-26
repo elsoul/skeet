@@ -1,0 +1,76 @@
+name: SkeetDiscordUtilsRelease
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/discord-utils/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+      - name: checkout code repository
+        uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+          pnpm -r run build
+
+      - name: Build and Add Line
+        run: |
+          cd packages/discord-utils
+          export TS_NODE_PROJECT=$(pwd)/tsconfig.json
+          pnpm build
+          pnpm test
+
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: create and publish versions
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm ci:version
+          publish: pnpm ci:publish
+          title: '[discord-utils] release'
+          commit: '[discord-utils] release'
+          createGithubReleases: true
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Send a Discord/X Notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm -F discord-utils discord:epics
+          pnpm -F discord-utils discord:labo
+          curl --location ${{ secrets.TW_ENDPOINT }} \
+          --header 'Content-Type: application/json' \
+          --data '{"repo": "elsoul/skeet-discord-utils", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
+          DISCORD_CHANNEL_ID_JA: ${{ secrets.DISCORD_CHANNEL_ID_JA }}
+          DISCORD_TOKEN_LABO: ${{ secrets.DISCORD_TOKEN_LABO }}
+          LABO_SKEET_CHANNEL_ID: ${{ secrets.LABO_SKEET_CHANNEL_ID }}
