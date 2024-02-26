@@ -56,7 +56,7 @@ Currently, it supports development on Google Cloud and Firebase.
 Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
 
 ```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v1.5.0)"
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.1)"
 ```
 
 If you already have pnpm installed, you can install Skeet CLI with pnpm:
@@ -97,14 +97,14 @@ YouTube Video Link: https://www.youtube.com/watch?v=e7J5HDhtpE4
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
-- [Node.js](https://nodejs.org/ja/) ^18.16.0
+- [Node.js](https://nodejs.org/ja/) ^20.0.0
 - [PNPM](https://pnpm.io) ^8.0.0
 - [GitHub CLI](https://cli.github.com/) ^2.29.0
 
 For Firebase Template
 
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
-- [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0
+- [Firebase CLI](https://firebase.google.com/docs/cli) ^13.0.0
 - [Java](https://www.java.com/en/download/)
 
 ## 📗 Usage 📗
