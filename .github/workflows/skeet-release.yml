@@ -28,8 +28,7 @@ jobs:
 
       - name: Install dependencie
         run: |
-          echo "${{ github.event.pull_request.title }}"
-          pnpm install
+          pnpm install --merge-git-branch-lockfiles
           pnpm -r run build
           pnpm -r run test
 
