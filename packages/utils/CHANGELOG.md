@@ -1,5 +1,11 @@
 # @skeet-framework/utils
 
+## 1.3.3
+
+### Patch Changes
+
+- [`6cfcac7`](https://github.com/elsoul/skeet/commit/6cfcac72a5af8641234dfc35c4c5ea546dc54c6b) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - change node-fetch version
+
 ## 1.3.2
 
 ### Patch Changes
