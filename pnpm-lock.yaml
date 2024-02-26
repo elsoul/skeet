@@ -11,6 +11,9 @@ importers:
       '@skeet-framework/cli':
         specifier: workspace:*
         version: link:packages/cli
+      '@skeet-framework/discord-utils':
+        specifier: workspace:^
+        version: link:packages/discord-utils
       '@skeet-framework/utils':
         specifier: workspace:*
         version: link:packages/utils

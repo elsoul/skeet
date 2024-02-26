@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@skeet-framework/cli": "workspace:*",
+    "@skeet-framework/discord-utils": "workspace:^",
     "@skeet-framework/utils": "workspace:*"
   },
   "devDependencies": {
@@ -49,13 +50,13 @@
     "esbuild": "0.20.0",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
     "nodemon": "3.0.3",
     "prettier": "3.2.5",
     "ts-loader": "9.5.1",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
-    "typescript": "5.3.3",
-    "husky": "9.0.11",
-    "lint-staged": "15.2.2"
+    "typescript": "5.3.3"
   }
 }
