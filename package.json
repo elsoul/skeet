@@ -28,7 +28,8 @@
   "scripts": {
     "ci:version": "changeset version",
     "ci:publish": "changeset publish",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "pnpm run -r test",
+    "build": "pnpm run -r build",
     "cli": "pnpm -F \"@skeet-framework/cli\"",
     "utils": "pnpm -F \"@skeet-framework/utils\"",
     "discord:send": "echo hey",
