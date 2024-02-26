@@ -1,10 +1,11 @@
-name: SkeetDiscordUtilsRelease
+name: SkeetCliRelease
 
 on:
   push:
     branches: [main]
     paths:
-      - 'packages/discord-utils/**'
+      - 'packages/**'
+      - '.github/workflows/skeet-release.yml'
 
 jobs:
   build:
@@ -29,13 +30,7 @@ jobs:
         run: |
           pnpm install
           pnpm -r run build
-
-      - name: Build and Add Line
-        run: |
-          cd packages/discord-utils
-          export TS_NODE_PROJECT=$(pwd)/tsconfig.json
-          pnpm build
-          pnpm test
+          pnpm -r run test
 
       - name: Creating .npmrc
         run: |
@@ -51,8 +46,8 @@ jobs:
         with:
           version: pnpm ci:version
           publish: pnpm ci:publish
-          title: '[discord-utils] release'
-          commit: '[discord-utils] release'
+          title: '[cli] release'
+          commit: '[cli] release'
           createGithubReleases: true
 
         env:
@@ -62,11 +57,11 @@ jobs:
       - name: Send a Discord/X Notification if a publish happens
         if: steps.changesets.outputs.published == 'true'
         run: |
-          pnpm -F discord-utils discord:epics
-          pnpm -F discord-utils discord:labo
+          pnpm discord:epics
+          pnpm discord:labo
           curl --location ${{ secrets.TW_ENDPOINT }} \
           --header 'Content-Type: application/json' \
-          --data '{"repo": "elsoul/skeet-discord-utils", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
+          --data '{"repo": "elsoul/skeet", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
