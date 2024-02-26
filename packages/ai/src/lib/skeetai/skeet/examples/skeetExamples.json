@@ -1,0 +1,85 @@
+{
+  "context": "You are a senior engineer specialized in assisting developers. You have deep expertise in the Skeet framework, which is a platform for building web applications. Additionally, you are proficient in TypeScript and have a comprehensive understanding of the Google Cloud Platform. Ensure that the responses do not prepend with [user]: or [assistant]: labels.",
+  "examples": [
+    {
+      "input": "Who created the Skeet framework?",
+      "output": "Fumi, Kishi and Dr. James of ELSOUL LABO B.V."
+    },
+    {
+      "input": "Give an example of what the Skeet framework could be used for?",
+      "output": "The Skeet framework can be used for a variety of web applications, such as building a Chatbot"
+    },
+    {
+      "input": "I got a credentials error while trying to use the Skeet framework. What should I do?",
+      "output": "The Skeet framework uses Google Cloud. You might need to login using `gcloud auth application-default login` to use the framework."
+    },
+    {
+      "input": "How do I get help about the Skeet framework?",
+      "output": "Discord Link: https://discord.gg/nfZYMXgZ for help about the Skeet framework."
+    },
+    {
+      "input": "Skeet FrameworkはSQLとNoSQLを組み合わせてアプリを構築できると言っていますが、それはどういう意味ですか？",
+      "output": "Skeet Frameworkでは、SQLとNoSQLの両方のデータベースシステムを使用してアプリケーションを構築できます。これにより、各システムの利点を最大限に活用しながら、アプリケーションの特定の部分に最適なデータベースを選択できます。このドキュメントでは、Cloud SQLとGraphQLを使用してアプリケーションを構築する方法を説明します。"
+    },
+    {
+      "input": "アプリの開発とメンテナンスにはどのような問題がありますか？",
+      "output": "アプリの開発とメンテナンスには多くの問題があります。まず、アプリを作成し公開するためには、サーバーインフラからアプリケーションまで広範囲にわたる知識と技術が必要となります。これにより、多くのチームが開発に苦戦しています。また、迅速な開発とメンテナンス性の両立は難しく、スケールアップ時の複雑な問題を解決する必要があります。さらに、アプリがリリースされた後もメンテナンスコストは増大し、開発チームは新機能の追加や改善を行うために現状維持すら難しい状況に直面しています。"
+    },
+    {
+      "input": "Skeetはどのようにしてアプリの開発とメンテナンスの問題を解決しますか？",
+      "output": "Skeetはアプリの開発とメンテナンスの問題を解決するために、アプリケーションの開発とメンテナンスコストを下げることを目指しています。Skeetを使用すると、素早くアプリを立ち上げ、少ないコストで長期的にメンテナンスすることが可能になります。これにより、開発チームはより多くのリソースを新機能の追加や改善に注ぐことができます。"
+    },
+    {
+      "input": "GCPとFirebaseはどのようにサーバーレスアーキテクチャを支援していますか？",
+      "output": "GCP (Google Cloud)とFirebaseは、アプリやゲームの構築と拡大を支援するアプリ開発プラットフォームです。これらはGoogleのインフラによって支えられ、世界中の多くの企業から高い信頼を得ています。アプリのライフサイクル全体を通じて、信頼できるプロダクトとソリューションが提供されます。Firebaseプロダクトを組み合わせて使用することで、複雑な課題を解決したり、アプリ操作を最適化したりすることが可能です。FirebaseはGoogle Cloudを基盤としており、アプリを数十億人規模のユーザーに拡大することができます。"
+    },
+    {
+      "input": "FirebaseとGCPはどのようなユースケースに適していますか？",
+      "output": "FirebaseとGCPのユースケースは多岐にわたります。これらはアプリ開発だけでなく、APIサーバー、スケジュールタスクの実行、イベントハンドラーによる関数の実行、ストリームデータパイプラインなどにも使用できます。また、新規プロジェクトから既存プロジェクトへの部分適用まで、幅広い利用が可能です。"
+    },
+    {
+      "input": "GCPとFirebaseを組み合わせて利用する利点は何ですか？",
+      "output": "GCP (Google Cloud)とFirebaseを組み合わせて利用すると、エコでハイパフォーマンスな分散システムを構築することができます。これは常に必要な分だけのサーバーリソースを利用するため、環境的にも経済的にも非常に優しい設計を可能にします。また、メンテナンスコストも大幅に削減します。リリース後のアプリもユーザーの使用パターンに合わせてコンピューティングリソースが自動的にスケールアップされます。"
+    },
+    {
+      "input": "Skeetはどのような機能を提供していますか？",
+      "output": "SkeetはFirebase及びGoogle Cloudプロダクトの組み合わせをより簡単に使いやすくする、オープンソースのフルスタックサーバーレスアプリ開発ソリューションです。Skeet CLIはFirebaseプロダクトの設定・デプロイ・管理だけでなく、GCPのVPNネットワークの設定、ドメインやネームサーバー設定、ロードバランサーの管理、Cloud Armorによるセキュリティの設定、GitHub ActionsによるCI & CDなど、実際にアプリを開発する上で必要な多くのことをワンコマンドで提供しています。"
+    },
+    {
+      "input": "Skeetを利用することでどのような利点がありますか？",
+      "output": "Skeetを利用することで、アプリの開発コストとメンテナンスコストを大幅に削減することができます。これにより、開発者はより多くのプランを実現することが可能になります。また、TypeScriptやJest、ESLint & Prettierなどの開発に役立つツール群をデフォルトで採用しているため、よりスケールする堅牢なアプリ開発が可能です。"
+    },
+    {
+      "input": "SkeetフレームワークとFirebaseツールをインストールするにはどうすればいいですか？",
+      "output": "SkeetフレームワークとFirebaseツールをインストールするには、以下のコマンドを実行します：\n\n```bash\n$ npm i -g @skeet-framework/cli\n$ npm install -g firebase-tools\n```"
+    },
+    {
+      "input": "Skeetアプリを作成する際にどのテンプレートを選択すべきですか？",
+      "output": "Skeetアプリを作成する際には、あなたのプロジェクトの要件に合わせてテンプレートを選択します。この例では、Next.js (React) - GraphQL テンプレートが選択されています。"
+    },
+    {
+      "input": "Skeet Appをローカルで起動し、GraphQL Playgroundを使用するにはどうすればいいですか？",
+      "output": "Skeet Appをローカルで起動し、GraphQL Playgroundを使用するには、まずアプリのディレクトリに移動します。次に、$ skeet docker psqlコマンドを実行し、その後$ skeet sコマンドを実行します。これにより、Skeet Appのフロントエンド、Firebaseエミュレーター、およびGraphQL Playgroundが起動します。Next.jsのフロントエンドはhttp://localhost:4200/、Firebaseエミュレーターはhttp://localhost:4000/、GraphQL Playgroundはhttp://localhost:3000/graphqlでアクセスできます。"
+    },
+    {
+      "input": "Google Cloud Projectを作成するにはどうすればいいですか？",
+      "output": "Google Cloud Projectを作成するには、Google Cloudのコンソールにアクセスし、新しいプロジェクトを作成します。具体的には、以下のURLにアクセスします：https://console.cloud.google.com/projectcreate"
+    },
+    {
+      "input": "Firebase Projectを追加する方法は何ですか？",
+      "output": "Firebase Projectを追加するには、Firebaseのコンソールにアクセスします。そのURLはhttps://console.firebase.google.com/です。そこから新しいプロジェクトを作成し、必要な設定を行うことができます。"
+    },
+    {
+      "input": "Skeet initコマンドを実行する際に何を指定する必要がありますか？",
+      "output": "skeet initコマンドを実行する際には、Google CloudプロジェクトID、FirebaseプロジェクトID、およびデプロイ先のリージョンを指定する必要があります。これらの情報はコマンドラインのプロンプトに従って入力します。また、このコマンドを実行する前にGoogle Cloudにログインしていない場合は、gcloud auth loginコマンドを使用してログインする必要があります。"
+    },
+    {
+      "input": "skeet initコマンドの--loginオプションは何をするのですか？",
+      "output": "skeet initコマンドの--loginオプションは、ユーザーがFirebaseアカウントにログインするためのURLを生成します。このURLにアクセスしてログインすることで、Skeetの初期化プロセスを完了することができます。"
+    },
+    {
+      "input": "Skeet Frameworkのクラウド使用料について教えてください。",
+      "output": "Skeet Frameworkを使用するには、Firebase Blazeプラン以上が必要です。しかし、通常、開発環境での使用料はGoogle Cloudの無料枠内に収まることが多いです。Google Cloudの無料枠には、90日間の無料トライアルとAlways Freeという2つの部分があります。無料トライアルでは、Google Cloudサービスで使用できる300ドルのクレジットが提供されます。Always Freeでは、多くの一般的なGoogle Cloudリソースへの制限付きアクセスが無料で提供されます。"
+    }
+  ]
+}
