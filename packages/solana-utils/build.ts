@@ -1,12 +1,30 @@
 import { build } from 'esbuild'
+import path from 'path'
+import { aliasPath } from 'esbuild-plugin-alias-path'
 ;(async () => {
-  const res = await build({
-    entryPoints: ['./src/index.ts'],
+  console.log('Building...')
+  await build({
+    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     bundle: true,
     minify: true,
-    outfile: './dist/index.js',
+    keepNames: true,
+    sourcemap: 'inline',
+    sourcesContent: true,
+    outfile: path.resolve(__dirname, 'dist/index.js'),
     platform: 'node',
     format: 'cjs',
-    external: [''],
+    define: {
+      'process.env.NODE_ENV': `"production"`,
+    },
+    metafile: true,
+    external: ['path', '@skeet-framework/utils', 'fs', 'child_process', 'util'],
+    plugins: [
+      aliasPath({
+        alias: {
+          '@/*': path.resolve(__dirname, './src'),
+        },
+      }),
+    ],
   })
+  console.log('Build complete ⭐️')
 })()
