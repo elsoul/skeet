@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "baseUrl": ".",
+    "rootDirs": ["./src", "./dist"],
+    "paths": {
+      "@/lib/*": ["src/lib/*"]
+    },
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "lib": ["esnext"],
+    "emitDeclarationOnly": true,
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./test/**/*"]
+}
