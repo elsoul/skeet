@@ -4,12 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-.pnp*
-.yarn
 
 # testing
 /coverage
-/coverage_dir
 
 # next.js
 /.next/
@@ -42,15 +39,12 @@ gcloud-key.json
 #firebase
 .firebase
 firebase-debug.log
+firestore-debug.log
 
 .env
 .env.production
 
 /apps/
 keyfile.json
-/functions/
-.firebase*
-tmp
-/sql/
 dist/
-./functions
+docs/

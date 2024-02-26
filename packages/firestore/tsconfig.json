@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "declaration": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@lib/*": ["./lib/*"]
+    }
+  },
+  "include": ["src/**/*", "tests/**/*", "release.ts", "jest.config.js"],
+  "exclude": ["dist/**/*", "node_modules"]
+}
