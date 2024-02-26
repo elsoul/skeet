@@ -28,6 +28,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          echo "${{ github.event.pull_request.title }}"
           pnpm install
           pnpm -r run build
           pnpm -r run test
@@ -45,9 +46,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm ci:version
-          publish: pnpm ci:publish
-          title: '[cli] release'
-          commit: '[cli] release'
+          publish: pnpm ci:publisha
           createGithubReleases: true
 
         env:
