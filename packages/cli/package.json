@@ -43,7 +43,7 @@
     "version": "npx ts-node -r tsconfig-paths/register --transpile-only src/lib/logVersion.ts"
   },
   "dependencies": {
-    "@skeet-framework/ai": "1.7.13",
+    "@skeet-framework/ai": "workspace:*",
     "@skeet-framework/utils": "workspace:*",
     "chalk": "5.3.0",
     "chalk-pipe": "6.0.0",
