@@ -1,7 +1,6 @@
 import { GRAPHQL_PATH, PRISMA_SCHEMA_PATH } from '@/index'
 import { readFileSync, writeFileSync } from 'fs'
 import { convertFromKebabCaseToLowerCase } from '@/utils/string'
-import { importConfig } from '../importConfig'
 import { getPrismaPath } from '@/config/path'
 
 export type ModelSchema = {
@@ -83,9 +82,8 @@ export const syncEnumFile = async () => {
   })
 }
 
-export const getModels = () => {
-  const { app } = importConfig()
-  const prismaPath = getPrismaPath(app.template)
+export const getModels = (sqlName: string) => {
+  const prismaPath = getPrismaPath(sqlName)
   const prismaSchema = readFileSync(prismaPath, 'utf-8')
   const lines = prismaSchema.split('\n')
   const models: Array<string> = []
@@ -98,9 +96,8 @@ export const getModels = () => {
   return models
 }
 
-export const getColumns = (modelName: string) => {
-  const { app } = importConfig()
-  const prismaPath = getPrismaPath(app.template)
+export const getColumns = (sqlName: string, modelName: string) => {
+  const prismaPath = getPrismaPath(sqlName)
   const prismaSchema = readFileSync(prismaPath, 'utf-8')
   const lines = prismaSchema.split('\n')
   const modelSchema: Array<ModelSchema> = []

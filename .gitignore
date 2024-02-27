@@ -54,3 +54,4 @@ tmp
 /sql/
 dist/
 ./functions
+./sql

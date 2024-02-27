@@ -17,10 +17,6 @@ export enum FILE_NAME {
   PRISMA_SCHEMA = 'schema.prisma',
 }
 
-export const getPrismaPath = (db: string) => {
-  const path = db.includes('GraphQL') ? PATH.GRAPHQL : PATH.SQL
-  if (db === 'GraphQL') {
-    return `${path}/prisma/${FILE_NAME.PRISMA_SCHEMA}`
-  }
-  return `${path}/prisma/${FILE_NAME.PRISMA_SCHEMA}`
+export const getPrismaPath = (sqlName: string) => {
+  return `${PATH.SQL}/${sqlName}/prisma/${FILE_NAME.PRISMA_SCHEMA}`
 }

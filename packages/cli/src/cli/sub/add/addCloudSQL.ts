@@ -78,7 +78,7 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       default: false,
     },
   ])
-  cloneSQL(sqlName)
+  await cloneSQL(sqlName)
   if (!confirm.confirm) {
     const announce = `💡 You can create the Cloud SQL instance later by running the command:
 
