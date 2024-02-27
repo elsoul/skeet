@@ -12,6 +12,7 @@ import {
   addDomainToConfig,
   addProjectRegionToSkeetOptions,
 } from '@/lib/files/addJson'
+import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { existsSync, mkdir, mkdirSync, readFileSync, writeFileSync } from 'fs'
@@ -44,6 +45,10 @@ export const addFunctions = (functionName: string) => {
       )
 
       updateFirebaseConfig(functionName)
+      updatePackageJsonName(
+        functionName + '-func',
+        functionDir + '/package.json',
+      )
       addFunctionsToPackageJson(functionName)
       const githubAction = functionsYml(functionName)
       writeFileSync(githubAction.filePath, githubAction.body)

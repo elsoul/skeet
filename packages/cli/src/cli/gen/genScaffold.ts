@@ -1,64 +1,61 @@
-import { GRAPHQL_PATH } from '@/index'
-import { Logger, getModels, syncEnumFile } from '@/lib'
-import * as Skeet from '.'
+import { getModels } from '@/lib'
+import { getSQLs } from '@/lib/files/getSQLs'
+import { crud } from '@/templates/sql/crud'
+import { routing } from '@/templates/sql/routing'
 import { readdirSync, writeFileSync } from 'fs'
+import inquirer from 'inquirer'
+import { addIndexToSqlIndex } from './addIndexToSqlIndex'
+import { toPascalCase } from '@/utils/string'
 
 export const genScaffoldAll = async () => {
-  const newModels = await getNewModels()
-  await syncEnumFile()
+  const sqlName = await askSqlName()
+  const newModels = getNewModels(sqlName)
+  if (newModels.length === 0) {
+    console.log('No new models found')
+    return
+  }
+  console.log('New models found:', newModels)
   for await (const modelName of newModels) {
-    await genScaffold(modelName)
+    await genScaffold(sqlName, modelName)
   }
-  await genGraphqlIndex()
-  await genmodelManagerIndex()
 }
 
-export const genScaffold = async (modelName: string) => {
-  await Skeet.genDir(modelName)
-  await Skeet.genMutation(modelName)
-  await Skeet.genModel(modelName)
-  await Skeet.genQuery(modelName)
-  await Skeet.genIndex(modelName)
+export const askSqlName = async () => {
+  const sqlNames = getSQLs()
+  const answer = await inquirer.prompt<{ sqlName: string }>([
+    {
+      type: 'list',
+      name: 'sqlName',
+      message: 'Select the sql name',
+      choices: sqlNames,
+    },
+  ])
+  return answer.sqlName
 }
 
-export const genGraphqlIndex = async () => {
-  const exportArray = [
-    `export * from './taskManager'`,
-    `export * from './modelManager'`,
-    `export * from './authManager'`,
-    `export * from './responseManager'`,
-  ]
-
-  const filePath = GRAPHQL_PATH + '/index.ts'
-  writeFileSync(filePath, exportArray.join('\n'), { flag: 'w' })
-  Logger.successCheck(`successfully created ✔ - ${filePath}`)
+export const genScaffold = async (sqlName: string, modelName: string) => {
+  const { filePath, body } = crud(sqlName, modelName)
+  writeFileSync(filePath, body)
+  console.log(`✔ successfully created - ${filePath}`)
+  const route = routing(sqlName, modelName)
+  writeFileSync(route.filePath, route.body)
+  console.log(`✔ successfully created - ${route.filePath}`)
+  await addIndexToSqlIndex(sqlName, modelName)
 }
 
-export const genmodelManagerIndex = async () => {
-  const apiModels = getApiModels()
-  const exportArray: Array<string> = []
-  for await (const model of apiModels) {
-    const str = `export * from './${model}'`
-    exportArray.push(str)
-  }
-  const filePath = GRAPHQL_PATH + '/modelManager/index.ts'
-  writeFileSync(filePath, exportArray.join('\n'), { flag: 'w' })
-  Logger.successCheck(`successfully created ✔ - ${filePath}`)
-}
-
-export const getNewModels = () => {
-  const apiModels = getApiModels()
-  const prismaModels = getModels()
-  const newMoldes = prismaModels.filter((x) => apiModels.indexOf(x) === -1)
+export const getNewModels = (sqlName: string) => {
+  const currentModels = getCurrentModels(sqlName)
+  const prismaModels = getModels(sqlName)
+  const newMoldes = prismaModels.filter((x) => currentModels.indexOf(x) === -1)
   return newMoldes
 }
 
-export const getApiModels = () => {
-  const apiModels = readdirSync(GRAPHQL_PATH + '/modelManager/', {
+export const getCurrentModels = (sqlName: string) => {
+  const currentModels = readdirSync(`./sql/${sqlName}/src/models`, {
     withFileTypes: true,
   })
-    .filter((item) => item.isDirectory())
-    .map((item) => item.name)
+    .filter((item) => item.isFile())
+    .map((item) => toPascalCase(item.name.replace('.ts', '')))
 
-  return apiModels
+  return currentModels
 }

@@ -4,8 +4,9 @@ import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import { updateDefaultIndex } from './updateDefaultIndex'
 import { addScriptToPackageJson } from '@/lib/files/addScriptToPackageJson'
 import { pnpmBuild } from '@/lib/pnpmBuild'
+import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 
-export const cloneSQL = (sqlName: string) => {
+export const cloneSQL = async (sqlName: string) => {
   const config = importConfig()
   const sqlRoot = './sql/' + sqlName
   if (existsSync(sqlRoot)) {
@@ -25,6 +26,7 @@ export const cloneSQL = (sqlName: string) => {
   const instanceName = 'sql-' + sqlName
   const sqlCmd = instanceName.replace('-db', '')
   updateDefaultIndex(instanceName)
+  await updatePackageJsonName(sqlName, sqlRoot + '/package.json')
   addScriptToPackageJson(
     './package.json',
     `skeet:${sqlCmd}`,

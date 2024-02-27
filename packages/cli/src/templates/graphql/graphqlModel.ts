@@ -15,9 +15,9 @@ export const graphqlModel = async (modelName: string) => {
 
 export const enumImport = async (
   modelName: string,
-  enumArray: Array<string>
+  enumArray: Array<string>,
 ) => {
-  const lowerEnum = enumArray.map(enumName => toLowerCase(enumName))
+  const lowerEnum = enumArray.map((enumName) => toLowerCase(enumName))
   const enumString = lowerEnum.join(', ')
   const body = [
     `import { objectType } from 'nexus'`,
@@ -36,7 +36,7 @@ export const normalImport = async (modelName: string) => {
 }
 
 export const modelCodes = async (modelName: string) => {
-  const modelCols: ModelSchemaArray = await getColumns(modelName)
+  const modelCols: ModelSchemaArray = getColumns('', modelName)
   const enumNames = await getEnumCols(modelCols)
   let importArray = []
   const modelCodeArray = [
