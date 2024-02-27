@@ -1,3 +1,5 @@
+import { toCamelCase } from '@skeet-framework/utils'
+import chalk from 'chalk'
 import { readFile, writeFile } from 'fs/promises'
 
 export const addIndexToSqlIndex = async (
@@ -5,6 +7,7 @@ export const addIndexToSqlIndex = async (
   newModelName: string,
 ) => {
   const modelNameLower = newModelName.toLowerCase()
+  const modelNameCamel = toCamelCase(newModelName)
   const filePath = `./sql/${sqlName}/src/index.ts`
   const fileBodyArray = (await readFile(filePath, 'utf-8')).split('\n')
   // find the 'from '@/routes/' line
@@ -12,17 +15,19 @@ export const addIndexToSqlIndex = async (
     line.includes("from '@/routes/'"),
   )
   // insert the new import line under the 'from '@/routes/' line
-  const newLine = `import { ${modelNameLower}Router } from '@/routes/${modelNameLower}'`
+  const newLine = `import { ${modelNameCamel}Router } from '@/routes/${modelNameCamel}'`
   fileBodyArray.splice(fromRoutesIndex + 1, 0, newLine)
 
   // find the 'app.route(rootDir' line
   const appRouteIndex = fileBodyArray.findIndex((line) =>
     line.includes('app.route(rootDir'),
   )
-  const newRouteLine = `app.route(rootDir + '/${modelNameLower}s', ${modelNameLower}Router)`
+  const newRouteLine = `app.route(rootDir + '/${modelNameCamel}s', ${modelNameCamel}Router)`
   fileBodyArray.splice(appRouteIndex + 1, 0, newRouteLine)
 
   // write the new file body
   await writeFile(filePath, fileBodyArray.join('\n'))
-  console.log(`✔️ Added ${modelNameLower} to ./sql/${sqlName}/src/index.ts`)
+  console.log(
+    chalk.white(`✔️ Added ${modelNameLower} to ./sql/${sqlName}/src/index.ts`),
+  )
 }

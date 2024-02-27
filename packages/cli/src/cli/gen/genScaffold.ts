@@ -6,6 +6,7 @@ import { readdirSync, writeFileSync } from 'fs'
 import inquirer from 'inquirer'
 import { addIndexToSqlIndex } from './addIndexToSqlIndex'
 import { toPascalCase } from '@/utils/string'
+import chalk from 'chalk'
 
 export const genScaffoldAll = async () => {
   const sqlName = await askSqlName()
@@ -36,10 +37,10 @@ export const askSqlName = async () => {
 export const genScaffold = async (sqlName: string, modelName: string) => {
   const { filePath, body } = crud(sqlName, modelName)
   writeFileSync(filePath, body)
-  console.log(`✔ successfully created - ${filePath}`)
+  console.log(chalk.white(`✔ successfully created - ${filePath}`))
   const route = routing(sqlName, modelName)
   writeFileSync(route.filePath, route.body)
-  console.log(`✔ successfully created - ${route.filePath}`)
+  console.log(chalk.white(`✔ successfully created - ${route.filePath}`))
   await addIndexToSqlIndex(sqlName, modelName)
 }
 
