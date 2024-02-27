@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.0.4
+
+### Patch Changes
+
+- [#271](https://github.com/elsoul/skeet/pull/271) [`6416dfe`](https://github.com/elsoul/skeet/commit/6416dfe90b099b09186716ae85644634789f52d4) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update - skeet g scaffold for SQL
+
 ## 2.0.3
 
 ### Patch Changes
