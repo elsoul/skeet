@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.0.5
+
+### Patch Changes
+
+- [#273](https://github.com/elsoul/skeet/pull/273) [`144d5fb`](https://github.com/elsoul/skeet/commit/144d5fb2f7271a3ae189fab2154a9b7b781a5f97) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - fix - skeet g scaffold
+
 ## 2.0.4
 
 ### Patch Changes
