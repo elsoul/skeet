@@ -1,0 +1,134 @@
+{
+  "warningThisIsV1": "注意: これは Skeet Ver.1 用のドキュメントです。まずは最新バージョンのSkeetを確認していただくことをおすすめします。",
+  "toNewVersionButton": "最新バージョンを確認",
+  "title": "Skeet ドキュメント",
+  "body1": "GCP (Google Cloud) と Firebase上にフルスタックアプリ",
+  "body2": "を構築できるオープンソースのサーバーレスフレームワーク",
+  "previousPage": "前のページ",
+  "nextPage": "次のページ",
+  "actions": {
+    "motivation": {
+      "title": "モチベーション",
+      "body": "Skeet は素早くアプリを立ち上げ、少ないコストで長期的にメンテナンスしていくことを可能にします。"
+    },
+    "quickstart": {
+      "title": "クイックスタート",
+      "body": "Skeet フレームワークを使い始めるための設定について説明します。"
+    },
+    "setup": {
+      "title": "セットアップ",
+      "body": "Skeet フレームワークを使い始めるための設定について説明します。"
+    },
+    "tutorial": {
+      "title": "チュートリアル",
+      "body": "Skeet フレームワーク を使ってAIチャットアプリを作成するチュートリアルです。"
+    },
+    "initial-deploy": {
+      "title": "本番のデプロイ",
+      "body": "Skeet アプリを公開する方法について説明します。GitHub ActionsによるCommit毎のデプロイもワンコマンドで設定できます。"
+    },
+    "basic-architecture": {
+      "title": "基本アーキテクチャ",
+      "body": "Skeetフレームワークの基本構造について説明します。アプリの各ディレクトリやCLIの各コマンドを解説しています。"
+    },
+    "skeet-firestore": {
+      "title": "Skeet Firestore",
+      "body": "Skeet フレームワーク における型安全な Firestore の使い方を解説します。"
+    },
+    "nextjs-template": {
+      "title": "Next.js (React)",
+      "body": "Next.js (React) のボイラープレート。TypeScript、SEO対応、多言語対応、SSG、PWAなどWeb開発に必要な設定は完了しています。"
+    },
+    "expo-template": {
+      "title": "Expo (React Native)",
+      "body": "Expo (React Native)のボイラープレート。モバイル開発(ios,Android)においてもTailwindなどnpm、Reactの資産を活かせます。"
+    },
+    "skeet-cli": {
+      "title": "Skeet CLI",
+      "body": "Skeet CLI は Skeet フレームワーク を使用しているプロジェクトを作成するためのコマンドラインツールです。"
+    }
+  },
+  "menuNav": {
+    "home": "ドキュメント ホーム",
+    "general": {
+      "groupTitle": "全般",
+      "motivation": "モチベーション",
+      "overall-architecture": "全体アーキテクチャ"
+    },
+    "skeet-graphql": {
+      "groupTitle": "GraphQL バックエンド",
+      "quickstart": "クイックスタート",
+      "setup": "セットアップ",
+      "basic-architecture": "基本アーキテクチャ",
+      "initial-deploy": "本番のデプロイ",
+      "tutorial": "チュートリアル",
+      "zero-to-deploy": "ゼロからデプロイまで",
+      "firebase-user-authentification": "Firebase ログイン認証",
+      "add-worker": "Workerを追加する",
+      "setup-load-balancer": "ロードバランサーを設定する",
+      "cloud-armor": "Cloud Armor の設定",
+      "skeet-plugins": "Skeet プラグイン"
+    },
+    "skeet-firestore": {
+      "groupTitle": "Firestore バックエンド",
+      "quickstart": "クイックスタート",
+      "setup": "セットアップ",
+      "basic-architecture": "基本アーキテクチャ",
+      "initial-deploy": "本番のデプロイ",
+      "tutorial": "チュートリアル",
+      "zero-to-deploy": "ゼロからデプロイまで",
+      "firebase-user-authentification": "Firebase ログイン認証",
+      "add-worker": "Workerを追加する",
+      "setup-load-balancer": "ロードバランサーを設定する",
+      "cloud-armor": "Cloud Armor の設定",
+      "skeet-plugins": "Skeet プラグイン"
+    },
+    "skeet-ai": {
+      "groupTitle": "Skeet AI",
+      "skeet-ai-basic": "基本的な使い方",
+      "prisma": "Prisma モード",
+      "method": "Method モード",
+      "typedoc": "TypeDoc モード",
+      "firestore": "Firestore モード",
+      "translate": "Translate モード",
+      "function": "Function モード"
+    },
+    "plugins": {
+      "groupTitle": "プラグイン",
+      "skeet-ai": "Skeet AI",
+      "skeet-utils": "Skeet Utils",
+      "skeet-firestore": "Skeet Firestore"
+    },
+    "frontend": {
+      "groupTitle": "フロントエンド",
+      "nextjs-graphql-template": "Next.js + GraphQL",
+      "nextjs-firestore-template": "Next.js + Firestore",
+      "expo-firestore-template": "Expo + Firestore",
+      "solana-firestore-template": "Solana Mobile Stack + Web"
+    },
+    "skeet-cli": {
+      "groupTitle": "Skeet CLI",
+      "ai": "Skeet AI Assistant",
+      "create": "Skeet Create",
+      "server": "Skeet Server",
+      "deploy": "Skeet Deploy",
+      "init": "Skeet Init",
+      "yarn": "Skeet Yarn",
+      "login": "Skeet Login",
+      "curl": "Skeet Curl",
+      "generate": "Skeet Generate",
+      "docker": "Skeet Docker",
+      "db": "Skeet DB",
+      "iam": "Skeet iAM",
+      "add": "Skeet Add",
+      "sync": "Skeet Sync",
+      "delete": "Skeet Delete",
+      "list": "Skeet List",
+      "test": "Skeet Test"
+    }
+  },
+  "headerNav": {
+    "home": "ホームページ",
+    "news": "ニュース"
+  }
+}

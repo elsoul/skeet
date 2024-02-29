@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://skeet.dev/sitemap.xml

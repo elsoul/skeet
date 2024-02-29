@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "skeet-framework"
+  },
+  "targets": {
+    "skeet-framework": {
+      "hosting": {
+        "skeet-utils": [
+          "skeet-utils"
+        ],
+        "skeet-doc": [
+          "skeet-doc"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

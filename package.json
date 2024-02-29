@@ -21,8 +21,9 @@
   "author": "ELSOUL LABO B.V.",
   "license": "Apache-2.0",
   "engines": {
-    "pnpm": "8.15.4",
-    "npm": "please_use_pnpm_instead"
+    "pnpm": ">=8",
+    "npm": "please_use_pnpm_instead",
+    "node": ">=20"
   },
   "packageManager": "pnpm@8.15.4",
   "scripts": {
