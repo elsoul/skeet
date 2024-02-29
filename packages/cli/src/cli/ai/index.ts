@@ -20,7 +20,7 @@ export const aiCommands = () => {
     .action(async (options) => {
       await validateAiConfig()
       const { ai } = importConfig()
-      const lang = ai.lang || 'en'
+      const lang = ai.lang as 'en' | 'ja'
       const logger = new AiLog(lang)
       const aiType = options.openai ? 'OpenAI' : 'VertexAI'
       validEnv(aiType as AIType, logger)
