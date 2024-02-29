@@ -9,6 +9,7 @@ on:
       - 'package.json'
       - 'firebase.json'
       - '.firebaserc'
+      - 'pnpm-lock.yaml'
 
 jobs:
   build:
