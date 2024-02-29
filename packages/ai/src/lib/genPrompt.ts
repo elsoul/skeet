@@ -1,16 +1,15 @@
-import { inspect } from 'util'
-import { OpenAIPromptParams, VertexExample, VertexPromptParams } from './types'
 import { ChatCompletionMessageParam } from 'openai/resources'
+import { Content } from '@google-cloud/vertexai'
 
 /**
  * Represents the AI platforms supported by the generatePrompt function.
  */
-export type AIType = 'VertexAI' | 'OpenAI'
+export type AIType = 'Gemini' | 'OpenAI'
 
 /**
  * Represents an example consisting of input and output content.
  */
-export type AIExample = {
+export type InputOutput = {
   /**
    * The input content for the AI platform.
    */
@@ -23,51 +22,57 @@ export type AIExample = {
 }
 
 /**
- * Represents the structure of the AI prompt which includes context and examples.
+ * Represents the structure of the AI prompt which includes context and inputOutput.
  */
-export interface AIPrompt {
-  /**
-   * The context or background information for the AI prompt.
-   */
-  context: string
 
-  /**
-   * An array of examples, each consisting of input and output pairs.
-   */
-  examples: AIExample[]
-}
-
-export function generatePrompt(
+export function generatePrompt<T extends AIType>(
+  aiType: T,
   context: string,
-  examples: AIExample[],
+  inputOutput: InputOutput[],
   content: string,
-  ai: AIType,
-): VertexPromptParams | OpenAIPromptParams {
-  if (ai === 'VertexAI') {
+): T extends 'Gemini' ? Content[] : ChatCompletionMessageParam[] {
+  if (aiType === 'Gemini') {
     const exampleMessages = []
-    for (const example of examples) {
-      const exampleSet = { input: { content: '' }, output: { content: '' } }
-      if (example.input) exampleSet.input = { content: example.input }
-      if (!example.output) continue
-      exampleSet.output = { content: example.output }
-
-      if (exampleSet.input.content !== '' && exampleSet.output.content !== '')
-        exampleMessages.push(exampleSet)
+    for (const example of inputOutput) {
+      const inputExample = {
+        role: 'user',
+        parts: [{ text: String(example.input) }],
+      } as Content
+      exampleMessages.push(inputExample)
+      const outputExample: Content = {
+        role: 'model',
+        parts: [{ text: example.output }],
+      }
+      exampleMessages.push(outputExample)
     }
-
-    return {
-      context,
-      examples: exampleMessages,
-      messages: [
-        {
-          author: 'user',
-          content,
-        },
-      ],
-    } as VertexPromptParams
-  } else if (ai === 'OpenAI') {
+    // First value of exampleMessages
+    const firstExample = exampleMessages[0]
+    const restExamples = exampleMessages.slice(1)
+    const contents = [
+      {
+        role: 'user',
+        parts: [
+          {
+            text: context + '\n' + firstExample.parts[0].text,
+          },
+        ],
+      },
+      ...restExamples,
+      {
+        role: 'user',
+        parts: [
+          {
+            text: content,
+          },
+        ],
+      },
+    ] as Content[]
+    return contents as T extends 'Gemini'
+      ? Content[]
+      : ChatCompletionMessageParam[]
+  } else if (aiType === 'OpenAI') {
     const exampleMessages = []
-    for (const example of examples) {
+    for (const example of inputOutput) {
       if (example.input)
         exampleMessages.push({
           role: 'user',
@@ -91,7 +96,9 @@ export function generatePrompt(
       },
     ]
 
-    return { messages }
+    return messages as T extends 'Gemini'
+      ? Content[]
+      : ChatCompletionMessageParam[]
   } else {
     throw new Error('Unsupported AI type')
   }
@@ -99,7 +106,7 @@ export function generatePrompt(
 
 export const migrationPrompt = {
   context: `You are a specialist in naming database migration files. Users will provide you with a brief description of the database change they want to implement. Your task is to return a migration filename in camelCase that aptly describes the task. For example, when creating a new table, it's common to start the filename with "add". However, the prefix might vary based on the specific operation.`,
-  examples: [
+  inputOutput: [
     {
       input: 'Create a new users table',
       output: 'addUsersTable',
@@ -125,7 +132,7 @@ export const migrationPrompt = {
 
 export const namingPrompt = {
   context: `You are a specialist in naming TypeScript functions. Users will provide you with a brief description of the function they want to create. Your task is to return a function name related to the described task in camelCase, ranging from 4 to 20 characters. Even if the user's description is vague or unusual, try to come up with the most appropriate name.`,
-  examples: [
+  inputOutput: [
     {
       input: 'Create a user',
       output: 'createUser',

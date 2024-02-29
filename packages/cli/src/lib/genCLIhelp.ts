@@ -1,9 +1,10 @@
+import chalk from 'chalk'
 import { execSync } from 'child_process'
 import { writeFile } from 'fs/promises'
 
-// `$ skeet --help`からコマンドのリストを取得
+// `$ node dist/index.js --help`からコマンドのリストを取得
 function getCommands(): string[] {
-  const helpOutput = execSync('skeet --help').toString()
+  const helpOutput = execSync('node dist/index.js --help').toString()
 
   // 正規表現を使用してコマンド名を抽出 (これは仮の正規表現で、実際の出力に合わせて調整が必要です)
   const commandMatches = helpOutput.match(/^\s*(\w+)\s+/gm)
@@ -15,7 +16,7 @@ function getCommands(): string[] {
 
 // 各コマンドに対して詳細なヘルプを取得
 function getDetailedHelpForCommand(command: string): string {
-  return execSync(`skeet ${command} --help`).toString()
+  return execSync(`node dist/index.js ${command} --help`).toString()
 }
 
 // 実行
@@ -28,8 +29,9 @@ for (const command of commands) {
 }
 
 const run = async () => {
-  await writeFile('commands.txt', detailedHelpArray.join('\n'))
-  console.log(detailedHelpArray)
+  const body = `export const CLI_HELP = \`${detailedHelpArray.join('\n')}\``
+  await writeFile('./src/lib/cliHelp.ts', body)
+  console.log(chalk.white(`✔️ CLI help written to src/lib/cliHelp.ts`))
 }
 
 void run()

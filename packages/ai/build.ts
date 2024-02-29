@@ -1,18 +1,22 @@
-import { build } from 'esbuild'
+// Import the necessary modules using ESM syntax
+import esbuild from 'esbuild'
 import path from 'path'
-import { aliasPath } from 'esbuild-plugin-alias-path'
+import aliasPath from 'esbuild-plugin-alias-path'
+import { fileURLToPath } from 'url'
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+// Using an IIFE (Immediately Invoked Function Expression) with async to run asynchronous code
 ;(async () => {
   console.log('Building...')
-  await build({
-    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
+  await esbuild.build({
+    entryPoints: ['src/index.ts'],
     bundle: true,
     minify: true,
     keepNames: true,
     sourcemap: 'inline',
     sourcesContent: true,
-    outfile: path.resolve(__dirname, 'dist/index.js'),
+    outfile: path.resolve('dist/index.js'),
     platform: 'node',
-    format: 'cjs',
+    format: 'esm',
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
@@ -21,7 +25,7 @@ import { aliasPath } from 'esbuild-plugin-alias-path'
     plugins: [
       aliasPath({
         alias: {
-          '@/*': path.resolve(__dirname, './src'),
+          '@/*': path.resolve('./src'),
         },
       }),
     ],

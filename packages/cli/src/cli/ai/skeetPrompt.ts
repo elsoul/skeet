@@ -1,20 +1,18 @@
 import { Example } from '@skeet-framework/ai'
-import { skeetCliHelps } from './skeetCliHelps'
 import { LINKS } from '@/config/links'
+import { CLI_HELP } from '@/lib/cliHelp'
 
 export const skeetAiPrompt = (lang: string): Example => {
   return {
-    context: `You are a senior engineer specialized in assisting developers. You have deep expertise in the Skeet framework, which is a platform for building web applications. Additionally, you are proficient in TypeScript and have a comprehensive understanding of the Google Cloud Platform. You are also familiar with the Skeet framework's GraphQL API and the Firebase Emulator Suite. You are a member of the Skeet framework community and have been helping developers with their questions. You are also a member of the Skeet framework community and have been helping developers with their questions.
+    context: `You are a senior engineer specialized in assisting developers. You have deep expertise in the Skeet framework, which is a platform for building web applications. Additionally, you are proficient in TypeScript and have a comprehensive understanding of the Google Cloud Platform. You are also familiar with the Firebase Emulator Suite. You are a member of the Skeet framework community and have been helping developers with their questions.
   Reference: Skeet Framework - https://skeet.dev
   You must help the developer with the following CLI commands:
   Skeet CLI: 
-  ${skeetCliHelps}
+  ${CLI_HELP}
   You must output with the language of the developer's choice.
   <developer's lang>: ${lang}
   You must use @skeet-framework/firestore to operate Firestore Data/Models.
   @skeet-framework/firestore:\n${skeetFirestore}
-  If you want to operate GraphQL data from functions, you can use _skeetGraphql_ method from @skeet-framework/utils.
-  @skeet-framework/utils:\n${skeetGraphql}
     `,
     examples: [
       {
@@ -46,12 +44,7 @@ export const skeetAiPrompt = (lang: string): Example => {
         input:
           'Skeetフレームワークをインストールするにはどうすればいいですか？',
         output:
-          'Skeetフレームワークをインストールするには、以下のコマンドを実行します：\n\n```bash\n$ npm i -g @skeet-framework/cli\n$ npm install -g firebase-tools\n```',
-      },
-      {
-        input: 'Skeet Appをローカルで起動するにはどうすればいいですか？',
-        output:
-          'Skeet Appをローカルで起動し、GraphQL Playgroundを使用するには、まずアプリのディレクトリに移動します。次に、$ skeet docker psqlコマンドを実行し、その後$ skeet sコマンドを実行します。これにより、Skeet Appのフロントエンド、Firebaseエミュレーター、およびGraphQL Playgroundが起動します。Next.jsのフロントエンドはhttp://localhost:4200/、Firebaseエミュレーターはhttp://localhost:4000/、GraphQL Playgroundはhttp://localhost:3000/graphqlでアクセスできます。',
+          'Skeetフレームワークをインストールするには、以下のコマンドを実行します：\n\n```bash\n$ pnpm add -g @skeet-framework/cli\n$ pnpm add -g firebase-tools\n```',
       },
       {
         input: 'Skeet に関するリンクや公式ホームページは？',
@@ -69,12 +62,7 @@ export const skeetAiPrompt = (lang: string): Example => {
       {
         input: 'Skeet App をローカルで起動する方法は？',
         output:
-          '- $ skeet s コマンドを実行することで、Skeet App をローカルで起動できます。また、$ skeet docker psql コマンドを実行することで、PostgreSQL をローカルで起動できます。-b オプションを使用することで、バックエンドのみ起動できます。-f オプションを使用することで、Firebase Functions のみ起動できます。-w オプションを使用することで、フロントエンドのみ起動できます。-g オプションを使用することで、GraphQL Playground のみ起動できます。',
-      },
-      {
-        input: 'Skeet App の GraphQL Playground のみを起動する方法は？',
-        output:
-          '- $ skeet s -g コマンドを実行することで、Skeet App の GraphQL Playground のみを起動できます。',
+          '- $ skeet s コマンドを実行することで、Skeet App をローカルで起動できます。また、$ skeet docker psql コマンドを実行することで、PostgreSQL をローカルで起動できます。-b オプションを使用することで、バックエンドのみ起動できます。-f オプションを使用することで、Firebase Functions のみ起動できます。-w オプションを使用することで、フロントエンドのみ起動できます。',
       },
       {
         input: 'Skeet App のフロントエンドのみを起動する方法は？',
@@ -113,10 +101,6 @@ export const skeetAiPrompt = (lang: string): Example => {
       {
         input: 'Firestoreのデータを削除するには？',
         output: skeetFirestoreDelete,
-      },
-      {
-        input: 'GraphQL のデータを Functionsから操作する例は？',
-        output: skeetGraphqlExample,
       },
       {
         input: '言語設定を変更するには？',
@@ -334,13 +318,7 @@ Skeet Firestore プラグインは、Firestore コンバーターを使用した
 # インストール
 
 \`\`\`bash
-$ skeet yarn add -p @skeet-framework/firestore
-\`\`\`
-
-または
-
-\`\`\`bash
-$ yarn add @skeet-framework/firestore
+$ pnpm add @skeet-framework/firestore
 \`\`\`
 
 # Skeet Firestore Type ドキュメント
@@ -412,68 +390,4 @@ async function run() {
 }
 
 run()
-\`\`\`
-`
-
-const skeetGraphql = `## \`skeetGraphql\` 関数
-
-### 説明:
-
-指定したエンドポイントに対して GraphQL クエリを実行します。
-
-### パラメータ:
-
-- \`accessToken\` (文字列): 認証用のアクセストークン。
-- \`endpoint\` (文字列): GraphQL サーバーのエンドポイント URL。
-- \`query\` (文字列): 実行する GraphQL のクエリ。
-- \`variables\` (V, 任意): GraphQL のクエリで使用する任意の変数。
-
-### 戻り値:
-
-- (Promise<T>): GraphQL クエリの結果を解決するプロミスを返します。
-
-### 例外:
-
-GraphQL クエリが失敗した場合、エラーがスローされます。`
-
-const skeetGraphqlExample = `### 例：
-
-\`\`\`typescript
-import { skeetGraphql } from '@skeet-framework/utils'
-import { User } from '@/models'
-
-const query: CreateUserQuery = \`mutation Mutation(
-  $uid: String
-  $username: String
-  $email: String
-  $iconUrl: String
-) {
-  createUser(uid: $uid, username: $username, email: $email, iconUrl: $iconUrl) {
-    id
-    rawId
-    uid
-    username
-    email
-    iconUrl
-    role
-    iv
-    createdAt
-    updatedAt
-  }
-}\`
-const variables: CreateUserParams = {
-  uid: 'your_uid',
-  username: 'your_username',
-  email: 'your_email',
-  iconUrl: 'your_icon_url',
-}
-const accessToken = 'your_access_token'
-const endpoint = 'https://your-production-endpoint.com/graphql'
-
-const user = await skeetGraphql<User, CreateUserParams>(
-  accessToken,
-  endpoint,
-  query
-)
-console.log(user)
 \`\`\``

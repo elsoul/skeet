@@ -1,5 +1,4 @@
-import { VertexAI } from '@/lib/vertexai'
-import { OpenAI } from '@/lib/openai'
+import { VertexAI } from '@google-cloud/vertexai'
 
 export type Example = {
   context: string
@@ -16,8 +15,6 @@ export enum NamingEnum {
   FUNCTION = 'function',
   MODEL = 'model',
 }
-
-export type AiInstance = VertexAI | OpenAI
 
 export enum SkeetAiMode {
   Function = 'function',
