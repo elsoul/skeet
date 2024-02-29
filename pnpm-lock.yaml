@@ -570,9 +570,6 @@ importers:
       '@heroicons/react':
         specifier: 2.0.17
         version: 2.0.17(react@18.2.0)
-      '@skeet-framework/ai':
-        specifier: workspace:*
-        version: link:../../packages/ai
       clsx:
         specifier: 1.2.1
         version: 1.2.1
