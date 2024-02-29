@@ -4,7 +4,7 @@
     "projectId": "skeet-framework",
     "template": "Next.js (React) - Firestore",
     "region": "europe-west6",
-    "appDomain": "app.skeet.dev",
+    "appDomain": "skeet.dev",
     "nsDomain": "skeet.dev",
     "lbDomain": "lb.skeet.dev",
     "hasLoadBalancer": false,

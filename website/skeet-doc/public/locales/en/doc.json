@@ -1,0 +1,128 @@
+{
+  "title": "Skeet Document",
+  "body1": "Open-Source Serverless App Framework for full-stack apps",
+  "body2": "on GCP (Google Cloud) and Firebase.",
+  "previousPage": "Previous page",
+  "nextPage": "Next page",
+  "actions": {
+    "motivation": {
+      "title": "Motivation",
+      "body": "Skeet allows you to get your app up and running quickly and maintain it for the long term at a low cost."
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "body": "Describes the setup for getting started with the Skeet framework."
+    },
+    "setup": {
+      "title": "Setup",
+      "body": "Describes the setup for getting started with the Skeet framework."
+    },
+    "tutorial": {
+      "title": "Tutorial",
+      "body": "This tutorial will create an Chat App using Skeet Framework."
+    },
+    "initial-deploy": {
+      "title": "Deploy for Production",
+      "body": "You can learn how to publish your Skeet app. You can also set deploy for each Commit with GitHub Actions with a single command."
+    },
+    "basic-architecture": {
+      "title": "Basic Architecture",
+      "body": "Describes the basic structure of the Skeet framework. Each directory of the application and each command of CLI are explained."
+    },
+    "skeet-firestore": {
+      "title": "Firestore Plugin",
+      "body": "How to use type-safe Firestore in Skeet Framework."
+    },
+    "nextjs-template": {
+      "title": "Next.js Template (React)",
+      "body": "The settings necessary for web development, such as TypeScript, SEO support, multilingual support, SSG, PWA, etc., have been completed."
+    },
+    "expo-template": {
+      "title": "Expo (React Native)",
+      "body": "Expo (React Native) on the frontend. We can use npm packages like the Tailwind on mobile dev as well."
+    }
+  },
+  "menuNav": {
+    "home": "Docs Home",
+    "general": {
+      "groupTitle": "General",
+      "motivation": "Motivation",
+      "overall-architecture": "Overall Architecture",
+      "about-v3": "About Ver.3 (Soon)"
+    },
+    "skeet-graphql": {
+      "groupTitle": "GraphQL Backend",
+      "quickstart": "Quickstart",
+      "setup": "Setup",
+      "basic-architecture": "Basic Architecture",
+      "initial-deploy": "Deploy for Production",
+      "tutorial": "Tutorial",
+      "zero-to-deploy": "Zero to Deploy",
+      "firebase-user-authentification": "Firebase Login Authentification",
+      "add-worker": "Add Worker",
+      "setup-load-balancer": "Setup Load Balancer",
+      "cloud-armor": "Setup Cloud Armor",
+      "skeet-plugins": "Skeet Plugins"
+    },
+    "skeet-firestore": {
+      "groupTitle": "Firestore Backend",
+      "quickstart": "Quickstart",
+      "setup": "Setup",
+      "basic-architecture": "Basic Architecture",
+      "initial-deploy": "Deploy for Production",
+      "tutorial": "Tutorial",
+      "zero-to-deploy": "Zero to Deploy",
+      "firebase-user-authentification": "Firebase Login Authentification",
+      "add-worker": "Add Worker",
+      "setup-load-balancer": "Setup Load Balancer",
+      "cloud-armor": "Setup Cloud Armor",
+      "skeet-plugins": "Skeet Plugins"
+    },
+    "skeet-ai": {
+      "groupTitle": "Skeet AI",
+      "skeet-ai-basic": "Basic Usage",
+      "prisma": "Prisma Mode",
+      "method": "Method Mode",
+      "typedoc": "TypeDoc Mode",
+      "firestore": "Firestore Mode",
+      "translate": "Translate Mode",
+      "function": "Function Mode"
+    },
+    "plugins": {
+      "groupTitle": "Plugins",
+      "skeet-ai": "Skeet AI Assistant",
+      "skeet-firestore": "Skeet Firestore",
+      "skeet-utils": "Skeet Utils"
+    },
+    "frontend": {
+      "groupTitle": "Frontend",
+      "nextjs-graphql-template": "Next.js + GraphQL",
+      "nextjs-firestore-template": "Next.js + Firestore",
+      "expo-firestore-template": "Expo + Firestore",
+      "solana-firestore-template": "Solana Mobile Stack + Web"
+    },
+    "skeet-cli": {
+      "groupTitle": "Skeet CLI",
+      "create": "Skeet Create",
+      "server": "Skeet Server",
+      "deploy": "Skeet Deploy",
+      "init": "Skeet Init",
+      "yarn": "Skeet Yarn",
+      "login": "Skeet Login",
+      "curl": "Skeet Curl",
+      "generate": "Skeet Generate",
+      "docker": "Skeet Docker",
+      "db": "Skeet DB",
+      "iam": "Skeet iAM",
+      "add": "Skeet Add",
+      "sync": "Skeet Sync",
+      "delete": "Skeet Delete",
+      "list": "Skeet List",
+      "test": "Skeet Test"
+    }
+  },
+  "headerNav": {
+    "home": "Skeet Home",
+    "news": "News"
+  }
+}

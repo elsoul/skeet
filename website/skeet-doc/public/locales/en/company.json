@@ -1,0 +1,59 @@
+{
+  "MissionRow": {
+    "tagline": "Mission",
+    "title": "Imagining and creating a better future",
+    "description1": "We are grateful for the knowledge and skills bequeathed to us by our great predecessors.",
+    "description2": "Our responsibility is to leverage these assets and develop and improve them in an open-source spirit.",
+    "description3": "We aim to move society forward for the better by sharing knowledge and technology, working together to solve problems, and exploring new possibilities.",
+    "description4": "We aim to make the future we all imagine and create better and more possible for everyone through our work."
+  },
+  "InformationRow": {
+    "title": "Company Information",
+    "body": "About ELSOUL LABO",
+    "name": { "title": "Name", "body1": "ELSOUL LABO B.V." },
+    "establish": { "title": "Established", "body1": "September 11, 2020" },
+    "address": {
+      "title": "Location",
+      "body1": "Weteringschans 165, 1017XD Amsterdam, Netherlands"
+    },
+    "founders": {
+      "title": "Founders",
+      "body1": "Fumitake Kawasaki",
+      "body2": "Shota Kishi"
+    },
+    "capital": { "title": "Capital", "body1": "10,000 €" },
+    "bank": {
+      "title": "Bank",
+      "body1": "ING, BUNK"
+    },
+    "certification": {
+      "title": "Certification",
+      "body1": "WBSO by Dutch government (Advanced Research)",
+      "body2": "Google Cloud Build Partner. (Integration Products)",
+      "body3": "Google Cloud Web3 Startups Program Certification"
+    },
+    "purpose": {
+      "title": "Content",
+      "body1": "Software Research and Development"
+    }
+  },
+  "TeamRow": {
+    "title": "About the core team",
+    "body": "Everyone is a software developer and has their specialties. In addition, they have experience in various positions, such as sales, marketing, and software R&D. We research and develop beneficial software from multiple perspectives.",
+    "FumitakeKawasaki": {
+      "name": "Fumitake Kawasaki",
+      "role": "Co-founder",
+      "bio": "Software researcher. With more than ten years of experience in the software business from various perspectives, from sales to research and development, the serverless framework \"SOULs\" developed to solve development issues has been certified as an advanced research and development project (WBSO) by the Dutch government. He is strong in the back-end, cloud infrastructure, and smart contract development, is also good at improving the efficiency of development work, and has invented many tools."
+    },
+    "ShotaKishi": {
+      "name": "Shota Kishi",
+      "role": "Co-founder",
+      "bio": "Software researcher. He has been designing and developing software products for ten years. He has strengths in front-end development and can develop user-friendly UX multi-platform apps (PC, tablet, smartphone) with human-centered design. Since he participates in the back-end, cloud infrastructure, and smart contract development, he can design and develop applications while considering the overall balance. He is a contributor to Solana Labs."
+    },
+    "JamesNeveYasui": {
+      "name": "James Neve",
+      "role": "Technical Advisor",
+      "bio": "AI researcher. He holds a Ph.D. in Machine Learning and has published eight academic papers. He has been engaged in researching and developing recommendation engines for matching apps and has a track record of greatly improving the match rate between users. His broad and deep coverage of back-end, front-end, and machine learning enables him to solve his team's toughest problems. His multifaceted approach allows him to maximize the quality of his products."
+    }
+  }
+}

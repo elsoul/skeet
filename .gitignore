@@ -49,7 +49,6 @@ firebase-debug.log
 /apps/
 keyfile.json
 /functions/
-.firebase*
 tmp
 /sql/
 dist/
