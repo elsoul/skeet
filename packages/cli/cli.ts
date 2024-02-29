@@ -28,7 +28,7 @@ for (const command of commands) {
 }
 
 const run = async () => {
-  await writeFile('commands.txt', commands.join('\n'))
+  await writeFile('commands.txt', detailedHelpArray.join('\n'))
   console.log(detailedHelpArray)
 }
 

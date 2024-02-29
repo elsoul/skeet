@@ -4,6 +4,11 @@
       "target": "skeet-utils",
       "public": "packages/utils/docs",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    },
+    {
+      "target": "skeet-doc",
+      "public": "website/skeet-doc/out",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     }
   ]
 }

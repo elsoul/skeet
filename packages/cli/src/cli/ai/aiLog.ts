@@ -1,4 +1,3 @@
-import { SkeetAIOptions } from '@skeet-framework/ai'
 import { utcNow } from '@skeet-framework/utils'
 import chalk from 'chalk'
 import CliTable3 from 'cli-table3'
@@ -6,6 +5,7 @@ import { appendFileSync, existsSync, mkdirSync } from 'fs'
 import { SkeetAiMode } from '../../types/skeetTypes'
 import SkeetLangJA from './locales/ja/skeetAi.json'
 import SkeetLangEN from './locales/en/skeetAi.json'
+import { SkeetAIOptions } from '.'
 
 const SkeetLangs = {
   ja: SkeetLangJA,

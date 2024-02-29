@@ -2,37 +2,44 @@
 import { describe, it, expect } from 'vitest'
 
 import { Content } from '@google-cloud/vertexai'
-import { geminiChat, vertextAIStream } from '@/lib/geminiChat'
+import { geminiChat } from '@/lib/geminiChat'
 import { ChatCompletionMessageParam } from 'openai/resources'
 import { openAIChat } from '@/lib/openAIChat'
-import { generatePrompt } from '@/index'
+import { generatePrompt, readGeminiStream, readOpenAIStream } from '@/index'
 import { inspect } from 'util'
 import { VertexAiResponse } from '@/lib/types/vertexAiResponseTypes'
+import { Readable } from 'stream'
 
 describe('Gemini AI', () => {
-  it('geminiChat works', async () => {
-    // const contents = [
-    //   { role: 'user', parts: [{ text: 'How are you doing today?' }] },
-    // ] as Content[]
-    // await geminiChat(contents)
-    expect(200).toBe(200)
-  })
+  // it('geminiChat works', async () => {
+  //   const contents = [
+  //     { role: 'user', parts: [{ text: 'How are you doing today?' }] },
+  //   ] as Content[]
+  //   const res = await geminiChat(contents)
+  //   if (!res) {
+  //     console.error('No result from geminiChat')
+  //     return
+  //   }
+  //   await readGeminiStream(res)
+  //   expect(200).toBe(200)
+  // })
 
-  it('openAIChat works', async () => {
-    // const contents = [
-    //   {
-    //     role: 'system',
-    //     content: 'You are a helpful assistant.',
-    //   },
-    //   {
-    //     role: 'user',
-    //     content: 'Tell me about Skeet Framework?',
-    //   },
-    // ] as ChatCompletionMessageParam[]
-    // const res = await openAIChat(contents)
-    // console.log(res)
-    expect(200).toBe(200)
-  })
+  // it('openAIChat works', async () => {
+  //   const contents = [
+  //     {
+  //       role: 'system',
+  //       content: 'You are a helpful assistant.',
+  //     },
+  //     {
+  //       role: 'user',
+  //       content: 'Tell me about Skeet Framework?',
+  //     },
+  //   ] as ChatCompletionMessageParam[]
+  //   const res = await openAIChat(contents)
+  //   if (res) await readOpenAIStream(res as unknown as Readable)
+  //   console.log(res)
+  //   expect(200).toBe(200)
+  // })
 
   it('generatePrompt Gemini returns Content[]', async () => {
     const context = 'You are a helpful assistant.'
@@ -49,7 +56,7 @@ describe('Gemini AI', () => {
       inputOutput,
       content,
     )
-    console.log(`Gemini: ${inspect(contents, false, null, true)}`)
+    // console.log(`Gemini: ${inspect(contents, false, null, true)}`)
     // Check if the contents is an array
     expect(Array.isArray(contents)).toBeTruthy()
 
@@ -65,9 +72,9 @@ describe('Gemini AI', () => {
     //   console.error('No result from geminiChat')
     //   return
     // }
-    // await vertextAIStream(result)
+    // await readGeminiStream(result)
 
-    console.log(`Gemini: ${inspect(contents, false, null, true)}`)
+    // console.log(`Gemini: ${inspect(contents, false, null, true)}`)
   })
 
   it('generatePrompt OpenAI returns ChatCompletionMessageParam[]', async () => {

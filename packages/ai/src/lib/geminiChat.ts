@@ -19,7 +19,7 @@ export interface ConfigGeminiType extends GenerationConfig {
   location: string
 }
 
-export type GeminiModel = 'gemini-pro' | 'gemini-pro-vision'
+export type GeminiModel = 'gemini-1.0-pro' | 'gemini-1.0-pro-vision'
 
 export const defaultGeminiConfig: ConfigGeminiType = {
   project,
@@ -28,7 +28,7 @@ export const defaultGeminiConfig: ConfigGeminiType = {
   temperature: 0.1,
   top_p: 1,
   top_k: 40,
-  model: 'gemini-pro' as GeminiModel,
+  model: 'gemini-1.0-pro' as GeminiModel,
 }
 
 export const geminiChat = async (
@@ -68,17 +68,4 @@ export const geminiChat = async (
   } catch (error) {
     throw new Error(`Error in geminiChat: ${error}`)
   }
-}
-
-export const vertextAIStream = async (
-  streamingResp: StreamGenerateContentResult,
-) => {
-  for await (const item of streamingResp.stream) {
-    const text = JSON.parse(JSON.stringify(item)) as unknown as VertexAiResponse
-    console.log(text.candidates[0].content.parts[0].text)
-  }
-  const response = JSON.parse(
-    JSON.stringify(await streamingResp.response),
-  ) as unknown as VertexAiResponse
-  return response
 }

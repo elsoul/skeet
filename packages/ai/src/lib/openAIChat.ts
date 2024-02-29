@@ -11,8 +11,15 @@ dotenv.config()
 const apiKey = process.env.CHAT_GPT_KEY || ''
 const organizationKey = process.env.CHAT_GPT_ORG || ''
 
+export type OpenAIModel =
+  | 'gpt-4-turbo-preview'
+  | 'gpt-4-vision-preview'
+  | 'gpt-4-32k'
+  | 'gpt-3.5-turbo-0125'
+  | 'gpt-3.5-turbo'
+
 export interface ConfigOpenAIType {
-  model: string
+  model: OpenAIModel
   temperature: number
   maxTokens: number
   topP: number
@@ -23,7 +30,7 @@ export interface ConfigOpenAIType {
 }
 
 export const defaultOpenAIConfig: ConfigOpenAIType = {
-  model: 'gpt-4-turbo-preview',
+  model: 'gpt-4-turbo-preview' as OpenAIModel,
   temperature: 0,
   maxTokens: 256,
   topP: 0.95,
@@ -37,7 +44,6 @@ export const openAIChat = async (
   contents: Array<ChatCompletionMessageParam>,
   config = defaultOpenAIConfig,
 ) => {
-  console.log('openaiChat')
   if (config.organizationKey === '' || config.apiKey === '') {
     console.error(
       'CHAT_GPT_ORG and CHAT_GPT_KEY are required in .env file.\n\nor you can pass them as arguments to the function.',
@@ -62,27 +68,4 @@ export const openAIChat = async (
     openaiConfig,
   )) as Stream<ChatCompletionChunk>
   return stream
-}
-
-export const openaiStream = async (
-  openaiStream: Stream<ChatCompletionChunk>,
-) => {
-  let bufferedResponse = ''
-  const messages: string[] = []
-  for await (const chunk of openaiStream) {
-    if (chunk.choices && chunk.choices[0] && chunk.choices[0].delta?.content) {
-      bufferedResponse += chunk.choices[0].delta?.content.toString()
-
-      let separatorIndex
-      while ((separatorIndex = bufferedResponse.indexOf('\n')) >= 0) {
-        const messagePart = bufferedResponse.slice(0, separatorIndex).trim()
-        if (messagePart) {
-          messages.push(messagePart)
-        }
-        console.log(messagePart)
-
-        bufferedResponse = bufferedResponse.slice(separatorIndex + 1)
-      }
-    }
-  }
 }

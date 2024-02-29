@@ -1,5 +1,5 @@
+import { AIType, generatePrompt } from '@skeet-framework/ai'
 import { prismaPrompt } from './prompt'
-import { AIType, generatePrompt } from '@/lib/genPrompt'
 
 export const skeetAiPrisma = async (
   aiType: AIType,

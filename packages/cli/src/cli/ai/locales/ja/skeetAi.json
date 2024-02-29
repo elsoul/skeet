@@ -31,7 +31,7 @@
   "warning": {
     "temperature": "⚠️ 感情の大きさは0から1の間でなければなりません ⚠️",
     "gptKey": "⚠️ CHAT_GPT_ORGとCHAT_GPT_KEYを設定してください ⚠️",
-    "gcpKey": "⚠️ GCLOUD_PROJECTとREGIONを設定してください ⚠️",
+    "gcpKey": "⚠️ GCP_PROJECT_ID と GCP_LOCATION を設定してください ⚠️",
     "mode": "⚠️ このモードは現在のテンプレートでは使用できません ⚠️"
   },
   "skeetMode": {},

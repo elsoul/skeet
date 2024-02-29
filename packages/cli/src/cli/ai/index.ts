@@ -2,17 +2,23 @@ import { program } from '@/index'
 import { promptUser } from './ai'
 import chalk from 'chalk'
 import { AIType } from '@skeet-framework/ai'
-import { SkeetAIOptions } from '@skeet-framework/ai'
 import { SKEET_CONFIG_PATH, importConfig } from '@/lib'
 import { AiLog } from './aiLog'
 import { readFileSync, writeFileSync } from 'fs'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 
+export type SkeetAIOptions = {
+  ai: AIType
+  maxTokens: string
+  model: string
+  temperature: string
+}
+
 export const aiCommands = () => {
   program
     .command('ai')
     .description('AI Playground')
-    .option('-v, --vertex', 'Vertex AI')
+    .option('-g, --gemini', 'Gemini')
     .option('-o, --openai', 'OpenAI')
     .option('-m, --model <string>', 'Model')
     .option('-token, --token <number>', 'Max Tokens')
@@ -22,11 +28,11 @@ export const aiCommands = () => {
       const { ai } = importConfig()
       const lang = ai.lang as 'en' | 'ja'
       const logger = new AiLog(lang)
-      const aiType = options.openai ? 'OpenAI' : 'VertexAI'
+      const aiType = options.openai ? 'OpenAI' : 'Gemini'
       validEnv(aiType as AIType, logger)
       const model = options.openai
-        ? options.model || 'gpt-4-1106-preview'
-        : options.model || 'chat-bison@001'
+        ? options.model || 'gpt-4-turbo-preview'
+        : options.model || 'gemini-1.0-pro'
       const maxTokens = options.token || '1000'
       const temperature = options.temperature || '0'
       if (Number(temperature) > 1 || Number(temperature) < 0) {
@@ -61,8 +67,8 @@ const validEnv = (aiType: AIType, logger: AiLog) => {
       process.exit(1)
     }
   } else {
-    const org = process.env.GCLOUD_PROJECT
-    const key = process.env.REGION
+    const org = process.env.GCP_PROJECT_ID
+    const key = process.env.GCP_LOCATION
     if (!org || !key) {
       console.log(chalk.yellow(logger.text().warning.gcpKey))
       console.log(chalk.yellow('⚠️ Did you run `$ skeet iam ai`? ⚠️'))
@@ -75,8 +81,8 @@ const defaultAiConfig = {
   lang: 'en',
   ais: [
     {
-      name: 'VertexAI',
-      availableModels: ['chat-bison@001', 'chat-bison-32k'],
+      name: 'Gemini',
+      availableModels: ['gemini-1.0-pro', 'gemini-1.0-pro-vision'],
     },
   ],
 }

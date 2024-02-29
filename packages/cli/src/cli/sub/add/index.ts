@@ -9,7 +9,6 @@ import { addWebAppDomain } from './addWebAppDomain'
 import { addIp } from './addIp'
 import { addGithubEnv } from './addGithubEnv'
 import chalk from 'chalk'
-import { addGraphQL } from './addGraphQL'
 import { addScriptToPackageJson } from '@/lib/files/addScriptToPackageJson'
 import { addDiscordWebhook } from './addDiscordWebhook'
 import { addDependencyToPackageJson } from '@/lib/files/addDependencyToPackageJson'
@@ -102,14 +101,6 @@ export const addSubCommands = async () => {
   add.command('ip').action(async () => {
     await addIp()
   })
-
-  add
-    .command('graphql')
-    .alias('graphQL')
-    .description('Add GraphQL')
-    .action(async () => {
-      await addGraphQL()
-    })
 
   add
     .command('sql')

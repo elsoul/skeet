@@ -1,19 +1,19 @@
 import {
   AIType,
-  ChatCompletionMessageParam,
-  OpenAI,
-  OpenAIPromptParams,
-  SkeetAI,
-  VertexAI,
-  VertexPromptParams,
+  ChatCompletionChunk,
+  ConfigGeminiType,
+  ConfigOpenAIType,
+  OpenAIModel,
+  defaultGeminiConfig,
+  geminiChat,
   generatePrompt,
+  openAIChat,
+  readGeminiStream,
+  readOpenAIStream,
 } from '@skeet-framework/ai'
 import chalk from 'chalk'
 import { skeetAiPrompt } from './skeetPrompt'
-import { vertexStream } from './vertexStream'
-import { openaiStream } from './openaiStream'
 import { prismaMode } from './mode/prismaMode'
-import { SkeetAIOptions } from '@skeet-framework/ai'
 import { skeetMode } from './mode/skeetMode'
 import { typedocMode } from './mode/typedocMode'
 import { translateMode } from './mode/translateMode'
@@ -23,6 +23,11 @@ import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
 import { methodMode } from './mode/methodMode'
 import inquirer from 'inquirer'
 import { AiLog } from './aiLog'
+import { SkeetAIOptions } from '.'
+import { Readable } from 'stream'
+
+const GEMINI = 'Gemini'
+const OPENAI = 'OpenAI'
 
 export async function promptUser(
   options: SkeetAIOptions,
@@ -30,9 +35,10 @@ export async function promptUser(
 ): Promise<void> {
   const log = logger.text() as SkeetLog
   const aiOptions = {
-    ai: (options.ai as AIType) || ('VertexAI' as AIType),
-    maxTokens: 1000,
-    model: options.model || 'chat-bison@001',
+    ai: (options.ai as AIType) || ('Gemini' as AIType),
+    maxTokens: options.maxTokens || '1000',
+    model: options.model || defaultGeminiConfig.model,
+    temperature: options.temperature || '0.1',
   }
 
   console.log('\n')
@@ -57,72 +63,89 @@ export async function promptUser(
     return
   }
   console.log(chalk.blue('Skeet:'))
-  const skeetAi = new SkeetAI(aiOptions)
 
-  if (userInput.input.toLowerCase().match(/^\$ prisma$/)) {
-    await prismaMode(skeetAi, logger)
-    return
-  }
-  if (userInput.input.toLowerCase().match(/^\$ skeet/)) {
-    await skeetMode(userInput.input, skeetAi, logger)
-    return
-  }
-  if (userInput.input.toLowerCase().match(/^\$ typedoc/)) {
-    await typedocMode(skeetAi, logger)
-    return
-  }
-  if (userInput.input.toLowerCase().match(/^\$ translate/)) {
-    await translateMode(skeetAi, logger)
-    promptUser(aiOptions, logger)
-    return
-  }
-  if (userInput.input.toLowerCase().match(/^\$ firestore/)) {
-    await firestoreMode(skeetAi, logger)
-    return
-  }
-  if (userInput.input.toLowerCase().match(/^\$ function/)) {
-    await functionMode(skeetAi, logger)
-    return
-  }
-  if (userInput.input.toLowerCase().match(/^\$ method/)) {
-    await methodMode(skeetAi, logger)
-    return
-  }
-  if (userInput.input.toLowerCase().match(/^\$ help/)) {
-    logger.help()
-    promptUser(aiOptions, logger)
-    return
-  }
+  // if (userInput.input.toLowerCase().match(/^\$ prisma$/)) {
+  //   await prismaMode(aiOptions, logger)
+  //   return
+  // }
+  // if (userInput.input.toLowerCase().match(/^\$ skeet/)) {
+  //   await skeetMode(userInput.input, skeetAi, logger)
+  //   return
+  // }
+  // if (userInput.input.toLowerCase().match(/^\$ typedoc/)) {
+  //   await typedocMode(skeetAi, logger)
+  //   return
+  // }
+  // if (userInput.input.toLowerCase().match(/^\$ translate/)) {
+  //   await translateMode(skeetAi, logger)
+  //   promptUser(aiOptions, logger)
+  //   return
+  // }
+  // if (userInput.input.toLowerCase().match(/^\$ firestore/)) {
+  //   await firestoreMode(skeetAi, logger)
+  //   return
+  // }
+  // if (userInput.input.toLowerCase().match(/^\$ function/)) {
+  //   await functionMode(skeetAi, logger)
+  //   return
+  // }
+  // if (userInput.input.toLowerCase().match(/^\$ method/)) {
+  //   await methodMode(skeetAi, logger)
+  //   return
+  // }
+  // if (userInput.input.toLowerCase().match(/^\$ help/)) {
+  //   logger.help()
+  //   promptUser(aiOptions, logger)
+  //   return
+  // }
 
   const skeetPrompt = skeetAiPrompt('en')
 
-  const prompt = generatePrompt(
-    skeetPrompt.context,
-    skeetPrompt.examples,
-    userInput.input,
-    aiOptions.ai,
-  )
-  logger.addJson(
-    SkeetRole.USER,
-    userInput.input,
-    SkeetAiMode.Skeet,
-    aiOptions.model,
-  )
-
-  if (aiOptions.ai === 'VertexAI') {
+  if (aiOptions.ai === GEMINI) {
     try {
-      const ai = skeetAi.aiInstance as VertexAI
-      const stream = await ai.promptStream(prompt as VertexPromptParams)
-      vertexStream(stream, skeetAi.initOptions, logger)
+      const geminiConfig: ConfigGeminiType = {
+        model: aiOptions.model,
+        project: process.env.GCP_PROJECT_ID || '',
+        location: process.env.GCP_LOCATION || '',
+      }
+      const contents = generatePrompt<typeof GEMINI>(
+        GEMINI,
+        skeetPrompt.context,
+        skeetPrompt.examples,
+        userInput.input,
+      )
+      const stream = await geminiChat(contents, geminiConfig)
+      if (stream) {
+        await readGeminiStream(stream)
+      }
+      promptUser(aiOptions, logger)
     } catch (error) {
       console.error('Error:', error)
       process.exit(1)
     }
   } else {
     try {
-      const ai = skeetAi.aiInstance as OpenAI
-      const stream = await ai.promptStream(prompt.messages)
-      openaiStream(stream, skeetAi.initOptions, logger)
+      const openaiConfig: ConfigOpenAIType = {
+        model: aiOptions.model as OpenAIModel,
+        maxTokens: Number(aiOptions.maxTokens),
+        temperature: Number(aiOptions.temperature),
+        topP: 1,
+        n: 1,
+        stream: true,
+        organizationKey: process.env.CHAT_GPT_ORG || '',
+        apiKey: process.env.CHAT_GPT_KEY || '',
+      }
+      const prompt = generatePrompt<typeof OPENAI>(
+        OPENAI,
+        skeetPrompt.context,
+        skeetPrompt.examples,
+        userInput.input,
+      )
+      const stream = await openAIChat(prompt, openaiConfig)
+      if (stream) {
+        await readOpenAIStream(stream as unknown as Readable)
+      }
+      promptUser(aiOptions, logger)
     } catch (error) {
       console.error('Error:', error)
       process.exit(1)
