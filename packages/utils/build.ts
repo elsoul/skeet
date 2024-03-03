@@ -1,29 +1,22 @@
 import { build } from 'esbuild'
-import path from 'path'
-import { aliasPath } from 'esbuild-plugin-alias-path'
-;(async () => {
+void (async () => {
   await build({
-    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
+    entryPoints: ['./src/index.ts'],
     bundle: true,
     minify: true,
-    keepNames: true,
-    sourcemap: 'inline',
-    sourcesContent: true,
-    outdir: path.resolve(__dirname, 'dist'),
+    outfile: './dist/index.js',
     platform: 'node',
-    format: 'cjs',
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
-    metafile: true,
-    external: ['path'],
-    plugins: [
-      aliasPath({
-        alias: {
-          '@/*': path.resolve(__dirname, './src'),
-        },
-      }),
+    format: 'esm',
+    external: [
+      '@prisma/client',
+      'fs',
+      'path',
+      'util',
+      'child_process',
+      'crypto',
     ],
   })
-  console.log('Build complete ⭐️')
 })()
