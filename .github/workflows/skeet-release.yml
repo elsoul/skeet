@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencie
         run: |
-          pnpm install --merge-git-branch-lockfiles
+          pnpm install --no-frozen-lockfile
           pnpm -r run build
           pnpm -r run test
 
