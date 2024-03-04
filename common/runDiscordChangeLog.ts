@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const REPO_NAME = 'elsoul/skeet-cli'
+const REPO_NAME = 'elsoul/skeet'
 
 const run = async (project: 'labo' | 'epics') => {
   if (project === 'labo') {
