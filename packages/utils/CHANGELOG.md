@@ -1,5 +1,11 @@
 # @skeet-framework/utils
 
+## 1.3.4
+
+### Patch Changes
+
+- [#283](https://github.com/elsoul/skeet/pull/283) [`c78d703`](https://github.com/elsoul/skeet/commit/c78d703df629649ac8d125b4c56ddb9c89f2592e) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Migrate to esm
+
 ## 1.3.3
 
 ### Patch Changes
