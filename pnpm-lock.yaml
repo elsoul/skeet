@@ -875,7 +875,7 @@ importers:
         specifier: 3.3.1
         version: 3.3.1(postcss@8.4.23)
       tsx:
-        specifier: ^4.7.1
+        specifier: 4.7.1
         version: 4.7.1
       typescript:
         specifier: 5.0.4
