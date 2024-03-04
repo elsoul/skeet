@@ -21,7 +21,6 @@ export {
   addLeadingZero,
 } from './lib'
 export type { DiscordOptions } from './lib'
-export * as dotenv from 'dotenv'
 export {
   format,
   sub,

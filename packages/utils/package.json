@@ -35,21 +35,19 @@
     "test": "vitest",
     "build": "rm -rf dist/ && tsx build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/",
     "build-doc": "typedoc src/index.ts --out docs",
-    "dev": "npx tsx src/index.ts",
-    "start": "node dist/index.js",
-    "discord:labo": "npx tsx src/lib/runDiscordChangeLog.ts labo",
-    "discord:epics": "npx tsx src/lib/runDiscordChangeLog.ts epics",
-    "version": "npx tsx src/lib/logVersion.ts"
+    "dev": "npx ts-node -r tsconfig-paths/register --transpile-only src/index.ts",
+    "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only ./.github/workflows/runDiscordChangeLog.ts labo",
+    "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only ./.github/workflows/runDiscordChangeLog.ts epics"
   },
   "dependencies": {
     "date-fns": "3.3.1",
     "date-fns-tz": "2.0.0",
-    "dotenv": "16.4.5",
     "node-fetch": "3.3.2"
   },
   "devDependencies": {
     "@types/node": "20.11.24",
     "@types/node-fetch": "2.6.11",
+    "dotenv": "16.4.5",
     "esbuild": "0.20.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
