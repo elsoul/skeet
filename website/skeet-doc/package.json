@@ -9,12 +9,12 @@
   "scripts": {
     "dev": "next dev -p 4200",
     "build": "next build && next export",
-    "postbuild": "npx ts-node ./scripts/generateSitemap.ts",
+    "postbuild": "tsx ./scripts/generateSitemap.ts",
     "deploy:doc": "pnpm build && cd ../.. && pnpm dlx firebase-tools deploy --only hosting:skeet-doc",
     "start": "next start",
     "lint": "next lint",
     "update:packages": "ncu -u -x 'node-fetch,glob' && pnpm i -F skeet-doc",
-    "send:sitemap": "npx ts-node ./scripts/sendSitemap.ts"
+    "send:sitemap": "tsx ./scripts/sendSitemap.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.4.0",
@@ -88,6 +88,7 @@
     "remark-stringify": "10.0.2",
     "tailwind-scrollbar-hide": "1.1.7",
     "tailwindcss": "3.3.1",
+    "tsx": "4.7.1",
     "typescript": "5.0.4",
     "unified": "10.1.2"
   }
