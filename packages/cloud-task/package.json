@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cloud-task",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Skeet Framework Plugin - Cloud Task",
   "main": "dist/index.js",
   "module": "dist/index.js",
