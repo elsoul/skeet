@@ -1,29 +1,29 @@
-import { build } from 'esbuild'
-import path from 'path'
-import { aliasPath } from 'esbuild-plugin-alias-path'
+// Import the necessary modules using ESM syntax
+import esbuild from 'esbuild'
 ;(async () => {
   console.log('Building...')
-  await build({
-    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
+  await esbuild.build({
+    entryPoints: ['src/index.ts'],
     bundle: true,
     minify: true,
     keepNames: true,
     sourcemap: 'inline',
     sourcesContent: true,
-    outfile: path.resolve(__dirname, 'dist/index.js'),
+    outdir: 'dist',
     platform: 'node',
-    format: 'cjs',
+    format: 'esm',
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
     metafile: true,
-    external: ['path', '@skeet-framework/utils', 'fs', 'child_process', 'util'],
-    plugins: [
-      aliasPath({
-        alias: {
-          '@/*': path.resolve(__dirname, './src'),
-        },
-      }),
+    external: [
+      'path',
+      'fs',
+      'child_process',
+      'util',
+      'dotenv',
+      'discord.js',
+      'discord-interactions',
     ],
   })
   console.log('Build complete ⭐️')

@@ -1,24 +1,27 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "Node",
-    "declaration": true,
+    "outDir": "./dist",
     "baseUrl": ".",
-    "rootDirs": ["./src", "./dist"],
-    "paths": {
-      "@/lib/*": ["src/lib/*"]
-    },
     "strict": true,
     "esModuleInterop": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
     "lib": ["esnext"],
-    "emitDeclarationOnly": true,
-    "outDir": "./dist"
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["./src/**/*"],
-  "exclude": ["./test/**/*"]
+  "files": ["package.json"],
+  "include": ["src/**/*", "tests/**/*", "./**/*"],
+  "exclude": ["dist", "node_modules", "build.ts"],
+  "compileOnSave": false
 }
