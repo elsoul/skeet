@@ -72,6 +72,14 @@
     "SolanaValidator": {
       "title": "Skeet operates a validator for the Solana blockchain",
       "description": "As a validator on the Solana chain, Skeet community is committed to ensuring the reliability and stability of the network. We will also contribute to the technical aspects of achieving Solana's fast and stable network."
+    },
+    "GoogleWeb3": {
+      "title": "ELSOUL LABO has been certified by Google Web3 Startups program",
+      "description": "ELSOUL LABO's activities in the Web3 sector, including Epics DAO, and support for open-source development initiatives such as solv and Skeet, have been recognized and selected for the Google Cloud Web3 Startups program."
+    },
+    "ENASE2024": {
+      "title": "Research Paper on AI & Serverless 'Skeet' Accepted for ENASE 2024",
+      "description": "The research paper 'Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development' has been accepted for presentation at the international conference on software engineering, ENASE 2024."
     }
   },
   "WhyOpenSourceDevelopmentRow": {
