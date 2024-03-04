@@ -1,23 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
-    "declaration": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "baseUrl": ".",
     "strict": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": false,
     "esModuleInterop": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
-    "rootDir": ".",
+    "lib": ["esnext"],
     "sourceMap": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@lib/*": ["./lib/*"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "tests/**/*", "release.ts", "jest.config.js"],
-  "exclude": ["dist/**/*", "node_modules"]
+  "files": ["package.json"],
+  "include": ["src/**/*", "tests/**/*", "./**/*"],
+  "exclude": ["dist", "node_modules", "build.ts"],
+  "compileOnSave": false
 }
