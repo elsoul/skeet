@@ -31,6 +31,8 @@ jobs:
         run: pnpm add -g firebase-tools
       - name: GitHub repository setting
         run: git config --global url."https://github.com".insteadOf ssh://git@github.com
+      - name: Install dependencies
+        run: pnpm install
       - name: Build App
         run: pnpm -F utils build-doc
         env:
