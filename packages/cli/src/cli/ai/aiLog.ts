@@ -1,8 +1,5 @@
-import { utcNow } from '@skeet-framework/utils'
 import chalk from 'chalk'
 import CliTable3 from 'cli-table3'
-import { appendFileSync, existsSync, mkdirSync } from 'fs'
-import { SkeetAiMode } from '../../types/skeetTypes'
 import SkeetLangJA from './locales/ja/skeetAi.json'
 import SkeetLangEN from './locales/en/skeetAi.json'
 import { SkeetAIOptions } from '.'
@@ -71,32 +68,5 @@ export class AiLog {
     )
 
     console.log(table.toString())
-  }
-
-  addJson = (
-    role: string,
-    content: string,
-    mode: SkeetAiMode,
-    model: string,
-  ) => {
-    const tmpJson = `tmp/ai/history-${this.lang}.jsonl`
-    if (!existsSync('tmp/ai')) {
-      mkdirSync('tmp/ai', { recursive: true })
-    }
-    const data = {
-      role,
-      content,
-      mode,
-      model,
-      createdAt: utcNow(),
-    }
-    let insertData = ''
-    if (existsSync(tmpJson) === false) {
-      appendFileSync(tmpJson, '')
-      insertData = JSON.stringify(data)
-    } else {
-      insertData = ',\n' + JSON.stringify(data)
-    }
-    appendFileSync(tmpJson, insertData)
   }
 }

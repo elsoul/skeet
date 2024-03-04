@@ -1,16 +1,19 @@
 import { SkeetCloudConfig, SkeetTemplate } from '@/types/skeetTypes'
-import { setGcloudProject } from '../gcloud'
-import { checkRepoExists, createGitRepo, gitCommit, gitInit } from '../git'
-import { Logger } from '../logger'
-import { setupGcp } from './setupGcp'
-import { addAppJson } from '../files/addJson'
+import { setGcloudProject } from '@/lib/gcloud/iam/setGcloudProject'
+import { gitInit } from '@/lib/git/gitInit'
+import { gitCommit } from '@/lib/git/gitInit'
+import { createGitRepo } from '@/lib/git/createGitRepo'
+import { checkRepoExists } from '@/lib/git/checkRepoExists'
+import { Logger } from '@/lib/logger'
+import { setupGcp } from '@/lib/setup/setupGcp'
+import { addAppJson } from '@/lib/files/addJson'
 
 export const setupCloud = async (
   skeetConfig: SkeetCloudConfig,
   repoName: string,
   region: string,
 ) => {
-  setGcloudProject(skeetConfig.app.projectId)
+  await setGcloudProject(skeetConfig.app.projectId)
 
   if (await checkRepoExists(repoName)) {
     Logger.warning(
@@ -22,10 +25,10 @@ export const setupCloud = async (
   await gitCommit()
   await createGitRepo(repoName)
   if (skeetConfig.app.template === SkeetTemplate.ExpoFirestore) {
-    addAppJson(repoName)
+    await addAppJson(repoName)
   }
   if (skeetConfig.app.template === SkeetTemplate.SolanaFirestore) {
-    addAppJson(repoName)
+    await addAppJson(repoName)
   }
   await setupGcp(skeetConfig, region)
 }

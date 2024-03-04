@@ -1,12 +1,12 @@
-import { importConfig } from '@/lib'
+import { importConfig } from '@/lib/files/importConfig'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import inquirer from 'inquirer'
-import { cloneSQL } from './cloneSQL'
-import { writeFileSync } from 'node:fs'
+import { cloneSQL } from '@/cli/sub/add/cloneSQL'
+import { writeFile } from 'fs/promises'
 import { SKEET_CONFIG_PATH } from '@/index'
-import { deployCloudSQL } from './deployCloudSQL'
+import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
 
 type AnswerResponse = {
   instanceName: string
@@ -97,8 +97,8 @@ ${chalk.green('$ skeet deploy --sql')}
   }
 }
 
-export const updateSkeetConfigDb = (instanceName: string) => {
-  const config = importConfig()
+export const updateSkeetConfigDb = async (instanceName: string) => {
+  const config = await importConfig()
   const sqls = config.SQLs
 
   sqls.forEach((sql) => {
@@ -106,5 +106,5 @@ export const updateSkeetConfigDb = (instanceName: string) => {
       sql.isCreated = true
     }
   })
-  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
+  await writeFile(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
 }

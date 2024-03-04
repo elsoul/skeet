@@ -6,7 +6,7 @@ import {
   functionsInstanceTypes,
   getFunctions,
 } from '@/lib'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFile, writeFile } from 'fs/promises'
 
 export const addMethod = async (
   methodName: string,
@@ -14,9 +14,9 @@ export const addMethod = async (
   functionName = '',
 ) => {
   try {
-    const functions = getFunctions()
+    const functions = await getFunctions()
     if (instanceType !== '' && functionName !== '') {
-      genFunction(methodName, instanceType, functionName)
+      await genFunction(methodName, instanceType, functionName)
     } else {
       const question = await inquirer.prompt<{ instanceType: string }>(
         instanceTypeList(),
@@ -25,7 +25,7 @@ export const addMethod = async (
 
       if (functions.length === 1) {
         functionName = functions[0]
-        genFunction(methodName, instanceTypeValue, functionName)
+        await genFunction(methodName, instanceTypeValue, functionName)
       } else {
         const answer2 = await inquirer.prompt<{ functionName: string }>([
           {
@@ -41,7 +41,7 @@ export const addMethod = async (
           },
         ])
         functionName = answer2.functionName || ''
-        genFunction(methodName, instanceTypeValue, functionName)
+        await genFunction(methodName, instanceTypeValue, functionName)
       }
     }
     return { status: 'success' }
@@ -50,9 +50,12 @@ export const addMethod = async (
   }
 }
 
-export const insertFunction = (filePath: string, functionName: string) => {
+export const insertFunction = async (
+  filePath: string,
+  functionName: string,
+) => {
   try {
-    const data = readFileSync(filePath, 'utf-8')
+    const data = await readFile(filePath, 'utf-8')
     const lines = data.split('\n')
     const targetLine = "} from '@/routings'"
     const insertionPoint = lines.findIndex((line) => line.includes(targetLine))
@@ -66,7 +69,7 @@ export const insertFunction = (filePath: string, functionName: string) => {
 
     lines.splice(insertionPoint, 0, `  ${functionName},`)
     const newData = lines.join('\n')
-    writeFileSync(filePath, newData, 'utf-8')
+    await writeFile(filePath, newData, 'utf-8')
     Logger.successCheck(`Successfully exported to ${filePath}`)
     return true
   } catch (error) {
@@ -74,16 +77,20 @@ export const insertFunction = (filePath: string, functionName: string) => {
   }
 }
 
-const genFunction = (
+const genFunction = async (
   methodName: string,
   instanceType: string,
   functionName: string,
 ) => {
-  const genFile = genInstanceMethod(instanceType, functionName, methodName)
-  writeFileSync(genFile.filePath, genFile.body)
+  const genFile = await genInstanceMethod(
+    instanceType,
+    functionName,
+    methodName,
+  )
+  await writeFile(genFile.filePath, genFile.body)
   Logger.successCheck(`successfully generated - ${genFile.filePath}`)
   const indexFile = `${FUNCTIONS_PATH}/${functionName}/src/index.ts`
-  insertFunction(indexFile, methodName)
+  await insertFunction(indexFile, methodName)
 }
 
 export const instanceTypeList = () => {

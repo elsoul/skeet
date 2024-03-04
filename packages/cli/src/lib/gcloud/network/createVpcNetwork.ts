@@ -1,4 +1,4 @@
-import { getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { createConnector } from './createConnector'
 import { createFixIp } from './createFixIp'
 import { createFirewallSsh } from './createFirewallSsh'

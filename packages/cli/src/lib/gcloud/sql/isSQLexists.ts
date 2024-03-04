@@ -2,7 +2,7 @@ import { importConfig } from '@/lib/files'
 
 export const isSQLexists = async () => {
   try {
-    const { db } = importConfig()
+    const { db } = await importConfig()
     if (db.whiteList !== '') return true
 
     return false

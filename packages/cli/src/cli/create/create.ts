@@ -1,43 +1,44 @@
-import * as fileDataOf from '@/templates/init'
 import { sleep } from '@/utils/time'
 import {
-  Logger,
-  execSyncCmd,
-  APP_REPO_URL,
   NEXT_REPO_URL,
-  FUNCTIONS_PATH,
-  GRAPHQL_REPO_PATH,
   SOLANA_REPO_URL,
-  WEB_APP_PATH,
-} from '@/lib'
-import { convertFromKebabCaseToLowerCase } from '@/utils/string'
+  APP_REPO_URL,
+} from '@/lib/files/getSkeetConfig'
 import inquirer from 'inquirer'
-import { questionList } from '@/cli/init/questionList'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { DEFAULT_FUNCTION_NAME } from '@/index'
-import { SkeetTemplate, SkeetTemplateBackend } from '@/types/skeetTypes'
-import { dbGen } from '../sub/db/dbGen'
-import { dbDeploy } from '../sub/db/dbDeploy'
-import { PATH } from '@/config/path'
+import { SkeetTemplate } from '@/types/skeetTypes'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import chalk from 'chalk'
+import { execSyncCmd } from '@/lib/execSyncCmd'
+import { generateInitFiles } from './generateInitFile'
+import { Logger } from '@/lib/logger'
 
 export const create = async (initAppName: string) => {
-  const { template } = await askForTemplate()
+  const { template } = await inquirer.prompt<{ template: string }>([
+    {
+      type: 'list',
+      message: 'Select Template of Skeet',
+      name: 'template',
+      choices: [
+        new inquirer.Separator(' Templates '),
+        { name: SkeetTemplate.NextJsFirestore },
+        { name: SkeetTemplate.ExpoFirestore },
+        { name: SkeetTemplate.SolanaFirestore },
+      ],
+      validate(answer: string) {
+        if (answer.length < 1) {
+          return 'You must choose at least one template.'
+        }
+        return true
+      },
+    },
+  ])
   await skeetCreate(initAppName, template)
-}
-
-const askForTemplate = async () => {
-  const projectInquirer = inquirer.prompt(questionList.templateQuestions)
-  let template = ''
-  await projectInquirer.then(async (answer) => {
-    template = answer.template
-  })
-  return { template }
 }
 
 export const skeetCreate = async (appName: string, template: string) => {
   const appDir = './' + appName
-  if (existsSync(appDir)) {
-    Logger.error(`Directory ${appName} already exists.`)
+  if (await checkFileDirExists(appDir)) {
+    console.error(chalk.yellow(`Directory ${appName} already exists.`))
     process.exit(0)
   }
   let gitCloneCmd = null
@@ -48,19 +49,19 @@ export const skeetCreate = async (appName: string, template: string) => {
   } else {
     gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
   }
-  execSyncCmd(gitCloneCmd)
+  await execSyncCmd(gitCloneCmd)
   const cmd = ['pnpm', 'install']
-  execSyncCmd(cmd, appDir)
-  execSyncCmd(cmd, `${appDir}/${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`)
+  await execSyncCmd(cmd, appDir)
+  await execSyncCmd(cmd, `${appDir}/functions/skeet`)
   if (template === SkeetTemplate.SolanaFirestore) {
-    execSyncCmd(cmd, `${appDir}/${WEB_APP_PATH}`)
+    await execSyncCmd(cmd, `${appDir}/webapp`)
   }
   const rmDefaultGit = ['rm', '-rf', '.git']
-  execSyncCmd(rmDefaultGit, appDir)
+  await execSyncCmd(rmDefaultGit, appDir)
   const rmDefaultGithubActions = ['rm', '-rf', '.github']
-  execSyncCmd(rmDefaultGithubActions, appDir)
+  await execSyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
-  execSyncCmd(cmd, `./${appName}`)
+  await execSyncCmd(cmd, `./${appName}`)
 
   await generateInitFiles(appName, template)
   Logger.skeetAA()
@@ -68,78 +69,5 @@ export const skeetCreate = async (appName: string, template: string) => {
   const nmb = Math.floor(Math.random() * 4 + 1)
   if (nmb === 4) {
     Logger.cmText()
-  }
-}
-
-export const generateInitFiles = async (appName: string, template: string) => {
-  const spinner = Logger.syncSpinner('Generating init files...')
-  await initPackageJson(appName)
-  if (template === SkeetTemplate.ExpoFirestore) {
-    await initAppJson(appName)
-  }
-  if (template === SkeetTemplate.SolanaFirestore) {
-    await initAppJson(appName)
-  }
-
-  if (template !== 'Backend Only - GraphQL') {
-    await addAppNameToSkeetOptions(appName, DEFAULT_FUNCTION_NAME)
-  }
-
-  const firebaserc = await fileDataOf.firebaserc(appName)
-  writeFileSync(firebaserc.filePath, firebaserc.body)
-
-  const firestoreIndexesJson = await fileDataOf.firestoreIndexesJson(appName)
-  writeFileSync(firestoreIndexesJson.filePath, firestoreIndexesJson.body)
-
-  const skeetCloudConfigGen = await fileDataOf.skeetCloudConfigGen(
-    appName,
-    template,
-  )
-  writeFileSync(skeetCloudConfigGen.filePath, skeetCloudConfigGen.body)
-  spinner.stop()
-}
-
-export const initPackageJson = async (appName: string) => {
-  try {
-    const filePath = `./${appName}/package.json`
-    const packageJson = readFileSync(filePath)
-    const newPackageJson = JSON.parse(String(packageJson))
-    newPackageJson.name = appName
-    newPackageJson.version = '0.0.1'
-    newPackageJson.description = `Full-stack Serverless Framework Skeet ${appName} App`
-    writeFileSync(filePath, JSON.stringify(newPackageJson, null, 2))
-  } catch (error) {
-    throw new Error(`initPackageJson: ${error}`)
-  }
-}
-
-export const initAppJson = async (appName: string) => {
-  const appDir = './' + appName
-  const filePath = `${appDir}/app.json`
-  const appJson = readFileSync(filePath)
-  const newAppJson = JSON.parse(String(appJson))
-  const appNameLowerCase = convertFromKebabCaseToLowerCase(appName)
-  newAppJson.expo.name = appName
-  newAppJson.expo.slug = appName
-  newAppJson.expo.scheme = appNameLowerCase
-  newAppJson.expo.owner = 'openai'
-  newAppJson.expo.githubUrl = `https://github.com/YOUR_ACCOUNT/${appName}`
-  newAppJson.expo.android.package = `com.skeet.${appNameLowerCase}`
-  newAppJson.expo.ios.bundleIdentifier = `com.skeet.${appNameLowerCase}`
-  writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
-}
-
-export const addAppNameToSkeetOptions = async (
-  appName: string,
-  functionName: string,
-) => {
-  try {
-    const filePath = `./${appName}/functions/${functionName}/skeetOptions.json`
-    const jsonFile = readFileSync(filePath)
-    const skeetOptions = JSON.parse(String(jsonFile))
-    skeetOptions.name = appName
-    writeFileSync(filePath, JSON.stringify(skeetOptions, null, 2))
-  } catch (error) {
-    throw new Error(`addAppNameToSkeetOptions: ${error}`)
   }
 }

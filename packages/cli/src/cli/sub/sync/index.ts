@@ -1,13 +1,8 @@
-import { PRISMA_SCHEMA_PATH, program } from '@/index'
-import { syncModels } from './syncModels'
-import { syncTypes } from './syncTypes'
+import { program } from '@/index'
 import { syncRoutings } from './syncRoutings'
 import { syncArmors } from './syncArmors'
 import { syncSql } from './syncSql'
 import { syncTaskQueue } from './syncTaskQueue'
-import { syncRunUrl } from './syncRunUrl'
-import { readFileSync } from 'node:fs'
-import { prismaSchemaToTypeScriptTypes } from './prismaSchemaToTypeScriptType'
 import { addEnvSync } from '@/lib'
 
 export const syncSubCommands = async () => {
@@ -21,15 +16,15 @@ export const syncSubCommands = async () => {
     .alias('routing')
     .description('Skeet Sync Routings')
     .action(async () => {
-      syncRoutings()
+      await syncRoutings()
     })
   sync
     .command('armors')
     .alias('a')
     .alias('armor')
     .description('Skeet Sync Cloud Armor Rules')
-    .action(() => {
-      syncArmors()
+    .action(async () => {
+      await syncArmors()
     })
 
   sync
@@ -44,12 +39,6 @@ export const syncSubCommands = async () => {
     .description('Skeet Sync Task Queue')
     .action(async () => {
       await syncTaskQueue()
-    })
-  sync
-    .command('runUrl')
-    .description('Skeet Sync Run Url')
-    .action(async () => {
-      await syncRunUrl()
     })
 
   sync

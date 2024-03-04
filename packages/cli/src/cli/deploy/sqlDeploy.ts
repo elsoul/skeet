@@ -1,10 +1,10 @@
-import { importConfig } from '@/lib'
+import { importConfig } from '@/lib/files/importConfig'
 import inquirer from 'inquirer'
-import { deployCloudSQL } from '../sub/add/deployCloudSQL'
-import { updateSkeetConfigDb } from '../sub/add/addCloudSQL'
+import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
+import { updateSkeetConfigDb } from '@/cli/sub/add/addCloudSQL'
 
 export const sqlDeploy = async () => {
-  const config = importConfig()
+  const config = await importConfig()
   const sqls = config.SQLs.filter((sql) => !sql.isCreated)
   if (sqls.length === 0) {
     console.log('No SQL instance to deploy')
@@ -32,6 +32,6 @@ export const sqlDeploy = async () => {
       String(sql.cpu),
       sql.memory,
     )
-    updateSkeetConfigDb(sql.instanceName)
+    await updateSkeetConfigDb(sql.instanceName)
   }
 }

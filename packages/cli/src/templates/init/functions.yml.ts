@@ -1,9 +1,9 @@
 import { SKEET_CONFIG } from '@/config/config'
 import { convertToKebabCase, toCamelCase } from '@/utils/string'
-import { mkdirSync } from 'fs'
+import { mkdir } from 'fs/promises'
 
-export const functionsYml = (functionName: string) => {
-  mkdirSync('.github/workflows', { recursive: true })
+export const functionsYml = async (functionName: string) => {
+  await mkdir('.github/workflows', { recursive: true })
   const nodeVersion = SKEET_CONFIG.NODE_VERSION
   const name = toCamelCase(functionName) + 'Func'
   const kebabName = convertToKebabCase(functionName)

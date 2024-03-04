@@ -4,3 +4,7 @@ export enum LINKS {
   STRIPE_APP_JA = 'https://zenn.dev/fumisouls/books/a27314e5a8428d/viewer/185d11',
   STRIPE_APP_EN = 'https://link.medium.com/GQk2ePQVRFb',
 }
+
+export enum REPO {
+  BACKEND_FUNCTIONS_REPO_URL = 'https://github.com/elsoul/skeet-functions-only',
+}

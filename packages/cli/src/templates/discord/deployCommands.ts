@@ -1,11 +1,12 @@
 import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { FUNCTIONS_PATH } from '@/lib'
-import { existsSync, mkdirSync } from 'fs'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import { mkdir } from 'fs/promises'
 
-export const deployCommands = () => {
+export const deployCommands = async () => {
   const fileDir = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/lib/discord`
-  if (!existsSync(fileDir)) {
-    mkdirSync(fileDir, { recursive: true })
+  if (!(await checkFileDirExists(fileDir))) {
+    await mkdir(fileDir, { recursive: true })
   }
   const filePath = `${fileDir}/deploy-commands.ts`
   const body = `import { commands } from './commands'

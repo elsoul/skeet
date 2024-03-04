@@ -1,45 +1,32 @@
-import {
-  BACKEND_FUNCTIONS_REPO_URL,
-  BACKEND_GRAPHQL_REPO_URL,
-  FUNCTIONS_PATH,
-  Logger,
-  execSyncCmd,
-} from '@/lib'
-import { generateInitFiles } from './create'
+import { execSyncCmd } from '@/lib/execSyncCmd'
+import { Logger } from '@/lib/logger'
 import { sleep } from '@/utils/time'
-import { SkeetTemplateBackend } from '@/types/skeetTypes'
-import { DEFAULT_FUNCTION_NAME } from '@/index'
-import { existsSync } from 'fs'
 import { questionList } from '../init/questionList'
 import inquirer from 'inquirer'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import { generateInitFiles } from './generateInitFile'
+import { REPO } from '@/config/links'
 
 export const createBackend = async (appName: string) => {
   const { template } = await inquirer.prompt<{ template: string }>(
     questionList.backendTemplateQuestions,
   )
   const appDir = './' + appName
-  if (existsSync(appDir)) {
+  if (await checkFileDirExists(appDir)) {
     Logger.error(`Directory ${appName} already exists.`)
     process.exit(0)
   }
-  let gitCloneCmd = null
-  let backendRootPath = ''
-  if (template === SkeetTemplateBackend.Firestore) {
-    gitCloneCmd = ['git', 'clone', BACKEND_FUNCTIONS_REPO_URL, appName]
-    backendRootPath = `${appDir}/${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}`
-  } else {
-    gitCloneCmd = ['git', 'clone', BACKEND_GRAPHQL_REPO_URL, appName]
-    backendRootPath = `${appDir}/graphql`
-  }
+  const gitCloneCmd = ['git', 'clone', REPO.BACKEND_FUNCTIONS_REPO_URL, appName]
+  const backendRootPath = `${appDir}/functions/skeet`
 
-  execSyncCmd(gitCloneCmd)
+  await execSyncCmd(gitCloneCmd)
   const cmd = ['pnpm', 'install']
-  execSyncCmd(cmd, appDir)
-  execSyncCmd(cmd, backendRootPath)
+  await execSyncCmd(cmd, appDir)
+  await execSyncCmd(cmd, backendRootPath)
   const rmDefaultGit = ['rm', '-rf', '.git']
-  execSyncCmd(rmDefaultGit, appDir)
+  await execSyncCmd(rmDefaultGit, appDir)
   const rmDefaultGithubActions = ['rm', '-rf', '.github']
-  execSyncCmd(rmDefaultGithubActions, appDir)
+  await execSyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
 
   await generateInitFiles(appName, template)

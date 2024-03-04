@@ -1,5 +1,5 @@
-import { execSyncCmd, getContainerImageUrl } from '@/lib'
-
+import { getContainerImageUrl } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 export const pushContainer = async (
   projectId: string,
   appName: string,
@@ -7,5 +7,5 @@ export const pushContainer = async (
 ) => {
   const imageUrl = getContainerImageUrl(projectId, appName, region)
   const shCmd = ['docker', 'push', imageUrl]
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }

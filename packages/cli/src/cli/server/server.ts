@@ -1,6 +1,6 @@
 import { execSync, spawn } from 'child_process'
-import { existsSync } from 'fs'
 import { ServerOptions } from '.'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 
 export const server = async (options: ServerOptions) => {
   try {
@@ -24,17 +24,15 @@ export const server = async (options: ServerOptions) => {
       }
     }
 
-    mkidrTmpDir()
+    await mkidrTmpDir()
 
     let cmd = []
     if (options.backend) {
-      cmd = ['pnpm', 'skeet:graphql', '&&', 'pnpm skeet:dev']
+      cmd = ['pnpm skeet:dev']
     } else if (options.functions) {
       cmd = ['pnpm', 'skeet:dev']
     } else if (options.web) {
       cmd = ['pnpm', 'dev']
-    } else if (options.graphql) {
-      cmd = ['pnpm', 'skeet:graphql']
     } else {
       cmd = ['pnpm', 'skeet']
     }
@@ -55,8 +53,8 @@ export const server = async (options: ServerOptions) => {
   }
 }
 
-const mkidrTmpDir = () => {
-  if (existsSync('tmp/data')) return
+const mkidrTmpDir = async () => {
+  if (await checkFileDirExists('tmp/data')) return
   const cmd = `mkdir -p tmp/data && mkdir -p tmp/ai && chmod -R 777 tmp`
   execSync(cmd)
 }

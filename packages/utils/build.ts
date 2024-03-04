@@ -15,8 +15,7 @@ import esbuild from 'esbuild'
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
-    metafile: true,
-    external: ['path', '@skeet-framework/utils', 'fs', 'child_process', 'util'],
+    external: ['fs', 'path', 'util', 'child_process', 'crypto', 'dotenv'],
   })
   console.log('Build complete ⭐️')
 })()

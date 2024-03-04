@@ -20,7 +20,7 @@ export const runCommands = () => {
         const pnpmCmd = `pnpm ${options.filter} ${options.cmd}`
         spawnSync(pnpmCmd, { stdio: 'inherit', shell: true })
       } else {
-        const choices = getAllApps()
+        const choices = await getAllApps()
         const answer = await inquirer.prompt<{
           packageNames: string[]
           cmd: string

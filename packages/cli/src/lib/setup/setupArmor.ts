@@ -1,8 +1,7 @@
 import { syncArmors } from '@/cli/sub/sync/syncArmors'
-import { getZone, initArmor } from '../gcloud'
-import { Logger } from '../logger'
+import { initArmor } from '../gcloud'
 
 export const setupArmor = async (projectId: string, appName: string) => {
-  initArmor()
-  syncArmors()
+  await initArmor()
+  await syncArmors()
 }

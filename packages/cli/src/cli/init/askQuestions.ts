@@ -15,14 +15,11 @@ export const askForProjectId = async () => {
 }
 
 export const askForProjectIdAndRegion = async () => {
-  const projectInquirer = inquirer.prompt(questionList.projectRegionQuestions)
-  let projectId = ''
-  let region = ''
-  await projectInquirer.then(async (answer) => {
-    projectId = answer.projectId
-    region = answer.region
-  })
-  return { projectId, region }
+  const projectInquirer = await inquirer.prompt<{
+    projectId: string
+    region: string
+  }>(questionList.projectRegionQuestions)
+  return projectInquirer
 }
 
 export const askForSqlPassword = async () => {

@@ -40,6 +40,6 @@ const getRecentUpdatedFiles = async (
 }
 
 // 使用例
-getRecentUpdatedFiles(`.`, 10).then((files) => {
-  console.log(files)
-})
+// getRecentUpdatedFiles(`.`, 10).then((files) => {
+//   console.log(files)
+// })

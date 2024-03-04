@@ -1,10 +1,11 @@
 import {
-  execSyncCmd,
   getBuidEnvString,
   getContainerImageName,
   getContainerImageUrl,
   getNetworkConfig,
-} from '@/lib'
+} from '@/lib/files/getSkeetConfig'
+
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const deployCloudRun = async (
   projectId: string,
@@ -22,10 +23,10 @@ export const deployCloudRun = async (
   let cloudRunName = ''
   let image = ''
   if (workerName === '') {
-    cloudRunName = getContainerImageName(appName)
+    cloudRunName = await getContainerImageName(appName)
     image = getContainerImageUrl(projectId, appName, region)
   } else {
-    cloudRunName = getContainerImageName(appName, workerName)
+    cloudRunName = await getContainerImageName(appName, workerName)
     image = getContainerImageUrl(
       projectId,
       appName,
@@ -77,5 +78,5 @@ export const deployCloudRun = async (
   } else {
     shCmd.push('--ingress', 'internal')
   }
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }

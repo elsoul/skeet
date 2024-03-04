@@ -1,19 +1,19 @@
-import { readdirSync, statSync } from 'fs'
+import { readdir, stat } from 'fs/promises'
 import path from 'path'
 
-export const getFilesInDirectory = (directoryPath: string) => {
+export const getFilesInDirectory = async (directoryPath: string) => {
   try {
     const files: { name: string; lastModified: Date }[] = []
-    const fileNames = readdirSync(directoryPath)
+    const fileNames = await readdir(directoryPath)
 
-    fileNames.forEach((fileName) => {
+    for (const fileName of fileNames) {
       const filePath = path.join(directoryPath, fileName)
-      const stats = statSync(filePath)
+      const stats = await stat(filePath)
 
       if (stats.isFile() && fileName !== 'index.ts') {
         files.push({ name: fileName, lastModified: stats.mtime })
       }
-    })
+    }
 
     return files
   } catch (error) {
@@ -22,7 +22,7 @@ export const getFilesInDirectory = (directoryPath: string) => {
 }
 
 export const replaceFileExtension = (
-  files: { name: string; lastModified: Date }[]
+  files: { name: string; lastModified: Date }[],
 ) => {
   try {
     return files.map((file) => {

@@ -1,8 +1,7 @@
 import { DEFAULT_FUNCTION_NAME } from '@/index'
-import { execSyncCmd } from '@/lib'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 import { getExportedFunctions } from '@/lib/files/getExportedFunctions'
 import inquirer from 'inquirer'
-import { spawnSync } from 'node:child_process'
 
 export const firebaseFunctionsDeploy = async (
   projectId: string,
@@ -23,7 +22,7 @@ export const firebaseFunctionsDeploy = async (
   }
   try {
     const path = `${process.cwd()}/functions/${functionName}/src/index.ts`
-    const methods = getExportedFunctions(path)
+    const methods = await getExportedFunctions(path)
     if (methods.length === 0) {
       throw new Error(
         `firebaseFunctionsDeploy: No exported functions found in ${path}`,
@@ -64,7 +63,7 @@ export const firebaseFunctionsDeploy = async (
       '-P',
       `${projectId}`,
     ]
-    spawnSync(shCmd.join(' '), { stdio: 'inherit', shell: true })
+    await execSyncCmd(shCmd)
   } catch (error) {
     throw new Error(`firebaseFunctionsDeploy: ${error}`)
   }

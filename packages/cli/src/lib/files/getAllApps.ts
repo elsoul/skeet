@@ -1,19 +1,17 @@
-import { dir } from 'console'
 import { getDirectoryLastModified } from './getDirectoryLastModified'
 import { getFunctions } from './getFunctions'
 import { getSQLs } from './getSQLs'
-import { e } from 'vitest/dist/reporters-QGe8gs4b'
 
-export const getAllApps = (): string[] => {
+export const getAllApps = async () => {
   try {
     const functionDirs = []
-    const dirs = getFunctions().map((dir) => `functions/${dir}`)
-    const sqls = getSQLs().map((dir) => `sql/${dir}`)
+    const dirs = (await getFunctions()).map((dir) => `functions/${dir}`)
+    const sqls = (await getSQLs()).map((dir) => `sql/${dir}`)
     dirs.push('webapp')
     dirs.push(...sqls)
     for (const dir of dirs) {
       const name = dir
-      const lastModified = getDirectoryLastModified(dir)
+      const lastModified = await getDirectoryLastModified(dir)
       functionDirs.push({
         name,
         lastModified,

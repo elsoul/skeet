@@ -1,19 +1,17 @@
 import inquirer from 'inquirer'
-import { importConfig, getFunctions } from '@/lib'
-import { deployWebApp } from './deployWebApp'
-import { deployRules } from './deployRules'
-import { firebaseFunctionsDeploy } from './firebaseDeploy'
-import { deployGraphql } from './deployGraphql'
-import { spawnSync } from 'child_process'
+import { importConfig } from '@/lib/files/importConfig'
+import { getFunctions } from '@/lib/files/getFunctions'
+import { deployWebApp } from '@/cli/deploy/deployWebApp'
+import { deployRules } from '@/cli/deploy/deployRules'
+import { firebaseFunctionsDeploy } from '@/cli/deploy/firebaseDeploy'
+import { deployGraphql } from '@/cli/deploy/deployGraphql'
 import { pnpmBuild } from '@/lib/pnpmBuild'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const deploy = async () => {
-  const functions = getFunctions()
+  const functions = await getFunctions()
   let functionsArray: Array<{ [key: string]: string }> = [{ name: 'webapp' }]
-  const { app } = importConfig()
-  if (app.template.includes('GraphQL')) {
-    functionsArray.push({ name: 'graphql' })
-  }
+  const { app } = await importConfig()
   if (app.template.includes('SQL')) {
     functionsArray.push({ name: 'sql' })
   }
@@ -24,9 +22,8 @@ export const deploy = async () => {
     functionsArray = functionsArray.filter((f) => f.name !== 'webapp')
   }
   if (functionsArray.length === 1) {
-    spawnSync(`pnpm -F ${functionsArray[0].name}-func build`, {
-      stdio: 'inherit',
-    })
+    const cmd = ['pnpm', '-F', `${functionsArray[0].name}-func`, 'build']
+    await execSyncCmd(cmd)
     await firebaseFunctionsDeploy(app.fbProjectId, functionsArray[0].name)
     return
   }
@@ -49,14 +46,14 @@ export const deploy = async () => {
 
   if (answer.functions.length > 0) {
     for await (const service of answer.functions) {
-      const config = importConfig()
+      const config = await importConfig()
       if (service === 'webapp') {
         await deployWebApp()
         await deployRules(config.app.projectId)
-      } else if (service === 'graphql' || service === 'sql') {
+      } else if (service === 'sql') {
         await deployGraphql(config)
       } else {
-        pnpmBuild(service)
+        await pnpmBuild(service)
         await firebaseFunctionsDeploy(config.app.fbProjectId, service)
       }
     }

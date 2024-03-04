@@ -1,7 +1,7 @@
 import { importConfig, addPathMatcher } from '@/lib'
 
-export const addRounting = (methodName: string, paths: string[]) => {
-  const config = importConfig()
+export const addRounting = async (methodName: string, paths: string[]) => {
+  const config = await importConfig()
   addPathMatcher(
     config.app.projectId,
     config.app.name,

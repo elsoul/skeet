@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { writeFile } from 'fs/promises'
 ;[
   'create',
   'server',
@@ -23,6 +23,9 @@ import fs from 'fs'
   description: skeet ${item} command
 ---
   `
-  const res = fs.writeFileSync(filePath, body)
-  console.log(res)
+  const run = async () => {
+    const res = await writeFile(filePath, body)
+    console.log(res)
+  }
+  void run()
 })

@@ -1,5 +1,6 @@
-import { getNetworkConfig, importConfig } from '@/lib'
-import { spawnSync } from 'child_process'
+import { execSyncCmd } from '@/lib/execSyncCmd'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { importConfig } from '@/lib/files/importConfig'
 
 export type PatchOptions = {
   activation: string
@@ -14,7 +15,7 @@ export const patchSQL = async (
   ips: string = '',
   network: string = '',
 ) => {
-  const config = importConfig()
+  const config = await importConfig()
   const { networkName } = getNetworkConfig(projectId, config.app.name)
   const shCmd = [
     'gcloud',
@@ -47,5 +48,5 @@ export const patchSQL = async (
   if (patchOption.network !== '') {
     shCmd.push('--network', networkName)
   }
-  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit' })
+  await execSyncCmd(shCmd)
 }

@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const gitInit = async () => {
   const cmdLine = ['git', 'init', '--initial-branch', 'main']

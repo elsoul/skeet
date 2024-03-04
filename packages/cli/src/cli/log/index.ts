@@ -13,12 +13,12 @@ export const logCommands = async () => {
         Logger.skeetAA()
         Logger.welcomText('', 'install')
       } else if (options.function) {
-        const { app } = importConfig()
+        const { app } = await importConfig()
         const functionName = options.function
         fuctionsLog(app.projectId, functionName)
         return
       } else {
-        const { app } = importConfig()
+        const { app } = await importConfig()
         fuctionsLog(app.projectId)
       }
     })

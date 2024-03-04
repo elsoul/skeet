@@ -1,12 +1,20 @@
-import { StdioOptions, spawnSync } from 'child_process'
+import { exec } from 'child_process'
+import { promisify } from 'util'
 
-export const execSyncCmd = (
-  command: Array<string>,
-  cwd: string = '.',
-  stdio = 'inherit' as StdioOptions,
-) => {
-  spawnSync(command[0], command.slice(1), {
-    cwd,
-    stdio,
-  })
+const execAsync = promisify(exec)
+
+export const execSyncCmd = async (command: string[], cwd = '.') => {
+  try {
+    const { stdout, stderr } = await execAsync(command.join(' '), {
+      cwd,
+    })
+    console.log(stdout)
+    if (stderr) {
+      console.error(stderr)
+    }
+    return { stdout, stderr }
+  } catch (error) {
+    console.error('Error executing command:', error)
+    return { stdout: '', stderr: String(error) }
+  }
 }

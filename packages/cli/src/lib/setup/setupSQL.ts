@@ -1,10 +1,10 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { createVpcNetwork } from '../gcloud'
+import { createVpcNetwork } from '@/lib/gcloud/network/createVpcNetwork'
 import { initSql } from '@/cli/init/initSql'
-import { sqlIp } from '@/cli'
+import { sqlIp } from '@/cli/sql/sqlIp'
 import { addIp } from '@/cli/sub/add/addIp'
 import { dbDeploy } from '@/cli/sub/db/dbDeploy'
-import { addEnvSync } from '../git'
+import { addEnvSync } from '@/lib/git/addEnvSync'
 import { FILE_NAME, PATH } from '@/config/path'
 
 export const setupSQL = async (
@@ -24,10 +24,8 @@ export const setupSQL = async (
     await initSql(skeetConfig, sqlPassword)
     await addIp()
     await sqlIp()
-    dbDeploy(true)
-    const envProductionPath = skeetConfig.app.template.includes('GraphQL')
-      ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
-      : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
+    await dbDeploy(true)
+    const envProductionPath = PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
     await addEnvSync(envProductionPath)
     return true
   } catch (error) {

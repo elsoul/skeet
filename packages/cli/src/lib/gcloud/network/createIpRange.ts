@@ -1,4 +1,5 @@
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const createIpRange = async (projectId: string, appName: string) => {
   const networkConfig = getNetworkConfig(projectId, appName)
@@ -20,5 +21,5 @@ export const createIpRange = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  return await execSyncCmd(shCmd)
 }

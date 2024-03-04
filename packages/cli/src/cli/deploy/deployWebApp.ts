@@ -1,11 +1,11 @@
-import { execSync } from 'child_process'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const deployWebApp = async () => {
   try {
     const cmd = ['pnpm', 'build:production:webapp']
-    execSync(cmd.join(' '), { stdio: 'inherit' })
+    await execSyncCmd(cmd)
     const shCmd = ['firebase', 'deploy', '--only', 'hosting']
-    execSync(shCmd.join(' '), { stdio: 'inherit' })
+    await execSyncCmd(shCmd)
     return true
   } catch (error) {
     throw new Error(`deployWebApp: ${error}`)

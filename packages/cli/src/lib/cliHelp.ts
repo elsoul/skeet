@@ -16,7 +16,6 @@ Commands:
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
                                Endpoint
   g|generate                   Skeet Generate Comannd
-  release|r [options]          Release a new version
   log [options]                Deploy Skeet APP to Firebase
   docker                       Docker commands
   db                           Database commands
@@ -88,7 +87,6 @@ Commands:
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
                                Endpoint
   g|generate                   Skeet Generate Comannd
-  release|r [options]          Release a new version
   log [options]                Deploy Skeet APP to Firebase
   docker                       Docker commands
   db                           Database commands
@@ -120,7 +118,6 @@ Commands:
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
                                Endpoint
   g|generate                   Skeet Generate Comannd
-  release|r [options]          Release a new version
   log [options]                Deploy Skeet APP to Firebase
   docker                       Docker commands
   db                           Database commands
@@ -222,7 +219,6 @@ Commands:
   armors|a         Skeet Sync Cloud Armor Rules
   sql              Skeet Sync SQL
   taskQueue|tq     Skeet Sync Task Queue
-  runUrl           Skeet Sync Run Url
   ghEnv [options]  Sync Env File to Github Secret
   help [command]   display help for command
 
@@ -231,18 +227,16 @@ Usage: skeet get [options] [command]
 Get Skeet App List
 
 Options:
-  -h, --help             display help for command
+  -h, --help            display help for command
 
 Commands:
-  functions|function     Show Skeet Functions List
-  https                  Show Skeet Https List
-  dns                    Show Skeet NameServer Records
-  secret <secretKey>     Get Skeet Secret Value
-  models|m               Show Skeet Models List
-  columns|c <modelName>  Show Skeet Models columns
-  files|file [options]   Show Recent Updated Files
-  users [options]        Download Firebase Auth Users in JSON
-  help [command]         display help for command
+  functions|function    Show Skeet Functions List
+  https                 Show Skeet Https List
+  dns                   Show Skeet NameServer Records
+  secret <secretKey>    Get Skeet Secret Value
+  files|file [options]  Show Recent Updated Files
+  users [options]       Download Firebase Auth Users in JSON
+  help [command]        display help for command
 
 Usage: skeet ai [options]
 
@@ -294,7 +288,6 @@ Commands:
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
                                Endpoint
   g|generate                   Skeet Generate Comannd
-  release|r [options]          Release a new version
   log [options]                Deploy Skeet APP to Firebase
   docker                       Docker commands
   db                           Database commands

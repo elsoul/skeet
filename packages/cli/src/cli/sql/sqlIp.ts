@@ -1,8 +1,10 @@
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { importConfig, patchSQL, getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { importConfig } from '@/lib/files/importConfig'
+import { patchSQL } from '@/lib/gcloud/sql/patchSQL'
 
 export const sqlIp = async () => {
-  const skeetCloudConfig: SkeetCloudConfig = importConfig()
+  const skeetCloudConfig: SkeetCloudConfig = await importConfig()
   const { networkName, instanceName } = getNetworkConfig(
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,

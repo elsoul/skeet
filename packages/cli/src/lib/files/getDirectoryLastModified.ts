@@ -1,11 +1,19 @@
-import { readdirSync, statSync } from 'fs'
+import { readdir, stat } from 'fs/promises'
 import path from 'path'
 
-export const getDirectoryLastModified = (dirPath: string): Date => {
-  const files = readdirSync(dirPath)
-  return files.reduce((latest, file) => {
+export const getDirectoryLastModified = async (
+  dirPath: string,
+): Promise<Date> => {
+  const files = await readdir(dirPath)
+  let latest = new Date(0) // default: 1970-01-01T00:00:00.000Z
+
+  for (const file of files) {
     const filePath = path.join(dirPath, file)
-    const stat = statSync(filePath)
-    return stat.mtime > latest ? stat.mtime : latest
-  }, new Date(0)) // default: 1970-01-01T00:00:00.000Z
+    const fileStat = await stat(filePath)
+    if (fileStat.mtime > latest) {
+      latest = fileStat.mtime
+    }
+  }
+
+  return latest
 }

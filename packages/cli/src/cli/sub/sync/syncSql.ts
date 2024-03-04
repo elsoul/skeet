@@ -6,8 +6,8 @@ import {
 } from '@/lib'
 
 export const syncSql = async () => {
-  const skeetConfig = importConfig()
-  setGcloudProject(skeetConfig.app.projectId)
+  const skeetConfig = await importConfig()
+  await setGcloudProject(skeetConfig.app.projectId)
   const networkConfig = getNetworkConfig(
     skeetConfig.app.projectId,
     skeetConfig.app.name,

@@ -41,7 +41,7 @@ export const dbSubCommands = () => {
       const dbDirs = await selectDb()
       for (const dbDir of dbDirs) {
         const cwd = './sql/' + dbDir
-        dbDeploy(options.production, cwd)
+        await dbDeploy(options.production, cwd)
       }
     })
 

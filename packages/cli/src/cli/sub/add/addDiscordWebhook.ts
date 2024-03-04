@@ -2,31 +2,32 @@ import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { FUNCTIONS_PATH } from '@/lib'
 import { discordRouter } from '@/templates/discord/discordRouter'
 import chalk from 'chalk'
-import { existsSync, writeFileSync } from 'fs'
+import { writeFile } from 'fs/promises'
 import { insertFunction } from './addMethod'
 import { helloAction } from '@/templates/discord/helloAction'
 import { helloCommand } from '@/templates/discord/helloCommand'
 import { helloIndex } from '@/templates/discord/helloIndex'
 import { helloMessage } from '@/templates/discord/helloMessage'
 import { deployCommands } from '@/templates/discord/deployCommands'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 
-export const addDiscordWebhook = () => {
+export const addDiscordWebhook = async () => {
   try {
     let { body, filePath } = discordRouter()
-    if (existsSync(filePath)) {
+    if (await checkFileDirExists(filePath)) {
       return false
     }
-    writeFileSync(filePath, body)
-    ;({ body, filePath } = helloAction())
-    writeFileSync(filePath, body)
-    ;({ body, filePath } = helloCommand())
-    writeFileSync(filePath, body)
-    ;({ body, filePath } = helloIndex())
-    writeFileSync(filePath, body)
-    ;({ body, filePath } = deployCommands())
-    writeFileSync(filePath, body)
-    ;({ body, filePath } = helloMessage())
-    writeFileSync(filePath, body)
+    await writeFile(filePath, body)
+    ;({ body, filePath } = await helloAction())
+    await writeFile(filePath, body)
+    ;({ body, filePath } = await helloCommand())
+    await writeFile(filePath, body)
+    ;({ body, filePath } = await helloIndex())
+    await writeFile(filePath, body)
+    ;({ body, filePath } = await deployCommands())
+    await writeFile(filePath, body)
+    ;({ body, filePath } = await helloMessage())
+    await writeFile(filePath, body)
 
     console.log(chalk.green(`✅ discordRouter added 🎉`))
     console.log(chalk.green(`✅ helloAction added 🎉`))
@@ -36,7 +37,7 @@ export const addDiscordWebhook = () => {
     console.log(chalk.green(`✅ helloMessage added 🎉`))
     const indexFile = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/index.ts`
     const methodName = 'discordRouter'
-    insertFunction(indexFile, methodName)
+    await insertFunction(indexFile, methodName)
     return true
   } catch (error) {
     throw new Error(`addDiscordWebhook: ${error}`)

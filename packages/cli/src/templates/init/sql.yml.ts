@@ -1,11 +1,11 @@
 import { SKEET_CONFIG } from '@/config/config'
 import { getContainerRegion } from '@/lib'
 import { toCamelCase } from '@skeet-framework/utils'
-import { mkdirSync } from 'fs'
+import { mkdir } from 'fs/promises'
 
 const NODE_VERSION = SKEET_CONFIG.NODE_VERSION
 
-export const sqlYml = (
+export const sqlYml = async (
   instanceName: string,
   memory: string,
   cpu: string,
@@ -19,7 +19,7 @@ export const sqlYml = (
   const sqlDir = instanceName.split('-')[1] + '-db'
   const cloudRunName = instanceName.replaceAll('-', '')
   const cameledInstanceName = toCamelCase(instanceName)
-  mkdirSync('.github/workflows', { recursive: true })
+  await mkdir('.github/workflows', { recursive: true })
   const filePath = `.github/workflows/${instanceName}.yml`
   const body = `name: ${cameledInstanceName}
 on:

@@ -1,6 +1,6 @@
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
-export const updateSecurityPolicyRule = (
+export const updateSecurityPolicyRule = async (
   projectId: string,
   securityPolicyName: string,
   priority: string = '1000',
@@ -23,5 +23,5 @@ export const updateSecurityPolicyRule = (
       shCmd.push(`--${key}=${value}`)
     }
   }
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }

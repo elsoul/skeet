@@ -21,7 +21,7 @@ export const fuctionsLog = async (
     return
   }
   try {
-    const functions = getFunctions()
+    const functions = await getFunctions()
     let logFunctionName = { functionName: '' }
     if (functions.length > 1) {
       logFunctionName = await inquirer.prompt([
@@ -45,7 +45,7 @@ export const fuctionsLog = async (
     const path = `${process.cwd()}/functions/${
       logFunctionName.functionName
     }/src/index.ts`
-    const methods = getExportedFunctions(path)
+    const methods = await getExportedFunctions(path)
     if (methods.length === 0) {
       throw new Error(`fuctionsLog: No exported functions found in ${path}`)
     }

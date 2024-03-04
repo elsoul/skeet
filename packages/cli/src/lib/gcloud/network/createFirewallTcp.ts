@@ -1,5 +1,6 @@
-import { GCP_IP_RANGE } from '.'
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { GCP_IP_RANGE } from '@/config/config'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const createFirewallTcp = async (projectId: string, appName: string) => {
   const firewallTcpName = getNetworkConfig(projectId, appName).firewallTcpName
@@ -16,5 +17,5 @@ export const createFirewallTcp = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }

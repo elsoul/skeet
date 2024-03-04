@@ -1,13 +1,10 @@
 import { PATH } from '@/config/path'
-import { GRAPHQL_ROOT } from '@/index'
-import { execSyncCmd, getContainerImageName, importConfig } from '@/lib'
+import { getContainerImageName } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const buildContainer = async (appName: string) => {
-  const imageName = getContainerImageName(appName)
-  const skeetConfig = importConfig()
-  const filePath = skeetConfig.app.template.includes('GraphQL')
-    ? PATH.GRAPHQL
-    : PATH.SQL
+  const imageName = await getContainerImageName(appName)
+  const filePath = PATH.SQL
   const shCmd = [
     'docker',
     'build',
@@ -19,5 +16,5 @@ export const buildContainer = async (appName: string) => {
     '-t',
     imageName,
   ]
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }

@@ -8,9 +8,9 @@ import {
 } from '@/lib/gcloud'
 import { Logger } from '@/lib'
 
-export const syncArmors = () => {
-  const config = importConfig()
-  setGcloudProject(config.app.projectId)
+export const syncArmors = async () => {
+  const config = await importConfig()
+  await setGcloudProject(config.app.projectId)
   for (const cloudArmor of config.cloudArmor)
     for (const rule of cloudArmor.rules) {
       const securityPolicyName = cloudArmor.securityPolicyName
@@ -20,7 +20,7 @@ export const syncArmors = () => {
         rule.priority,
       )
       if (result) {
-        updateSecurityPolicyRule(
+        await updateSecurityPolicyRule(
           config.app.projectId,
           securityPolicyName,
           rule.priority,
@@ -28,8 +28,8 @@ export const syncArmors = () => {
         )
       } else {
         console.log(`✅ Creating security policry rule: ${securityPolicyName}`)
-        createSecurityPolicy(config.app.projectId, securityPolicyName)
-        createSecurityPolicyRule(
+        await createSecurityPolicy(config.app.projectId, securityPolicyName)
+        await createSecurityPolicyRule(
           config.app.projectId,
           securityPolicyName,
           rule.description,

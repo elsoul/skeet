@@ -1,19 +1,20 @@
 import { BACKEND_SQL_REPO_URL, SKEET_CONFIG_PATH, importConfig } from '@/lib'
 import { spawnSync } from 'child_process'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import { mkdir, writeFile } from 'fs/promises'
 import { updateDefaultIndex } from './updateDefaultIndex'
 import { addScriptToPackageJson } from '@/lib/files/addScriptToPackageJson'
 import { pnpmBuild } from '@/lib/pnpmBuild'
 import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 
 export const cloneSQL = async (sqlName: string) => {
-  const config = importConfig()
+  const config = await importConfig()
   const sqlRoot = './sql/' + sqlName
-  if (existsSync(sqlRoot)) {
+  if (await checkFileDirExists(sqlRoot)) {
     console.log('SQL already exists')
     return
   }
-  mkdirSync(sqlRoot, { recursive: true })
+  await mkdir(sqlRoot, { recursive: true })
   const gitCloneCmd = ['git', 'clone', BACKEND_SQL_REPO_URL, sqlRoot]
   spawnSync(gitCloneCmd[0], gitCloneCmd.slice(1), { stdio: 'inherit' })
   const dbDevURL = `DATABASE_URL=postgresql://skeeter:rabbit@127.0.0.1:5432/skeet-${sqlName}-dev?schema=public`
@@ -25,9 +26,9 @@ export const cloneSQL = async (sqlName: string) => {
   pnpmBuild(sqlRoot)
   const instanceName = 'sql-' + sqlName
   const sqlCmd = instanceName.replace('-db', '')
-  updateDefaultIndex(instanceName)
+  await updateDefaultIndex(instanceName)
   await updatePackageJsonName(sqlName, sqlRoot + '/package.json')
-  addScriptToPackageJson(
+  await addScriptToPackageJson(
     './package.json',
     `skeet:${sqlCmd}`,
     `pnpm -F ${sqlName} dev`,
@@ -42,5 +43,5 @@ export const cloneSQL = async (sqlName: string) => {
     isCreated: false,
   }
   config.SQLs.push(defaultSQLconfig)
-  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
+  await writeFile(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
 }

@@ -1,18 +1,18 @@
 import { PRISMA_SCHEMA_PATH } from '@/index'
 import { Logger } from '@/lib'
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFile, writeFile } from 'fs/promises'
 
 export type PrismaModel = {
   name: string
   fields: Array<{ name: string; type: string; isOptional: boolean }>
 }
 
-export const writePrismaSchemaToFunctions = (functionName: string) => {
+export const writePrismaSchemaToFunctions = async (functionName: string) => {
   try {
-    const yourPrismaSchemaHere = readFileSync(PRISMA_SCHEMA_PATH, 'utf-8')
+    const yourPrismaSchemaHere = await readFile(PRISMA_SCHEMA_PATH, 'utf-8')
     const tsTypes = prismaSchemaToTypeScriptTypes(yourPrismaSchemaHere)
     const outputPath = `./functions/${functionName}/src/models/sql/prisma.ts`
-    writeFileSync(outputPath, tsTypes)
+    await writeFile(outputPath, tsTypes)
     Logger.successCheck(`Updated Prisma schema to ${outputPath}`)
   } catch (error) {
     throw new Error(`Error writing Prisma schema to functions: ${error}`)

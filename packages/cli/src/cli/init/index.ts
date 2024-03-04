@@ -2,8 +2,10 @@ import { program } from '@/index'
 import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
 import { initLb } from './initLb'
 import { init } from './init'
-import { writeFileSync } from 'fs'
-import { importConfig, setupNetwork, setupSQL } from '@/lib'
+import { writeFile } from 'fs/promises'
+import { importConfig } from '@/lib/files/importConfig'
+import { setupSQL } from '@/lib/setup/setupSQL'
+import { setupNetwork } from '@/lib/setup/setupNetwork'
 import { askForSqlPassword } from './askQuestions'
 export * from './askQuestions'
 
@@ -27,9 +29,9 @@ export const initCommands = async () => {
     .action(async (options: Options) => {
       if (options.config) {
         const data = await skeetCloudConfigAppGen()
-        writeFileSync(data.filePath, data.body)
+        await writeFile(data.filePath, data.body)
       } else if (options.sql) {
-        const skeetConfig = importConfig()
+        const skeetConfig = await importConfig()
         const sqlPassword = await askForSqlPassword()
         await setupSQL(skeetConfig, sqlPassword, false)
       } else if (options.lb) {

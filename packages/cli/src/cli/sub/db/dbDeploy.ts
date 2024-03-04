@@ -1,7 +1,7 @@
 import { PATH } from '@/config/path'
-import { spawnSync } from 'child_process'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
-export const dbDeploy = (
+export const dbDeploy = async (
   production: boolean = false,
   cwd = PATH.GRAPHQL as string,
 ) => {
@@ -20,8 +20,5 @@ export const dbDeploy = (
   } else {
     shCmd = ['npx', 'prisma', 'migrate', 'deploy']
   }
-  spawnSync(shCmd[0], shCmd.slice(1), {
-    cwd,
-    stdio: 'inherit',
-  })
+  await execSyncCmd(shCmd, cwd)
 }

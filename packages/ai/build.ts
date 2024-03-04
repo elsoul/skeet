@@ -9,14 +9,24 @@ import esbuild from 'esbuild'
     keepNames: true,
     sourcemap: 'inline',
     sourcesContent: true,
-    outfile: 'dist/index.js',
+    outdir: 'dist',
     platform: 'node',
     format: 'esm',
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
     metafile: true,
-    external: ['path', '@skeet-framework/utils', 'fs', 'child_process', 'util'],
+    external: [
+      'path',
+      '@skeet-framework/utils',
+      'fs',
+      'child_process',
+      'util',
+      '@google-cloud/translate',
+      'dotenv',
+      '@google-cloud/vertexai',
+      'openai',
+    ],
   })
   console.log('Build complete ⭐️')
 })()

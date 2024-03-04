@@ -1,8 +1,8 @@
 import inquirer from 'inquirer'
 import { regionList } from './regionList'
 import chalk from 'chalk'
-import { Logger } from '@/lib'
-import { SkeetTemplate, SkeetTemplateBackend } from '@/types/skeetTypes'
+import { Logger } from '@/lib/logger'
+import { SkeetTemplateBackend } from '@/types/skeetTypes'
 
 export module questionList {
   export const requireRepoName = (value: string) => {
@@ -11,14 +11,6 @@ export module questionList {
     }
 
     return 'This is not GitHub Repo Name!It must be repoOwner/repoName'
-  }
-
-  export const requireDomainName = (value: string) => {
-    if (/.+\..+/.test(value)) {
-      return true
-    }
-
-    return 'This is not Domain Name!It must be example.com'
   }
 
   export const requireLetterAndNumber = (value: string) => {
@@ -91,26 +83,6 @@ export module questionList {
     },
   ]
 
-  export const templateQuestions = [
-    {
-      type: 'list',
-      message: 'Select Template of Skeet',
-      name: 'template',
-      choices: [
-        new inquirer.Separator(' Templates '),
-        { name: SkeetTemplate.NextJsFirestore },
-        { name: SkeetTemplate.ExpoFirestore },
-        { name: SkeetTemplate.SolanaFirestore },
-      ],
-      validate(answer: string) {
-        if (answer.length < 1) {
-          return 'You must choose at least one template.'
-        }
-        return true
-      },
-    },
-  ]
-
   export const backendTemplateQuestions = [
     {
       type: 'list',
@@ -150,36 +122,6 @@ export module questionList {
       validate: questionList.requireRepoName,
       default() {
         return 'elsoul/skeet-app'
-      },
-    },
-  ]
-
-  export const domainQuestions = [
-    {
-      type: 'input',
-      name: 'appDomain',
-      message: "What's your domain address for App",
-      validate: questionList.requireDomainName,
-      default() {
-        return 'app.skeet.dev'
-      },
-    },
-    {
-      type: 'input',
-      name: 'nsDomain',
-      message: "What's your domain address for Domain Name Server",
-      validate: questionList.requireDomainName,
-      default() {
-        return 'skeet.dev'
-      },
-    },
-    {
-      type: 'input',
-      name: 'lbDomain',
-      message: "What's your subdomain address for Load Balancer",
-      validate: questionList.requireDomainName,
-      default() {
-        return 'lb.skeet.dev'
       },
     },
   ]

@@ -1,4 +1,5 @@
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const createRouter = async (
   projectId: string,
@@ -17,5 +18,5 @@ export const createRouter = async (
     '--region',
     region,
   ]
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }
