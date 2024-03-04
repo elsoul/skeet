@@ -12,7 +12,14 @@ void (async () => {
     },
     format: 'esm',
     tsconfig: './tsconfig.json',
-    external: ['@skeet-framework/firestore', 'firebase-admin', 'fs'],
+    external: [
+      '@skeet-framework/firestore',
+      'firebase-admin',
+      '@skeet-framework/utils',
+      'fs',
+      'firebase-functions',
+      'dotenv',
+    ],
   })
 
   await build({
@@ -29,7 +36,10 @@ void (async () => {
       '../../common/*',
       '@skeet-framework/firestore',
       'firebase-admin',
+      '@skeet-framework/utils',
       'fs',
+      'firebase-functions',
+      'dotenv',
     ],
     tsconfig: './tsconfig.json',
   })
