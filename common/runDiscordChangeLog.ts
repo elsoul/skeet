@@ -1,5 +1,5 @@
 import { discordChangeLog } from '@skeet-framework/discord-utils'
-import { dotenv } from '@skeet-framework/utils'
+import dotenv from 'dotenv'
 
 dotenv.config()
 
