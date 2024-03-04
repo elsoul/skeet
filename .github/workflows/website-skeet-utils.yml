@@ -38,4 +38,4 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=8192
       - name: Deploy to Firebase
-        run: firebase deploy --only hosting:skee-utils
+        run: firebase deploy --only hosting:skeet-utils
