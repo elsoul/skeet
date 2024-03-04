@@ -71,6 +71,14 @@
     "SolanaValidator": {
       "title": "Skeet は Solana ブロックチェーンのバリデーターを運営しています",
       "description": "Skeet 開発コミュニティは、Solana チェーンにおけるバリデーターとして、ネットワークの信頼性と安定性を担保することに尽力します。Solana の高速かつ安定したネットワークを実現するための技術的な側面についても貢献します。"
+    },
+    "GoogleWeb3": {
+      "title": "エルソウルラボはGoogle Web3 Startupsプログラムに認定されました",
+      "description": "エルソウルラボのWeb3分野における活動のEpics DAO、solvやSkeet等のオープンソース開発を応援する取り組みが認められ、Google Cloud Web3 Startupsプログラムに選出されました。"
+    },
+    "ENASE2024": {
+      "title": "AI・サーバーレス「Skeet」の研究論文が国際会議のENASE2024に採択されました",
+      "description": "研究論文「Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development」について、ソフトウェアエンジニアリングに関する国際会議 ENASE 2024 に採択されました。"
     }
   },
   "WhyOpenSourceDevelopmentRow": {

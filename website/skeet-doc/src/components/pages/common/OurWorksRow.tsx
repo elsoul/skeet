@@ -3,6 +3,8 @@ import GoogleCloudSkeet from '@/assets/img/work/GoogleCloudSkeet.png'
 import ValidatorListSkeet from '@/assets/img/work/SkeetSolanaValidator.png'
 import WBSO2023 from '@/assets/img/work/WBSO2023.png'
 import { useTranslation } from 'next-i18next'
+import GoogleCloudWeb3Startups from '@/assets/img/work/GoogleCloudWeb3Startups.png'
+import ENASE2024 from '@/assets/img/work/ENASE2024Accepted.jpg'
 
 const works = [
   {
@@ -19,6 +21,16 @@ const works = [
     title: 'OurWorksRow.SolanaValidator.title',
     imageUrl: ValidatorListSkeet,
     description: 'OurWorksRow.SolanaValidator.description',
+  },
+  {
+    title: 'OurWorksRow.GoogleWeb3.title',
+    imageUrl: GoogleCloudWeb3Startups,
+    description: 'OurWorksRow.GoogleWeb3.description',
+  },
+  {
+    title: 'OurWorksRow.ENASE2024.title',
+    imageUrl: ENASE2024,
+    description: 'OurWorksRow.ENASE2024.description',
   },
 ]
 
