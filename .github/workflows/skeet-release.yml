@@ -1,4 +1,4 @@
-name: SkeetCliRelease
+name: SkeetRelease
 
 on:
   push:
