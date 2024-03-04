@@ -1,15 +1,21 @@
-import { build } from 'esbuild'
-void (async () => {
-  await build({
-    entryPoints: ['./src/index.ts'],
+// Import the necessary modules using ESM syntax
+import esbuild from 'esbuild'
+;(async () => {
+  console.log('Building...')
+  await esbuild.build({
+    entryPoints: ['src/index.ts'],
     bundle: true,
     minify: true,
-    outfile: './dist/index.js',
+    keepNames: true,
+    sourcemap: 'inline',
+    sourcesContent: true,
+    outfile: 'dist/index.js',
     platform: 'node',
+    format: 'esm',
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
-    format: 'esm',
     external: ['fs', 'path', 'util', 'child_process', 'crypto', 'dotenv'],
   })
+  console.log('Build complete ⭐️')
 })()

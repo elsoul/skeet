@@ -574,9 +574,6 @@ importers:
       date-fns-tz:
         specifier: 2.0.0
         version: 2.0.0(date-fns@3.3.1)
-      dotenv:
-        specifier: 16.4.5
-        version: 16.4.5
       node-fetch:
         specifier: 3.3.2
         version: 3.3.2
@@ -587,6 +584,9 @@ importers:
       '@types/node-fetch':
         specifier: 2.6.11
         version: 2.6.11
+      dotenv:
+        specifier: 16.4.5
+        version: 16.4.5
       esbuild:
         specifier: 0.20.1
         version: 0.20.1
