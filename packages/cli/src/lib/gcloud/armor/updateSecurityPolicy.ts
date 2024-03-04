@@ -1,4 +1,5 @@
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const updateSecurityPolicy = (projectId: string, appName: string) => {
   const appConf = getNetworkConfig(projectId, appName)

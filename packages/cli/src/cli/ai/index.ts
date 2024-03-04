@@ -2,10 +2,10 @@ import { program } from '@/index'
 import { promptUser } from './ai'
 import chalk from 'chalk'
 import { AIType } from '@skeet-framework/ai'
-import { SKEET_CONFIG_PATH, importConfig } from '@/lib'
+import { importConfig } from '@/lib/files/importConfig'
 import { AiLog } from './aiLog'
-import { readFileSync, writeFileSync } from 'fs'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
+import { validEnv } from './validEnv'
+import { validateAiConfig } from './validateAiConfig'
 
 export type SkeetAIOptions = {
   ai: AIType
@@ -25,7 +25,7 @@ export const aiCommands = () => {
     .option('-temp, --temperature <number>', 'Temperature')
     .action(async (options) => {
       await validateAiConfig()
-      const { ai } = importConfig()
+      const { ai } = await importConfig()
       const lang = ai.lang as 'en' | 'ja'
       const logger = new AiLog(lang)
       const aiType = options.openai ? 'OpenAI' : 'Gemini'
@@ -56,49 +56,4 @@ export const aiCommands = () => {
       )
       promptUser(aiOptions, logger)
     })
-}
-
-const validEnv = (aiType: AIType, logger: AiLog) => {
-  if (aiType === 'OpenAI') {
-    const org = process.env.CHAT_GPT_ORG
-    const key = process.env.CHAT_GPT_KEY
-    if (!org || !key) {
-      console.log(chalk.yellow(logger.text().warning.gptKey))
-      process.exit(1)
-    }
-  } else {
-    const org = process.env.GCP_PROJECT_ID
-    const key = process.env.GCP_LOCATION
-    if (!org || !key) {
-      console.log(chalk.yellow(logger.text().warning.gcpKey))
-      console.log(chalk.yellow('⚠️ Did you run `$ skeet iam ai`? ⚠️'))
-      process.exit(1)
-    }
-  }
-}
-
-const defaultAiConfig = {
-  lang: 'en',
-  ais: [
-    {
-      name: 'Gemini',
-      availableModels: ['gemini-1.0-pro', 'gemini-1.0-pro-vision'],
-    },
-  ],
-}
-
-const validateAiConfig = async () => {
-  try {
-    const config = readFileSync(`./skeet-cloud.config.json`)
-    const skeetConfig: SkeetCloudConfig = JSON.parse(String(config))
-    if (!skeetConfig.ai) {
-      skeetConfig.ai = defaultAiConfig
-      writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
-    }
-  } catch (error) {
-    const skeetConfig = {
-      ai: defaultAiConfig,
-    }
-    writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
-  }
 }

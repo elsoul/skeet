@@ -10,13 +10,6 @@ void (async () => {
       'process.env.NODE_ENV': `"production"`,
     },
     format: 'esm',
-    external: [
-      '@prisma/client',
-      'fs',
-      'path',
-      'util',
-      'child_process',
-      'crypto',
-    ],
+    external: ['fs', 'path', 'util', 'child_process', 'crypto', 'dotenv'],
   })
 })()

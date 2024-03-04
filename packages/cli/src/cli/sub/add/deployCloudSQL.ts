@@ -1,12 +1,9 @@
 import { askForSqlPassword } from '@/cli/init'
-import {
-  addEnvSync,
-  createSQL,
-  createSqlUser,
-  getDatabaseIp,
-  getNetworkConfig,
-  patchSQL,
-} from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { addEnvSync } from '@/lib/git/addEnvSync'
+import { createSQL } from '@/lib/gcloud/sql/createSQL'
+import { patchSQL } from '@/lib/gcloud/sql/patchSQL'
+import { getDatabaseIp } from '@/lib/gcloud/sql/getDatabaseIp'
 import { genEnvBuild } from '@/lib/files/genEnvBuild'
 import { genEnvProduction } from '@/lib/files/genEnvProduction'
 import { setupSQLActions } from '@/lib/setup/setupSQLActions'
@@ -36,7 +33,7 @@ export const deployCloudSQL = async (
   const databaseIp = await getDatabaseIp(config.app.projectId, instanceName)
 
   const genDir = `./sql/${sqlName}`
-  genEnvBuild(instanceName, genDir, databaseIp, encodedPassword)
+  await genEnvBuild(instanceName, genDir, databaseIp, encodedPassword)
   const { networkName } = getNetworkConfig(
     config.app.projectId,
     config.app.name,
@@ -47,7 +44,7 @@ export const deployCloudSQL = async (
     instanceName,
     true,
   )
-  genEnvProduction(
+  await genEnvProduction(
     instanceName,
     genDir,
     config.app.region,
@@ -59,7 +56,7 @@ export const deployCloudSQL = async (
   const maxConcurrency = '80'
   const maxInstances = '100'
   const minInstances = '0'
-  setupSQLActions(
+  await setupSQLActions(
     instanceName,
     memory,
     cpu,
@@ -67,5 +64,5 @@ export const deployCloudSQL = async (
     maxInstances,
     minInstances,
   )
-  updateSkeetConfigDb(instanceName)
+  await updateSkeetConfigDb(instanceName)
 }

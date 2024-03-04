@@ -1,38 +1,29 @@
 import dotenv from 'dotenv'
 import { Command } from 'commander'
 import { VERSION } from '@/lib/version'
-import {
-  dbSubCommands,
-  dockerSubCommands,
-  iamSubCommands,
-  addSubCommands,
-  syncSubCommands,
-  deleteSubCommands,
-  listSubCommands,
-  createCommands,
-  serverCommands,
-  deployCommands,
-  initCommands,
-  loginCommands,
-  curlCommands,
-  genCommands,
-  releaseCommands,
-  aiCommands,
-  configCommands,
-  runCommands,
-} from '@/cli'
-import { logCommands } from './cli/log'
+import { aiCommands } from '@/cli/ai'
+import { configCommands } from '@/cli/config'
+import { runCommands } from '@/cli/run'
+import { deleteSubCommands } from '@/cli/sub/delete'
+import { listSubCommands } from '@/cli/get/index'
+import { syncSubCommands } from '@/cli/sub/sync'
+import { addSubCommands } from '@/cli/sub/add'
+import { iamSubCommands } from '@/cli/sub/iam'
+import { dockerSubCommands } from '@/cli/sub/docker'
+import { genCommands } from '@/cli/gen'
+import { curlCommands } from '@/cli/curl'
+import { loginCommands } from '@/cli/login'
+import { initCommands } from '@/cli/init'
+import { deployCommands } from '@/cli/deploy'
+import { createCommands } from '@/cli/create'
+import { serverCommands } from '@/cli/server'
+import { logCommands } from '@/cli/log'
+import { dbSubCommands } from '@/cli/sub/db'
 
-export const GRAPHQL_ROOT = './graphql'
-export const GRAPHQL_ENV_PRODUCTION_PATH = GRAPHQL_ROOT + '/.env.production'
-export const GRAPHQL_ENV_BUILD_PATH = GRAPHQL_ROOT + '/.env.build'
-export const GRAPHQL_PATH = GRAPHQL_ROOT + '/src/graphql'
-export const PRISMA_SCHEMA_PATH = GRAPHQL_ROOT + '/prisma/schema.prisma'
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
 export const FIREBASERC_PATH = './.firebaserc'
 export const TRANSLATE_PATH = 'tmp/ai/translate.json'
-export { getChangeLog } from '@/cli/release/release'
 export const program = new Command()
 
 program
@@ -44,24 +35,23 @@ dotenv.config()
 
 export const lang = process.env.SKEET_LANG || 'en'
 
-function main() {
+async function main() {
   try {
-    createCommands()
-    serverCommands()
-    deployCommands()
-    initCommands()
-    loginCommands()
-    curlCommands()
-    genCommands()
-    releaseCommands()
-    logCommands()
-    dockerSubCommands()
+    await createCommands()
+    await serverCommands()
+    await deployCommands()
+    await initCommands()
+    await loginCommands()
+    await curlCommands()
+    await genCommands()
+    await logCommands()
+    await dockerSubCommands()
     dbSubCommands()
-    iamSubCommands()
-    addSubCommands()
-    syncSubCommands()
-    deleteSubCommands()
-    listSubCommands()
+    await iamSubCommands()
+    await addSubCommands()
+    await syncSubCommands()
+    await deleteSubCommands()
+    await listSubCommands()
     aiCommands()
     configCommands()
     runCommands()

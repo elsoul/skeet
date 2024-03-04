@@ -21,7 +21,7 @@ export const curlCommands = async () => {
       false,
     )
     .action(async (methodName: string, options) => {
-      const config = importConfig()
+      const config = await importConfig()
       if (options.production) {
         if (!options.functions) throw new Error('Need to define functionsName')
 

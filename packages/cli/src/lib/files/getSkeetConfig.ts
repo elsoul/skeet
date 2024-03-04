@@ -1,8 +1,8 @@
-import { execSync } from 'child_process'
-import { readFileSync } from 'fs'
+import { readFile } from 'fs/promises'
 import { CONTAINER_REGIONS } from '@/config/region'
-import { importConfig } from './importConfig'
+import { importConfig } from '@/lib/files/importConfig'
 import { FILE_NAME, PATH } from '@/config/path'
+import { execSyncCmd } from '../execSyncCmd'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -35,12 +35,12 @@ export const getFunctionInfo = (functionName: string) => {
   return functionInfo
 }
 
-export const getFunctionConfig = (functionName: string) => {
+export const getFunctionConfig = async (functionName: string) => {
   try {
-    const tsconfig = readFileSync('./tsconfig.json', 'utf-8')
-    const prretierrc = readFileSync('.prettierrc', 'utf-8')
+    const tsconfig = await readFile('./tsconfig.json', 'utf-8')
+    const prretierrc = await readFile('.prettierrc', 'utf-8')
     const result = {
-      package: readConfigFile(functionName, 'package.json'),
+      package: await readConfigFile(functionName, 'package.json'),
       tsconfig,
       prretierrc,
     }
@@ -50,10 +50,10 @@ export const getFunctionConfig = (functionName: string) => {
   }
 }
 
-const readConfigFile = (functionName: string, file: string) => {
+const readConfigFile = async (functionName: string, file: string) => {
   try {
     const path = `${FUNCTIONS_PATH}/${functionName}/${file}`
-    return readFileSync(path, 'utf-8')
+    return await readFile(path, 'utf-8')
   } catch (error) {
     return ''
   }
@@ -123,12 +123,11 @@ export const getContainerImageUrl = (
   return cRegion + '/' + containerProjectName + '/' + imageName + ':latest'
 }
 
-export const getContainerImageName = (
+export const getContainerImageName = async (
   appName: string,
   workerName: string = '',
 ) => {
-  const skeetConfig = importConfig()
-  const db = skeetConfig.app.template.includes('GraphQL') ? 'graphql' : 'sql'
+  const db = 'sql'
   const imageName =
     workerName !== ''
       ? 'skeet-' + appName + '-worker-' + workerName
@@ -147,20 +146,7 @@ export const regionToTimezone = (region: string) => {
   }
 }
 
-export const getRunUrl = async (projectId: string, appName: string) => {
-  try {
-    const runName = getNetworkConfig(projectId, appName).cloudRunName
-    console.log(runName)
-    const cmd = `gcloud run services list --project=${projectId} | grep ${runName} | awk '{print $4}'`
-    const res = String(execSync(cmd)).replace(/\r?\n/g, '')
-
-    return res
-  } catch (error) {
-    return ''
-  }
-}
-
-export const isNegExists = (
+export const isNegExists = async (
   projectId: string,
   region: string,
   methodName: string,
@@ -178,7 +164,7 @@ export const isNegExists = (
     projectId,
   ]
   try {
-    const stdout = String(execSync(shCmd.join(' '), { stdio: 'ignore' }))
+    const stdout = String(await execSyncCmd(shCmd))
     if (stdout.includes('ERROR:')) throw new Error('does not exist')
     return true
   } catch (error) {
@@ -212,7 +198,7 @@ export const getBuidEnvArray = async (
 }
 
 export const getActionsEnvString = async (filePath: string) => {
-  const stream = readFileSync(filePath)
+  const stream = await readFile(filePath)
   const envArray: Array<string> = String(stream).split('\n')
   const newEnv: Array<string> = []
   for await (const envLine of envArray) {
@@ -230,11 +216,11 @@ export const getActionsEnvString = async (filePath: string) => {
 }
 
 export const getBuidEnvString = async () => {
-  const skeetConfig = importConfig()
+  const skeetConfig = await importConfig()
   const envProductionPath = skeetConfig.app.template.includes('GraphQL')
     ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
     : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
-  const stream = readFileSync(envProductionPath)
+  const stream = await readFile(envProductionPath)
   const envArray: Array<string> = String(stream).split('\n')
   const hash: { [key: string]: string } = {}
   for await (const line of envArray) {

@@ -2,27 +2,28 @@ import { LOG } from '@/config/log'
 import { PATH } from '@/config/path'
 import { lang } from '@/index'
 import { Logger } from '@/lib'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { appendLineToFile } from '@/templates/instanceTypes'
 import { toCamelCase } from '@/utils/string'
 import { toUpperCase } from '@skeet-framework/utils'
 import chalk from 'chalk'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import { mkdir, writeFile } from 'fs/promises'
 
-export const genModel = (modelName: string) => {
+export const genModel = async (modelName: string) => {
   try {
     const camel = toCamelCase(modelName)
     const capital = toUpperCase(modelName)
-    if (!existsSync(PATH.MODEL)) {
-      mkdirSync(PATH.MODEL, { recursive: true })
+    if (!(await checkFileDirExists(PATH.MODEL))) {
+      await mkdir(PATH.MODEL, { recursive: true })
     }
     const filePath = `${PATH.MODEL}/${modelName}Models.ts`
-    if (existsSync(filePath)) {
+    if (await checkFileDirExists(filePath)) {
       console.log(chalk.yellow(`⚠️ Already Exist - ${filePath}`))
       return false
     }
     const modelIndexPath = `${PATH.MODEL}/index.ts`
-    if (!existsSync(modelIndexPath)) {
-      writeFileSync(modelIndexPath, '')
+    if (!(await checkFileDirExists(modelIndexPath))) {
+      await writeFile(modelIndexPath, '')
     }
     const body = `import { Timestamp, FieldValue } from '@skeet-framework/firestore'
 
@@ -79,9 +80,9 @@ export type ${capital}Child = {
   updatedAt?: Timestamp | FieldValue
 }
 `
-    writeFileSync(filePath, body)
+    await writeFile(filePath, body)
     const indexLine = `export * from './${camel}Models'`
-    appendLineToFile(modelIndexPath, indexLine)
+    await appendLineToFile(modelIndexPath, indexLine)
     Logger.successCheck(`successfully created - ${filePath}`)
     return true
   } catch (error) {

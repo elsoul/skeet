@@ -1,6 +1,4 @@
-import { GRAPHQL_PATH, PRISMA_SCHEMA_PATH } from '@/index'
-import { readFileSync, writeFileSync } from 'fs'
-import { convertFromKebabCaseToLowerCase } from '@/utils/string'
+import { readFile } from 'fs/promises'
 import { getPrismaPath } from '@/config/path'
 
 export type ModelSchema = {
@@ -52,39 +50,9 @@ export const getEnumCols = async (modelCols: Array<ModelSchema>) => {
   return enumCols
 }
 
-export const getEnums = async () => {
-  const prismaSchema = readFileSync(PRISMA_SCHEMA_PATH)
-  const splitSchema = String(prismaSchema).split(`enum `)
-  splitSchema.shift()
-  const enums: Array<string> = []
-  for await (const line of splitSchema) {
-    const enumName = line.match('(.+) {') || ''
-    enums.push(enumName[1])
-  }
-  return enums
-}
-
-export const syncEnumFile = async () => {
-  const enums = await getEnums()
-  const fileBody = [
-    `import { enumType } from 'nexus'`,
-    `import { ${enums.join(', ')} } from 'nexus-prisma'\n`,
-  ]
-  for await (const enumName of enums) {
-    fileBody.push(
-      `export const ${convertFromKebabCaseToLowerCase(
-        enumName,
-      )}Enum = enumType(${enumName})`,
-    )
-  }
-  writeFileSync(`${GRAPHQL_PATH}/enums.ts`, fileBody.join('\n'), {
-    flag: 'w',
-  })
-}
-
-export const getModels = (sqlName: string) => {
+export const getModels = async (sqlName: string) => {
   const prismaPath = getPrismaPath(sqlName)
-  const prismaSchema = readFileSync(prismaPath, 'utf-8')
+  const prismaSchema = await readFile(prismaPath, 'utf-8')
   const lines = prismaSchema.split('\n')
   const models: Array<string> = []
   for (const line of lines) {
@@ -96,9 +64,9 @@ export const getModels = (sqlName: string) => {
   return models
 }
 
-export const getColumns = (sqlName: string, modelName: string) => {
+export const getColumns = async (sqlName: string, modelName: string) => {
   const prismaPath = getPrismaPath(sqlName)
-  const prismaSchema = readFileSync(prismaPath, 'utf-8')
+  const prismaSchema = await readFile(prismaPath, 'utf-8')
   const lines = prismaSchema.split('\n')
   const modelSchema: Array<ModelSchema> = []
   let isModel = false

@@ -11,19 +11,19 @@ import {
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { addProjectRegionToSkeetConfig } from '../files/addJson'
 import { projectIdNotExists } from '../gcloud/billing/checkBillingAccount'
-import { existsSync } from 'node:fs'
+import { checkFileDirExists } from '../files/checkFileDirExists'
 
 export const setupIamAi = async () => {
   try {
-    if (!existsSync(SKEET_CONFIG_PATH)) {
+    if (!(await checkFileDirExists(SKEET_CONFIG_PATH))) {
       await addProjectRegionToSkeetConfig()
     }
     Logger.normal(`Generating AI Permissions...`)
-    const config: SkeetCloudConfig = importConfig()
+    const config: SkeetCloudConfig = await importConfig()
     if (await projectIdNotExists(config.app.projectId))
       Logger.projectIdNotExistsError(config.app.projectId)
 
-    setGcloudProject(config.app.projectId)
+    await setGcloudProject(config.app.projectId)
     await enableAiPermissions(config.app.projectId)
     await createServiceAccount(config.app.projectId, config.app.name)
     await createServiceAccountKey(config.app.projectId, config.app.name)

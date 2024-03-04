@@ -1,5 +1,6 @@
 import { Logger, copyFileWithOverwrite, getModelFiles } from '@/lib'
-import { existsSync, mkdirSync } from 'fs'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import { mkdir } from 'fs/promises'
 import inquirer from 'inquirer'
 
 export const syncModels = async () => {
@@ -50,11 +51,11 @@ export const syncModels = async () => {
 
 const copyToFrontend = async (
   latestModelFileName: string,
-  latestModelPath: string
+  latestModelPath: string,
 ) => {
   const frontModelPath = `src/types/models/${latestModelFileName}`
-  if (existsSync('src/types/models')) {
-    mkdirSync('src/types/models', { recursive: true })
+  if (await checkFileDirExists('src/types/models')) {
+    await mkdir('src/types/models', { recursive: true })
   }
   await copyFileWithOverwrite(latestModelPath, frontModelPath)
 }

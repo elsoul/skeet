@@ -1,8 +1,8 @@
-import { readFileSync } from 'fs'
+import { readFile } from 'fs/promises'
 
-export function getExportedFunctions(filePath: string): string[] {
+export async function getExportedFunctions(filePath: string) {
   try {
-    const fileContent = readFileSync(filePath, 'utf-8')
+    const fileContent = await readFile(filePath, 'utf-8')
     const regex = /export\s+{\s+([^}]+)\s+}/g
 
     const match = regex.exec(fileContent)

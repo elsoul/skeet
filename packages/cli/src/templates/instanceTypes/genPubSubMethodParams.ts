@@ -1,13 +1,14 @@
 import { PATH } from '@/config/path'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { toCamelCase, toPascalCase } from '@skeet-framework/utils'
-import { existsSync, mkdirSync } from 'fs'
+import { mkdir } from 'fs/promises'
 
-export const genPubSubMethodParams = (methodName: string) => {
+export const genPubSubMethodParams = async (methodName: string) => {
   const pascalMethodName = toPascalCase(methodName)
   const camelMethodName = toCamelCase(methodName)
   const pubsubPath = `${PATH.TYPE}/pubsub`
-  if (!existsSync(pubsubPath)) {
-    mkdirSync(pubsubPath)
+  if (!(await checkFileDirExists(pubsubPath))) {
+    await mkdir(pubsubPath)
   }
   const filePath = `${pubsubPath}/${camelMethodName}Params.ts`
   const body = `export type ${pascalMethodName}Params = {

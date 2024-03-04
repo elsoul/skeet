@@ -1,33 +1,31 @@
+import chalk from 'chalk'
+import { skeetAiPrompt } from './skeetPrompt'
+// import { prismaMode } from './mode/prismaMode'
+// import { skeetMode } from './mode/skeetMode'
+// import { typedocMode } from './mode/typedocMode'
+// import { translateMode } from './mode/translateMode'
+// import { firestoreMode } from './mode/firestoreMode'
+// import { functionMode } from './mode/functionMode'
+// import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
+// import { methodMode } from './mode/methodMode'
+import inquirer from 'inquirer'
+import { AiLog } from './aiLog'
+import { SkeetAIOptions } from '.'
+import { Readable } from 'stream'
 import {
-  AIType,
-  ChatCompletionChunk,
   ConfigGeminiType,
   ConfigOpenAIType,
   OpenAIModel,
-  defaultGeminiConfig,
   geminiChat,
   generatePrompt,
   openAIChat,
   readGeminiStream,
   readOpenAIStream,
 } from '@skeet-framework/ai'
-import chalk from 'chalk'
-import { skeetAiPrompt } from './skeetPrompt'
-import { prismaMode } from './mode/prismaMode'
-import { skeetMode } from './mode/skeetMode'
-import { typedocMode } from './mode/typedocMode'
-import { translateMode } from './mode/translateMode'
-import { firestoreMode } from './mode/firestoreMode'
-import { functionMode } from './mode/functionMode'
-import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
-import { methodMode } from './mode/methodMode'
-import inquirer from 'inquirer'
-import { AiLog } from './aiLog'
-import { SkeetAIOptions } from '.'
-import { Readable } from 'stream'
 
 const GEMINI = 'Gemini'
 const OPENAI = 'OpenAI'
+type AIType = 'Gemini' | 'OpenAI'
 
 export async function promptUser(
   options: SkeetAIOptions,
@@ -37,7 +35,7 @@ export async function promptUser(
   const aiOptions = {
     ai: (options.ai as AIType) || ('Gemini' as AIType),
     maxTokens: options.maxTokens || '1000',
-    model: options.model || defaultGeminiConfig.model,
+    model: options.model || 'gemini-1.0-pro',
     temperature: options.temperature || '0.1',
   }
 

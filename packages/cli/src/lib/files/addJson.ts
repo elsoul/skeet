@@ -1,56 +1,56 @@
 import { AiConfig, SkeetCloudConfig, SkeetOptions } from '@/types/skeetTypes'
 import { importConfig } from './importConfig'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFile, writeFile } from 'fs/promises'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from './getSkeetConfig'
 import { Logger } from '../logger'
 import { copyFileWithOverwrite } from './copyFiles'
-import { askForProjectIdAndRegion } from '@/cli'
+import { askForProjectIdAndRegion } from '@/cli/init/askQuestions'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
 
-export const addDomainToConfig = (
+export const addDomainToConfig = async (
   appDomain: string,
   nsDomain: string,
   lbDomain: string,
   functionName: string,
 ) => {
-  const skeetConfig: SkeetCloudConfig = importConfig()
+  const skeetConfig: SkeetCloudConfig = await importConfig()
   const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
-  const jsonFile = readFileSync(skeetOptionsFile)
+  const jsonFile = await readFile(skeetOptionsFile)
   const newJsonFile: SkeetOptions = JSON.parse(String(jsonFile))
   newJsonFile.appDomain = appDomain
   newJsonFile.nsDomain = nsDomain
   newJsonFile.lbDomain = lbDomain
 
-  writeFileSync(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
+  await writeFile(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 
   skeetConfig.app.appDomain = appDomain
   skeetConfig.app.nsDomain = nsDomain
   skeetConfig.app.lbDomain = lbDomain
-  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+  await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   Logger.successCheck('Successfully Updated skeet-cloud.config.json!')
 }
 
-export const addProjectRegionToSkeetOptions = (
+export const addProjectRegionToSkeetOptions = async (
   region: string,
   projectId: string,
   fbProjectId: string,
   functionName: string,
 ) => {
   try {
-    const skeetConfig: SkeetCloudConfig = importConfig()
+    const skeetConfig: SkeetCloudConfig = await importConfig()
 
     skeetConfig.app.region = region
     skeetConfig.app.projectId = projectId
     skeetConfig.app.fbProjectId = fbProjectId
     const filePath = `./functions/${functionName}/skeetOptions.json`
-    const jsonFile = readFileSync(filePath)
+    const jsonFile = await readFile(filePath)
     const newJsonFile = JSON.parse(String(jsonFile))
     newJsonFile.name = skeetConfig.app.name
     newJsonFile.projectId = skeetConfig.app.projectId
     newJsonFile.fbProjectId = skeetConfig.app.fbProjectId
     newJsonFile.region = skeetConfig.app.region
-    writeFileSync(filePath, JSON.stringify(newJsonFile, null, 2))
-    writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+    await writeFile(filePath, JSON.stringify(newJsonFile, null, 2))
+    await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
     Logger.successCheck('Successfully Updated skeet-cloud.config.json')
   } catch (error) {
     throw new Error(`addProjectRegionToSkeetOptions: ${error}`)
@@ -84,16 +84,16 @@ export const addProjectRegionToSkeetConfig = async () => {
       ],
     },
   }
-  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfigMin, null, 2))
+  await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfigMin, null, 2))
   Logger.successCheck('Successfully created ./skeet-cloud.config.json')
 }
 
-export const addAppJson = (repoName: string) => {
+export const addAppJson = async (repoName: string) => {
   const filePath = `./app.json`
-  const appJson = readFileSync(filePath)
+  const appJson = await readFile(filePath)
   const newAppJson = JSON.parse(String(appJson))
   newAppJson.expo.githubUrl = `https://github.com/${repoName}`
-  writeFileSync(filePath, JSON.stringify(newAppJson, null, 2))
+  await writeFile(filePath, JSON.stringify(newAppJson, null, 2))
   Logger.successCheck(`Successfully Updated ${filePath}`)
 }
 

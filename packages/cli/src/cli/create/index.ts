@@ -10,7 +10,7 @@ export const createCommands = async () => {
     .option('-b, --backend', 'Create Backend Only', false)
     .action(async (appName: string, options: { backend: boolean }) => {
       if (options.backend) {
-        createBackend(appName)
+        await createBackend(appName)
       } else {
         await create(appName)
       }

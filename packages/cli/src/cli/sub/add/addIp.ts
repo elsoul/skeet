@@ -1,7 +1,8 @@
 import { SKEET_CONFIG_PATH } from '@/index'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import { Logger, importConfig } from '@/lib'
-import { writeFileSync } from 'fs'
+import { Logger } from '@/lib/logger'
+import { importConfig } from '@/lib/files/importConfig'
+import { writeFile } from 'fs/promises'
 import { sendGet } from '@skeet-framework/utils'
 
 export const addIp = async () => {
@@ -19,10 +20,10 @@ export const getHomeIp = async () => {
 }
 
 export const addHomeIpToSkeetConfig = async (ip: string) => {
-  const skeetConfig: SkeetCloudConfig = importConfig()
+  const skeetConfig: SkeetCloudConfig = await importConfig()
   const whiteList = skeetConfig.db.whiteList || ''
   skeetConfig.db.whiteList =
     whiteList === '' ? whiteList + `${ip}` : whiteList + `,${ip}`
 
-  writeFileSync(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
+  await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
 }

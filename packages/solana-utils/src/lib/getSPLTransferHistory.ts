@@ -1,6 +1,4 @@
 import { Connection, PublicKey, ConfirmedSignatureInfo } from '@solana/web3.js'
-import { writeFileSync } from 'fs'
-import { exit } from 'process'
 
 /**
  * Fetches the SPL Transfer history for a given wallet address.
@@ -30,7 +28,7 @@ export const getSPLTransferHistory = async (
   const accountPublicKey = new PublicKey(accountAddress)
 
   // Fetching the transfer history using getConfirmedSignaturesForAddress2
-  let params: { limit: number; before?: string } = {
+  const params: { limit: number; before?: string } = {
     limit,
   }
   if (beforeSignature) {

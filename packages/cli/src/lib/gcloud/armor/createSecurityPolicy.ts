@@ -1,6 +1,7 @@
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
-export const createSecurityPolicy = (
+export const createSecurityPolicy = async (
   projectId: string,
   securityPolicyName: string,
 ) => {
@@ -16,7 +17,7 @@ export const createSecurityPolicy = (
       '--project',
       projectId,
     ]
-    execSyncCmd(shCmd, '.', 'ignore')
+    await execSyncCmd(shCmd, '.')
     return true
   } catch (error) {
     return false

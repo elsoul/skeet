@@ -1,20 +1,16 @@
-import { GRAPHQL_PATH } from '@/index'
-import { existsSync, readdirSync } from 'fs'
+import { readdir } from 'fs/promises'
 import inquirer from 'inquirer'
 
+type SelectDbOptions = {
+  db: string[]
+}
+
 export const selectDb = async () => {
-  let hasGraphql = false
-  if (existsSync(GRAPHQL_PATH)) {
-    hasGraphql = true
-  }
-  const sqlDirs = readdirSync('./sql', { withFileTypes: true })
+  const sqlDirs = await readdir('./sql', { withFileTypes: true })
+  const choices = sqlDirs
     .filter((item) => item.isDirectory())
     .map((item) => item.name)
-  const choices = sqlDirs
-  if (hasGraphql) {
-    choices.push('GraphQL')
-  }
-  const answer = await inquirer.prompt<{ db: string[] }>([
+  const answer = await inquirer.prompt<SelectDbOptions>([
     {
       type: 'checkbox',
       message: 'Select Database',

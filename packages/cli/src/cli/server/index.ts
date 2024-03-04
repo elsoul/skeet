@@ -5,7 +5,6 @@ export type ServerOptions = {
   backend: boolean
   functions: boolean
   web: boolean
-  graphql: boolean
 }
 
 export const serverCommands = async () => {
@@ -16,8 +15,8 @@ export const serverCommands = async () => {
     .option(`-b, --backend`, 'Run Backend only')
     .option(`-f, --functions`, 'Run Firebase Functions only')
     .option(`-w, --web`, 'Run Web App only')
-    .option(`-g, --graphql`, 'Run GraphQL Server only')
     .action(async (options: ServerOptions) => {
+      console.log('Running Skeet App...')
       await server(options)
     })
 }

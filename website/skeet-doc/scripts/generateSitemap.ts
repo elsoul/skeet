@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { writeFile } from 'fs/promises'
 import { globby } from 'globby'
 import siteConfig from '../src/config/site'
 
@@ -35,7 +35,7 @@ async function generateSiteMap() {
 </urlset>
   `
 
-  fs.writeFileSync('out/sitemap.xml', sitemap)
+  await writeFile('out/sitemap.xml', sitemap)
 }
 
 void generateSiteMap()

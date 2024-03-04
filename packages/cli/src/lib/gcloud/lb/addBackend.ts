@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 import { getFunctionInfo, getNetworkConfig } from '@/lib'
 
 export const addBackend = (

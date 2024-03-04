@@ -1,11 +1,4 @@
-import {
-  readFileSync,
-  writeFileSync,
-  unlinkSync,
-  existsSync,
-  rmSync,
-  mkdirSync,
-} from 'fs'
+import { readFile, writeFile, unlink, rm, mkdir } from 'fs/promises'
 import {
   Logger,
   firebaseSdkConfig,
@@ -15,6 +8,7 @@ import {
   firebaseAppList,
 } from '@/lib'
 import { copyDefaultFirebaseConfig } from '@/lib/files/addJson'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 
 export const addFirebaseApp = async (
   projectId: string,
@@ -25,11 +19,11 @@ export const addFirebaseApp = async (
     const firebaseConfigDir = './lib/firebaseAppConfig'
     const targetFilePathTs = `${firebaseConfigDir}/${appDisplayName}.ts`
 
-    if (existsSync(sourceFilePath)) {
-      rmSync(sourceFilePath)
+    if (await checkFileDirExists(sourceFilePath)) {
+      await rm(sourceFilePath)
     }
-    if (!existsSync(firebaseConfigDir)) {
-      mkdirSync(firebaseConfigDir, { recursive: true })
+    if (!(await checkFileDirExists(firebaseConfigDir))) {
+      await mkdir(firebaseConfigDir, { recursive: true })
     }
     const appList = await firebaseAppList()
     if (checkAppExistence(appList, appDisplayName))
@@ -42,7 +36,7 @@ export const addFirebaseApp = async (
     await firebaseSdkConfig(appId)
     await updateFirebaseJson(appDisplayName)
     await rewriteFirebaseConfig(sourceFilePath, targetFilePathTs)
-    unlinkSync(sourceFilePath)
+    await unlink(sourceFilePath)
     await copyDefaultFirebaseConfig(appDisplayName)
 
     return true
@@ -56,7 +50,7 @@ const rewriteFirebaseConfig = async (
   targetFilePath: string,
 ) => {
   try {
-    const data = readFileSync(sourceFilePath, 'utf8')
+    const data = await readFile(sourceFilePath, 'utf8')
     const modifiedData = data.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '')
 
     const match = modifiedData.match(/firebase\.initializeApp\(({[\s\S]+?})\);/)
@@ -73,7 +67,7 @@ const rewriteFirebaseConfig = async (
 
     const finalData = `const firebaseConfig = {\n${formattedConfig}\n}\nexport default firebaseConfig;`
 
-    writeFileSync(targetFilePath, finalData, 'utf8')
+    await writeFile(targetFilePath, finalData, 'utf8')
 
     Logger.successCheck(
       `File '${targetFilePath}' has been created successfully`,

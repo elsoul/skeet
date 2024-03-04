@@ -1,11 +1,12 @@
 import { program } from '@/index'
 import { listFunctions, listHttps } from '../sub/list'
 import { getSecret } from './getSecret'
-import { Logger, importConfig, getZone, getModels, getColumns } from '@/lib'
+import { Logger, importConfig, getZone } from '@/lib'
 import { FileType, getRecentUpdatedFiles } from './getRecentUpdatedFiles'
 import { firebaseAuthUserGet } from '@/lib/firebase/firebaseAuthUserGet'
 import { PATH } from '@/config/path'
-import { existsSync, mkdirSync } from 'fs'
+import { mkdir } from 'fs/promises'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 
 export const listSubCommands = async () => {
   const get = program.command('get').description('Get Skeet App List')
@@ -25,9 +26,9 @@ export const listSubCommands = async () => {
   get
     .command('dns')
     .description('Show Skeet NameServer Records')
-    .action(() => {
-      const { app } = importConfig()
-      const res = getZone(app.projectId, app.name)
+    .action(async () => {
+      const { app } = await importConfig()
+      const res = await getZone(app.projectId, app.name)
       Logger.dnsSetupLog(res)
     })
   get
@@ -37,23 +38,7 @@ export const listSubCommands = async () => {
     .action((secretKey: string) => {
       getSecret(secretKey)
     })
-  get
-    .command('models')
-    .alias('m')
-    .alias('model')
-    .description('Show Skeet Models List')
-    .action(() => {
-      getModels()
-    })
-  get
-    .command('columns')
-    .alias('c')
-    .alias('column')
-    .argument('<modelName>', 'Model Name - e.g. User')
-    .description('Show Skeet Models columns')
-    .action((modelName: string) => {
-      getColumns(modelName)
-    })
+
   get
     .command('files')
     .alias('file')
@@ -80,15 +65,15 @@ export const listSubCommands = async () => {
     .description('Download Firebase Auth Users in JSON')
     .option('-p, --projectId <projectId>', 'Project Id', '')
     .option('-o, --output <output>', 'Output Path', PATH.FIREBASE_USERS)
-    .action((options: { output: string; projectId: string }) => {
-      const { app } = importConfig()
+    .action(async (options: { output: string; projectId: string }) => {
+      const { app } = await importConfig()
       let projectId = app.projectId
       if (options.projectId !== '') {
         projectId = options.projectId
       }
       const tmpDir = PATH.TMP
-      if (!existsSync(tmpDir)) {
-        mkdirSync(tmpDir)
+      if (!(await checkFileDirExists(tmpDir))) {
+        await mkdir(tmpDir)
       }
       firebaseAuthUserGet(projectId, options.output)
     })

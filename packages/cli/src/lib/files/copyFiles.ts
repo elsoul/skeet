@@ -1,30 +1,14 @@
-import { createReadStream, createWriteStream, existsSync, unlinkSync } from 'fs'
-import { Logger } from '../logger/logger'
-
-const copyFile = (
-  sourceFilePath: string,
-  destinationFilePath: string
-): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const readStream = createReadStream(sourceFilePath)
-    const writeStream = createWriteStream(destinationFilePath)
-
-    readStream.on('error', (error) => reject(error))
-    writeStream.on('error', (error) => reject(error))
-
-    writeStream.on('finish', () => resolve())
-
-    readStream.pipe(writeStream)
-  })
-}
+import { copyFile, unlink } from 'fs/promises'
+import { Logger } from '@/lib/logger'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 
 export const copyFileWithOverwrite = async (
   sourceFilePath: string,
-  destinationFilePath: string
+  destinationFilePath: string,
 ): Promise<void> => {
   try {
-    if (existsSync(destinationFilePath)) {
-      unlinkSync(destinationFilePath) // 既存のファイルを削除
+    if (await checkFileDirExists(destinationFilePath)) {
+      await unlink(destinationFilePath)
     }
     await copyFile(sourceFilePath, destinationFilePath)
     Logger.successCheck(`File copied: ${destinationFilePath}`)

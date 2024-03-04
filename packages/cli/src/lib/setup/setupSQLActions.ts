@@ -1,9 +1,9 @@
 import { importConfig } from '@/lib'
 import { Logger } from '@/lib/logger'
-import { writeFileSync } from 'fs'
+import { writeFile } from 'fs/promises'
 import { sqlYml } from '@/templates/init/sql.yml'
 
-export const setupSQLActions = (
+export const setupSQLActions = async (
   instanceName: string,
   memory: string,
   cpu: string,
@@ -12,13 +12,13 @@ export const setupSQLActions = (
   minInstances: string,
 ) => {
   try {
-    const config = importConfig()
+    const config = await importConfig()
     const region = config.app.region
     const splitInstanceName = instanceName.split('-')
     const dbName = splitInstanceName[1].toUpperCase()
     const databaseUrl = `DATABASE_URL=\${{ secrets.DATABASE_URL_${dbName} }}`
     const envString = databaseUrl
-    const result = sqlYml(
+    const result = await sqlYml(
       instanceName,
       memory,
       cpu,
@@ -28,7 +28,7 @@ export const setupSQLActions = (
       envString,
       region,
     )
-    writeFileSync(result.filePath, result.body, { flag: 'w' })
+    await writeFile(result.filePath, result.body, { flag: 'w' })
     Logger.success(`Successfully updated ${result.filePath}!`)
 
     return true

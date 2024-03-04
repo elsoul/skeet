@@ -9,7 +9,7 @@ import { AiLog } from '../aiLog'
 export const functionMode = async (skeetAi: SkeetAI, logger: AiLog) => {
   const log = logger.text() as SkeetLog
   console.log(log.functionMode.init)
-  const functions = getFunctions()
+  const functions = await getFunctions()
   let functionName = ''
   if (functions.length === 1) {
     functionName = functions[0]
@@ -72,7 +72,7 @@ export const functionMode = async (skeetAi: SkeetAI, logger: AiLog) => {
     'ai',
     answer.instanceType,
     SkeetAiMode.Function,
-    String(skeetAi.initOptions.model)
+    String(skeetAi.initOptions.model),
   )
   console.log(log.functionMode.ExitingMode + '...\n')
   promptUser(skeetAi.initOptions, logger)

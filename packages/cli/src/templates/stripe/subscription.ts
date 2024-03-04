@@ -1,11 +1,12 @@
 import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { FUNCTIONS_PATH } from '@/lib'
-import { existsSync, mkdirSync } from 'fs'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import { mkdir } from 'fs/promises'
 
-export const subscription = () => {
+export const subscription = async () => {
   const fileDir = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/lib/stripe/webhook`
-  if (!existsSync(fileDir)) {
-    mkdirSync(fileDir, { recursive: true })
+  if (!(await checkFileDirExists(fileDir))) {
+    await mkdir(fileDir, { recursive: true })
   }
   const filePath = `${fileDir}/subscription.ts`
   const body = `import Stripe from 'stripe'

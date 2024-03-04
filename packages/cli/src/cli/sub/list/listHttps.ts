@@ -3,8 +3,8 @@ import { convertToKebabCase } from '@skeet-framework/utils'
 import * as cli from 'cli-table3'
 
 export const listHttps = async () => {
-  const { app } = importConfig()
-  const https = getHttpRoutings()
+  const { app } = await importConfig()
+  const https = await getHttpRoutings()
   const table = new cli.default({
     head: ['Function', 'Endpoint', 'ParamsPath'],
     style: {

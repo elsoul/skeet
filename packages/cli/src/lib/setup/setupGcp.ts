@@ -1,21 +1,19 @@
 import { dockerLogin } from '@/cli/sub/docker/dockerLogin'
-import {
-  createServiceAccount,
-  createServiceAccountKey,
-  runAddAllRole,
-  runEnableAllPermission,
-  setGcloudProject,
-  addJsonEnv,
-  KEYFILE_PATH,
-  Logger,
-} from '@/lib'
+import { addJsonEnv } from '@/lib/git/addJsonEnv'
+import { createServiceAccount } from '@/lib/gcloud/iam/createServiceAccount'
+import { createServiceAccountKey } from '@/lib/gcloud/iam/createServiceAccountKey'
+import { runEnableAllPermission } from '@/lib/gcloud/iam/enablePermission'
+import { runAddAllRole } from '@/lib/gcloud/iam/addRole'
+import { setGcloudProject } from '@/lib/gcloud/iam/setGcloudProject'
+import { Logger } from '@/lib/logger'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { sleep } from '@/utils/time'
-import { rmSync } from 'fs'
+import { rm } from 'fs/promises'
+import { KEYFILE_PATH } from '@/lib/files/getSkeetConfig'
 
 export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   const spinner = Logger.syncSpinner('Setting up GCP...')
-  setGcloudProject(config.app.projectId)
+  await setGcloudProject(config.app.projectId)
   await runEnableAllPermission(config.app.projectId)
   await createServiceAccount(config.app.projectId, config.app.name)
   await createServiceAccountKey(config.app.projectId, config.app.name)
@@ -23,7 +21,7 @@ export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   await addJsonEnv()
   await dockerLogin()
   await sleep(2000)
-  rmSync(KEYFILE_PATH)
+  await rm(KEYFILE_PATH)
   await runAddAllRole(config.app.projectId, config.app.name)
   spinner.stop()
 }

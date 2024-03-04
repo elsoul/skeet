@@ -27,8 +27,8 @@ export const addSubCommands = async () => {
   add
     .command('functions')
     .argument('<functionsName>', 'Functions Name - e.g. skeet')
-    .action((functionsName: string) => {
-      addFunctions(functionsName)
+    .action(async (functionsName: string) => {
+      await addFunctions(functionsName)
     })
 
   add
@@ -64,7 +64,7 @@ export const addSubCommands = async () => {
       'Firebase App Display Name - e.g. skeet-web-console',
     )
     .action(async (appDisplayName: string) => {
-      const { app } = importConfig()
+      const { app } = await importConfig()
       await addFirebaseApp(app.projectId, appDisplayName)
     })
   add
@@ -87,7 +87,7 @@ export const addSubCommands = async () => {
     .action(async () => {
       console.log(chalk.blue(`👷 Creating Github Repository...`))
       await genGithubActions()
-      addGhActions()
+      await addGhActions()
       console.log(chalk.green(`✅ Github Repository/Actions Created`))
     })
 
@@ -107,7 +107,7 @@ export const addSubCommands = async () => {
     .alias('SQL')
     .description('Add Cloud SQL')
     .action(async () => {
-      const config = importConfig()
+      const config = await importConfig()
       await addCloudSQL(config)
     })
 
@@ -126,18 +126,18 @@ export const addSubCommands = async () => {
         },
       ])
       if (webhookType.webhookType === 'discord') {
-        const isDirExist = addDiscordWebhook()
+        const isDirExist = await addDiscordWebhook()
         if (!isDirExist) {
           console.log(chalk.yellow('⚠️ Discord Webhook already exists'))
           return
         }
         const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
-        addScriptToPackageJson(
+        await addScriptToPackageJson(
           packageJsonPath,
           'discord:deploy',
           'npx ts-node -r tsconfig-paths/register --transpile-only src/lib/discord/deploy-commands.ts',
         )
-        addDependencyToPackageJson(
+        await addDependencyToPackageJson(
           packageJsonPath,
           '@skeet-framework/discord-utils',
           '0.2.13',
@@ -145,13 +145,13 @@ export const addSubCommands = async () => {
         const cmd = `pnpm -F ${DEFAULT_FUNCTION_NAME}-func install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
       } else {
-        const isDirExist = addStripeWebhook()
+        const isDirExist = await addStripeWebhook()
         if (!isDirExist) {
           console.log(chalk.yellow('⚠️ Stripe Webhook already exists'))
           return
         }
         const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
-        addDependencyToPackageJson(packageJsonPath, 'stripe', '14.4.0')
+        await addDependencyToPackageJson(packageJsonPath, 'stripe', '14.4.0')
         const cmd = `pnpm -F ${DEFAULT_FUNCTION_NAME}-func install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
       }
@@ -162,7 +162,7 @@ export const addSubCommands = async () => {
     .alias('tq')
     .argument('<queueName>', 'CloudTask Queue Name')
     .action(async (queueName: string) => {
-      const { app } = importConfig()
+      const { app } = await importConfig()
       await addTaskQueue(app.projectId, queueName, app.region)
     })
 }

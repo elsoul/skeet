@@ -1,5 +1,4 @@
-import { execSyncCmd } from '@/lib'
-import { execSync } from 'child_process'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const createFixIp = async (
   projectId: string,
@@ -18,7 +17,7 @@ export const createFixIp = async (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }
 
 export const getIp = async (projectId: string, ipName: string) => {
@@ -34,7 +33,8 @@ export const getIp = async (projectId: string, ipName: string) => {
       '--project',
       projectId,
     ]
-    const ip = String(execSync(shCmd.join(' '))).replace(/\r?\n/g, '')
+    const { stdout } = await execSyncCmd(shCmd)
+    const ip = stdout.replace(/\r?\n/g, '')
     console.log(ip)
     return ip
   } catch (error) {

@@ -1,13 +1,11 @@
-import {
-  createSQL,
-  generateEnvBuild,
-  generateEnvProduction,
-  getDatabaseIp,
-  getNetworkConfig,
-  patchSQL,
-} from '@/lib'
+import { createSQL } from '@/lib/gcloud/sql/createSQL'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import percentEncode from '@stdlib/string-percent-encode'
+import { getDatabaseIp } from '@/lib/gcloud/sql/getDatabaseIp'
+import { generateEnvBuild } from '@/lib/gcloud/sql/generateEnvBuild'
+import { patchSQL } from '@/lib/gcloud/sql/patchSQL'
+import { generateEnvProduction } from '@/lib/gcloud/sql/generateEnvProduction'
 
 export const initSql = async (
   skeetCloudConfig: SkeetCloudConfig,
@@ -35,7 +33,7 @@ export const initSql = async (
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
   )
-  generateEnvBuild(skeetCloudConfig.app.name, databaseIp, encodedPassword)
+  await generateEnvBuild(skeetCloudConfig.app.name, databaseIp, encodedPassword)
 
   await patchSQL(
     skeetCloudConfig.app.projectId,

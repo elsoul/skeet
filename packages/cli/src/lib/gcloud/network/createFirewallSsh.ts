@@ -1,4 +1,5 @@
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const createFirewallSsh = async (projectId: string, appName: string) => {
   const networkNames = getNetworkConfig(projectId, appName)
@@ -15,5 +16,5 @@ export const createFirewallSsh = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  await execSyncCmd(shCmd)
 }

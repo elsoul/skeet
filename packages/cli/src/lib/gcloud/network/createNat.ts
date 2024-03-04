@@ -1,4 +1,5 @@
-import { execSyncCmd, getNetworkConfig } from '@/lib'
+import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const createNat = async (
   projectId: string,
@@ -24,5 +25,5 @@ export const createNat = async (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  return await execSyncCmd(shCmd)
 }

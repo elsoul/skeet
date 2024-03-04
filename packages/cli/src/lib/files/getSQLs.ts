@@ -1,12 +1,12 @@
-import { mkdirSync, readdirSync } from 'fs'
+import { mkdir, readdir } from 'fs/promises'
 import path from 'path'
 
-export const getSQLs = () => {
+export const getSQLs = async () => {
   const dir = path.join(process.cwd(), 'sql')
   if (!dir) {
-    mkdirSync(dir)
+    await mkdir(dir)
   }
   console.log(dir)
-  const apps = readdirSync(dir)
+  const apps = await readdir(dir)
   return apps
 }

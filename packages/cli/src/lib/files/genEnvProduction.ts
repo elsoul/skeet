@@ -1,16 +1,16 @@
-import { writeFileSync } from 'fs'
+import { writeFile } from 'fs/promises'
 import { getContainerRegion, regionToTimezone } from './getSkeetConfig'
 import { importConfig } from './importConfig'
 import { Logger } from '../logger'
 
-export const genEnvProduction = (
+export const genEnvProduction = async (
   instanceName: string,
   generateDir: string,
   region: string,
   databaseIp: string,
   encodedPassword: string,
 ) => {
-  const { app } = importConfig()
+  const { app } = await importConfig()
   const cRegion = getContainerRegion(region)
   const timeZone = regionToTimezone(region)
   const upperCaseInstanceName = instanceName.toUpperCase().replaceAll('-', '_')
@@ -26,8 +26,8 @@ export const genEnvProduction = (
     `DATABASE_URL_${dbName}="postgresql://postgres:$${encodedPassword}@${databaseIp}:5432/${instanceName}?schema=public"\n`,
     `TZ=${timeZone}`,
   ]
-  envProduction.forEach((keyValue) => {
-    writeFileSync(filePath, keyValue, { flag: 'a' })
+  envProduction.forEach(async (keyValue) => {
+    await writeFile(filePath, keyValue, { flag: 'a' })
   })
   Logger.success(`successfully exported! - ${filePath}`)
 }

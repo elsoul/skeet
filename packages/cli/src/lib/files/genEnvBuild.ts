@@ -1,8 +1,8 @@
 import { FILE_NAME } from '@/config/path'
-import { writeFileSync } from 'fs'
+import { writeFile } from 'fs/promises'
 import { Logger } from '@/lib/logger'
 
-export const genEnvBuild = (
+export const genEnvBuild = async (
   instanceName: string,
   generateDir: string,
   databaseIp: string,
@@ -12,6 +12,6 @@ export const genEnvBuild = (
   const databaseUrl = `DATABASE_URL=postgresql://postgres:${encodedPassword}@${databaseIp}:5432/${instanceName}?schema=public\n`
   const nodeSetting = 'NO_PEER_DEPENDENCY_CHECK=1\nSKEET_ENV=production'
   const envFile = databaseUrl + nodeSetting
-  writeFileSync(filePath, envFile, { flag: 'w' })
+  await writeFile(filePath, envFile, { flag: 'w' })
   Logger.success(`successfully exported! - ${filePath}`)
 }

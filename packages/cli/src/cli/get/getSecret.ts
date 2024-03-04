@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib'
+import { execSyncCmd } from '@/lib/execSyncCmd'
 
 export const getSecret = (secretKey: string) => {
   try {
