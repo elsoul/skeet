@@ -37,20 +37,14 @@ This plugin is a collection of utilities for basic operations.
 # Installation
 
 ```bash
-$ skeet yarn add -p @skeet-framework/utils
-```
-
-or
-
-```bash
-$ yarn add @skeet-framework/utils
+$ pnpm add @skeet-framework/utils
 ```
 
 # Skeet Utils Docs
 
 More information can be found in the following documents.
 
-- [Skeet Utils TypeDoc](https://elsoul.github.io/skeet-utils/)
+- [Skeet Utils TypeDoc](https://skeet-utils.web.app/)
 
 ## Skeet Framework Document
 
@@ -73,12 +67,11 @@ Powered by TUtils, Cloud Functions, Typesaurus, Jest, Prettier, and Google Cloud
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Node](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/)
 - [Google SDK](https://cloud.google.com/sdk/docs)
 - [GitHub CLI](https://cli.github.com/)
 
 ```bash
-$ npm i -g @skeet-framework/cli
+$ pnpm add -g @skeet-framework/cli
 $ skeet create web-app
 ```
 
