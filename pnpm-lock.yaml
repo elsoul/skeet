@@ -160,9 +160,6 @@ importers:
       commander:
         specifier: 12.0.0
         version: 12.0.0
-      dotenv:
-        specifier: 16.4.1
-        version: 16.4.1
       dotenv-cli:
         specifier: 7.3.0
         version: 7.3.0
@@ -180,10 +177,10 @@ importers:
         specifier: 2.27.1
         version: 2.27.1
       '@skeet-framework/discord-utils':
-        specifier: 0.4.0
+        specifier: workspace:*
         version: link:../discord-utils
       '@skeet-framework/firestore':
-        specifier: 2.5.1
+        specifier: workspace:*
         version: link:../firestore
       '@stdlib/string-percent-encode':
         specifier: 0.1.1
@@ -197,9 +194,6 @@ importers:
       '@types/inquirer':
         specifier: 9.0.7
         version: 9.0.7
-      '@types/jest':
-        specifier: 29.5.12
-        version: 29.5.12
       '@types/node':
         specifier: 20.11.16
         version: 20.11.16
@@ -215,18 +209,12 @@ importers:
       '@typescript-eslint/parser':
         specifier: 6.21.0
         version: 6.21.0(eslint@8.56.0)(typescript@5.3.3)
-      babel-loader:
-        specifier: 9.1.3
-        version: 9.1.3(@babel/core@7.24.0)(webpack@5.90.3)
       copyfiles:
         specifier: 2.4.1
         version: 2.4.1
       esbuild:
         specifier: 0.20.0
         version: 0.20.0
-      esbuild-plugin-alias-path:
-        specifier: ^2.0.2
-        version: 2.0.2(esbuild@0.20.0)
       eslint:
         specifier: 8.56.0
         version: 8.56.0
@@ -239,14 +227,8 @@ importers:
       prettier:
         specifier: 3.2.5
         version: 3.2.5
-      ts-loader:
-        specifier: 9.5.1
-        version: 9.5.1(typescript@5.3.3)(webpack@5.90.3)
-      tsconfig-paths:
-        specifier: 4.2.0
-        version: 4.2.0
       tsx:
-        specifier: ^4.7.1
+        specifier: 4.7.1
         version: 4.7.1
       typescript:
         specifier: 5.3.3
@@ -6048,7 +6030,7 @@ packages:
       '@babel/core': 7.24.0
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.90.3(esbuild@0.20.0)
+      webpack: 5.90.3(esbuild@0.20.1)
     dev: true
 
   /babel-plugin-istanbul@6.1.1:
@@ -7653,17 +7635,6 @@ packages:
     dependencies:
       es6-promise: 4.2.8
     dev: false
-
-  /esbuild-plugin-alias-path@2.0.2(esbuild@0.20.0):
-    resolution: {integrity: sha512-YK8H9bzx6/CG6YBV11XjoNLjRhNZP0Ta4xZ3ATHhPn7pN8ljQGg+zne4d47DpIzF8/sX2qM+xQWev0CvaD2rSQ==}
-    peerDependencies:
-      esbuild: '>= 0.14.0'
-    dependencies:
-      esbuild: 0.20.0
-      find-up: 5.0.0
-      fs-extra: 10.1.0
-      jsonfile: 6.1.0
-    dev: true
 
   /esbuild-plugin-alias-path@2.0.2(esbuild@0.20.1):
     resolution: {integrity: sha512-YK8H9bzx6/CG6YBV11XjoNLjRhNZP0Ta4xZ3ATHhPn7pN8ljQGg+zne4d47DpIzF8/sX2qM+xQWev0CvaD2rSQ==}
@@ -15110,6 +15081,31 @@ packages:
       webpack: 5.90.3(esbuild@0.20.0)
     dev: true
 
+  /terser-webpack-plugin@5.3.10(esbuild@0.20.1)(webpack@5.90.3):
+    resolution: {integrity: sha512-BKFPWlPDndPs+NGGCr1U59t0XScL5317Y0UReNrHaw9/FwhPENlq6bfgs+4yPfyP51vqC1bQ4rp1EfXW5ZSH9w==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      esbuild: 0.20.1
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.28.1
+      webpack: 5.90.3(esbuild@0.20.1)
+    dev: true
+
   /terser@5.28.1:
     resolution: {integrity: sha512-wM+bZp54v/E9eRRGXb5ZFDvinrJIOaTapx3WUokyVGZu5ucVCK55zEgGd5Dl2fSr3jUo5sDiERErUWLY6QPFyA==}
     engines: {node: '>=10'}
@@ -16636,6 +16632,46 @@ packages:
       schema-utils: 3.3.0
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.10(esbuild@0.20.0)(webpack@5.90.3)
+      watchpack: 2.4.0
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+    dev: true
+
+  /webpack@5.90.3(esbuild@0.20.1):
+    resolution: {integrity: sha512-h6uDYlWCctQRuXBs1oYpVe6sFcWedl0dpcVaTf/YF67J9bKvwJajFulMVSYKHrksMB3I/pIagRzDxwxkebuzKA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.5
+      '@webassemblyjs/ast': 1.11.6
+      '@webassemblyjs/wasm-edit': 1.11.6
+      '@webassemblyjs/wasm-parser': 1.11.6
+      acorn: 8.11.3
+      acorn-import-assertions: 1.9.0(acorn@8.11.3)
+      browserslist: 4.23.0
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.15.1
+      es-module-lexer: 1.4.1
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.3.0
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.10(esbuild@0.20.1)(webpack@5.90.3)
       watchpack: 2.4.0
       webpack-sources: 3.2.3
     transitivePeerDependencies:

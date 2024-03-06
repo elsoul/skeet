@@ -1,7 +1,5 @@
 import { discordChangeLog } from '@skeet-framework/discord-utils'
-import dotenv from 'dotenv'
-
-dotenv.config()
+require('dotenv').config()
 
 const REPO_NAME = 'elsoul/skeet'
 
