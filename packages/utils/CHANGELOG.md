@@ -1,5 +1,49 @@
 # @skeet-framework/utils
 
+## 1.3.5
+
+### Patch Changes
+
+- [#298](https://github.com/elsoul/skeet/pull/298) [`27bd640`](https://github.com/elsoul/skeet/commit/27bd64022d84b40a69c223a2c84e257fb75d6433) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - sendGet/sendPost, Add - execSync/existsSync
+
+  - execSync
+
+  ```
+  // Example of executing a shell command
+  async function runCommand() {
+    const command = 'ls -l'
+    const cwd = '/usr'
+    const isLog = true
+
+    const { stdout, stderr } = await execSync(command, cwd, isLog)
+    // Outputs are logged based on the isLog parameter
+  }
+
+  runCommand().catch(error => {
+    console.error('Failed to execute command:', error)
+  })
+  ```
+
+  - existsSync
+
+  ```
+  // Example of how to use existsSync to check if a file and a directory exist
+  const filePath = './path/to/your/file.txt'
+  const dirPath = './path/to/your/directory'
+
+  async function checkExists() {
+    const fileExists = await existsSync(filePath)
+    console.log(fileExists ? 'File exists.' : 'File does not exist.')
+
+    const dirExists = await existsSync(dirPath)
+    console.log(dirExists ? 'Directory exists.' : 'Directory does not exist.')
+  }
+
+  checkExists().catch(error => {
+    console.error('An error occurred:', error)
+  })
+  ```
+
 ## 1.3.4
 
 ### Patch Changes
