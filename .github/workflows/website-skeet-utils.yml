@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'packages/utils/docs/index.html'
+      - 'packages/utils/docs/**'
       - '.github/workflows/website-skeet-utils.yml'
 
 jobs:
