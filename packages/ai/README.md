@@ -25,7 +25,7 @@
 
 Skeet AI Plugin for Multile Chat Models.
 
-Build generative AI apps quickly and responsibly with Model API, a simple, secure, and multiple AI models are available.
+chat function can call Gemini and OpenAI with the same arguments, making it easy to compare the results of Gemini and OpenAI.
 
 This plugin wraps the following AI models.
 
@@ -37,20 +37,14 @@ Fast and easy to deploy with Skeet Framework.
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
-- [Node.js](https://nodejs.org/ja/) ^18.16.0
-- [Yarn](https://yarnpkg.com/) ^1.22.19
+- [Node.js](https://nodejs.org/ja/) ^20.0.0
+- [Pnpm](https://pnpm.io/) ^8.0.0
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
 
 ## Installation
 
 ```bash
-$ yarn add @skeet-framework/ai
-```
-
-with Skeet Framework CLI
-
-```bash
-$ skeet yarn add -p @skeet-framework/ai
+$ pnpm add @skeet-framework/ai
 ```
 
 # Initial Setup - Vertex AI (Google Cloud)
@@ -61,7 +55,7 @@ if you havent installed Skeet CLI, install it.
 
 ```bash
 $ gcloud auth application-default
-$ npm i -g @skeet-framework/cli
+$ pnpm add -g @skeet-framework/cli
 ```
 
 and run `skeet iam ai` command.
@@ -83,84 +77,6 @@ And set environment variables following the console's output.
 
 **Note: options overwrite the environment variables**
 
-## Quick Start
-
-VertexAI
-
-```ts
-import { SkeetAI } from '@skeet-framework/ai'
-
-const skeetAi = new SkeetAI({
-  ai: 'VetexAI',
-})
-const result = await skeetAi.chat('Hello')
-console.log(result)
-```
-
-OpenAI
-
-**Note: You need finished [Initial Setup - Open AI (ChatGPT)](/README.md#initial-setup---open-ai-chatgpt) to use OpenAI API**
-
-```ts
-import { SkeetAI } from '@skeet-framework/ai'
-
-const skeetAi = new SkeetAI({
-  ai: 'OpenAI',
-})
-const result = await skeetAi.chat('Hello')
-console.log(result)
-```
-
-## Vertex AI - Prompt Example
-
-Example `app.ts`
-
-```ts
-import { VertexAI, VertexPromptParams } from '@skeet-framework/ai'
-
-const run = async () => {
-  const context =
-    'You are a developer familiar with the Skeet framework for building web applications.'
-  const examples = [
-    {
-      input:
-        'What is the Skeet framework and what benefits does it offer for app development?',
-      output:
-        'The Skeet framework is an open-source full-stack app development solution that aims to lower the development and operation cost of applications. It allows developers to focus more on the application logic and worry less about infrastructure. The framework can be assembled with a combination of SQL and NoSQL.',
-    },
-  ]
-  const content = 'Tell me about the Skeet framework.'
-  const prompt = generatePrompt(
-    context,
-    examples,
-    content,
-    'VertexAI',
-  ) as VertexPromptParams
-
-  const vertexAi = new SkeetAI({
-    ai: 'VertexAI',
-  })
-  const response = await vertexAi.prompt(prompt)
-  console.log('Question:\n', prompt.messages[0].content)
-  console.log('Answer:\n', response)
-
-  const content =
-    'The Skeet framework is an open-source full-stack app development solution that aims to lower the development and operation cost of applications. It allows developers to focus more on the application logic and worry less about infrastructure. The framework can be assembled with a combination of SQL and NoSQL.'
-  const promptTitle = await vertexAi.generateTitlePrompt(content)
-  const title = await vertexAi.prompt(promptTitle)
-  console.log('\nOriginal content:\n', content)
-  console.log('\nGenerated title:\n', title)
-}
-
-run()
-```
-
-Run
-
-```bash
-$ npx ts-node app.ts
-```
-
 # Initial Setup - Open AI (ChatGPT)
 
 ## Create OpenAI API Key
@@ -171,123 +87,33 @@ $ npx ts-node app.ts
 
 📕 [OpenAI API Document](https://platform.openai.com/docs/introduction)
 
-# Usage
+## Usage
 
-## OpenAI
-
-set environment variables
-
-```bash
-$ export CHAT_GPT_ORG=org-id
-$ export CHAT_GPT_KEY=your-api-key
-```
-
-Example `app.ts`
+chat function can call Gemini and OpenAI with the same arguments, making it easy to compare the results of Gemini and OpenAI.
 
 ```ts
-import { OpenAI, OpenAIPromptParams } from '@skeet-framework/ai'
+import { chat } from '@skeet-framework/ai'
 
-const run = async () => {
-  const context = 'You are a developer familiar with the Skeet framework for building web applications.'
-  const examples = [
-    {
-      input:
-        'What is the Skeet framework and what benefits does it offer for app development?',
-      output:
-        'The Skeet framework is an open-source full-stack app development solution that aims to lower the development and operation cost of applications. It allows developers to focus more on the application logic and worry less about infrastructure. The framework can be assembled with a combination of SQL and NoSQL.',
-    },
-  ]
-  const content = 'Tell me about the Skeet framework.'
-  const prompt = generatePrompt(
-    context,
-    examples,
-    content,
-    'OpenAI'
-  ) as OpenAIPromptParams
+const context = 'You are a helpful assistant.'
+const examples = [
+  {
+    input: 'What is the capital of France?',
+    output: 'The capital of France is Paris.',
+  },
+  {
+    input: 'What is the capital of Spain?',
+    output: 'The capital of Spain is Madrid.',
+  },
+  {
+    input: 'What is the capital of Italy?',
+    output: 'The capital of Italy is Rome.',
+  },
+]
+const input = 'What is the capital of France?'
 
-  const openAi = new SkeetAI({
-    ai: 'OpenAI',
-  })
-  const response = await openAi.prompt(prompt)
-  console.log('Question:\n', prompt.messages[0].content)
-  console.log('Answer:\n', response)
-
-  const content =
-    'The Skeet framework is an open-source full-stack app development solution that aims to lower the development and operation cost of applications. It allows developers to focus more on the application logic and worry less about infrastructure. The framework can be assembled with a combination of SQL and NoSQL.'
-  const promptTitle = await openAi.generateTitlePrompt(content)
-  const title = await openAi.prompt(promptTitle)
-  console.log('\nOriginal content:\n', content)
-  console.log('\nGenerated title:\n', title)
+const gemini = await chat(context, examples, input, 'Gemini')
+const openai = await chat(context, examples, input, 'OpenAI')
 ```
-
-Run
-
-```bash
-$ npx ts-node app.ts
-```
-
-## Fine-tuning
-
-Fine-tuning is a technique that allows you to customize the model to your specific use case by providing examples of the desired behavior.
-
-### Fine-tuning - OpenAI
-
-Create a JSONL file with the following format.
-
-_./fine-tuning.jsonl_
-
-```jsonl
-{"messages":[{"role":"system","content":"You are a senior engineer specialized in assisting developers."},{"role":"user","content":"Give an example of what the Skeet framework could be used for?"},{"role":"assistant","content":"The Skeet framework can be used for a variety of web applications, such as building a Chatbot"}]}
-{"messages":[{"role":"system","content":"You are a senior engineer specialized in assisting developers."},{"role":"user","content":"I got a credentials error while trying to use the Skeet framework. What should I do?"},{"role":"assistant","content":"The Skeet framework uses Google Cloud. You might need to login using `gcloud auth application-default login` to use the framework."}]}
-```
-
-Example `tuning.ts`
-
-```ts
-import { OpenAI } from '@skeet-framework/ai'
-
-const openAi = new SkeetAI({
-  ai: 'OpenAI',
-})
-
-// Upload JSONL file
-const filePath = './fine-tuning.jsonl'
-const uploadFile = await openAi.uploadFile(filePath)
-
-// Create Fine-tuning Job
-const model = 'gpt-3.5-turbo-0613'
-const job = await openAi.createFineTuningJob(uploadFile.id, model)
-
-// Check Fine-tuning Job Status
-const jobStatus = await openAi.showFineTuningJob(job.id)
-console.log(jobStatus)
-```
-
-You can use the fine-tuned model after the job is completed.
-
-## Skeet AI Transration
-
-This method is used to translate .json/.md files from one language to another.
-
-```ts
-import { SkeetAI } from '@skeet-framework/ai'
-
-const skeetAi = new SkeetAI()
-
-const translatePaths = {
-  paths: ['./README.md', './doc.json'],
-  langFrom: 'en',
-  langTo: 'ja',
-}
-
-await skeetAi.translates(
-  translatePaths.paths,
-  translatePaths.langFrom,
-  translatePaths.langTo,
-)
-```
-
-This function will generate a translated file in the same directory as the original file.
 
 # Skeet AI Docs
 

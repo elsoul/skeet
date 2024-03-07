@@ -6,6 +6,11 @@
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     },
     {
+      "target": "skeet-ai",
+      "public": "packages/ai/docs",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    },
+    {
       "target": "skeet-doc",
       "public": "website/skeet-doc/out",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]

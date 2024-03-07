@@ -10,6 +10,9 @@
         ],
         "skeet-doc": [
           "skeet-doc"
+        ],
+        "skeet-ai": [
+          "skeet-ai"
         ]
       }
     }

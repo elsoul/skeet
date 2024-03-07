@@ -16,6 +16,8 @@ import {
   ConfigGeminiType,
   ConfigOpenAIType,
   OpenAIModel,
+  chat,
+  defaultGeminiConfig,
   geminiChat,
   generatePrompt,
   openAIChat,
@@ -35,7 +37,7 @@ export async function promptUser(
   const aiOptions = {
     ai: (options.ai as AIType) || ('Gemini' as AIType),
     maxTokens: options.maxTokens || '1000',
-    model: options.model || 'gemini-1.0-pro',
+    model: options.model || defaultGeminiConfig.model,
     temperature: options.temperature || '0.1',
   }
 
@@ -98,55 +100,11 @@ export async function promptUser(
   // }
 
   const skeetPrompt = skeetAiPrompt('en')
-
-  if (aiOptions.ai === GEMINI) {
-    try {
-      const geminiConfig: ConfigGeminiType = {
-        model: aiOptions.model,
-        project: process.env.GCP_PROJECT_ID || '',
-        location: process.env.GCP_LOCATION || '',
-      }
-      const contents = generatePrompt<typeof GEMINI>(
-        GEMINI,
-        skeetPrompt.context,
-        skeetPrompt.examples,
-        userInput.input,
-      )
-      const stream = await geminiChat(contents, geminiConfig)
-      if (stream) {
-        await readGeminiStream(stream)
-      }
-      promptUser(aiOptions, logger)
-    } catch (error) {
-      console.error('Error:', error)
-      process.exit(1)
-    }
-  } else {
-    try {
-      const openaiConfig: ConfigOpenAIType = {
-        model: aiOptions.model as OpenAIModel,
-        maxTokens: Number(aiOptions.maxTokens),
-        temperature: Number(aiOptions.temperature),
-        topP: 1,
-        n: 1,
-        stream: true,
-        organizationKey: process.env.CHAT_GPT_ORG || '',
-        apiKey: process.env.CHAT_GPT_KEY || '',
-      }
-      const prompt = generatePrompt<typeof OPENAI>(
-        OPENAI,
-        skeetPrompt.context,
-        skeetPrompt.examples,
-        userInput.input,
-      )
-      const stream = await openAIChat(prompt, openaiConfig)
-      if (stream) {
-        await readOpenAIStream(stream as unknown as Readable)
-      }
-      promptUser(aiOptions, logger)
-    } catch (error) {
-      console.error('Error:', error)
-      process.exit(1)
-    }
-  }
+  await chat(
+    skeetPrompt.context,
+    skeetPrompt.examples,
+    userInput.input,
+    aiOptions.ai,
+  )
+  await promptUser(aiOptions, logger)
 }

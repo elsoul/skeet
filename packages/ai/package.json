@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/ai",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Skeet Framework Plugin - AI",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -25,18 +25,16 @@
   "bugs": {
     "url": "https://github.com/elsoul/skeet/issues"
   },
-  "homepage": "https://skeet.dev",
+  "homepage": "https://skeet-ai.web.app/",
   "scripts": {
     "test": "vitest",
-    "build": "rm -rf dist/ && tsx build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/",
+    "build": "rm -rf dist/ && tsx build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/ && pnpm run build-doc",
     "build-doc": "typedoc src/index.ts --out docs",
-    "dev": "npx ts-node -r tsconfig-paths/register --transpile-only src/index.ts",
-    "discord:labo": "npx ts-node -r tsconfig-paths/register --transpile-only ./.github/workflows/runDiscordChangeLog.ts labo",
-    "discord:epics": "npx ts-node -r tsconfig-paths/register --transpile-only ./.github/workflows/runDiscordChangeLog.ts epics"
+    "dev": "tsx src/index.ts"
   },
   "dependencies": {
     "@google-cloud/translate": "8.1.0",
-    "@google-cloud/vertexai": "0.4.0",
+    "@google-cloud/vertexai": "0.5.0",
     "chalk": "5.3.0",
     "dotenv": "16.4.5",
     "openai": "4.28.4"
@@ -44,17 +42,13 @@
   "devDependencies": {
     "@skeet-framework/discord-utils": "workspace:*",
     "@skeet-framework/utils": "workspace:*",
-    "@types/node": "20.11.22",
+    "@types/node": "20.11.24",
     "esbuild": "0.20.1",
-    "esbuild-plugin-alias-path": "2.0.2",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "prettier": "3.2.5",
-    "ts-loader": "9.5.1",
-    "ts-node": "10.9.2",
-    "tsconfig-paths": "4.2.0",
     "tsx": "4.7.1",
-    "typedoc": "0.25.9",
+    "typedoc": "0.25.11",
     "typescript": "5.3.3",
     "vite-tsconfig-paths": "4.3.1",
     "vitest": "1.3.1"
