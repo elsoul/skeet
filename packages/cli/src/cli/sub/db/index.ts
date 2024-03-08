@@ -6,6 +6,7 @@ import { dbReset } from './dbReset'
 import { dbSeed } from './dbSeed'
 import { dbStudio } from './dbStudio'
 import { selectDb } from './selectDb'
+import { writePrismaSchemaToFunctions } from '../sync/prismaSchemaToTypeScriptType'
 
 type DbOptions = {
   production: boolean
@@ -35,13 +36,16 @@ export const dbSubCommands = () => {
     })
 
   db.command('deploy')
+    .alias('dev')
     .description('Prisma DB Deploy command')
     .option('-p, --production', 'Production mode', false)
     .action(async (options: DbOptions) => {
       const dbDirs = await selectDb()
       for (const dbDir of dbDirs) {
         const cwd = './sql/' + dbDir
+        const modelPath = cwd + '/prisma/schema.prisma'
         await dbDeploy(options.production, cwd)
+        await writePrismaSchemaToFunctions(modelPath)
       }
     })
 

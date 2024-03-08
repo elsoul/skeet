@@ -1,19 +1,30 @@
-import { PRISMA_SCHEMA_PATH } from '@/index'
 import { Logger } from '@/lib'
-import { readFile, writeFile } from 'fs/promises'
+import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import { mkdir, readFile, writeFile } from 'fs/promises'
 
 export type PrismaModel = {
   name: string
   fields: Array<{ name: string; type: string; isOptional: boolean }>
 }
 
-export const writePrismaSchemaToFunctions = async (functionName: string) => {
+export const writePrismaSchemaToFunctions = async (modelPath: string) => {
   try {
-    const yourPrismaSchemaHere = await readFile(PRISMA_SCHEMA_PATH, 'utf-8')
+    const sqlName = modelPath.split('/')[2]
+    const yourPrismaSchemaHere = await readFile(modelPath, 'utf-8')
+    const commonSqlDir = './common/sql/'
+    if (!(await checkFileDirExists(commonSqlDir))) {
+      await mkdir(commonSqlDir, { recursive: true })
+    }
     const tsTypes = prismaSchemaToTypeScriptTypes(yourPrismaSchemaHere)
-    const outputPath = `./functions/${functionName}/src/models/sql/prisma.ts`
+    const outDir = `${commonSqlDir}${sqlName}`
+    if (!(await checkFileDirExists(outDir))) {
+      await mkdir(outDir, { recursive: true })
+    }
+    const outputPath = `${outDir}/prismaSchema.ts`
     await writeFile(outputPath, tsTypes)
-    Logger.successCheck(`Updated Prisma schema to ${outputPath}`)
+    Logger.successCheck(
+      `Converted prisma.schema to Common Type - ${outputPath}`,
+    )
   } catch (error) {
     throw new Error(`Error writing Prisma schema to functions: ${error}`)
   }
@@ -82,7 +93,7 @@ export function prismaSchemaToTypeScriptTypes(prismaSchema: string): string {
     output += `export type ${model.name} = {\n`
     for (const field of model.fields) {
       const tsType = mapPrismaTypeToTsType(field.type)
-      output += `  ${field.name}${field.isOptional ? '?' : ''}: ${tsType};\n`
+      output += `  ${field.name}${field.isOptional ? '?' : ''}: ${tsType}\n`
     }
     output += '}\n\n'
   }
