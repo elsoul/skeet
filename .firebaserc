@@ -13,6 +13,9 @@
         ],
         "skeet-ai": [
           "skeet-ai"
+        ],
+        "skeet-cloud-task": [
+          "skeet-cloud-task"
         ]
       }
     }

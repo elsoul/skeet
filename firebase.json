@@ -14,6 +14,11 @@
       "target": "skeet-doc",
       "public": "website/skeet-doc/out",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    },
+    {
+      "target": "skeet-cloud-task",
+      "public": "website/skeet-cloud-task/out",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     }
   ]
 }
