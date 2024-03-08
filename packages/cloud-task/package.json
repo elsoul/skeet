@@ -27,7 +27,7 @@
   "homepage": "https://skeet.dev",
   "scripts": {
     "test": "vitest",
-    "build": "rm -rf dist/ && tsx build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/",
+    "build": "rm -rf dist/ && tsx build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/ && pnpm run build-doc",
     "build-doc": "typedoc src/index.ts --out docs",
     "dev": "tsx src/index.ts"
   },
@@ -35,15 +35,11 @@
     "@google-cloud/tasks": "5.1.1"
   },
   "devDependencies": {
-    "@skeet-framework/discord-utils": "workspace:*",
-    "@skeet-framework/utils": "workspace:*",
     "@types/node": "20.11.24",
     "esbuild": "0.20.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "prettier": "3.2.5",
-    "ts-loader": "9.5.1",
-    "tsconfig-paths": "4.2.0",
     "tsx": "4.7.1",
     "typedoc": "0.25.10",
     "typescript": "5.3.3",
