@@ -17,7 +17,7 @@
     },
     {
       "target": "skeet-cloud-task",
-      "public": "packages/cloud-task/out",
+      "public": "packages/cloud-task/docs",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     }
   ]
