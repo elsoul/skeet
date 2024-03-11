@@ -4,7 +4,7 @@ import path from 'path'
 export const getSQLs = async () => {
   const dir = path.join(process.cwd(), 'sql')
   if (!dir) {
-    await mkdir(dir)
+    await mkdir(dir, { recursive: true })
   }
   console.log(dir)
   const apps = await readdir(dir)
