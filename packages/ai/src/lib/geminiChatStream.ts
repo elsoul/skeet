@@ -4,6 +4,7 @@ import {
   HarmBlockThreshold,
   GenerationConfig,
   Content,
+  StreamGenerateContentResult,
 } from '@google-cloud/vertexai'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -29,7 +30,7 @@ export const defaultGeminiConfig: ConfigGeminiType = {
   model: 'gemini-1.0-pro' as GeminiModel,
 }
 
-export const geminiChat = async (
+export const geminiChatStream = async (
   contents: Content[],
   config = defaultGeminiConfig,
 ) => {
@@ -62,11 +63,11 @@ export const geminiChat = async (
       contents,
     }
 
-    const resp = await generativeModel.generateContent(request)
-    if (resp == null) {
-      throw new Error('Error in geminiChat: response is null')
+    const streamingResp = await generativeModel.generateContentStream(request)
+    if (streamingResp == null) {
+      throw new Error('Error in geminiChatStream: No response from Vertex AI')
     }
-    return resp.response.candidates[0].content.parts[0].text as string
+    return streamingResp as StreamGenerateContentResult
   } catch (error) {
     throw new Error(`Error in geminiChat: ${error}`)
   }

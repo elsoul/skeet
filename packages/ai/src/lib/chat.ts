@@ -4,6 +4,13 @@ import { ConfigOpenAIType, defaultOpenAIConfig, openAIChat } from './openAIChat'
 import { readGeminiStream } from './readGeminiStream'
 import { readOpenAIStream } from './readOpenAIStream'
 import { Readable } from 'stream'
+import {
+  GenerateContentResult,
+  StreamGenerateContentResult,
+} from '@google-cloud/vertexai'
+import OpenAI from 'openai'
+import { geminiChatStream } from './geminiChatStream'
+import { openAIChatStream } from './openAIChatStream'
 
 const GEMINI = 'Gemini'
 const OPENAI = 'OpenAI'
@@ -16,6 +23,7 @@ const OPENAI = 'OpenAI'
  * @param examples - An array of `InputOutput` objects representing example input-output pairs to guide the model's responses.
  * @param input - The user's input string for which a response is requested from the chat model.
  * @param aiType - Specifies the chat model to use. Defaults to 'Gemini'. Can be either 'Gemini' or 'OpenAI'.
+ * @param isStream - A boolean indicating whether to return a stream of the model's response. Defaults to true.
  * @param isLogging - A boolean indicating whether to log the stream's content to the console. Defaults to true.
  * @returns Returns a Promise resolving to a stream of the model's response. If logging is disabled, the raw stream is returned directly.
  * @throws Exits the process with status code 1 if an error occurs.
@@ -36,6 +44,7 @@ export const chat = async (
   examples: InputOutput[],
   input: string,
   aiType = GEMINI as AIType,
+  isStream = true,
   isLogging = true,
 ) => {
   if (aiType === GEMINI) {
@@ -51,14 +60,17 @@ export const chat = async (
         examples,
         input,
       )
-      const stream = await geminiChat(contents, geminiConfig)
-      if (!isLogging) {
-        return stream
+
+      if (isStream) {
+        const stream = await geminiChatStream(contents, geminiConfig)
+        if (!isLogging) {
+          return stream as StreamGenerateContentResult
+        }
+        await readGeminiStream(stream as StreamGenerateContentResult)
+        return stream as StreamGenerateContentResult
       }
-      if (stream) {
-        await readGeminiStream(stream)
-      }
-      return stream
+      const resp = await geminiChat(contents, geminiConfig)
+      return resp
     } catch (error) {
       console.error('Error:', error)
       process.exit(1)
@@ -81,14 +93,16 @@ export const chat = async (
         examples,
         input,
       )
-      const stream = await openAIChat(prompt, openaiConfig)
-      if (!isLogging) {
-        return stream
-      }
-      if (stream) {
+
+      if (isStream) {
+        const stream = await openAIChatStream(prompt, openaiConfig)
+        if (!isLogging) {
+          return stream
+        }
         await readOpenAIStream(stream as unknown as Readable)
       }
-      return stream
+      const resp = await openAIChat(prompt, openaiConfig)
+      return resp
     } catch (error) {
       console.error('Error:', error)
       process.exit(1)

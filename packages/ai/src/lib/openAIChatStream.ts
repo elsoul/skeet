@@ -1,44 +1,18 @@
 import OpenAI from 'openai'
 import {
+  ChatCompletionChunk,
   ChatCompletionCreateParamsBase,
   ChatCompletionMessageParam,
 } from 'openai/resources/chat/completions'
+import { Stream } from 'openai/streaming'
 import dotenv from 'dotenv'
+import { defaultOpenAIConfig } from './openAIChat'
 dotenv.config()
 
 const apiKey = process.env.CHAT_GPT_KEY || ''
 const organizationKey = process.env.CHAT_GPT_ORG || ''
 
-export type OpenAIModel =
-  | 'gpt-4-turbo-preview'
-  | 'gpt-4-vision-preview'
-  | 'gpt-4-32k'
-  | 'gpt-3.5-turbo-0125'
-  | 'gpt-3.5-turbo'
-
-export interface ConfigOpenAIType {
-  model: OpenAIModel
-  temperature: number
-  maxTokens: number
-  topP: number
-  n: number
-  stream: boolean
-  organizationKey: string
-  apiKey: string
-}
-
-export const defaultOpenAIConfig: ConfigOpenAIType = {
-  model: 'gpt-4-turbo-preview' as OpenAIModel,
-  temperature: 0,
-  maxTokens: 256,
-  topP: 0.95,
-  n: 1,
-  stream: true,
-  organizationKey,
-  apiKey,
-}
-
-export const openAIChat = async (
+export const openAIChatStream = async (
   contents: Array<ChatCompletionMessageParam>,
   config = defaultOpenAIConfig,
 ) => {
@@ -59,14 +33,11 @@ export const openAIChat = async (
     max_tokens: config.maxTokens,
     top_p: config.topP,
     n: config.n,
-    stream: false,
+    stream: true,
     messages: contents,
   }
-
-  const resp = await ai.chat.completions.create(openaiConfig)
-  if ('choices' in resp) {
-    return resp.choices[0].message.content as string
-  } else {
-    throw new Error('Error in openAIChat: response is null')
-  }
+  const stream = (await ai.chat.completions.create(
+    openaiConfig,
+  )) as Stream<ChatCompletionChunk>
+  return stream
 }
