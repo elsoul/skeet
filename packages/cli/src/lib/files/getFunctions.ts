@@ -6,7 +6,7 @@ export const getFunctions = async () => {
   try {
     const dir = path.join(process.cwd(), 'functions')
     if (!dir) {
-      await mkdir(dir)
+      await mkdir(dir, { recursive: true })
     }
     const sqlDirs = (await readdir(dir)).map((dirName) =>
       path.join(dir, dirName),

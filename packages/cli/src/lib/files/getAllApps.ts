@@ -1,6 +1,8 @@
+import { mkdir } from 'fs/promises'
 import { getDirectoryLastModified } from './getDirectoryLastModified'
 import { getFunctions } from './getFunctions'
 import { getSQLs } from './getSQLs'
+import path from 'path'
 
 export const getAllApps = async () => {
   try {
@@ -8,6 +10,9 @@ export const getAllApps = async () => {
     const dirs = (await getFunctions()).map((dir) => `functions/${dir}`)
     const sqls = (await getSQLs()).map((dir) => `sql/${dir}`)
     dirs.push('webapp')
+    if (!path.join(process.cwd(), 'webapp')) {
+      await mkdir('webapp', { recursive: true })
+    }
     dirs.push(...sqls)
     for (const dir of dirs) {
       const name = dir
