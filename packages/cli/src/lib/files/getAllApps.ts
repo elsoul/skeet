@@ -1,4 +1,4 @@
-import { existsSync } from '@skeet-framework/utils'
+import path from 'path'
 import { getDirectoryLastModified } from './getDirectoryLastModified'
 import { getFunctions } from './getFunctions'
 import { getSQLs } from './getSQLs'
@@ -10,7 +10,7 @@ export const getAllApps = async () => {
     const dirs = (await getFunctions()).map((dir) => `functions/${dir}`)
     const sqls = (await getSQLs()).map((dir) => `sql/${dir}`)
     dirs.push('webapp')
-    if (await existsSync('webapp')) {
+    if (!path.join(process.cwd(), 'webapp')) {
       await mkdir('webapp', { recursive: true })
     }
     dirs.push(...sqls)

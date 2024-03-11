@@ -210,14 +210,11 @@ importers:
         specifier: 0.20.1
         version: 0.20.1
       esbuild-plugin-alias-path:
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2(esbuild@0.20.1)
       eslint:
         specifier: 8.57.0
         version: 8.57.0
-      eslint-config-prettier:
-        specifier: 9.1.0
-        version: 9.1.0(eslint@8.57.0)
       nodemon:
         specifier: 3.1.0
         version: 3.1.0
@@ -231,13 +228,13 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       tsx:
-        specifier: ^4.7.1
+        specifier: 4.7.1
         version: 4.7.1
       typescript:
         specifier: 5.4.2
         version: 5.4.2
       vite:
-        specifier: ^5.1.5
+        specifier: 5.1.5
         version: 5.1.5(@types/node@20.11.25)
       vite-tsconfig-paths:
         specifier: 4.3.1
@@ -9059,12 +9056,6 @@ packages:
       get-intrinsic: 1.2.4
     dev: true
 
-  /get-tsconfig@4.7.2:
-    resolution: {integrity: sha512-wuMsz4leaj5hbGgg4IvDU0bqJagpftG5l5cXIAvo8uZrqn0NJqwtfupTN00VnkQJPcIRrxYrm1Ue24btpCha2A==}
-    dependencies:
-      resolve-pkg-maps: 1.0.0
-    dev: true
-
   /get-tsconfig@4.7.3:
     resolution: {integrity: sha512-ZvkrzoUA0PQZM6fy6+/Hce561s+faD1rsNwhnO5FelNjyy7EMGJ3Rz1AQ8GYDWjhRs/7dBLOEJvhK8MiEJOAFg==}
     dependencies:
@@ -15501,7 +15492,7 @@ packages:
     hasBin: true
     dependencies:
       esbuild: 0.19.12
-      get-tsconfig: 4.7.2
+      get-tsconfig: 4.7.3
     optionalDependencies:
       fsevents: 2.3.3
     dev: true

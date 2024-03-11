@@ -14,6 +14,7 @@ describe('Method: getFunctions/getSQLs', () => {
 
   it('should return SQL Apps array', async () => {
     const functions = await getSQLs()
+    console.log(functions)
 
     // return SQL App Name array
     expect(functions).toBeInstanceOf(Array)

@@ -1,4 +1,3 @@
-import { PRISMA_SCHEMA_PATH } from '@/index'
 import chalk from 'chalk'
 import { promptUser } from '../ai'
 import { spawnSync } from 'child_process'
@@ -8,6 +7,13 @@ import inquirer from 'inquirer'
 import { yesOrNo } from './yesOrNoMode'
 import { AiLog } from '../aiLog'
 import { SkeetAIOptions } from '..'
+import { getSQLs } from '@/lib/files/getSQLs'
+import { prismaPrompt } from '../skeetai/prisma/prompt'
+
+type PrismaOptions = {
+  modelPath: string
+  input: string
+}
 
 export const prismaMode = async (config: SkeetAIOptions, logger: AiLog) => {
   const log = logger.text() as SkeetLog
@@ -23,14 +29,21 @@ export const prismaMode = async (config: SkeetAIOptions, logger: AiLog) => {
     log.prismaMode.example2 +
     '\n\n' +
     chalk.green(log.common.you + ':')
-  logger.addJson(SkeetRole.AI, inputMessage, SkeetAiMode.Firestore, model)
-  const answer = await inquirer.prompt([
+
+  const answer = await inquirer.prompt<PrismaOptions>([
+    {
+      type: 'list',
+      name: 'modelPath',
+      message: 'Select Model',
+      choices: await getSQLs(),
+    },
     {
       type: 'input',
       name: 'input',
       message: inputMessage,
     },
   ])
+  const firstAiContent = await prismaPrompt(answer.modelPath)
 
   const prismaSchema = (await skeetAi.prisma(answer.input)) as string
   console.log(
