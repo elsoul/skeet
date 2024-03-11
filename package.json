@@ -31,6 +31,7 @@
     "ci:publish": "changeset publish",
     "test": "pnpm run -r test",
     "build": "pnpm run -r build",
+    "dev:func": "firebase emulators:start --only functions",
     "cli": "pnpm -F \"@skeet-framework/cli\"",
     "utils": "pnpm -F \"@skeet-framework/utils\"",
     "discord:labo": "tsx ./common/runDiscordChangeLog.ts labo",

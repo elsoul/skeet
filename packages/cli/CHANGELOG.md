@@ -1,5 +1,29 @@
 # @skeet-framework/cli
 
+## 2.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`c70fa8f`](https://github.com/elsoul/skeet/commit/c70fa8f24321104f4cdfc82a4738ebf9fa6752c7)]:
+  - @skeet-framework/ai@1.8.2
+
+## 2.0.9
+
+### Patch Changes
+
+- [#305](https://github.com/elsoul/skeet/pull/305) [`cc18a61`](https://github.com/elsoul/skeet/commit/cc18a614aecd1ddfe2cd47146c95af522fa1af7f) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet db dev
+
+  Run `skeet db dev` to generate the prisma schema and types for the selected databases and generate the migration files if needed.
+
+  ```bash
+  $ skeet db migrate
+  ? Select Database (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
+  ❯◉ card-db
+   ◯ point-db
+   ◯ staking-db
+   ✔ Converted prisma.schema to Common Type - ./common/sql/card-db/prismaSchema.ts 🎉
+  ```
+
 ## 2.0.8
 
 ### Patch Changes

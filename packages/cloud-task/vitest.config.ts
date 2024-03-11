@@ -8,6 +8,5 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     setupFiles: [],
-    // testTimeout: 20000,
   },
 })

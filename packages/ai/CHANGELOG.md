@@ -1,5 +1,11 @@
 # @skeet-framework/ai
 
+## 1.8.2
+
+### Patch Changes
+
+- [#308](https://github.com/elsoul/skeet/pull/308) [`c70fa8f`](https://github.com/elsoul/skeet/commit/c70fa8f24321104f4cdfc82a4738ebf9fa6752c7) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - add isStream boolean to chat function
+
 ## 1.8.1
 
 ### Patch Changes

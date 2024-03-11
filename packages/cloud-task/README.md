@@ -32,12 +32,6 @@ Especially works with [Skeet Framework](https://skeet.dev).
 pnpm add -g @skeet-framework/cloud-task
 ```
 
-with Skeet Framework
-
-```bash
-skeet yarn add -p @skeet-framework/cloud-task
-```
-
 ## Usage
 
 Checks whether a validator is active on the Solana network.
@@ -64,7 +58,7 @@ console.log(result)
 
 more functions can be found in the
 
-- [Skeet Solana Utils TypeDoc](https://elsoul.github.io/skeet-cloud-task/)
+- [Skeet Cloud Task TypeDoc](https://elsoul.github.io/skeet-cloud-task/)
 
 ## Contributing
 

@@ -1,8 +1,8 @@
-import { mkdir } from 'fs/promises'
+import path from 'path'
 import { getDirectoryLastModified } from './getDirectoryLastModified'
 import { getFunctions } from './getFunctions'
 import { getSQLs } from './getSQLs'
-import path from 'path'
+import { mkdir } from 'fs/promises'
 
 export const getAllApps = async () => {
   try {

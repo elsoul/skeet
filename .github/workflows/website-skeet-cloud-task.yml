@@ -1,11 +1,11 @@
-name: skeet-ai
+name: skeet-cloud-task
 on:
   push:
     branches:
       - main
     paths:
-      - 'packages/ai/**'
-      - '.github/workflows/website-skeet-ai.yml'
+      - 'packages/cloud-task/docs/**'
+      - '.github/workflows/website-skeet-cloud-task.yml'
 
 jobs:
   build:
@@ -34,8 +34,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build App
-        run: pnpm -F ai build-doc
+        run: pnpm -F cloud-task build-doc
         env:
           NODE_OPTIONS: --max-old-space-size=8192
       - name: Deploy to Firebase
-        run: firebase deploy --only hosting:skeet-ai
+        run: firebase deploy --only hosting:skeet-cloud-task
