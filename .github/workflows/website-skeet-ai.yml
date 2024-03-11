@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'packages/ai/docs/**'
+      - 'packages/ai/**'
       - '.github/workflows/website-skeet-ai.yml'
 
 jobs:
