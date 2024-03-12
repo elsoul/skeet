@@ -1,5 +1,12 @@
 # base-functions
 
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`efad937`](https://github.com/elsoul/skeet/commit/efad937a1b75ff083ac23ea1f41fd9ae1431de8c)]:
+  - @skeet-framework/utils@1.3.6
+
 ## 1.0.4
 
 ### Patch Changes
