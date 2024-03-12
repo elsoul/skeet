@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "dist",
+    "target": "ESNext",
+    "strict": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "lib": ["esnext"],
+    "sourceMap": true,
+    "paths": {
+      "@website/*": ["./website/*"],
+      "@lib/*": ["lib/*"],
+      "@functions/*": ["./functions/*"],
+      "@common/*": ["./common/*"]
+    }
+  },
+  "compileOnSave": true,
+  "include": ["**/*.ts", "common/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
