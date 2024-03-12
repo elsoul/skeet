@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'packages/**'
+      - 'templates/**'
       - '.github/workflows/skeet-release.yml'
 
 jobs:
