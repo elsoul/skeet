@@ -24,17 +24,7 @@ export class AiLog {
 
   help = () => {
     console.log(
-      chalk.white(
-        `\n🤖 ${this.text().common.skeetAiModeText} 🤖\n\n` +
-          '$ prisma\n' +
-          '$ typedoc\n' +
-          '$ translate\n' +
-          '$ firestore\n' +
-          '$ function\n' +
-          '$ method\n' +
-          '$ help\n' +
-          '$ q\n',
-      ),
+      chalk.white(`\n🤖 ${this.text().common.skeetAiModeText} 🤖\n\n`),
     )
   }
 
@@ -60,12 +50,7 @@ export class AiLog {
       }, // テーブルの罫線スタイルを指定
     })
 
-    table.push(
-      [this.text().common.aiType, aiOptions.ai],
-      [this.text().common.model, aiOptions.model],
-      [this.text().common.maxToken, aiOptions.maxTokens],
-      [this.text().common.temperature, aiOptions.temperature],
-    )
+    table.push([this.text().common.aiType, aiOptions.ai])
 
     console.log(table.toString())
   }

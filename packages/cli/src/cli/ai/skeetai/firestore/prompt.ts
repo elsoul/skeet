@@ -17,9 +17,7 @@ async function readModels(modelPath: string) {
   }
 }
 
-export const firestorePrompt = async (modelPath: string) => {
-  const existingModels = await readModels(modelPath)
-
+export const firestorePrompt = async () => {
   const prompt = {
     context: `
 You are a specialist in generating Firestore's data model design in TypeScript 5.2.0. Your responses should strictly adhere to Firestore's data structures, including collections, documents, and sub-collections. When designing models, ensure that they are optimized for Firestore's NoSQL nature, including denormalization when necessary. Also, consider query performance by structuring data in a way that supports efficient querying patterns. Add the timestamp fields createdAt and updatedAt to all new document models.
@@ -29,10 +27,6 @@ The CollectionId is the collection name.
 The DocumentId is the document name.
 The Path is the path to the document.
 
-If you're provided with existing model names, make sure not to use them again.
----Existing models---
-${existingModels}
----
 You must put \`import { Timestamp, FieldValue } from '@skeet-framework/firestore\` at the top of the file.
 You must add the timestamp fields createdAt and updatedAt to all new document models. timestamp format: \`createdAt?: Timestamp | FieldValue\n updatedAt?: Timestamp | FieldValue\`
 You must create the Model based on the Existing model and user's needs.

@@ -1,17 +1,17 @@
-import { SkeetAI } from '@skeet-framework/ai'
 import chalk from 'chalk'
 import { promptUser } from '../ai'
-import { spawnSync } from 'child_process'
 import { AiLog } from '../aiLog'
+import { SkeetAIOptions } from '..'
+import { execAsync } from '@skeet-framework/utils'
 
 export const skeetMode = async (
   input: string,
-  skeetAi: SkeetAI,
-  logger: AiLog
+  options: SkeetAIOptions,
+  logger: AiLog,
 ) => {
   console.log(chalk.blue('Skeet:'), chalk.white(`Running skeet command...`))
 
   const cmd = `${input.replace(/^\$ skeet/, 'skeet')}`
-  spawnSync(cmd, { shell: true, stdio: 'inherit' })
-  await promptUser(skeetAi.initOptions, logger)
+  await execAsync(cmd)
+  await promptUser(options, logger)
 }

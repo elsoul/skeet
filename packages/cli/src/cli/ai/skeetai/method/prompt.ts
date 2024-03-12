@@ -1,10 +1,9 @@
-import { Example } from '@/lib/types/skeetaiTypes'
+import { Example } from '@skeet-framework/ai'
 
 export const typescriptMethodPrompt = (
   tsconfig: string,
   packageJson: string,
   prettierrc: string,
-  existingModels: string,
   existingFunctions: string,
 ) => {
   const prompt: Example = {
@@ -13,12 +12,10 @@ You are a specialist in generating TypeScript 5.2.0 functions. Your responses sh
 
 If you're provided with existing function names, make sure not to use them again.
 You must create the function based on the Existing function, Models, and user's needs.
-You must not use the existing function names and model names.
+You must not use the existing function names.
 ---Existing functions---
 ${existingFunctions}
----Existing models---
-${existingModels}
----
+
 You must follow package.json, tsconfig.json and prettierrc.json.
 ---package.json---
 ${packageJson}

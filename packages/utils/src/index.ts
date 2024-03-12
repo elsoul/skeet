@@ -57,5 +57,5 @@ export {
   differenceInQuarters,
   differenceInISOWeekYears,
 } from 'date-fns'
-export { execSync } from './lib/execSync'
-export { existsSync } from './lib/existsSync'
+export { execAsync } from './lib/execAsync'
+export { existsAsync } from './lib/existsAsync'

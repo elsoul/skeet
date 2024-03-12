@@ -1,15 +1,18 @@
-import { AIType, generatePrompt } from '@/lib/genPrompt'
+import {
+  AIType,
+  Example,
+  NamingEnum,
+  generatePrompt,
+} from '@skeet-framework/ai'
 import {
   migrationNamingPrompt,
   functionNamingPrompt,
   modelNamingPrompt,
 } from './prompt'
-import { Example, NamingEnum } from '@/lib/types/skeetaiTypes'
 export const skeetNaming = async (
   content: string,
   aiType: AIType,
   namingEnum: NamingEnum,
-  modelPath: string,
   functionNames = ['skeet'],
 ) => {
   try {
@@ -19,7 +22,7 @@ export const skeetNaming = async (
     } else if (namingEnum === NamingEnum.FUNCTION) {
       example = functionNamingPrompt(functionNames)
     } else if (namingEnum === NamingEnum.MODEL) {
-      example = await modelNamingPrompt(modelPath)
+      example = await modelNamingPrompt()
     }
 
     const result = generatePrompt(

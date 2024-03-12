@@ -1,4 +1,4 @@
-import { AIType, generatePrompt } from '@/lib/genPrompt'
+import { AIType, generatePrompt } from '@skeet-framework/ai'
 import { typedocPrompt } from './prompt'
 
 export const skeetGenTypedoc = async (aiType: AIType, content: string) => {

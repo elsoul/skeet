@@ -1,15 +1,11 @@
-import { PATH } from '@/config/path'
-import { spawnSync } from 'child_process'
+import { execAsync } from '@skeet-framework/utils'
 
-export const dbMigrate = (production: boolean = false, cwd = './graphql') => {
+export const dbMigrate = async (cwd: string, production: boolean = false) => {
   try {
     const prismaMigrateCmd = production
       ? ['npx', 'dotenv', '-e', `.env.build`, 'npx', 'prisma', 'migrate', 'dev']
       : ['npx', 'prisma', 'migrate', 'dev']
-    spawnSync(prismaMigrateCmd[0], prismaMigrateCmd.slice(1), {
-      cwd,
-      stdio: 'inherit',
-    })
+    return await execAsync(prismaMigrateCmd.join(' '), cwd)
   } catch (error) {
     throw new Error(`Error initializing database: ${error}`)
   }

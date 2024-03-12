@@ -17,7 +17,7 @@
   "cloudArmor": [],
   "routings": [],
   "ai": {
-    "lang": "ja",
+    "lang": "en",
     "ais": [
       {
         "name": "VertexAI",

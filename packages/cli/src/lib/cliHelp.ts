@@ -243,12 +243,10 @@ Usage: skeet ai [options]
 AI Playground
 
 Options:
-  -g, --gemini                   Gemini
-  -o, --openai                   OpenAI
-  -m, --model <string>           Model
-  -token, --token <number>       Max Tokens
-  -temp, --temperature <number>  Temperature
-  -h, --help                     display help for command
+  -g, --gemini  Gemini
+  -o, --openai  OpenAI
+  --mode        Mode
+  -h, --help    display help for command
 
 Usage: skeet config [options] [command]
 

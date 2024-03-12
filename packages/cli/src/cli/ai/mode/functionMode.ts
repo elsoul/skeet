@@ -1,12 +1,14 @@
-import { NamingEnum, SkeetAI } from '@skeet-framework/ai'
+import { chat } from '@skeet-framework/ai'
 import { promptUser } from '../ai'
 import inquirer from 'inquirer'
-import { SkeetAiMode, SkeetInstanceType } from '@/types/skeetTypes'
-import { getFunctions } from '@/lib'
-import { spawnSync } from 'child_process'
+import { SkeetInstanceType } from '@/types/skeetTypes'
+import { getFunctions } from '@/lib/files/getFunctions'
 import { AiLog } from '../aiLog'
+import { SkeetAIOptions } from '..'
+import { functionNamingPrompt } from '../skeetai/naming/prompt'
+import { execAsync } from '@skeet-framework/utils'
 
-export const functionMode = async (skeetAi: SkeetAI, logger: AiLog) => {
+export const functionMode = async (options: SkeetAIOptions, logger: AiLog) => {
   const log = logger.text() as SkeetLog
   console.log(log.functionMode.init)
   const functions = await getFunctions()
@@ -46,34 +48,37 @@ export const functionMode = async (skeetAi: SkeetAI, logger: AiLog) => {
       text = `${name} ` + log.functionMode.storage || ''
     } else if (`${name}` === 'schedule') {
       text = `${name} ` + log.functionMode.schedule || ''
+    } else if (`${name}` === 'onCall') {
+      text = `${name} ` + log.functionMode.onCall || ''
     }
     choices.push({ name: text, value: name })
   }
-  const answer = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'instanceType',
-      message: log.functionMode.modeDesc,
-      choices,
-    },
-  ])
-  const answer2 = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'input',
-      message: log.functionMode.modeDesc2,
-    },
-  ])
-  const namingAnswer = await skeetAi.naming(answer2.input, NamingEnum.FUNCTION)
-  const cmd = `skeet add method ${namingAnswer} --instance ${answer.instanceType} --function ${functionName}`
-  spawnSync(cmd, { stdio: 'inherit', shell: true })
-
-  logger.addJson(
-    'ai',
-    answer.instanceType,
-    SkeetAiMode.Function,
-    String(skeetAi.initOptions.model),
+  const answer = await inquirer.prompt<{ instanceType: string; input: string }>(
+    [
+      {
+        type: 'list',
+        name: 'instanceType',
+        message: log.functionMode.modeDesc,
+        choices,
+      },
+      {
+        type: 'input',
+        name: 'input',
+        message: log.functionMode.modeDesc2,
+      },
+    ],
   )
+  const namingPrompt = functionNamingPrompt(await getFunctions())
+  const namingAnswer = (await chat(
+    namingPrompt.context,
+    namingPrompt.examples,
+    answer.input,
+    options.ai,
+    false,
+  )) as string
+  const cmd = `skeet add method --methodName ${namingAnswer} --instance ${answer.instanceType} --function ${functionName}`
+  await execAsync(cmd)
+
   console.log(log.functionMode.ExitingMode + '...\n')
-  promptUser(skeetAi.initOptions, logger)
+  await promptUser(options, logger)
 }

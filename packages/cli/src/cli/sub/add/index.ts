@@ -20,6 +20,12 @@ import { addStripeWebhook } from './addStripeWebhook'
 import { addTaskQueue } from './addTaskQueue'
 import { addCloudSQL } from './addCloudSQL'
 
+type AddMethodOptions = {
+  instance: string
+  function: string
+  methodName: string
+}
+
 export const addSubCommands = async () => {
   const add = program
     .command('add')
@@ -35,19 +41,24 @@ export const addSubCommands = async () => {
     .command('method')
     .option('--instance <instance>', 'Instance Type - e.g. http')
     .option('--function <function>', 'Function Name - e.g. skeet')
-    .action(async (options: { function: string; instance: string }) => {
-      const answer = await inquirer.prompt<{ methodName: string }>([
-        {
-          type: 'input',
-          name: 'methodName',
-          message: 'Enter Method Name',
-          default: 'methodName',
-        },
-      ])
-      const methodNameString = answer.methodName || 'methodName'
-      if (options.function !== '' && options.instance !== '') {
-        await addMethod(methodNameString, options.instance, options.function)
+    .option('--methodName <methodName>', 'Method Name - e.g. methodName')
+    .action(async (options: AddMethodOptions) => {
+      if (
+        options.function !== null &&
+        options.instance !== null &&
+        options.methodName !== null
+      ) {
+        await addMethod(options.methodName, options.instance, options.function)
       } else {
+        const answer = await inquirer.prompt<{ methodName: string }>([
+          {
+            type: 'input',
+            name: 'methodName',
+            message: 'Enter Method Name',
+            default: 'methodName',
+          },
+        ])
+        const methodNameString = answer.methodName || 'methodName'
         await addMethod(methodNameString)
       }
     })

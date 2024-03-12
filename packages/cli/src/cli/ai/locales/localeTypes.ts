@@ -53,6 +53,7 @@ interface ExtendedMode extends BaseMode {
   firestore?: string
   storage?: string
   schedule?: string
+  onCall?: string
   auth?: string
   modeDesc2?: string
 }

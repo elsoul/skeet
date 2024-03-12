@@ -8,7 +8,7 @@
     "model": "Model",
     "maxToken": "Max Token",
     "temperature": "Temperature",
-    "skeetAiModeText": "Skeet AI Mode\n `$ <mode>` to change AI mode",
+    "skeetAiModeText": "Skeet AI Mode\nType `mode` to change AI mode",
     "isSelected": "is selected 🤖 (type 'q' to quit)",
     "shutdown": "is shutting down",
     "howAboutThis": "How about this?\n\n",
@@ -69,6 +69,7 @@
     "firestore": "- Triggered by Firestore event",
     "pubsub": "- Triggered by PubSub event",
     "schedule": "- Triggered by Schedule event",
+    "onCall": "- Triggered by onCall event",
     "example1": "I want to create a blog app.",
     "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
     "ExitingMode": "Exiting Function Mode"

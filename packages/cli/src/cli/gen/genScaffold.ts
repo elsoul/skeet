@@ -21,6 +21,18 @@ export const genScaffoldAll = async () => {
   }
 }
 
+export const genScaffoldSingle = async (sqlName: string) => {
+  const newModels = await getNewModels(sqlName)
+  if (newModels.length === 0) {
+    console.log('No new models found')
+    return
+  }
+  console.log('New models found:', newModels)
+  for await (const modelName of newModels) {
+    await genScaffold(sqlName, modelName)
+  }
+}
+
 export const askSqlName = async () => {
   const sqlNames = await getSQLs()
   const answer = await inquirer.prompt<{ sqlName: string }>([
