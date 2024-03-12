@@ -8,7 +8,7 @@
     "model": "モデル",
     "maxToken": "最大トークン",
     "temperature": "感情の大きさ",
-    "skeetAiModeText": "Skeet AIモード\n `$ <mode>` でAIモードを変更",
+    "skeetAiModeText": "Skeet AIモード\n `mode` と入力してAIモードを変更",
     "isSelected": "が選択されました 🤖 ('q'を入力して終了)",
     "shutdown": "シャットダウン中",
     "howAboutThis": "これはいかがでしょうか？\n\n",
@@ -70,6 +70,7 @@
     "firestore": "- Firestoreイベントによってトリガーされます",
     "pubsub": "- PubSubイベントによってトリガーされます",
     "schedule": "- スケジュールイベントによってトリガーされます",
+    "onCall": "- クライアントからの呼び出しによってトリガーされます",
     "example1": "ブログアプリを作りたい。",
     "example2": "次のフィールドを持つ新しいモデル、Clientを作りたい：id、名前、メール、パスワード、作成日、更新日。",
     "ExitingMode": "Functionモードを終了"

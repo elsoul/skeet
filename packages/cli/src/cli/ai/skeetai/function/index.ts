@@ -1,6 +1,6 @@
-import { InstanceType } from '@/lib/types/skeetaiTypes'
+import { AIType, generatePrompt } from '@skeet-framework/ai'
 import { firebaseFunctionPrompt } from './prompt'
-import { AIType, generatePrompt } from '@/lib/genPrompt'
+import { SkeetInstanceType } from '@/types/skeetTypes'
 
 export const skeetFunction = async (
   aiType: AIType,
@@ -10,7 +10,7 @@ export const skeetFunction = async (
   prettierrc: string,
   existingFunctions: string,
   existingModels: string,
-  instanceType: InstanceType,
+  instanceType: SkeetInstanceType,
 ) => {
   try {
     const example = firebaseFunctionPrompt(

@@ -1,9 +1,10 @@
-import { Example, InstanceType } from '@/lib/types/skeetaiTypes'
 import { auth } from './auth'
 import { firestore } from './firestore'
 import { pubsub } from './pubsub'
 import { schedule } from './schedule'
 import { http, httpExample } from './http'
+import { SkeetInstanceType } from '@/types/skeetTypes'
+import { Example } from '@skeet-framework/ai'
 
 export const firebaseFunctionPrompt = (
   tsconfig: string,
@@ -11,18 +12,18 @@ export const firebaseFunctionPrompt = (
   prettierrc: string,
   existingModels: string,
   existingFunctions: string,
-  instanceType: InstanceType,
+  instanceType: SkeetInstanceType,
 ) => {
   let instanceTemplate = ''
-  if (instanceType === InstanceType.AUTH) {
+  if (instanceType === SkeetInstanceType.AUTH) {
     instanceTemplate = auth
-  } else if (instanceType === InstanceType.FIRESTORE) {
+  } else if (instanceType === SkeetInstanceType.FIRESTORE) {
     instanceTemplate = firestore
-  } else if (instanceType === InstanceType.PUBSUB) {
+  } else if (instanceType === SkeetInstanceType.PUBSUB) {
     instanceTemplate = pubsub
-  } else if (instanceType === InstanceType.SCHEDULE) {
+  } else if (instanceType === SkeetInstanceType.SCHEDULE) {
     instanceTemplate = schedule
-  } else if (instanceType === InstanceType.HTTP) {
+  } else if (instanceType === SkeetInstanceType.HTTP) {
     instanceTemplate = http
   }
   const prompt: Example = {

@@ -10,6 +10,7 @@ import { writePrismaSchemaToFunctions } from '../sync/prismaSchemaToTypeScriptTy
 
 type DbOptions = {
   production: boolean
+  d: string
 }
 
 export const dbSubCommands = () => {
@@ -17,11 +18,17 @@ export const dbSubCommands = () => {
   db.command('migrate')
     .description('Initialize database')
     .option('-p, --production', 'Production mode', false)
+    .option('-d <d>', 'Database', 'all')
     .action(async (options: DbOptions) => {
+      if (options.d !== 'all') {
+        const cwd = './sql/' + options.d
+        await dbMigrate(cwd, options.production)
+        return
+      }
       const dbDirs = await selectDb()
       for (const dbDir of dbDirs) {
         const cwd = './sql/' + dbDir
-        dbMigrate(options.production, cwd)
+        await dbMigrate(cwd, options.production)
       }
     })
 

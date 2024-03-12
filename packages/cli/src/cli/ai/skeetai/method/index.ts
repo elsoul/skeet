@@ -1,5 +1,5 @@
+import { AIType, generatePrompt } from '@skeet-framework/ai'
 import { typescriptMethodPrompt } from './prompt'
-import { AIType, generatePrompt } from '@/lib/genPrompt'
 
 export const skeetMethod = async (
   content: string,
@@ -8,7 +8,6 @@ export const skeetMethod = async (
   packageJson: string,
   prettierrc: string,
   existingFunctions: string,
-  existingModels: string,
 ) => {
   try {
     const example = typescriptMethodPrompt(
@@ -16,7 +15,6 @@ export const skeetMethod = async (
       packageJson,
       prettierrc,
       existingFunctions,
-      existingModels,
     )
     const result = generatePrompt(
       aiType,

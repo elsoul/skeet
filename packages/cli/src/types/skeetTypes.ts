@@ -112,6 +112,7 @@ export enum SkeetInstanceType {
   FIRESTORE = 'firestore',
   PUBSUB = 'pubsub',
   SCHEDULE = 'schedule',
+  ONCALL = 'onCall',
 }
 
 export enum SkeetAiMode {

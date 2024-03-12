@@ -108,7 +108,8 @@ async function readModelFiles(modelPath: string) {
   }
 }
 
-export const modelNamingPrompt = async (modelPath: string) => {
+export const modelNamingPrompt = async () => {
+  const commonModelPath = 'common/models'
   return {
     context: `You are a specialist in naming TypeScript model file name. Users will provide you with Firestore Model. Your task is to return a model file name related to the described task in camelCase, ranging from 4 to 20 characters. Even if the user's description is vague or unusual, try to come up with the most appropriate name. You can use the following rules to name the model file name.
     you must use camelCase.
@@ -117,7 +118,7 @@ export const modelNamingPrompt = async (modelPath: string) => {
     you must not use numbers.
     you must not use spaces.
     you must not use the same name as the existing model file name.
-    Exisiting model file names: ${(await readModelFiles(modelPath)).join(', ')}
+    Exisiting model file names: ${(await readModelFiles(commonModelPath)).join(', ')}
     you must use <filename>Models.ts as the file name.
     your task is to return <filename>Models.ts as the file name.
     `,

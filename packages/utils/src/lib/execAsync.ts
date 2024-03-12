@@ -1,7 +1,7 @@
 import { exec } from 'child_process'
 import { promisify } from 'util'
 
-const execAsync = promisify(exec)
+const execAsyncCmd = promisify(exec)
 
 /**
  * Asynchronously executes a shell command in a child process, optionally logs the output, and allows execution in a specific working directory.
@@ -21,7 +21,7 @@ const execAsync = promisify(exec)
  *   const cwd = '/usr';
  *   const isLog = true;
  *
- *   const { stdout, stderr } = await execSync(command, cwd, isLog);
+ *   const { stdout, stderr } = await execAsync(command, cwd, isLog);
  *   // Outputs are logged based on the isLog parameter
  * }
  *
@@ -30,9 +30,9 @@ const execAsync = promisify(exec)
  * });
  */
 
-export const execSync = async (command: string, cwd = '.', isLog = true) => {
+export const execAsync = async (command: string, cwd = '.', isLog = true) => {
   try {
-    const { stdout, stderr } = await execAsync(command, {
+    const { stdout, stderr } = await execAsyncCmd(command, {
       cwd,
     })
     if (isLog) console.log(stdout)

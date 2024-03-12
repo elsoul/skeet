@@ -1,14 +1,14 @@
 import chalk from 'chalk'
 import { promptUser } from '../ai'
-import { spawnSync } from 'child_process'
-import { NamingEnum } from '@skeet-framework/ai'
-import { SkeetAiMode, SkeetRole } from '@/types/skeetTypes'
+import { chat } from '@skeet-framework/ai'
 import inquirer from 'inquirer'
 import { yesOrNo } from './yesOrNoMode'
 import { AiLog } from '../aiLog'
 import { SkeetAIOptions } from '..'
 import { getSQLs } from '@/lib/files/getSQLs'
 import { prismaPrompt } from '../skeetai/prisma/prompt'
+import { appendFile } from 'fs/promises'
+import { execAsync } from '@skeet-framework/utils'
 
 type PrismaOptions = {
   modelPath: string
@@ -18,7 +18,6 @@ type PrismaOptions = {
 export const prismaMode = async (config: SkeetAIOptions, logger: AiLog) => {
   const log = logger.text() as SkeetLog
   console.log(chalk.cyan(log.prismaMode.init))
-  const model = String(config.model)
   const inputMessage =
     log.prismaMode.modeDesc +
     '\n\n' +
@@ -43,16 +42,22 @@ export const prismaMode = async (config: SkeetAIOptions, logger: AiLog) => {
       message: inputMessage,
     },
   ])
-  const firstAiContent = await prismaPrompt(answer.modelPath)
-
-  const prismaSchema = (await skeetAi.prisma(answer.input)) as string
+  const prismaSchemaPath = './sql/' + answer.modelPath + '/prisma/schema.prisma'
+  const firstAiContent = await prismaPrompt(prismaSchemaPath)
+  const prismaSchema = (await chat(
+    firstAiContent.context,
+    firstAiContent.examples,
+    answer.input,
+    config.ai,
+    false,
+  )) as string
   console.log(
     chalk.blue(
       'Skeet: ' +
         chalk.white(log.common.howAboutThis) +
         chalk.gray(log.prismaMode.warning),
     ) +
-      `${chalk.white('```prisma.schema\n')}` +
+      chalk.white('```prisma.schema\n') +
       chalk.white(prismaSchema) +
       `${chalk.white('\n```')}`,
   )
@@ -60,42 +65,34 @@ export const prismaMode = async (config: SkeetAIOptions, logger: AiLog) => {
   const text = String(log.prismaMode.schemaConfirm)
   const isYes = await yesOrNo(text)
   if (!isYes) {
-    logger.addJson(SkeetRole.USER, 'No', SkeetAiMode.Prisma, model)
-    prismaMode(config, logger)
+    await prismaMode(config, logger)
     return
   }
-  logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Prisma, model)
-  const migrationName = await skeetAi.naming(prismaSchema, NamingEnum.MIGRATION)
-  console.log(chalk.white(`\nEdit: ${PRISMA_SCHEMA_PATH}`))
+
+  await appendFile(prismaSchemaPath, prismaSchema)
+  console.log(chalk.white(`\nUpdated: ${prismaSchemaPath}`))
   console.log(
     chalk.white(log.common.thenRun),
-    chalk.green(`$ skeet db migrate ${migrationName}`),
+    chalk.green(`$ skeet db migrate -d ${answer.modelPath}`),
   )
   const migrateText = String(log.prismaMode.migrationConfirm)
   const runMigrate = await yesOrNo(migrateText)
   if (runMigrate) {
-    spawnSync(`skeet db migrate ${migrationName}`, {
-      stdio: 'inherit',
-      shell: true,
-    })
-    logger.addJson(SkeetRole.USER, 'Yes', SkeetAiMode.Prisma, model)
+    await execAsync(`skeet db migrate -d ${answer.modelPath}`)
     console.log(
       chalk.white(log.common.thenRun),
-      chalk.green(`$ skeet g scaffold`),
+      chalk.green(`$ skeet g scaffold -d ${answer.modelPath}`),
     )
 
     const scaffoldText = String(log.prismaMode.scaffoldConfirm)
-    logger.addJson(SkeetRole.AI, scaffoldText, SkeetAiMode.Prisma, model)
+
     const runScaffold = await yesOrNo(scaffoldText)
     if (runScaffold) {
-      spawnSync(`skeet g scaffold`, {
-        stdio: 'inherit',
-        shell: true,
-      })
+      await execAsync(`skeet g scaffold -d ${answer.modelPath}`)
     }
   }
 
   console.log(chalk.white(log.prismaMode.ExitingMode + '...\n'))
-  promptUser(config, logger)
+  await promptUser(config, logger)
   return
 }

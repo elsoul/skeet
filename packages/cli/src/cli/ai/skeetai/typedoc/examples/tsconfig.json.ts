@@ -1,12 +1,11 @@
 export const tsconfig = () => {
   return `{
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "dist",
     "target": "ESNext",
-    "rootDir": ".",
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": ".",
@@ -20,10 +19,21 @@ export const tsconfig = () => {
     "lib": ["esnext"],
     "sourceMap": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "@common/*": ["../../common/*"]
     }
   },
   "compileOnSave": true,
-  "include": ["src/*", "src/**/*"]
-}`
+  "include": [
+    "src/*",
+    "src/**/*",
+    "build.ts",
+    "devBuild.ts",
+    "../../common/**/*",
+    "../common/types",
+    "../common/models"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
+`
 }
