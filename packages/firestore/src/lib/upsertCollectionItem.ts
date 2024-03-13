@@ -46,7 +46,7 @@ export const upsertCollectionItem = async <T extends firestore.DocumentData>(
   db: firestore.Firestore,
   collectionPath: string,
   docId: string,
-  params: firestore.UpdateData<WithFieldValue<T>>
+  params: firestore.UpdateData<WithFieldValue<T>>,
 ): Promise<boolean> => {
   try {
     const docRef = db

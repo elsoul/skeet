@@ -323,9 +323,6 @@ importers:
       '@firebase/rules-unit-testing':
         specifier: 3.0.1
         version: 3.0.1(firebase@10.8.1)
-      '@types/jest':
-        specifier: 29.5.12
-        version: 29.5.12
       '@types/node':
         specifier: 20.11.24
         version: 20.11.24
@@ -353,12 +350,6 @@ importers:
       prettier:
         specifier: 3.2.5
         version: 3.2.5
-      ts-loader:
-        specifier: 9.5.1
-        version: 9.5.1(typescript@5.3.3)(webpack@5.90.3)
-      tsconfig-paths:
-        specifier: 4.2.0
-        version: 4.2.0
       tsx:
         specifier: 4.7.1
         version: 4.7.1
@@ -552,7 +543,7 @@ importers:
         specifier: 0.4.1
         version: link:../../packages/cloud-task
       '@skeet-framework/firestore':
-        specifier: 2.5.1
+        specifier: workspace:*
         version: link:../../packages/firestore
       '@skeet-framework/utils':
         specifier: 1.3.6
@@ -4854,13 +4845,6 @@ packages:
     resolution: {integrity: sha512-pk2B1NWalF9toCRu6gjBzR69syFjP4Od8WRAX+0mmf9lAjCRicLOWc+ZrxZHx/0XRjotgkF9t6iaMJ+aXcOdZQ==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
-    dev: true
-
-  /@types/jest@29.5.12:
-    resolution: {integrity: sha512-eDC8bTvT/QhYdxJAulQikueigY5AsdBRH2yDKW3yveW7svY3+DzN84/2NUgkw10RTiJbWqZrTtoGVdYlvFJdLw==}
-    dependencies:
-      expect: 29.7.0
-      pretty-format: 29.7.0
     dev: true
 
   /@types/json-schema@7.0.15:

@@ -1,7 +1,7 @@
 import { firestore } from 'firebase-admin'
 
 export const createFirestoreDataConverter = <
-  T extends firestore.DocumentData
+  T extends firestore.DocumentData,
 >(): firestore.FirestoreDataConverter<T> => {
   return {
     toFirestore(data: T): firestore.DocumentData {

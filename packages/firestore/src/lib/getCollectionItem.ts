@@ -1,4 +1,5 @@
 import { firestore } from 'firebase-admin'
+
 /**
  * Retrieves a document from Firestore based on the provided document reference.
  *
@@ -32,11 +33,11 @@ import { firestore } from 'firebase-admin'
 export const getCollectionItem = async <T>(
   db: firestore.Firestore,
   collectionPath: string,
-  docId: string
+  docId: string,
 ): Promise<T | null> => {
   const dataRef = db
     .collection(collectionPath)
-    .doc(docId) as FirebaseFirestore.DocumentReference<T>
+    .doc(docId) as firestore.DocumentReference<T>
   const doc = await dataRef.get()
   if (!doc.exists) {
     return null
