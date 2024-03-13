@@ -22,7 +22,7 @@
   "main": "dist/index.js",
   "dependencies": {
     "@skeet-framework/ai": "1.8.2",
-    "@skeet-framework/cloud-task": "0.4.0",
+    "@skeet-framework/cloud-task": "0.4.1",
     "@skeet-framework/firestore": "2.5.1",
     "@skeet-framework/utils": "1.3.6",
     "firebase-admin": "12.0.0",

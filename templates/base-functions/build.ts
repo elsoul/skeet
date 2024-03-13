@@ -19,6 +19,7 @@ void (async () => {
       'fs',
       'firebase-functions',
       'dotenv',
+      '@skeet-framework/cloud-task',
     ],
   })
 
@@ -40,6 +41,7 @@ void (async () => {
       'fs',
       'firebase-functions',
       'dotenv',
+      '@skeet-framework/cloud-task',
     ],
     tsconfig: './tsconfig.json',
   })
