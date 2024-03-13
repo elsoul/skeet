@@ -13,7 +13,17 @@
   "cloudRun": {},
   "db": {},
   "SQLs": [],
-  "taskQueues": [],
+  "taskQueues": [
+    {
+      "queueName": "testQueue",
+      "location": "europe-west1",
+      "maxAttempts": 10,
+      "maxConcurrent": 1,
+      "maxRate": 1,
+      "maxInterval": "10s",
+      "minInterval": "1s"
+    }
+  ],
   "cloudArmor": [],
   "routings": [],
   "ai": {
@@ -21,7 +31,10 @@
     "ais": [
       {
         "name": "VertexAI",
-        "availableModels": ["chat-bison@001", "chat-bison-32k"]
+        "availableModels": [
+          "chat-bison@001",
+          "chat-bison-32k"
+        ]
       }
     ]
   }

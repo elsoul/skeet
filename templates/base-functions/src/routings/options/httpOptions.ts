@@ -16,6 +16,7 @@ export const publicHttpOption: HttpsOptions = {
   minInstances: 0,
   concurrency: 1,
   timeoutSeconds: 540,
+  invoker: 'public',
   labels: {
     skeet: 'http',
   },
