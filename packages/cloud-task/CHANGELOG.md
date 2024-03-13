@@ -1,5 +1,11 @@
 # @skeet-framework/cloud-task
 
+## 0.4.1
+
+### Patch Changes
+
+- [#317](https://github.com/elsoul/skeet/pull/317) [`01479f6`](https://github.com/elsoul/skeet/commit/01479f623bab6af10e056ce4748b5cb554bbd9b7) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update cloud task
+
 ## 0.4.0
 
 ### Minor Changes
