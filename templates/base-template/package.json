@@ -1,5 +1,5 @@
 {
-  "name": "base-template",
+  "name": "@skeet-framework/base-template",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,16 @@
     "node": "20",
     "version": "0.0.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elsoul/skeet.git"
+  },
+  "bugs": {
+    "url": "https://discord.gg/ausnBvAM38"
+  },
+  "files": [
+    "./*"
+  ],
   "scripts": {
     "test": "vitest"
   },
