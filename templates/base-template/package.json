@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/base-template",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Skeet Framework Base Template",
   "main": "index.js",
   "type": "module",
