@@ -1,6 +1,6 @@
 import { createCollectionRef } from './createCollectionRef'
-import { firestore } from 'firebase-admin'
 import { serverTimestamp } from './serverTimestamp'
+import { firestore } from 'firebase-admin'
 
 /**
  * Adds a new document to the specified collection in Firestore. If an ID is provided, the document will be set with that ID; otherwise, an ID will be automatically generated.
@@ -49,7 +49,7 @@ export const addCollectionItem = async <T extends firestore.DocumentData>(
   db: firestore.Firestore,
   collectionPath: string,
   params: T,
-  id?: string
+  id?: string,
 ) => {
   try {
     const collectionRef = createCollectionRef<T>(db, collectionPath)
@@ -62,7 +62,7 @@ export const addCollectionItem = async <T extends firestore.DocumentData>(
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp(),
         },
-        { merge: true }
+        { merge: true },
       )
 
       return docRef

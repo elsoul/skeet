@@ -22,6 +22,7 @@ import { build } from 'esbuild'
       'child_process',
       'util',
       'firebase-admin',
+      'firebase',
     ],
   })
   console.log('Build complete ⭐️')

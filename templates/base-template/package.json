@@ -21,7 +21,9 @@
     "./*"
   ],
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "pnpm -r build",
+    "skeet:dev": "firebase emulators:start --import=./tmp/data --export-on-exit --inspect-functions"
   },
   "keywords": [],
   "author": "ELSOUL LABO B.V.",

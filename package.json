@@ -31,7 +31,7 @@
     "ci:publish": "changeset publish",
     "test": "pnpm run -r test",
     "build": "pnpm run -r build",
-    "dev:func": "firebase emulators:start --only functions",
+    "dev:func": "pnpm -F base-functions build && firebase emulators:start --import=./tmp/data --export-on-exit --inspect-functions",
     "deploy:func": "firebase deploy --only functions",
     "cli": "pnpm -F \"@skeet-framework/cli\"",
     "utils": "pnpm -F \"@skeet-framework/utils\"",

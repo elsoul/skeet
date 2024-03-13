@@ -27,8 +27,6 @@
   "scripts": {
     "test": "vitest",
     "build": "rm -rf dist/ && tsx build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/",
-    "test:ci": "tsx firebase emulators:exec --only firestore 'yarn run test'",
-    "dev:emulator": "firebase emulators:start --only firestore --project fakeproject",
     "build-doc": "typedoc src/index.ts --out docs",
     "dev": "tsx src/index.ts",
     "lint": "eslint --ext .ts,.js --fix ."
@@ -40,7 +38,6 @@
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "3.0.1",
-    "@types/jest": "29.5.12",
     "@types/node": "20.11.24",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.1.0",
@@ -50,8 +47,6 @@
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
-    "ts-loader": "9.5.1",
-    "tsconfig-paths": "4.2.0",
     "tsx": "4.7.1",
     "typedoc": "0.25.10",
     "typescript": "5.3.3",
