@@ -1,5 +1,14 @@
 # base-functions
 
+## 1.0.7
+
+### Patch Changes
+
+- [#321](https://github.com/elsoul/skeet/pull/321) [`8f7db23`](https://github.com/elsoul/skeet/commit/8f7db23ed926d502204f63803889c772c357727d) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update esm
+
+- Updated dependencies [[`8f7db23`](https://github.com/elsoul/skeet/commit/8f7db23ed926d502204f63803889c772c357727d)]:
+  - @skeet-framework/firestore@2.5.2
+
 ## 1.0.6
 
 ### Patch Changes
