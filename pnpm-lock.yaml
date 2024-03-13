@@ -546,13 +546,16 @@ importers:
   templates/base-functions:
     dependencies:
       '@skeet-framework/ai':
-        specifier: workspace:*
+        specifier: 1.8.2
         version: link:../../packages/ai
+      '@skeet-framework/cloud-task':
+        specifier: 0.4.0
+        version: link:../../packages/cloud-task
       '@skeet-framework/firestore':
-        specifier: workspace:*
+        specifier: 2.5.1
         version: link:../../packages/firestore
       '@skeet-framework/utils':
-        specifier: workspace:*
+        specifier: 1.3.6
         version: link:../../packages/utils
       firebase-admin:
         specifier: 12.0.0
