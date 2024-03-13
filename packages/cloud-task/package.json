@@ -1,10 +1,10 @@
 {
   "name": "@skeet-framework/cloud-task",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Skeet Framework Plugin - Cloud Task",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/index.d.ts",
   "type": "module",
   "repository": {
     "type": "git",
