@@ -1,5 +1,11 @@
 # @skeet-framework/utils
 
+## 1.3.7
+
+### Patch Changes
+
+- [#323](https://github.com/elsoul/skeet/pull/323) [`a2dca64`](https://github.com/elsoul/skeet/commit/a2dca640a214815b00dfae22dd0486a31e236a5a) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update sendDiscord
+
 ## 1.3.6
 
 ### Patch Changes
