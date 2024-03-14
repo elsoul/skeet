@@ -16,11 +16,21 @@
     "lib": ["esnext"],
     "sourceMap": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@base-template/*": ["../../templates/base-template/*"],
+      "@base-functions/*": ["../../templates/base-functions/*"]
     }
   },
   "files": ["package.json"],
-  "include": ["src/**/*", "add-line.ts", "build.ts", "cli.ts", "tests/**/*"],
+  "include": [
+    "src/**/*",
+    "add-line.ts",
+    "build.ts",
+    "cli.ts",
+    "tests/**/*",
+    "../../templates/base-template/*",
+    "../../templates/base-functions/*"
+  ],
   "exclude": ["dist", "node_modules"],
   "compileOnSave": false
 }

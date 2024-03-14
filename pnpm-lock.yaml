@@ -546,7 +546,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/firestore
       '@skeet-framework/utils':
-        specifier: 1.3.6
+        specifier: 1.3.7
         version: link:../../packages/utils
       firebase-admin:
         specifier: 12.0.0

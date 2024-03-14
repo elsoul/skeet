@@ -19,6 +19,7 @@ import { createCommands } from '@/cli/create'
 import { serverCommands } from '@/cli/server'
 import { logCommands } from '@/cli/log'
 import { dbSubCommands } from '@/cli/sub/db'
+import { newCommands } from './cli/new'
 
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
@@ -55,6 +56,7 @@ async function main() {
     aiCommands()
     configCommands()
     runCommands()
+    await newCommands()
 
     program.parseAsync(process.argv)
   } catch (error) {

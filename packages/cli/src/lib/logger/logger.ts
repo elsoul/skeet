@@ -82,6 +82,25 @@ export module Logger {
     console.log(`${row5SKEE}${row5T}`)
   }
 
+  export const welcomText2 = (appName: string) => {
+    const title = warningHex(
+      '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡',
+    )
+    const text = `
+$ cd ${appName}
+$ skeet add functions
+$ skeet s
+
+You can add more apps by using below command
+
+$ skeet add sql/functions/website/webapp/mobile
+
+$ skeet ai --help`
+
+    console.log(title)
+    console.log(greyHex(text))
+  }
+
   export const welcomText = (appName: string, template: string) => {
     const title = warningHex(
       '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡',
@@ -111,8 +130,7 @@ Go To : http://127.0.0.1:4000/`
 $ skeet create testApp
 $ cd testApp
 $ skeet s
-Go To : http://localhost:4000
-      `
+Go To : http://localhost:4000`
     }
     console.log(greyHex(text))
   }
@@ -122,8 +140,8 @@ Go To : http://localhost:4000
     💃🤝🕺 We Support OpenSource Software Comunities 💃🤝🕺
   Why?  - OpenSouce Software Comunities should be deserved more 💎
   How?  - Incentivize for OpenSource Software Developments 💰
-  What? - Solve/Create GitHub Issues as always 🛠️
-  Epics Alpha: https://alpha.epics.dev/en/how-it-works/
+  What? - Play Game as Dev / Degen / Investor 🛠️
+  Epics Beta: https:/app.epics.dev/
   `
     console.log(successHex(text))
   }
