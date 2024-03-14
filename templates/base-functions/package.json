@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/base-functions",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "type": "module",
   "engines": {
     "pnpm": ">=8",
