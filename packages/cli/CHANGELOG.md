@@ -1,5 +1,14 @@
 # @skeet-framework/cli
 
+## 2.0.14
+
+### Patch Changes
+
+- [#327](https://github.com/elsoul/skeet/pull/327) [`64d017a`](https://github.com/elsoul/skeet/commit/64d017af139ad2f24b2e4377218338de0483933b) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Add - skeet new
+
+  Added a new command to the cli to create a new project.
+  This command will create skeet v3 projects.
+
 ## 2.0.13
 
 ### Patch Changes
