@@ -1,5 +1,11 @@
 # @skeet-framework/utils
 
+## 1.3.8
+
+### Patch Changes
+
+- [#325](https://github.com/elsoul/skeet/pull/325) [`bc20ae4`](https://github.com/elsoul/skeet/commit/bc20ae49e336f46f3683645fe95b20df2b564f5b) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - rm isLog from execAsync
+
 ## 1.3.7
 
 ### Patch Changes

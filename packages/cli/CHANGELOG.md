@@ -1,5 +1,12 @@
 # @skeet-framework/cli
 
+## 2.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`bc20ae4`](https://github.com/elsoul/skeet/commit/bc20ae49e336f46f3683645fe95b20df2b564f5b)]:
+  - @skeet-framework/utils@1.3.8
+
 ## 2.0.12
 
 ### Patch Changes
