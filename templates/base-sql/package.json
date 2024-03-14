@@ -1,0 +1,57 @@
+{
+  "name": "@skeet-framework/base-sql",
+  "version": "0.6.6",
+  "description": "Skeet SQL Template - TypeScript Serverless Framework",
+  "main": "dist/index.js",
+  "author": "POPPIN-FUMI",
+  "license": "Apache-2.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elsoul/skeet.git"
+  },
+  "bugs": {
+    "url": "https://discord.gg/ausnBvAM38"
+  },
+  "files": [
+    "./*"
+  ],
+  "scripts": {
+    "db:init": "npx prisma generate && npx prisma migrate dev",
+    "test": "vitest",
+    "build": "tsx build.ts",
+    "devBuild": "tsx devBuild.ts",
+    "publish": "npm publish",
+    "nodemon": "tsx devBuild.ts && node ./dist/index.js",
+    "dev": "nodemon",
+    "start": "node dist/index.js",
+    "db:dev": "npx prisma migrate dev",
+    "db:deploy": "npx prisma deploy",
+    "db:deploy:production": "dotenv -e .env.build npx prisma migrate dev",
+    "db:generate:production": "dotenv -e .env.build npx prisma generate",
+    "db:reset": "npx prisma migrate reset --force",
+    "db:generate": "npx prisma generate",
+    "d:build": "docker build -t card-db ."
+  },
+  "dependencies": {
+    "@hono/node-server": "1.8.2",
+    "@prisma/client": "5.10.2",
+    "@skeet-framework/utils": "1.3.5",
+    "hono": "4.0.10",
+    "prisma": "5.10.2",
+    "dotenv": "16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.25",
+    "esbuild": "0.20.1",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "nodemon": "3.1.0",
+    "prettier": "3.2.5",
+    "prettier-plugin-prisma": "5.0.0",
+    "tsx": "4.7.1",
+    "typescript": "5.4.2",
+    "vite-tsconfig-paths": "4.3.1",
+    "vitest": "1.3.1"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "base-functions",
+  "name": "@skeet-framework/base-functions",
   "version": "1.0.9",
   "type": "module",
   "engines": {
@@ -8,6 +8,16 @@
     "node": "20",
     "version": "0.0.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elsoul/skeet.git"
+  },
+  "bugs": {
+    "url": "https://discord.gg/ausnBvAM38"
+  },
+  "files": [
+    "./*"
+  ],
   "scripts": {
     "lint": "eslint --ext .ts,.js --fix .",
     "test": "vitest",
