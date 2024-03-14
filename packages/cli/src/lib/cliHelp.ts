@@ -27,6 +27,7 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
+  new                          Create Skeet Framework App
   help [command]               display help for command
 
 Usage: skeet create [options] <appName>
@@ -98,6 +99,7 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
+  new                          Create Skeet Framework App
   help [command]               display help for command
 
 Usage: skeet [options] [command]
@@ -129,6 +131,7 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
+  new                          Create Skeet Framework App
   help [command]               display help for command
 
 Usage: skeet log [options]
@@ -268,6 +271,13 @@ Options:
   -C, --cmd <cmd>        Command (default: "")
   -h, --help             display help for command
 
+Usage: skeet new [options]
+
+Create Skeet Framework App
+
+Options:
+  -h, --help  display help for command
+
 Usage: skeet [options] [command]
 
 CLI for Skeet - Full-stack TypeScript Serverless framework
@@ -297,5 +307,6 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
+  new                          Create Skeet Framework App
   help [command]               display help for command
 `
