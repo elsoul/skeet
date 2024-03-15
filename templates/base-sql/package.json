@@ -21,7 +21,6 @@
     "test": "vitest",
     "build": "tsx build.ts",
     "devBuild": "tsx devBuild.ts",
-    "publish": "npm publish",
     "nodemon": "tsx devBuild.ts && node ./dist/index.js",
     "dev": "nodemon",
     "start": "node dist/index.js",
