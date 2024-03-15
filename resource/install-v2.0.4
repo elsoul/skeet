@@ -39,6 +39,9 @@ install_pnpm_and_packages() {
 }
 
 install_java_with_sdkman() {
+    echo "Installing zip unzip..."
+    sudo apt-get install zip unzip -y
+    
     echo $USER_HOME
     if [ -d "$USER_HOME/.sdkman" ]; then
         echo "SDKMAN already installed."

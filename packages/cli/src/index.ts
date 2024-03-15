@@ -20,6 +20,8 @@ import { serverCommands } from '@/cli/server'
 import { logCommands } from '@/cli/log'
 import { dbSubCommands } from '@/cli/sub/db'
 import { newCommands } from './cli/new'
+import { firebaseAddSecret } from './lib/firebase/firebaseAddSecret'
+import { firebaseGetSecret } from './lib/firebase/firebaseGetSecret'
 
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
@@ -38,6 +40,13 @@ export const lang = process.env.SKEET_LANG || 'en'
 
 async function main() {
   try {
+    program
+      .command('test')
+      .description('Test Command')
+      .action(async () => {
+        const key = await firebaseGetSecret('TEST_KEY')
+        console.log(key)
+      })
     await createCommands()
     await serverCommands()
     await deployCommands()

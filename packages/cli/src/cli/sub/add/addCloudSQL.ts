@@ -7,6 +7,7 @@ import { cloneSQL } from '@/cli/sub/add/cloneSQL'
 import { writeFile } from 'fs/promises'
 import { SKEET_CONFIG_PATH } from '@/index'
 import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
+import { DatabaseVersion } from '@/config/skeetCloud'
 
 type AnswerResponse = {
   instanceName: string
@@ -17,6 +18,7 @@ type AnswerResponse = {
 }
 
 export const addCloudSQL = async (config: SkeetCloudConfig) => {
+  const dbVersions = Object.values(DatabaseVersion)
   const answer = await inquirer.prompt<AnswerResponse>([
     {
       type: 'input',
@@ -28,7 +30,7 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       type: 'list',
       name: 'databaseVersion',
       message: 'Database Version:',
-      choices: ['POSTGRES_15', 'MYSQL_8_0'],
+      choices: dbVersions,
       default: config.db.databaseVersion,
     },
     {

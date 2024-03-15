@@ -7,6 +7,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -29,6 +30,13 @@ Commands:
   run [options]                Run commands
   new                          Create Skeet Framework App
   help [command]               display help for command
+
+Usage: skeet test [options]
+
+Test Command
+
+Options:
+  -h, --help  display help for command
 
 Usage: skeet create [options] <appName>
 
@@ -79,6 +87,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -111,6 +120,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -193,22 +203,22 @@ Usage: skeet add [options] [command]
 Skeet Add Comannd to add new functions
 
 Options:
-  -h, --help                 display help for command
+  -h, --help                display help for command
 
 Commands:
-  functions <functionsName>
+  functions|func [options]
   method [options]
   model <modelName>
   app <appDisplayName>
   secret <secretKey>
   ghSecret <secretKey>
-  ghActions                  Add Github Actions
+  ghActions                 Add Github Actions
   webAppDomain [options]
   ip
-  sql|SQL                    Add Cloud SQL
-  webhook|webHook            Add Webhook Endpoint
+  sql|SQL                   Add Cloud SQL
+  webhook|webHook           Add Webhook Endpoint
   taskQueue|tq <queueName>
-  help [command]             display help for command
+  help [command]            display help for command
 
 Usage: skeet sync [options] [command]
 
@@ -287,6 +297,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
