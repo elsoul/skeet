@@ -8,10 +8,6 @@ export const execSyncCmd = async (command: string[], cwd = '.') => {
     const { stdout, stderr } = await execAsync(command.join(' '), {
       cwd,
     })
-    console.log(stdout)
-    if (stderr) {
-      console.error(stderr)
-    }
     return { stdout, stderr }
   } catch (error) {
     console.error('Error executing command:', error)

@@ -18,7 +18,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@base-template/*": ["../../templates/base-template/*"],
-      "@base-functions/*": ["../../templates/base-functions/*"]
+      "@base-functions/*": ["../../templates/base-functions/*"],
+      "@base-sql/*": ["../../templates/base-sql/*"]
     }
   },
   "files": ["package.json"],
@@ -29,7 +30,8 @@
     "cli.ts",
     "tests/**/*",
     "../../templates/base-template/*",
-    "../../templates/base-functions/*"
+    "../../templates/base-functions/*",
+    "../../templates/base-sql/*"
   ],
   "exclude": ["dist", "node_modules"],
   "compileOnSave": false

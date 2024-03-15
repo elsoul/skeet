@@ -2,12 +2,11 @@ import {
   Logger,
   FIREBASE_CONFIG_PATH,
   FUNCTIONS_PATH,
-  FUNCTIONS_REPO_URL,
   ROUTE_PACKAGE_JSON_PATH,
-  execSyncCmd,
   importConfig,
   importFirebaseConfig,
 } from '@/lib'
+import { dlFunctionTemplate } from '@/lib/dlFunctionTemplate'
 import {
   addDomainToConfig,
   addProjectRegionToSkeetOptions,
@@ -21,17 +20,14 @@ import { mkdir, readFile, writeFile } from 'fs/promises'
 export const addFunctions = async (functionName: string) => {
   try {
     const skeetConfig: SkeetCloudConfig = await importConfig()
-    const functionDir = FUNCTIONS_PATH + `/${functionName}`
+    const functionDir = FUNCTIONS_PATH + `/${functionName}-func`
     if (await checkFileDirExists(functionDir)) {
       Logger.error(`Already exist functionName: ${functionName}!`)
       return ''
     } else {
       await mkdir(functionDir, { recursive: true })
 
-      const gitCloneCmd = ['git', 'clone', FUNCTIONS_REPO_URL, functionDir]
-      execSyncCmd(gitCloneCmd)
-      const rmDefaultGit = ['rm', '-rf', '.git', '.github']
-      execSyncCmd(rmDefaultGit, functionDir)
+      await dlFunctionTemplate(functionName)
       await addProjectRegionToSkeetOptions(
         skeetConfig.app.region,
         skeetConfig.app.projectId,

@@ -1,7 +1,9 @@
 import { getTemplateRepo } from '@/config/repo'
 import { program } from '@/index'
 import { Logger } from '@/lib'
+import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import inquirer from 'inquirer'
+import { a } from 'vitest/dist/suite-UrZdHRff'
 
 export const newCommands = async () => {
   program
@@ -20,6 +22,7 @@ export const newCommands = async () => {
       ])
       const result = await getTemplateRepo(answer.name)
       if (result) {
+        await updatePackageJsonName(answer.name, answer.name + '/package.json')
         Logger.skeetAA()
         Logger.welcomText2(answer.name)
         const nmb = Math.floor(Math.random() * 4 + 1)

@@ -32,9 +32,22 @@ export const addSubCommands = async () => {
     .description('Skeet Add Comannd to add new functions')
   add
     .command('functions')
-    .argument('<functionsName>', 'Functions Name - e.g. skeet')
-    .action(async (functionsName: string) => {
-      await addFunctions(functionsName)
+    .alias('func')
+    .option('--functionsName <functionsName>', 'Function Name - e.g. skeet', '')
+    .action(async (options: { functionsName: string }) => {
+      if (options.functionsName !== '') {
+        await addFunctions(options.functionsName)
+        return
+      }
+      const answer = await inquirer.prompt<{ functionsName: string }>([
+        {
+          type: 'input',
+          name: 'functionsName',
+          message: 'Enter Function Name',
+          default: 'skeet',
+        },
+      ])
+      await addFunctions(answer.functionsName)
     })
 
   add
