@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.0.16
+
+### Patch Changes
+
+- [#335](https://github.com/elsoul/skeet/pull/335) [`560160e`](https://github.com/elsoul/skeet/commit/560160e9ec041e261a9ab9346d0a8759c92c55d2) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update - skeet add functions
+
 ## 2.0.15
 
 ### Patch Changes
