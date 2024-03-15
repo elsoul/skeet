@@ -14,8 +14,8 @@ export const importConfig = async () => {
 
 export const importFirebaseConfig = async () => {
   try {
-    const config = await readFile(`./firebase.json`)
-    const json = JSON.parse(String(config))
+    const config = await readFile(`./firebase.json`, 'utf8')
+    const json = JSON.parse(config)
     return json
   } catch (error) {
     console.log(error)

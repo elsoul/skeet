@@ -16,8 +16,6 @@ export type SkeetOptions = {
   region: string
   fbProjectId: string
   appDomain: string
-  nsDomain: string
-  lbDomain: string
 }
 
 export type SkeetCloudConfig = {
