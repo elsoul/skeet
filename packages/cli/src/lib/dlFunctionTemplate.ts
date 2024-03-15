@@ -1,7 +1,6 @@
 import { TEMPLATE_VERSION } from '@/config/templateVersion'
-import { execAsync, existsAsync } from '@skeet-framework/utils'
+import { execAsync } from '@skeet-framework/utils'
 import chalk from 'chalk'
-import { mkdir } from 'fs/promises'
 
 export const dlFunctionTemplate = async (functionName: string) => {
   const version = TEMPLATE_VERSION.BASE_FUNCTIONS
@@ -10,10 +9,12 @@ export const dlFunctionTemplate = async (functionName: string) => {
   const fileName = `${template}-${version}.tgz`
   const cmd = `wget ${BASE_TEMP}`
   const functionPath = `functions/${functionName}-func`
-  console.log(cmd)
+  console.log(chalk.blue('🕰️ Downloading function template...'))
   await execAsync(cmd)
   await execAsync(`tar -xvzf ${fileName} -C ${functionPath}`)
-  await execAsync(`mv ${functionPath}/package/* ${functionPath}/`)
-  await execAsync(`rm -rf ${fileName} && ${functionPath}/package`)
+  await execAsync(
+    `find ${functionPath}/package -mindepth 1 -maxdepth 1 -exec mv {} ${functionPath}/ \\;`,
+  )
+  await execAsync(`rm -rf ${fileName} ${functionPath}/package`)
   return true
 }

@@ -1,6 +1,19 @@
 {
   "lang": "en",
-  "app": [],
+  "app": {
+    "name": "skeet-app",
+    "projectId": "skeet-app",
+    "fbProjectId": "skeet-app",
+    "region": "europe-west4",
+    "nameServerDomain": "skeet-app.com",
+    "loadBalancerDomain": "lb.skeet-app.com",
+    "appDomains": [
+      {
+        "name": "skeet-app-web",
+        "domain": "app.skeet-app.com"
+      }
+    ]
+  },
   "cloudRun": [],
   "SQL": [],
   "taskQueue": [],

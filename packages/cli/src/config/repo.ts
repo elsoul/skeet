@@ -16,7 +16,9 @@ export const getTemplateRepo = async (appName: string) => {
   }
   await mkdir(appName)
   await execAsync(`tar -xvzf ${fileName} -C ${appName}`)
-  await execAsync(`mv ${appName}/package/* ${appName}/`)
-  await execAsync(`rm -rf ${fileName} && ${appName}/package`)
+  await execAsync(
+    `find ${appName}/package -mindepth 1 -maxdepth 1 -exec mv {} ${appName}/ \\;`,
+  )
+  await execAsync(`rm -rf ${fileName} ${appName}/package`)
   return true
 }
