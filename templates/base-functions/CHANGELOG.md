@@ -1,5 +1,11 @@
 # base-functions
 
+## 1.0.11
+
+### Patch Changes
+
+- [#331](https://github.com/elsoul/skeet/pull/331) [`1d75f0d`](https://github.com/elsoul/skeet/commit/1d75f0dd72ef0af366664186a7a59d1376f7da25) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update add functions
+
 ## 1.0.10
 
 ### Patch Changes
