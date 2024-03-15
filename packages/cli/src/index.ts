@@ -40,13 +40,6 @@ export const lang = process.env.SKEET_LANG || 'en'
 
 async function main() {
   try {
-    program
-      .command('test')
-      .description('Test Command')
-      .action(async () => {
-        const key = await firebaseGetSecret('TEST_KEY')
-        console.log(key)
-      })
     await createCommands()
     await serverCommands()
     await deployCommands()

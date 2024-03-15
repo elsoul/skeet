@@ -16,12 +16,10 @@ export const addDomainToConfig = async (
   functionName: string,
 ) => {
   const skeetConfig: SkeetCloudConfig = await readOrCreateConfig()
-  const skeetOptionsFile = `./functions/${functionName}/skeetOptions.json`
+  const skeetOptionsFile = `./functions/${functionName}-func/skeetOptions.json`
   const jsonFile = await readFile(skeetOptionsFile)
   const newJsonFile: SkeetOptions = JSON.parse(String(jsonFile))
   newJsonFile.appDomain = appDomain
-  newJsonFile.nsDomain = nsDomain
-  newJsonFile.lbDomain = lbDomain
 
   await writeFile(skeetOptionsFile, JSON.stringify(newJsonFile, null, 2))
 

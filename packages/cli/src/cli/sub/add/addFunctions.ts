@@ -15,6 +15,7 @@ import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
+import chalk from 'chalk'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 
 export const addFunctions = async (functionName: string) => {
@@ -34,12 +35,6 @@ export const addFunctions = async (functionName: string) => {
         skeetConfig.app.fbProjectId,
         functionName,
       )
-      addDomainToConfig(
-        skeetConfig.app.appDomain,
-        skeetConfig.app.nsDomain,
-        skeetConfig.app.lbDomain,
-        functionName,
-      )
 
       await updateFirebaseConfig(functionName)
       updatePackageJsonName(
@@ -48,8 +43,13 @@ export const addFunctions = async (functionName: string) => {
       )
       await addFunctionsToPackageJson(functionName)
       const githubAction = await functionsYml(functionName)
+      const githubActionPath = `$.github/workflows`
+      if (await checkFileDirExists(githubActionPath)) {
+        await mkdir(githubActionPath, { recursive: true })
+      }
       await writeFile(githubAction.filePath, githubAction.body)
     }
+    Logger.successCheck(`Successfully added ${functionName}-func function`)
   } catch (error) {
     throw new Error(`Error in addFunctions: ${error}`)
   }
@@ -58,7 +58,7 @@ export const addFunctions = async (functionName: string) => {
 export const updateFirebaseConfig = async (functionName: string) => {
   const firebaseConfig = await importFirebaseConfig()
   const newFunction = {
-    source: `functions/${functionName}`,
+    source: `functions/${functionName}-func`,
     codebase: functionName,
     ignore: [
       'node_modules',
@@ -75,11 +75,11 @@ export const updateFirebaseConfig = async (functionName: string) => {
 export const addFunctionsToPackageJson = async (functionName: string) => {
   const packageJson = await readFile(ROUTE_PACKAGE_JSON_PATH)
   const newPackageJson = JSON.parse(String(packageJson))
-  newPackageJson.scripts[`skeet:${functionName}`] =
+  newPackageJson.scripts[`skeet:${functionName}-func`] =
     `pnpm -F ${functionName}-func dev`
   await writeFile(
     ROUTE_PACKAGE_JSON_PATH,
     JSON.stringify(newPackageJson, null, 2),
   )
-  Logger.successCheck('Successfully Updated ./package.json')
+  Logger.successCheck('Successfully Updated package.json')
 }
