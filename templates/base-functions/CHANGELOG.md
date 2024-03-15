@@ -1,5 +1,11 @@
 # base-functions
 
+## 1.0.12
+
+### Patch Changes
+
+- [`ecbfacf`](https://github.com/elsoul/skeet/commit/ecbfacf079b1b0153ed4178d47d45b4e1813dc23) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update packages
+
 ## 1.0.11
 
 ### Patch Changes
