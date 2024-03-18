@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createConnector = async (
   projectId: string,
@@ -22,5 +22,5 @@ export const createConnector = async (
     '--subnet',
     networkNames.subnetName,
   ]
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

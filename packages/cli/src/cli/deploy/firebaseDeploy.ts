@@ -1,5 +1,5 @@
 import { DEFAULT_FUNCTION_NAME } from '@/index'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 import { getExportedFunctions } from '@/lib/files/getExportedFunctions'
 import inquirer from 'inquirer'
 
@@ -17,7 +17,7 @@ export const firebaseFunctionsDeploy = async (
       '-P',
       `${projectId}`,
     ]
-    execSyncCmd(shCmd)
+    execAsyncCmd(shCmd)
     return
   }
   try {
@@ -63,7 +63,7 @@ export const firebaseFunctionsDeploy = async (
       '-P',
       `${projectId}`,
     ]
-    await execSyncCmd(shCmd)
+    await execAsyncCmd(shCmd)
   } catch (error) {
     throw new Error(`firebaseFunctionsDeploy: ${error}`)
   }

@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const updateBackendSecurityPolicy = async (
   projectId: string,
@@ -18,5 +18,5 @@ export const updateBackendSecurityPolicy = async (
     projectId,
     '--global',
   ]
-  execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

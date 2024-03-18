@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 import { Logger } from '@/lib/logger'
 import { sleep } from '@/utils/time'
 import { questionList } from '../init/questionList'
@@ -19,14 +19,14 @@ export const createBackend = async (appName: string) => {
   const gitCloneCmd = ['git', 'clone', REPO.BACKEND_FUNCTIONS_REPO_URL, appName]
   const backendRootPath = `${appDir}/functions/skeet`
 
-  await execSyncCmd(gitCloneCmd)
+  await execAsyncCmd(gitCloneCmd)
   const cmd = ['pnpm', 'install']
-  await execSyncCmd(cmd, appDir)
-  await execSyncCmd(cmd, backendRootPath)
+  await execAsyncCmd(cmd, appDir)
+  await execAsyncCmd(cmd, backendRootPath)
   const rmDefaultGit = ['rm', '-rf', '.git']
-  await execSyncCmd(rmDefaultGit, appDir)
+  await execAsyncCmd(rmDefaultGit, appDir)
   const rmDefaultGithubActions = ['rm', '-rf', '.github']
-  await execSyncCmd(rmDefaultGithubActions, appDir)
+  await execAsyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
 
   await generateInitFiles(appName, template)

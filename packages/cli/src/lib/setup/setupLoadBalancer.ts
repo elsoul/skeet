@@ -1,4 +1,4 @@
-import { addBackendSetup } from '@/cli/sub/add/addBackendSetup'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import {
   addBackend,
   addPathMatcher,
@@ -18,8 +18,6 @@ import {
   setGcloudProject,
   getNetworkConfig,
   Logger,
-  getFunctionInfo,
-  importConfig,
   SKEET_CONFIG_PATH,
 } from '@/lib'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
@@ -42,8 +40,8 @@ export const setupLoadBalancer = async (
     const methodName = 'root'
     await createNeg(config.app.projectId, methodName, config.app.region, true)
     const defaultBackendServiceName = `${config.app.name}-default`
-    createBackend(config.app.projectId, defaultBackendServiceName)
-    addBackend(
+    await createBackend(config.app.projectId, defaultBackendServiceName)
+    await addBackend(
       config.app.projectId,
       config.app.name,
       defaultBackendServiceName,
@@ -60,24 +58,22 @@ export const setupLoadBalancer = async (
       config.app.projectId,
       config.app.name,
     ).securityPolicyName
-    createSecurityPolicy(config.app.projectId, securityPolicyName)
-    updateBackend(
+    await createSecurityPolicy(config.app.projectId, securityPolicyName)
+    await updateBackend(
       config.app.projectId,
       config.app.name,
       defaultBackendServiceName,
     )
 
-    const paths = []
+    const paths = [] as string[]
 
-    // Create GraphQL Endpoint if template includes graphql
-    if (config.app.template.includes('GraphQL')) {
-      const graphqlInfo = getFunctionInfo('graphql')
-      addBackendSetup('graphql')
-      const graphqlPath = `/graphql=${graphqlInfo.backendService}`
-      paths.push(graphqlPath)
-    }
-
-    addPathMatcher(config.app.projectId, config.app.name, lbDomain, paths, true)
+    await addPathMatcher(
+      config.app.projectId,
+      config.app.name,
+      lbDomain,
+      paths,
+      true,
+    )
 
     await hasLoadBalancerTrue()
 
@@ -93,7 +89,7 @@ export const setupLoadBalancer = async (
 
 const hasLoadBalancerTrue = async () => {
   try {
-    const skeetConfig: SkeetCloudConfig = await importConfig()
+    const skeetConfig = await readOrCreateConfig()
     skeetConfig.app.hasLoadBalancer = true
     await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   } catch (error) {

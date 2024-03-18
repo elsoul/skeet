@@ -1,6 +1,6 @@
-import { execSyncCmd, getFunctionInfo } from '@/lib'
+import { execAsyncCmd, getFunctionInfo } from '@/lib'
 
-export const updateBackend = (
+export const updateBackend = async (
   projectId: string,
   securityPolicyName: string,
   methodName: string,
@@ -18,5 +18,5 @@ export const updateBackend = (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  return await execAsyncCmd(shCmd)
 }

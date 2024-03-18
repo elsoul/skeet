@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const deployRules = async (projectId: string) => {
   try {
@@ -10,7 +10,7 @@ export const deployRules = async (projectId: string) => {
       '--project',
       `${projectId}`,
     ]
-    execSyncCmd(shCmd)
+    execAsyncCmd(shCmd)
     return true
   } catch (error) {
     throw new Error(`deployRules: ${error}`)

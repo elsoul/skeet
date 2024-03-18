@@ -8,7 +8,7 @@ import inquirer from 'inquirer'
 import { SkeetTemplate } from '@/types/skeetTypes'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import chalk from 'chalk'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 import { generateInitFiles } from './generateInitFile'
 import { Logger } from '@/lib/logger'
 
@@ -49,19 +49,19 @@ export const skeetCreate = async (appName: string, template: string) => {
   } else {
     gitCloneCmd = ['git', 'clone', APP_REPO_URL, appName]
   }
-  await execSyncCmd(gitCloneCmd)
+  await execAsyncCmd(gitCloneCmd)
   const cmd = ['pnpm', 'install']
-  await execSyncCmd(cmd, appDir)
-  await execSyncCmd(cmd, `${appDir}/functions/skeet`)
+  await execAsyncCmd(cmd, appDir)
+  await execAsyncCmd(cmd, `${appDir}/functions/skeet`)
   if (template === SkeetTemplate.SolanaFirestore) {
-    await execSyncCmd(cmd, `${appDir}/webapp`)
+    await execAsyncCmd(cmd, `${appDir}/webapp`)
   }
   const rmDefaultGit = ['rm', '-rf', '.git']
-  await execSyncCmd(rmDefaultGit, appDir)
+  await execAsyncCmd(rmDefaultGit, appDir)
   const rmDefaultGithubActions = ['rm', '-rf', '.github']
-  await execSyncCmd(rmDefaultGithubActions, appDir)
+  await execAsyncCmd(rmDefaultGithubActions, appDir)
   await sleep(1000)
-  await execSyncCmd(cmd, `./${appName}`)
+  await execAsyncCmd(cmd, `./${appName}`)
 
   await generateInitFiles(appName, template)
   Logger.skeetAA()

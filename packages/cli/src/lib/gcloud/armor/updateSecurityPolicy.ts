@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const updateSecurityPolicy = (projectId: string, appName: string) => {
   const appConf = getNetworkConfig(projectId, appName)
@@ -15,5 +15,5 @@ export const updateSecurityPolicy = (projectId: string, appName: string) => {
     '--log-level=VERBOSE',
     '--json-parsing=STANDARD',
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
 }

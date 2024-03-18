@@ -1,11 +1,11 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const deployWebApp = async () => {
   try {
     const cmd = ['pnpm', 'build:production:webapp']
-    await execSyncCmd(cmd)
+    await execAsyncCmd(cmd)
     const shCmd = ['firebase', 'deploy', '--only', 'hosting']
-    await execSyncCmd(shCmd)
+    await execAsyncCmd(shCmd)
     return true
   } catch (error) {
     throw new Error(`deployWebApp: ${error}`)

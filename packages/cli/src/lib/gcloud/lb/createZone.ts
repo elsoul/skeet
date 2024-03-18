@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createZone = async (
   projectId: string,
@@ -22,7 +22,8 @@ export const createZone = async (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  const result = await execAsyncCmd(shCmd)
+  return result.stdout
 }
 
 export const getZone = async (projectId: string, appName: string) => {
@@ -37,7 +38,7 @@ export const getZone = async (projectId: string, appName: string) => {
       '--project',
       projectId,
     ]
-    const { stderr, stdout } = await execSyncCmd(shCmd)
+    const { stderr, stdout } = await execAsyncCmd(shCmd)
     const regex = /ns-cloud-[a-zA-Z0-9]{2}\.googledomains\.com\./
     const lines = stdout.split('\n')
     const zoneLines: string[] = []

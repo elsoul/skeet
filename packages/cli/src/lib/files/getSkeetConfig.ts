@@ -2,7 +2,7 @@ import { readFile } from 'fs/promises'
 import { CONTAINER_REGIONS } from '@/config/region'
 import { importConfig } from '@/lib/files/importConfig'
 import { FILE_NAME, PATH } from '@/config/path'
-import { execSyncCmd } from '../execSyncCmd'
+import { execAsyncCmd } from '../execAsyncCmd'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -164,7 +164,7 @@ export const isNegExists = async (
     projectId,
   ]
   try {
-    const stdout = String(await execSyncCmd(shCmd))
+    const stdout = String(await execAsyncCmd(shCmd))
     if (stdout.includes('ERROR:')) throw new Error('does not exist')
     return true
   } catch (error) {

@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createFixIp = async (
   projectId: string,
@@ -17,7 +17,7 @@ export const createFixIp = async (
     '--project',
     projectId,
   ]
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }
 
 export const getIp = async (projectId: string, ipName: string) => {
@@ -33,7 +33,7 @@ export const getIp = async (projectId: string, ipName: string) => {
       '--project',
       projectId,
     ]
-    const { stdout } = await execSyncCmd(shCmd)
+    const { stdout } = await execAsyncCmd(shCmd)
     const ip = stdout.replace(/\r?\n/g, '')
     console.log(ip)
     return ip

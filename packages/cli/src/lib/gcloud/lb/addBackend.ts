@@ -1,7 +1,7 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 import { getFunctionInfo, getNetworkConfig } from '@/lib'
 
-export const addBackend = (
+export const addBackend = async (
   projectId: string,
   appName: string,
   methodName: string,
@@ -27,5 +27,5 @@ export const addBackend = (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

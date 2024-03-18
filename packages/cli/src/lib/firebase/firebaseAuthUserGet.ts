@@ -1,5 +1,5 @@
 import { PATH } from '@/config/path'
-import { execSyncCmd } from '../execSyncCmd'
+import { execAsyncCmd } from '../execAsyncCmd'
 
 export const firebaseAuthUserGet = (
   projectId: string,
@@ -7,7 +7,7 @@ export const firebaseAuthUserGet = (
 ) => {
   try {
     const cmd = ['firebase', 'auth:export', path, '--project', projectId]
-    execSyncCmd(cmd)
+    execAsyncCmd(cmd)
   } catch (error) {
     throw new Error(`firebaseAuthUserGet: ${error}`)
   }

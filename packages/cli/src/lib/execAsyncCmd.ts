@@ -3,7 +3,7 @@ import { promisify } from 'util'
 
 const execAsync = promisify(exec)
 
-export const execSyncCmd = async (command: string[], cwd = '.') => {
+export const execAsyncCmd = async (command: string[], cwd = '.') => {
   try {
     const { stdout, stderr } = await execAsync(command.join(' '), {
       cwd,

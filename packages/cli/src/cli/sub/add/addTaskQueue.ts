@@ -1,4 +1,4 @@
-import { execSyncCmd, importConfig } from '@/lib'
+import { execAsyncCmd, importConfig } from '@/lib'
 import { TaskQueue } from '@/types/skeetTypes'
 import { Logger } from '@/lib/logger'
 import { SKEET_CONFIG_PATH } from '@/index'
@@ -47,7 +47,7 @@ export const addTaskQueue = async (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
   if (!isUpdate) await addTaskQueueToConf(taskQueue)
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }

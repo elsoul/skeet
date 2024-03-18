@@ -7,6 +7,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -29,6 +30,13 @@ Commands:
   run [options]                Run commands
   new                          Create Skeet Framework App
   help [command]               display help for command
+
+Usage: skeet test [options]
+
+Test command
+
+Options:
+  -h, --help  display help for command
 
 Usage: skeet create [options] <appName>
 
@@ -59,7 +67,6 @@ Options:
   --login        Activate Firebase Login (default: false)
   --config       Generate Skeet Cloud Config (default: false)
   --lb           Setup Cloud Load Balancer (default: false)
-  --sql          Setup SQL (default: false)
   -n, --network  Setup Network (default: false)
   -h, --help     display help for command
 
@@ -79,6 +86,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -111,6 +119,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -288,6 +297,7 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase

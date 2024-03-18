@@ -1,11 +1,11 @@
-import { SKEET_CONFIG_PATH, execSyncCmd, importConfig } from '@/lib'
+import { SKEET_CONFIG_PATH, execAsyncCmd, importConfig } from '@/lib'
 import { AI } from '@/types/skeetTypes'
 import { writeFile } from 'fs/promises'
 
 export const addSecret = async (key: string) => {
   try {
     const cmd = ['firebase', 'functions:secrets:set', key]
-    execSyncCmd(cmd)
+    execAsyncCmd(cmd)
     return await addAiConfig(key)
   } catch (error) {
     throw new Error(`addSecret: ${error}`)

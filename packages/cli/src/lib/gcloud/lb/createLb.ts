@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createLb = async (projectId: string, appName: string) => {
   const appConf = getNetworkConfig(projectId, appName)
@@ -14,5 +14,5 @@ export const createLb = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
 }

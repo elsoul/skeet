@@ -1,7 +1,7 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
-export const addPathMatcher = (
+export const addPathMatcher = async (
   projectId: string,
   appName: string,
   domain: string,
@@ -50,5 +50,5 @@ export const addPathMatcher = (
       '--delete-orphaned-path-matcher',
     ]
   }
-  execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

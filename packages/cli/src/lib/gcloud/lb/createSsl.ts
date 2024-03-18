@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createSsl = async (
   projectId: string,
@@ -18,5 +18,5 @@ export const createSsl = async (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
 }

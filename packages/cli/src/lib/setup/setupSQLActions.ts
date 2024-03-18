@@ -1,7 +1,8 @@
-import { importConfig } from '@/lib'
+import { regionToTimezone } from '@/lib'
 import { Logger } from '@/lib/logger'
 import { writeFile } from 'fs/promises'
 import { sqlYml } from '@/templates/init/sql.yml'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const setupSQLActions = async (
   instanceName: string,
@@ -12,12 +13,15 @@ export const setupSQLActions = async (
   minInstances: string,
 ) => {
   try {
-    const config = await importConfig()
+    const config = await readOrCreateConfig()
     const region = config.app.region
-    const splitInstanceName = instanceName.split('-')
-    const dbName = splitInstanceName[1].toUpperCase()
-    const databaseUrl = `DATABASE_URL=\${{ secrets.DATABASE_URL_${dbName} }}`
-    const envString = databaseUrl
+    const timezone = regionToTimezone(region)
+    const TZ = `TZ=${timezone}`
+    const secretKeyName =
+      'DATABASE_PRODUCTION_URL_' +
+      instanceName.toUpperCase().replaceAll('-', '_')
+    const databaseUrl = `DATABASE_URL=\${{ secrets.${secretKeyName} }}`
+    const envString = databaseUrl + '\n' + TZ + '\n'
     const result = await sqlYml(
       instanceName,
       memory,

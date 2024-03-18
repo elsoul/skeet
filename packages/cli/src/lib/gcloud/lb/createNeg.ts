@@ -1,4 +1,4 @@
-import { importConfig, execSyncCmd, getFunctionInfo } from '@/lib'
+import { importConfig, execAsyncCmd, getFunctionInfo } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 
 // This will need updates when Google Cloud Run naming changed
@@ -33,5 +33,5 @@ export const createNeg = async (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
 }

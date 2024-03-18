@@ -22,6 +22,7 @@ import { dbSubCommands } from '@/cli/sub/db'
 import { newCommands } from './cli/new'
 import { firebaseAddSecret } from './lib/firebase/firebaseAddSecret'
 import { firebaseGetSecret } from './lib/firebase/firebaseGetSecret'
+import { getDatabaseIp } from './lib/gcloud/sql/getDatabaseIp'
 
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
@@ -40,6 +41,12 @@ export const lang = process.env.SKEET_LANG || 'en'
 
 async function main() {
   try {
+    program
+      .command('test')
+      .description('Test command')
+      .action(async () => {
+        await getDatabaseIp('epics-platform', 'sql-card-db', true)
+      })
     await createCommands()
     await serverCommands()
     await deployCommands()

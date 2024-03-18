@@ -1,6 +1,6 @@
 import { GCP_IP_RANGE } from '@/config/config'
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createSubnet = async (
   projectId: string,
@@ -22,5 +22,5 @@ export const createSubnet = async (
     '--region',
     region,
   ]
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

@@ -1,5 +1,5 @@
 import {
-  execSyncCmd,
+  execAsyncCmd,
   getNetworkConfig,
   importConfig,
   setGcloudProject,
@@ -27,5 +27,5 @@ export const syncSql = async () => {
     '--project',
     skeetConfig.app.projectId,
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
 }

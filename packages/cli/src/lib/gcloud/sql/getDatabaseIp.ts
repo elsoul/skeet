@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const getDatabaseIp = async (
   projectId: string,
@@ -18,9 +18,9 @@ export const getDatabaseIp = async (
       instanceName,
       '|',
       'awk',
-      `{print ${ipCol}}`,
+      `'{print ${ipCol}}'`,
     ]
-    const { stdout } = await execSyncCmd(cmd)
+    const { stdout } = await execAsyncCmd(cmd)
     const databaseIp = String(stdout).replace(/\r?\n/g, '')
     return databaseIp
   } catch (error) {

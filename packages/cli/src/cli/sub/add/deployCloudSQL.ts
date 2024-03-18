@@ -10,6 +10,8 @@ import { setupSQLActions } from '@/lib/setup/setupSQLActions'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import percentEncode from '@stdlib/string-percent-encode'
 import { updateSkeetConfigDb } from './addCloudSQL'
+import { firebaseAddSecret } from '@/lib/firebase/firebaseAddSecret'
+import { addEnv } from '@/lib'
 
 export const deployCloudSQL = async (
   instanceName: string,
@@ -20,7 +22,6 @@ export const deployCloudSQL = async (
 ) => {
   const password = await askForSqlPassword()
   const encodedPassword = percentEncode(password)
-  const sqlName = instanceName.replace('sql-', '')
   await createSQL(
     config.app.projectId,
     instanceName,
@@ -32,8 +33,14 @@ export const deployCloudSQL = async (
   )
   const databaseIp = await getDatabaseIp(config.app.projectId, instanceName)
 
-  const genDir = `./sql/${sqlName}`
-  await genEnvBuild(instanceName, genDir, databaseIp, encodedPassword)
+  const genDir = `./sql/${instanceName}`
+  const { key, value } = await genEnvBuild(
+    instanceName,
+    genDir,
+    databaseIp,
+    encodedPassword,
+  )
+  await firebaseAddSecret(key, value)
   const { networkName } = getNetworkConfig(
     config.app.projectId,
     config.app.name,
@@ -44,15 +51,13 @@ export const deployCloudSQL = async (
     instanceName,
     true,
   )
-  await genEnvProduction(
+  const productionEnv = await genEnvProduction(
     instanceName,
-    genDir,
-    config.app.region,
     databasePrivateIp,
     encodedPassword,
   )
-  const envProductionPath = `${genDir}/.env.production`
-  await addEnvSync(envProductionPath)
+  await firebaseAddSecret(productionEnv.key, productionEnv.value)
+  await addEnv(productionEnv.key, productionEnv.value)
   const maxConcurrency = '80'
   const maxInstances = '100'
   const minInstances = '0'

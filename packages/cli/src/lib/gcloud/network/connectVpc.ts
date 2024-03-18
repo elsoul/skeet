@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const connectVpc = async (projectId: string, appName: string) => {
   try {
@@ -18,7 +18,7 @@ export const connectVpc = async (projectId: string, appName: string) => {
       '--project',
       projectId,
     ]
-    return await execSyncCmd(shCmd)
+    return await execAsyncCmd(shCmd)
   } catch (error) {
     throw new Error(`connectVpc: ${error}`)
   }

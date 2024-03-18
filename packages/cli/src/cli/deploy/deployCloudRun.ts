@@ -5,7 +5,7 @@ import {
   getNetworkConfig,
 } from '@/lib/files/getSkeetConfig'
 
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const deployCloudRun = async (
   projectId: string,
@@ -78,5 +78,5 @@ export const deployCloudRun = async (
   } else {
     shCmd.push('--ingress', 'internal')
   }
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

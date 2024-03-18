@@ -8,6 +8,7 @@ import { writeFile } from 'fs/promises'
 import { SKEET_CONFIG_PATH } from '@/index'
 import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
 import { DatabaseVersion } from '@/config/skeetCloud'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 type AnswerResponse = {
   instanceName: string
@@ -60,7 +61,7 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       border: [],
     },
   })
-  const instanceName = `sql-${sqlName}`
+  const instanceName = sqlName
   const tableBody = [
     ['Instance Name', chalk.green(instanceName)],
     ['Database Version', chalk.green(answer.databaseVersion)],
@@ -100,12 +101,12 @@ ${chalk.green('$ skeet deploy --sql')}
 }
 
 export const updateSkeetConfigDb = async (instanceName: string) => {
-  const config = await importConfig()
-  const sqls = config.SQLs
+  const config = await readOrCreateConfig()
+  const sqls = config.SQL
 
   sqls.forEach((sql) => {
     if (sql.instanceName === instanceName) {
-      sql.isCreated = true
+      sql.status = 'RUNNING'
     }
   })
   await writeFile(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
