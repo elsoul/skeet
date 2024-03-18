@@ -26,6 +26,7 @@ import esbuild from 'esbuild'
       'dotenv',
       '@google-cloud/vertexai',
       'openai',
+      '@anthropic-ai/sdk',
     ],
   })
   console.log('Build complete ⭐️')

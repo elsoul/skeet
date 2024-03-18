@@ -18,13 +18,20 @@ export const aiCommands = () => {
     .description('AI Playground')
     .option('-g, --gemini', 'Gemini')
     .option('-o, --openai', 'OpenAI')
+    .option('-c, --claude', 'Claude')
     .option('--mode', 'Mode')
     .action(async (options) => {
       await validateAiConfig()
       const { ai } = await importConfig()
       const lang = ai.lang as 'en' | 'ja'
       const logger = new AiLog(lang)
-      const aiType = options.openai ? 'OpenAI' : 'Gemini'
+      let aiType = 'Gemini'
+      if (options.claude) {
+        aiType = 'Claude'
+      } else if (options.openai) {
+        aiType = 'OpenAI'
+      } else {
+      }
       validEnv(aiType as AIType, logger)
       const aiOptions: SkeetAIOptions = {
         ai: aiType as AIType,

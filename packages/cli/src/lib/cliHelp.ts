@@ -7,7 +7,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -30,13 +29,6 @@ Commands:
   run [options]                Run commands
   new                          Create Skeet Framework App
   help [command]               display help for command
-
-Usage: skeet test [options]
-
-Test Command
-
-Options:
-  -h, --help  display help for command
 
 Usage: skeet create [options] <appName>
 
@@ -87,7 +79,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -120,7 +111,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -258,6 +248,7 @@ AI Playground
 Options:
   -g, --gemini  Gemini
   -o, --openai  OpenAI
+  -c, --claude  Claude
   --mode        Mode
   -h, --help    display help for command
 
@@ -297,7 +288,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test Command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase

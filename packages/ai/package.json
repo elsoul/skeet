@@ -41,16 +41,19 @@
     "openai": "4.29.1"
   },
   "devDependencies": {
-    "@types/node": "20.11.28",
-    "esbuild": "0.20.2",
-    "eslint": "8.57.0",
-    "eslint-config-prettier": "9.1.0",
-    "prettier": "3.2.5",
-    "tsx": "4.7.1",
-    "typedoc": "0.25.12",
-    "typescript": "5.4.2",
-    "vite": "5.1.6",
-    "vite-tsconfig-paths": "4.3.2",
-    "vitest": "1.4.0"
+    "eslint-config-prettier": "*",
+    "typedoc": "*",
+    "@types/node": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
+    "esbuild": "*",
+    "eslint": "*",
+    "nodemon": "*",
+    "prettier": "*",
+    "tsx": "*",
+    "typescript": "*",
+    "vite": "*",
+    "vite-tsconfig-paths": "*",
+    "vitest": "*"
   }
 }
