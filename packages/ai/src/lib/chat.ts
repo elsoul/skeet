@@ -12,6 +12,7 @@ import { Content } from './types/vertexAiResponseTypes'
 import { MessageParam } from '@anthropic-ai/sdk/resources'
 import { claudeChatStream } from './claudeChatStream'
 import { claudeChat } from './claudeChat'
+import { readClaudeStream } from './readClaudeStream'
 
 const GEMINI = 'Gemini'
 const OPENAI = 'OpenAI'
@@ -123,7 +124,7 @@ export const chat = async (
         if (!isLogging) {
           return stream
         }
-        await readOpenAIStream(stream as unknown as Readable)
+        await readClaudeStream(stream)
       }
       const resp = await claudeChat(prompt)
       return resp
