@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.1.0
+
+### Minor Changes
+
+- [`3c2f157`](https://github.com/elsoul/skeet/commit/3c2f1578c53c9cc68655af01b8c1dd6af47c8188) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet add sql
+
 ## 2.0.19
 
 ### Patch Changes
