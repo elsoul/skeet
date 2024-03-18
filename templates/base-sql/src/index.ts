@@ -33,7 +33,7 @@ app.use(
   }),
 )
 
-const rootDir = '/sql-card-db'
+const rootDir = '/card-db'
 
 app.route(rootDir + '/users', userRouter)
 

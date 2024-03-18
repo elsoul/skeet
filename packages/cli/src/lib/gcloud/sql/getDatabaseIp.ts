@@ -18,7 +18,7 @@ export const getDatabaseIp = async (
       instanceName,
       '|',
       'awk',
-      `{print ${ipCol}}`,
+      `'{print ${ipCol}}'`,
     ]
     const { stdout } = await execSyncCmd(cmd)
     const databaseIp = String(stdout).replace(/\r?\n/g, '')

@@ -60,7 +60,7 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       border: [],
     },
   })
-  const instanceName = `sql-${sqlName}`
+  const instanceName = sqlName
   const tableBody = [
     ['Instance Name', chalk.green(instanceName)],
     ['Database Version', chalk.green(answer.databaseVersion)],

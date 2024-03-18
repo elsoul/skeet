@@ -32,7 +32,7 @@ jobs:
       - name: GitHub repository setting
         run: git config --global url."https://github.com".insteadOf ssh://git@github.com
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
       - name: Build App
         run: pnpm -F ai build-doc
         env:
