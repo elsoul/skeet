@@ -1,13 +1,8 @@
-import { VertexAI } from '@google-cloud/vertexai'
+import { InputOutput } from '../genPrompt'
 
 export type Example = {
   context: string
   examples: InputOutput[]
-}
-
-export type InputOutput = {
-  input: string
-  output: string
 }
 
 export enum NamingEnum {

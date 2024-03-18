@@ -1,6 +1,6 @@
 ---
-"@skeet-framework/base-template": patch
-"@skeet-framework/cli": patch
+'@skeet-framework/base-template': patch
+'@skeet-framework/cli': patch
 ---
 
-update template
+Updated the base template and CLI to include the new AI module.
