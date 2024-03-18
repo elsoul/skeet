@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/base-sql",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "description": "Skeet SQL Template - TypeScript Serverless Framework",
   "main": "dist/index.js",
   "author": "POPPIN-FUMI",
