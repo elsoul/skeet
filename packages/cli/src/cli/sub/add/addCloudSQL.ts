@@ -1,5 +1,3 @@
-import { importConfig } from '@/lib/files/importConfig'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import inquirer from 'inquirer'
@@ -7,7 +5,7 @@ import { cloneSQL } from '@/cli/sub/add/cloneSQL'
 import { writeFile } from 'fs/promises'
 import { SKEET_CONFIG_PATH } from '@/index'
 import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
-import { DatabaseVersion } from '@/config/skeetCloud'
+import { DatabaseVersion, SkeetCloudConfig } from '@/config/skeetCloud'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 type AnswerResponse = {
@@ -25,32 +23,32 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       type: 'input',
       name: 'instanceName',
       message: 'Cloud SQL Instance Name:',
-      default: `${config.app.name}`,
+      default: `user-db`,
     },
     {
       type: 'list',
       name: 'databaseVersion',
       message: 'Database Version:',
       choices: dbVersions,
-      default: config.db.databaseVersion,
+      default: 'POSTGRES_15',
     },
     {
       type: 'input',
       name: 'storageSize',
       message: 'Storage Size(GB):',
-      default: config.db.storageSize,
+      default: '10',
     },
     {
       type: 'input',
       name: 'cpu',
       message: 'CPU:',
-      default: config.db.cpu,
+      default: '1GiB',
     },
     {
       type: 'input',
       name: 'memory',
       message: 'Memory:',
-      default: config.db.memory,
+      default: '4GiB',
     },
   ])
   const sqlName = answer.instanceName + '-db'

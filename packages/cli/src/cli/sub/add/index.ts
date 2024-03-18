@@ -19,6 +19,7 @@ import { genGithubActions } from '@/cli/gen'
 import { addStripeWebhook } from './addStripeWebhook'
 import { addTaskQueue } from './addTaskQueue'
 import { addCloudSQL } from './addCloudSQL'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 type AddMethodOptions = {
   instance: string
@@ -131,7 +132,7 @@ export const addSubCommands = async () => {
     .alias('SQL')
     .description('Add Cloud SQL')
     .action(async () => {
-      const config = await importConfig()
+      const config = await readOrCreateConfig()
       await addCloudSQL(config)
     })
 

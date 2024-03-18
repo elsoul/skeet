@@ -7,11 +7,11 @@ import { getDatabaseIp } from '@/lib/gcloud/sql/getDatabaseIp'
 import { genEnvBuild } from '@/lib/files/genEnvBuild'
 import { genEnvProduction } from '@/lib/files/genEnvProduction'
 import { setupSQLActions } from '@/lib/setup/setupSQLActions'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 import percentEncode from '@stdlib/string-percent-encode'
 import { updateSkeetConfigDb } from './addCloudSQL'
 import { firebaseAddSecret } from '@/lib/firebase/firebaseAddSecret'
 import { addEnv } from '@/lib'
+import { SkeetCloudConfig } from '@/config/skeetCloud'
 
 export const deployCloudSQL = async (
   instanceName: string,
