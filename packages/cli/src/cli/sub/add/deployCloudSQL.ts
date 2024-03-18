@@ -1,6 +1,5 @@
 import { askForSqlPassword } from '@/cli/init'
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { addEnvSync } from '@/lib/git/addEnvSync'
 import { createSQL } from '@/lib/gcloud/sql/createSQL'
 import { patchSQL } from '@/lib/gcloud/sql/patchSQL'
 import { getDatabaseIp } from '@/lib/gcloud/sql/getDatabaseIp'

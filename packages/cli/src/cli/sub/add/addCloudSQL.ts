@@ -51,7 +51,10 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       default: '4GiB',
     },
   ])
-  const sqlName = answer.instanceName + '-db'
+  let sqlName = answer.instanceName
+  if (!sqlName.endsWith('-db')) {
+    sqlName = `${sqlName}-db`
+  }
 
   const table = new Table.default({
     style: {
