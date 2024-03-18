@@ -1,5 +1,16 @@
 # @skeet-framework/cli
 
+## 2.0.17
+
+### Patch Changes
+
+- [#337](https://github.com/elsoul/skeet/pull/337) [`8b8b24b`](https://github.com/elsoul/skeet/commit/8b8b24bb98c77b485317076a52d14bf811b99df8) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Updated the base template and CLI to include the new AI module.
+
+  Add - Claude3 AI to skeet ai
+
+- Updated dependencies [[`8bad710`](https://github.com/elsoul/skeet/commit/8bad710f9ef620b2635ba3de650a4064a09a20b3)]:
+  - @skeet-framework/ai@1.8.3
+
 ## 2.0.16
 
 ### Patch Changes
