@@ -11,6 +11,7 @@ import { SkeetCloudConfig } from '@/types/skeetTypes'
 import percentEncode from '@stdlib/string-percent-encode'
 import { updateSkeetConfigDb } from './addCloudSQL'
 import { firebaseAddSecret } from '@/lib/firebase/firebaseAddSecret'
+import { addEnv } from '@/lib'
 
 export const deployCloudSQL = async (
   instanceName: string,
@@ -50,15 +51,13 @@ export const deployCloudSQL = async (
     instanceName,
     true,
   )
-  await genEnvProduction(
+  const productionEnv = await genEnvProduction(
     instanceName,
-    genDir,
-    config.app.region,
     databasePrivateIp,
     encodedPassword,
   )
-  const envProductionPath = `${genDir}/.env.production`
-  await addEnvSync(envProductionPath)
+  await firebaseAddSecret(productionEnv.key, productionEnv.value)
+  await addEnv(productionEnv.key, productionEnv.value)
   const maxConcurrency = '80'
   const maxInstances = '100'
   const minInstances = '0'

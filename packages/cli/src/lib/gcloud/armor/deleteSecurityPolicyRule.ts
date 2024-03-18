@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const deleteSecurityPolicyRule = (
   projectId: string,
@@ -19,5 +19,5 @@ export const deleteSecurityPolicyRule = (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
 }

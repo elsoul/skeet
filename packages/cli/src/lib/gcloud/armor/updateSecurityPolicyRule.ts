@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const updateSecurityPolicyRule = async (
   projectId: string,
@@ -23,5 +23,5 @@ export const updateSecurityPolicyRule = async (
       shCmd.push(`--${key}=${value}`)
     }
   }
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

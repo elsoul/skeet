@@ -22,13 +22,17 @@ export const dbSubCommands = () => {
     .action(async (options: DbOptions) => {
       if (options.d !== 'all') {
         const cwd = './sql/' + options.d
-        await dbMigrate(cwd, options.production)
+        const { stdout, stderr } = await dbMigrate(cwd, options.production)
+        console.log(stdout)
+        console.log(stderr)
         return
       }
       const dbDirs = await selectDb()
       for (const dbDir of dbDirs) {
         const cwd = './sql/' + dbDir
-        await dbMigrate(cwd, options.production)
+        const { stdout, stderr } = await dbMigrate(cwd, options.production)
+        console.log(stdout)
+        console.log(stderr)
       }
     })
 

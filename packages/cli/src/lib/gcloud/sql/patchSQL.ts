@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { importConfig } from '@/lib/files/importConfig'
 
@@ -48,5 +48,5 @@ export const patchSQL = async (
   if (patchOption.network !== '') {
     shCmd.push('--network', networkName)
   }
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

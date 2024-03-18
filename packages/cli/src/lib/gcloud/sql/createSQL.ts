@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createSQL = async (
   projectId: string,
@@ -30,5 +30,5 @@ export const createSQL = async (
     '--database-flags',
     'cloudsql.iam_authentication=on',
   ]
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

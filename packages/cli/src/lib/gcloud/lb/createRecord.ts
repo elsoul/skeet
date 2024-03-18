@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createRecord = async (
   projectId: string,
@@ -27,7 +27,7 @@ export const createRecord = async (
     '--project',
     projectId,
   ]
-  execSyncCmd(shCmd)
+  execAsyncCmd(shCmd)
 }
 
 export const createCaaRecords = async (

@@ -2,7 +2,7 @@ import {
   getContainerImageName,
   getContainerImageUrl,
 } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const tagContainer = async (
   projectId: string,
@@ -12,5 +12,5 @@ export const tagContainer = async (
   const imageName = await getContainerImageName(appName)
   const imageUrl = getContainerImageUrl(projectId, appName, region)
   const shCmd = ['docker', 'tag', imageName, imageUrl]
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

@@ -1,4 +1,4 @@
-import { execSyncCmd, getFunctionInfo } from '@/lib'
+import { execAsyncCmd, getFunctionInfo } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 
 export const deleteNeg = async (
@@ -21,7 +21,7 @@ export const deleteNeg = async (
       projectId,
       '--quiet',
     ]
-    execSyncCmd(shCmd)
+    execAsyncCmd(shCmd)
   } catch (error) {
     throw new Error(`deleteNeg: ${error}`)
   }

@@ -1,5 +1,5 @@
 import { PATH } from '@/config/path'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const dbDeploy = async (
   production: boolean = false,
@@ -20,5 +20,5 @@ export const dbDeploy = async (
   } else {
     shCmd = ['npx', 'prisma', 'migrate', 'deploy']
   }
-  await execSyncCmd(shCmd, cwd)
+  await execAsyncCmd(shCmd, cwd)
 }

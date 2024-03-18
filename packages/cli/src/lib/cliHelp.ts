@@ -67,7 +67,6 @@ Options:
   --login        Activate Firebase Login (default: false)
   --config       Generate Skeet Cloud Config (default: false)
   --lb           Setup Cloud Load Balancer (default: false)
-  --sql          Setup SQL (default: false)
   -n, --network  Setup Network (default: false)
   -h, --help     display help for command
 

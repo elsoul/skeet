@@ -1,5 +1,5 @@
 import { DEFAULT_FUNCTION_NAME } from '@/index'
-import { execSyncCmd, getFunctions } from '@/lib'
+import { execAsyncCmd, getFunctions } from '@/lib'
 import { getExportedFunctions } from '@/lib/files/getExportedFunctions'
 import inquirer from 'inquirer'
 import { spawnSync } from 'node:child_process'
@@ -17,7 +17,7 @@ export const fuctionsLog = async (
       '-P',
       `${projectId}`,
     ]
-    execSyncCmd(shCmd)
+    execAsyncCmd(shCmd)
     return
   }
   try {

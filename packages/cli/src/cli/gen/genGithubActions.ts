@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib'
+import { execAsyncCmd } from '@/lib'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 
 export const genGithubActions = async () => {
@@ -9,7 +9,7 @@ export const genGithubActions = async () => {
       return
     }
     const cmd = ['mv', `./github`, actionsPath]
-    await execSyncCmd(cmd)
+    await execAsyncCmd(cmd)
   } catch (error) {
     console.log(error)
   }

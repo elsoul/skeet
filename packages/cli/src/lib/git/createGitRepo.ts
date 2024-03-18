@@ -1,4 +1,4 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const createGitRepo = async (
   repoName: string,
@@ -16,5 +16,5 @@ export const createGitRepo = async (
     '--source=./',
     '--remote=upstream',
   ]
-  execSyncCmd(cmdLine)
+  execAsyncCmd(cmdLine)
 }

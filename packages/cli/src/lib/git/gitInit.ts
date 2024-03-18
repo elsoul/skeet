@@ -1,18 +1,18 @@
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const gitInit = async () => {
   const cmdLine = ['git', 'init', '--initial-branch', 'main']
-  execSyncCmd(cmdLine)
+  execAsyncCmd(cmdLine)
 }
 
 export const gitCryptInit = async () => {
   const cmdLine = ['git', 'crypt', 'init']
-  execSyncCmd(cmdLine)
+  execAsyncCmd(cmdLine)
 }
 
 export const gitCommit = async () => {
   const cmdLine = ['git', 'add', '.']
-  execSyncCmd(cmdLine)
+  execAsyncCmd(cmdLine)
   const cmdLine2 = ['git', 'commit', '-m', '"first commit"']
-  execSyncCmd(cmdLine2)
+  execAsyncCmd(cmdLine2)
 }

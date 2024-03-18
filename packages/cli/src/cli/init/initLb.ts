@@ -29,7 +29,6 @@ export const initLb = async () => {
     skeetConfig.app.name,
     skeetConfig.app.region,
   )
-  await genGithubActions()
   await firebaseFunctionsDeploy(skeetConfig.app.fbProjectId)
 
   await setupLoadBalancer(

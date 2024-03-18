@@ -6,7 +6,7 @@ import { deployRules } from '@/cli/deploy/deployRules'
 import { firebaseFunctionsDeploy } from '@/cli/deploy/firebaseDeploy'
 import { deployGraphql } from '@/cli/deploy/deployGraphql'
 import { pnpmBuild } from '@/lib/pnpmBuild'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const deploy = async () => {
   const functions = await getFunctions()
@@ -23,7 +23,7 @@ export const deploy = async () => {
   }
   if (functionsArray.length === 1) {
     const cmd = ['pnpm', '-F', `${functionsArray[0].name}-func`, 'build']
-    await execSyncCmd(cmd)
+    await execAsyncCmd(cmd)
     await firebaseFunctionsDeploy(app.fbProjectId, functionsArray[0].name)
     return
   }

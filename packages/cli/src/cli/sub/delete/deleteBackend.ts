@@ -1,4 +1,4 @@
-import { execSyncCmd, getFunctionInfo } from '@/lib'
+import { execAsyncCmd, getFunctionInfo } from '@/lib'
 
 export const deleteBackend = async (projectId: string, methodName: string) => {
   try {
@@ -14,7 +14,7 @@ export const deleteBackend = async (projectId: string, methodName: string) => {
       projectId,
       '--quiet',
     ]
-    execSyncCmd(shCmd)
+    execAsyncCmd(shCmd)
   } catch (error) {
     throw new Error(`deleteBackend: ${error}`)
   }

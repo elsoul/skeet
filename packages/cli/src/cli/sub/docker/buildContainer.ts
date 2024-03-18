@@ -1,6 +1,6 @@
 import { PATH } from '@/config/path'
 import { getContainerImageName } from '@/lib/files/getSkeetConfig'
-import { execSyncCmd } from '@/lib/execSyncCmd'
+import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
 export const buildContainer = async (appName: string) => {
   const imageName = await getContainerImageName(appName)
@@ -16,5 +16,5 @@ export const buildContainer = async (appName: string) => {
     '-t',
     imageName,
   ]
-  await execSyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }

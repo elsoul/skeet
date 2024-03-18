@@ -21,8 +21,13 @@ export const addBackendSetup = async (
     if (isNeg) return { status: 'skip' }
 
     await createNeg(config.app.projectId, methodName, config.app.region)
-    createBackend(config.app.projectId, kebab)
-    addBackend(config.app.projectId, config.app.name, kebab, config.app.region)
+    await createBackend(config.app.projectId, kebab)
+    await addBackend(
+      config.app.projectId,
+      config.app.name,
+      kebab,
+      config.app.region,
+    )
     let securityPolicyNameValue = getNetworkConfig(
       config.app.projectId,
       config.app.name,
@@ -30,7 +35,7 @@ export const addBackendSetup = async (
     if (securityPolicyName) {
       securityPolicyNameValue = securityPolicyName
     }
-    updateBackend(config.app.projectId, securityPolicyNameValue, kebab)
+    await updateBackend(config.app.projectId, securityPolicyNameValue, kebab)
     return { status: 'success' }
   } catch (error) {
     throw new Error(`addBackendSetup: ${error}`)
