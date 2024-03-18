@@ -1,5 +1,5 @@
 import { PATH } from '@/config/path'
-import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { spawnSync } from 'child_process'
 
 export const dbDeploy = async (
   production: boolean = false,
@@ -20,5 +20,9 @@ export const dbDeploy = async (
   } else {
     shCmd = ['npx', 'prisma', 'migrate', 'deploy']
   }
-  await execAsyncCmd(shCmd, cwd)
+  spawnSync(shCmd[0], shCmd.slice(1), {
+    cwd,
+    stdio: 'inherit',
+    shell: true,
+  })
 }

@@ -1,6 +1,7 @@
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { firebaseGetSecret } from '@/lib/firebase/firebaseGetSecret'
 import { execAsync } from '@skeet-framework/utils'
+import { spawnSync } from 'child_process'
 
 export const dbMigrate = async (cwd: string, production: boolean = false) => {
   try {
@@ -30,7 +31,12 @@ export const dbMigrate = async (cwd: string, production: boolean = false) => {
       }
     }
 
-    return await execAsync(prismaMigrateCmd.join(' '), cwd)
+    spawnSync(prismaMigrateCmd[0], prismaMigrateCmd.slice(1), {
+      cwd,
+      stdio: 'inherit',
+      shell: true,
+    })
+    return true
   } catch (error) {
     throw new Error(`Error initializing database: ${error}`)
   }

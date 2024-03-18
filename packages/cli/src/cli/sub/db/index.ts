@@ -22,17 +22,15 @@ export const dbSubCommands = () => {
     .action(async (options: DbOptions) => {
       if (options.d !== 'all') {
         const cwd = './sql/' + options.d
-        const { stdout, stderr } = await dbMigrate(cwd, options.production)
-        console.log(stdout)
-        console.log(stderr)
+        await dbMigrate(cwd, options.production)
+        await writePrismaSchemaToFunctions(cwd + '/prisma/schema.prisma')
         return
       }
       const dbDirs = await selectDb()
       for (const dbDir of dbDirs) {
         const cwd = './sql/' + dbDir
-        const { stdout, stderr } = await dbMigrate(cwd, options.production)
-        console.log(stdout)
-        console.log(stderr)
+        await dbMigrate(cwd, options.production)
+        await writePrismaSchemaToFunctions(cwd + '/prisma/schema.prisma')
       }
     })
 
