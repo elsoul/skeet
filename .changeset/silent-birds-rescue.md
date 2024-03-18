@@ -4,3 +4,5 @@
 ---
 
 Updated the base template and CLI to include the new AI module.
+
+Add - Claude3 AI to skeet ai
