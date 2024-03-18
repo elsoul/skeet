@@ -4,20 +4,22 @@ import { ConfigOpenAIType, defaultOpenAIConfig, openAIChat } from './openAIChat'
 import { readGeminiStream } from './readGeminiStream'
 import { readOpenAIStream } from './readOpenAIStream'
 import { Readable } from 'stream'
-import {
-  GenerateContentResult,
-  StreamGenerateContentResult,
-} from '@google-cloud/vertexai'
+import { StreamGenerateContentResult } from '@google-cloud/vertexai'
 import OpenAI from 'openai'
 import { geminiChatStream } from './geminiChatStream'
 import { openAIChatStream } from './openAIChatStream'
+import { Content } from './types/vertexAiResponseTypes'
+import { MessageParam } from '@anthropic-ai/sdk/resources'
+import { claudeChatStream } from './claudeChatStream'
+import { claudeChat } from './claudeChat'
 
 const GEMINI = 'Gemini'
 const OPENAI = 'OpenAI'
+const CLAUDE = 'Claude'
 
 /**
  * Asynchronously communicates with a chat model to generate a response based on the provided context, examples, and input.
- * It supports interaction with either Gemini or OpenAI models based on the `aiType` parameter.
+ * It supports interaction with Gemini, OpenAI, or Claude models based on the `aiType` parameter.
  *
  * @param context - A string providing context or background information for the chat model to consider.
  * @param examples - An array of `InputOutput` objects representing example input-output pairs to guide the model's responses.
@@ -59,7 +61,7 @@ export const chat = async (
         context,
         examples,
         input,
-      )
+      ) as Content[]
 
       if (isStream) {
         const stream = await geminiChatStream(contents, geminiConfig)
@@ -75,7 +77,7 @@ export const chat = async (
       console.error('Error:', error)
       process.exit(1)
     }
-  } else {
+  } else if (aiType === OPENAI) {
     try {
       const openaiConfig: ConfigOpenAIType = {
         model: defaultOpenAIConfig.model,
@@ -92,7 +94,7 @@ export const chat = async (
         context,
         examples,
         input,
-      )
+      ) as OpenAI.Chat.Completions.ChatCompletionMessageParam[]
 
       if (isStream) {
         const stream = await openAIChatStream(prompt, openaiConfig)
@@ -102,6 +104,28 @@ export const chat = async (
         await readOpenAIStream(stream as unknown as Readable)
       }
       const resp = await openAIChat(prompt, openaiConfig)
+      return resp
+    } catch (error) {
+      console.error('Error:', error)
+      process.exit(1)
+    }
+  } else if (aiType === CLAUDE) {
+    try {
+      const prompt = generatePrompt<typeof CLAUDE>(
+        CLAUDE,
+        context,
+        examples,
+        input,
+      ) as MessageParam[]
+      console.log(prompt)
+      if (isStream) {
+        const stream = await claudeChatStream(prompt)
+        if (!isLogging) {
+          return stream
+        }
+        await readOpenAIStream(stream as unknown as Readable)
+      }
+      const resp = await claudeChat(prompt)
       return resp
     } catch (error) {
       console.error('Error:', error)

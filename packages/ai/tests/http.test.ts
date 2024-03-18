@@ -86,7 +86,7 @@ describe('Gemini AI', () => {
       context,
       inputOutput,
       content,
-    )
+    ) as Content[]
     // console.log(`Gemini: ${inspect(contents, false, null, true)}`)
     // Check if the contents is an array
     expect(Array.isArray(contents)).toBeTruthy()
@@ -122,7 +122,7 @@ describe('Gemini AI', () => {
       context,
       inputOutput,
       content,
-    )
+    ) as ChatCompletionMessageParam[]
     // Check if the result is an array
     expect(Array.isArray(res)).toBeTruthy()
 
