@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.0.19
+
+### Patch Changes
+
+- [#342](https://github.com/elsoul/skeet/pull/342) [`1c58530`](https://github.com/elsoul/skeet/commit/1c585305c965b878abfbe8cf2efb036bad523a5d) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update - skeet db dev/migrate
+
 ## 2.0.18
 
 ### Patch Changes
