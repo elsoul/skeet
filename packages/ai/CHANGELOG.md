@@ -1,5 +1,24 @@
 # @skeet-framework/ai
 
+## 1.8.3
+
+### Patch Changes
+
+- [#338](https://github.com/elsoul/skeet/pull/338) [`8bad710`](https://github.com/elsoul/skeet/commit/8bad710f9ef620b2635ba3de650a4064a09a20b3) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Add - Claude3 AI
+
+  ```ts
+  import { chat } from "@skeet-framework/ai";
+
+  const examples = [
+    { input: "Who was the first person in space?", output: "Yuri Gagarin" },
+    { input: "Tell me about the Apollo missions.", output: "Gemini" },
+  ];
+  const aiType = "Claude";
+  const context = "You are an helpful AI assistant";
+  const content = "Hello, how are you?";
+  const result = await chat(context, examples, aiType, content);
+  ```
+
 ## 1.8.2
 
 ### Patch Changes

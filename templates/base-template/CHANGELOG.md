@@ -1,5 +1,13 @@
 # base-template
 
+## 1.0.3
+
+### Patch Changes
+
+- [#337](https://github.com/elsoul/skeet/pull/337) [`8b8b24b`](https://github.com/elsoul/skeet/commit/8b8b24bb98c77b485317076a52d14bf811b99df8) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Updated the base template and CLI to include the new AI module.
+
+  Add - Claude3 AI to skeet ai
+
 ## 1.0.2
 
 ### Patch Changes
