@@ -2,6 +2,13 @@
   "name": "@skeet-framework/base-template",
   "version": "1.0.3",
   "description": "Skeet Framework Base Template",
+  "keywords": [
+    "typescript",
+    "serverless",
+    "framework"
+  ],
+  "author": "ELSOUL LABO B.V.",
+  "license": "Apache-2.0",
   "main": "index.js",
   "type": "module",
   "engines": {
@@ -23,23 +30,23 @@
   "scripts": {
     "test": "vitest",
     "build": "pnpm -r build",
+    "skeet": "run-p skeet:*",
     "skeet:dev": "firebase emulators:start --import=./tmp/data --export-on-exit --inspect-functions"
   },
-  "keywords": [],
-  "author": "ELSOUL LABO B.V.",
-  "license": "Apache-2.0",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "7.1.1",
-    "@typescript-eslint/parser": "7.1.1",
-    "esbuild": "0.20.1",
-    "eslint": "8.57.0",
     "firebase": "10.8.1",
-    "nodemon": "3.1.0",
-    "prettier": "3.2.5",
-    "tsx": "4.7.1",
-    "typescript": "5.3.3",
-    "vite": "5.1.5",
-    "vite-tsconfig-paths": "4.3.1",
-    "vitest": "1.3.1"
+    "npm-run-all": "4.1.5",
+    "@types/node": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
+    "esbuild": "*",
+    "eslint": "*",
+    "nodemon": "*",
+    "prettier": "*",
+    "tsx": "*",
+    "typescript": "*",
+    "vite": "*",
+    "vite-tsconfig-paths": "*",
+    "vitest": "*"
   }
 }
