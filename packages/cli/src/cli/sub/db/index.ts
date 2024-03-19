@@ -16,6 +16,7 @@ type DbOptions = {
 export const dbSubCommands = () => {
   const db = program.command('db').description('Database commands')
   db.command('migrate')
+    .alias('dev')
     .description('Initialize database')
     .option('-p, --production', 'Production mode', false)
     .option('-d <d>', 'Database', 'all')
@@ -45,7 +46,6 @@ export const dbSubCommands = () => {
     })
 
   db.command('deploy')
-    .alias('dev')
     .description('Prisma DB Deploy command')
     .option('-p, --production', 'Production mode', false)
     .action(async (options: DbOptions) => {

@@ -54,3 +54,4 @@ tmp
 dist/
 ./functions
 ./sql
+*.log

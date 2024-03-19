@@ -1,6 +1,7 @@
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { firebaseGetSecret } from '@/lib/firebase/firebaseGetSecret'
 import { execAsync } from '@skeet-framework/utils'
+import chalk from 'chalk'
 import { spawnSync } from 'child_process'
 
 export const dbMigrate = async (cwd: string, production: boolean = false) => {
@@ -17,17 +18,23 @@ export const dbMigrate = async (cwd: string, production: boolean = false) => {
         const value = await firebaseGetSecret(key)
         if (value) {
           await execAsync(`echo "DATABASE_URL=${value}" > .env.build`, cwd)
+        } else {
+          console.log(
+            chalk.yellow(
+              `⚠️ Please make sure the secret ${key} exists in Firebase Secrets\nYou can set it by running\n\nskeet add secret`,
+            ),
+          )
+          return
         }
       }
     } else {
       if (!(await checkFileDirExists('.env'))) {
+        console.log(chalk.yellow(`⚠️ No .env file found`))
         let dbKey = cwd.split('/').pop()
         dbKey = dbKey?.toUpperCase().replaceAll('-', '_')
         const dbKeyLowercase = dbKey?.toLowerCase()
         const value = `postgresql://skeeter:rabbit@localhost:5432/dev-${dbKeyLowercase}?schema=public\n`
-        if (value) {
-          await execAsync(`echo "DATABASE_URL=${value}" > .env`, cwd)
-        }
+        await execAsync(`echo "DATABASE_URL=${value}" > .env`, cwd)
       }
     }
 

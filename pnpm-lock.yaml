@@ -588,7 +588,7 @@ importers:
   templates/base-functions:
     dependencies:
       '@skeet-framework/ai':
-        specifier: 1.8.4
+        specifier: 1.8.5
         version: link:../../packages/ai
       '@skeet-framework/cloud-task':
         specifier: 0.4.1
