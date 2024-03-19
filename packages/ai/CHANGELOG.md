@@ -1,5 +1,11 @@
 # @skeet-framework/ai
 
+## 1.8.5
+
+### Patch Changes
+
+- [#350](https://github.com/elsoul/skeet/pull/350) [`a7037fa`](https://github.com/elsoul/skeet/commit/a7037faea90e1c0a6167817b68eab925fb5ec22b) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update chat response
+
 ## 1.8.4
 
 ### Patch Changes
