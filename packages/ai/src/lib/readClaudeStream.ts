@@ -6,8 +6,16 @@ export const readClaudeStream = async (
   streamingResp: Stream<MessageStreamEvent>,
 ) => {
   for await (const item of streamingResp) {
-    const text = JSON.parse(JSON.stringify(item))
-    process.stdout.write(chalk.white(text.delta?.text))
+    try {
+      const text = JSON.parse(JSON.stringify(item))
+      const msg = text.delta?.text
+      if (msg != null) process.stdout.write(chalk.white(msg))
+    } catch (error) {
+      process.stdout.write(
+        chalk.white('Something went wrong... Please try again 🙇'),
+      )
+      return error
+    }
   }
   // ストリームの終了後、改行を出力して区切ります
   process.stdout.write('\n')
