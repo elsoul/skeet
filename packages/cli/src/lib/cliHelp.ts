@@ -172,16 +172,16 @@ Usage: skeet db [options] [command]
 Database commands
 
 Options:
-  -h, --help            display help for command
+  -h, --help             display help for command
 
 Commands:
-  migrate [options]     Initialize database
-  generate              Prisma Generate command
-  deploy|dev [options]  Prisma DB Deploy command
-  reset [options]       Prisma DB Reset command
-  seed [options]        Prisma DB Seed command
-  studio [options]      Prisma DB Studio command
-  help [command]        display help for command
+  migrate|dev [options]  Initialize database
+  generate               Prisma Generate command
+  deploy [options]       Prisma DB Deploy command
+  reset [options]        Prisma DB Reset command
+  seed [options]         Prisma DB Seed command
+  studio [options]       Prisma DB Studio command
+  help [command]         display help for command
 
 Usage: skeet iam [options] [command]
 
