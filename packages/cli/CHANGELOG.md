@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.1.4
+
+### Patch Changes
+
+- [#352](https://github.com/elsoul/skeet/pull/352) [`57bcacc`](https://github.com/elsoul/skeet/commit/57bcaccc896710036b08357fabf06e1c6ba4bb18) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update - skeet add sql
+
 ## 2.1.3
 
 ### Patch Changes
