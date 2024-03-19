@@ -1,9 +1,9 @@
 {
   "name": "@skeet-framework/base-sql",
   "version": "0.6.9",
-  "description": "Skeet SQL Template - TypeScript Serverless Framework",
+  "description": "Skeet SQL API Server Template - TypeScript Serverless Framework",
   "main": "dist/index.js",
-  "author": "POPPIN-FUMI",
+  "author": "ELSOUL LABO B.V.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
@@ -16,6 +16,8 @@
   "files": [
     "./*"
   ],
+  "port": 3000,
+  "container": "base-sql",
   "scripts": {
     "db:init": "npx prisma generate && npx prisma migrate dev",
     "test": "vitest",
@@ -25,23 +27,23 @@
     "dev": "nodemon",
     "start": "node dist/index.js",
     "db:dev": "npx prisma migrate dev",
-    "db:deploy": "npx prisma deploy",
-    "db:deploy:production": "dotenv -e .env.build npx prisma migrate dev",
+    "db:dev:production": "dotenv -e .env.build npx prisma migrate dev",
     "db:generate:production": "dotenv -e .env.build npx prisma generate",
     "db:reset": "npx prisma migrate reset --force",
     "db:generate": "npx prisma generate",
-    "d:build": "docker build -t card-db ."
+    "d:build": "docker build -t $npm_package_container .",
+    "d:run": "docker run --env-file .env -p $npm_package_port:$npm_package_port --rm --name $npm_package_container $npm_package_container",
+    "d:rm": "docker rm -f $npm_package_container"
   },
   "dependencies": {
     "@hono/node-server": "1.8.2",
     "@prisma/client": "5.11.0",
-    "@skeet-framework/utils": "workspace:*",
     "dotenv": "16.4.5",
-    "hono": "4.1.0",
+    "hono": "4.1.2",
     "prisma": "5.11.0"
   },
   "devDependencies": {
-    "@types/node": "20.11.28",
+    "@types/node": "20.11.29",
     "esbuild": "0.20.2",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
