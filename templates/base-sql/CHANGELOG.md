@@ -1,5 +1,11 @@
 # @skeet-framework/base-sql
 
+## 0.6.10
+
+### Patch Changes
+
+- [#348](https://github.com/elsoul/skeet/pull/348) [`a2c8ae3`](https://github.com/elsoul/skeet/commit/a2c8ae3b22c45f1ef292bd4b4a8f5f937438d6ce) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update base-sql docker cmds
+
 ## 0.6.9
 
 ### Patch Changes
