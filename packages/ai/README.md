@@ -31,6 +31,7 @@ This plugin wraps the following AI models.
 
 - [Vertex AI(Google Cloud)](https://cloud.google.com/vertex-ai/)
 - [Open AI(ChatGPT)](https://openai.com/)
+- [Claude AI](https://claude.ai/)
 
 Fast and easy to deploy with Skeet Framework.
 
@@ -113,6 +114,7 @@ const input = 'What is the capital of France?'
 
 const gemini = await chat(context, examples, input, 'Gemini')
 const openai = await chat(context, examples, input, 'OpenAI')
+const claude = await chat(context, examples, input, 'Claude')
 ```
 
 # Skeet AI Docs
@@ -145,8 +147,8 @@ Powered by TAI, Cloud Functions, Typesaurus, Jest, Prettier, and Google Cloud.
 - [GitHub CLI](https://cli.github.com/)
 
 ```bash
-$ npm i -g @skeet-framework/cli
-$ skeet create web-app
+$ pnpm add -g @skeet-framework/cli
+$ skeet new
 ```
 
 ## Contributing
