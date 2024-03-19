@@ -1,5 +1,12 @@
 # base-functions
 
+## 1.0.16
+
+### Patch Changes
+
+- Updated dependencies [[`a7037fa`](https://github.com/elsoul/skeet/commit/a7037faea90e1c0a6167817b68eab925fb5ec22b)]:
+  - @skeet-framework/ai@1.8.5
+
 ## 1.0.15
 
 ### Patch Changes
