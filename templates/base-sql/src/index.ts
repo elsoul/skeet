@@ -3,6 +3,7 @@ import { Hono, Context } from 'hono'
 import { cors } from 'hono/cors'
 import { userRouter } from '@/routes/user'
 import dotenv from 'dotenv'
+import packageJson from '../package.json'
 dotenv.config()
 
 const app = new Hono()
@@ -41,7 +42,7 @@ app.get(rootDir + '/', (c: Context) => {
   return c.json({ message: 'Hello, World!' })
 })
 
-const port = Number(process.env.PORT) || 3000
+const port = Number(process.env.PORT) || packageJson.port
 console.log(`Server is running on port http://localhost:${port}${rootDir}/`)
 serve({
   fetch: app.fetch,

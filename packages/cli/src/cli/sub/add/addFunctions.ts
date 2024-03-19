@@ -7,15 +7,11 @@ import {
   importFirebaseConfig,
 } from '@/lib'
 import { dlFunctionTemplate } from '@/lib/dlFunctionTemplate'
-import {
-  addDomainToConfig,
-  addProjectRegionToSkeetOptions,
-} from '@/lib/files/addJson'
+import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
-import chalk from 'chalk'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 
 export const addFunctions = async (functionName: string) => {
