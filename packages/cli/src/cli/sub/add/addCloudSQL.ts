@@ -2,11 +2,12 @@ import chalk from 'chalk'
 import * as Table from 'cli-table3'
 import inquirer from 'inquirer'
 import { cloneSQL } from '@/cli/sub/add/cloneSQL'
-import { writeFile } from 'fs/promises'
+import { readFile, writeFile } from 'fs/promises'
 import { SKEET_CONFIG_PATH } from '@/index'
 import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
 import { DatabaseVersion, SkeetCloudConfig } from '@/config/skeetCloud'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { getSQLs } from '@/lib/files/getSQLs'
 
 type AnswerResponse = {
   instanceName: string
@@ -83,6 +84,7 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
     },
   ])
   await cloneSQL(sqlName)
+  await updatePackageJsonPort(sqlName)
   if (!confirm.confirm) {
     const announce = `💡 You can create the Cloud SQL instance later by running the command:
 
@@ -111,4 +113,21 @@ export const updateSkeetConfigDb = async (instanceName: string) => {
     }
   })
   await writeFile(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
+}
+
+const updatePackageJsonPort = async (instanceName: string) => {
+  const sqlDirs = await getSQLs()
+  if (sqlDirs.length === 1) {
+    // No need to update the port
+    return
+  }
+  const packageJsonPath = `./sql/${instanceName}/package.json`
+  const packageJsonFile = await readFile(packageJsonPath, 'utf8')
+  const packageJson = JSON.parse(packageJsonFile) as {
+    port: number
+    container: string
+  }
+  packageJson.port = packageJson.port + sqlDirs.length - 1
+  packageJson.container = instanceName
+  await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2))
 }
