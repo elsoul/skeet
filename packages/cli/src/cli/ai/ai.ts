@@ -53,6 +53,11 @@ export async function promptUser(
   }
 
   const skeetPrompt = skeetAiPrompt('en')
-  await chat(skeetPrompt.context, skeetPrompt.examples, userInput.input)
+  await chat(
+    skeetPrompt.context,
+    skeetPrompt.examples,
+    userInput.input,
+    aiOptions.ai,
+  )
   await promptUser(aiOptions, logger)
 }
