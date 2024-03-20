@@ -7,7 +7,17 @@ import { spawnSync } from 'child_process'
 export const dbMigrate = async (cwd: string, production: boolean = false) => {
   try {
     const prismaMigrateCmd = production
-      ? ['npx', 'dotenv', '-e', `.env.build`, 'npx', 'prisma', 'migrate', 'dev']
+      ? [
+          'npx',
+          'dotenv-cli',
+          '-e',
+          `.env.build`,
+          '--',
+          'npx',
+          'prisma',
+          'migrate',
+          'dev',
+        ]
       : ['npx', 'prisma', 'migrate', 'dev']
 
     if (production) {

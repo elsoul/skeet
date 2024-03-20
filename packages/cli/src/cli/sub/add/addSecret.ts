@@ -1,25 +1,22 @@
-import { SKEET_CONFIG_PATH, execAsyncCmd, importConfig } from '@/lib'
-import { AI } from '@/types/skeetTypes'
-import { writeFile } from 'fs/promises'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { spawnSync } from 'child_process'
 
 export const addSecret = async (key: string) => {
   try {
-    const cmd = ['firebase', 'functions:secrets:set', key]
-    execAsyncCmd(cmd)
-    return await addAiConfig(key)
+    const config = await readOrCreateConfig()
+    if (!config.app.fbProjectId) {
+      throw new Error('Project ID not found')
+    }
+    const cmd = [
+      'firebase',
+      'functions:secrets:set',
+      key,
+      '--project',
+      config.app.projectId,
+    ]
+    spawnSync(cmd[0], cmd.slice(1), { stdio: 'inherit', shell: true })
+    return
   } catch (error) {
     throw new Error(`addSecret: ${error}`)
   }
-}
-
-const addAiConfig = async (key: string) => {
-  const skeetConfig = await importConfig()
-  if (key === 'CHAT_GPT_KEY') {
-    skeetConfig.ai.ais.push({
-      name: 'OpenAI',
-      availableModels: ['gpt-3.5-turbo', 'gpt-4'],
-    } as AI)
-    await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
-  }
-  return true
 }

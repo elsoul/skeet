@@ -46,6 +46,7 @@ export type AppDomains = {
 export type CloudRunConfig = {
   name: string
   url: string
+  localPort: number
   cpu: number
   memory: string
   maxConcurrency: number

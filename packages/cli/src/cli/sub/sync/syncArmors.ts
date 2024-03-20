@@ -7,9 +7,10 @@ import {
   updateSecurityPolicyRule,
 } from '@/lib/gcloud'
 import { Logger } from '@/lib'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const syncArmors = async () => {
-  const config = await importConfig()
+  const config = await readOrCreateConfig()
   await setGcloudProject(config.app.projectId)
   for (const cloudArmor of config.cloudArmor)
     for (const rule of cloudArmor.rules) {
