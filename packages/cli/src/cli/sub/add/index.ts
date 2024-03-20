@@ -92,12 +92,17 @@ export const addSubCommands = async () => {
       const { app } = await importConfig()
       await addFirebaseApp(app.projectId, appDisplayName)
     })
-  add
-    .command('secret')
-    .argument('<secretKey>', 'Secret Key - e.g. API_KEY')
-    .action(async (secretKey: string) => {
-      await addSecret(secretKey)
-    })
+  add.command('secret').action(async () => {
+    const answer = await inquirer.prompt<{ secretKey: string }>([
+      {
+        type: 'input',
+        name: 'secretKey',
+        message: 'Enter Secret Key',
+        default: 'API_KEY',
+      },
+    ])
+    await addSecret(answer.secretKey)
+  })
 
   add
     .command('ghSecret')

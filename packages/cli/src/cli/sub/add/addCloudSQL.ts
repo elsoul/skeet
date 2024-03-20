@@ -5,7 +5,12 @@ import { cloneSQL } from '@/cli/sub/add/cloneSQL'
 import { readFile, writeFile } from 'fs/promises'
 import { SKEET_CONFIG_PATH } from '@/index'
 import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
-import { DatabaseVersion, SkeetCloudConfig } from '@/config/skeetCloud'
+import {
+  CloudRunConfig,
+  DatabaseVersion,
+  SkeetCloudConfig,
+  defaultSkeetCloudConfig,
+} from '@/config/skeetCloud'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { getSQLs } from '@/lib/files/getSQLs'
 
@@ -106,7 +111,19 @@ ${chalk.green('$ skeet deploy --sql')}
 export const updateSkeetConfigDb = async (instanceName: string) => {
   const config = await readOrCreateConfig()
   const sqls = config.SQL
-
+  const cloudRunName = instanceName.replace('-', '')
+  const sqlDirs = await getSQLs()
+  const cloudRun: CloudRunConfig = {
+    name: cloudRunName,
+    url: '',
+    localPort: 3000 + sqlDirs.length - 1,
+    cpu: 1,
+    memory: '4GiB',
+    maxConcurrency: 80,
+    maxInstances: 100,
+    minInstances: 0,
+  }
+  config.cloudRun.push(cloudRun)
   sqls.forEach((sql) => {
     if (sql.instanceName === instanceName) {
       sql.status = 'RUNNING'

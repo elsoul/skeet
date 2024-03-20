@@ -33,6 +33,7 @@ export const setupSQLActions = async (
       region,
     )
     await writeFile(result.filePath, result.body, { flag: 'w' })
+    // Add cloudRun to skeet cloud config
     Logger.success(`Successfully updated ${result.filePath}!`)
 
     return true

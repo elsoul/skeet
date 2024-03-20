@@ -66,6 +66,8 @@ jobs:
         run: pnpm -F ${sqlDir} db:dev
       - name: Execute tests
         run: pnpm -F ${sqlDir} test
+      - name: Copy common directory
+        run: cp -r common ./sql/${sqlDir}/
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
         with:
