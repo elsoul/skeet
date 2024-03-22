@@ -21,6 +21,9 @@ export const syncArmors = async () => {
         rule.priority,
       )
       if (result) {
+        console.log(
+          `✅ Updating security policry rule: ${securityPolicyName}\ndescription: ${rule.description}`,
+        )
         await updateSecurityPolicyRule(
           config.app.projectId,
           securityPolicyName,
