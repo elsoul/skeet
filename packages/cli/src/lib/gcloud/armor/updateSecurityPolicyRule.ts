@@ -23,5 +23,7 @@ export const updateSecurityPolicyRule = async (
       shCmd.push(`--${key}=${value}`)
     }
   }
-  await execAsyncCmd(shCmd)
+  const log = await execAsyncCmd(shCmd)
+  if (log.stdout != null) console.log(log.stdout)
+  if (log.stderr != null) console.log(log.stderr)
 }

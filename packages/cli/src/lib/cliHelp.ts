@@ -209,7 +209,7 @@ Commands:
   method [options]
   model <modelName>
   app <appDisplayName>
-  secret <secretKey>
+  secret
   ghSecret <secretKey>
   ghActions                 Add Github Actions
   webAppDomain [options]

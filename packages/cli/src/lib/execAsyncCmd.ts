@@ -5,7 +5,7 @@ export interface SpawnResult {
   stderr: string
 }
 
-const spawnAsync = (
+export const spawnAsync = (
   command: string,
   args: string[],
   options: { cwd: string },

@@ -21,6 +21,9 @@ export const syncArmors = async () => {
         rule.priority,
       )
       if (result) {
+        console.log(
+          `✅ Updating security policy rule: ${securityPolicyName}\ndescription: ${rule.description}`,
+        )
         await updateSecurityPolicyRule(
           config.app.projectId,
           securityPolicyName,
@@ -28,7 +31,9 @@ export const syncArmors = async () => {
           rule.options,
         )
       } else {
-        console.log(`✅ Creating security policry rule: ${securityPolicyName}`)
+        console.log(
+          `✅ Creating security policy rule: ${securityPolicyName}\ndescription: ${rule.description}`,
+        )
         await createSecurityPolicy(config.app.projectId, securityPolicyName)
         await createSecurityPolicyRule(
           config.app.projectId,
