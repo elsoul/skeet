@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.1.5
+
+### Patch Changes
+
+- [#354](https://github.com/elsoul/skeet/pull/354) [`40741b3`](https://github.com/elsoul/skeet/commit/40741b3fa8d0e5ef440aec41f5b204458afada7e) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - update - skeet sync armor
+
 ## 2.1.4
 
 ### Patch Changes
