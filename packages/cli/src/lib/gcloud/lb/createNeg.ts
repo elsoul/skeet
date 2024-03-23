@@ -33,5 +33,5 @@ export const createNeg = async (
     '--project',
     projectId,
   ]
-  execAsyncCmd(shCmd)
+  await execAsyncCmd(shCmd)
 }
