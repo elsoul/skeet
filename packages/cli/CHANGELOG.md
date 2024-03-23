@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.0
+
+### Minor Changes
+
+- Fixed Sync Routings
+
 ## 2.1.6
 
 ### Patch Changes

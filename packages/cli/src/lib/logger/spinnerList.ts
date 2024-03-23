@@ -39,8 +39,8 @@ export const spinnerPattern = [
     right: '🕺',
   },
   {
-    left: '💰',
-    right: '💰',
+    left: '⌛',
+    right: '⌛',
   },
   {
     left: '⚒️',
