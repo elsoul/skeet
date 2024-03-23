@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.1
+
+### Patch Changes
+
+- [#360](https://github.com/elsoul/skeet/pull/360) [`882aeb7`](https://github.com/elsoul/skeet/commit/882aeb79b82832c0367ee091d8bfad872936eb4d) Thanks [@KishiTheMechanic](https://github.com/KishiTheMechanic)! - somehow version unchange
+
 ## 2.2.0
 
 ### Minor Changes
