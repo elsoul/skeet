@@ -50,14 +50,6 @@ export const addBackendSetup = async (
     console.log(chalk.white(`✅ Updating backend: ${kebab}`))
     await updateBackend(config.app.projectId, securityPolicyNameValue, kebab)
 
-    await addPathMatcher(
-      config.app.projectId,
-      config.app.name,
-      config.app.loadBalancerDomain,
-      [kebab],
-      false,
-    )
-
     return { status: 'success' }
   } catch (error) {
     throw new Error(`addBackendSetup: ${error}`)
