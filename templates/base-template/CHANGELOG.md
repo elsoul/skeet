@@ -1,5 +1,11 @@
 # base-template
 
+## 1.0.6
+
+### Patch Changes
+
+- [`afbd84b`](https://github.com/elsoul/skeet/commit/afbd84b96e7b5692b762f5993d2ef6c43dc496e7) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update base-template
+
 ## 1.0.5
 
 ### Patch Changes
