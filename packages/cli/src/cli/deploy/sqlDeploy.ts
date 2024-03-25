@@ -1,17 +1,18 @@
-import { importConfig } from '@/lib/files/importConfig'
 import inquirer from 'inquirer'
 import { deployCloudSQL } from '@/cli/sub/add/deployCloudSQL'
 import { updateSkeetConfigDb } from '@/cli/sub/add/addCloudSQL'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import chalk from 'chalk'
 
 export const sqlDeploy = async () => {
-  const config = await importConfig()
-  const sqls = config.SQLs.filter((sql) => !sql.isCreated)
+  const config = await readOrCreateConfig()
+  const sqls = config.SQL.filter((sql) => sql.status === 'NOT_CREATED')
   if (sqls.length === 0) {
     console.log('No SQL instance to deploy')
     return
   }
   const context = `You have ${sqls.length} SQL instances to deploy.`
-  console.log(context)
+  console.log(chalk.white(context))
   const answer = await inquirer.prompt([
     {
       type: 'confirm',

@@ -28,7 +28,7 @@ export const deployCommands = async () => {
         //await pnpmBuild(DEFAULT_FUNCTION_NAME)
         return
       } else if (options.sql) {
-        //await sqlDeploy()
+        await sqlDeploy()
         return
       }
       await deploy()
