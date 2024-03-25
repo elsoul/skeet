@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.4
+
+### Patch Changes
+
+- [#372](https://github.com/elsoul/skeet/pull/372) [`0343da7`](https://github.com/elsoul/skeet/commit/0343da721d24aecee848502009ed70fe612ba8f1) Thanks [@KishiTheMechanic](https://github.com/KishiTheMechanic)! - Fix sync routings
+
 ## 2.2.3
 
 ### Patch Changes
