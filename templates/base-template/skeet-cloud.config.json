@@ -18,5 +18,6 @@
   "SQL": [],
   "taskQueue": [],
   "cloudArmor": [],
-  "routing": []
+  "routing": [],
+  "secretKey": []
 }
