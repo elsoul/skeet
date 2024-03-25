@@ -21,7 +21,7 @@ export const dbMigrate = async (cwd: string, production: boolean = false) => {
       : ['npx', 'prisma', 'migrate', 'dev']
 
     if (production) {
-      if (!(await checkFileDirExists('.env.build'))) {
+      if (!(await checkFileDirExists(cwd + '/.env.build'))) {
         let dbKey = cwd.split('/').pop()
         dbKey = dbKey?.toUpperCase().replaceAll('-', '_')
         const key = `DATABASE_BUILD_URL_${dbKey}`
@@ -38,12 +38,12 @@ export const dbMigrate = async (cwd: string, production: boolean = false) => {
         }
       }
     } else {
-      if (!(await checkFileDirExists('.env'))) {
+      if (!(await checkFileDirExists(cwd + '/.env'))) {
         console.log(chalk.yellow(`⚠️ No .env file found`))
         let dbKey = cwd.split('/').pop()
         dbKey = dbKey?.toUpperCase().replaceAll('-', '_')
         const dbKeyLowercase = dbKey?.toLowerCase()
-        const value = `postgresql://skeeter:rabbit@localhost:5432/dev-${dbKeyLowercase}?schema=public\n`
+        const value = `postgresql://skeeter:rabbit@localhost:5432/dev-${dbKeyLowercase}?schema=public`
         await execAsync(`echo "DATABASE_URL=${value}" > .env`, cwd)
       }
     }

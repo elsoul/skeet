@@ -11,6 +11,7 @@ import { updateSkeetConfigDb } from './addCloudSQL'
 import { firebaseAddSecret } from '@/lib/firebase/firebaseAddSecret'
 import { addEnv } from '@/lib'
 import { SkeetCloudConfig } from '@/config/skeetCloud'
+import chalk from 'chalk'
 
 export const deployCloudSQL = async (
   instanceName: string,
@@ -21,7 +22,13 @@ export const deployCloudSQL = async (
 ) => {
   const password = await askForSqlPassword()
   const encodedPassword = percentEncode(password)
-  await createSQL(
+  console.log(
+    chalk.white(
+      `⏳ Waiting for SQL instance to be ready...\nThis may take a few minutes.`,
+    ),
+  )
+
+  const { stderr, stdout } = await createSQL(
     config.app.projectId,
     instanceName,
     config.app.region,
@@ -30,7 +37,13 @@ export const deployCloudSQL = async (
     cpu,
     memory,
   )
+  if (stderr) {
+    console.log(stderr)
+    return
+  }
+
   const databaseIp = await getDatabaseIp(config.app.projectId, instanceName)
+  console.log(stdout)
 
   const genDir = `./sql/${instanceName}`
   const { key, value } = await genEnvBuild(
@@ -43,6 +56,12 @@ export const deployCloudSQL = async (
   const { networkName } = getNetworkConfig(
     config.app.projectId,
     config.app.name,
+  )
+
+  console.log(
+    chalk.white(
+      `⏳ Waiting for SQL instance to be patched...\nThis may take a few minutes.`,
+    ),
   )
   await patchSQL(config.app.projectId, instanceName, '', '', networkName)
   const databasePrivateIp = await getDatabaseIp(

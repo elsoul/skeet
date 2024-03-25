@@ -67,7 +67,7 @@ export type SQL_STATUS = 'RUNNING' | 'NOT_CREATED' | 'PAUSED'
 export type SQLConfig = {
   instanceName: string
   databaseVersion: DATABASE_TYPE
-  cpu: string
+  cpu: number
   memory: string
   storageSize: number
   whiteList?: string

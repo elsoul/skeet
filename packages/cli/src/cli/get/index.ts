@@ -1,14 +1,17 @@
 import { program } from '@/index'
 import { listFunctions, listHttps } from '../sub/list'
-import { getSecret } from './getSecret'
-import { Logger, importConfig, getZone } from '@/lib'
+import { Logger, getZone } from '@/lib'
 import { FileType, getRecentUpdatedFiles } from './getRecentUpdatedFiles'
 import { firebaseAuthUserGet } from '@/lib/firebase/firebaseAuthUserGet'
 import { PATH } from '@/config/path'
 import { mkdir } from 'fs/promises'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import chalk from 'chalk'
+import { firebaseGetSecret } from '@/lib/firebase/firebaseGetSecret'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import inquirer from 'inquirer'
 
-export const listSubCommands = async () => {
+export const listSubCommands = () => {
   const get = program.command('get').description('Get Skeet App List')
   get
     .command('functions')
@@ -27,16 +30,29 @@ export const listSubCommands = async () => {
     .command('dns')
     .description('Show Skeet NameServer Records')
     .action(async () => {
-      const { app } = await importConfig()
+      const { app } = await readOrCreateConfig()
       const res = await getZone(app.projectId, app.name)
       Logger.dnsSetupLog(res)
     })
   get
     .command('secret')
-    .argument('<secretKey>', 'Secret Key - e.g. API_KEY')
+    .option('-k, --key <key>', '')
     .description('Get Skeet Secret Value')
-    .action((secretKey: string) => {
-      getSecret(secretKey)
+    .action(async (options: { key: string }) => {
+      let key = options.key
+      if (options.key == null) {
+        const answer = await inquirer.prompt<{ key: string }>([
+          {
+            type: 'input',
+            name: 'secretKey',
+            message: 'Enter Secret Key',
+            default: 'SECRET_KEY',
+          },
+        ])
+        key = answer.key
+      }
+      const secret = await firebaseGetSecret(key)
+      if (secret) console.log(chalk.white(secret))
     })
 
   get
@@ -66,7 +82,7 @@ export const listSubCommands = async () => {
     .option('-p, --projectId <projectId>', 'Project Id', '')
     .option('-o, --output <output>', 'Output Path', PATH.FIREBASE_USERS)
     .action(async (options: { output: string; projectId: string }) => {
-      const { app } = await importConfig()
+      const { app } = await readOrCreateConfig()
       let projectId = app.projectId
       if (options.projectId !== '') {
         projectId = options.projectId
@@ -75,6 +91,7 @@ export const listSubCommands = async () => {
       if (!(await checkFileDirExists(tmpDir))) {
         await mkdir(tmpDir)
       }
-      firebaseAuthUserGet(projectId, options.output)
+      const { stdout } = await firebaseAuthUserGet(projectId, options.output)
+      console.log(chalk.white(stdout))
     })
 }

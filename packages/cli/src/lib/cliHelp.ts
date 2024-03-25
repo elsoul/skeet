@@ -7,7 +7,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -30,13 +29,6 @@ Commands:
   run [options]                Run commands
   new                          Create Skeet Framework App
   help [command]               display help for command
-
-Usage: skeet test [options]
-
-Test command
-
-Options:
-  -h, --help  display help for command
 
 Usage: skeet create [options] <appName>
 
@@ -86,7 +78,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -119,7 +110,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
@@ -245,7 +235,7 @@ Commands:
   functions|function    Show Skeet Functions List
   https                 Show Skeet Https List
   dns                   Show Skeet NameServer Records
-  secret <secretKey>    Get Skeet Secret Value
+  secret [options]      Get Skeet Secret Value
   files|file [options]  Show Recent Updated Files
   users [options]       Download Firebase Auth Users in JSON
   help [command]        display help for command
@@ -297,7 +287,6 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  test                         Test command
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
