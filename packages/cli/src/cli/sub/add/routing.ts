@@ -1,7 +1,7 @@
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { addPathMatcher } from '@/lib'
 
-export const addRounting = async (paths: string[]) => {
+export const addRouting = async (paths: string[]) => {
   const config = await readOrCreateConfig()
   return await addPathMatcher(
     config.app.projectId,
