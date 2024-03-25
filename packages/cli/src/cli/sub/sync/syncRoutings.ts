@@ -1,8 +1,6 @@
 import {
   getFunctionInfo,
   getHttpRoutings,
-  getNetworkConfig,
-  importConfig,
   Logger,
   setGcloudProject,
 } from '@/lib'
@@ -10,13 +8,15 @@ import { convertToKebabCase } from '@/utils/string'
 import { addBackendSetup } from '../add/addBackendSetup'
 import { addRounting } from '../add/routing'
 import { getSQLs } from '@/lib/files/getSQLs'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import chalk from 'chalk'
 
 export const syncRoutings = async () => {
-  const { app } = await importConfig()
+  const { app } = await readOrCreateConfig()
   await setGcloudProject(app.projectId)
   const files = await getHttpRoutings()
   const paths = []
-  const spinner = Logger.syncSpinner('syncRoutings...')
+  console.log(chalk.green('⏳ Syncing routings'))
   for (const file of files) {
     for (const methoName of file.httpEndpoints) {
       const methodNameKebab = convertToKebabCase(methoName)
@@ -26,6 +26,7 @@ export const syncRoutings = async () => {
         securityPolicyName = method.securityPolicyName
       }
       const functionInfo = getFunctionInfo(methodNameKebab)
+      console.log(chalk.green(`✅ Adding backend setup for ${methodNameKebab}`))
       await addBackendSetup(methodNameKebab, securityPolicyName)
       const pathString = `/${file.functionName}/${methodNameKebab}=${functionInfo.backendService}`
       paths.push(pathString)
@@ -45,14 +46,14 @@ export const syncRoutings = async () => {
       paths.push(sqlPath)
     }
   }
-  const { pathMatcherName } = getNetworkConfig(app.projectId, app.name)
-  await addRounting(pathMatcherName, paths)
-  spinner.stop()
+
+  await addRounting(paths)
+  Logger.successCheck('successfully updated routings')
 }
 
 const findMethod = async (methodName: string) => {
-  const { routings } = await importConfig()
-  const method = routings.find((routing) => routing.methodName === methodName)
+  const { routing } = await readOrCreateConfig()
+  const method = routing.find((routing) => routing.methodName === methodName)
   if (!method) return null
   return method
 }

@@ -27,5 +27,5 @@ export const addBackend = async (
     '--project',
     projectId,
   ]
-  await execAsyncCmd(shCmd)
+  return await execAsyncCmd(shCmd)
 }

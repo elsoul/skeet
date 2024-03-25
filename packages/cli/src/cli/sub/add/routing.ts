@@ -1,9 +1,9 @@
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { addPathMatcher } from '@/lib'
 
-export const addRounting = async (methodName: string, paths: string[]) => {
+export const addRounting = async (paths: string[]) => {
   const config = await readOrCreateConfig()
-  await addPathMatcher(
+  return await addPathMatcher(
     config.app.projectId,
     config.app.name,
     config.app.loadBalancerDomain,

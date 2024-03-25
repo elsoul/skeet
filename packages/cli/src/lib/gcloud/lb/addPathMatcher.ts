@@ -50,5 +50,5 @@ export const addPathMatcher = async (
       '--delete-orphaned-path-matcher',
     ]
   }
-  await execAsyncCmd(shCmd)
+  return await execAsyncCmd(shCmd)
 }
