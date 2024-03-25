@@ -1,5 +1,11 @@
 # base-template
 
+## 1.0.8
+
+### Patch Changes
+
+- [#373](https://github.com/elsoul/skeet/pull/373) [`16b9fa0`](https://github.com/elsoul/skeet/commit/16b9fa024337261fa9238a93d48f851de9de9efa) Thanks [@KishiTheMechanic](https://github.com/KishiTheMechanic)! - Fix things
+
 ## 1.0.7
 
 ### Patch Changes
