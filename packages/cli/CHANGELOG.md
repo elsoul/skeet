@@ -1,5 +1,15 @@
 # @skeet-framework/cli
 
+## 2.2.2
+
+### Patch Changes
+
+- [#365](https://github.com/elsoul/skeet/pull/365) [`ab06bd2`](https://github.com/elsoul/skeet/commit/ab06bd2fdee626d86e4f103cc7299684bd2c45ff) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet sync routings fix #362
+
+  ```bash
+  $ skeet sync routings
+  ```
+
 ## 2.2.1
 
 ### Patch Changes
