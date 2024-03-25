@@ -44,7 +44,7 @@ export const listSubCommands = () => {
         const answer = await inquirer.prompt<{ key: string }>([
           {
             type: 'input',
-            name: 'secretKey',
+            name: 'key',
             message: 'Enter Secret Key',
             default: 'SECRET_KEY',
           },

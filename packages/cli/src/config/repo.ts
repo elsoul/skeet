@@ -9,6 +9,7 @@ export const getTemplateRepo = async (appName: string) => {
   const BASE_TEMP = `https://registry.npmjs.org/@skeet-framework/${template}/-/${template}-${version}.tgz`
   const fileName = `${template}-${version}.tgz`
   const cmd = `wget ${BASE_TEMP}`
+  console.log(cmd)
   await execAsync(cmd)
   if (await existsAsync(appName)) {
     console.log(chalk.yellow('⚠️ Folder already exists'))

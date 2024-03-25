@@ -11,7 +11,7 @@ const validateProjectID = (input: string) => {
   return (
     regex.test(input) ||
     chalk.yellow(
-      '⚠️ The project ID must start with a lowercase letter,\n contain only lowercase letters, numbers, and hyphens,\n must not end with a hyphen, and be 6-30 characters long.',
+      '⚠️ The project ID must start with a lowercase letter, contain only lowercase letters, numbers, and hyphens, must not end with a hyphen, and be 6-30 characters long.',
     )
   )
 }
