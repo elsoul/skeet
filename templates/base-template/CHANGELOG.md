@@ -1,5 +1,11 @@
 # base-template
 
+## 1.0.7
+
+### Patch Changes
+
+- [`f2d1f10`](https://github.com/elsoul/skeet/commit/f2d1f103497838578325c1d172f971ffe935cf57) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Fix - template
+
 ## 1.0.6
 
 ### Patch Changes
