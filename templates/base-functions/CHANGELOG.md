@@ -1,5 +1,11 @@
 # base-functions
 
+## 1.1.1
+
+### Patch Changes
+
+- [`4215ff9`](https://github.com/elsoul/skeet/commit/4215ff923d57f6f7aa8ab6622840af122ea97056) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update version
+
 ## 1.1.0
 
 ### Minor Changes
