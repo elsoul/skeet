@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.3
+
+### Patch Changes
+
+- [#367](https://github.com/elsoul/skeet/pull/367) [`a1ce123`](https://github.com/elsoul/skeet/commit/a1ce12333ef9b67f995182822320cd6c21b513dc) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update execAsncCmd
+
 ## 2.2.2
 
 ### Patch Changes
