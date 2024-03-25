@@ -1,4 +1,5 @@
-import { importConfig, execAsyncCmd, getFunctionInfo } from '@/lib'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { execAsyncCmd, getFunctionInfo } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 
 // This will need updates when Google Cloud Run naming changed
@@ -10,14 +11,11 @@ export const createNeg = async (
 ) => {
   const kebab = convertToKebabCase(methodName)
   const functionInfo = getFunctionInfo(kebab)
-  const config = await importConfig()
+  const config = await readOrCreateConfig()
   const negName = init
     ? `skeet-${config.app.name}-default-neg`
     : functionInfo.neg
-  let cloudRunName = kebab.replace(/-/g, '')
-  if (methodName === 'graphql') {
-    cloudRunName = `skeet-${config.app.name}-graphql`
-  }
+  const cloudRunName = kebab.replace(/-/g, '')
   const shCmd = [
     'gcloud',
     'compute',
@@ -33,5 +31,5 @@ export const createNeg = async (
     '--project',
     projectId,
   ]
-  await execAsyncCmd(shCmd)
+  return await execAsyncCmd(shCmd)
 }

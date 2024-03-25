@@ -3,6 +3,7 @@ import { CONTAINER_REGIONS } from '@/config/region'
 import { importConfig } from '@/lib/files/importConfig'
 import { FILE_NAME, PATH } from '@/config/path'
 import { execAsyncCmd } from '../execAsyncCmd'
+import { stderr } from 'process'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -164,8 +165,8 @@ export const isNegExists = async (
     projectId,
   ]
   try {
-    const stdout = String(await execAsyncCmd(shCmd))
-    if (stdout.includes('ERROR:')) throw new Error('does not exist')
+    const { stdout, stderr } = await execAsyncCmd(shCmd)
+    if (stderr.includes('ERROR:') || stdout === '') return false
     return true
   } catch (error) {
     return false

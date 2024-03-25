@@ -32,20 +32,16 @@ export const spawnAsync = (
     })
   })
 
-// execAsyncCmd関数の型を定義
 export const execAsyncCmd = async (
   command: string[],
   cwd: string = '.',
 ): Promise<SpawnResult> => {
   try {
-    // 最初の要素をコマンドとして、残りを引数の配列として扱う
     const cmd = command[0]
     const args = command.slice(1)
     const { stdout, stderr } = await spawnAsync(cmd, args, { cwd })
     return { stdout, stderr }
   } catch (error) {
-    console.error('Error executing command:', error)
-    // Error型の場合に備えて、errorオブジェクトを文字列に変換
     return {
       stdout: '',
       stderr: error instanceof Error ? error.message : String(error),
