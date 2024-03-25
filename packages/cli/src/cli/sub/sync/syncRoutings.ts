@@ -6,7 +6,7 @@ import {
 } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
 import { addBackendSetup } from '../add/addBackendSetup'
-import { addRounting } from '../add/routing'
+import { addRouting } from '../add/routing'
 import { getSQLs } from '@/lib/files/getSQLs'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import chalk from 'chalk'
@@ -47,7 +47,7 @@ export const syncRoutings = async () => {
     }
   }
 
-  await addRounting(paths)
+  await addRouting(paths)
   Logger.successCheck('successfully updated routings')
 }
 

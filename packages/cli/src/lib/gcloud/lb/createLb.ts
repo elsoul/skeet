@@ -14,5 +14,5 @@ export const createLb = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  execAsyncCmd(shCmd)
+  return await execAsyncCmd(shCmd)
 }
