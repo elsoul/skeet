@@ -30,5 +30,5 @@ export const createSQL = async (
     '--database-flags',
     'cloudsql.iam_authentication=on',
   ]
-  await execAsyncCmd(shCmd)
+  return await execAsyncCmd(shCmd)
 }

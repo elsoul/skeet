@@ -9,7 +9,6 @@ import {
   CloudRunConfig,
   DatabaseVersion,
   SkeetCloudConfig,
-  defaultSkeetCloudConfig,
 } from '@/config/skeetCloud'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { getSQLs } from '@/lib/files/getSQLs'
@@ -48,7 +47,7 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       type: 'input',
       name: 'cpu',
       message: 'CPU:',
-      default: '1GiB',
+      default: '1',
     },
     {
       type: 'input',
@@ -102,7 +101,7 @@ ${chalk.green('$ skeet deploy --sql')}
       instanceName,
       config,
       answer.databaseVersion,
-      answer.cpu,
+      String(answer.cpu),
       answer.memory,
     )
   }

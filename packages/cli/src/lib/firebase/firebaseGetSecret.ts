@@ -8,7 +8,7 @@ export const firebaseGetSecret = async (secretKey: string) => {
   }
   const cmd = `firebase functions:secrets:access ${secretKey}`
   const result = await execAsync(cmd)
-  if (result.stdout == null) {
+  if (result.stdout == null || result.stdout.trim() === '') {
     console.log(chalk.yellow('⚠️ secretKey not found.'))
     return null
   }

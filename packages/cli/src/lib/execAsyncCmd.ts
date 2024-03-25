@@ -8,7 +8,7 @@ export interface SpawnResult {
 export const spawnAsync = (
   command: string,
   args: string[],
-  options: { cwd: string },
+  options: { cwd: string; shell: boolean } = { cwd: '.', shell: true },
 ): Promise<SpawnResult> =>
   new Promise((resolve, reject) => {
     const child = spawn(command, args, options)
@@ -39,7 +39,7 @@ export const execAsyncCmd = async (
   try {
     const cmd = command[0]
     const args = command.slice(1)
-    const { stdout, stderr } = await spawnAsync(cmd, args, { cwd })
+    const { stdout, stderr } = await spawnAsync(cmd, args, { cwd, shell: true })
     return { stdout, stderr }
   } catch (error) {
     return {

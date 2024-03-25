@@ -21,7 +21,7 @@ export const setupSQLActions = async (
       'DATABASE_PRODUCTION_URL_' +
       instanceName.toUpperCase().replaceAll('-', '_')
     const databaseUrl = `DATABASE_URL=\${{ secrets.${secretKeyName} }}`
-    const envString = databaseUrl + '\n' + TZ + '\n'
+    const envString = databaseUrl + ',' + TZ
     const result = await sqlYml(
       instanceName,
       memory,

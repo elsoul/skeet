@@ -16,7 +16,7 @@ export const sqlYml = async (
   region: string,
 ) => {
   const cRegion = getContainerRegion(region).split('.')[0]
-  const sqlDir = instanceName.split('-')[1] + '-db'
+  const sqlDir = instanceName
   const cloudRunName = instanceName.replaceAll('-', '')
   const cameledInstanceName = toCamelCase(instanceName)
   await mkdir('.github/workflows', { recursive: true })
