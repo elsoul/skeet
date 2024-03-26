@@ -1,13 +1,15 @@
 import { spawnSync } from 'child_process'
 import { SKEET_CONFIG_CLOUD_PATH } from '@/config/config'
 import chalk from 'chalk'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const firebasePruneSecret = async () => {
+  const config = await readOrCreateConfig()
   const command = [
     'firebase',
     'functions:secrets:prune',
     '--project',
-    'skeet-framework',
+    config.app.fbProjectId,
   ]
 
   spawnSync(command[0], command.slice(1), {
