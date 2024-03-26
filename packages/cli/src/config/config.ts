@@ -1,3 +1,5 @@
+export const SKEET_CONFIG_CLOUD_PATH = './skeet-cloud.config.json'
+
 export enum SKEET_CONFIG {
   NODE_VERSION = '20.11.1',
 }
