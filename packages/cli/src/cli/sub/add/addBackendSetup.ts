@@ -6,7 +6,6 @@ import { addBackend } from '@/lib/gcloud/lb/addBackend'
 import { convertToKebabCase } from '@/utils/string'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import chalk from 'chalk'
-import { addPathMatcher, createFr } from '@/lib'
 
 export const addBackendSetup = async (
   methodName: string,

@@ -9,7 +9,7 @@ import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import chalk from 'chalk'
 import { firebaseGetSecret } from '@/lib/firebase/firebaseGetSecret'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
-import inquirer from 'inquirer'
+import { getSecretKeys } from '@/lib/files/getSecretKeys'
 
 export const listSubCommands = () => {
   const get = program.command('get').description('Get Skeet App List')
@@ -39,20 +39,19 @@ export const listSubCommands = () => {
     .option('-k, --key <key>', '')
     .description('Get Skeet Secret Value')
     .action(async (options: { key: string }) => {
-      let key = options.key
+      const key = options.key
       if (options.key == null) {
-        const answer = await inquirer.prompt<{ key: string }>([
-          {
-            type: 'input',
-            name: 'key',
-            message: 'Enter Secret Key',
-            default: 'SECRET_KEY',
-          },
-        ])
-        key = answer.key
+        const keys = await getSecretKeys()
+        for (const key of keys) {
+          const secret = await firebaseGetSecret(key)
+          if (secret) {
+            console.log(chalk.white(`🗝️  ${key}: ${secret}`))
+          }
+        }
+        return
       }
       const secret = await firebaseGetSecret(key)
-      if (secret) console.log(chalk.white(secret))
+      if (secret) console.log(chalk.white(`🗝️  ${key}: ${secret}`))
     })
 
   get

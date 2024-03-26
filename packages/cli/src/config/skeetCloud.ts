@@ -14,6 +14,7 @@ export const defaultSkeetCloudConfig: SkeetCloudConfig = {
   taskQueue: [],
   cloudArmor: [],
   routing: [],
+  secretKey: [],
   lang: 'en',
 }
 
@@ -24,6 +25,7 @@ export type SkeetCloudConfig = {
   taskQueue: TaskQueue[]
   cloudArmor: CloudArmor[]
   routing: Routing[]
+  secretKey: string[]
   lang: 'en' | 'ja'
 }
 

@@ -137,16 +137,7 @@
       "securityPolicyName": "skeet-sql-armor"
     }
   ],
-  "ai": {
-    "lang": "en",
-    "ais": [
-      {
-        "name": "VertexAI",
-        "availableModels": [
-          "chat-bison@001",
-          "chat-bison-32k"
-        ]
-      }
-    ]
-  }
+  "secretKey": [
+    "TEST_KEY"
+  ]
 }

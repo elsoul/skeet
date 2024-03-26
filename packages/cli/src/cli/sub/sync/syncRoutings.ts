@@ -47,7 +47,9 @@ export const syncRoutings = async () => {
     }
   }
 
-  await addRouting(paths)
+  console.log(chalk.green('✅ Adding routings'))
+  const result = await addRouting(paths)
+  if (result.stderr) console.log(result.stderr)
   Logger.successCheck('successfully updated routings')
 }
 

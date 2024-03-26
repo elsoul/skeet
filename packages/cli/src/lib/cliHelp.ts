@@ -28,6 +28,7 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
+  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet create [options] <appName>
@@ -99,6 +100,7 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
+  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet [options] [command]
@@ -131,6 +133,7 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
+  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet log [options]
@@ -278,6 +281,13 @@ Create Skeet Framework App
 Options:
   -h, --help  display help for command
 
+Usage: skeet test [options]
+
+Run tests
+
+Options:
+  -h, --help  display help for command
+
 Usage: skeet [options] [command]
 
 CLI for Skeet - Full-stack TypeScript Serverless framework
@@ -308,5 +318,6 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
+  test                         Run tests
   help [command]               display help for command
 `
