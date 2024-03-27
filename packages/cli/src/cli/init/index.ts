@@ -17,15 +17,11 @@ export const initCommands = async () => {
   program
     .command('init')
     .option('--login', 'Activate Firebase Login', false)
-    .option('--config', 'Generate Skeet Cloud Config', false)
     .option('--lb', 'Setup Cloud Load Balancer', false)
     .option('-n, --network', 'Setup Network', false)
     .description('Initialize Google Cloud Setups for Skeet APP')
     .action(async (options: Options) => {
-      if (options.config) {
-        const data = await skeetCloudConfigAppGen()
-        await writeFile(data.filePath, data.body)
-      } else if (options.lb) {
+      if (options.lb) {
         await initLb()
       } else if (options.network) {
         await setupNetwork()

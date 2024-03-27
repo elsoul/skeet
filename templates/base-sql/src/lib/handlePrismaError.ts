@@ -4,7 +4,7 @@ export const handlePrismaError = (
   error: Prisma.PrismaClientKnownRequestError | any,
 ) => {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    // 特定のエラーコードに基づいたカスタムエラーメッセージのハンドリング
+    // Please refer to the Prisma error codes documentation
     if (error.code === 'P2002') {
       return {
         status: 'error',
@@ -18,9 +18,9 @@ export const handlePrismaError = (
         message: 'User not created',
       }
     }
-    // 他のPrismaエラーコードに基づく処理をここに追加...
+    // Please add more error codes as needed
   }
-  // 予期しないエラーの処理
+  // Fallback to a generic error message
   return {
     status: 'error',
     message: 'An unexpected error occurred',

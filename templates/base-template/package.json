@@ -1,5 +1,6 @@
 {
   "name": "@skeet-framework/base-template",
+  "projectId": "skeet-framework",
   "version": "1.0.8",
   "description": "Skeet Framework Base Template",
   "keywords": [
@@ -31,22 +32,23 @@
     "test": "vitest",
     "build": "pnpm -r build",
     "skeet": "run-p skeet:*",
-    "skeet:dev": "firebase emulators:start --import=./tmp/data --export-on-exit --inspect-functions"
+    "skeet:dev": "firebase emulators:start --import=./tmp/data --export-on-exit --inspect-functions --project $npm_package_projectId",
+    "run:psql": "pnpm skeet docker psql"
   },
   "devDependencies": {
-    "firebase": "10.8.1",
+    "@types/node": "20.11.30",
+    "@typescript-eslint/eslint-plugin": "7.4.0",
+    "@typescript-eslint/parser": "7.4.0",
+    "esbuild": "0.20.2",
+    "eslint": "8.57.0",
+    "firebase": "10.9.0",
+    "nodemon": "3.1.0",
     "npm-run-all": "4.1.5",
-    "@types/node": "*",
-    "@typescript-eslint/eslint-plugin": "*",
-    "@typescript-eslint/parser": "*",
-    "esbuild": "*",
-    "eslint": "*",
-    "nodemon": "*",
-    "prettier": "*",
-    "tsx": "*",
-    "typescript": "*",
-    "vite": "*",
-    "vite-tsconfig-paths": "*",
-    "vitest": "*"
+    "prettier": "3.2.5",
+    "tsx": "4.7.1",
+    "typescript": "5.4.3",
+    "vite": "5.2.6",
+    "vite-tsconfig-paths": "4.3.2",
+    "vitest": "1.4.0"
   }
 }

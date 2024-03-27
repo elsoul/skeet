@@ -3,6 +3,7 @@ import { regionList } from './regionList'
 import chalk from 'chalk'
 import { Logger } from '@/lib/logger'
 import { SkeetTemplateBackend } from '@/types/skeetTypes'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export module questionList {
   export const requireRepoName = (value: string) => {
@@ -20,41 +21,6 @@ export module questionList {
 
     return 'Password need to have at least a letter and a number'
   }
-
-  export const projectQuestions = [
-    {
-      type: 'input',
-      name: 'projectId',
-      message: "What's your GCP Project ID",
-      default() {
-        return 'skeet-app-123456'
-      },
-    },
-    {
-      type: 'input',
-      name: 'fbProjectId',
-      message: "What's your Firebase Project ID",
-      default() {
-        return 'skeet-app-123456'
-      },
-    },
-    {
-      type: 'list',
-      message: 'Select Regions to deploy',
-      name: 'region',
-      choices: [
-        new inquirer.Separator(' 🌏 Regions 🌏 '),
-        ...regionList.map((value) => ({ name: value })),
-      ],
-      validate(answer: string) {
-        if (answer.length < 1) {
-          return 'You must choose at least one service.'
-        }
-
-        return true
-      },
-    },
-  ]
 
   export const projectRegionQuestions = [
     {
@@ -165,4 +131,42 @@ export module questionList {
       throw new Error(`checkIfFirebaseSetup: ${error}`)
     }
   }
+}
+
+export const projectQuestions = async () => {
+  const config = await readOrCreateConfig()
+  return [
+    {
+      type: 'input',
+      name: 'projectId',
+      message: "What's your GCP Project ID",
+      default() {
+        return config.app.projectId
+      },
+    },
+    {
+      type: 'input',
+      name: 'fbProjectId',
+      message: "What's your Firebase Project ID",
+      default() {
+        return config.app.fbProjectId
+      },
+    },
+    {
+      type: 'list',
+      message: 'Select Regions to deploy',
+      name: 'region',
+      choices: [
+        new inquirer.Separator(' 🌏 Regions 🌏 '),
+        ...regionList.map((value) => ({ name: value })),
+      ],
+      validate(answer: string) {
+        if (answer.length < 1) {
+          return 'You must choose at least one service.'
+        }
+
+        return true
+      },
+    },
+  ]
 }

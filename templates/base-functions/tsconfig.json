@@ -28,7 +28,8 @@
     "src/**/*",
     "build.ts",
     "devBuild.ts",
-    "../../common/**/*"
+    "../../common/**/*",
+    "vitest.config.ts"
   ],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -20,5 +20,9 @@ export const getTemplateRepo = async (appName: string) => {
     `find ${appName}/package -mindepth 1 -maxdepth 1 -exec mv {} ${appName}/ \\;`,
   )
   await execAsync(`rm -rf ${fileName} ${appName}/package`)
+  await execAsync(
+    `rm -rf ${appName}/sql/.keep ${appName}/functions/.keep ${appName}/webapp/.keep ${appName}/website/.keep ${appName}/mobile/.keep ${appName}/common/.keep`,
+  )
+  await execAsync(`pnpm install`, appName)
   return true
 }

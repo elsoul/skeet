@@ -28,7 +28,7 @@ import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
 import { DEFAULT_FUNCTION_NAME, FIREBASERC_PATH } from '@/index'
 import { syncRoutings } from '../sub/sync/syncRoutings'
 import inquirer from 'inquirer'
-import { questionList } from './questionList'
+import { projectQuestions, questionList } from './questionList'
 import { spawnSync } from 'child_process'
 import { readFile, writeFile } from 'fs/promises'
 import { domains } from './initLb'
@@ -42,7 +42,7 @@ export type initialParams = {
 export const init = async (loginMode = false) => {
   // Setup Google Cloud Project
   const { projectId, fbProjectId, region } =
-    await inquirer.prompt<initialParams>(questionList.projectQuestions)
+    await inquirer.prompt<initialParams>(await projectQuestions())
   if (await projectIdNotExists(projectId))
     Logger.projectIdNotExistsError(projectId)
 

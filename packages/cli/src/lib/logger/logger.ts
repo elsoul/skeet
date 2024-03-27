@@ -193,11 +193,10 @@ Go To : http://localhost:4000`
       `\n⚠️ Please make sure if you create Firestore & FirebaseAuth ⚠️\n`,
     )
     Logger.normal(`Click the link to check 👇`)
-    if (!template.includes('GraphQL')) {
-      Logger.normal(
-        `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`,
-      )
-    }
+
+    Logger.normal(
+      `Firestore: https://console.firebase.google.com/project/${projectId}/firestore`,
+    )
     Logger.normal(
       `Firebase Auth: https://console.firebase.google.com/project/${projectId}/authentication\n`,
     )

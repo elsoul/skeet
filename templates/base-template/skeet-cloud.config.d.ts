@@ -1,24 +1,6 @@
-export const defaultSkeetCloudConfig: SkeetCloudConfig = {
-  lang: 'en',
-  app: {
-    name: '',
-    projectId: '',
-    fbProjectId: '',
-    region: '',
-    nameServerDomain: '',
-    loadBalancerDomain: '',
-    appDomains: [],
-    hasLoadBalancer: false,
-    cloudStatus: 'NOT_CREATED',
-  },
-  cloudRun: [],
-  SQL: [],
-  taskQueue: [],
-  cloudArmor: [],
-  routing: [],
-  secretKey: [],
+declare module 'skeet-cloud.config.json' {
+  const value: SkeetCloudConfig
 }
-
 export type SkeetCloudStatusType =
   | 'NOT_CREATED'
   | 'PROJECT_CREATED'
@@ -67,9 +49,9 @@ export type CloudRunConfig = {
   maxInstances: number
 }
 
-export const DatabaseVersion = {
-  POSTGRES_15: 'POSTGRES_15',
-  MYSQL_8_0: 'MYSQL_8_0',
+export enum DatabaseVersion {
+  POSTGRES_15 = 'POSTGRES_15',
+  MYSQL_8_0 = 'MYSQL_8_0',
 }
 
 export type DATABASE_TYPE =

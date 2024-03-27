@@ -23,14 +23,18 @@ export const iamSubCommands = async () => {
     })
   iam
     .command('pull')
-    .description('Download IAM Key for Google Cloud Platform')
+    .description(
+      'Download IAM Key for Google Cloud Platform path: ./keypair.json',
+    )
     .action(async () => {
       const config = await importConfig()
       await createServiceAccountKey(config.app.projectId, config.app.name)
     })
   iam
     .command('sync')
-    .description('Sync Service Account Key as GitHub Secret')
+    .description(
+      'Sync Service Account Key as GitHub Secret path: ./keypair.json',
+    )
     .action(async () => {
       await addJsonEnv()
     })
