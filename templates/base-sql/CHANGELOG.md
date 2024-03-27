@@ -1,5 +1,11 @@
 # @skeet-framework/base-sql
 
+## 0.6.11
+
+### Patch Changes
+
+- [`8c71527`](https://github.com/elsoul/skeet/commit/8c71527234e35e2d034741af132c2cbadbcc27fe) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update template
+
 ## 0.6.10
 
 ### Patch Changes
