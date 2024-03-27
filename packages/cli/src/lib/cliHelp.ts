@@ -28,7 +28,6 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
-  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet create [options] <appName>
@@ -58,7 +57,6 @@ Initialize Google Cloud Setups for Skeet APP
 
 Options:
   --login        Activate Firebase Login (default: false)
-  --config       Generate Skeet Cloud Config (default: false)
   --lb           Setup Cloud Load Balancer (default: false)
   -n, --network  Setup Network (default: false)
   -h, --help     display help for command
@@ -100,7 +98,6 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
-  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet [options] [command]
@@ -133,7 +130,6 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
-  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet log [options]
@@ -186,8 +182,10 @@ Options:
 Commands:
   ai              Setup AI for Google Cloud Platform
   init            Setup IAM for Google Cloud Platform
-  pull            Download IAM Key for Google Cloud Platform
-  sync            Sync Service Account Key as GitHub Secret
+  pull            Download IAM Key for Google Cloud Platform path:
+                  ./keypair.json
+  sync            Sync Service Account Key as GitHub Secret path:
+                  ./keypair.json
   help [command]  display help for command
 
 Usage: skeet add [options] [command]
@@ -281,13 +279,6 @@ Create Skeet Framework App
 Options:
   -h, --help  display help for command
 
-Usage: skeet test [options]
-
-Run tests
-
-Options:
-  -h, --help  display help for command
-
 Usage: skeet [options] [command]
 
 CLI for Skeet - Full-stack TypeScript Serverless framework
@@ -318,6 +309,5 @@ Commands:
   config                       Config commands
   run [options]                Run commands
   new                          Create Skeet Framework App
-  test                         Run tests
   help [command]               display help for command
 `
