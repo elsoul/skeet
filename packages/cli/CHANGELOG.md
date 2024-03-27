@@ -1,5 +1,17 @@
 # @skeet-framework/cli
 
+## 2.2.7
+
+### Patch Changes
+
+- [`8c71527`](https://github.com/elsoul/skeet/commit/8c71527234e35e2d034741af132c2cbadbcc27fe) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update template
+
+- [`b37c5b4`](https://github.com/elsoul/skeet/commit/b37c5b49017a8d285842d87e6f5095ec8bd4cb14) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Package update
+
+- Updated dependencies [[`b37c5b4`](https://github.com/elsoul/skeet/commit/b37c5b49017a8d285842d87e6f5095ec8bd4cb14)]:
+  - @skeet-framework/utils@1.3.9
+  - @skeet-framework/ai@1.8.6
+
 ## 2.2.6
 
 ### Patch Changes
