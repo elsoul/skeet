@@ -9,6 +9,16 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ]
+    },
+    {
+      "source": "templates/skeet-func-template",
+      "codebase": "skeet-func-template",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ]
     }
   ],
   "emulators": {

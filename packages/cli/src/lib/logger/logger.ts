@@ -152,9 +152,8 @@ Go To : http://localhost:4000`
       Logger.normal(
         `Please check the project ID from Google Cloud. \n\nex) \`skeet-app\` might be \`skeet-app-123456\`.`,
       )
-      throw new Error(`Project ID ${projectId} does not exist`)
     } catch (error) {
-      throw new Error(`projectIdNotExistsLog: ${error}`)
+      console.error(`projectIdNotExistsError: ${error}`)
     }
   }
 

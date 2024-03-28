@@ -1,5 +1,7 @@
 import { spawnSync } from 'child_process'
 import { addRole, createServiceAccount, enablePermission } from '../iam'
+import { inspect } from 'util'
+import { execAsync } from '@skeet-framework/utils'
 
 export const checkBillingAccount = async (
   projectId: string,
@@ -42,11 +44,13 @@ export const addBillingRole = async (projectId: string, appName: string) => {
 }
 
 export const projectIdNotExists = async (projectId: string) => {
-  if (projectId.length < 4) return false
+  try {
+    if (projectId.length < 4) return false
 
-  const cmd = `gcloud projects list --filter ${projectId}`
-  const output = spawnSync(cmd, { stdio: 'pipe' })
-
-  console.log(String(output.stderr).trim())
-  return String(output.stderr).trim() !== ''
+    const cmd = `gcloud projects list --filter ${projectId}`
+    const output = await execAsync(cmd)
+    return String(output.stdout).trim() !== ''
+  } catch (error) {
+    return false
+  }
 }

@@ -21,6 +21,7 @@ import { logCommands } from '@/cli/log'
 import { dbSubCommands } from '@/cli/sub/db'
 import { newCommands } from './cli/new'
 import { firebaseAddSecret } from './lib/firebase/firebaseAddSecret'
+import { initV2Commands } from './cli/init/indexV2'
 
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
@@ -42,7 +43,7 @@ async function main() {
     await createCommands()
     await serverCommands()
     await deployCommands()
-    await initCommands()
+    await initV2Commands()
     await loginCommands()
     await curlCommands()
     await genCommands()
