@@ -7,7 +7,7 @@ import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { dlSQLTemplate } from '@/lib/dlSQLTemplate'
 import { execAsync } from '@skeet-framework/utils'
-import { SQLConfig } from '@/config/skeetCloud'
+import { CloudRunConfig, SQLConfig } from '@/config/skeetCloud'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const cloneSQL = async (sqlName: string) => {
@@ -31,9 +31,10 @@ export const cloneSQL = async (sqlName: string) => {
   )
   await execAsync(`pnpm install && pnpm -F ${sqlName} build`)
   const defaultSQLconfig: SQLConfig = {
+    username: 'Buidler',
     instanceName: sqlName,
     databaseVersion: 'POSTGRES_15',
-    cpu: '1GiB',
+    cpu: 1,
     memory: '4GiB',
     storageSize: 10,
     whiteList: '',

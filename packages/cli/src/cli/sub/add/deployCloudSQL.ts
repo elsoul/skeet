@@ -12,6 +12,7 @@ import { firebaseAddSecret } from '@/lib/firebase/firebaseAddSecret'
 import { addEnv } from '@/lib'
 import { SkeetCloudConfig } from '@/config/skeetCloud'
 import chalk from 'chalk'
+import { generateEnvProduction } from '@/lib/gcloud/sql/generateEnvProduction'
 
 export const deployCloudSQL = async (
   instanceName: string,
@@ -20,7 +21,7 @@ export const deployCloudSQL = async (
   cpu: string,
   memory: string,
 ) => {
-  const password = await askForSqlPassword()
+  const { username, password } = await askForSqlPassword()
   const encodedPassword = percentEncode(password)
   console.log(
     chalk.white(
@@ -53,6 +54,7 @@ export const deployCloudSQL = async (
     encodedPassword,
   )
   await firebaseAddSecret(key, value)
+  await addEnv(key, value)
   const { networkName } = getNetworkConfig(
     config.app.projectId,
     config.app.name,
@@ -69,8 +71,9 @@ export const deployCloudSQL = async (
     instanceName,
     true,
   )
-  const productionEnv = await genEnvProduction(
+  const productionEnv = await generateEnvProduction(
     instanceName,
+    username,
     databasePrivateIp,
     encodedPassword,
   )
@@ -87,5 +90,5 @@ export const deployCloudSQL = async (
     maxInstances,
     minInstances,
   )
-  await updateSkeetConfigDb(instanceName)
+  await updateSkeetConfigDb(instanceName, true, username)
 }

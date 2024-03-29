@@ -1,9 +1,8 @@
 import { readFile } from 'fs/promises'
 import { CONTAINER_REGIONS } from '@/config/region'
-import { importConfig } from '@/lib/files/importConfig'
-import { FILE_NAME, PATH } from '@/config/path'
 import { execAsyncCmd } from '../execAsyncCmd'
-import { stderr } from 'process'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { findSQLConfigByName } from './findSQLConfigByName'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -102,37 +101,30 @@ export const getContainerRegion = (region: string) => {
   }
 }
 
-export const getContainerImageUrl = (
-  projectId: string,
-  appName: string,
-  region: string,
-  workerName: string = '',
-  isPlugin: boolean = false,
-) => {
-  const cRegion = getContainerRegion(region)
-
-  let imageName = ''
-  if (workerName !== '' && isPlugin) {
-    imageName = 'skeet-worker-' + workerName
-  } else if (workerName !== '') {
-    imageName = 'skeet-' + appName + '-worker-' + workerName
-  } else {
-    imageName = 'skeet-' + appName + '-api'
+export const getRegistryRegion = (region: string) => {
+  switch (region) {
+    case region.match('asia')?.input:
+      return 'asia'
+    case region.match('eu')?.input:
+      return 'eu'
+    default:
+      return 'us'
   }
-
-  const containerProjectName = isPlugin ? 'skeet-framework' : projectId
-  return cRegion + '/' + containerProjectName + '/' + imageName + ':latest'
 }
 
-export const getContainerImageName = async (
-  appName: string,
-  workerName: string = '',
+export const getContainerImageUrl = (
+  projectId: string,
+  imageName: string,
+  region: string,
 ) => {
-  const db = 'sql'
-  const imageName =
-    workerName !== ''
-      ? 'skeet-' + appName + '-worker-' + workerName
-      : 'skeet-' + appName + '-' + db
+  const cRegion: CONTAINER_REGIONS = getContainerRegion(region)
+  const registryRegion = getRegistryRegion(region)
+  const artifactRegistry = `${registryRegion}-docker.pkg.dev/${projectId}/${cRegion}/${imageName}`
+  return artifactRegistry
+}
+
+export const getContainerImageName = async (appName: string) => {
+  const imageName = 'skeet-' + appName
   return imageName
 }
 
@@ -216,11 +208,8 @@ export const getActionsEnvString = async (filePath: string) => {
   return returnArray.join(',')
 }
 
-export const getBuidEnvString = async () => {
-  const skeetConfig = await importConfig()
-  const envProductionPath = skeetConfig.app.template.includes('GraphQL')
-    ? PATH.GRAPHQL + '/' + FILE_NAME.ENV_PRODUCTION
-    : PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
+export const getBuidEnvString = async (sqlName: string) => {
+  const envProductionPath = `sql/${sqlName}/.env.build`
   const stream = await readFile(envProductionPath)
   const envArray: Array<string> = String(stream).split('\n')
   const hash: { [key: string]: string } = {}
@@ -228,21 +217,5 @@ export const getBuidEnvString = async () => {
     const value = line.split('=')
     hash[value[0]] = value[1]
   }
-  const dabaseUrl = `postgresql://postgres:${hash['SKEET_GCP_DB_PASSWORD']}@${hash['SKEET_GCP_DB_PRIVATE_IP']}:5432/skeet-${hash['SKEET_APP_NAME']}-production?schema=public`
-  const buildEnvArray = await getBuidEnvArray(
-    hash['SKEET_GCP_PROJECT_ID'],
-    hash['GOOGLE_CLOUD_PROJECT'],
-    dabaseUrl,
-    hash['TZ'],
-  )
-  const newEnv = envArray.filter((value) => {
-    if (
-      !value.match('SKEET_GCP_PROJECT_ID') &&
-      !value.match('SKEET_GCP_DB_PASSWORD')
-    ) {
-      return value
-    }
-  })
-  const returnArray = buildEnvArray.concat(newEnv)
-  return returnArray.join(',')
+  return envArray.join(',')
 }

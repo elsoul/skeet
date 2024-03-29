@@ -57,6 +57,8 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
     },
   ])
   let sqlName = answer.instanceName
+
+  // Add -db suffix if not exists
   if (!sqlName.endsWith('-db')) {
     sqlName = `${sqlName}-db`
   }
@@ -87,8 +89,10 @@ export const addCloudSQL = async (config: SkeetCloudConfig) => {
       default: false,
     },
   ])
+
   await cloneSQL(sqlName)
   await updatePackageJsonPort(sqlName)
+  await updateSkeetConfigDb(sqlName)
   if (!confirm.confirm) {
     const announce = `💡 You can create the Cloud SQL instance later by running the command:
 
@@ -107,15 +111,30 @@ ${chalk.green('$ skeet deploy --sql')}
   }
 }
 
-export const updateSkeetConfigDb = async (instanceName: string) => {
+export const updateSkeetConfigDb = async (
+  instanceName: string,
+  isDeployed = false,
+  username = 'edgar',
+) => {
   const config = await readOrCreateConfig()
   const sqls = config.SQL
+  if (isDeployed) {
+    sqls.forEach((sql) => {
+      if (sql.instanceName === instanceName) {
+        sql.username = username
+        sql.status = 'RUNNING'
+      }
+    })
+    await writeFile(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
+    return
+  }
   const cloudRunName = instanceName.replace('-', '')
   const sqlDirs = await getSQLs()
+  const localPort = 3000 + sqlDirs.length - 1
   const cloudRun: CloudRunConfig = {
     name: cloudRunName,
     url: '',
-    localPort: 3000 + sqlDirs.length - 1,
+    localPort,
     cpu: 1,
     memory: '4GiB',
     maxConcurrency: 80,
@@ -123,11 +142,6 @@ export const updateSkeetConfigDb = async (instanceName: string) => {
     minInstances: 0,
   }
   config.cloudRun.push(cloudRun)
-  sqls.forEach((sql) => {
-    if (sql.instanceName === instanceName) {
-      sql.status = 'RUNNING'
-    }
-  })
   await writeFile(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
 }
 

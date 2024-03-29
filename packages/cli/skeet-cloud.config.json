@@ -138,5 +138,19 @@
       "securityPolicyName": "skeet-sql-armor"
     }
   ],
-  "secretKey": ["TEST_KEY"]
+  "secretKey": [
+    "TEST_KEY"
+  ],
+  "ai": {
+    "lang": "en",
+    "ais": [
+      {
+        "name": "Gemini",
+        "availableModels": [
+          "gemini-1.0-pro",
+          "gemini-1.0-pro-vision"
+        ]
+      }
+    ]
+  }
 }

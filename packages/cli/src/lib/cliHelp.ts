@@ -27,7 +27,8 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
-  new                          Create Skeet Framework App
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
   help [command]               display help for command
 
 Usage: skeet create [options] <appName>
@@ -48,7 +49,7 @@ Deploy Skeet APP to Firebase
 Options:
   -f, --function <function>  Function Name. e.g. skeet:root
   -d, --discord              Deploy Discord Commands (default: false)
-  --sql                      Deploy SQL (default: false)
+  --sql                      Deploy NOT_CREATED Cloud SQLs (default: false)
   -h, --help                 display help for command
 
 Usage: skeet init [options]
@@ -94,7 +95,8 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
-  new                          Create Skeet Framework App
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
   help [command]               display help for command
 
 Usage: skeet [options] [command]
@@ -126,7 +128,8 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
-  new                          Create Skeet Framework App
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
   help [command]               display help for command
 
 Usage: skeet log [options]
@@ -269,13 +272,6 @@ Options:
   -C, --cmd <cmd>        Command (default: "")
   -h, --help             display help for command
 
-Usage: skeet new [options]
-
-Create Skeet Framework App
-
-Options:
-  -h, --help  display help for command
-
 Usage: skeet [options] [command]
 
 CLI for Skeet - Full-stack TypeScript Serverless framework
@@ -305,6 +301,7 @@ Commands:
   ai [options]                 AI Playground
   config                       Config commands
   run [options]                Run commands
-  new                          Create Skeet Framework App
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
   help [command]               display help for command
 `

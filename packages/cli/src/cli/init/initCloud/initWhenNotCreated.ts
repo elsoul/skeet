@@ -16,6 +16,8 @@ import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { addFirebaseApp } from '../../sub/add/addFirebaseApp'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
+import { PATH } from '@/config/path'
+import { SKEET_CONFIG_CLOUD_PATH } from '@/config/config'
 
 export const initWhenNotCreated = async () => {
   const { projectId, fbProjectId, region } =
@@ -39,10 +41,16 @@ export const initWhenNotCreated = async () => {
   )
   const defaultAppDisplayName = fbProjectId
   await addFirebaseApp(fbProjectId, defaultAppDisplayName)
-  const { app } = await readOrCreateConfig()
-  await createServiceAccount(projectId, app.name)
+  const config = await readOrCreateConfig()
+  await createServiceAccount(projectId, config.app.name)
   await runEnableAllPermission(projectId)
-  await runAddAllRole(projectId, app.name)
+  await runAddAllRole(projectId, config.app.name)
+  config.app.cloudStatus = 'PROJECT_CREATED'
+  await writeFile(SKEET_CONFIG_CLOUD_PATH, JSON.stringify(config, null, 2))
+  await writeFile(
+    '.env',
+    `GCP_PROJECT_ID=${projectId}\nGCP_LOCATION=${region}\n`,
+  )
 }
 
 const updateFirebaserc = async (fbProjectId: string) => {

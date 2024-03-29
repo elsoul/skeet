@@ -31,7 +31,7 @@
   "warning": {
     "temperature": "⚠️ Temperature must be between 0 and 1 ⚠️",
     "gptKey": "⚠️ Please set CHAT_GPT_ORG and CHAT_GPT_KEY ⚠️",
-    "gcpKey": "⚠️ Please set GCLOUD_PROJECT and REGION ⚠️"
+    "gcpKey": "⚠️ Please set GCP_PROJECT_ID and GCP_LOCATION ⚠️"
   },
   "skeetMode": {},
   "typedocMode": {

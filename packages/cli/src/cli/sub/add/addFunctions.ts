@@ -15,7 +15,7 @@ import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 
-export const addFunctions = async (functionName: string, isSkeet = false) => {
+export const addFunctions = async (functionName: string) => {
   try {
     const skeetConfig: SkeetCloudConfig = await importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}-func`
@@ -25,11 +25,7 @@ export const addFunctions = async (functionName: string, isSkeet = false) => {
     } else {
       await mkdir(functionDir, { recursive: true })
 
-      if (isSkeet) {
-        await dlSkeetFunctionTemplate()
-      } else {
-        await dlFunctionTemplate(functionName)
-      }
+      await dlFunctionTemplate(functionName)
 
       await addProjectRegionToSkeetOptions(
         skeetConfig.app.region,

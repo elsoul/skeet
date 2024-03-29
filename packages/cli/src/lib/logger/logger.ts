@@ -88,12 +88,9 @@ export module Logger {
     )
     const text = `
 $ cd ${appName}
-$ skeet add functions
-$ skeet s
+$ skeet init
 
-You can add more apps by using below command
-
-$ skeet add sql/functions/website/webapp/mobile
+You can ask AI Assistant for help
 
 $ skeet ai --help`
 

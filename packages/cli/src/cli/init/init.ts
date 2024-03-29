@@ -83,7 +83,8 @@ export const init = async (loginMode = false) => {
   const hasGraphQL = skeetConfig.app.template.includes('GraphQL')
 
   if (hasGraphQL && !(await isSQLexists())) {
-    sqlPassword = await askForSqlPassword()
+    const answer = await askForSqlPassword()
+    sqlPassword = answer.password
   }
 
   // Ask Domain info if LB is not exists

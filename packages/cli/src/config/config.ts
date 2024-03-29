@@ -8,6 +8,6 @@ export type TemplateType =
   | 'base-template'
   | 'base-functions'
   | 'base-sql'
-  | 'skeet-func'
+  | 'skeet-func-template'
 
 export const GCP_IP_RANGE = '10.124.0.0/28'

@@ -1,10 +1,10 @@
 import { getTemplateRepo } from '@/config/repo'
-import { DEFAULT_FUNCTION_NAME, program } from '@/index'
+import { program } from '@/index'
 import { Logger } from '@/lib'
 import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { addFunctions } from '../sub/add/addFunctions'
+import { dlSkeetFunctionTemplate } from '@/lib/dlSkeetFunctionTemplate'
 
 const validateProjectID = (input: string) => {
   // Google Cloud Project IDに適用する正規表現
@@ -17,11 +17,17 @@ const validateProjectID = (input: string) => {
   )
 }
 
+type NewCommandOptions = {
+  blank: boolean
+}
+
 export const newCommands = async () => {
   program
     .command('new')
+    .alias('n')
+    .option('-b, --blank', 'Create a blank template', false)
     .description('Create Skeet Framework App')
-    .action(async () => {
+    .action(async (options: NewCommandOptions) => {
       const answer = await inquirer.prompt([
         {
           type: 'input',
@@ -34,10 +40,11 @@ export const newCommands = async () => {
         },
       ])
 
-      const result = await getTemplateRepo(answer.name)
+      const result = options.blank
+        ? await getTemplateRepo(answer.name)
+        : await dlSkeetFunctionTemplate(answer.name)
       if (result) {
         await updatePackageJsonName(answer.name, answer.name + '/package.json')
-        await addFunctions(DEFAULT_FUNCTION_NAME, true)
         Logger.skeetAA()
         Logger.welcomText2(answer.name)
         const nmb = Math.floor(Math.random() * 4 + 1)

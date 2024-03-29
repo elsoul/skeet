@@ -12,7 +12,9 @@
         "name": "skeet-app-web",
         "domain": "app.skeet-app.com"
       }
-    ]
+    ],
+    "hasLoadBalancer": false,
+    "cloudStatus": "NOT_CREATED"
   },
   "cloudRun": [],
   "SQL": [],

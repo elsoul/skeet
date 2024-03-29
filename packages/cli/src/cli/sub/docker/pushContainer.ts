@@ -7,5 +7,8 @@ export const pushContainer = async (
 ) => {
   const imageUrl = getContainerImageUrl(projectId, appName, region)
   const shCmd = ['docker', 'push', imageUrl]
-  await execAsyncCmd(shCmd)
+  const { stdout, stderr } = await execAsyncCmd(shCmd)
+  console.log(stdout)
+  console.log(stderr)
+  return true
 }

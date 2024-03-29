@@ -1,19 +1,6 @@
 import inquirer from 'inquirer'
 import { questionList } from './questionList'
 
-export const askForProjectId = async () => {
-  const projectInquirer = inquirer.prompt(questionList.projectQuestions)
-  let projectId = ''
-  let fbProjectId = ''
-  let region = ''
-  await projectInquirer.then(async (answer) => {
-    projectId = answer.projectId
-    region = answer.region
-    fbProjectId = answer.fbProjectId
-  })
-  return { projectId, region, fbProjectId }
-}
-
 export const askForProjectIdAndRegion = async () => {
   const projectInquirer = await inquirer.prompt<{
     projectId: string
@@ -23,7 +10,8 @@ export const askForProjectIdAndRegion = async () => {
 }
 
 export const askForSqlPassword = async () => {
-  const { password1, password2 } = await inquirer.prompt<{
+  const { password1, password2, username } = await inquirer.prompt<{
+    username: string
     password1: string
     password2: string
   }>(questionList.sqlPasswordQuestions)
@@ -32,7 +20,10 @@ export const askForSqlPassword = async () => {
     await askForSqlPassword()
   }
 
-  return password1
+  return {
+    username,
+    password: password1,
+  }
 }
 
 export const askForGithubRepo = async () => {

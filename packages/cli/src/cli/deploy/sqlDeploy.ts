@@ -33,6 +33,6 @@ export const sqlDeploy = async () => {
       String(sql.cpu),
       sql.memory,
     )
-    await updateSkeetConfigDb(sql.instanceName)
+    await updateSkeetConfigDb(sql.instanceName, true)
   }
 }

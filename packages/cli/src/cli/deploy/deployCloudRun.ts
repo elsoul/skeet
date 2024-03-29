@@ -16,30 +16,15 @@ export const deployCloudRun = async (
   maxConcurrency: string = '80',
   maxInstances: string = '100',
   minInstances: string = '0',
-  workerName: string = '',
-  isWorkerPlugin: boolean = false,
   hasBalancer: boolean = false,
 ) => {
-  let cloudRunName = ''
-  let image = ''
-  if (workerName === '') {
-    cloudRunName = await getContainerImageName(appName)
-    image = getContainerImageUrl(projectId, appName, region)
-  } else {
-    cloudRunName = await getContainerImageName(appName, workerName)
-    image = getContainerImageUrl(
-      projectId,
-      appName,
-      region,
-      workerName,
-      isWorkerPlugin,
-    )
-  }
+  const cloudRunName = appName.replace(/-/g, '')
+  const image = getContainerImageUrl(projectId, cloudRunName, region)
   const { connectorName, serviceAccountName } = getNetworkConfig(
     projectId,
     appName,
   )
-  const envString = await getBuidEnvString()
+  const envString = await getBuidEnvString(appName)
   const shCmd = [
     'gcloud',
     'run',
@@ -70,10 +55,10 @@ export const deployCloudRun = async (
     '--set-env-vars',
     envString,
   ]
-  if (hasBalancer && workerName === '') {
+  if (hasBalancer) {
     shCmd.push('--ingress', 'internal-and-cloud-load-balancing')
     shCmd.push('--allow-unauthenticated')
-  } else if (!hasBalancer && workerName === '') {
+  } else if (!hasBalancer) {
     shCmd.push('--allow-unauthenticated')
   } else {
     shCmd.push('--ingress', 'internal')

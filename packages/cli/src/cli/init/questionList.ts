@@ -94,6 +94,12 @@ export module questionList {
 
   export const sqlPasswordQuestions = [
     {
+      type: 'input',
+      message: 'Enter your CloudSQL username',
+      name: 'username',
+      default: 'edgar',
+    },
+    {
       type: 'password',
       message: 'Enter your CloudSQL password',
       name: 'password1',

@@ -12,5 +12,8 @@ export const tagContainer = async (
   const imageName = await getContainerImageName(appName)
   const imageUrl = getContainerImageUrl(projectId, appName, region)
   const shCmd = ['docker', 'tag', imageName, imageUrl]
-  await execAsyncCmd(shCmd)
+  const { stdout, stderr } = await execAsyncCmd(shCmd)
+  console.log(stdout)
+  console.log(stderr)
+  return true
 }

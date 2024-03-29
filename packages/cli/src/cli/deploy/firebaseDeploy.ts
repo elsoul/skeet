@@ -1,6 +1,6 @@
 import { DEFAULT_FUNCTION_NAME } from '@/index'
-import { execAsyncCmd } from '@/lib/execAsyncCmd'
 import { getExportedFunctions } from '@/lib/files/getExportedFunctions'
+import { spawnSync } from 'child_process'
 import inquirer from 'inquirer'
 
 export const firebaseFunctionsDeploy = async (
@@ -17,11 +17,11 @@ export const firebaseFunctionsDeploy = async (
       '-P',
       `${projectId}`,
     ]
-    execAsyncCmd(shCmd)
-    return
+    spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
+    return true
   }
   try {
-    const path = `${process.cwd()}/functions/${functionName}/src/index.ts`
+    const path = `./functions/${functionName}/src/index.ts`
     const methods = await getExportedFunctions(path)
     if (methods.length === 0) {
       throw new Error(
@@ -63,7 +63,9 @@ export const firebaseFunctionsDeploy = async (
       '-P',
       `${projectId}`,
     ]
-    await execAsyncCmd(shCmd)
+    // spawn and write logs to console from child process
+    spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
+    return true
   } catch (error) {
     throw new Error(`firebaseFunctionsDeploy: ${error}`)
   }

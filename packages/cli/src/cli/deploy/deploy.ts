@@ -4,26 +4,27 @@ import { getFunctions } from '@/lib/files/getFunctions'
 import { deployWebApp } from '@/cli/deploy/deployWebApp'
 import { deployRules } from '@/cli/deploy/deployRules'
 import { firebaseFunctionsDeploy } from '@/cli/deploy/firebaseDeploy'
-import { deployGraphql } from '@/cli/deploy/deployGraphql'
 import { pnpmBuild } from '@/lib/pnpmBuild'
 import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { deployCloudRunForSQL } from './deployCloudRunForSQL'
+import { getSQLs } from '@/lib/files/getSQLs'
 
 export const deploy = async () => {
   const functions = await getFunctions()
-  let functionsArray: Array<{ [key: string]: string }> = [{ name: 'webapp' }]
-  const { app } = await importConfig()
-  if (app.template.includes('SQL')) {
-    functionsArray.push({ name: 'sql' })
-  }
+  const sqls = await getSQLs()
+  const { app } = await readOrCreateConfig()
+  const functionsArray: Array<{ name: string }> = []
   for await (const functionName of functions) {
     functionsArray.push({ name: functionName })
   }
-  if (app.template.includes('Backend Only')) {
-    functionsArray = functionsArray.filter((f) => f.name !== 'webapp')
+  if (sqls.length > 0) {
+    for await (const sql of sqls) {
+      functionsArray.push({ name: sql })
+    }
   }
   if (functionsArray.length === 1) {
-    const cmd = ['pnpm', '-F', `${functionsArray[0].name}-func`, 'build']
-    await execAsyncCmd(cmd)
+    await pnpmBuild(functionsArray[0].name)
     await firebaseFunctionsDeploy(app.fbProjectId, functionsArray[0].name)
     return
   }
@@ -46,12 +47,12 @@ export const deploy = async () => {
 
   if (answer.functions.length > 0) {
     for await (const service of answer.functions) {
-      const config = await importConfig()
+      const config = await readOrCreateConfig()
       if (service === 'webapp') {
         await deployWebApp()
         await deployRules(config.app.projectId)
-      } else if (service === 'sql') {
-        await deployGraphql(config)
+      } else if (service.endsWith('db')) {
+        await deployCloudRunForSQL(service)
       } else {
         await pnpmBuild(service)
         await firebaseFunctionsDeploy(config.app.fbProjectId, service)

@@ -20,8 +20,8 @@ import { serverCommands } from '@/cli/server'
 import { logCommands } from '@/cli/log'
 import { dbSubCommands } from '@/cli/sub/db'
 import { newCommands } from './cli/new'
-import { firebaseAddSecret } from './lib/firebase/firebaseAddSecret'
 import { initV2Commands } from './cli/init/indexV2'
+import { consoleCommands } from './cli/console'
 
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
@@ -59,6 +59,7 @@ async function main() {
     configCommands()
     runCommands()
     await newCommands()
+    await consoleCommands()
     // program
     //   .command('test')
     //   .description('Run tests')
