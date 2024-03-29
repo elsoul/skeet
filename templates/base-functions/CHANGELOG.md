@@ -1,5 +1,19 @@
 # base-functions
 
+## 1.1.4
+
+### Patch Changes
+
+- [`3b0ea95`](https://github.com/elsoul/skeet/commit/3b0ea95441762c67c2f557f85e0febfe61e4bbc4) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet deploy
+
+  ```bash
+  $ skeet deploy
+  ? Select Services to run functions command (Press <space> to select, <a> to
+  toggle all, <i> to invert selection, and <enter> to proceed)
+    = Services =
+  ❯◯ skeet-func
+  ```
+
 ## 1.1.3
 
 ### Patch Changes
