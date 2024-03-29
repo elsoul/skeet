@@ -1,5 +1,11 @@
 # base-template
 
+## 1.0.11
+
+### Patch Changes
+
+- [#381](https://github.com/elsoul/skeet/pull/381) [`3e71753`](https://github.com/elsoul/skeet/commit/3e7175325140ca9b7ad0d4914bd2db468bf19121) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Add skeet-func-template
+
 ## 1.0.10
 
 ### Patch Changes
