@@ -20,9 +20,7 @@
       "@base-template/*": ["../../templates/base-template/*"],
       "@base-functions/*": ["../../templates/base-functions/*"],
       "@base-sql/*": ["../../templates/base-sql/*"],
-      "@skeet-func-template/*": [
-        "../../templates/base-template copy/skeet-func-template/*"
-      ]
+      "@skeet-func-template/*": ["../../templates/skeet-func-template/*"]
     }
   },
   "files": ["package.json"],

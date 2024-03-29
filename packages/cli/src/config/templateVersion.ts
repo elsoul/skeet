@@ -1,7 +1,7 @@
 import baseTemplatePackageJson from '@base-template/package.json'
 import baseFunctionsPackageJson from '@base-functions/package.json'
 import baseSqlPackageJson from '@base-sql/package.json'
-import skeetFuncPackageJson from '../../../../templates/base-template copy/skeet-func-template/package.json'
+import skeetFuncPackageJson from '@skeet-func-template/package.json'
 import { TemplateType } from '@/config/config'
 
 export const TEMPLATE_VERSION = {
