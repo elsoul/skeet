@@ -1,5 +1,5 @@
 import { db } from '@/index'
-import { User, genUserPath } from '@common/models'
+import { User, genUserPath } from '@common/models/userModels'
 import { add } from '@skeet-framework/firestore'
 import * as functions from 'firebase-functions/v1'
 import { authPublicOption } from '@/routings/options'

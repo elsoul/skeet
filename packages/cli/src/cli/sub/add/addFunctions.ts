@@ -7,6 +7,7 @@ import {
   importFirebaseConfig,
 } from '@/lib'
 import { dlFunctionTemplate } from '@/lib/dlFunctionTemplate'
+import { dlSkeetFunctionTemplate } from '@/lib/dlSkeetFunctionTemplate'
 import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
@@ -14,7 +15,7 @@ import { functionsYml } from '@/templates/init'
 import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 
-export const addFunctions = async (functionName: string) => {
+export const addFunctions = async (functionName: string, isSkeet = false) => {
   try {
     const skeetConfig: SkeetCloudConfig = await importConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}-func`
@@ -24,7 +25,12 @@ export const addFunctions = async (functionName: string) => {
     } else {
       await mkdir(functionDir, { recursive: true })
 
-      await dlFunctionTemplate(functionName)
+      if (isSkeet) {
+        await dlSkeetFunctionTemplate()
+      } else {
+        await dlFunctionTemplate(functionName)
+      }
+
       await addProjectRegionToSkeetOptions(
         skeetConfig.app.region,
         skeetConfig.app.projectId,

@@ -1,9 +1,10 @@
 import { getTemplateRepo } from '@/config/repo'
-import { program } from '@/index'
+import { DEFAULT_FUNCTION_NAME, program } from '@/index'
 import { Logger } from '@/lib'
 import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
+import { addFunctions } from '../sub/add/addFunctions'
 
 const validateProjectID = (input: string) => {
   // Google Cloud Project IDに適用する正規表現
@@ -36,6 +37,7 @@ export const newCommands = async () => {
       const result = await getTemplateRepo(answer.name)
       if (result) {
         await updatePackageJsonName(answer.name, answer.name + '/package.json')
+        await addFunctions(DEFAULT_FUNCTION_NAME, true)
         Logger.skeetAA()
         Logger.welcomText2(answer.name)
         const nmb = Math.floor(Math.random() * 4 + 1)
