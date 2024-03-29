@@ -1,4 +1,4 @@
-import { firestore } from 'firebase-admin'
+import { Firestore } from 'firebase-admin/firestore'
 
 /**
  * Deletes a document from the specified collection in Firestore.
@@ -13,11 +13,14 @@ import { firestore } from 'firebase-admin'
  *
  * @example
  * ```typescript
- * import { firestore } from 'firebase-admin'
- * import * as admin from 'firebase-admin'
+ * import { getFirestore } from 'firebase-admin/firestore'
+ * import { applicationDefault, initializeApp } from 'firebase-admin/app'
  * import { remove } from '@skeet-framework/firestore'
  *
- * const db = admin.firestore();
+ * const firebaseApp = initializeApp({
+ *  credential: applicationDefault(),
+ * })
+ * export const db = getFirestore(firebaseApp)
  *
  * async function run() {
  *   try {
@@ -36,9 +39,9 @@ import { firestore } from 'firebase-admin'
  * ```
  */
 export const deleteCollectionItem = async (
-  db: firestore.Firestore,
+  db: Firestore,
   collectionPath: string,
-  docId: string
+  docId: string,
 ): Promise<boolean> => {
   try {
     const docRef = db.collection(collectionPath).doc(docId)

@@ -1,4 +1,4 @@
-import { firestore } from 'firebase-admin'
+import { DocumentData, Firestore, UpdateData } from 'firebase-admin/firestore'
 import { createFirestoreDataConverter } from './createFirestoreDataConverter'
 import { serverTimestamp } from './serverTimestamp'
 
@@ -40,11 +40,11 @@ import { serverTimestamp } from './serverTimestamp'
  * run();
  * ```
  */
-export const updateCollectionItem = async <T extends firestore.DocumentData>(
-  db: firestore.Firestore,
+export const updateCollectionItem = async <T extends DocumentData>(
+  db: Firestore,
   collectionPath: string,
   docId: string,
-  params: firestore.UpdateData<T>
+  params: UpdateData<T>,
 ): Promise<boolean> => {
   try {
     const docRef = db

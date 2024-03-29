@@ -1,6 +1,6 @@
 import { createCollectionRef } from './createCollectionRef'
 import { serverTimestamp } from './serverTimestamp'
-import { firestore } from 'firebase-admin'
+import { DocumentData, Firestore } from 'firebase-admin/firestore'
 
 /**
  * Adds a new document to the specified collection in Firestore. If an ID is provided, the document will be set with that ID; otherwise, an ID will be automatically generated.
@@ -16,10 +16,14 @@ import { firestore } from 'firebase-admin'
  *
  * @example
  * ```typescript
- * import { firestore } from 'firebase-admin'
+ * import { getFirestore } from 'firebase-admin/firestore'
+ * import { applicationDefault, initializeApp } from 'firebase-admin/app'
  * import { add } from '@skeet-framework/firestore'
  *
- * const db = firestore();
+ * const firebaseApp = initializeApp({
+ *  credential: applicationDefault(),
+ * })
+ * export const db = getFirestore(firebaseApp)
  * const data: User = {
  *   name: "John Doe",
  *   age: 30
@@ -45,8 +49,8 @@ import { firestore } from 'firebase-admin'
  * ```
  */
 
-export const addCollectionItem = async <T extends firestore.DocumentData>(
-  db: firestore.Firestore,
+export const addCollectionItem = async <T extends DocumentData>(
+  db: Firestore,
   collectionPath: string,
   params: T,
   id?: string,

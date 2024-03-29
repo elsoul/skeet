@@ -1,9 +1,13 @@
 // tests/http.test.ts
 import { describe, it, expect } from 'vitest'
-import admin from 'firebase-admin'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 import { add } from '../src/index'
-admin.initializeApp()
-const db = admin.firestore()
+
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
 
 describe('Skeet Firestore', () => {
   it('create Test model', async () => {

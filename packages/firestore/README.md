@@ -31,13 +31,7 @@ This plugin is for serverside with Firebase Admin SDK.
 # Installation
 
 ```bash
-$ skeet yarn add -p @skeet-framework/firestore
-```
-
-or
-
-```bash
-$ yarn add @skeet-framework/firestore
+$ pnpm add @skeet-framework/firestore
 ```
 
 # Skeet Firestore Docs
@@ -63,18 +57,26 @@ createdAt and updatedAt are automatically added to the document with Firebase Se
 ## Initialize
 
 ```typescript
-import * as admin from 'firebase-admin'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 
-admin.initializeApp()
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
 ```
 
 ## Add Collection Item
 
 ```ts
-import { firestore } from 'firebase-admin'
 import { add } from '@skeet-framework/firestore'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 
-const db = firestore()
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
 const data: User = {
   name: 'John Doe',
   age: 30,
@@ -96,10 +98,14 @@ run()
 ## Adds Collection Items
 
 ```ts
-import { firestore } from 'firebase-admin'
 import { adds } from '@skeet-framework/firestore'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 
-const db = firestore()
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
 const users: User[] = [
   { name: 'John Doe', age: 30 },
   { name: 'Jane Smith', age: 25 },
@@ -122,11 +128,15 @@ run()
 ## Get Collection Item
 
 ```ts
-import { firestore } from 'firebase-admin'
-import * as admin from 'firebase-admin'
 import { get } from '@skeet-framework/firestore'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 
-const db = admin.firestore()
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
+
 async function run() {
   try {
     const path = 'Users'
@@ -144,11 +154,14 @@ run()
 ## Query Collection Items
 
 ```typescript
-import { firestore } from 'firebase-admin'
-import * as admin from 'firebase-admin'
 import { query, QueryCondition } from '@skeet-framework/firestore'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 
-const db = admin.firestore()
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
 
 // Simple query to get users over 25 years old
 const simpleConditions: QueryCondition[] = [
@@ -181,13 +194,13 @@ async function run() {
     // Using the advanced conditions
     const orderedUsers = await query<User>(db, path, advancedConditions)
     console.log(
-      `Found ${orderedUsers.length} users over 25 years old, ordered by name.`
+      `Found ${orderedUsers.length} users over 25 years old, ordered by name.`,
     )
 
     // Using the limited conditions
     const limitedUsers = await query<User>(db, path, limitedConditions)
     console.log(
-      `Found ${limitedUsers.length} users over 25 years old, limited to 5.`
+      `Found ${limitedUsers.length} users over 25 years old, limited to 5.`,
     )
   } catch (error) {
     console.error(`Error querying collection: ${error}`)
@@ -200,11 +213,15 @@ run()
 ## Update Collection Item
 
 ```ts
-import { firestore } from 'firebase-admin'
-import * as admin from 'firebase-admin'
 import { update } from '@skeet-framework/firestore'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 
-const db = admin.firestore()
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
+
 const updatedData: User = {
   age: 38,
 }
@@ -228,17 +245,22 @@ run()
 ## Delete Collection Item
 
 ```ts
-import { firestore } from 'firebase-admin'
-import * as admin from 'firebase-admin'
-import { delete } from '@skeet-framework/firestore'
+import { remove } from '@skeet-framework/firestore'
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
+
+const firebaseApp = initializeApp({
+  credential: applicationDefault(),
+})
+export const db = getFirestore(firebaseApp)
 
 async function run() {
   try {
     const path = 'Users'
     const docId = '123456'
-    const success = await delete(db, path, docId)
+    const success = await remove(db, path, docId)
     if (success) {
-      console.log(`Document with ID ${docId} deleted successfully.`)
+      console.log(`Document with ID ${docId} removed successfully.`)
     }
   } catch (error) {
     console.error(`Error deleting document: ${error}`)
@@ -260,4 +282,4 @@ The package is available as open source under the terms of the [Apache-2.0 Licen
 
 # Code of Conduct
 
-Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet-firestore/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet/blob/master/CODE_OF_CONDUCT.md).

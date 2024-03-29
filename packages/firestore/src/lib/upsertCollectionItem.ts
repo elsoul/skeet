@@ -1,8 +1,9 @@
-import { firestore } from 'firebase-admin'
+import { DocumentData, Firestore, UpdateData } from 'firebase-admin/firestore'
 import { createFirestoreDataConverter } from './createFirestoreDataConverter'
 import { serverTimestamp } from './serverTimestamp'
+import { FieldValue } from 'firebase/firestore'
 
-export type WithFieldValue<T> = { [K in keyof T]: T[K] | firestore.FieldValue }
+export type WithFieldValue<T> = { [K in keyof T]: T[K] | FieldValue }
 
 /**
  * Updates or inserts a document in the specified Firestore collection with the given data.
@@ -42,11 +43,11 @@ export type WithFieldValue<T> = { [K in keyof T]: T[K] | firestore.FieldValue }
  * run();
  * ```
  */
-export const upsertCollectionItem = async <T extends firestore.DocumentData>(
-  db: firestore.Firestore,
+export const upsertCollectionItem = async <T extends DocumentData>(
+  db: Firestore,
   collectionPath: string,
   docId: string,
-  params: firestore.UpdateData<WithFieldValue<T>>,
+  params: UpdateData<WithFieldValue<T>>,
 ): Promise<boolean> => {
   try {
     const docRef = db

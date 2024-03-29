@@ -1,4 +1,4 @@
-import { firestore } from 'firebase-admin'
+import { DocumentReference, Firestore } from 'firebase-admin/firestore'
 
 /**
  * Retrieves a document from Firestore based on the provided document reference.
@@ -9,11 +9,14 @@ import { firestore } from 'firebase-admin'
  *
  * @example
  * ```typescript
- * import { firestore } from 'firebase-admin'
- * import * as admin from 'firebase-admin'
+ * import { getFirestore } from 'firebase-admin/firestore'
+ * import { applicationDefault, initializeApp } from 'firebase-admin/app'
  * import { get } from '@skeet-framework/firestore'
  *
- * const db = admin.firestore();
+ * const firebaseApp = initializeApp({
+ *  credential: applicationDefault(),
+ * })
+ * export const db = getFirestore(firebaseApp)
  *
  * async function run() {
  *   try {
@@ -31,13 +34,13 @@ import { firestore } from 'firebase-admin'
  * ```
  */
 export const getCollectionItem = async <T>(
-  db: firestore.Firestore,
+  db: Firestore,
   collectionPath: string,
   docId: string,
 ): Promise<T | null> => {
   const dataRef = db
     .collection(collectionPath)
-    .doc(docId) as firestore.DocumentReference<T>
+    .doc(docId) as DocumentReference<T>
   const doc = await dataRef.get()
   if (!doc.exists) {
     return null
