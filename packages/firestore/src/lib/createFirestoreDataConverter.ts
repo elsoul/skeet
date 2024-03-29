@@ -1,13 +1,17 @@
-import { firestore } from 'firebase-admin'
+import {
+  DocumentData,
+  FirestoreDataConverter,
+  QueryDocumentSnapshot,
+} from 'firebase-admin/firestore'
 
 export const createFirestoreDataConverter = <
-  T extends firestore.DocumentData,
->(): firestore.FirestoreDataConverter<T> => {
+  T extends DocumentData,
+>(): FirestoreDataConverter<T> => {
   return {
-    toFirestore(data: T): firestore.DocumentData {
+    toFirestore(data: T): DocumentData {
       return data
     },
-    fromFirestore(snapshot: firestore.QueryDocumentSnapshot): T {
+    fromFirestore(snapshot: QueryDocumentSnapshot): T {
       return snapshot.data() as T
     },
   }

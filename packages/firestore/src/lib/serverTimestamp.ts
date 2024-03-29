@@ -1,6 +1,5 @@
-import pkg from 'firebase-admin'
-const { firestore } = pkg
+import { FieldValue } from 'firebase-admin/firestore'
 
 export const serverTimestamp = () => {
-  return firestore.FieldValue.serverTimestamp()
+  return FieldValue.serverTimestamp()
 }

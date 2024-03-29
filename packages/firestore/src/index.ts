@@ -13,3 +13,11 @@ export {
 } from './lib'
 export type { QueryCondition, WithFieldValue } from './lib'
 export { Timestamp, FieldValue } from 'firebase/firestore'
+export type {
+  DocumentData,
+  Firestore,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+  UpdateData,
+  Primitive,
+} from 'firebase/firestore'

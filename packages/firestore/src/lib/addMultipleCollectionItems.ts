@@ -1,5 +1,6 @@
 import { createCollectionRef } from './createCollectionRef'
-import { firestore } from 'firebase-admin'
+import { DocumentData, Firestore, WriteResult } from 'firebase-admin/firestore'
+
 import { serverTimestamp } from './serverTimestamp'
 
 /**
@@ -17,10 +18,14 @@ import { serverTimestamp } from './serverTimestamp'
  *
  * @example
  * ```typescript
- * import { firestore } from 'firebase-admin'
+ * import { getFirestore } from 'firebase-admin/firestore'
+ * import { applicationDefault, initializeApp } from 'firebase-admin/app'
  * import { adds } from '@skeet-framework/firestore'
  *
- * const db = firestore();
+ * const firebaseApp = initializeApp({
+ *  credential: applicationDefault(),
+ * })
+ * export const db = getFirestore(firebaseApp)
  * const users: User[] = [
  *   { name: "John Doe", age: 30 },
  *   { name: "Jane Smith", age: 25 },
@@ -40,19 +45,17 @@ import { serverTimestamp } from './serverTimestamp'
  * run();
  * ```
  */
-export const addMultipleCollectionItems = async <
-  T extends firestore.DocumentData
->(
-  db: firestore.Firestore,
+export const addMultipleCollectionItems = async <T extends DocumentData>(
+  db: Firestore,
   collectionPath: string,
-  items: T[]
-): Promise<firestore.WriteResult[][]> => {
+  items: T[],
+): Promise<WriteResult[][]> => {
   const MAX_BATCH_SIZE = 500
 
   const chunkedItems =
     items.length > 500 ? chunkArray(items, MAX_BATCH_SIZE) : [items]
 
-  const batchResults: firestore.WriteResult[][] = []
+  const batchResults: WriteResult[][] = []
 
   for (const chunk of chunkedItems) {
     try {

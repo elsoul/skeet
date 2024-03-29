@@ -1,4 +1,10 @@
-import { firestore } from 'firebase-admin'
+import {
+  DocumentData,
+  Firestore,
+  OrderByDirection,
+  Query,
+  WhereFilterOp,
+} from 'firebase-admin/firestore'
 import { createFirestoreDataConverter } from './createFirestoreDataConverter'
 
 /**
@@ -6,9 +12,9 @@ import { createFirestoreDataConverter } from './createFirestoreDataConverter'
  */
 export type QueryCondition = {
   field?: string
-  operator?: firestore.WhereFilterOp
+  operator?: WhereFilterOp
   value?: any
-  orderDirection?: firestore.OrderByDirection // "asc" or "desc"
+  orderDirection?: OrderByDirection // "asc" or "desc"
   limit?: number
 }
 
@@ -26,9 +32,14 @@ export type QueryCondition = {
  *
  * @example
  * ```typescript
- * import { firestore } from 'firebase-admin'
+ * import { getFirestore } from 'firebase-admin/firestore'
+ * import { applicationDefault, initializeApp } from 'firebase-admin/app'
  * import { query } from '@skeet-framework/firestore'
- * const db = firestore();
+ *
+ * const firebaseApp = initializeApp({
+ *  credential: applicationDefault(),
+ * })
+ * export const db = getFirestore(firebaseApp)
  *
  * // Simple query to get users over 25 years old
  * const simpleConditions: QueryCondition[] = [
@@ -74,13 +85,13 @@ export type QueryCondition = {
  * run();
  * ```
  */
-export const queryCollectionItems = async <T extends firestore.DocumentData>(
-  db: firestore.Firestore,
+export const queryCollectionItems = async <T extends DocumentData>(
+  db: Firestore,
   collectionPath: string,
-  conditions: QueryCondition[]
+  conditions: QueryCondition[],
 ): Promise<T[]> => {
   try {
-    let query: firestore.Query = db
+    let query: Query = db
       .collection(collectionPath)
       .withConverter(createFirestoreDataConverter<T>())
 
@@ -93,7 +104,7 @@ export const queryCollectionItems = async <T extends firestore.DocumentData>(
         query = query.where(
           condition.field,
           condition.operator,
-          condition.value
+          condition.value,
         )
       }
       if (condition.field && condition.orderDirection) {
