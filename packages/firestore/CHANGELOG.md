@@ -1,5 +1,11 @@
 # @skeet-framework/firestore
 
+## 2.6.0
+
+### Minor Changes
+
+- [#383](https://github.com/elsoul/skeet/pull/383) [`41011b1`](https://github.com/elsoul/skeet/commit/41011b19035b6a97e317eec3b03a8216c2e26d09) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Updated to ESM
+
 ## 2.5.2
 
 ### Patch Changes

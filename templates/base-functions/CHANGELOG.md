@@ -1,5 +1,12 @@
 # base-functions
 
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`41011b1`](https://github.com/elsoul/skeet/commit/41011b19035b6a97e317eec3b03a8216c2e26d09)]:
+  - @skeet-framework/firestore@2.6.0
+
 ## 1.1.2
 
 ### Patch Changes
