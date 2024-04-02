@@ -1,5 +1,18 @@
 # @skeet-framework/cli
 
+## 2.2.9
+
+### Patch Changes
+
+- [#386](https://github.com/elsoul/skeet/pull/386) [`cbdeca7`](https://github.com/elsoul/skeet/commit/cbdeca72117920440ac4b70f4fb5ec4639a93990) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - ## Update - skeet init
+
+  skeet init now supports auto configuration of Google Cloud/Firebase Project step by step.
+  This reads the `skeet-cloud.config.json` file and configure the project depending on the cloud status.
+
+  ```bash
+  $ skeet init
+  ```
+
 ## 2.2.8
 
 ### Patch Changes

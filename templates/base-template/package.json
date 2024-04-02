@@ -1,7 +1,7 @@
 {
   "name": "@skeet-framework/base-template",
   "projectId": "skeet-framework",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Skeet Framework Base Template",
   "keywords": [
     "typescript",
