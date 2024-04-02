@@ -37,13 +37,14 @@
     "shell": "firebase functions:shell --project $npm_package_projectId"
   },
   "devDependencies": {
+    "@skeet-framework/firestore": "workspace:^",
     "@types/node": "20.11.30",
     "@typescript-eslint/eslint-plugin": "7.4.0",
     "@typescript-eslint/parser": "7.4.0",
-    "firebase-functions": "4.8.1",
     "esbuild": "0.20.2",
     "eslint": "8.57.0",
     "firebase": "10.9.0",
+    "firebase-functions": "4.8.1",
     "nodemon": "3.1.0",
     "npm-run-all": "4.1.5",
     "prettier": "3.2.5",

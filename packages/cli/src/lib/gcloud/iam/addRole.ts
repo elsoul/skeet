@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const runAddAllRole = async (projectId: string, appName: string) => {
   await addAllRoles(projectId, appName, roleList)

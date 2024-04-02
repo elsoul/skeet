@@ -4,6 +4,7 @@ import { createServiceAccountKey } from '@/lib/gcloud'
 import { setupIam } from '@/lib/setup'
 import { addJsonEnv } from '@/lib/git'
 import { setupIamAi } from '@/lib/setup/setupIamAi'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const iamSubCommands = async () => {
   const iam = program
@@ -27,7 +28,7 @@ export const iamSubCommands = async () => {
       'Download IAM Key for Google Cloud Platform path: ./keypair.json',
     )
     .action(async () => {
-      const config = await importConfig()
+      const config = await readOrCreateConfig()
       await createServiceAccountKey(config.app.projectId, config.app.name)
     })
   iam

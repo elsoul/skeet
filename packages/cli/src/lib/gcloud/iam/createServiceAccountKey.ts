@@ -1,9 +1,9 @@
 import { KEYFILE_PATH } from '@/lib'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const createServiceAccountKey = async (
   projectId: string,
-  appName: string
+  appName: string,
 ) => {
   const createServiceAccountCmd = [
     'gcloud',

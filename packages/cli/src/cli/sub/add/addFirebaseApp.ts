@@ -26,10 +26,10 @@ export const addFirebaseApp = async (
       await mkdir(firebaseConfigDir, { recursive: true })
     }
     const appList = await firebaseAppList()
-    if (checkAppExistence(appList, appDisplayName))
-      throw new Error(
-        `Default Firebase App '${appDisplayName}' already exists. Skipping the firebase config creating process... Delete the Firebase webapp on the web console if you want to create a new one. Then run 'skeet init' again. It will create the new webapp and the firebaseConfig files.`,
-      )
+    if (checkAppExistence(appList, appDisplayName)) {
+      console.log('App already exists. Skipping...')
+      return
+    }
 
     const appId = (await firebaseCreateWebProject(appDisplayName)) || ''
     await firebaseApplyWebProject(projectId, appDisplayName)

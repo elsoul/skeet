@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 import { addRole, createServiceAccount, enablePermission } from '../iam'
 import { inspect } from 'util'
 import { execAsync } from '@skeet-framework/utils'

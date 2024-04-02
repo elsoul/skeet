@@ -3,7 +3,7 @@ import { execSync, spawnSync } from 'child_process'
 
 export const createServiceAccount = async (
   projectId: string,
-  appName: string
+  appName: string,
 ) => {
   try {
     const getServiceAccountCmd = [
@@ -18,10 +18,8 @@ export const createServiceAccount = async (
     ]
     const cmd = getServiceAccountCmd.join(' ')
     console.log(cmd)
-    const result = String(execSync(cmd))
-    console.log(`Account exists: ${result}`)
+    execSync(cmd)
   } catch (error) {
-    console.log('Service account does not exist, creating new one...')
     const createServiceAccountCmd = [
       'gcloud',
       'iam',

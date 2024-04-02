@@ -1,5 +1,5 @@
 import { PATH } from '@/config/path'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const dbStudio = (production: boolean = false, cwd = './graphql') => {
   try {

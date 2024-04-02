@@ -1,5 +1,5 @@
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const addSecret = async (key: string) => {
   try {

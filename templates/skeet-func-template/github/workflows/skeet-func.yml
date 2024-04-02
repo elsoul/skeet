@@ -1,0 +1,42 @@
+name: SkeetFunc
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'functions/skeet/**'
+      - '.github/workflows/skeet-func.yml'
+      - 'pnpm-lock.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.SKEET_GCP_SA_KEY }}
+      - name: Install firebase tools
+        run: pnpm add -g firebase-tools
+      - name: GitHub repository setting
+        run: git config --global url."https://github.com".insteadOf ssh://git@github.com
+      - name: Install dependencies
+        run: pnpm -F skeet-func install
+      - name: Build App
+        run: pnpm -F skeet-func build
+      - name: Deploy to Firebase
+        run: firebase deploy --only functions:skeet

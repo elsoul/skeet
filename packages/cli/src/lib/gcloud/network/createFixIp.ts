@@ -1,4 +1,5 @@
 import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { spawnSync } from 'node:child_process'
 
 export const createFixIp = async (
   projectId: string,
@@ -17,7 +18,7 @@ export const createFixIp = async (
     '--project',
     projectId,
   ]
-  await execAsyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
 }
 
 export const getIp = async (projectId: string, ipName: string) => {

@@ -712,6 +712,9 @@ importers:
 
   templates/base-template:
     devDependencies:
+      '@skeet-framework/firestore':
+        specifier: workspace:^
+        version: link:../../packages/firestore
       '@types/node':
         specifier: 20.11.30
         version: 20.11.30
@@ -760,6 +763,9 @@ importers:
 
   templates/skeet-func-template:
     devDependencies:
+      '@skeet-framework/firestore':
+        specifier: workspace:^
+        version: link:../../packages/firestore
       '@types/node':
         specifier: 20.11.30
         version: 20.11.30
@@ -16518,7 +16524,7 @@ packages:
       debug: 4.3.4(supports-color@5.5.0)
       globrex: 0.1.2
       tsconfck: 3.0.3(typescript@5.4.3)
-      vite: 5.2.6(@types/node@20.11.25)
+      vite: 5.2.6(@types/node@20.11.30)
     transitivePeerDependencies:
       - supports-color
       - typescript

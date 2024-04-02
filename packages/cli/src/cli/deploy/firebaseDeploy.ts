@@ -1,6 +1,6 @@
 import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { getExportedFunctions } from '@/lib/files/getExportedFunctions'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 import inquirer from 'inquirer'
 
 export const firebaseFunctionsDeploy = async (

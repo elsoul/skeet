@@ -1,8 +1,9 @@
+import { DOCKER_DB_NAME, DOCKER_DB_PASS, DOCKER_DB_USER } from '@/config/config'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { firebaseGetSecret } from '@/lib/firebase/firebaseGetSecret'
 import { execAsync } from '@skeet-framework/utils'
 import chalk from 'chalk'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const dbMigrate = async (cwd: string, production: boolean = false) => {
   try {
@@ -43,7 +44,7 @@ export const dbMigrate = async (cwd: string, production: boolean = false) => {
         let dbKey = cwd.split('/').pop()
         dbKey = dbKey?.toUpperCase().replaceAll('-', '_')
         const dbKeyLowercase = dbKey?.toLowerCase()
-        const value = `postgresql://skeeter:rabbit@localhost:5432/dev-${dbKeyLowercase}?schema=public`
+        const value = `postgresql://${DOCKER_DB_USER}:${DOCKER_DB_PASS}@localhost:5432/${DOCKER_DB_NAME}?schema=public`
         await execAsync(`echo "DATABASE_URL=${value}" > .env`, cwd)
       }
     }

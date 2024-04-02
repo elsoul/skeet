@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const appCreate = async (projectId: string, region: string) => {
   const shCmd = [

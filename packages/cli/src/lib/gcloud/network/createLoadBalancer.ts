@@ -1,9 +1,9 @@
 import { DomainAnswer } from '@/cli'
+import { SkeetCloudConfig } from '@/config/skeetCloud'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { addDomainToConfig } from '@/lib/files/addJson'
 import { setupLoadBalancer } from '@/lib/setup'
 import { setupArmor } from '@/lib/setup/setupArmor'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 
 export const createLoadBalancer = async (
   skeetConfig: SkeetCloudConfig,

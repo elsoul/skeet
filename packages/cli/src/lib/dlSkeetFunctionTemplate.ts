@@ -10,8 +10,6 @@ export const dlSkeetFunctionTemplate = async (appName: string) => {
   const BASE_TEMP = `https://registry.npmjs.org/@skeet-framework/${template}/-/${template}-${version}.tgz`
   const fileName = `${template}-${version}.tgz`
   const cmd = `wget ${BASE_TEMP}`
-  const functionPath = `functions/skeet-func`
-  console.log(chalk.blue('🕰️ Downloading function template...'))
   await execAsync(cmd)
   if (await existsAsync(appName)) {
     console.log(chalk.yellow('⚠️ Folder already exists'))

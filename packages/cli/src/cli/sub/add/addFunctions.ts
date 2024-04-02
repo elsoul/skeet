@@ -1,26 +1,25 @@
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { SkeetCloudConfig } from '@/config/skeetCloud'
 import {
   Logger,
   FIREBASE_CONFIG_PATH,
   FUNCTIONS_PATH,
   ROUTE_PACKAGE_JSON_PATH,
-  importConfig,
   importFirebaseConfig,
 } from '@/lib'
 import { dlFunctionTemplate } from '@/lib/dlFunctionTemplate'
-import { dlSkeetFunctionTemplate } from '@/lib/dlSkeetFunctionTemplate'
 import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import { functionsYml } from '@/templates/init'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { mkdir, readFile, writeFile } from 'fs/promises'
 
 export const addFunctions = async (functionName: string) => {
   try {
-    const skeetConfig: SkeetCloudConfig = await importConfig()
+    const skeetConfig: SkeetCloudConfig = await readOrCreateConfig()
     const functionDir = FUNCTIONS_PATH + `/${functionName}-func`
     if (await checkFileDirExists(functionDir)) {
-      Logger.error(`Already exist functionName: ${functionName}!`)
+      Logger.error(`Already exist functionName: ${functionName}-func !`)
       return ''
     } else {
       await mkdir(functionDir, { recursive: true })
@@ -35,7 +34,7 @@ export const addFunctions = async (functionName: string) => {
       )
 
       await updateFirebaseConfig(functionName)
-      updatePackageJsonName(
+      await updatePackageJsonName(
         functionName + '-func',
         functionDir + '/package.json',
       )

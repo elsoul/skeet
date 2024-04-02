@@ -23,8 +23,20 @@ export type SkeetCloudStatusType =
   | 'NOT_CREATED'
   | 'PROJECT_CREATED'
   | 'FUNCTIONS_CREATED'
+  | 'GITHUB_ACTIONS_CREATED'
   | 'VPN_CREATED'
+  | 'SQL_CREATED'
   | 'RUNNING'
+
+export enum SkeetCloudStatus {
+  NOT_CREATED,
+  PROJECT_CREATED,
+  FUNCTIONS_CREATED,
+  GITHUB_ACTIONS_CREATED,
+  VPN_CREATED,
+  SQL_CREATED,
+  RUNNING,
+}
 
 export type LangType = 'en' | 'ja'
 

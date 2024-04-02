@@ -16,5 +16,5 @@ export const createGitRepo = async (
     '--source=./',
     '--remote=upstream',
   ]
-  execAsyncCmd(cmdLine)
+  await execAsyncCmd(cmdLine)
 }

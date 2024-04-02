@@ -56,13 +56,13 @@ Currently, it supports development on Google Cloud and Firebase.
 Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
 
 ```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/v1.0.2-install)"
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.4)"
 ```
 
 If you already have Node.js installed, you can install Skeet CLI with npm:
 
 ```bash
-$ npm i -g @skeet-framework/cli
+$ pnpm add -g @skeet-framework/cli
 ```
 
 ## Enabling Google Cloud VertexAI/OpenAI
@@ -73,11 +73,11 @@ You will need OpenAI API Key to use OpenAI.
 Use the following command to enable VertexAI:
 
 ```bash
-$ skeet iam ai
+$ skeet init
 ```
 
 ```bash
-$ skeet ai
+$ skeet ai --help
 ```
 
 or you can choose AI engine by passing options
@@ -109,23 +109,43 @@ For Firebase Template
 
 ## 📗 Usage 📗
 
-### ① Install pnpm
+### ① Install dependencies
 
 ```bash
 $ curl -fsSL https://get.pnpm.io/install.sh | sh -
-```
-
-### ① Install Skeet/Firebase CLI
-
-```bash
-$ pnpm i -g @skeet-framework/cli
-$ pnpm install -g firebase-tools
+$ pnpm add -g @skeet-framework/cli
+$ pnpm add -g firebase-tools
 ```
 
 ### ② Create Skeet App
 
 ```bash
-$ skeet create <appName>
+$ skeet new
+? Enter the name of the app (skeet-app)
+```
+
+### ③ Initialize Firebase/Google Cloud Project
+
+```bash
+$ skeet init
+Initializing Cloud Configurations...
+? What's your GCP Project ID (skeet-framework)
+```
+
+### ④ Call Your AI Assistant
+
+Now you can call your AI Assistant to create a new function, method, typedoc, and more.
+
+```bash
+$ skeet ai --help
+```
+
+## Add Build-in Template
+
+You can add a build-in template to your App.
+
+```bash
+$ skeet add --help
 ```
 
 You can choose a template for the frontend and backend.
@@ -137,44 +157,16 @@ You can choose a template for the frontend and backend.
 
 ![Solana Mobile Stack](https://storage.googleapis.com/skeet-assets/animation/SkeetSolanaMobileStack.gif)
 
-or
-
-Create Skeet App with only backend
-
-```bash
-$ skeet create <appName> --backend
-```
-
-You can choose a template for the backend.
-
-- [Backend - GraphQL template](https://github.com/elsoul/skeet-graphql-only)
-- [Backend - Firestore template](https://github.com/elsoul/skeet-functions-only)
-
 ![Chatbot](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
 
-### ③ Run Skeet App
+### Run Skeet App
 
 ```bash
 $ cd <appName>
 $ skeet s
 ```
 
-or
-
-put options to run only backend, frontend, or GraphQL server
-
-```bash
-Usage: skeet server|s [options]
-
-Run Skeet App
-
-Options:
-  -b, --backend    Run Backend only
-  -f, --functions  Run Firebase Functions only
-  -w, --web        Run Web App only
-  -g, --graphql    Run GraphQL Server only
-  -h, --help       display help for command
-```
+## Development Environment
 
 Now you have both frontend and backend running locally ⭐️
 
@@ -183,61 +175,6 @@ Now you have both frontend and backend running locally ⭐️
 📲 Frontend(Expo) - [http://localhost:19006/](http://localhost:19006/)
 
 💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
-
-If you choose GraphQL template, you can use GraphQL Playground
-
-📊 GraphQL Playground - [http://localhost:3000/graphql](http://localhost:3000/graphql)
-
-## Launching Skeet AI Assistant
-
-The Skeet AI Assistant is an interactive tool designed to handle various queries.
-
-```bash
-$ skeet ai --help
-AI Playground
-
-Options:
-  -v, --vertex                   Vertex AI
-  -o, --openai                   OpenAI
-  -m, --model <string>           Model
-  -token, --token <number>       Max Tokens
-  -temp, --temperature <number>  Temperature
-  -h, --help                     display help for command
-```
-
-Upon launching, you'll see a prompt like the one below. Try asking it something:
-
-```bash
-skeet ai --openai
-╔═════════════╤════════╗
-│ Option      │ Value  │
-╟─────────────┼────────╢
-│ AI Type     │ OpenAI │
-╟─────────────┼────────╢
-│ Model       │ gpt-4  │
-╟─────────────┼────────╢
-│ Max Token   │ 1000   │
-╟─────────────┼────────╢
-│ Temperature │ 0      │
-╚═════════════╧════════╝
-
-🤖 Skeet AI Mode
- `$ <mode>` to change AI mode 🤖
-
-$ prisma
-$ typedoc
-$ translate
-$ firestore
-$ function
-$ method
-$ help
-$ q
-
-OpenAI is selected 🤖 (type 'q' to quit)
-? What can I do for you?
-
-You:
-```
 
 ## Skeet Document
 
@@ -256,13 +193,13 @@ Options:
   -h, --help                   display help for command
 
 Commands:
-  create <appName>             Create Skeet Framework App
-  server|s                     Run Skeet App
-  deploy                       Deploy Skeet APP to Firebase
-  init [options]               Initialize Google Cloud Setups for Skeet APP
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
+  init                         Initialize Cloud Configurations
   login                        Skeet Login Command - Create Firebase Login Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
   g|generate                   Skeet Generate Comannd
+  log [options]                Deploy Skeet APP to Firebase
   docker                       Docker commands
   db                           Database commands
   iam                          Skeet IAM Comannd to setup Google Cloud Platform
@@ -270,6 +207,11 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
+  ai [options]                 AI Playground
+  config                       Config commands
+  run [options]                Run commands
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
   help [command]               display help for command
 ```
 
@@ -283,10 +225,8 @@ Commands:
 - [Cloud SQL - Relational Database](https://cloud.google.com/sql)
 - [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
 - [Prisma - ORM](https://www.prisma.io/)
-- [GraphQL - Query Language](https://graphql.org/)
-- [Apollo - GraphQL Server](https://www.apollographql.com/)
 - [TypeScript - TypeCheck](https://www.typescriptlang.org/)
-- [Jest - Test](https://jestjs.io/)
+- [Vitest - Test](https://vitest.dev/)
 - [ESLint - Linter](https://eslint.org/)
 - [Prettier - Formatter](https://prettier.io/)
 - [Next.js (React) - Web Frontend(SSG)](https://nextjs.org/)
@@ -294,7 +234,7 @@ Commands:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/skeet-cli This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/skeet This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -302,4 +242,4 @@ The package is available as open source under the terms of the [Apache-2.0 Licen
 
 ## Code of Conduct
 
-Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet-cli/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the SKEET project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/elsoul/skeet/blob/master/CODE_OF_CONDUCT.md).

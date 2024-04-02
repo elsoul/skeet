@@ -4,7 +4,6 @@ import { mkdir } from 'fs/promises'
 
 export const functionsYml = async (functionName: string) => {
   await mkdir('.github/workflows', { recursive: true })
-  const nodeVersion = SKEET_CONFIG.NODE_VERSION
   const name = toCamelCase(functionName) + 'Func'
   const kebabName = convertToKebabCase(functionName)
   const ymlName = `${kebabName}-func.yml`
