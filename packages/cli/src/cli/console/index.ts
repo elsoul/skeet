@@ -1,6 +1,6 @@
 import { program } from '@/index'
 import { getFunctions } from '@/lib'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 import inquirer from 'inquirer'
 
 export const consoleCommands = async () => {

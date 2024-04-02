@@ -16,8 +16,9 @@ import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { addFirebaseApp } from '../../sub/add/addFirebaseApp'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
-import { PATH } from '@/config/path'
 import { SKEET_CONFIG_CLOUD_PATH } from '@/config/config'
+import { Spinner } from 'cli-spinner'
+import chalk from 'chalk'
 
 export const initWhenNotCreated = async () => {
   const { projectId, fbProjectId, region } =
@@ -42,6 +43,10 @@ export const initWhenNotCreated = async () => {
   const defaultAppDisplayName = fbProjectId
   await addFirebaseApp(fbProjectId, defaultAppDisplayName)
   const config = await readOrCreateConfig()
+  const spinner = new Spinner(chalk.blue('🔨 Initializing Project...') + ` %s`)
+  console.log('\n')
+  spinner.setSpinnerString(18)
+  spinner.start()
   await createServiceAccount(projectId, config.app.name)
   await runEnableAllPermission(projectId)
   await runAddAllRole(projectId, config.app.name)
@@ -50,6 +55,13 @@ export const initWhenNotCreated = async () => {
   await writeFile(
     '.env',
     `GCP_PROJECT_ID=${projectId}\nGCP_LOCATION=${region}\n`,
+  )
+  spinner.stop()
+  console.log(chalk.white('\n ✔️ Successfully Initialized Your Project'))
+  console.log(
+    chalk.white(
+      `Now you can try your AI Assistant 🔥\n\n  $ skeet ai --help\n\n`,
+    ),
   )
 }
 

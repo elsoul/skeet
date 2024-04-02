@@ -1,6 +1,6 @@
 import { program } from '@/index'
 import { getAllApps } from '@/lib/files/getAllApps'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 import inquirer from 'inquirer'
 
 export type RunOptions = {

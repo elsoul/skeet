@@ -6,10 +6,10 @@ import { runEnableAllPermission } from '@/lib/gcloud/iam/enablePermission'
 import { runAddAllRole } from '@/lib/gcloud/iam/addRole'
 import { setGcloudProject } from '@/lib/gcloud/iam/setGcloudProject'
 import { Logger } from '@/lib/logger'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { sleep } from '@/utils/time'
 import { rm } from 'fs/promises'
 import { KEYFILE_PATH } from '@/lib/files/getSkeetConfig'
+import { SkeetCloudConfig } from '@/config/skeetCloud'
 
 export const setupGcp = async (config: SkeetCloudConfig, region: string) => {
   const spinner = Logger.syncSpinner('Setting up GCP...')

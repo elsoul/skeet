@@ -5,6 +5,7 @@ import { updatePackageJsonName } from '@/lib/files/updatePackageJsonName'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { dlSkeetFunctionTemplate } from '@/lib/dlSkeetFunctionTemplate'
+import { Spinner } from 'cli-spinner'
 
 const validateProjectID = (input: string) => {
   // Google Cloud Project IDに適用する正規表現
@@ -39,10 +40,16 @@ export const newCommands = async () => {
           validate: validateProjectID,
         },
       ])
-
+      const spinner = new Spinner(
+        chalk.blue('🚛 Downloading base template...📦') + ` %s`,
+      )
+      console.log('\n')
+      spinner.setSpinnerString(18)
+      spinner.start()
       const result = options.blank
         ? await getTemplateRepo(answer.name)
         : await dlSkeetFunctionTemplate(answer.name)
+      spinner.stop()
       if (result) {
         await updatePackageJsonName(answer.name, answer.name + '/package.json')
         Logger.skeetAA()

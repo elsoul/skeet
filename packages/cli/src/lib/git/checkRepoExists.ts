@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const checkRepoExists = async (repoName: string) => {
   const cmd = ['gh', 'repo', 'list']

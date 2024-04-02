@@ -1,5 +1,5 @@
 import { DEFAULT_FUNCTION_NAME, program } from '@/index'
-import { FUNCTIONS_PATH, importConfig } from '@/lib'
+import { FUNCTIONS_PATH } from '@/lib'
 import { addFunctions } from './addFunctions'
 import { addMethod } from './addMethod'
 import { addModel } from './addModel'
@@ -13,7 +13,7 @@ import { addScriptToPackageJson } from '@/lib/files/addScriptToPackageJson'
 import { addDiscordWebhook } from './addDiscordWebhook'
 import { addDependencyToPackageJson } from '@/lib/files/addDependencyToPackageJson'
 import inquirer from 'inquirer'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 import { addGhActions } from './addGhActions'
 import { genGithubActions } from '@/cli/gen'
 import { addStripeWebhook } from './addStripeWebhook'
@@ -45,7 +45,7 @@ export const addSubCommands = async () => {
           type: 'input',
           name: 'functionsName',
           message: 'Enter Function Name',
-          default: 'skeet',
+          default: 'solana',
         },
       ])
       await addFunctions(answer.functionsName)
@@ -89,7 +89,7 @@ export const addSubCommands = async () => {
       'Firebase App Display Name - e.g. skeet-web-console',
     )
     .action(async (appDisplayName: string) => {
-      const { app } = await importConfig()
+      const { app } = await readOrCreateConfig()
       await addFirebaseApp(app.projectId, appDisplayName)
     })
   add.command('secret').action(async () => {
@@ -192,7 +192,7 @@ export const addSubCommands = async () => {
     .alias('tq')
     .argument('<queueName>', 'CloudTask Queue Name')
     .action(async (queueName: string) => {
-      const { app } = await importConfig()
+      const { app } = await readOrCreateConfig()
       await addTaskQueue(app.projectId, queueName, app.region)
     })
 }

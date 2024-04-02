@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const dbSeed = (production: boolean = false, cwd = './graphql') => {
   try {

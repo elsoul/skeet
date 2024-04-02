@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const listSQL = async (projectId: string) => {
   const shCmd = ['gcloud', 'sql', 'instances', 'list', '--project', projectId]

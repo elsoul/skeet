@@ -13,7 +13,6 @@ import { dockerSubCommands } from '@/cli/sub/docker'
 import { genCommands } from '@/cli/gen'
 import { curlCommands } from '@/cli/curl'
 import { loginCommands } from '@/cli/login'
-import { initCommands } from '@/cli/init'
 import { deployCommands } from '@/cli/deploy'
 import { createCommands } from '@/cli/create'
 import { serverCommands } from '@/cli/server'
@@ -64,7 +63,6 @@ async function main() {
     //   .command('test')
     //   .description('Run tests')
     //   .action(async () => {
-    //     const res = await firebaseAddSecret('TEST_KEY', 'TEST_VALUE')
     //   })
 
     program.parseAsync(process.argv)

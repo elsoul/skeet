@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 import { SKEET_CONFIG_CLOUD_PATH } from '@/config/config'
 import chalk from 'chalk'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'

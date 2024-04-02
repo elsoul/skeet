@@ -37,6 +37,7 @@
     "shell": "firebase functions:shell --project $npm_package_projectId"
   },
   "devDependencies": {
+    "@skeet-framework/firestore": "workspace:^",
     "@types/node": "20.11.30",
     "@typescript-eslint/eslint-plugin": "7.4.0",
     "@typescript-eslint/parser": "7.4.0",

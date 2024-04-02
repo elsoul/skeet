@@ -1,8 +1,8 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const firebaseApplyWebProject = async (
   projectId: string,
-  appDisplayName: string
+  appDisplayName: string,
 ) => {
   try {
     const shCmd = [

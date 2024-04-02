@@ -1,3 +1,4 @@
+import { DOCKER_DB_NAME } from '@/config/config'
 import { Logger } from '@/lib'
 import { sleep } from '@/utils/time'
 import { execSync, spawnSync } from 'child_process'
@@ -31,7 +32,7 @@ export const runPsql = async () => {
     '-e',
     'POSTGRES_PASSWORD=rabbit',
     '-e',
-    'POSTGRES_DB=skeet-graphql-dev',
+    `POSTGRES_DB=${DOCKER_DB_NAME}`,
     'postgres:15-alpine',
   ]
   spawnSync(psqlCmd[0], psqlCmd.slice(1), {

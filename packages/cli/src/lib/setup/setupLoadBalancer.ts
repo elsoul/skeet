@@ -1,4 +1,5 @@
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { SkeetCloudConfig } from '@/config/skeetCloud'
 import {
   addBackend,
   addPathMatcher,
@@ -20,7 +21,6 @@ import {
   Logger,
   SKEET_CONFIG_PATH,
 } from '@/lib'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { writeFile } from 'fs/promises'
 
 export const setupLoadBalancer = async (

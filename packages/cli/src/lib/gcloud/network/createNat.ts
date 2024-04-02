@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { spawnSync } from 'node:child_process'
 
 export const createNat = async (
   projectId: string,
@@ -25,5 +25,5 @@ export const createNat = async (
     '--project',
     projectId,
   ]
-  return await execAsyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
 }

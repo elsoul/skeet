@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const dockerBuild = async () => {
   const cmd = `pnpm docker:build`

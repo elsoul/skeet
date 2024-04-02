@@ -10,7 +10,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations for Skeet
+  init                         Initialize Cloud Configurations
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -54,7 +54,7 @@ Options:
 
 Usage: skeet init [options]
 
-Initialize Cloud Configurations for Skeet
+Initialize Cloud Configurations
 
 Options:
   -h, --help  display help for command
@@ -78,7 +78,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations for Skeet
+  init                         Initialize Cloud Configurations
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -111,7 +111,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations for Skeet
+  init                         Initialize Cloud Configurations
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -284,7 +284,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations for Skeet
+  init                         Initialize Cloud Configurations
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions

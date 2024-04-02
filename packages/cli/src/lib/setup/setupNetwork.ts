@@ -1,8 +1,8 @@
-import { importConfig, createVpcNetwork, setGcloudProject } from '@/lib'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { createVpcNetwork, setGcloudProject } from '@/lib'
 
 export const setupNetwork = async () => {
-  const config: SkeetCloudConfig = await importConfig()
+  const config = await readOrCreateConfig()
   await setGcloudProject(config.app.projectId)
   await createVpcNetwork(
     config.app.projectId,

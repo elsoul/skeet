@@ -1,5 +1,4 @@
 import inquirer from 'inquirer'
-import { importConfig } from '@/lib/files/importConfig'
 import { setupCloud } from '@/lib/setup/setupCloud'
 import { setupLoadBalancer } from '@/lib/setup/setupLoadBalancer'
 import { createVpcNetwork } from '@/lib/gcloud/network/createVpcNetwork'
@@ -8,9 +7,8 @@ import { Logger } from '@/lib/logger'
 import { getZone } from '@/lib/gcloud/lb/createZone'
 import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
 import { syncArmors } from '../sub/sync/syncArmors'
-import { SkeetCloudConfig } from '@/types/skeetTypes'
 import { askForGithubRepo } from './askQuestions'
-import { genGithubActions } from '../gen/genGithubActions'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 type DomainAnswer = {
   appDomain: string
@@ -19,7 +17,7 @@ type DomainAnswer = {
 }
 
 export const initLb = async () => {
-  const skeetConfig: SkeetCloudConfig = await importConfig()
+  const skeetConfig = await readOrCreateConfig()
   const githubRepo = await askForGithubRepo()
   const domainInquirer = await inquirer.prompt<DomainAnswer>(domains)
 

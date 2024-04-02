@@ -1,6 +1,6 @@
 import prompt from 'prompt'
 import { getNetworkConfig } from '@/lib'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 
 export const runSqlUserCreate = async (projectId: string, appName: string) => {
   const dbPassPrompt = {

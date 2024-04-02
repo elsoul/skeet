@@ -125,6 +125,9 @@ export const updateSkeetConfigDb = async (
         sql.status = 'RUNNING'
       }
     })
+    if (config.app.cloudStatus === 'VPN_CREATED') {
+      config.app.cloudStatus = 'SQL_CREATED'
+    }
     await writeFile(SKEET_CONFIG_PATH, JSON.stringify(config, null, 2))
     return
   }

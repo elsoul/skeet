@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import { promptUser } from '../ai'
-import { appendFile, writeFile } from 'fs/promises'
+import { writeFile } from 'fs/promises'
 import { chat } from '@skeet-framework/ai'
 import inquirer from 'inquirer'
 import { yesOrNo } from './yesOrNoMode'
@@ -61,11 +61,6 @@ export const firestoreMode = async (options: SkeetAIOptions, logger: AiLog) => {
     return
   }
   const modelFilePath = `common/models/${modelFileSuggestion}`
-  const modelIndexPath = `common/models/index.ts`
-  await appendFile(
-    modelIndexPath.replace('.ts', ''),
-    `export * from './${modelFileSuggestion}'`,
-  )
   await writeFile(modelFilePath, aiAnswer)
   const createdText = `\n${log.common.created}: ${modelFilePath}`
   console.log(chalk.white(createdText))

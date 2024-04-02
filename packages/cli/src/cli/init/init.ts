@@ -4,7 +4,6 @@ import {
   firebaseUseAdd,
   firebaseLogin,
   createLoadBalancer,
-  isSQLexists,
   setupCloud,
   createServiceAccount,
   setupNetwork,
@@ -16,22 +15,18 @@ import { addFirebaseApp } from '../sub/add/addFirebaseApp'
 import { pnpmBuild } from '../../lib/pnpmBuild'
 import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
 import { deployRules } from '../deploy/deployRules'
-import { setupSQL } from '@/lib/setup/setupSQL'
-import {
-  DomainAnswer,
-  askForGithubRepo,
-  askForSqlPassword,
-} from './askQuestions'
+import { DomainAnswer, askForGithubRepo } from './askQuestions'
 import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { genGithubActions } from '../gen'
 import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
 import { DEFAULT_FUNCTION_NAME, FIREBASERC_PATH } from '@/index'
 import { syncRoutings } from '../sub/sync/syncRoutings'
 import inquirer from 'inquirer'
-import { projectQuestions, questionList } from './questionList'
-import { spawnSync } from 'child_process'
+import { projectQuestions } from './questionList'
+import { spawnSync } from 'node:child_process'
 import { readFile, writeFile } from 'fs/promises'
 import { domains } from './initLb'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export type initialParams = {
   projectId: string
@@ -67,8 +62,8 @@ export const init = async (loginMode = false) => {
   await runAddAllRole(projectId, app.name)
   if (loginMode) return
 
-  const skeetConfig = await importConfig()
-  await Logger.confirmFirebaseSetup(fbProjectId, skeetConfig.app.template)
+  const skeetConfig = await readOrCreateConfig()
+  await Logger.confirmFirebaseSetup(fbProjectId, '')
 
   const githubRepo = await askForGithubRepo()
 
@@ -77,14 +72,6 @@ export const init = async (loginMode = false) => {
     appDomain: '',
     nsDomain: '',
     lbDomain: '',
-  }
-
-  let sqlPassword = ''
-  const hasGraphQL = skeetConfig.app.template.includes('GraphQL')
-
-  if (hasGraphQL && !(await isSQLexists())) {
-    const answer = await askForSqlPassword()
-    sqlPassword = answer.password
   }
 
   // Ask Domain info if LB is not exists
@@ -98,11 +85,8 @@ export const init = async (loginMode = false) => {
   // Setup Network
   await setupNetwork()
 
-  // Setup Cloud SQL
-  if (sqlPassword !== '') await setupSQL(skeetConfig, sqlPassword)
-
   // Deploy Default Firebase Functions
-  pnpmBuild(DEFAULT_FUNCTION_NAME)
+  await pnpmBuild(DEFAULT_FUNCTION_NAME)
   await firebaseFunctionsDeploy(skeetConfig.app.fbProjectId)
   await deployRules(skeetConfig.app.fbProjectId)
 

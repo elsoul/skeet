@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { spawnSync } from 'child_process'
+import { spawnSync } from 'node:child_process'
 import { DEFAULT_FUNCTION_NAME } from '@/index'
 dotenv.config()
 
