@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/base-sql",
-  "version": "0.6.11",
+  "version": "0.6.12",
   "description": "Skeet SQL API Server Template - TypeScript Serverless Framework",
   "main": "dist/index.js",
   "author": "ELSOUL LABO B.V.",
