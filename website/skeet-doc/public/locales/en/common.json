@@ -114,5 +114,20 @@
     "title": "Concentrate on Desired Functionalities",
     "description": "Skeet consistently utilizes TypeScript to enable the creation of essential features and UI as needed, without the worry of infrastructure design and management. Just write the code to solve the problems, and you're ready to go global.",
     "link": "Explore the Full Architecture"
+  },
+  "StakeForOpenSourceRow": {
+    "subtitle": "Stake for the future of Open-Source Development",
+    "title": "Let's support Open-Source Development while earning staking rewards.",
+    "description": "※ These are not intended for investment advice. The information are based on the situation at the time of writing. Please check for the most current information. Always NFA/DYOR.",
+    "feature1": {
+      "title": "Solana Mainnet Validator",
+      "description": "By staking SOL tokens with the Solana mainnet validator operated by ELSOUL LABO, you can earn a staking reward of 7.04% APR (Annual Percentage Rate, as of April 5, 2024), after deducting fees and other expenses. All fees incurred for this purpose will be used as operating expenses for ELSOUL LABO, aimed at improving the open-source development environment.",
+      "button": "Go to Validator Detail"
+    },
+    "feature2": {
+      "title": "Buidlers Collective (BDLC) NFT",
+      "description": "When you stake BDLC NFTs on the Epics platform, you can earn $EPCT token rewards. Additionally, an equivalent amount of $EPCT is donated to the open-source project where the NFTs are staked, to be used for future development. This initiative utilizes blockchain technology to enable socially beneficial NFT staking and No Loss Donation, where staking rewards are donated without losing the principal.",
+      "button": "Go to NFT Marketplace"
+    }
   }
 }
