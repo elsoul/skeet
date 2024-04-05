@@ -44,18 +44,25 @@ export default function WhyOpenSourceDevelopmentRow() {
           </p>
         </div>
         <div className="mx-auto mt-6 flex flex-col items-center justify-center">
-          <Image
-            src={logoHorizontal}
-            alt="Open Source Initiative"
-            className="w-48 dark:hidden"
-            unoptimized
-          />
-          <Image
-            src={logoHorizontalInvert}
-            alt="Open Source Initiative"
-            className="hidden w-48 dark:block"
-            unoptimized
-          />
+          <a
+            href="https://opensource.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80"
+          >
+            <Image
+              src={logoHorizontal}
+              alt="Open Source Initiative"
+              className="w-48 dark:hidden"
+              unoptimized
+            />
+            <Image
+              src={logoHorizontalInvert}
+              alt="Open Source Initiative"
+              className="hidden w-48 dark:block"
+              unoptimized
+            />
+          </a>
         </div>
         <div className="mx-auto mt-12 max-w-2xl lg:max-w-none">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
