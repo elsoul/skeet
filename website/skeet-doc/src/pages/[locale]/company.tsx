@@ -7,6 +7,7 @@ import TeamRow from '@/components/pages/company/TeamRow'
 import ContactRow from '@/components/pages/common/ContactRow'
 import MissionRow from '@/components/pages/company/MissionRow'
 import OurWorksRow from '@/components/pages/common/OurWorksRow'
+import StakeForOpenSourceRow from '@/components/pages/common/StakeForOpenSourceRow'
 
 const seo = {
   pathname: '/company',
@@ -31,6 +32,7 @@ export default function Company() {
       <InformationRow />
       <TeamRow />
       <OurWorksRow />
+      <StakeForOpenSourceRow />
       <ContactRow />
     </>
   )

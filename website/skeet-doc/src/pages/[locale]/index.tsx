@@ -21,6 +21,7 @@ import AIAutoCodeDevelopmentRow from '@/components/pages/common/AIAutoCodeDevelo
 import SolanaMobileStackRow from '@/components/pages/common/SolanaMobileStackRow'
 import SkeetArchitectureRow from '@/components/pages/common/SkeetArchitectureRow'
 import BooksRow from '@/components/pages/common/BooksRow'
+import StakeForOpenSourceRow from '@/components/pages/common/StakeForOpenSourceRow'
 
 const articleDirName = 'news'
 
@@ -53,6 +54,7 @@ export default function Home({
       <GoToQuickstartRow />
       <SkeetDemoRow />
       <WhyOpenSourceDevelopmentRow />
+      <StakeForOpenSourceRow />
       <TopNewsRow articles={articles} urls={urls} />
       <BooksRow />
       <MediaLogoRow />
