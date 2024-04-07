@@ -9,7 +9,7 @@
     "nsDomain": "your-nameserver.com",
     "lbDomain": "loadbalancer.your-app-url.com",
     "hasLoadBalancer": false,
-    "cloudStatus": "NOT_CREATED"
+    "cloudStatus": "PROJECT_CREATED"
   },
   "cloudRun": {
     "name": "skeet-nextjs-graphql-graphql",
@@ -138,18 +138,13 @@
       "securityPolicyName": "skeet-sql-armor"
     }
   ],
-  "secretKey": [
-    "TEST_KEY"
-  ],
+  "secretKey": ["TEST_KEY"],
   "ai": {
     "lang": "en",
     "ais": [
       {
         "name": "Gemini",
-        "availableModels": [
-          "gemini-1.0-pro",
-          "gemini-1.0-pro-vision"
-        ]
+        "availableModels": ["gemini-1.0-pro", "gemini-1.0-pro-vision"]
       }
     ]
   }

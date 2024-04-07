@@ -1,6 +1,5 @@
 import inquirer from 'inquirer'
-import { initialParams } from '../init'
-import { projectQuestions } from '../questionList'
+import { projectQuestions } from '../../init/questionList'
 import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
 import {
   Logger,
@@ -10,17 +9,24 @@ import {
   runAddAllRole,
   runEnableAllPermission,
 } from '@/lib'
-import { readFile, writeFile } from 'fs/promises'
-import { DEFAULT_FUNCTION_NAME, FIREBASERC_PATH } from '@/index'
+import { writeFile } from 'fs/promises'
+import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
 import { addFirebaseApp } from '../../sub/add/addFirebaseApp'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
-import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { SKEET_CONFIG_CLOUD_PATH } from '@/config/config'
 import { Spinner } from 'cli-spinner'
 import chalk from 'chalk'
+import { updateFirebaserc } from '@/lib/files/updateFirebaserc'
+import { updateSkeetCloudConfigCloudStatus } from '../updateSkeetCloudConfigCloudStatus'
 
-export const initWhenNotCreated = async () => {
+type initialParams = {
+  projectId: string
+  fbProjectId: string
+  region: string
+}
+
+export const initFirebaseProject = async () => {
   const { projectId, fbProjectId, region } =
     await inquirer.prompt<initialParams>(await projectQuestions())
   const isProjectExists = await projectIdNotExists(projectId)
@@ -50,30 +56,11 @@ export const initWhenNotCreated = async () => {
   await createServiceAccount(projectId, config.app.name)
   await runEnableAllPermission(projectId)
   await runAddAllRole(projectId, config.app.name)
-  config.app.cloudStatus = 'PROJECT_CREATED'
+  await updateSkeetCloudConfigCloudStatus('PROJECT_CREATED')
   await writeFile(SKEET_CONFIG_CLOUD_PATH, JSON.stringify(config, null, 2))
   await writeFile(
     '.env',
     `GCP_PROJECT_ID=${projectId}\nGCP_LOCATION=${region}\n`,
   )
   spinner.stop()
-  console.log(chalk.white('\n ✔️ Successfully Initialized Your Project'))
-  console.log(
-    chalk.white(
-      `Now you can try your AI Assistant 🔥\n\n  $ skeet ai --help\n\n`,
-    ),
-  )
-}
-
-const updateFirebaserc = async (fbProjectId: string) => {
-  if (!(await checkFileDirExists(FIREBASERC_PATH))) {
-    await writeFile(
-      FIREBASERC_PATH,
-      JSON.stringify({ projects: { default: fbProjectId } }, null, 2),
-    )
-    return
-  }
-  const firebaserc = JSON.parse(await readFile(FIREBASERC_PATH, 'utf-8'))
-  firebaserc.projects.default = fbProjectId
-  await writeFile(FIREBASERC_PATH, JSON.stringify(firebaserc, null, 2))
 }

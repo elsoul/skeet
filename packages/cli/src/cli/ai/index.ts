@@ -2,11 +2,10 @@ import { program } from '@/index'
 import { promptUser } from './ai'
 import chalk from 'chalk'
 import { AIType } from '@skeet-framework/ai'
-import { importConfig } from '@/lib/files/importConfig'
 import { AiLog } from './aiLog'
 import { validEnv } from './validEnv'
-import { validateAiConfig } from './validateAiConfig'
 import { modeSelect } from './modeSelect'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export type SkeetAIOptions = {
   ai: AIType
@@ -15,15 +14,14 @@ export type SkeetAIOptions = {
 export const aiCommands = () => {
   program
     .command('ai')
-    .description('AI Playground')
-    .option('-g, --gemini', 'Gemini')
-    .option('-o, --openai', 'OpenAI')
-    .option('-c, --claude', 'Claude')
-    .option('--mode', 'Mode')
+    .description('Call Skeet AI Assistant')
+    .option('-g, --gemini', 'Use Gemini - default')
+    .option('-o, --openai', 'Use OpenAI')
+    .option('-c, --claude', 'Use Claude')
+    .option('--mode', 'Call Mode Select Prompt')
     .action(async (options) => {
-      await validateAiConfig()
-      const { ai } = await importConfig()
-      const lang = ai.lang as 'en' | 'ja'
+      const config = await readOrCreateConfig()
+      const lang = config.lang as 'en' | 'ja'
       const logger = new AiLog(lang)
       let aiType = 'Gemini'
       if (options.claude) {

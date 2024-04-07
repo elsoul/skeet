@@ -24,7 +24,7 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
@@ -92,7 +92,7 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
@@ -125,7 +125,7 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
@@ -243,13 +243,13 @@ Commands:
 
 Usage: skeet ai [options]
 
-AI Playground
+Call Skeet AI Assistant
 
 Options:
-  -g, --gemini  Gemini
-  -o, --openai  OpenAI
-  -c, --claude  Claude
-  --mode        Mode
+  -g, --gemini  Use Gemini - default
+  -o, --openai  Use OpenAI
+  -c, --claude  Use Claude
+  --mode        Call Mode Select Prompt
   -h, --help    display help for command
 
 Usage: skeet config [options] [command]
@@ -298,7 +298,7 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App

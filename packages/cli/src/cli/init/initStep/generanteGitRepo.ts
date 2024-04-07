@@ -3,7 +3,7 @@ import { addGhActions } from '@/cli/sub/add/addGhActions'
 import { addJsonEnv } from '@/lib'
 import { updateSkeetCloudConfigCloudStatus } from '../updateSkeetCloudConfigCloudStatus'
 
-export const initWhenFunctionsCreated = async () => {
+export const generanteGitRepo = async () => {
   await genGithubActions()
   await addGhActions()
   await addJsonEnv()

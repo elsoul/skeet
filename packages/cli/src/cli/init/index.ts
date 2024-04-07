@@ -1,32 +1,26 @@
 import { program } from '@/index'
-import { skeetCloudConfigAppGen } from '@/templates/init/skeet-cloud.config-app'
-import { initLb } from './initLb'
 import { init } from './init'
-import { writeFile } from 'fs/promises'
-import { setupNetwork } from '@/lib/setup/setupNetwork'
-export * from './askQuestions'
+import { generanteGitRepo } from './initStep/generanteGitRepo'
+import { createVPN } from './initStep/createVPN'
 
 type Options = {
-  login: boolean
-  config: boolean
-  lb: boolean
-  network: boolean
+  repo: boolean
+  vpn: boolean
 }
 
 export const initCommands = async () => {
   program
     .command('init')
-    .option('--login', 'Activate Firebase Login', false)
-    .option('--lb', 'Setup Cloud Load Balancer', false)
-    .option('-n, --network', 'Setup Network', false)
-    .description('Initialize Google Cloud Setups for Skeet APP')
+    .option('--repo', 'Configure Github Repo/Actions', false)
+    .option('--vpn', 'Setup Cloud VPN', false)
+    .description('Initialize Google Cloud Setups')
     .action(async (options: Options) => {
-      if (options.lb) {
-        await initLb()
-      } else if (options.network) {
-        await setupNetwork()
+      if (options.repo) {
+        await generanteGitRepo()
+      } else if (options.vpn) {
+        await createVPN()
       } else {
-        await init(options.login)
+        await init()
       }
     })
 }

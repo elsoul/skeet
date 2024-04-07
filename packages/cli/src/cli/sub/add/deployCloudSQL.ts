@@ -1,4 +1,3 @@
-import { askForSqlPassword } from '@/cli/init'
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { createSQL } from '@/lib/gcloud/sql/createSQL'
 import { patchSQL } from '@/lib/gcloud/sql/patchSQL'
@@ -13,6 +12,7 @@ import { addEnv } from '@/lib'
 import { SkeetCloudConfig } from '@/config/skeetCloud'
 import chalk from 'chalk'
 import { generateEnvProduction } from '@/lib/gcloud/sql/generateEnvProduction'
+import { askForSqlPassword } from '@/cli/init/askQuestions'
 
 export const deployCloudSQL = async (
   instanceName: string,
