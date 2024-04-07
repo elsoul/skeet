@@ -19,7 +19,7 @@ export const getTemplateVersion = (templateType: TemplateType) => {
       return TEMPLATE_VERSION.BASE_FUNCTIONS
     case 'base-sql':
       return TEMPLATE_VERSION.BASE_SQL
-    case 'skeet-func':
+    case 'skeet-func-template':
       return TEMPLATE_VERSION.SKEET_FUNC
     default:
       return TEMPLATE_VERSION.BASE_TEMPLATE

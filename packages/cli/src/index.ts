@@ -19,8 +19,9 @@ import { serverCommands } from '@/cli/server'
 import { logCommands } from '@/cli/log'
 import { dbSubCommands } from '@/cli/sub/db'
 import { newCommands } from './cli/new'
-import { initV2Commands } from './cli/init/indexV2'
 import { consoleCommands } from './cli/console'
+import { checkCommands } from './cli/check'
+import { initCommands } from './cli'
 
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
@@ -42,7 +43,7 @@ async function main() {
     await createCommands()
     await serverCommands()
     await deployCommands()
-    await initV2Commands()
+    await initCommands()
     await loginCommands()
     await curlCommands()
     await genCommands()
@@ -59,6 +60,7 @@ async function main() {
     runCommands()
     await newCommands()
     await consoleCommands()
+    await checkCommands()
     // program
     //   .command('test')
     //   .description('Run tests')

@@ -1,114 +1,18 @@
-import {
-  Logger,
-  importConfig,
-  firebaseUseAdd,
-  firebaseLogin,
-  createLoadBalancer,
-  setupCloud,
-  createServiceAccount,
-  setupNetwork,
-  getZone,
-  runAddAllRole,
-  runEnableAllPermission,
-} from '@/lib'
-import { addFirebaseApp } from '../sub/add/addFirebaseApp'
-import { pnpmBuild } from '../../lib/pnpmBuild'
-import { firebaseFunctionsDeploy } from '../deploy/firebaseDeploy'
-import { deployRules } from '../deploy/deployRules'
-import { DomainAnswer, askForGithubRepo } from './askQuestions'
-import { addProjectRegionToSkeetOptions } from '@/lib/files/addJson'
-import { genGithubActions } from '../gen'
-import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
-import { DEFAULT_FUNCTION_NAME, FIREBASERC_PATH } from '@/index'
-import { syncRoutings } from '../sub/sync/syncRoutings'
-import inquirer from 'inquirer'
-import { projectQuestions } from './questionList'
-import { spawnSync } from 'node:child_process'
-import { readFile, writeFile } from 'fs/promises'
-import { domains } from './initLb'
-import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { initFirebaseProject } from './initStep/initFirebaseProject'
+import { deployFirebaseFunctions } from './initStep/deployFirebaseFunctions'
+import { generanteGitRepo } from './initStep/generanteGitRepo'
+import { createVPN } from './initStep/createVPN'
 
-export type initialParams = {
-  projectId: string
-  fbProjectId: string
-  region: string
-}
+export const init = async () => {
+  // Initialize Firebase Project - cloudStatus: 'PROJECT_CREATED'
+  await initFirebaseProject()
 
-export const init = async (loginMode = false) => {
-  // Setup Google Cloud Project
-  const { projectId, fbProjectId, region } =
-    await inquirer.prompt<initialParams>(await projectQuestions())
-  if (await projectIdNotExists(projectId))
-    Logger.projectIdNotExistsError(projectId)
+  // Deploy Firebase Functions(skeet-func) - cloudStatus: 'FUNCTIONS_CREATED'
+  await deployFirebaseFunctions()
 
-  await updateFirebaserc(fbProjectId)
+  // Generate Github Actions - cloudStatus: 'GITHUB_ACTIONS_CREATED'
+  await generanteGitRepo()
 
-  if (!region) throw new Error('region is undefined')
-
-  // Setup Firebase Project
-  await firebaseLogin()
-  await firebaseUseAdd(fbProjectId)
-  await addProjectRegionToSkeetOptions(
-    region,
-    projectId,
-    fbProjectId,
-    DEFAULT_FUNCTION_NAME,
-  )
-  const defaultAppDisplayName = fbProjectId
-  await addFirebaseApp(fbProjectId, defaultAppDisplayName)
-  const { app } = await importConfig()
-  await createServiceAccount(projectId, app.name)
-  await runEnableAllPermission(projectId)
-  await runAddAllRole(projectId, app.name)
-  if (loginMode) return
-
-  const skeetConfig = await readOrCreateConfig()
-  await Logger.confirmFirebaseSetup(fbProjectId, '')
-
-  const githubRepo = await askForGithubRepo()
-
-  let domainAnswer: DomainAnswer = {
-    isDomain: false,
-    appDomain: '',
-    nsDomain: '',
-    lbDomain: '',
-  }
-
-  // Ask Domain info if LB is not exists
-  if (!skeetConfig.app.hasLoadBalancer) {
-    domainAnswer = await inquirer.prompt<DomainAnswer>(domains)
-  }
-
-  // Setup Cloud
-  await setupCloud(skeetConfig, githubRepo, skeetConfig.app.region)
-
-  // Setup Network
-  await setupNetwork()
-
-  // Deploy Default Firebase Functions
-  await pnpmBuild(DEFAULT_FUNCTION_NAME)
-  await firebaseFunctionsDeploy(skeetConfig.app.fbProjectId)
-  await deployRules(skeetConfig.app.fbProjectId)
-
-  // Create Github Actions
-  await genGithubActions()
-
-  // Create Load Balancer if not exists
-  if (!skeetConfig.app.hasLoadBalancer) {
-    await createLoadBalancer(skeetConfig, domainAnswer)
-    await syncRoutings()
-    const cmd = `pnpm deploy`
-    spawnSync(cmd, { stdio: 'inherit', shell: true })
-    const ips = await getZone(projectId, skeetConfig.app.name)
-    Logger.dnsSetupLog(ips)
-  } else {
-    const cmd = `pnpm deploy`
-    spawnSync(cmd, { stdio: 'inherit', shell: true })
-  }
-}
-
-const updateFirebaserc = async (fbProjectId: string) => {
-  const firebaserc = JSON.parse(await readFile(FIREBASERC_PATH, 'utf-8'))
-  firebaserc.projects.default = fbProjectId
-  await writeFile(FIREBASERC_PATH, JSON.stringify(firebaserc, null, 2))
+  // Create VPN and NAT - cloudStatus: 'VPN_CREATED'
+  await createVPN()
 }

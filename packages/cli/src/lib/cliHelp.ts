@@ -10,7 +10,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -24,11 +24,12 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 
 Usage: skeet create [options] <appName>
@@ -54,9 +55,11 @@ Options:
 
 Usage: skeet init [options]
 
-Initialize Cloud Configurations
+Initialize Google Cloud Setups
 
 Options:
+  --repo      Configure Github Repo/Actions (default: false)
+  --vpn       Setup Cloud VPN (default: false)
   -h, --help  display help for command
 
 Usage: skeet login [options]
@@ -78,7 +81,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -92,11 +95,12 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 
 Usage: skeet [options] [command]
@@ -111,7 +115,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -125,11 +129,12 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 
 Usage: skeet log [options]
@@ -243,13 +248,13 @@ Commands:
 
 Usage: skeet ai [options]
 
-AI Playground
+Call Skeet AI Assistant
 
 Options:
-  -g, --gemini  Gemini
-  -o, --openai  OpenAI
-  -c, --claude  Claude
-  --mode        Mode
+  -g, --gemini  Use Gemini - default
+  -o, --openai  Use OpenAI
+  -c, --claude  Use Claude
+  --mode        Call Mode Select Prompt
   -h, --help    display help for command
 
 Usage: skeet config [options] [command]
@@ -272,6 +277,13 @@ Options:
   -C, --cmd <cmd>        Command (default: "")
   -h, --help             display help for command
 
+Usage: skeet check [options]
+
+Check Cloud Configurations
+
+Options:
+  -h, --help  display help for command
+
 Usage: skeet [options] [command]
 
 CLI for Skeet - Full-stack TypeScript Serverless framework
@@ -284,7 +296,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -298,10 +310,11 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 `

@@ -6,6 +6,8 @@ import { SkeetAIOptions } from '.'
 import { AIType, chat } from '@skeet-framework/ai'
 import { modeSelect } from './modeSelect'
 import { skeetMode } from './mode/skeetMode'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { skeetAiPromptV } from './skeetPromptV'
 
 export async function promptUser(
   options: SkeetAIOptions,
@@ -17,6 +19,7 @@ export async function promptUser(
   }
 
   console.log('\n')
+
   const userInput = await inquirer.prompt([
     {
       type: 'input',
@@ -52,7 +55,8 @@ export async function promptUser(
     return
   }
 
-  const skeetPrompt = skeetAiPrompt('en')
+  const config = await readOrCreateConfig()
+  const skeetPrompt = await skeetAiPromptV(config.lang)
   await chat(
     skeetPrompt.context,
     skeetPrompt.examples,
