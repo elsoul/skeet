@@ -1,5 +1,4 @@
 import chalk from 'chalk'
-import inquirer from 'inquirer'
 import { AIType, chat } from '@skeet-framework/ai'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { SkeetAIOptions } from '..'

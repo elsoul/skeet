@@ -10,7 +10,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -29,6 +29,7 @@ Commands:
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 
 Usage: skeet create [options] <appName>
@@ -54,9 +55,11 @@ Options:
 
 Usage: skeet init [options]
 
-Initialize Cloud Configurations
+Initialize Google Cloud Setups
 
 Options:
+  --repo      Configure Github Repo/Actions (default: false)
+  --vpn       Setup Cloud VPN (default: false)
   -h, --help  display help for command
 
 Usage: skeet login [options]
@@ -78,7 +81,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -97,6 +100,7 @@ Commands:
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 
 Usage: skeet [options] [command]
@@ -111,7 +115,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -130,6 +134,7 @@ Commands:
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 
 Usage: skeet log [options]
@@ -272,6 +277,13 @@ Options:
   -C, --cmd <cmd>        Command (default: "")
   -h, --help             display help for command
 
+Usage: skeet check [options]
+
+Check Cloud Configurations
+
+Options:
+  -h, --help  display help for command
+
 Usage: skeet [options] [command]
 
 CLI for Skeet - Full-stack TypeScript Serverless framework
@@ -284,7 +296,7 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login
                                Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions
@@ -303,5 +315,6 @@ Commands:
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 `
