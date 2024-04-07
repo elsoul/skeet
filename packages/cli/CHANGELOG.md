@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.10
+
+### Patch Changes
+
+- [#391](https://github.com/elsoul/skeet/pull/391) [`6b9df03`](https://github.com/elsoul/skeet/commit/6b9df0300581f65237c2e999eede73d7da3d7b99) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet init/ai/check
+
 ## 2.2.9
 
 ### Patch Changes
