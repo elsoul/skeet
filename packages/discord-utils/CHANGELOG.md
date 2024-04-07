@@ -1,5 +1,11 @@
 # @skeet-framework/discord-utils
 
+## 0.4.2
+
+### Patch Changes
+
+- [`814371b`](https://github.com/elsoul/skeet/commit/814371b8c8d0a8d6694d7ab28aac7256c667e855) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Packeges Version
+
 ## 0.4.1
 
 ### Patch Changes
