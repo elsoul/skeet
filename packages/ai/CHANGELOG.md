@@ -1,5 +1,11 @@
 # @skeet-framework/ai
 
+## 1.8.7
+
+### Patch Changes
+
+- [`814371b`](https://github.com/elsoul/skeet/commit/814371b8c8d0a8d6694d7ab28aac7256c667e855) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update Packeges Version
+
 ## 1.8.6
 
 ### Patch Changes
