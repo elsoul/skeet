@@ -58,9 +58,9 @@ export const addSubCommands = async () => {
     .option('--methodName <methodName>', 'Method Name - e.g. methodName')
     .action(async (options: AddMethodOptions) => {
       if (
-        options.function !== null &&
-        options.instance !== null &&
-        options.methodName !== null
+        options.function != null &&
+        options.instance != null &&
+        options.methodName != null
       ) {
         await addMethod(options.methodName, options.instance, options.function)
       } else {
