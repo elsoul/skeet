@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.12
+
+### Patch Changes
+
+- [`d2181fe`](https://github.com/elsoul/skeet/commit/d2181fe0a11887da6f98a978508eded07af39586) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Fix - skeet add method
+
 ## 2.2.11
 
 ### Patch Changes
