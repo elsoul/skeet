@@ -1,5 +1,6 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { spawnSync } from 'node:child_process'
 
 export const createZone = async (
   projectId: string,
@@ -18,12 +19,11 @@ export const createZone = async (
     '--visibility',
     'public',
     '--description',
-    `Skeet ${domain} config`,
+    `\'Skeet ${domain} config\'`,
     '--project',
     projectId,
   ]
-  const result = await execAsyncCmd(shCmd)
-  return result.stdout
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
 }
 
 export const getZone = async (projectId: string, appName: string) => {

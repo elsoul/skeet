@@ -1,5 +1,6 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { spawnSync } from 'node:child_process'
 
 export const createSecurityPolicy = async (
   projectId: string,
@@ -13,11 +14,11 @@ export const createSecurityPolicy = async (
       'create',
       securityPolicyName,
       '--description',
-      'policy for external users',
+      "'policy for external users'",
       '--project',
       projectId,
     ]
-    await execAsyncCmd(shCmd, '.')
+    spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
     return true
   } catch (error) {
     return false

@@ -45,7 +45,6 @@ export const askForNeedDomain = async () => {
 }
 
 export type DomainAnswer = {
-  isDomain: boolean
   appDomain: string
   nsDomain: string
   lbDomain: string

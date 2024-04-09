@@ -1,4 +1,4 @@
-import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { spawnSync } from 'node:child_process'
 
 export const createRecord = async (
   projectId: string,
@@ -27,7 +27,7 @@ export const createRecord = async (
     '--project',
     projectId,
   ]
-  execAsyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
 }
 
 export const createCaaRecords = async (
@@ -36,7 +36,7 @@ export const createCaaRecords = async (
   domain: string,
 ) => {
   const defaultRecord = await caaSslDefaultConf(projectId, zone)
-  await createRecord(
+  return await createRecord(
     projectId,
     zone,
     domain,
@@ -49,7 +49,7 @@ export const createCaaRecords = async (
 
 export const caaSslDefaultConf = async (projectId: string, zone: string) => {
   return {
-    rrdatas: '0 issue "pki.goog",0 issue "letsencrypt.org"',
+    rrdatas: `\'0 issue "pki.goog",0 issue "letsencrypt.org"\'`,
     ttl: '300',
     recordType: 'CAA',
   }

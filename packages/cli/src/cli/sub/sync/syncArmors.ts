@@ -1,4 +1,3 @@
-import { importConfig } from '@/lib'
 import { execSync } from 'child_process'
 import {
   createSecurityPolicy,

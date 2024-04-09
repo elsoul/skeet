@@ -60,6 +60,7 @@ Initialize Google Cloud Setups
 Options:
   --repo      Configure Github Repo/Actions (default: false)
   --vpn       Setup Cloud VPN (default: false)
+  --lb        Setup Load Balancer (default: false)
   -h, --help  display help for command
 
 Usage: skeet login [options]

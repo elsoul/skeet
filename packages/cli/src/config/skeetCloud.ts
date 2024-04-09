@@ -25,6 +25,7 @@ export type SkeetCloudStatusType =
   | 'FUNCTIONS_CREATED'
   | 'GITHUB_ACTIONS_CREATED'
   | 'VPN_CREATED'
+  | 'LOAD_BALANCER_CREATED'
 
 export enum SkeetCloudStatus {
   NOT_CREATED,

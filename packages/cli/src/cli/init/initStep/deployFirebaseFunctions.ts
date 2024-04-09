@@ -5,6 +5,8 @@ import { updateSkeetCloudConfigCloudStatus } from '../../init/updateSkeetCloudCo
 
 export const deployFirebaseFunctions = async () => {
   const config = await readOrCreateConfig()
+  spawnSync(`pnpm install`, { shell: true, stdio: 'inherit' })
+  spawnSync(`pnpm -F skeet-func build`, { shell: true, stdio: 'inherit' })
   const cmd1 = `firebase deploy --only functions:skeet-func:root --project ${config.app.projectId}`
   spawnSync(cmd1, { shell: true, stdio: 'inherit' })
   const cmd2 = `firebase functions:list --project ${config.app.projectId}`

@@ -1,4 +1,5 @@
-import { execAsyncCmd, getFunctionInfo } from '@/lib'
+import { getFunctionInfo } from '@/lib'
+import { spawnSync } from 'node:child_process'
 
 export const updateBackend = async (
   projectId: string,
@@ -18,5 +19,5 @@ export const updateBackend = async (
     '--project',
     projectId,
   ]
-  return await execAsyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
 }

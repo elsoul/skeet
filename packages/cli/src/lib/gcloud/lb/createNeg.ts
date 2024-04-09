@@ -1,6 +1,7 @@
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { execAsyncCmd, getFunctionInfo } from '@/lib'
 import { convertToKebabCase } from '@/utils/string'
+import { spawnSync } from 'node:child_process'
 
 // This will need updates when Google Cloud Run naming changed
 export const createNeg = async (
@@ -31,5 +32,5 @@ export const createNeg = async (
     '--project',
     projectId,
   ]
-  return await execAsyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
 }

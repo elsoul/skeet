@@ -1,5 +1,4 @@
 import { AiConfig, SkeetOptions } from '@/types/skeetTypes'
-import { importConfig } from './importConfig'
 import { readFile, writeFile } from 'fs/promises'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from './getSkeetConfig'
 import { Logger } from '../logger'
@@ -58,15 +57,6 @@ export const addProjectRegionToSkeetOptions = async (
   } catch (error) {
     throw new Error(`addProjectRegionToSkeetOptions: ${error}`)
   }
-}
-
-export type SkeetConfigMin = {
-  app: {
-    name: string
-    projectId: string
-    region: string
-  }
-  ai: AiConfig
 }
 
 export const addProjectRegionToSkeetConfig = async () => {
