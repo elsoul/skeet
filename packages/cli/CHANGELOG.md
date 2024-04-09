@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.13
+
+### Patch Changes
+
+- [#395](https://github.com/elsoul/skeet/pull/395) [`5a8ea42`](https://github.com/elsoul/skeet/commit/5a8ea42fcbb2795b0f42f8de7d15f2a0f2ca5d84) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet init
+
 ## 2.2.12
 
 ### Patch Changes
