@@ -1,5 +1,5 @@
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import {
-  importConfig,
   updateBackendSecurityPolicy,
   updateSecurityPolicy,
   Logger,
@@ -7,9 +7,9 @@ import {
 
 export const initArmor = async () => {
   try {
-    const config = await importConfig()
-    updateBackendSecurityPolicy(config.app.projectId, config.app.name)
-    updateSecurityPolicy(config.app.projectId, config.app.name)
+    const config = await readOrCreateConfig()
+    await updateBackendSecurityPolicy(config.app.projectId, config.app.name)
+    await updateSecurityPolicy(config.app.projectId, config.app.name)
     Logger.success(`successfully created Cloud Armor!`)
     return true
   } catch (error) {

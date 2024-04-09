@@ -1,3 +1,4 @@
+import { updateSkeetCloudConfigCloudStatus } from '@/cli/init/updateSkeetCloudConfigCloudStatus'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { SkeetCloudConfig } from '@/config/skeetCloud'
 import {
@@ -81,6 +82,7 @@ export const setupLoadBalancer = async (
     await createZone(config.app.projectId, config.app.name, nsDomain)
     await createRecord(config.app.projectId, networkConf.zoneName, lbDomain, ip)
     await createCaaRecords(config.app.projectId, networkConf.zoneName, lbDomain)
+    await updateSkeetCloudConfigCloudStatus('LOAD_BALANCER_CREATED')
   } catch (error) {
     Logger.error(`setupLoadBalancer error: ${JSON.stringify(error)}`)
     process.exit(1)

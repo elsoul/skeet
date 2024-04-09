@@ -36,7 +36,6 @@ export const getIp = async (projectId: string, ipName: string) => {
     ]
     const { stdout } = await execAsyncCmd(shCmd)
     const ip = stdout.replace(/\r?\n/g, '')
-    console.log(ip)
     return ip
   } catch (error) {
     throw new Error(`getIp: ${JSON.stringify(String(error))}`)

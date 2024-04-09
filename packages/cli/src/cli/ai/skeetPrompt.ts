@@ -8,7 +8,8 @@ To successfully set up Skeet Cloud, users must progress through a series of seve
 2. PROJECT_CREATED - Once the projects are created, proceed to set up your first Firebase Functions by executing the command:\n\n $ skeet deploy
 3. FUNCTIONS_CREATED - After setting up Firebase Functions, the next step is to configure Github Actions for continuous integration and delivery. This is also done using the same command: $ skeet init --repo
 4. GITHUB_ACTIONS_CREATED - With Github Actions configured, the following task is to establish a VPN to securely connect your resources. Use the command: $ skeet init --vpn
-5. VPN_CREATED - After the VPN setup, the next milestone involves setting up Cloud SQL to manage your databases. This is accomplished with: $ skeet init
+5. VPN_CREATED - After the VPN setup, the penultimate step is to create a load balancer. This is achieved by running the command: $ skeet init --lb
+6. LOAD_BALANCER_CREATED - All steps are now complete, and your Skeet Cloud is operational. You have successfully set up your environment and are ready to build and deploy your applications. If you have any questions, feel free to ask me anything by running the command: $ skeet ai
 
 It's important to follow these steps in order to properly set up and configure your Skeet Cloud environment. Ensure that you consult the provided documentation and use the specified commands as you progress through each status.
 You will get a cloud status and answer what you need to do next.
@@ -40,6 +41,11 @@ You must provide the user with the next steps to take based on their current sta
       },
       {
         input: 'VPN_CREATED',
+        output:
+          'Impressive!Your cloud status is VPN_CREATED.\nYour VPN is now set up. The next step is to create a load balancer. \nPlease run the command:\n\n $ skeet init --lb',
+      },
+      {
+        input: 'LOAD_BALANCER_CREATED',
         output:
           'Congratulations 🎊 Your are all set!\nYour Skeet Cloud is now operational, and you have completed all tutorials. Well done!\nPlease ask me anything by\n\n $ skeet ai',
       },

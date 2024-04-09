@@ -176,3 +176,41 @@ export const projectQuestions = async () => {
     },
   ]
 }
+
+const requireDomainName = (value: string) => {
+  if (/.+\..+/.test(value)) {
+    return true
+  }
+
+  return 'This is not Domain Name!It must be example.com'
+}
+
+export const domainQuestions = [
+  {
+    type: 'input',
+    name: 'appDomain',
+    message: "What's your domain address for App",
+    validate: requireDomainName,
+    default() {
+      return 'app.skeet.dev'
+    },
+  },
+  {
+    type: 'input',
+    name: 'nsDomain',
+    message: "What's your domain address for Domain Name Server",
+    validate: requireDomainName,
+    default() {
+      return 'skeet.dev'
+    },
+  },
+  {
+    type: 'input',
+    name: 'lbDomain',
+    message: "What's your subdomain address for Load Balancer",
+    validate: requireDomainName,
+    default() {
+      return 'lb.skeet.dev'
+    },
+  },
+]

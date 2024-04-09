@@ -1,7 +1,10 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { execAsyncCmd } from '@/lib/execAsyncCmd'
 
-export const updateSecurityPolicy = (projectId: string, appName: string) => {
+export const updateSecurityPolicy = async (
+  projectId: string,
+  appName: string,
+) => {
   const appConf = getNetworkConfig(projectId, appName)
   const shCmd = [
     'gcloud',
@@ -15,5 +18,5 @@ export const updateSecurityPolicy = (projectId: string, appName: string) => {
     '--log-level=VERBOSE',
     '--json-parsing=STANDARD',
   ]
-  execAsyncCmd(shCmd)
+  return await execAsyncCmd(shCmd)
 }
