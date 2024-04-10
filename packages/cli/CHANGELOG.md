@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.14
+
+### Patch Changes
+
+- [`9c76737`](https://github.com/elsoul/skeet/commit/9c7673727e56f84b0f57558b357ab864470143d8) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet add tq
+
 ## 2.2.13
 
 ### Patch Changes
