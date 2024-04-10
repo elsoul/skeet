@@ -27,10 +27,27 @@ export const createLoadBalancer = async () => {
     )
     spawnSync(`skeet sync routings`, { shell: true, stdio: 'inherit' })
     await setupArmor(skeetConfig.app.projectId, skeetConfig.app.name)
+    await updateArmorCloudConifg()
     const ips = await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
     Logger.dnsSetupLog(ips)
     return true
   } catch (error) {
     throw new Error(`createLoadBalancer error: ${error}`)
   }
+}
+
+const updateArmorCloudConifg = async () => {
+  const config = await readOrCreateConfig()
+  config.cloudArmor.push({
+    securityPolicyName: `skeet-${config.app.name}-armor`,
+    rules: [
+      {
+        priority: '2147483647',
+        description: 'Allow/Deny All IP addresses. default: allow',
+        options: {
+          action: 'allow',
+        },
+      },
+    ],
+  })
 }

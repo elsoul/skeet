@@ -20,6 +20,7 @@ import { addStripeWebhook } from './addStripeWebhook'
 import { addTaskQueue } from './addTaskQueue'
 import { addCloudSQL } from './addCloudSQL'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
+import { firebaseAddSecret } from '@/lib/firebase/firebaseAddSecret'
 
 type AddMethodOptions = {
   instance: string
@@ -31,6 +32,7 @@ export const addSubCommands = async () => {
   const add = program
     .command('add')
     .description('Skeet Add Comannd to add new functions')
+
   add
     .command('functions')
     .alias('func')
@@ -92,16 +94,27 @@ export const addSubCommands = async () => {
       const { app } = await readOrCreateConfig()
       await addFirebaseApp(app.projectId, appDisplayName)
     })
+
   add.command('secret').action(async () => {
-    const answer = await inquirer.prompt<{ secretKey: string }>([
+    const answer = await inquirer.prompt<{
+      secretKey: string
+      secretValue: string
+    }>([
       {
         type: 'input',
         name: 'secretKey',
         message: 'Enter Secret Key',
         default: 'API_KEY',
       },
+      {
+        type: 'password',
+        name: 'secretValue',
+        message: 'Enter Secret Value',
+        mask: '*',
+        default: 'API_KEY_VALUE',
+      },
     ])
-    await addSecret(answer.secretKey)
+    await firebaseAddSecret(answer.secretKey, answer.secretValue)
   })
 
   add
@@ -161,7 +174,7 @@ export const addSubCommands = async () => {
           console.log(chalk.yellow('⚠️ Discord Webhook already exists'))
           return
         }
-        const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
+        const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}-func/package.json`
         await addScriptToPackageJson(
           packageJsonPath,
           'discord:deploy',
@@ -170,7 +183,7 @@ export const addSubCommands = async () => {
         await addDependencyToPackageJson(
           packageJsonPath,
           '@skeet-framework/discord-utils',
-          '0.2.13',
+          '0.4.2',
         )
         const cmd = `pnpm -F ${DEFAULT_FUNCTION_NAME}-func install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
@@ -180,7 +193,7 @@ export const addSubCommands = async () => {
           console.log(chalk.yellow('⚠️ Stripe Webhook already exists'))
           return
         }
-        const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/package.json`
+        const packageJsonPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}-func/package.json`
         await addDependencyToPackageJson(packageJsonPath, 'stripe', '14.4.0')
         const cmd = `pnpm -F ${DEFAULT_FUNCTION_NAME}-func install`
         spawnSync(cmd, { shell: true, stdio: 'inherit' })
@@ -190,9 +203,19 @@ export const addSubCommands = async () => {
   add
     .command('taskQueue')
     .alias('tq')
-    .argument('<queueName>', 'CloudTask Queue Name')
-    .action(async (queueName: string) => {
+    .description('Add Cloud Task Queue')
+    .action(async () => {
+      const answer = await inquirer.prompt<{
+        queueName: string
+      }>([
+        {
+          type: 'input',
+          name: 'queueName',
+          message: 'Enter Secret Key',
+          default: 'API_KEY',
+        },
+      ])
       const { app } = await readOrCreateConfig()
-      await addTaskQueue(app.projectId, queueName, app.region)
+      await addTaskQueue(app.projectId, answer.queueName, app.region)
     })
 }

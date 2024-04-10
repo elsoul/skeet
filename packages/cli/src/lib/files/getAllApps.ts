@@ -30,7 +30,7 @@ export const getAllApps = async () => {
     result.push('root')
     const uniqueResult = result.map((dir) => {
       if (dir.includes('functions')) {
-        return dir.split('/')[1] + '-func'
+        return dir.split('/')[1]
       } else if (dir.includes('sql')) {
         return dir.split('/')[1]
       }

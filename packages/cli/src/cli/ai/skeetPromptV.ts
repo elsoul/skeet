@@ -1,10 +1,8 @@
 import { Example } from '@skeet-framework/ai'
 import { LINKS } from '@/config/links'
 import { CLI_HELP } from '@/lib/cliHelp'
-import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const skeetAiPromptV = async (lang: string): Promise<Example> => {
-  const config = await readOrCreateConfig()
   return {
     context: `You are a senior engineer specialized in assisting developers. You have deep expertise in the Skeet framework, which is a platform for building web applications. Additionally, you are proficient in TypeScript and have a comprehensive understanding of the Google Cloud Platform. You are also familiar with the Firebase Emulator Suite.
 Reference: Skeet Framework - https://skeet.dev
@@ -15,17 +13,6 @@ You must output with the language of the developer's choice.
 <developer's lang>: ${lang}
 You must use @skeet-framework/firestore to operate Firestore Data/Models.
 @skeet-framework/firestore:\n${skeetFirestore}
-To successfully set up Skeet Cloud, users must progress through a series of seven steps, each associated with a specific status indicated in the ./skeet-cloud.config.json file. This file also contains the app.name, app.projectId, app.fbProjectId which is crucial for naming the Google Cloud and Firebase projects. Below is a guide detailing each step and the actions required to reach the next status:
-1. NOT_CREATED - Immediately after creating your project, initiate the setup by creating a Google Cloud Project and a Firebase Project. Both should have the name specified in the app.name field of your ./skeet-cloud.config.json file. Detailed instructions for this step can be found at: https://skeet.dev/en/doc/skeet-firestore/setup/
-2. PROJECT_CREATED - Once the projects are created, proceed to set up your first Firebase Functions by executing the command: $ skeet init
-3. FUNCTIONS_CREATED - After setting up Firebase Functions, the next step is to configure Github Actions for continuous integration and delivery. This is also done using the same command: $ skeet init
-4. GITHUB_ACTIONS_CREATED - With Github Actions configured, the following task is to establish a VPN to securely connect your resources. Use the command: $ skeet init
-5. VPN_CREATED - After the VPN setup, the next milestone involves setting up Cloud SQL to manage your databases. This is accomplished with: $ skeet init
-6. SQL_CREATED - Having Cloud SQL ready, it's time to synchronize the routing configurations to update the load balancer, ensuring efficient traffic management. Execute the following command: $ skeet init
-7. RUNNING - Reaching this status signifies the successful completion of the Skeet Cloud setup. Your Skeet Cloud is now operational, and you've completed all tutorials.
-
-It's important to follow these steps in order to properly set up and configure your Skeet Cloud environment. Ensure that you consult the provided documentation and use the specified commands as you progress through each status.
-Here's User's Cloud Status: ${config.app.cloudStatus}
     `,
     examples: [
       {
@@ -70,22 +57,12 @@ Here's User's Cloud Status: ${config.app.cloudStatus}
       {
         input: 'Skeet App を作成する方法は？',
         output:
-          '- $ skeet create <appName> コマンドを実行することで、Skeet App を作成できます。',
+          '$ skeet new コマンドを実行することで、Skeet App を作成できます。',
       },
       {
         input: 'Skeet App をローカルで起動する方法は？',
         output:
-          '- $ skeet s コマンドを実行することで、Skeet App をローカルで起動できます。また、$ skeet docker psql コマンドを実行することで、PostgreSQL をローカルで起動できます。-b オプションを使用することで、バックエンドのみ起動できます。-f オプションを使用することで、Firebase Functions のみ起動できます。-w オプションを使用することで、フロントエンドのみ起動できます。',
-      },
-      {
-        input: 'Skeet App のフロントエンドのみを起動する方法は？',
-        output:
-          '- $ skeet s -w コマンドを実行することで、Skeet App のフロントエンドのみを起動できます。',
-      },
-      {
-        input: 'Skeet WhatApp のバックエンドのみを起動する方法は？',
-        output:
-          '- $ skeet s -b コマンドを実行することで、Skeet App のバックエンドのみを起動できます。',
+          '$ skeet s コマンドを実行することで、Skeet App をローカルで起動できます。',
       },
       {
         input: 'Firestore のモデルを扱うには？',
@@ -118,7 +95,7 @@ Here's User's Cloud Status: ${config.app.cloudStatus}
       {
         input: '言語設定を変更するには？',
         output:
-          '言語設定を変更するには、./skeet-cloud.config.json を編集します。ai の lang プロパティを変更します。例：\n\n```json\n{\n  "ai": {\n    "lang": "ja"\n  }\n}\n```\n現在使用できる言語:"ja", "de", "fr", "zh", "nl", "eo", "id", "it", "ko", "ru", "vi", "es", "pt", "ar"',
+          '言語設定を変更するには、./skeet-cloud.config.json の lang プロパティを変更します。',
       },
       {
         input: '新しいモデルを追加するには？',

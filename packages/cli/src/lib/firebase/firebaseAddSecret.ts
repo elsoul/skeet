@@ -1,4 +1,3 @@
-import { FILE_NAME, PATH } from '@/config/path'
 import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { execAsync } from '@skeet-framework/utils'
 import chalk from 'chalk'

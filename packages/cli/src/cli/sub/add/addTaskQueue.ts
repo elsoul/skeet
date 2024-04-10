@@ -1,8 +1,9 @@
-import { execAsyncCmd, importConfig } from '@/lib'
 import { TaskQueue } from '@/types/skeetTypes'
 import { Logger } from '@/lib/logger'
 import { SKEET_CONFIG_PATH } from '@/index'
 import { writeFile } from 'fs/promises'
+import { spawnSync } from 'node:child_process'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const addTaskQueue = async (
   projectId: string,
@@ -47,15 +48,15 @@ export const addTaskQueue = async (
     '--project',
     projectId,
   ]
-  execAsyncCmd(shCmd)
+  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
   if (!isUpdate) await addTaskQueueToConf(taskQueue)
   Logger.success('Successfully Updated skeet-cloud.config.json!')
 }
 
 export const addTaskQueueToConf = async (taskQueue: TaskQueue) => {
-  const skeetConfig = await importConfig()
-  if (skeetConfig.taskQueues) {
-    skeetConfig.taskQueues.push(taskQueue)
+  const skeetConfig = await readOrCreateConfig()
+  if (skeetConfig.taskQueue) {
+    skeetConfig.taskQueue.push(taskQueue)
     await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
   }
 }

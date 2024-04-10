@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'functions/skeet/**'
+      - 'functions/skeet-func/**'
       - '.github/workflows/skeet-func.yml'
       - 'pnpm-lock.yaml'
 
@@ -39,4 +39,4 @@ jobs:
       - name: Build App
         run: pnpm -F skeet-func build
       - name: Deploy to Firebase
-        run: firebase deploy --only functions:skeet
+        run: firebase deploy --only functions:skeet-func

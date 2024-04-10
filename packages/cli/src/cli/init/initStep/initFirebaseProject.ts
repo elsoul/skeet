@@ -58,9 +58,10 @@ export const initFirebaseProject = async () => {
   await runAddAllRole(projectId, config.app.name)
   await updateSkeetCloudConfigCloudStatus('PROJECT_CREATED')
   await writeFile(SKEET_CONFIG_CLOUD_PATH, JSON.stringify(config, null, 2))
+  const aiRegion = region.includes('eu') ? 'europe-west4' : region
   await writeFile(
     '.env',
-    `GCP_PROJECT_ID=${projectId}\nGCP_LOCATION=${region}\n`,
+    `GCP_PROJECT_ID=${projectId}\nGCP_LOCATION=${aiRegion}\n`,
   )
   spinner.stop()
 }

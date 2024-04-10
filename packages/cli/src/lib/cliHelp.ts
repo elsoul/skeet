@@ -213,7 +213,7 @@ Commands:
   ip
   sql|SQL                   Add Cloud SQL
   webhook|webHook           Add Webhook Endpoint
-  taskQueue|tq <queueName>
+  taskQueue|tq              Add Cloud Task Queue
   help [command]            display help for command
 
 Usage: skeet sync [options] [command]
