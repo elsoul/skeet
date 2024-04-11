@@ -141,6 +141,12 @@ Now you can call your AI Assistant to create a new function, method, typedoc, an
 $ skeet ai --help
 ```
 
+or You can call check command to check your configurations
+
+```bash
+$ skeet check
+```
+
 ## Add Build-in Template
 
 You can add a build-in template to your App.
