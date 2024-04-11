@@ -1,5 +1,11 @@
 # base-template
 
+## 1.0.17
+
+### Patch Changes
+
+- [`99123d9`](https://github.com/elsoul/skeet/commit/99123d96d405ebf664f3e31272bdf91cbd0b3037) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - invoke option
+
 ## 1.0.16
 
 ### Patch Changes
