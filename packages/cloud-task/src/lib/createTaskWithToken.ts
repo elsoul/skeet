@@ -29,7 +29,7 @@ const { CloudTasksClient } = v2beta3
  * const cloudRunUrl = 'https://your-cloud-run-endpoint'
  * const inSeconds = 60 // 1 minute from now
  *
- * const result await = createTask(project, location, queue, endpoint, body, inSeconds)
+ * const result await = createTaskWithToken(project, location, queue, endpoint, body, serviceAccountEmail, cloudRunUrl, inSeconds)
  * console.log(result)
  * ```
  */
@@ -80,7 +80,7 @@ export async function createTaskWithToken(
     console.log(`Created task ${name}`)
     return true
   } catch (error) {
-    console.error(`Error in createTask: ${error}`)
+    console.error(`Error in createTaskWithToken: ${error}`)
     return false
   }
 }
