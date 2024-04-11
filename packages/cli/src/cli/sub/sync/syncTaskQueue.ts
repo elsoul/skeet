@@ -1,12 +1,13 @@
 import { sleep } from '@/utils/time'
-import { importConfig, setGcloudProject } from '@/lib'
+import { setGcloudProject } from '@/lib'
 import { addTaskQueue } from '../add/addTaskQueue'
+import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 
 export const syncTaskQueue = async () => {
-  const skeetConfig = await importConfig()
+  const skeetConfig = await readOrCreateConfig()
   await setGcloudProject(skeetConfig.app.projectId)
-  if (skeetConfig.taskQueues) {
-    for await (const taskQueue of skeetConfig.taskQueues) {
+  if (skeetConfig.taskQueue) {
+    for await (const taskQueue of skeetConfig.taskQueue) {
       const isUpdate = true
       await addTaskQueue(
         skeetConfig.app.projectId,
