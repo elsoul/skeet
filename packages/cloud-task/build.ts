@@ -25,6 +25,7 @@ import esbuild from 'esbuild'
       'dotenv',
       '@google-cloud/tasks',
       'buffer',
+      'google-auth-library',
     ],
   })
   console.log('Build complete ⭐️')

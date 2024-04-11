@@ -12,7 +12,6 @@ const { CloudTasksClient } = v2beta3
  * @param {string} queue - The name of the task queue.
  * @param {string} endpoint - The endpoint URL for the task.
  * @param {Record<string, any>} body - The body of the HTTP request.
- * @param {string} serviceAccountEmail - The service account email to use for the task.
  * @param {string} cloudRunUrl - The Cloud Run URL to access the service.
  * @param {number} [inSeconds] - The schedule time for the task in seconds from now.
  * @returns {Promise<boolean>} - Indicates success or failure of task creation.
@@ -25,11 +24,10 @@ const { CloudTasksClient } = v2beta3
  * const queue = 'your-queue'
  * const endpoint = 'https://your.endpoint.url'
  * const body = { key: 'value' }
- * const serviceAccountEmail = 'client@<project-id>.iam.gserviceaccount.com'
  * const cloudRunUrl = 'https://your-cloud-run-endpoint'
  * const inSeconds = 60 // 1 minute from now
  *
- * const result await = createTaskWithToken(project, location, queue, endpoint, body, serviceAccountEmail, cloudRunUrl, inSeconds)
+ * const result await = createTaskWithToken(project, location, queue, endpoint, body, cloudRunUrl, inSeconds)
  * console.log(result)
  * ```
  */
@@ -40,7 +38,6 @@ export async function createTaskWithToken(
   queue: string,
   endpoint: string,
   body: Record<string, any>,
-  serviceAccountEmail: string,
   cloudRunUrl: string,
   inSeconds?: number,
 ): Promise<boolean> {
@@ -54,12 +51,9 @@ export async function createTaskWithToken(
       httpRequest: {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `bearer ${token}`,
         },
         httpMethod: 'POST',
-        oidcToken: {
-          serviceAccountEmail,
-        },
         url: endpoint,
         body: Buffer.from(JSON.stringify(body)).toString('base64'),
       },

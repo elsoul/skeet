@@ -32,7 +32,8 @@
     "dev": "tsx src/index.ts"
   },
   "dependencies": {
-    "@google-cloud/tasks": "5.3.0"
+    "@google-cloud/tasks": "5.3.0",
+    "google-auth-library": "9.7.0"
   },
   "devDependencies": {
     "@types/node": "20.12.5",
