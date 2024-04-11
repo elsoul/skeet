@@ -16,6 +16,7 @@ export const firestoreDefaultOption = (document: string): DocumentOptions => ({
   minInstances: 0,
   concurrency: 1,
   timeoutSeconds: 540,
+  invoker: 'public',
   labels: {
     skeet: 'firestore',
   },
@@ -34,8 +35,8 @@ export const firestorePrivateOption = (document: string): DocumentOptions => ({
   vpcConnector,
   vpcConnectorEgressSettings: 'PRIVATE_RANGES_ONLY',
   timeoutSeconds: 540,
+  invoker: 'private',
   labels: {
     skeet: 'firestore',
   },
 })
-

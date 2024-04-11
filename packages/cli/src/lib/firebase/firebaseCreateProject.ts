@@ -33,10 +33,13 @@ export const firebaseCreateProject = async (projectId: string) => {
       const announce = `
 ⚠️ Please update your firebase plan to Blaze to fully utilize the features of Skeet Framework.
 
-To update the plan, visit the following link:
-https://console.firebase.google.com/u/0/project/${projectId}/usage/details
+To update the plan, visit the following link 👇
 `
+      const link = chalk.white(
+        `https://console.firebase.google.com/u/0/project/${projectId}/usage/details`,
+      )
       console.log(chalk.yellow(announce))
+      console.log(link)
     }
     return true
   } catch (error) {

@@ -30,7 +30,6 @@ export const initFirebaseProject = async (
   await addFirebaseApp(projectId, defaultAppDisplayName)
   const config = await readOrCreateConfig()
   const spinner = new Spinner(chalk.blue('🔨 Initializing Project...') + ` %s`)
-  console.log('\n')
   spinner.setSpinnerString(18)
   spinner.start()
   await createServiceAccount(projectId, config.app.name)

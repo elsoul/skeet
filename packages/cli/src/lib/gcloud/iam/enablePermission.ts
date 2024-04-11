@@ -1,17 +1,7 @@
-import { execAsync } from '@skeet-framework/utils'
 import { spawnSync } from 'child_process'
 
 export const runEnableAllPermission = async (projectId: string) => {
   await enableServiceListPermission(projectId, serviceList)
-}
-
-export const enableAiPermissions = async (projectId: string) => {
-  const aiServiceList = [
-    'aiplatform.googleapis.com',
-    'translate.googleapis.com',
-    'secretmanager.googleapis.com',
-  ]
-  await enableServiceListPermission(projectId, aiServiceList)
 }
 
 export const enableServiceListPermission = async (

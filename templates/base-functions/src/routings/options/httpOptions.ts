@@ -35,6 +35,7 @@ export const privateHttpOption: HttpsOptions = {
   vpcConnectorEgressSettings: 'PRIVATE_RANGES_ONLY',
   cors,
   timeoutSeconds: 540,
+  invoker: 'private',
   labels: {
     skeet: 'http',
   },
