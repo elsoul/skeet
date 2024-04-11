@@ -1,5 +1,11 @@
 # base-template
 
+## 1.0.16
+
+### Patch Changes
+
+- [`b3c4081`](https://github.com/elsoul/skeet/commit/b3c4081772ffd547adfedd9cf9c640b9a466c603) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet init
+
 ## 1.0.15
 
 ### Patch Changes
