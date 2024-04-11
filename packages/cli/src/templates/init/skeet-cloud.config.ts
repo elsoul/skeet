@@ -13,7 +13,7 @@ export const skeetCloudConfigGen = async (
   "app": {
     "name": "${appName}",
     "projectId": "${appName}",
-    "fbProjectId": "${appName}",
+    "projectId": "${appName}",
     "template": "${template}",
     "region": "europe-west6",
     "appDomain": "app.your-app-url.com",

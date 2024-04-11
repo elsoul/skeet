@@ -1,4 +1,4 @@
-import { AiConfig, SkeetOptions } from '@/types/skeetTypes'
+import { SkeetOptions } from '@/types/skeetTypes'
 import { readFile, writeFile } from 'fs/promises'
 import { FUNCTIONS_PATH, SKEET_CONFIG_PATH } from './getSkeetConfig'
 import { Logger } from '../logger'
@@ -35,7 +35,6 @@ export const addDomainToConfig = async (
 export const addProjectRegionToSkeetOptions = async (
   region: string,
   projectId: string,
-  fbProjectId: string,
   functionName: string,
 ) => {
   try {
@@ -43,13 +42,11 @@ export const addProjectRegionToSkeetOptions = async (
 
     skeetConfig.app.region = region
     skeetConfig.app.projectId = projectId
-    skeetConfig.app.fbProjectId = fbProjectId
     const filePath = `./functions/${functionName}-func/skeetOptions.json`
     const jsonFile = await readFile(filePath)
     const newJsonFile = JSON.parse(String(jsonFile))
     newJsonFile.name = skeetConfig.app.name
     newJsonFile.projectId = skeetConfig.app.projectId
-    newJsonFile.fbProjectId = skeetConfig.app.fbProjectId
     newJsonFile.region = skeetConfig.app.region
     await writeFile(filePath, JSON.stringify(newJsonFile, null, 2))
     await writeFile(SKEET_CONFIG_PATH, JSON.stringify(skeetConfig, null, 2))
@@ -81,7 +78,7 @@ export const copyDefaultFirebaseConfig = async (appDisplayName: string) => {
   try {
     const originalFirebaseConfigPath = `./lib/firebaseAppConfig/${appDisplayName}.ts`
     const defaultFirebaseTsConfigPath = `./lib/firebaseConfig.ts`
-    const functionsTsConfigPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/lib/firebaseConfig.ts`
+    const functionsTsConfigPath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}-func/src/lib/firebaseConfig.ts`
     await copyFileWithOverwrite(
       originalFirebaseConfigPath,
       defaultFirebaseTsConfigPath,

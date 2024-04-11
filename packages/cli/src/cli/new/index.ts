@@ -6,6 +6,8 @@ import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { dlSkeetFunctionTemplate } from '@/lib/dlSkeetFunctionTemplate'
 import { Spinner } from 'cli-spinner'
+import { readFile, writeFile } from 'fs/promises'
+import { a } from 'vitest/dist/suite-a18diDsI'
 
 const validateProjectID = (input: string) => {
   // Google Cloud Project IDに適用する正規表現
@@ -43,7 +45,6 @@ export const newCommands = async () => {
       const spinner = new Spinner(
         chalk.blue('🚛 Downloading base template...📦') + ` %s`,
       )
-      console.log('\n')
       spinner.setSpinnerString(18)
       spinner.start()
       const result = options.blank
@@ -52,6 +53,15 @@ export const newCommands = async () => {
       spinner.stop()
       if (result) {
         await updatePackageJsonName(answer.name, answer.name + '/package.json')
+        const skeetConfig = JSON.parse(
+          await readFile(answer.name + '/skeet-cloud.config.json', 'utf-8'),
+        )
+        skeetConfig.app.name = answer.name
+        skeetConfig.app.projectId = answer.name
+        await writeFile(
+          answer.name + '/skeet-cloud.config.json',
+          JSON.stringify(skeetConfig, null, 2),
+        )
         Logger.skeetAA()
         Logger.welcomText2(answer.name)
         const nmb = Math.floor(Math.random() * 4 + 1)

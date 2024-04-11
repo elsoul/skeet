@@ -3,7 +3,6 @@ export const defaultSkeetCloudConfig: SkeetCloudConfig = {
   app: {
     name: '',
     projectId: '',
-    fbProjectId: '',
     region: '',
     nameServerDomain: '',
     loadBalancerDomain: '',
@@ -51,7 +50,6 @@ export type SkeetCloudConfig = {
 export type AppConfig = {
   name: string
   projectId: string
-  fbProjectId: string
   region: string
   nameServerDomain: string
   loadBalancerDomain: string

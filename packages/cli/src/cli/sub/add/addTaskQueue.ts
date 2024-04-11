@@ -17,7 +17,11 @@ export const addTaskQueue = async (
   isUpdate: boolean = false,
 ) => {
   const method = isUpdate ? 'update' : 'create'
-  const location = region.slice(0, -1) + '1'
+
+  // Cloud Task does not support europe-west4, so we need to convert it to europe-west6
+  const location = region.includes('europe-west4')
+    ? region.slice(0, -1) + '6'
+    : region
   const taskQueue: TaskQueue = {
     queueName,
     location,

@@ -17,7 +17,6 @@ export const checkCommands = async () => {
       const config = await readOrCreateConfig()
       const lang = config.lang as 'en' | 'ja'
       const logger = new AiLog(lang)
-      const cloudStatus: SkeetCloudStatusType = config.app.cloudStatus
       await checkAi({ ai: 'Gemini' }, logger)
       // await checkCloudByStatus(cloudStatus)
     })

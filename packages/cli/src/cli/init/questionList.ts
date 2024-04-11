@@ -151,14 +151,6 @@ export const projectQuestions = async () => {
       },
     },
     {
-      type: 'input',
-      name: 'fbProjectId',
-      message: "What's your Firebase Project ID",
-      default() {
-        return config.app.fbProjectId
-      },
-    },
-    {
       type: 'list',
       message: 'Select Regions to deploy',
       name: 'region',

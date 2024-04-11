@@ -62,6 +62,7 @@ $ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/inst
 If you already have Node.js installed, you can install Skeet CLI with npm:
 
 ```bash
+$ pnpm add -g firebase-tools
 $ pnpm add -g @skeet-framework/cli
 ```
 
@@ -166,6 +167,17 @@ $ cd <appName>
 $ skeet s
 ```
 
+### Test Firebase Functions Endpoint
+
+To call Firebase Functions Endpoint, you can use the following command:
+
+e.g. Call root() function
+
+```bash
+$ skeet c
+firebase > root()
+```
+
 ## Development Environment
 
 Now you have both frontend and backend running locally ⭐️
@@ -193,9 +205,10 @@ Options:
   -h, --help                   display help for command
 
 Commands:
+  create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init                         Initialize Cloud Configurations
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
   g|generate                   Skeet Generate Comannd
@@ -207,11 +220,12 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 ```
 

@@ -5,7 +5,7 @@ import { writeFile } from 'fs/promises'
 
 export const firebaseRemoveSecret = async (secretKey: string) => {
   const config = await readOrCreateConfig()
-  const cmd = `firebase functions:secrets:destroy ${secretKey} --project ${config.app.fbProjectId}`
+  const cmd = `firebase functions:secrets:destroy ${secretKey} --project ${config.app.projectId}`
   const result = await execAsync(cmd)
   if (result.stderr != null && result.stderr.trim() !== '') {
     console.log(chalk.yellow('⚠️ Failed to remove secret.'))

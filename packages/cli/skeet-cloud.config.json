@@ -2,7 +2,7 @@
   "app": {
     "name": "skeet-framework",
     "projectId": "skeet-framework",
-    "fbProjectId": "skeet-framework",
+    "projectId": "skeet-framework",
     "template": "Next.js (React) - Firestore",
     "region": "europe-west6",
     "appDomain": "app.your-app-url.com",

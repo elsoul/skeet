@@ -24,5 +24,6 @@ export const getTemplateRepo = async (appName: string) => {
     `rm -rf ${appName}/sql/.keep ${appName}/functions/.keep ${appName}/webapp/.keep ${appName}/website/.keep ${appName}/mobile/.keep ${appName}/common/.keep`,
   )
   await execAsync(`pnpm install`, appName)
+  await execAsync(`pnpm build`, appName)
   return true
 }

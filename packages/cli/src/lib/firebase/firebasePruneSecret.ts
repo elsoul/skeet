@@ -9,7 +9,7 @@ export const firebasePruneSecret = async () => {
     'firebase',
     'functions:secrets:prune',
     '--project',
-    config.app.fbProjectId,
+    config.app.projectId,
   ]
 
   spawnSync(command[0], command.slice(1), {

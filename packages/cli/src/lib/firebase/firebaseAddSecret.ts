@@ -12,7 +12,7 @@ export const firebaseAddSecret = async (
     console.log(chalk.yellow('⚠️ secretKey must be uppercase letters only.'))
     return
   }
-  const cmd = `echo "${secretValue}" | firebase functions:secrets:set ${secretKey} --project ${config.app.fbProjectId} --data-file -`
+  const cmd = `echo "${secretValue}" | firebase functions:secrets:set ${secretKey} --project ${config.app.projectId} --data-file -`
   const result = await execAsync(cmd)
   if (result.stderr != null && result.stderr.trim() !== '') {
     console.log(chalk.yellow('⚠️ Failed to add secret.'))

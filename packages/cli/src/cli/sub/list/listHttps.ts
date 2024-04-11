@@ -15,7 +15,7 @@ export const listHttps = async () => {
   const functionsEndpoints: string[][] = []
   for await (const file of https) {
     for await (const path of file.httpEndpoints) {
-      let endpoint = `https://${app.region}-${app.fbProjectId}.cloudfunctions.net/${path}`
+      let endpoint = `https://${app.region}-${app.projectId}.cloudfunctions.net/${path}`
       if (app.hasLoadBalancer) {
         const kebabcase = convertToKebabCase(path)
         endpoint = `https://${app.lbDomain}/${file.functionName}/${kebabcase}`

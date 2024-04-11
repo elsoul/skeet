@@ -9,12 +9,11 @@ export async function checkAi(
   options: SkeetAIOptions,
   logger: AiLog,
 ): Promise<void> {
-  const log = logger.text() as SkeetLog
+  console.log(chalk.blue('🔍 Checking Your Cloud Status...'))
+
   const aiOptions = {
     ai: (options.ai as AIType) || ('Gemini' as AIType),
   }
-
-  console.log('\n')
 
   console.log(chalk.blue('Skeet:'))
 

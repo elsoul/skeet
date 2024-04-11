@@ -1,5 +1,4 @@
 import inquirer from 'inquirer'
-import { importConfig } from '@/lib/files/importConfig'
 import { getFunctions } from '@/lib/files/getFunctions'
 import { deployWebApp } from '@/cli/deploy/deployWebApp'
 import { deployRules } from '@/cli/deploy/deployRules'
@@ -25,7 +24,7 @@ export const deploy = async () => {
   }
   if (functionsArray.length === 1) {
     await pnpmBuild(functionsArray[0].name)
-    await firebaseFunctionsDeploy(app.fbProjectId, functionsArray[0].name)
+    await firebaseFunctionsDeploy(app.projectId, functionsArray[0].name)
     return
   }
 
@@ -55,7 +54,7 @@ export const deploy = async () => {
         await deployCloudRunForSQL(service)
       } else {
         await pnpmBuild(service)
-        await firebaseFunctionsDeploy(config.app.fbProjectId, service)
+        await firebaseFunctionsDeploy(config.app.projectId, service)
       }
     }
   }

@@ -3,16 +3,11 @@
   "app": {
     "name": "skeet-app",
     "projectId": "skeet-app",
-    "fbProjectId": "skeet-app",
+    "projectId": "skeet-app",
     "region": "europe-west4",
     "nameServerDomain": "skeet-app.com",
     "loadBalancerDomain": "lb.skeet-app.com",
-    "appDomains": [
-      {
-        "name": "skeet-app-web",
-        "domain": "app.skeet-app.com"
-      }
-    ],
+    "appDomains": [],
     "hasLoadBalancer": false,
     "cloudStatus": "NOT_CREATED"
   },

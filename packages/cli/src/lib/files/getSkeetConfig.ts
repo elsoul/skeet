@@ -1,8 +1,6 @@
 import { readFile } from 'fs/promises'
 import { CONTAINER_REGIONS } from '@/config/region'
 import { execAsyncCmd } from '../execAsyncCmd'
-import { readOrCreateConfig } from '@/config/readOrCreateConfig'
-import { findSQLConfigByName } from './findSQLConfigByName'
 
 export const TYPE_PATH = './types'
 export const FUNCTIONS_PATH = './functions'
@@ -177,14 +175,13 @@ export const defaultProductionEnvArray = [
 
 export const getBuidEnvArray = async (
   projectId: string,
-  fbProjectId: string,
   databaseUrl: string,
   tz: string,
 ) => {
   return [
     'NO_PEER_DEPENDENCY_CHECK=1',
     `SKEET_GCP_PROJECT_ID=${projectId}`,
-    `SKEET_FB_PROJECT_ID=${fbProjectId}`,
+    `SKEET_FB_PROJECT_ID=${projectId}`,
     `TZ=${tz}`,
     `DATABASE_URL=${databaseUrl}`,
   ]

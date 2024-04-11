@@ -32,6 +32,7 @@
     "test": "vitest",
     "build": "pnpm -r build",
     "skeet": "run-p skeet:*",
+    "skeet:skeet-func": "pnpm -F skeet-func dev",
     "skeet:dev": "firebase emulators:start --import=./tmp/data --export-on-exit --inspect-functions --project $npm_package_projectId",
     "run:psql": "pnpm skeet docker psql",
     "shell": "firebase functions:shell --project $npm_package_projectId"
