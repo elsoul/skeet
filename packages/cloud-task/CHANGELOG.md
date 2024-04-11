@@ -1,5 +1,11 @@
 # @skeet-framework/cloud-task
 
+## 1.0.0
+
+### Major Changes
+
+- [#400](https://github.com/elsoul/skeet/pull/400) [`ac14eeb`](https://github.com/elsoul/skeet/commit/ac14eebb0a0a0eac80397420f7985d149aee94d3) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Add cloud task with token
+
 ## 0.4.4
 
 ### Patch Changes
