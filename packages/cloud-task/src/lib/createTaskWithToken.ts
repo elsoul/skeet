@@ -1,5 +1,6 @@
 import { v2beta3 } from '@google-cloud/tasks'
 import { Buffer } from 'buffer'
+import { GoogleAuth } from 'google-auth-library'
 
 const { CloudTasksClient } = v2beta3
 
@@ -12,6 +13,7 @@ const { CloudTasksClient } = v2beta3
  * @param {string} endpoint - The endpoint URL for the task.
  * @param {Record<string, any>} body - The body of the HTTP request.
  * @param {string} serviceAccountEmail - The service account email to use for the task.
+ * @param {string} cloudRunUrl - The Cloud Run URL to access the service.
  * @param {number} [inSeconds] - The schedule time for the task in seconds from now.
  * @returns {Promise<boolean>} - Indicates success or failure of task creation.
  * @throws {Error} - Throws an error if there is an issue creating the task.
@@ -24,9 +26,10 @@ const { CloudTasksClient } = v2beta3
  * const endpoint = 'https://your.endpoint.url'
  * const body = { key: 'value' }
  * const serviceAccountEmail = 'client@<project-id>.iam.gserviceaccount.com'
+ * const cloudRunUrl = 'https://your-cloud-run-endpoint'
  * const inSeconds = 60 // 1 minute from now
  *
- * const result await = createTask(project, location, queue, endpoint, body, inSeconds)
+ * const result await = createTaskWithToken(project, location, queue, endpoint, body, serviceAccountEmail, cloudRunUrl, inSeconds)
  * console.log(result)
  * ```
  */
@@ -38,15 +41,20 @@ export async function createTaskWithToken(
   endpoint: string,
   body: Record<string, any>,
   serviceAccountEmail: string,
+  cloudRunUrl: string,
   inSeconds?: number,
 ): Promise<boolean> {
   try {
+    const auth = new GoogleAuth()
+    const tokenClient = await auth.getIdTokenClient(cloudRunUrl)
+    const token = await tokenClient.idTokenProvider.fetchIdToken(cloudRunUrl)
     const client = new CloudTasksClient()
     const parent = client.queuePath(project, location, queue)
     const task = {
       httpRequest: {
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         httpMethod: 'POST',
         oidcToken: {
@@ -72,7 +80,7 @@ export async function createTaskWithToken(
     console.log(`Created task ${name}`)
     return true
   } catch (error) {
-    console.error(`Error in createTask: ${error}`)
+    console.error(`Error in createTaskWithToken: ${error}`)
     return false
   }
 }
