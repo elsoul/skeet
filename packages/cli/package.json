@@ -1,6 +1,6 @@
 {
   "name": "@skeet-framework/cli",
-  "version": "2.2.15",
+  "version": "2.2.16",
   "description": "Skeet CLI",
   "main": "dist/index.js",
   "module": "dist/index.js",
