@@ -1,5 +1,14 @@
 # base-functions
 
+## 1.1.6
+
+### Patch Changes
+
+- [#398](https://github.com/elsoul/skeet/pull/398) [`cb160a1`](https://github.com/elsoul/skeet/commit/cb160a11bf759d2af2e0b2736cf9c64a787dec7f) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet init
+
+- Updated dependencies [[`cb160a1`](https://github.com/elsoul/skeet/commit/cb160a11bf759d2af2e0b2736cf9c64a787dec7f)]:
+  - @skeet-framework/cloud-task@0.4.4
+
 ## 1.1.5
 
 ### Patch Changes

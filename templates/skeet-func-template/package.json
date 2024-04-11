@@ -1,7 +1,7 @@
 {
   "name": "@skeet-framework/skeet-func-template",
   "projectId": "skeet-framework",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Skeet Framework Base Template",
   "keywords": [
     "typescript",
