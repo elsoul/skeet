@@ -1,5 +1,12 @@
 # base-functions
 
+## 1.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`ac14eeb`](https://github.com/elsoul/skeet/commit/ac14eebb0a0a0eac80397420f7985d149aee94d3)]:
+  - @skeet-framework/cloud-task@1.0.0
+
 ## 1.1.6
 
 ### Patch Changes
