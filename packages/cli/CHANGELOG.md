@@ -1,5 +1,11 @@
 # @skeet-framework/cli
 
+## 2.2.17
+
+### Patch Changes
+
+- [`99123d9`](https://github.com/elsoul/skeet/commit/99123d96d405ebf664f3e31272bdf91cbd0b3037) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - invoke option
+
 ## 2.2.16
 
 ### Patch Changes
