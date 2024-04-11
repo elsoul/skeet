@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process'
 export const addSecret = async (key: string) => {
   try {
     const config = await readOrCreateConfig()
-    if (!config.app.fbProjectId) {
+    if (!config.app.projectId) {
       throw new Error('Project ID not found')
     }
     const cmd = [

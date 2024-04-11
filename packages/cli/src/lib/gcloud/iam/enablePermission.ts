@@ -1,4 +1,5 @@
 import { execAsync } from '@skeet-framework/utils'
+import { spawnSync } from 'child_process'
 
 export const runEnableAllPermission = async (projectId: string) => {
   await enableServiceListPermission(projectId, serviceList)
@@ -34,7 +35,7 @@ export const enablePermission = async (
     '--project',
     projectId,
   ]
-  return await execAsync(serviceEnableCmd.join(' '))
+  spawnSync(serviceEnableCmd.join(' '), { stdio: 'inherit', shell: true })
 }
 
 export const serviceList = [

@@ -1,8 +1,4 @@
-import inquirer from 'inquirer'
-import { projectQuestions } from '../../init/questionList'
-import { projectIdNotExists } from '@/lib/gcloud/billing/checkBillingAccount'
 import {
-  Logger,
   createServiceAccount,
   firebaseLogin,
   firebaseUseAdd,
@@ -20,34 +16,18 @@ import chalk from 'chalk'
 import { updateFirebaserc } from '@/lib/files/updateFirebaserc'
 import { updateSkeetCloudConfigCloudStatus } from '../updateSkeetCloudConfigCloudStatus'
 
-type initialParams = {
-  projectId: string
-  fbProjectId: string
-  region: string
-}
-
-export const initFirebaseProject = async () => {
-  const { projectId, fbProjectId, region } =
-    await inquirer.prompt<initialParams>(await projectQuestions())
-  const isProjectExists = await projectIdNotExists(projectId)
-  if (!isProjectExists) {
-    Logger.projectIdNotExistsError(projectId)
-    return
-  }
-
-  await updateFirebaserc(fbProjectId)
+export const initFirebaseProject = async (
+  projectId: string,
+  region: string,
+) => {
+  await updateFirebaserc(projectId)
 
   // Setup Firebase Project
   await firebaseLogin()
-  await firebaseUseAdd(fbProjectId)
-  await addProjectRegionToSkeetOptions(
-    region,
-    projectId,
-    fbProjectId,
-    DEFAULT_FUNCTION_NAME,
-  )
-  const defaultAppDisplayName = fbProjectId
-  await addFirebaseApp(fbProjectId, defaultAppDisplayName)
+  await firebaseUseAdd(projectId)
+  await addProjectRegionToSkeetOptions(region, projectId, DEFAULT_FUNCTION_NAME)
+  const defaultAppDisplayName = projectId
+  await addFirebaseApp(projectId, defaultAppDisplayName)
   const config = await readOrCreateConfig()
   const spinner = new Spinner(chalk.blue('🔨 Initializing Project...') + ` %s`)
   console.log('\n')

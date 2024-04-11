@@ -61,6 +61,7 @@ Options:
   --repo      Configure Github Repo/Actions (default: false)
   --vpn       Setup Cloud VPN (default: false)
   --lb        Setup Load Balancer (default: false)
+  --iam       Setup IAM (default: false)
   -h, --help  display help for command
 
 Usage: skeet login [options]
@@ -186,7 +187,6 @@ Options:
   -h, --help      display help for command
 
 Commands:
-  ai              Setup AI for Google Cloud Platform
   init            Setup IAM for Google Cloud Platform
   pull            Download IAM Key for Google Cloud Platform path:
                   ./keypair.json

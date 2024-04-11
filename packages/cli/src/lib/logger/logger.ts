@@ -203,10 +203,10 @@ Go To : http://localhost:4000`
   }
 
   export const confirmFirebaseSetup = async (
-    fbProjectId: string,
+    projectId: string,
     template: string,
   ) => {
-    Logger.confirmIfFirebaseSetupLog(fbProjectId, template)
-    await questionList.checkIfFirebaseSetup(fbProjectId)
+    Logger.confirmIfFirebaseSetupLog(projectId, template)
+    await questionList.checkIfFirebaseSetup(projectId)
   }
 }

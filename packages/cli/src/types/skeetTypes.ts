@@ -14,7 +14,7 @@ export type SkeetOptions = {
   name: string
   projectId: string
   region: string
-  fbProjectId: string
+  projectId: string
   appDomain: string
 }
 
@@ -33,7 +33,7 @@ export type SkeetCloudConfig = {
 export type AppConfig = {
   name: string
   projectId: string
-  fbProjectId: string
+  projectId: string
   template: string
   region: string
   appDomain: string

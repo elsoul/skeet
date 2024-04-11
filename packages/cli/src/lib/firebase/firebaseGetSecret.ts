@@ -8,7 +8,7 @@ export const firebaseGetSecret = async (secretKey: string) => {
     console.log(chalk.yellow('⚠️ secretKey must be uppercase letters only.'))
     return null
   }
-  const cmd = `firebase functions:secrets:access ${secretKey} --project ${config.app.fbProjectId}`
+  const cmd = `firebase functions:secrets:access ${secretKey} --project ${config.app.projectId}`
   const result = await execAsync(cmd)
   if (result.stdout == null || result.stdout.trim() === '') {
     console.log(chalk.yellow('⚠️ secretKey not found.'))

@@ -19,7 +19,7 @@ export const deployCommands = async () => {
         const methodName = options.function.split(':')[1]
         await pnpmBuild(functionName)
         await firebaseFunctionsDeploy(
-          app.fbProjectId,
+          app.projectId,
           functionName,
           `functions:${functionName}:${methodName}`,
         )

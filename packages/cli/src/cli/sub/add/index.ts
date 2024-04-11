@@ -211,8 +211,8 @@ export const addSubCommands = async () => {
         {
           type: 'input',
           name: 'queueName',
-          message: 'Enter Secret Key',
-          default: 'API_KEY',
+          message: 'Enter Task Queue Name',
+          default: 'check-validator',
         },
       ])
       const { app } = await readOrCreateConfig()

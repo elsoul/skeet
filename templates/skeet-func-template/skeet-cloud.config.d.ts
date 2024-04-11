@@ -5,8 +5,9 @@ export type SkeetCloudStatusType =
   | 'NOT_CREATED'
   | 'PROJECT_CREATED'
   | 'FUNCTIONS_CREATED'
+  | 'GITHUB_ACTIONS_CREATED'
   | 'VPN_CREATED'
-  | 'RUNNING'
+  | 'LOAD_BALANCER_CREATED'
 
 export type LangType = 'en' | 'ja'
 
@@ -24,7 +25,7 @@ export type SkeetCloudConfig = {
 export type AppConfig = {
   name: string
   projectId: string
-  fbProjectId: string
+  projectId: string
   region: string
   nameServerDomain: string
   loadBalancerDomain: string
