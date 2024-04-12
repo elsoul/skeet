@@ -2,7 +2,6 @@ import chalk from 'chalk'
 import { Spinner } from 'cli-spinner'
 import { spinnerPattern } from './spinnerList'
 import { questionList } from '@/cli/init/questionList'
-import { SkeetTemplateBackend } from '@/types/skeetTypes'
 
 export module Logger {
   export const successHex = chalk.hex('#39A845')
@@ -98,37 +97,17 @@ $ skeet ai --help`
     console.log(greyHex(text))
   }
 
-  export const welcomText = (appName: string, template: string) => {
+  export const welcomText = (appName: string) => {
     const title = warningHex(
       '\n⚡⚡⚡ Buidl TypeScript Fullstack App Fast ⚡⚡⚡',
     )
-    let text = template.includes('GraphQL')
-      ? `
+    const text = `$ skeet new
 $ cd ${appName}
-$ skeet docker psql
+$ skeet init
 $ skeet s
-Go To : http://127.0.0.1:4000/`
-      : `
-$ cd ${appName}
-$ skeet s
-Go To : http://127.0.0.1:4000/`
+View Emulator UI at : ${chalk.underline('http://127.0.0.1:4000/')}`
 
     console.log(title)
-    if (template === SkeetTemplateBackend.GraphQL) {
-      text = `
-      $ cd ${appName}
-      $ skeet docker psql
-      $ skeet s
-      Go To : http://localhost:3000/graphql
-          `
-    }
-    if (template === 'install') {
-      text = `
-$ skeet create testApp
-$ cd testApp
-$ skeet s
-Go To : http://localhost:4000`
-    }
     console.log(greyHex(text))
   }
 
@@ -138,7 +117,7 @@ Go To : http://localhost:4000`
   Why?  - OpenSouce Software Comunities should be deserved more 💎
   How?  - Incentivize for OpenSource Software Developments 💰
   What? - Play Game as Dev / Degen / Investor 🛠️
-  Epics Beta: https:/app.epics.dev/
+  Epics Beta: ${chalk.underline('https:/app.epics.dev/')}
   `
     console.log(successHex(text))
   }

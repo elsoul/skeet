@@ -18,14 +18,14 @@ export const init = async () => {
     await projectQuestions(),
   )
   // Initialize Firebase Project - cloudStatus: 'PROJECT_CREATED'
-  // await firebaseCreateProject(projectId)
-  // const planChanged = await confirmIfContinue(
-  //   `Did you update your firebase plan to Blaze?`,
-  // )
-  // if (!planChanged) {
-  //   console.log('Please update your firebase plan to Blaze to continue.')
-  //   process.exit(1)
-  // }
+  await firebaseCreateProject(projectId)
+  const planChanged = await confirmIfContinue(
+    `Did you update your firebase plan to Blaze?`,
+  )
+  if (!planChanged) {
+    console.log('Please update your firebase plan to Blaze to continue.')
+    process.exit(1)
+  }
   await initFirebaseProject(projectId, region)
 
   // Deploy Firebase Functions(skeet-func) - cloudStatus: 'FUNCTIONS_CREATED'
