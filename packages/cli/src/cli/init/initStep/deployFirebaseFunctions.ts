@@ -2,6 +2,7 @@ import { readOrCreateConfig } from '@/config/readOrCreateConfig'
 import { execAsync } from '@skeet-framework/utils'
 import { spawnSync } from 'node:child_process'
 import { updateSkeetCloudConfigCloudStatus } from '../../init/updateSkeetCloudConfigCloudStatus'
+import chalk from 'chalk'
 
 export const deployFirebaseFunctions = async () => {
   const config = await readOrCreateConfig()
@@ -12,9 +13,11 @@ export const deployFirebaseFunctions = async () => {
   const cmd2 = `firebase functions:list --project ${config.app.projectId}`
   const { stdout } = await execAsync(cmd2)
   if (stdout.includes('root')) {
-    console.log(
-      '🚀 Deployed Your First Firebase Functions!Please Call Skeet AI with the following command:\n\n$ skeet ai',
+    console.log('🚀 Deployed Your First Firebase Functions!\n')
+    const content = chalk.white(
+      `https://${config.app.region}-${config.app.projectId}.cloudfunctions.net/root`,
     )
+    console.log(`🔗 Your Function URL: ${chalk.underline(content)}\n\n`)
     await updateSkeetCloudConfigCloudStatus('FUNCTIONS_CREATED')
     return true
   } else {

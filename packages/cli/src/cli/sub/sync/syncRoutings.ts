@@ -16,7 +16,7 @@ export const syncRoutings = async () => {
   await setGcloudProject(app.projectId)
   const files = await getHttpRoutings()
   const paths = []
-  console.log(chalk.green('⏳ Syncing routings'))
+  console.log(chalk.white('⏳ Syncing routings'))
   for (const file of files) {
     for (const methoName of file.httpEndpoints) {
       const methodNameKebab = convertToKebabCase(methoName)

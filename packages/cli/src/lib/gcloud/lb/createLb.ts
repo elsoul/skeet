@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { execAsync } from '@skeet-framework/utils'
 
 export const createLb = async (projectId: string, appName: string) => {
   const appConf = getNetworkConfig(projectId, appName)
@@ -14,5 +14,5 @@ export const createLb = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  return await execAsyncCmd(shCmd)
+  return await execAsync(shCmd.join(' '))
 }

@@ -9,6 +9,9 @@ import inquirer from 'inquirer'
 import { getZone } from '../lb'
 import { Logger } from '@/lib/logger'
 import { spawnSync } from 'node:child_process'
+import { writeFile } from 'node:fs/promises'
+import { SKEET_CONFIG_CLOUD_PATH } from '@/config/config'
+import { syncRoutings } from '@/cli/sub/sync/syncRoutings'
 
 export const createLoadBalancer = async () => {
   try {
@@ -25,7 +28,7 @@ export const createLoadBalancer = async () => {
       domainAnswer.lbDomain,
       domainAnswer.nsDomain,
     )
-    spawnSync(`skeet sync routings`, { shell: true, stdio: 'inherit' })
+    await syncRoutings()
     await setupArmor(skeetConfig.app.projectId, skeetConfig.app.name)
     await updateArmorCloudConifg()
     const ips = await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
@@ -50,4 +53,5 @@ const updateArmorCloudConifg = async () => {
       },
     ],
   })
+  await writeFile(SKEET_CONFIG_CLOUD_PATH, JSON.stringify(config, null, 2))
 }

@@ -29,6 +29,7 @@ import { build } from 'esbuild'
       'cli-spinner',
       'cli-table3',
       '@skeet-framework/ai',
+      'cli-progress',
     ],
   })
   console.log('Build complete ⭐️')

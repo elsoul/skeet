@@ -1,6 +1,5 @@
-import { execAsyncCmd } from '@/lib/execAsyncCmd'
 import { getFunctionInfo, getNetworkConfig } from '@/lib'
-import { spawnSync } from 'node:child_process'
+import { execAsync } from '@skeet-framework/utils'
 
 export const addBackend = async (
   projectId: string,
@@ -28,5 +27,5 @@ export const addBackend = async (
     '--project',
     projectId,
   ]
-  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
+  return await execAsync(shCmd.join(' '))
 }

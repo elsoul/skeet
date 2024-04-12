@@ -1,16 +1,7 @@
-import { spawnSync } from 'node:child_process'
+import { execAsync } from '@skeet-framework/utils'
 
 export const runAddAllRole = async (projectId: string, appName: string) => {
-  await addAllRoles(projectId, appName, roleList)
-}
-
-export const runAiRole = async (projectId: string, appName: string) => {
-  const aiRoleList = [
-    'roles/aiplatform.admin',
-    'roles/cloudtranslate.admin',
-    'roles/iam.serviceAccountUser',
-  ]
-  await addAllRoles(projectId, appName, aiRoleList)
+  return await addAllRoles(projectId, appName, roleList)
 }
 
 export const addAllRoles = async (
@@ -18,9 +9,11 @@ export const addAllRoles = async (
   appName: string,
   roleList: Array<string>,
 ) => {
+  const results = []
   for await (const roleName of roleList) {
-    await addRole(projectId, appName, roleName)
+    results.push(await addRole(projectId, appName, roleName))
   }
+  return results
 }
 
 export const addRole = async (
@@ -38,7 +31,7 @@ export const addRole = async (
     '--role',
     roleName,
   ]
-  spawnSync(addRoleCmd[0], addRoleCmd.slice(1), { stdio: 'inherit' })
+  return await execAsync(addRoleCmd.join(' '))
 }
 
 export const roleList = [

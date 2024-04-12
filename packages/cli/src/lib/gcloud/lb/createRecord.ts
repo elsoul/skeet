@@ -1,4 +1,4 @@
-import { spawnSync } from 'node:child_process'
+import { execAsync } from '@skeet-framework/utils'
 
 export const createRecord = async (
   projectId: string,
@@ -27,7 +27,7 @@ export const createRecord = async (
     '--project',
     projectId,
   ]
-  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
+  return await execAsync(shCmd.join(' '))
 }
 
 export const createCaaRecords = async (

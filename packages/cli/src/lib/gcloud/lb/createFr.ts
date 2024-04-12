@@ -1,5 +1,5 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { spawnSync } from 'node:child_process'
+import { execAsync } from '@skeet-framework/utils'
 
 export const createFr = async (projectId: string, appName: string) => {
   const appConf = getNetworkConfig(projectId, appName)
@@ -23,5 +23,5 @@ export const createFr = async (projectId: string, appName: string) => {
     '--project',
     projectId,
   ]
-  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
+  return await execAsync(shCmd.join(' '))
 }

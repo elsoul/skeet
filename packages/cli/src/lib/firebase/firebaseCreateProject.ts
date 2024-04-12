@@ -35,8 +35,10 @@ export const firebaseCreateProject = async (projectId: string) => {
 
 To update the plan, visit the following link 👇
 `
-      const link = chalk.white(
-        `https://console.firebase.google.com/u/0/project/${projectId}/usage/details`,
+      const link = chalk.underline(
+        chalk.white(
+          `https://console.firebase.google.com/u/0/project/${projectId}/usage/details\n`,
+        ),
       )
       console.log(chalk.yellow(announce))
       console.log(link)

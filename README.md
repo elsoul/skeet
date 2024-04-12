@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://skeet.dev/en/">
-    <img src="https://storage.googleapis.com/skeet-assets/imgs/v2/SkeetV2EN.jpg" alt="Skeet" />
+    <img src="https://user-images.githubusercontent.com/20677823/221215449-93a7b5a8-5f33-4da8-9dd4-d0713db0a280.png" alt="Skeet" />
   </a>
 
   <a href="https://twitter.com/intent/follow?screen_name=ELSOUL_LABO2">
@@ -39,7 +39,7 @@ Developers can quickly start building functional apps and publish them in the cl
 
 ## Overall Architecture Diagram
 
-![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/v2/SkeetArchitectureV2.jpg)
+![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/SkeetArchitecture.png)
 
 Skeet is an open-source framework for serverless app development crafted in TypeScript.
 
@@ -56,12 +56,13 @@ Currently, it supports development on Google Cloud and Firebase.
 Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
 
 ```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.1)"
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.4)"
 ```
 
-If you already have pnpm installed, you can install Skeet CLI with pnpm:
+If you already have Node.js installed, you can install Skeet CLI with npm:
 
 ```bash
+$ pnpm add -g firebase-tools
 $ pnpm add -g @skeet-framework/cli
 ```
 
@@ -73,11 +74,11 @@ You will need OpenAI API Key to use OpenAI.
 Use the following command to enable VertexAI:
 
 ```bash
-$ skeet iam ai
+$ skeet init
 ```
 
 ```bash
-$ skeet ai
+$ skeet ai --help
 ```
 
 or you can choose AI engine by passing options
@@ -97,27 +98,22 @@ YouTube Video Link: https://www.youtube.com/watch?v=e7J5HDhtpE4
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
-- [Node.js](https://nodejs.org/ja/) ^20.0.0
-- [PNPM](https://pnpm.io) ^8.0.0
+- [Node.js](https://nodejs.org/ja/) ^20.11.0
+- [PNPM](https://pnpm.io/) ^8.0.0
 - [GitHub CLI](https://cli.github.com/) ^2.29.0
 
 For Firebase Template
 
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
-- [Firebase CLI](https://firebase.google.com/docs/cli) ^13.0.0
+- [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0
 - [Java](https://www.java.com/en/download/)
 
 ## 📗 Usage 📗
 
-Install PNPM
+### ① Install dependencies
 
 ```bash
 $ curl -fsSL https://get.pnpm.io/install.sh | sh -
-```
-
-### ① Install Skeet/Firebase CLI
-
-```bash
 $ pnpm add -g @skeet-framework/cli
 $ pnpm add -g firebase-tools
 ```
@@ -125,42 +121,63 @@ $ pnpm add -g firebase-tools
 ### ② Create Skeet App
 
 ```bash
-$ skeet create <appName>
+$ skeet new
+? Enter the name of the app (skeet-app)
 ```
 
-You can choose a template for the frontend and backend.
+### ③ Initialize Firebase/Google Cloud Project
 
-- [Next.js (React) with Firestore template](https://github.com/elsoul/skeet-next)
-- [Expo (React Native) with Firestore template](https://github.com/elsoul/skeet-app)
-- [Solana Mobile Stack (Expo) + Web (Next.js) with Firestore template](https://github.com/elsoul/skeet-solana-mobile-stack)
-- [Backend Only - Firestore template](https://github.com/elsoul/skeet-functions-only)
+```bash
+$ skeet init
+Initializing Cloud Configurations...
+? What's your GCP Project ID (skeet-framework)
+```
+
+### ④ Call Your AI Assistant
+
+Now you can call your AI Assistant to create a new function, method, typedoc, and more.
+
+```bash
+$ skeet ai --help
+```
+
+or You can call check command to check your configurations
+
+```bash
+$ skeet check
+```
+
+## Add Build-in Template
+
+You can add a build-in template to your App.
+
+```bash
+$ skeet add --help
+```
 
 ![Solana Mobile Stack](https://storage.googleapis.com/skeet-assets/animation/SkeetSolanaMobileStack.gif)
 
 ![Chatbot](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
 
-### ③ Run Skeet App
+### Run Skeet App
 
 ```bash
 $ cd <appName>
 $ skeet s
 ```
 
-or
+### Test Firebase Functions Endpoint
 
-put options to run only backend, frontend or functions
+To call Firebase Functions Endpoint, you can use the following command:
+
+e.g. Call root() function
 
 ```bash
-Usage: skeet server|s [options]
-
-Run Skeet App
-
-Options:
-  -b, --backend    Run Backend only
-  -f, --functions  Run Firebase Functions only
-  -w, --web        Run Web App only
-  -h, --help       display help for command
+$ skeet c
+firebase > root()
 ```
+
+## Development Environment
 
 Now you have both frontend and backend running locally ⭐️
 
@@ -169,57 +186,6 @@ Now you have both frontend and backend running locally ⭐️
 📲 Frontend(Expo) - [http://localhost:19006/](http://localhost:19006/)
 
 💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
-
-## Launching Skeet AI Assistant
-
-The Skeet AI Assistant is an interactive tool designed to handle various queries.
-
-```bash
-$ skeet ai --help
-AI Playground
-
-Options:
-  -v, --vertex                   Vertex AI
-  -o, --openai                   OpenAI
-  -m, --model <string>           Model
-  -token, --token <number>       Max Tokens
-  -temp, --temperature <number>  Temperature
-  -h, --help                     display help for command
-```
-
-Upon launching, you'll see a prompt like the one below. Try asking it something:
-
-```bash
-skeet ai --openai
-╔═════════════╤════════╗
-│ Option      │ Value  │
-╟─────────────┼────────╢
-│ AI Type     │ OpenAI │
-╟─────────────┼────────╢
-│ Model       │ gpt-4  │
-╟─────────────┼────────╢
-│ Max Token   │ 1000   │
-╟─────────────┼────────╢
-│ Temperature │ 0      │
-╚═════════════╧════════╝
-
-🤖 Skeet AI Mode
- `$ <mode>` to change AI mode 🤖
-
-$ prisma
-$ typedoc
-$ translate
-$ firestore
-$ function
-$ method
-$ help
-$ q
-
-OpenAI is selected 🤖 (type 'q' to quit)
-? What can I do for you?
-
-You:
-```
 
 ## Skeet Document
 
@@ -241,11 +207,10 @@ Commands:
   create [options] <appName>   Create Skeet Framework App
   server|s [options]           Run Skeet App
   deploy [options]             Deploy Skeet APP to Firebase
-  init [options]               Initialize Google Cloud Setups for Skeet APP
+  init [options]               Initialize Google Cloud Setups
   login                        Skeet Login Command - Create Firebase Login Token
   curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
   g|generate                   Skeet Generate Comannd
-  release|r [options]          Release a new version
   log [options]                Deploy Skeet APP to Firebase
   docker                       Docker commands
   db                           Database commands
@@ -254,9 +219,12 @@ Commands:
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
   get                          Get Skeet App List
-  ai [options]                 AI Playground
+  ai [options]                 Call Skeet AI Assistant
   config                       Config commands
   run [options]                Run commands
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
   help [command]               display help for command
 ```
 
@@ -271,17 +239,15 @@ Commands:
 - [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
 - [Prisma - ORM](https://www.prisma.io/)
 - [TypeScript - TypeCheck](https://www.typescriptlang.org/)
-- [Jest - Test](https://jestjs.io/)
+- [Vitest - Test](https://vitest.dev/)
 - [ESLint - Linter](https://eslint.org/)
 - [Prettier - Formatter](https://prettier.io/)
 - [Next.js (React) - Web Frontend(SSG)](https://nextjs.org/)
 - [Expo (React Native) - Mobile App](https://expo.dev/)
-- [Hono - API Server](https://hono.dev/)
-- [Neon - Serverless Postgres](https://neon.tech/)
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/skeet-cli This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/skeet This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 

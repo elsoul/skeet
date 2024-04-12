@@ -166,6 +166,9 @@ importers:
       chalk-pipe:
         specifier: 6.0.0
         version: 6.0.0
+      cli-progress:
+        specifier: 3.12.0
+        version: 3.12.0
       cli-spinner:
         specifier: 0.2.10
         version: 0.2.10
@@ -200,6 +203,9 @@ importers:
       '@stdlib/string-percent-encode':
         specifier: 0.2.1
         version: 0.2.1
+      '@types/cli-progress':
+        specifier: ^3.11.5
+        version: 3.11.5
       '@types/cli-spinner':
         specifier: 0.2.3
         version: 0.2.3
@@ -605,6 +611,9 @@ importers:
       '@skeet-framework/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      dotenv:
+        specifier: 16.4.5
+        version: 16.4.5
       firebase-admin:
         specifier: 12.0.0
         version: 12.0.0
@@ -5117,6 +5126,12 @@ packages:
   /@types/caseless@0.12.5:
     resolution: {integrity: sha512-hWtVTC2q7hc7xZ/RLbxapMvDMgUnDvKvMOpKal4DrMyfGBUfB1oKaZlIRr6mJL+If3bAP6sV/QneGzF6tJjZDg==}
 
+  /@types/cli-progress@3.11.5:
+    resolution: {integrity: sha512-D4PbNRbviKyppS5ivBGyFO29POlySLmA2HyUFE4p5QGazAMM3CwkKWcvTl8gvElSuxRh6FPKL8XmidX873ou4g==}
+    dependencies:
+      '@types/node': 20.12.5
+    dev: true
+
   /@types/cli-spinner@0.2.3:
     resolution: {integrity: sha512-TMO6mWltW0lCu1de8DMRq9+59OP/tEjghS+rs8ZEQ2EgYP5yV3bGw0tS14TMyJGqFaoVChNvhkVzv9RC1UgX+w==}
     dependencies:
@@ -7310,6 +7325,13 @@ packages:
     dependencies:
       restore-cursor: 4.0.0
     dev: true
+
+  /cli-progress@3.12.0:
+    resolution: {integrity: sha512-tRkV3HJ1ASwm19THiiLIXLO7Im7wlTuKnvkYaTkyoAPefqjNg7W7DHKUlGRxy9vxDvbyCYQkQozvptuMkGCg8A==}
+    engines: {node: '>=4'}
+    dependencies:
+      string-width: 4.2.3
+    dev: false
 
   /cli-spinner@0.2.10:
     resolution: {integrity: sha512-U0sSQ+JJvSLi1pAYuJykwiA8Dsr15uHEy85iCJ6A+0DjVxivr3d+N2Wjvodeg89uP5K6TswFkKBfAD7B3YSn/Q==}
@@ -16810,7 +16832,7 @@ packages:
       debug: 4.3.4(supports-color@5.5.0)
       globrex: 0.1.2
       tsconfck: 3.0.3(typescript@5.4.3)
-      vite: 5.2.6(@types/node@20.11.25)
+      vite: 5.2.6(@types/node@20.11.30)
     transitivePeerDependencies:
       - supports-color
       - typescript

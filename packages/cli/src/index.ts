@@ -22,6 +22,9 @@ import { newCommands } from './cli/new'
 import { consoleCommands } from './cli/console'
 import { checkCommands } from './cli/check'
 import { initCommands } from './cli'
+import chalk from 'chalk'
+import { Spinner } from 'cli-spinner'
+import { sleep } from './utils/time'
 
 export const SKEET_CONFIG_PATH = './skeet-cloud.config.json'
 export const DEFAULT_FUNCTION_NAME = 'skeet'
@@ -61,11 +64,34 @@ async function main() {
     await newCommands()
     await consoleCommands()
     await checkCommands()
-    // program
-    //   .command('test')
-    //   .description('Run tests')
-    //   .action(async () => {
-    //   })
+    program
+      .command('test')
+      .description('Run tests')
+      .action(async () => {
+        // Show 7 colors of chalk in terminal with spinner
+        // await sleep(2) for each color
+        const spinner = new Spinner('%s')
+        spinner.setSpinnerString(18)
+        spinner.start()
+        spinner.setSpinnerTitle(chalk.blue('Setting GCP project...'))
+        await sleep(2000)
+        spinner.setSpinnerTitle(chalk.green('Getting network configuration...'))
+        await sleep(2000)
+        spinner.setSpinnerTitle(chalk.red('Creating fixed IP...'))
+        await sleep(2000)
+        spinner.setSpinnerTitle(chalk.yellow('Creating NEG...'))
+        await sleep(2000)
+        spinner.setSpinnerTitle(chalk.magenta('Creating backend service...'))
+        await sleep(2000)
+        spinner.setSpinnerTitle(
+          chalk.cyan('Adding backend service to load balancer...'),
+        )
+        await sleep(2000)
+        spinner.setSpinnerTitle(chalk.white('Creating load balancer...'))
+        await sleep(2000)
+        spinner.stop()
+        console.log('Test completed')
+      })
 
     program.parseAsync(process.argv)
   } catch (error) {

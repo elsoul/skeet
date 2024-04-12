@@ -1,6 +1,6 @@
 import { GCP_IP_RANGE } from '@/config/config'
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
-import { spawnSync } from 'node:child_process'
+import { execAsync } from '@skeet-framework/utils'
 
 export const createSubnet = async (
   projectId: string,
@@ -22,5 +22,5 @@ export const createSubnet = async (
     '--region',
     region,
   ]
-  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
+  return await execAsync(shCmd.join(' '))
 }

@@ -30,6 +30,7 @@ Commands:
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
   check                        Check Cloud Configurations
+  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet create [options] <appName>
@@ -103,6 +104,7 @@ Commands:
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
   check                        Check Cloud Configurations
+  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet [options] [command]
@@ -137,6 +139,7 @@ Commands:
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
   check                        Check Cloud Configurations
+  test                         Run tests
   help [command]               display help for command
 
 Usage: skeet log [options]
@@ -285,6 +288,13 @@ Check Cloud Configurations
 Options:
   -h, --help  display help for command
 
+Usage: skeet test [options]
+
+Run tests
+
+Options:
+  -h, --help  display help for command
+
 Usage: skeet [options] [command]
 
 CLI for Skeet - Full-stack TypeScript Serverless framework
@@ -317,5 +327,6 @@ Commands:
   new|n [options]              Create Skeet Framework App
   console|c                    Call Firebase Console to Test Functions
   check                        Check Cloud Configurations
+  test                         Run tests
   help [command]               display help for command
 `

@@ -1,6 +1,6 @@
 import { getNetworkConfig } from '@/lib/files/getSkeetConfig'
 import { execAsyncCmd } from '@/lib/execAsyncCmd'
-import { spawnSync } from 'node:child_process'
+import { execAsync } from '@skeet-framework/utils'
 
 export const createZone = async (
   projectId: string,
@@ -23,7 +23,7 @@ export const createZone = async (
     '--project',
     projectId,
   ]
-  spawnSync(shCmd[0], shCmd.slice(1), { stdio: 'inherit', shell: true })
+  return await execAsync(shCmd.join(' '))
 }
 
 export const getZone = async (projectId: string, appName: string) => {

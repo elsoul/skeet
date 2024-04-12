@@ -20,9 +20,8 @@ export const initFirebaseProject = async (
   projectId: string,
   region: string,
 ) => {
-  await updateFirebaserc(projectId)
-
   // Setup Firebase Project
+  await updateFirebaserc(projectId)
   await firebaseLogin()
   await firebaseUseAdd(projectId)
   await addProjectRegionToSkeetOptions(region, projectId, DEFAULT_FUNCTION_NAME)
@@ -36,11 +35,11 @@ export const initFirebaseProject = async (
   await runEnableAllPermission(projectId)
   await runAddAllRole(projectId, config.app.name)
   await updateSkeetCloudConfigCloudStatus('PROJECT_CREATED')
-  await writeFile(SKEET_CONFIG_CLOUD_PATH, JSON.stringify(config, null, 2))
+  spinner.stop()
+  console.log(`Your Cloud Project has been initialized successfully! 🎉`)
   const aiRegion = region.includes('eu') ? 'europe-west4' : region
   await writeFile(
     '.env',
     `GCP_PROJECT_ID=${projectId}\nGCP_LOCATION=${aiRegion}\n`,
   )
-  spinner.stop()
 }

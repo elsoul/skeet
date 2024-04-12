@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+import { execAsync } from '@skeet-framework/utils'
 
 export const createServiceAccount = async (
   projectId: string,
@@ -15,7 +15,5 @@ export const createServiceAccount = async (
     '--project',
     projectId,
   ]
-  spawnSync(createServiceAccountCmd[0], createServiceAccountCmd.slice(1), {
-    stdio: 'inherit',
-  })
+  return await execAsync(createServiceAccountCmd.join(' '))
 }
