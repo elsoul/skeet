@@ -14,7 +14,7 @@ export const firebaseCreateProject = async (projectId: string) => {
       '--display-name',
       projectId,
     ]
-    const spinner = new Spinner(chalk.blue('🔮 Creating Project...') + ` %s`)
+    const spinner = new Spinner(chalk.white('🔮 Creating Project...') + ` %s`)
     spinner.start()
     const result = await execAsync(shCmd.join(' '))
     spinner.stop()

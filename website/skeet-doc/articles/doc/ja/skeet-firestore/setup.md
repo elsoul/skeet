@@ -38,43 +38,26 @@ Skeet Framework は SQL と NoSQL を組み合わせてアプリを構築でき�
 ### ① パッケージのインストール
 
 Skeet CLI は Skeet フレームワークを効率的に利用するためのコマンドラインツールです。以下のコマンドでインストールできます。
-すでに npm がインストールされている場合は、以下のコマンドでインストールできます。
+すでに pnpm がインストールされている場合は、以下のコマンドでインストールできます。
 
 ```bash
-$ npm i -g @skeet-framework/cli
-$ npm install -g firebase-tools
+$ pnpm i -g @skeet-framework/cli
+$ pnpm install -g firebase-tools
 ```
 
-npm がインストールされていない場合は、以下のコマンドでインストールできます。
+pnpm がインストールされていない場合は、以下のコマンドでインストールできます。
 (このコマンドは、pnpm, Java, @skeet-framework/cli をインストールし .profile/.zshrc を編集します。)
 
 ```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.1)"
-$ npm install -g firebase-tools
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.5)"
+$ pnpm install -g firebase-tools
 ```
 
 ### ② Skeet アプリの作成
 
 ```bash
-$ skeet create <appName>
+$ skeet new
 ```
-
-![Skeet Create Select Template](/doc-images/cli/skeet-create-list.png)
-
-フロントエンドのテンプレートを選択できます。
-
-- [Next.js (React)](https://nextjs.org/)
-- [Expo (React Native)](https://expo.dev/)
-
-※ 本チュートリアルでは Expo 版を利用していますが、Next.js 版を利用しても同じ手順で利用可能です。
-
-また、オプションをつけることで、バックエンドのみのテンプレートを選択できます。
-
-```bash
-$ skeet create <appName> --backend
-```
-
-![Skeet Create Select Template](/doc-images/cli/skeet-create-backend-list.png)
 
 ### ③ ローカルで起動
 
@@ -83,11 +66,7 @@ $ cd <appName>
 $ skeet s
 ```
 
-Skeet App フロントエンドと Firebase エミュレーターが起動します。
-
-📲 Frontend(Next.js) - [http://localhost:4200/](http://localhost:4200/)
-
-📲 Frontend(Expo) - [http://localhost:19006/](http://localhost:19006/)
+Firebase エミュレーターが起動します。
 
 💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
 

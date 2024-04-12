@@ -65,7 +65,7 @@ export const skeetCreate = async (appName: string, template: string) => {
 
   await generateInitFiles(appName, template)
   Logger.skeetAA()
-  Logger.welcomText(appName, template)
+  Logger.welcomText(appName)
   const nmb = Math.floor(Math.random() * 4 + 1)
   if (nmb === 4) {
     Logger.cmText()

@@ -56,7 +56,7 @@ Currently, it supports development on Google Cloud and Firebase.
 Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
 
 ```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.4)"
+$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.5)"
 ```
 
 If you already have Node.js installed, you can install Skeet CLI with npm:

@@ -11,7 +11,7 @@ export const logCommands = async () => {
     .action(async (options) => {
       if (options.AA) {
         Logger.skeetAA()
-        Logger.welcomText('', 'install')
+        Logger.welcomText('<your-app>')
       } else if (options.function) {
         const { app } = await importConfig()
         const functionName = options.function
