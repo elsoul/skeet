@@ -20,6 +20,7 @@ void (async () => {
       'firebase-functions',
       'dotenv',
       '@skeet-framework/cloud-task',
+      '@skeet-framework/ai'
     ],
   })
 
@@ -42,6 +43,7 @@ void (async () => {
       'firebase-functions',
       'dotenv',
       '@skeet-framework/cloud-task',
+      '@skeet-framework/ai'
     ],
     tsconfig: './tsconfig.json',
   })
