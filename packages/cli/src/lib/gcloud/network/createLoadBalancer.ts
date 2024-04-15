@@ -23,7 +23,7 @@ export const createLoadBalancer = async () => {
       domainAnswer.lbDomain,
       DEFAULT_FUNCTION_NAME,
     )
-    await setupLoadBalancer(
+    const lbIp = await setupLoadBalancer(
       skeetConfig,
       domainAnswer.lbDomain,
       domainAnswer.nsDomain,
@@ -32,7 +32,7 @@ export const createLoadBalancer = async () => {
     await setupArmor(skeetConfig.app.projectId, skeetConfig.app.name)
     await updateArmorCloudConifg()
     const ips = await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
-    Logger.dnsSetupLog(ips)
+    Logger.dnsSetupLog(ips, lbIp)
     return true
   } catch (error) {
     throw new Error(`createLoadBalancer error: ${error}`)
