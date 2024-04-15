@@ -29,7 +29,7 @@ export const initLb = async () => {
   )
   await firebaseFunctionsDeploy(skeetConfig.app.projectId)
 
-  await setupLoadBalancer(
+  const lbIp = await setupLoadBalancer(
     skeetConfig,
     domainInquirer.lbDomain,
     domainInquirer.nsDomain,
@@ -37,7 +37,7 @@ export const initLb = async () => {
   await initArmor()
   await syncArmors()
   const ips = await getZone(skeetConfig.app.projectId, skeetConfig.app.name)
-  Logger.dnsSetupLog(ips)
+  Logger.dnsSetupLog(ips, lbIp)
 }
 
 const requireDomainName = (value: string) => {

@@ -42,13 +42,6 @@ export const openAIChat = async (
   contents: Array<ChatCompletionMessageParam>,
   config = defaultOpenAIConfig,
 ) => {
-  if (config.organizationKey === '' || config.apiKey === '') {
-    console.error(
-      'CHAT_GPT_ORG and CHAT_GPT_KEY are required in .env file.\n\nor you can pass them as arguments to the function.',
-    )
-    process.exit(1)
-  }
-
   const ai = new OpenAI({
     apiKey,
     organization: organizationKey,

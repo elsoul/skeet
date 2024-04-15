@@ -145,7 +145,10 @@ View Emulator UI at : ${chalk.underline('http://127.0.0.1:4000/')}`
     }
   }
 
-  export const dnsSetupLog = (nameServerAddresses: Array<string>) => {
+  export const dnsSetupLog = (
+    nameServerAddresses: Array<string>,
+    lbIp: string,
+  ) => {
     Logger.warning(
       '🚸 === Copy & Paste below nameServer addresses to your DNS Setting === 🚸\n',
     )
@@ -156,7 +159,19 @@ View Emulator UI at : ${chalk.underline('http://127.0.0.1:4000/')}`
     Logger.warning(
       '👷 === https will be ready in about an hour after your DNS settings === 👷\n',
     )
-    Logger.successCheck(`You are all set`)
+    const content = `If you are not utilizing Google DNS, it is necessary to manually configure the A and CAA records.
+Please set up the three records listed below:
+
+DNS Records Setup:
+--------------------------------
+1. A Record:
+   Address: ${lbIp}
+
+2. CAA Records:
+   - 0 issue "pki.goog"
+   - 0 issue "letsencrypt.org"`
+    Logger.normal(content)
+    Logger.successCheck(`\nYou are all set`)
     Logger.normal(`\n📗 Doc: https://skeet.dev`)
   }
 

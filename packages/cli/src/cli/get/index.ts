@@ -32,7 +32,7 @@ export const listSubCommands = () => {
     .action(async () => {
       const { app } = await readOrCreateConfig()
       const res = await getZone(app.projectId, app.name)
-      Logger.dnsSetupLog(res)
+      Logger.dnsSetupLog(res, '<your-load-balancer-ip>')
     })
   get
     .command('secret')

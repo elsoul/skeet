@@ -123,6 +123,7 @@ export const setupLoadBalancer = async (
 
     spinner.stop(true)
     console.log(chalk.green('⚖️ Load balancer setup completed successfully!\n'))
+    return ip
   } catch (error) {
     spinner.stop(true)
     Logger.error(`setupLoadBalancer error: ${JSON.stringify(error)}`)
