@@ -1,5 +1,14 @@
 # @skeet-framework/cli
 
+## 2.2.20
+
+### Patch Changes
+
+- [#407](https://github.com/elsoul/skeet/pull/407) [`4b61902`](https://github.com/elsoul/skeet/commit/4b6190264175e75d7000729654031a7b4671aedd) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet doc setup
+
+- Updated dependencies [[`4b61902`](https://github.com/elsoul/skeet/commit/4b6190264175e75d7000729654031a7b4671aedd)]:
+  - @skeet-framework/ai@1.8.8
+
 ## 2.2.19
 
 ### Patch Changes
