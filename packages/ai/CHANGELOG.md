@@ -1,5 +1,11 @@
 # @skeet-framework/ai
 
+## 1.8.10
+
+### Patch Changes
+
+- [`0509f69`](https://github.com/elsoul/skeet/commit/0509f69f71c4901dd533193c18916dc51d67e045) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet add sql
+
 ## 1.8.9
 
 ### Patch Changes
