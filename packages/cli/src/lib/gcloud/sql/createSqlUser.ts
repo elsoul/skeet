@@ -21,6 +21,7 @@ export const runSqlUserCreate = async (projectId: string, appName: string) => {
       },
     },
   }
+  let userPass = ''
   prompt.start()
   prompt.get(dbPassPrompt, async (err, result) => {
     if (result.password !== result.passwordConfirm) {
@@ -29,8 +30,10 @@ export const runSqlUserCreate = async (projectId: string, appName: string) => {
       const password = String(result.password)
       const userName = String(result.userName)
       await createSqlUser(projectId, appName, userName, password)
+      userPass = password
     }
   })
+  return userPass
 }
 
 export const createSqlUser = async (
@@ -49,7 +52,7 @@ export const createSqlUser = async (
     '--instance',
     instanceName,
     '--password',
-    password,
+    `"${password}"`,
     '--project',
     projectId,
   ]

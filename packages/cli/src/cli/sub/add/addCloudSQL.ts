@@ -156,8 +156,11 @@ const updatePackageJsonPort = async (instanceName: string) => {
   const packageJson = JSON.parse(packageJsonFile) as {
     port: number
     container: string
+    projectId: string
   }
+  const config = await readOrCreateConfig()
   packageJson.port = packageJson.port + sqlDirs.length - 1
   packageJson.container = instanceName
+  packageJson.projectId = config.app.projectId
   await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2))
 }

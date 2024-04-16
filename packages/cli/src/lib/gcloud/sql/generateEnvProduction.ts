@@ -7,7 +7,7 @@ export const generateEnvProduction = async (
   databaseIp: string,
   encodedPassword: string,
 ) => {
-  const filePath = `sql/${appName}/.env.build`
+  const filePath = `sql/${appName}/.env.production`
   const secretKeyName =
     'DATABASE_PRODUCTION_URL_' + appName.toUpperCase().replaceAll('-', '_')
 

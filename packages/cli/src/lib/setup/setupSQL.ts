@@ -23,7 +23,7 @@ export const setupSQL = async (
 
     await initSql(skeetConfig, sqlPassword)
     await addIp()
-    await sqlIp()
+    await sqlIp('user-db')
     await dbDeploy(true)
     const envProductionPath = PATH.SQL + '/' + FILE_NAME.ENV_PRODUCTION
     await addEnvSync(envProductionPath)

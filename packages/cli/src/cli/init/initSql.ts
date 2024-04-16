@@ -33,7 +33,12 @@ export const initSql = async (
     skeetCloudConfig.app.projectId,
     skeetCloudConfig.app.name,
   )
-  await generateEnvBuild(skeetCloudConfig.app.name, databaseIp, encodedPassword)
+  await generateEnvBuild(
+    skeetCloudConfig.app.name,
+    'username',
+    databaseIp,
+    encodedPassword,
+  )
 
   await patchSQL(
     skeetCloudConfig.app.projectId,
@@ -47,11 +52,11 @@ export const initSql = async (
     skeetCloudConfig.app.name,
     true,
   )
-  await generateEnvProduction(
-    skeetCloudConfig.app.projectId,
-    skeetCloudConfig.app.name,
-    skeetCloudConfig.app.region,
-    databasePrivateIp,
-    encodedPassword,
-  )
+  // await generateEnvProduction(
+  //   skeetCloudConfig.app.projectId,
+  //   skeetCloudConfig.app.name,
+  //   skeetCloudConfig.app.region,
+  //   databasePrivateIp,
+  //   encodedPassword,
+  // )
 }

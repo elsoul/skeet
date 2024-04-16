@@ -8,17 +8,21 @@ export const genEnvBuild = async (
   databaseIp: string,
   encodedPassword: string,
 ): Promise<{ key: string; value: string }> => {
-  const secretKeyName =
-    'DATABASE_BUILD_URL_' + instanceName.toUpperCase().replaceAll('-', '_')
-  const filePath = generateDir + '/' + FILE_NAME.ENV_BUILD
-  const databaseUrlValue = `postgresql://postgres:${encodedPassword}@${databaseIp}:5432/${instanceName}?schema=public\n`
-  const databaseUrl = `DATABASE_URL=${databaseUrlValue}\n`
-  const envFile = databaseUrl
-  await writeFile(filePath, envFile, { flag: 'w' })
-  Logger.success(`successfully exported! - ${filePath}`)
-  const dbKeyValue = {
-    key: secretKeyName,
-    value: databaseUrlValue,
+  try {
+    const secretKeyName =
+      'DATABASE_BUILD_URL_' + instanceName.toUpperCase().replaceAll('-', '_')
+    const filePath = generateDir + '/' + FILE_NAME.ENV_BUILD
+    const databaseUrlValue = `postgresql://postgres:${encodedPassword}@${databaseIp}:5432/skeet-${instanceName}-production?schema=public\n`
+    const databaseUrl = `DATABASE_URL=${databaseUrlValue}\n`
+    const envFile = databaseUrl
+    await writeFile(filePath, envFile, { flag: 'w' })
+    Logger.success(`successfully exported! - ${filePath}`)
+    const dbKeyValue = {
+      key: secretKeyName,
+      value: databaseUrlValue,
+    }
+    return dbKeyValue
+  } catch (error) {
+    throw new Error(`genEnvBuild Error: ${error}`)
   }
-  return dbKeyValue
 }
