@@ -1,5 +1,14 @@
 # @skeet-framework/cli
 
+## 2.2.22
+
+### Patch Changes
+
+- [`0509f69`](https://github.com/elsoul/skeet/commit/0509f69f71c4901dd533193c18916dc51d67e045) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - skeet add sql
+
+- Updated dependencies [[`0509f69`](https://github.com/elsoul/skeet/commit/0509f69f71c4901dd533193c18916dc51d67e045)]:
+  - @skeet-framework/ai@1.8.10
+
 ## 2.2.21
 
 ### Patch Changes
