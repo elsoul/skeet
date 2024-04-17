@@ -169,11 +169,6 @@ export const docMenuNav = [
         icon: AcademicCapIcon,
       },
       {
-        name: 'doc:menuNav.skeet-firestore.initial-deploy',
-        href: '/doc/skeet-firestore/initial-deploy/',
-        icon: CloudArrowUpIcon,
-      },
-      {
         name: 'doc:menuNav.skeet-firestore.basic-architecture',
         href: '/doc/skeet-firestore/basic-architecture/',
         icon: BookOpenIcon,

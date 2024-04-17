@@ -39,9 +39,7 @@ Skeet Framework は SQL と NoSQL を組み合わせてアプリを構築でき�
 ここでは、`skeet init` を使って VPN と ロードバランサーを設定する方法を説明します。
 さらに CloudArmor を使ってアプリを保護するポリシーも自動で設定します。
 
-📱 Demo App made by Skeet: https://skeeter.dev/
-
-![https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif](https://storage.googleapis.com/skeet-assets/animation/skeet-cli-create-latest.gif)
+![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/SkeetArchitecture.png)
 
 ## 🧪 依存パッケージ 🧪
 
@@ -155,8 +153,18 @@ $ skeet ai --help
 
 ## $ skeet init コマンドでクラウド環境を一発で構築する
 
-Skeet プロジェクトを初期化するには、
-以下のコマンドを実行してください。
+これまで Cloud のサービスを適切に設定するためには、
+複雑な権限と API の設定が必要でしたが、Skeet Framework では
+Skeet init コマンドで以下の設定を自動で行います。
+
+- Google Cloud プロジェクトの作成
+- Google Gloud IAM の設定
+- Firebase Functions のデプロイ
+- GitHub Actions の設定
+- VPC ネットワーク の設定
+- Cloud DNS の設定
+- ロードバランサーの設定
+- クラウドアーマーの設定
 
 ```bash
 $ cd skeet-app
@@ -433,9 +441,14 @@ selection, and <enter> to proceed)
 
 `functions/skeet-func/src/routings/https/root.ts` に以下のように Organization ID と API Key を設定します。
 
+さらに、デフォルトでは HTTP インスタンスは public なネットワーク環境で作成されますが、
+本番環境ではプライベートなネットワーク環境でロードバランサーからアクセスできるようにするために、
+
+使用するオプションを _publicHttpOption_ から　*privateHttpOption* に変更します。
+
 ```typescript
 import { onRequest } from 'firebase-functions/v2/https'
-import { publicHttpOption } from '@/routings/options'
+import { privateHttpOption } from '@/routings/options'
 import { TypedRequestBody } from '@common/types/http'
 import { RootParams } from '@common/types/http/rootParams'
 import { defineSecret } from 'firebase-functions/params'
@@ -449,25 +462,34 @@ const CHAT_GPT_ORG = defineSecret('CHAT_GPT_ORG')
 const CHAT_GPT_KEY = defineSecret('CHAT_GPT_KEY')
 
 export const root = onRequest(
-  { ...publicHttpOption, secrets: ['CHAT_GPT_ORG', 'CHAT_GPT_KEY'] },
+  { ...privateHttpOption, secrets: ['CHAT_GPT_ORG', 'CHAT_GPT_KEY'] },
   async (req: TypedRequestBody<RootParams>, res) => {
     try {
+      const context =
+        'You are an assistant to cheer up people.You reply with the maximum of positive words.'
       const contents: ChatCompletionMessageParam[] = [
         {
           role: 'system',
-          content:
-            'You are an assistant to cheer up people.You reply with the maximum of positive words.',
+          content: context,
         },
         {
           role: 'user',
           content:
             'Hiiiiiiii, there! How are you doing today?\nLFGGGGGGGGGGGGGGG🚀',
         },
+        {
+          role: 'assistant',
+          content: 'I am doing great!LFGGGGGGGGGGGGGGG🚀\nHow are you?',
+        },
+        {
+          role: 'user',
+          content: "What's up?",
+        },
       ]
-      const config = defaultOpenAIConfig
-      // Set OpenAI Organization ID and API Key from Firebase Secrets
+      let config = defaultOpenAIConfig
       config.organizationKey = CHAT_GPT_ORG.value()
       config.apiKey = CHAT_GPT_KEY.value()
+      config.stream = false
       const result = await openAIChat(contents, config)
       res.json({ status: 'success', result })
     } catch (error) {
@@ -499,3 +521,10 @@ OpenAI の API Key は以下のリンクを参考に作成してください。
 ![画像](https://storage.googleapis.com/skeet-assets/imgs/backend/openai-api-key.png)
 
 📕 [OpenAI API Document](https://platform.openai.com/docs/introduction)
+
+## まとめ
+
+この章では、Skeet フレームワークのクラウド環境をセットアップし、
+Cloud Functions から OpenAI API を呼び出す方法を学びました。
+
+次のチュートリアルでは、より実践的に開発を進めるための便利な機能を紹介します。

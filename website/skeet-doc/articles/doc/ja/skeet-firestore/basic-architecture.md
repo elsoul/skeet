@@ -6,13 +6,14 @@ description: Skeetフレームワークの基本構造について説明しま�
 
 Skeet Framework は SQL と NoSQL を組み合わせてアプリを構築できます。
 
-ここでは、NoSQL のバックエンドを構築するための基本構造を説明します。
+PNPM を使ってパッケージを管理し、
+TypeScript で型安全な開発を行います。
 
-Skeet Framework Firestore バックエンドの基本的な構造は以下の通りです。
+Skeet Framework の基本的な構造は以下の通りです。
 
 | 一般的なバックエンドに必要な機能 | Skeet Framework                        |
 | -------------------------------- | -------------------------------------- |
-| データベース                     | Firestore                              |
+| データベース                     | Firestore or SQL                       |
 | ログイン認証                     | Firebase Authentication                |
 | API                              | Cloud Functions for Firebase 第 2 世代 |
 | ロードバランサー                 | Cloud Load Balancer                    |
@@ -21,42 +22,50 @@ Skeet Framework Firestore バックエンドの基本的な構造は以下の通
 | ドメイン                         | Cloud DNS                              |
 | セキュリティ                     | Cloud Armor                            |
 
-- [Typesaurus](https://typesaurus.com) による Firestore の型定義をサポート
 - [GitHub Actions](https://github.com/features/actions) による CI/CD をサポート
 - [Firebase Emulator](https://firebase.google.com/docs/emulator-suite) によるローカル開発をサポート
 - [TypeScript](https://www.typescriptlang.org/) による型安全な開発をサポート
+- [PNPM](https://pnpm.io/) によるパッケージ管理をサポート
 
 ## Skeet Framework の基本構造
 
-Skeet Framework Firestore のバックエンドはサーバーレスなため、
+Skeet Framework はサーバーレスなため、
 すぐにファンクションから書き始めることができます。
 
-_src_ にフロントエンドのソースコードが配置されます。
+_website_, _webapp_, _mobile_ にフロントエンドのソースコードが配置されます。
 
 _functions_ ディレクトリ以下に Cloud Functions for Firebase のプロジェクトが配置されます。
 
 functions には複数の functions を追加することができます。
 
 ```bash
-├── src
-│   ├── public
-│   └── types
+root
+├── common
 ├── functions
-│   └── skeet
+├── mobile
+├── sql
+├── webapp
+├── website
 ├── package.json
+├── pnpm-workspace.yaml
+├── tsconfig.json
 ├── skeet-cloud.config.json
-└── firebase.json
+└── vitest.config.ts
 ```
 
 | ディレクトリ            | 説明                                        |
 | ----------------------- | ------------------------------------------- |
-| src                     | フロントエンドのソースコード                |
-| src/public              | フロントエンドのソースコード                |
-| src/types               | フロントエンドの型定義                      |
+| common                  | 共通の型や関数、モデル                      |
+| webapp                  | Web アプリのソースコード                    |
+| website                 | Web サイトのソースコード                    |
+| mobile                  | モバイルアプリのソースコード                |
 | functions               | Cloud Functions for Firebase のソースコード |
-| functions/skeet         | OpenAI API 等に関する functions             |
-| package.json            | バックエンドのパッケージ管理                |
+| sql                     | SQL API のソースコード                      |
+| package.json            | パッケージ管理                              |
 | skeet-cloud.config.json | Skeet Framework の設定ファイル              |
+| tsconfig.json           | TypeScript の設定ファイル                   |
+| vitest.config.ts        | Vite テストの設定ファイル                   |
+| pnpm-workspace.yaml     | PNPM の設定ファイル                         |
 | firebase.json           | Firebase の設定ファイル                     |
 
 ## Skeet Functions の基本構造
@@ -65,7 +74,7 @@ Skeet Functions は Cloud Functions for Firebase をベースにしています�
 _functions_ ディレクトリ以下に Cloud Functions for Firebase のプロジェクトが配置されます。
 functions には複数の functions を追加することができます。
 
-例: _functions/skeet_
+例: _functions/skeet-func_
 
 ```bash
 .
@@ -78,13 +87,8 @@ functions には複数の functions を追加することができます。
 ├── src
 │   ├── index.ts
 │   ├── lib
-│   ├── models
-│   ├── routings
-│   ├── scripts
-│   ├── types
-│   └── utils
-├── tsconfig.json
-└── yarn.lock
+│   └── routings
+└── tsconfig.json
 ```
 
 | ディレクトリ  | 説明                         |
@@ -97,19 +101,17 @@ functions には複数の functions を追加することができます。
 | src           | ソースコード                 |
 | src/index.ts  | エントリーポイント           |
 | src/lib       | ライブラリ                   |
-| src/models    | モデル                       |
 | src/routings  | ルーティング                 |
 | src/scripts   | スクリプト                   |
-| src/types     | 型定義                       |
 | src/utils     | ユーティリティ               |
 | tsconfig.json | TypeScript の設定            |
-| yarn.lock     | パッケージのロックファイル   |
 
 ## Skeet Functions のインスタンスタイプ
 
 | インスタンスタイプ | 説明                                                                   |
 | ------------------ | ---------------------------------------------------------------------- |
 | Http               | HTTP リクエストを受け取る関数                                          |
+| OnCall             | 関数を呼び出す関数                                                     |
 | PubSub             | PubSub メッセージを受け取る関数                                        |
 | Scheduler          | スケジュールされた関数                                                 |
 | Firestore          | Firestore のドキュメントの作成、更新、削除などのトリガーを受け取る関数 |
@@ -133,6 +135,9 @@ functions には複数の functions を追加することができます。
 │   ├── getUserChatRoomMessages.ts
 │   ├── index.ts
 │   └── root.ts
+├── onCall
+│   ├── onCallExample.ts
+│   └── index.ts
 ├── index.ts
 ├── options
 │   ├── authOptions.ts
@@ -174,6 +179,7 @@ export const publicHttpOption: HttpsOptions = {
   minInstances: 0,
   concurrency: 1,
   timeoutSeconds: 540,
+  invoker: 'public',
   labels: {
     skeet: 'http',
   },
@@ -192,6 +198,7 @@ export const privateHttpOption: HttpsOptions = {
   vpcConnectorEgressSettings: 'PRIVATE_RANGES_ONLY',
   cors,
   timeoutSeconds: 540,
+  invoker: 'private',
   labels: {
     skeet: 'http',
   },
@@ -214,8 +221,6 @@ export const root = onRequest(
     try {
       res.json({
         status: 'success',
-        message: 'Skeet Backend is running!',
-        name: req.body.name || 'Anonymous',
       })
     } catch (error) {
       const errorLog = `root - ${error}`
@@ -228,7 +233,7 @@ export const root = onRequest(
 
 Http インスタンスの型定義は、_src/types/http/{httpInstance}Params.ts_ に記述します。
 
-_types/http/rootParams.ts_
+_common/types/http/rootParams.ts_
 
 ```ts
 export type RootParams = {
@@ -303,7 +308,7 @@ export const pubsubExample = onMessagePublished(
 
 PubSub インスタンスの型定義は、_src/types/pubsub/{pubsubInstance}Params.ts_ に記述します。
 
-_types/pubsub/pubsubExampleParams.ts_
+_common/types/pubsub/pubsubExampleParams.ts_
 
 ```ts
 export type PubsubExampleParams = {
@@ -564,11 +569,31 @@ Options:
 モデルの定義は、
 コレクションのツリー構造を
 
-_src/models/{modelName}Models.ts_
+_common/models/{modelName}Models.ts_
 
 に記述します。
 
-型定義には [Typesaurus](https://typesaurus.com) を使用しています。
+また、_skeet ai_ コマンドを使用して、_firestore_ のデータモデルを自動生成することができます。
+以下のコマンドで Skeet AI Firestore モードを起動し、作成したいモデルの説明を入力します。
+
+```bash
+$ skeet ai --mode
+? 🤖 Select Mode
+  prisma
+  typedoc
+❯ firestore
+  function
+  method
+
+🔥 Firestore Model Generating Mode 🔥
+? Please describe your Firestore use case.
+
+e.g. I want to create a blog app.
+
+You:
+```
+
+型定義には [Firestore Data Converter](https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter) を使用しています。
 
 NoSQL データモデルは非常に柔軟であるため、
 モデルの定義は必須ではありませんが、
@@ -583,48 +608,25 @@ NoSQL データモデルは非常に柔軟であるため、
 
 さらに CodePilot でのコード補完が効くようになります。
 
-_models/userModels.ts_
+_common/models/userModels.ts_
 
 ```ts
-import { Ref, Timestamp } from '@skeet-framework/firestore'
-
-// Define Collection Name
-export const userCollectionName = 'User'
-export const userChatRoomCollectionName = 'UserChatRoom'
-export const userChatRoomMessageCollectionName = 'UserChatRoomMessage'
+import { Timestamp, FieldValue } from '@skeet-framework/firestore'
 
 // CollectionId: User
-// DocumentId: uid
+// DocumentId: auto
+// Path: User
+export const UserCN = 'User'
+export const genUserPath = () => `${UserCN}`
 export type User = {
+  id?: string
   uid: string
   username: string
   email: string
   iconUrl: string
-  createdAt?: Timestamp
-  updatedAt?: Timestamp
-}
-
-// CollectionId: UserChatRoom
-// DocumentId: auto
-export type UserChatRoom = {
-  userRef: Ref<User>
-  title: string
-  model: string
-  maxTokens: number
-  temperature: number
-  stream: boolean
-  createdAt?: Timestamp
-  updatedAt?: Timestamp
-}
-
-// CollectionId: UserChatRoomMessage
-// DocumentId: auto
-export type UserChatRoomMessage = {
-  userChatRoomRef: Ref<UserChatRoom>
-  role: string
-  content: string
-  createdAt?: Timestamp
-  updatedAt?: Timestamp
+  userChatRoomIds?: string[]
+  createdAt?: Timestamp | FieldValue
+  updatedAt?: Timestamp | FieldValue
 }
 ```
 
@@ -632,10 +634,7 @@ export type UserChatRoomMessage = {
 _@skeet-framework/firestore_ プラグインを使用して行います。
 
 ```ts
-import {
-  addCollectionItem,
-  getCollectionItem,
-} from '@skeet-framework/firestore'
+import { add, get } from '@skeet-framework/firestore'
 ```
 
 詳しくは、[Skeet Firestore](/ja/doc/plugins/skeet-firestore) を参照してください。
@@ -648,28 +647,36 @@ yarn コマンドを 各ファンクションごとに実行することがで�
 コマンド一覧
 
 ```bash
-$ skeet --help
 Usage: skeet [options] [command]
 
-CLI for Skeet - Open-Source Serverless App Framework
+CLI for Skeet - Full-stack TypeScript Serverless framework
 
 Options:
   -V, --version                output the version number
   -h, --help                   display help for command
 
 Commands:
-  create <appName>             Create Skeet Framework App
-  server|s                     Run Skeet App
-  deploy                       Deploy Skeet APP to Firebase
-  init [options]               Initialize Google Cloud Setups for Skeet APP
+  create [options] <appName>   Create Skeet Framework App
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
+  init [options]               Initialize Google Cloud Setups
+  login                        Skeet Login Command - Create Firebase Login Token
+  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
+  g|generate                   Skeet Generate Comannd
+  log [options]                Deploy Skeet APP to Firebase
+  docker                       Docker commands
+  db                           Database commands
   iam                          Skeet IAM Comannd to setup Google Cloud Platform
-  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
   add                          Skeet Add Comannd to add new functions
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
-  login [options]              Skeet Login Command - Create Firebase Login Token
   get                          Get Skeet App List
-  curl [options] <methodName>  Skeet Curl Command - Call Cloud Functions Endpoint for Dev
-  test                         Skeet Jest Test Command
+  ai [options]                 Call Skeet AI Assistant
+  config                       Config commands
+  run [options]                Run commands
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
+  test                         Run tests
   help [command]               display help for command
 ```
