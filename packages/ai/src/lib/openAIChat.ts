@@ -50,8 +50,8 @@ export const openAIChat = async (
   }
 
   const ai = new OpenAI({
-    apiKey,
-    organization: organizationKey,
+    apiKey: config.apiKey,
+    organization: config.organizationKey,
   })
   const openaiConfig: ChatCompletionCreateParamsBase = {
     model: config.model,
