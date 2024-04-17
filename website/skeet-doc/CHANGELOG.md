@@ -1,5 +1,11 @@
 # skeet-doc
 
+## 0.1.4
+
+### Patch Changes
+
+- [#411](https://github.com/elsoul/skeet/pull/411) [`f10e8ed`](https://github.com/elsoul/skeet/commit/f10e8ed207d700250481bec576253928ae8b7eb5) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update doc ja
+
 ## 0.1.3
 
 ### Patch Changes

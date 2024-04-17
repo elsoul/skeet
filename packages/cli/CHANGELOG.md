@@ -1,5 +1,14 @@
 # @skeet-framework/cli
 
+## 2.2.23
+
+### Patch Changes
+
+- [#412](https://github.com/elsoul/skeet/pull/412) [`640c2ee`](https://github.com/elsoul/skeet/commit/640c2ee9ca37be9524a87ab8c764283201638a5f) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update - AI version
+
+- Updated dependencies [[`640c2ee`](https://github.com/elsoul/skeet/commit/640c2ee9ca37be9524a87ab8c764283201638a5f)]:
+  - @skeet-framework/ai@1.8.11
+
 ## 2.2.22
 
 ### Patch Changes
