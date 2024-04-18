@@ -497,7 +497,7 @@ RESPONSE RECEIVED FROM FUNCTION: 200, {
 
 Success! The setup is complete.
 
-#### - OpenAI の API Key を作成・取得について
+#### Create OpenAI API Key
 
 Please refer to the following link to create an OpenAI API Key.
 
