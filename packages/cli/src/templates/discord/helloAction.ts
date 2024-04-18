@@ -4,7 +4,7 @@ import { checkFileDirExists } from '@/lib/files/checkFileDirExists'
 import { mkdir } from 'fs/promises'
 
 export const helloAction = async () => {
-  const fileDir = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/lib/discord/actions`
+  const fileDir = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}-func/src/lib/discord/actions`
   if (!(await checkFileDirExists(fileDir))) {
     await mkdir(fileDir, { recursive: true })
   }

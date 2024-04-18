@@ -35,7 +35,7 @@ export const addDiscordWebhook = async () => {
     console.log(chalk.green(`✅ helloIndex added 🎉`))
     console.log(chalk.green(`✅ deployCommands added 🎉`))
     console.log(chalk.green(`✅ helloMessage added 🎉`))
-    const indexFile = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/index.ts`
+    const indexFile = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}-func/src/index.ts`
     const methodName = 'discordRouter'
     await insertFunction(indexFile, methodName)
     return true

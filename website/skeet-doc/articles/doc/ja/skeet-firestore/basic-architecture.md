@@ -543,26 +543,7 @@ Firebase ユーザー登録と Firestore ユーザー登録が完了します。
 
 コンソールに表示される コードをコピーしてターミナルに貼り付けます。
 
-_ACCESS_TOKEN_ が環境変数に設定され、
-
-_skeet curl_ コマンドが使用できるようになります。
-
-```bash
-$ skeet help curl
-Usage: skeet curl [options] <methodName>
-
-Skeet Curl Command - Call Cloud Functions Endpoint for Dev
-
-Arguments:
-  methodName                  Method Name - e.g. skeet curl createUserChatRoom
-
-Options:
-  -d,--data [data]            JSON Request Body - e.g. '{ "model": "gpt4", "maxTokens": 420 }'
-  -r, --raw                   Show chunk data (default: false)
-  -p, --production            For Production (default: false)
-  -f,--functions [functions]  For Production Functions Name (default: false)
-  -h, --help                  display help for command
-```
+_ACCESS_TOKEN_ が環境変数に設定されます。
 
 ## モデルの定義
 

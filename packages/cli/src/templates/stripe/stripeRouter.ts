@@ -2,7 +2,7 @@ import { DEFAULT_FUNCTION_NAME } from '@/index'
 import { FUNCTIONS_PATH } from '@/lib'
 
 export const stripeRouter = () => {
-  const filePath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/routings/http/stripeRouter.ts`
+  const filePath = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}-func/src/routings/http/stripeRouter.ts`
   const body = `import { onRequest } from 'firebase-functions/v2/https'
 import { publicHttpOption } from '@/routings/options'
 import Stripe from 'stripe'

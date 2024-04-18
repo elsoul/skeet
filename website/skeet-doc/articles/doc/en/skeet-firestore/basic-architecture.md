@@ -17,43 +17,51 @@ The basic structure of the Skeet Framework backend is as follows.
 | Domains                               | Cloud DNS                            |
 | Security                              | Cloud Armor                          |
 
-- Support for Firestore type definitions from [Typesaurus](https://typesaurus.com)
 - Support CI/CD with [GitHub Actions](https://github.com/features/actions)
 - Supports local development with [Firebase Emulator](https://firebase.google.com/docs/emulator-suite)
 - Supports type-safe development with [TypeScript](https://www.typescriptlang.org/)
+- Supports package management with [PNPM](https://pnpm.io/)
 
 ## Basic Structure of Skeet Framework
 
 Since the Skeet Framework backend is serverless,
 You can start writing from functions right away.
 
-_src_ will contain the frontend source code.
+_website_, _webapp_, _mobile_ will contain the frontend source code.
 
 The Cloud Functions for Firebase project will be placed under the _functions_ directory.
 
 You can add multiple functions to functions.
 
 ```bash
-├── src
-│   ├── public
-│   └── types
+root
+├── common
 ├── functions
-│   └── skeet
+├── mobile
+├── sql
+├── webapp
+├── website
 ├── package.json
+├── pnpm-workspace.yaml
+├── tsconfig.json
 ├── skeet-cloud.config.json
-└── firebase.json
+└── vitest.config.ts
 ```
 
 | Directory               | Description                              |
 | ----------------------- | ---------------------------------------- |
-| src                     | Frontend source code                     |
-| src/public              | Frontend source code                     |
-| src/types               | Frontend type definitions                |
+| common                  | Common source code                       |
+| webapp                  | Web application source code              |
+| website                 | Website source code                      |
+| mobile                  | Mobile application source code           |
 | functions               | Cloud Functions for Firebase source code |
-| functions/skeet         | functions related to OpenAI API etc      |
+| sql                     | SQL source code                          |
 | package.json            | Backend package management               |
 | skeet-cloud.config.json | Skeet Framework configuration file       |
-| firebase.json           | Firebase Settings                        |
+| tsconfig.json           | TypeScript configuration                 |
+| vitest.config.ts        | Vite Test configuration file             |
+| pnpm-workspace.yaml     | PNPM configuration file                  |
+| firebase.json           | Firebase configuration file              |
 
 ## Basic Structure of Skeet Functions
 
@@ -61,7 +69,7 @@ Skeet Functions are based on Cloud Functions for Firebase.
 The Cloud Functions for Firebase project will be placed under the _functions_ directory.
 You can add multiple functions to functions.
 
-e.g. _functions/skeet_
+e.g. _functions/skeet-func_
 
 ```bash
 .
@@ -74,38 +82,31 @@ e.g. _functions/skeet_
 ├── src
 │   ├── index.ts
 │   ├── lib
-│   ├── models
-│   ├── routings
-│   ├── scripts
-│   ├── types
-│   └── utils
-├── tsconfig.json
-└── yarn.lock
+│   └── routings
+└── tsconfig.json
 ```
 
-| Directory     | Description                |
-| ------------- | -------------------------- |
-| build.ts      | build script               |
-| devBuild.ts   | build script               |
-| dist          | Source code after build    |
-| nodemon.json  | Local launch configuration |
-| package.json  | Backend package management |
-| src           | source code                |
-| src/index.ts  | entry point                |
-| src/lib       | Libraries                  |
-| src/models    | models                     |
-| src/routings  | routings                   |
-| src/scripts   | scripts                    |
-| src/types     | type definitions           |
-| src/utils     | Utilities                  |
-| tsconfig.json | TypeScript configuration   |
-| yarn.lock     | Package lock file          |
+| Directory     | Description                  |
+| ------------- | ---------------------------- |
+| build.ts      | Build script                 |
+| devBuild.ts   | Development build script     |
+| dist          | Build output directory       |
+| nodemon.json  | Nodemon configuration        |
+| package.json  | Functions package management |
+| src           | Source code directory        |
+| src/index.ts  | Entry point                  |
+| src/lib       | Library                      |
+| src/routings  | Routings                     |
+| src/scripts   | Scripts                      |
+| src/utils     | Utilities                    |
+| tsconfig.json | TypeScript configuration     |
 
 ## Instance types for Skeet Functions
 
 | Instance type | Description                                                                                   |
 | ------------- | --------------------------------------------------------------------------------------------- |
 | Http          | Function that receives HTTP requests                                                          |
+| OnCall        | Function that receives Callable functions                                                     |
 | PubSub        | function that receives PubSub messages                                                        |
 | Scheduler     | Scheduled Functions                                                                           |
 | Firestore     | Functions that receive triggers for creating, updating, deleting, etc. documents in Firestore |
@@ -129,6 +130,9 @@ Also, Cloud Functions for Firebase option settings are located under routings/op
 │   ├── getUserChatRoomMessages.ts
 │   ├── index.ts
 │   └── root.ts
+├── onCall
+│   ├── onCallExample.ts
+│   └── index.ts
 ├── index.ts
 ├── options
 │   ├── authOptions.ts
@@ -170,6 +174,7 @@ export const publicHttpOption: HttpsOptions = {
   minInstances: 0,
   concurrency: 1,
   timeoutSeconds: 540,
+  invoker: 'public',
   labels: {
     skeet: 'http',
   },
@@ -188,6 +193,7 @@ export const privateHttpOption: HttpsOptions = {
   vpcConnectorEgressSettings: 'PRIVATE_RANGES_ONLY',
   cors,
   timeoutSeconds: 540,
+  invoker: 'private',
   labels: {
     skeet: 'http',
   },
@@ -533,32 +539,35 @@ Firebase user registration and Firestore user registration are completed.
 
 _ACCESS_TOKEN_ is stored in the local environment variable.
 
-Now you can use _skeet curl_ to call the Cloud Functions endpoint.
-
-```bash
-$ skeet help curl
-Usage: skeet curl [options] <methodName>
-
-Skeet Curl Command - Call Cloud Functions Endpoint for Dev
-
-Arguments:
-  methodName                  Method Name - e.g. skeet curl createUserChatRoom
-
-Options:
-  -d,--data [data]            JSON Request Body - e.g. '{ "model": "gpt4", "maxTokens": 420 }'
-  -r, --raw                   Show chunk data (default: false)
-  -p, --production            For Production (default: false)
-  -f,--functions [functions]  For Production Functions Name (default: false)
-  -h, --help                  display help for command
-```
-
 ## Model definition
 
 Define Models
 
-_src/models/{modelName}Models.ts_
+_common/models/{modelName}Models.ts_
 
-- [Typesaurus](https://typesaurus.com) for type definitions.
+Or use the _skeet ai_ command to automatically generate the Firestore data model.
+
+```bash
+$ skeet ai --mode
+? 🤖 Select Mode
+  prisma
+  typedoc
+❯ firestore
+  function
+  method
+
+🔥 Firestore Model Generating Mode 🔥
+? Please describe your Firestore use case.
+
+e.g. I want to create a blog app.
+
+You:
+```
+
+For type-safe development with Firestore,
+Skeet Framework uses the Firestore Data Converter.
+
+- [Firestore Data Converter](https://firebase.google.com/docs/reference/node/firebase.firestore.FirestoreDataConverter)
 
 The NoSQL data model is so flexible that
 Model definition is not required, but
@@ -578,43 +587,20 @@ _models/userModels.ts_
 ```ts
 import { Ref, Timestamp } from '@skeet-framework/firestore'
 
-// Define Collection Name
-export const userCollectionName = 'User'
-export const userChatRoomCollectionName = 'UserChatRoom'
-export const userChatRoomMessageCollectionName = 'UserChatRoomMessage'
-
 // CollectionId: User
-// DocumentId: uid
+// DocumentId: auto
+// Path: User
+export const UserCN = 'User'
+export const genUserPath = () => `${UserCN}`
 export type User = {
+  id?: string
   uid: string
   username: string
   email: string
   iconUrl: string
-  createdAt?: Timestamp
-  updatedAt?: Timestamp
-}
-
-// CollectionId: UserChatRoom
-// DocumentId: auto
-export type UserChatRoom = {
-  userRef: Ref<User>
-  title: string
-  model: string
-  maxTokens: number
-  temperature: number
-  stream: boolean
-  createdAt?: Timestamp
-  updatedAt?: Timestamp
-}
-
-// CollectionId: UserChatRoomMessage
-// DocumentId: auto
-export type UserChatRoomMessage = {
-  userChatRoomRef: Ref<UserChatRoom>
-  role: string
-  content: string
-  createdAt?: Timestamp
-  updatedAt?: Timestamp
+  userChatRoomIds?: string[]
+  createdAt?: Timestamp | FieldValue
+  updatedAt?: Timestamp | FieldValue
 }
 ```
 
@@ -625,10 +611,7 @@ install
 _@skeet-framework/firestore_
 
 ```ts
-import {
-  addCollectionItem,
-  getCollectionItem,
-} from '@skeet-framework/firestore'
+import { add, get } from '@skeet-framework/firestore'
 ```
 
 - [@skeet-framework/firestore](/en/doc/plugins/skeet-firestore)
@@ -640,28 +623,36 @@ Skeet CLI is a command line tool for Skeet Framework.
 Command List
 
 ```bash
-$ skeet --help
 Usage: skeet [options] [command]
 
-CLI for Skeet - Open-Source Serverless App framework
+CLI for Skeet - Full-stack TypeScript Serverless framework
 
 Options:
   -V, --version                output the version number
   -h, --help                   display help for command
 
 Commands:
-  create <appName>             Create Skeet Framework App
-  server|s                     Run Skeet App
-  deploy                       Deploy Skeet APP to Firebase
-  init [options]               Initialize Google Cloud Setups for Skeet APP
+  create [options] <appName>   Create Skeet Framework App
+  server|s [options]           Run Skeet App
+  deploy [options]             Deploy Skeet APP to Firebase
+  init [options]               Initialize Google Cloud Setups
+  login                        Skeet Login Command - Create Firebase Login Token
+  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
+  g|generate                   Skeet Generate Comannd
+  log [options]                Deploy Skeet APP to Firebase
+  docker                       Docker commands
+  db                           Database commands
   iam                          Skeet IAM Comannd to setup Google Cloud Platform
-  yarn [options] <yarnCmd>     Skeet Yarn Comannd to run yarn command for multiple functions
   add                          Skeet Add Comannd to add new functions
   sync                         Skeet Sync Comannd to sync backend and frontend
   delete|d                     Skeet Delete Command
-  login [options]              Skeet Login Command - Create Firebase Login Token
   get                          Get Skeet App List
-  curl [options] <methodName>  Skeet Curl Command - Call Cloud Functions Endpoint for Dev
-  test                         Skeet Jest Test Command
+  ai [options]                 Call Skeet AI Assistant
+  config                       Config commands
+  run [options]                Run commands
+  new|n [options]              Create Skeet Framework App
+  console|c                    Call Firebase Console to Test Functions
+  check                        Check Cloud Configurations
+  test                         Run tests
   help [command]               display help for command
 ```

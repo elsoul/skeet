@@ -23,7 +23,7 @@ export const addStripeWebhook = async () => {
     console.log(chalk.green(`✅ stripeRouter added 🎉`))
     console.log(chalk.green(`✅ webhook/subscription added 🎉`))
     console.log(chalk.green(`✅ webhook/payment added 🎉`))
-    const indexFile = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}/src/index.ts`
+    const indexFile = `${FUNCTIONS_PATH}/${DEFAULT_FUNCTION_NAME}-func/src/index.ts`
     const methodName = 'stripeRouter'
     await insertFunction(indexFile, methodName)
     return true

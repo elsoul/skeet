@@ -12,12 +12,16 @@ Firebase Functions から OpenAI API を呼び出す方法を説明します。
 ドメインの以下の項目の設定ができることを前提としています。
 
 - ネームサーバー
+
+ネームサーバーの設定ができない場合は、
+以下の項目の設定が必要になります。
+
 - A レコード
 - CAA レコード
 
 ロードバランサーを使って以下のようなエンドポイントから関数を呼び出すことができるようになります。
 
-`https://lb.<your-domain>`
+`https://lb.<your-domain>/skeet-fucn/root`
 
 さらに、CloudArmor を合わせて組み合わせることでエンドポイントごとにセキュリティポリシーを設定することができるようになります。
 
@@ -37,7 +41,7 @@ Skeet はオープンソースのフルスタックアプリ開発ソリュー�
 Skeet Framework は SQL と NoSQL を組み合わせてアプリを構築できます。
 
 ここでは、`skeet init` を使って VPN と ロードバランサーを設定する方法を説明します。
-さらに CloudArmor を使ってアプリを保護するポリシーも自動で設定します。
+さらに CloudArmor を使ってアプリを保護するセキュリティポリシーも自動で設定します。
 
 ![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/SkeetArchitecture.png)
 
@@ -46,7 +50,7 @@ Skeet Framework は SQL と NoSQL を組み合わせてアプリを構築でき�
 - [TypeScript](https://www.typescriptlang.org/) 5.4.0 以上
 - [Node.js](https://nodejs.org/ja/) 20.11.0 以上
 - [Pnpm](https://pnpm.io/) 8.0.0 以上
-- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) 430.0.0 以上
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) 471.0.0 以上
 - [Firebase CLI](https://firebase.google.com/docs/cli) 12.0.1 以上
 - [GitHub CLI](https://cli.github.com/) 2.47.0 以上
 - [Java](https://www.java.com/en/download/)
@@ -237,7 +241,6 @@ Do you want to deploy Firebase Functions now? (y/N)
 y を選択し進みます。
 
 ```bash
-
 ✔  Deploy complete!
 
 Project Console: https://console.firebase.google.com/project/skeet420/overview

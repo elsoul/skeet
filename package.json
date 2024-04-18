@@ -21,11 +21,11 @@
   "author": "ELSOUL LABO B.V.",
   "license": "Apache-2.0",
   "engines": {
-    "pnpm": ">=8",
+    "pnpm": ">=9",
     "npm": "please_use_pnpm_instead",
     "node": ">=20"
   },
-  "packageManager": "pnpm@8.15.5",
+  "packageManager": "pnpm@9.0.1",
   "scripts": {
     "ci:version": "changeset version",
     "ci:publish": "changeset publish",
