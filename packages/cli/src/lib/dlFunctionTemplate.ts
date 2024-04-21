@@ -2,16 +2,18 @@ import { TemplateType } from '@/config/config'
 import { TEMPLATE_VERSION } from '@/config/templateVersion'
 import { execAsync } from '@skeet-framework/utils'
 import chalk from 'chalk'
+import {downloadTemplate} from '@/lib/files/downloadFiles'
 
 export const dlFunctionTemplate = async (functionName: string) => {
   const version = TEMPLATE_VERSION.BASE_FUNCTIONS
   const template: TemplateType = 'base-functions'
-  const BASE_TEMP = `https://registry.npmjs.org/@skeet-framework/${template}/-/${template}-${version}.tgz`
-  const fileName = `${template}-${version}.tgz`
-  const cmd = `wget ${BASE_TEMP}`
-  const functionPath = `functions/${functionName}-func`
   console.log(chalk.blue('🕰️ Downloading function template...'))
-  await execAsync(cmd)
+  if (!(await downloadTemplate(template, version))) {
+    console.log(chalk.yellow(`⚠️ Fail when download template`))
+    return false
+  }
+  const functionPath = `functions/${functionName}-func`
+  const fileName = `${template}-${version}.tgz`
   await execAsync(`tar -xvzf ${fileName} -C ${functionPath}`)
   await execAsync(
     `find ${functionPath}/package -mindepth 1 -maxdepth 1 -exec mv {} ${functionPath}/ \\;`,
