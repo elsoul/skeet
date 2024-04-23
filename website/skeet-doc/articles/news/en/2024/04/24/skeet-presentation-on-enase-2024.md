@@ -1,6 +1,6 @@
 ---
 id: skeet-presentation-on-enase-2024
-title: The research paper on the AI-driven app development serverless framework Skeet has been accepted at the international conference ENASE 2024
+title: The Presentation of a Research Paper on the AI-Era Serverless Framework Skeet at the International Software Conference ENASE 2024
 category: Press Release
 thumbnail: /news/2024/04/24/SkeetENASE2024.jpg
 ---
