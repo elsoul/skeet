@@ -1,5 +1,11 @@
 # @skeet-framework/utils
 
+## 1.3.11
+
+### Patch Changes
+
+- [#418](https://github.com/elsoul/skeet/pull/418) [`5b0c0b3`](https://github.com/elsoul/skeet/commit/5b0c0b3504cb6607cfcf3971be95dda178146ee4) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - add confirmTransaction/PriorityFee
+
 ## 1.3.10
 
 ### Patch Changes

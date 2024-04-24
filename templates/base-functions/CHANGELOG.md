@@ -1,5 +1,12 @@
 # base-functions
 
+## 1.1.14
+
+### Patch Changes
+
+- Updated dependencies [[`5b0c0b3`](https://github.com/elsoul/skeet/commit/5b0c0b3504cb6607cfcf3971be95dda178146ee4)]:
+  - @skeet-framework/utils@1.3.11
+
 ## 1.1.13
 
 ### Patch Changes
