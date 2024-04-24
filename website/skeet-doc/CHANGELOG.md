@@ -1,5 +1,11 @@
 # skeet-doc
 
+## 0.1.5
+
+### Patch Changes
+
+- [`13fd90f`](https://github.com/elsoul/skeet/commit/13fd90f5a17f30e2ffffbb5e33d6fb2466e55f0c) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update document
+
 ## 0.1.4
 
 ### Patch Changes

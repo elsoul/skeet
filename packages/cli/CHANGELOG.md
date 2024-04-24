@@ -1,5 +1,14 @@
 # @skeet-framework/cli
 
+## 2.2.24
+
+### Patch Changes
+
+- [`13fd90f`](https://github.com/elsoul/skeet/commit/13fd90f5a17f30e2ffffbb5e33d6fb2466e55f0c) Thanks [@POPPIN-FUMI](https://github.com/POPPIN-FUMI)! - Update document
+
+- Updated dependencies [[`5b0c0b3`](https://github.com/elsoul/skeet/commit/5b0c0b3504cb6607cfcf3971be95dda178146ee4)]:
+  - @skeet-framework/utils@1.3.11
+
 ## 2.2.23
 
 ### Patch Changes
