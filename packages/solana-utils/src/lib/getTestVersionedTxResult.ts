@@ -52,8 +52,21 @@ export const getTestVersionedTxResult = async (
     priorityFee,
   )
   console.log('estimatedFee:', estimatedFee)
+
+  const instructionsForFinalTx: TransactionInstruction[] = [
+    ...instructions,
+    ComputeBudgetProgram.setComputeUnitLimit({
+      units: simulationResult.value.unitsConsumed
+        ? Math.trunc(simulationResult.value.unitsConsumed * 1.2)
+        : 200_000,
+    }),
+    ComputeBudgetProgram.setComputeUnitPrice({
+      microLamports: Math.ceil(estimatedFee.priorityFeeEstimate),
+    }),
+  ]
   const result = {
     testVersionedTx,
+    instructionsForFinalTx,
     estimatedFee: estimatedFee.priorityFeeEstimate,
     simulationResult,
     latestBlockhashAndContext,

@@ -32,7 +32,7 @@ export const confirmTransaction = async (
         )
         const versionedTx = new VersionedTransaction(
           new TransactionMessage({
-            instructions,
+            instructions: testVersionedTx.instructionsForFinalTx,
             payerKey: fromWallet.publicKey,
             recentBlockhash:
               testVersionedTx.latestBlockhashAndContext.value.blockhash,
