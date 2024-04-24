@@ -29,7 +29,6 @@ export const addFunctions = async (functionName: string) => {
       await addProjectRegionToSkeetOptions(
         skeetConfig.app.region,
         skeetConfig.app.projectId,
-        skeetConfig.app.projectId,
         functionName,
       )
 

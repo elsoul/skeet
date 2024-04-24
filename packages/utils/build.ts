@@ -15,7 +15,18 @@ import esbuild from 'esbuild'
     define: {
       'process.env.NODE_ENV': `"production"`,
     },
-    external: ['fs', 'path', 'util', 'child_process', 'crypto', 'dotenv'],
+    external: [
+      'fs',
+      'path',
+      'util',
+      'child_process',
+      'crypto',
+      'dotenv',
+      '@metaplex-foundation/mpl-token-metadata',
+      '@metaplex-foundation/umi',
+      '@solana/spl-token',
+      '@solana/web3.js',
+    ],
   })
   console.log('Build complete ⭐️')
 })()
