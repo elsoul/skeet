@@ -5,7 +5,6 @@ import {
   StakeProgram,
   ParsedAccountData,
 } from '@solana/web3.js'
-import { inspect } from 'util'
 
 /**
  * Fetches the list of stake accounts associated with a given wallet address.

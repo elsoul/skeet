@@ -35,7 +35,7 @@
     "test": "vitest",
     "build": "rm -rf dist/ && tsx build.ts && tsc --emitDeclarationOnly && mv -f dist/src/* dist/ && rm -rf dist/src/ && pnpm build-doc",
     "build-doc": "typedoc src/index.ts --out docs",
-    "dev": "npx ts-node -r tsconfig-paths/register --transpile-only src/index.ts"
+    "dev": "npx tsx src/index.ts"
   },
   "dependencies": {
     "date-fns": "3.6.0",
