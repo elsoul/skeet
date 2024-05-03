@@ -5,7 +5,7 @@ category: プレスリリース
 thumbnail: /news/2024/05/02/ELSOULLABOpresentedOnENASE2024.jpg
 ---
 
-ELSOUL LABO B.V.（エルソウルラボ、本社: オランダ・アムステルダム、代表取締役 CEO 川崎文武）は、AI 駆動アプリ開発を簡単に実現するオープンソースの TypeScript 製サーバレスアプリ開発ツール「Skeet」に関する研究論文「Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development」につきまして、2024 年 4 月 28 日(日)、29 日(月)に開催されるソフトウェアエンジニアリングに関する国際カンファレンス ENASE 2024 現地会場(Angers, フランス)で発表しました。
+ELSOUL LABO B.V.（エルソウルラボ、本社: オランダ・アムステルダム、代表取締役 CEO 川崎文武）は、AI 駆動アプリ開発を簡単に実現するオープンソースの TypeScript 製サーバレスアプリ開発ツール「Skeet」に関する研究論文「Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development」につきまして、2024 年 4 月 28 日(日)、29 日(月)に開催されたソフトウェアエンジニアリングに関する国際カンファレンス ENASE 2024 現地会場(Angers, フランス)で発表しました。
 
 ## Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development
 
