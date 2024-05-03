@@ -1,57 +1,54 @@
 ---
 id: elsoul-labo-presented-on-enase-2024
-title: エルソウルラボがソフトウェア国際会議 ENASE 2024 において AI 駆動型アプリケーションフレームワーク Skeet の研究論文を発表
-category: プレスリリース
+title: ELSOUL LABO Presents Research Paper on AI-Driven Application Framework 'Skeet' at International Software Conference ENASE 2024
+category: Press Release
 thumbnail: /news/2024/05/02/ELSOULLABOpresentedOnENASE2024.jpg
 ---
 
-ELSOUL LABO B.V.（エルソウルラボ、本社: オランダ・アムステルダム、代表取締役 CEO 川崎文武）は、AI 駆動アプリ開発を簡単に実現するオープンソースの TypeScript 製サーバレスアプリ開発ツール「Skeet」に関する研究論文「Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development」につきまして、2024 年 4 月 28 日(日)、29 日(月)に開催されるソフトウェアエンジニアリングに関する国際カンファレンス ENASE 2024 現地会場(Angers, フランス)での発表しました。
+ELSOUL LABO B.V. (Headquartered in Amsterdam, Netherlands, CEO Fumitake Kawasaki) has presented a research paper on "Skeet," an open-source TypeScript serverless app development tool that simplifies AI-driven app development. The presentation took place at the International Conference on Software Engineering, ENASE 2024, held on April 28th and 29th at the venue in Angers, France.
 
 ## Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development
 
 ![ENASE 2024 - Skeet](/news/2024/05/02/ENASE2024schedule.jpg)
 
-エルソウルラボの Skeet 開発チームによる研究論文「Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development」が、2024 年 4 月 28 日と 29 日にフランス・Angers で開催された国際ソフトウェアエンジニアリングカンファレンス、ENASE 2024 で発表されました。ジェームス博士が代表として登壇し、その発表は多くの参加者から高い評価を受けました。
+The research paper "Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development" by the Skeet development team from ELSOUL LABO was presented at the International Conference on Software Engineering, ENASE 2024, held in Angers, France on April 28th and 29th. Dr. James Neve, representing our team, delivered the presentation, which received high acclaim from many attendees.
 
-この研究は、現代の AI 駆動型アプリケーション開発をサポートするための軽量なサーバーレスフレームワークを提案しており、学会のプロシーディングに掲載・出版される予定です。また、Google Scholar や Scopus をはじめとする複数の主要な学術文献検索サービスにもインデックスされ、広く研究コミュニティに対して利用可能となります。
+This research proposes a lightweight serverless framework to support modern AI-driven application development, and is scheduled to be published in the conference proceedings. Additionally, it will be indexed in multiple major academic literature search services, including Google Scholar and Scopus, making it widely accessible to the research community.
 
 ![ENASE 2024 - Skeet paper](/news/2024/04/24/ENASE2024AfterTheConference.jpg)
 
-私たちは、この分野における知識の進展と技術革新に貢献できることを誇りに思います。
-今後の研究と開発に向けて更に精進してまいります。
+We are proud to contribute to the advancement of knowledge and technological innovation in this field and are committed to furthering our research and development efforts.
 
-いつも応援いただき誠にありがとうございます。
-引き続きのご支援とご協力をお願い申し上げます。
+Thank you always for your support.
 
 ![ENASE 2024 - Skeet paper](/news/2024/05/02/ENASEelsoulTeam.jpg)
 
-## ENASE (Evaluation of Novel Approaches to Software Engineering) について
+## About ENASE (Evaluation of Novel Approaches to Software Engineering)
 
 ![ENASE 2024](/news/2024/03/04/enase2024.jpg)
 
-ENASE（Evaluation of Novel Approaches to Software Engineering: 新しいソフトウェアエンジニアリングアプローチの評価）の使命は、ソフトウェアエンジニアリングに関する最新の研究成果や IT 業界の経験を議論し、公開することにより、プライムな国際フォーラムとなることです。この会議は、コンピューティングパラダイムが e サービス、クラウドコンピューティング、モバイル接続、ビジネスプロセス、社会参加へと現代的にシフトすることによるシステムとソフトウェア思考の進化を認識しています。
+The mission of ENASE (Evaluation of Novel Approaches to Software Engineering) is to become a prime international forum by discussing and publishing the latest research findings and IT industry experiences in software engineering. The conference recognizes the evolution in systems and software thinking due to the contemporary shift of the computing paradigm to e-services, cloud computing, mobile connectivity, business processes, and societal participation.
 
-最新のソフトウェアエンジニアリングへのアプローチに関する研究を公開し、それらをシステムおよびソフトウェア品質基準に対して評価することにより、ENASE 会議はソフトウェアエンジニアリングの知識と研究を進展させ、サービス指向、ビジネスプロセス駆動、およびユビキタスモバイルコンピューティングを含め、強調します。ENASE は、大規模システムおよびソフトウェアの開発、統合、展開、提供、保守、および進化に関わる研究者および実践者による考慮のために、最も希望が持てるトレンドを特定し、新しい方向性を提案することを目指しています。
+By publishing research on novel approaches to software engineering and evaluating them against systems and software quality criteria, the ENASE conference advances knowledge and research in software engineering, emphasizing service-oriented, business-process driven, and ubiquitous mobile computing. ENASE aims to identify the most hopeful trends and propose new directions for consideration by researchers and practitioners involved in the development, integration, deployment, delivery, maintenance, and evolution of large-scale systems and software.
 
-来年開催される ENASE 2025 はポルトガルのポルトにて開催予定です。
-次回も Skeet の進化について研究発表を行えるよう準備を進めてまいります。
+ENASE 2025 is scheduled to be held in Porto, Portugal next year. We will continue our preparations to present further developments on the Skeet framework at the upcoming conference.
 
 ENASE: https://enase.scitevents.org/
 
-## Skeet - TypeScript サーバーレスフレームワーク
+## Skeet - TypeScript Serverless Framework
 
-![Skeet - TypeScript Serverless Framework](/news/2024/03/01/SkeetV2JA.jpg)
+![Skeet - TypeScript Serverless Framework](/news/2024/03/01/SkeetV2EN.jpg)
 
-Skeet は、TypeScript を使用したオープンソースのサーバーレスアプリ開発ツールで、以下の特徴を備えています：
+Skeet is an open-source serverless app development tool using TypeScript, featuring:
 
-- **インフラ設計や管理の省略:** インフラに関する準備や心配を減らし、開発者がアプリケーションのロジックに集中できる環境を提供。
-- **迅速なアプリケーション開発:** 高速な開発サイクルを実現し、小規模チームでもサービス運用が可能。
-- **必要なものを必要な分だけ:** API サーバーから Web、iOS、Android アプリまで、必要なものを必要な分だけ迅速に開発。
-- **AI サポートの充実:** 開発するアプリへの AI 統合はもちろん、Skeet のツール自体にも AI サポートが組み込まれており、フレームワークを覚えきる前からアプリ開発をスタートすることができます。
-- **dApps、Web3 アプリ対応:** ブロックチェーンを利用したアプリケーション開発にも対応し、モジュール式で拡張可能な現代的アプリケーションフレームワークとして設計されています。
+- **Elimination of Infrastructure Design and Management:** Reduces the preparation and worry about infrastructure, providing an environment where developers can focus on application logic.
+  Rapid Application Development: Achieves a fast development cycle, making service operation possible even for small teams.
+- **Just What You Need, When You Need It:** Quickly develop everything from API servers to Web, iOS, and Android apps, with just what you need.
+- **Comprehensive AI Support:** Not only is AI integration into the apps you develop included, but Skeet's tools themselves are also embedded with AI support, allowing you to start app development before fully mastering the framework.
+- **Support for dApps, Web3 Apps**: Designed as a modular and extendable modern application framework, it supports the development of applications using blockchain technology.
 
-詳しくは公式ドキュメントをご覧ください。また、公式 Discord コミュニティでは、Skeet 開発者が集まり、日々最新情報の公開や議論が行われています。ぜひご参加ください。
+For more information, please visit the official documentation. Also, in the official Discord community, Skeet developers gather to share the latest information and discuss daily. Please join us.
 
-Skeet 公式ドキュメント: https://skeet.dev/ja/
+Skeet Official Documentation: https://skeet.dev/en/
 
-Discord コミュニティ: https://discord.com/invite/H2HeqRq54J
+Discord Community: https://discord.com/invite/H2HeqRq54J
