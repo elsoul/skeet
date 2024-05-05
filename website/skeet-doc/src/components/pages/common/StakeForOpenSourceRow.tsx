@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
-import SolanaMainnetValidatorImage from '@/assets/img/work/ELSOULLABOSolanaMainnetValidator.jpg'
+import SolanaMainnetValidatorImage from '@/assets/img/work/SkeetSolanaMainnetValidator.jpg'
 import NoLossDonationStakingMechanismJA from '@/assets/img/work/NoLossDonationStakingMechanismJA.jpg'
 import NoLossDonationStakingMechanismEN from '@/assets/img/work/NoLossDonationStakingMechanismEN.jpg'
 import { useMemo } from 'react'
@@ -10,9 +10,9 @@ const features = [
     name: 'common:StakeForOpenSourceRow.feature1.title',
     description: 'common:StakeForOpenSourceRow.feature1.description',
     imageSrc: (_isJapanese: boolean) => SolanaMainnetValidatorImage,
-    imageAlt: 'ELSOUL LABO Solana Mainnet Validator',
+    imageAlt: 'Skeet Solana Mainnet Validator',
     imageLink: (_isJapanese: boolean) =>
-      'https://www.validators.app/validators/Fumin2Kx6BjkbUGMi4E7ZkRQg4KmgDv2j5xJBi98nUAD?locale=en&network=mainnet',
+      'https://www.validators.app/validators/LionBN8UQ69Amea77CurDSCnRDVGTMND9oyv74ZteE2?locale=en&network=mainnet',
     button: 'common:StakeForOpenSourceRow.feature1.button',
   },
   {
