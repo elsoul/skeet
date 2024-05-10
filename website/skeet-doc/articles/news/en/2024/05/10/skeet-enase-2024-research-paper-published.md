@@ -5,7 +5,7 @@ category: Press Release
 thumbnail: /news/2024/05/10/SkeetENASE2024ResearchPaperPublished.jpg
 ---
 
-ELSOUL LABO B.V. (headquarters: Amsterdam, Netherlands, CEO: Fumitake Kawasaki) has published a research paper, "Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development," on the open-source TypeScript-based serverless application development tool "Skeet," which simplifies AI-driven app development. The paper was included in the ENASE 2024 conference proceedings, making it widely available to the research community and indexed by major academic literature search services like Google Scholar and Scopus.
+ELSOUL LABO B.V. (headquarters: Amsterdam, Netherlands, CEO: Fumitake Kawasaki) announces the publication of the research paper "Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development" about the open-source TypeScript serverless app development tool "Skeet," which makes AI-driven app development simple. The paper has been included in the ENASE 2024 conference proceedings, and as a result, it will be indexed by major academic literature search services like Google Scholar and Scopus, making it widely available to the research community.
 
 ## Skeet: Towards a Lightweight Serverless Framework Supporting Modern AI-Driven App Development
 
