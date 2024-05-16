@@ -32,7 +32,7 @@ Skeet のハイブリッド開発環境により、データの関係性が重�
 
 ![Skeet Prisma Studio](/news/2023/08/01/prisma-studio.jpg)
 
-Prisma (https://www.prisma.io/) は、SQL(リレーショナルデータベース)を TypeScript や JavaScript で簡単に扱うことができる ORM です。Skeet では Prisma を用いてデータベースのスキーマをシンプルかつ柔軟に定義でき、マイグレーションは自動生成され、開発に役立つ TypeScript の型も提供されます。また、Prisma Studio はデータベースを GUI で操作することを可能にし、開発者がデータの操作や確認を容易に行うことができます。
+Prisma (https://www.prisma.io/?via=ELSOULLABO) は、SQL(リレーショナルデータベース)を TypeScript や JavaScript で簡単に扱うことができる ORM です。Skeet では Prisma を用いてデータベースのスキーマをシンプルかつ柔軟に定義でき、マイグレーションは自動生成され、開発に役立つ TypeScript の型も提供されます。また、Prisma Studio はデータベースを GUI で操作することを可能にし、開発者がデータの操作や確認を容易に行うことができます。
 
 ![Skeet Apollo Console](/news/2023/08/01/apollo-console.png)
 

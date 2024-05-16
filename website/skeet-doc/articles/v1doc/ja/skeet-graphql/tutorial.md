@@ -66,7 +66,7 @@ ORM には Prisma を使います。
 
 - [PostgreSQL](https://www.postgresql.org/)
 - [MySQL](https://www.mysql.com/)
-- [Prisma](https://www.prisma.io/)
+- [Prisma](https://www.prisma.io/?via=ELSOULLABO)
 
 ### Vscode/Cursor の設定の例
 

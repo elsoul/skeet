@@ -21,7 +21,7 @@ Skeet Framework GraphQL バックエンドの基本的な構造は以下の通�
 | ドメイン                         | Cloud DNS                   |
 | セキュリティ                     | Cloud Armor                 |
 
-- [Prisma](https://prisma.io) による RDBMS（リレーショナルデータベース管理システム） の管理をサポート
+- [Prisma](https://www.prisma.io/?via=ELSOULLABO) による RDBMS（リレーショナルデータベース管理システム） の管理をサポート
 - [GitHub Actions](https://github.com/features/actions) による CI/CD をサポート
 - [Firebase Functions](https://firebase.google.com/docs/functions) によるサーバーレスなバックエンドをサポート
 - [Firebase Emulator](https://firebase.google.com/docs/emulator-suite) によるローカル開発をサポート
@@ -70,7 +70,7 @@ Skeet GraphQL は 以下のパッケージを使用しています。
 
 - [GraphQL](https://graphql.org/)
 - [Apollo Server](https://www.apollographql.com/)
-- [Prisma](https://www.prisma.io/)
+- [Prisma](https://www.prisma.io/?via=ELSOULLABO)
 - [Nexus](https://nexusjs.org/)
 - [GraphQL Shield](https://the-guild.dev/graphql/shield)
 

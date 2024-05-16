@@ -21,7 +21,7 @@ The basic structure of the Skeet Framework GraphQL backend is as follows.
 | Domains                          | Cloud DNS                   |
 | Security                         | Cloud Armor                 |
 
-- [Prisma](https://prisma.io) Support for managing RDBMS (Relational Database Management System)
+- [Prisma](https://www.prisma.io/?via=ELSOULLABO) Support for managing RDBMS (Relational Database Management System)
 - [GitHub Actions](https://github.com/features/actions) Support CI/CD
 - [Firebase Functions](https://firebase.google.com/docs/functions) Supports serverless backend
 - [Firebase Emulator](https://firebase.google.com/docs/emulator-suite) Support local development
@@ -70,7 +70,7 @@ Skeet GraphQL uses the following packages.
 
 - [GraphQL](https://graphql.org/)
 - [Apollo Server](https://www.apollographql.com/)
-- [Prisma](https://www.prisma.io/)
+- [Prisma](https://www.prisma.io/?via=ELSOULLABO)
 - [Nexus](https://nexusjs.org/)
 - [GraphQL Shield](https://the-guild.dev/graphql/shield)
 

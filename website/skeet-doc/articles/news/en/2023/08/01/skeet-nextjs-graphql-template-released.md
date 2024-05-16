@@ -32,7 +32,7 @@ With this update, you can now leverage the tools Prisma and Apollo to visualize 
 
 ![Skeet Prisma Studio](/news/2023/08/01/prisma-studio.jpg)
 
-Prisma (https://www.prisma.io/) is an ORM that can easily handle SQL (relational database) with TypeScript and JavaScript. Skeet uses Prisma to provide a simple and flexible way to define your database schema and auto-generated migrations and provides TypeScript types to help with development. In addition, Prisma Studio makes it possible to operate the database with a GUI, allowing developers to easily operate and check data.
+Prisma (https://www.prisma.io/?via=ELSOULLABO) is an ORM that can easily handle SQL (relational database) with TypeScript and JavaScript. Skeet uses Prisma to provide a simple and flexible way to define your database schema and auto-generated migrations and provides TypeScript types to help with development. In addition, Prisma Studio makes it possible to operate the database with a GUI, allowing developers to easily operate and check data.
 
 ![Skeet Apollo Console](/news/2023/08/01/apollo-console.png)
 

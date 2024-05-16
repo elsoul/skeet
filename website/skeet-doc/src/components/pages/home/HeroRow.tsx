@@ -143,7 +143,7 @@ export default function HomeHeroRow() {
                   {
                     name: 'Prisma',
                     logo: prismaLogo,
-                    link: 'https://www.prisma.io/',
+                    link: 'https://www.prisma.io/?via=ELSOULLABO',
                   },
                 ],
                 [
