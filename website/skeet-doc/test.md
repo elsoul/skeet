@@ -40,7 +40,7 @@ For RDBMS, we use PostgreSQL or MySQL. For ORM, we use Prisma.
 
 - [PostgreSQL](https://www.postgresql.org/)
 - [MySQL](https://www.mysql.com/)
-- [Prisma](https://www.prisma.io/)## Installation of Skeet CLI
+- [Prisma](https://www.prisma.io/?via=ELSOULLABO)## Installation of Skeet CLI
 
 Skeet CLI is a command-line tool for efficiently using the Skeet framework. You can install it with the following command.
 

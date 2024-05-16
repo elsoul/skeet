@@ -249,7 +249,7 @@ Commands:
 - [Firebase Authentication - Auth](https://firebase.google.com/docs/auth)
 - [Cloud SQL - Relational Database](https://cloud.google.com/sql)
 - [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
-- [Prisma - ORM](https://www.prisma.io/)
+- [Prisma - ORM](https://www.prisma.io/?via=ELSOULLABO)
 - [TypeScript - TypeCheck](https://www.typescriptlang.org/)
 - [ESLint - Linter](https://eslint.org/)
 - [Prettier - Formatter](https://prettier.io/)
