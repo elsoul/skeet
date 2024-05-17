@@ -14,7 +14,6 @@ import ContactRow from '@/components/pages/common/ContactRow'
 import SkeetDemoRow from '@/components/pages/home/SkeetDemoRow'
 import CTASectionRow from '@/components/pages/common/CTASectionRow'
 import MediaLogoRow from '@/components/pages/common/MediaLogoRow'
-import SkeetRTAYouTubeRow from '@/components/pages/common/SkeetRTAYouTubeRow'
 import WhyOpenSourceDevelopmentRow from '@/components/pages/common/WhyOpenSourceDevelopment'
 import OurWorksRow from '@/components/pages/common/OurWorksRow'
 import AIAutoCodeDevelopmentRow from '@/components/pages/common/AIAutoCodeDevelopmentRow'
@@ -22,6 +21,7 @@ import SolanaMobileStackRow from '@/components/pages/common/SolanaMobileStackRow
 import SkeetArchitectureRow from '@/components/pages/common/SkeetArchitectureRow'
 import BooksRow from '@/components/pages/common/BooksRow'
 import StakeForOpenSourceRow from '@/components/pages/common/StakeForOpenSourceRow'
+import NicoNicoChoKaigi2024Row from '@/components/pages/common/NicoNicoChoKaigi2024Row'
 
 const articleDirName = 'news'
 
