@@ -121,7 +121,7 @@
     "description": "※ These are not intended for investment advice. The information are based on the situation at the time of writing. Please check for the most current information. Always NFA/DYOR.",
     "feature1": {
       "title": "Solana Mainnet Validator",
-      "description": "The Solana mainnet validator operated by Skeet offers a 0% fee for users who stake their SOL tokens, resulting in a stake reward with an annual percentage rate (APR) of 7.58% as of May 16, 2024. As the only Solana data center in India, we are committed to strengthening the network using high-spec machines equipped with 112 vCPUs and 896 GB RAM.",
+      "description": "The Solana mainnet validator operated by Skeet offers a 0% fee for users who stake their SOL tokens, resulting in a stake reward with an annual percentage rate (APR) of 7.58% as of May 16, 2024. To contribute to the decentralization of the Solana network and enable innovation worldwide, we will focus our operations in areas with fewer nodes and data centers.",
       "button": "Go to Validator Detail"
     },
     "feature2": {
@@ -129,5 +129,10 @@
       "description": "When you stake BDLC NFTs on the Epics platform, you can earn $EPCT token rewards. Additionally, an equivalent amount of $EPCT is donated to the open-source project where the NFTs are staked, to be used for future development. This initiative utilizes blockchain technology to enable socially beneficial NFT staking and No Loss Donation, where staking rewards are donated without losing the principal.",
       "button": "Go to NFT Marketplace"
     }
+  },
+  "NicoNicoChoKaigi2024Row": {
+    "subtitle": "Cho Dice Roll in NICONICO CHOKAIGI 2024",
+    "title": "Thank you for visiting!",
+    "description": "Epics DAO participated in Nico Nico Chokaigi 2024, held at Makuhari Messe on April 27th and 28th, and distributed limited edition NFTs to visitors. The event attracted a total of 125,362 attendees, with about 3,000 people visiting the Epics DAO Cho Dice Roll booth, successfully concluding the event with great fanfare."
   }
 }

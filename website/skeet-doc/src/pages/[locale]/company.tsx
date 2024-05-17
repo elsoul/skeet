@@ -8,6 +8,7 @@ import ContactRow from '@/components/pages/common/ContactRow'
 import MissionRow from '@/components/pages/company/MissionRow'
 import OurWorksRow from '@/components/pages/common/OurWorksRow'
 import StakeForOpenSourceRow from '@/components/pages/common/StakeForOpenSourceRow'
+import NicoNicoChoKaigi2024Row from '@/components/pages/common/NicoNicoChoKaigi2024Row'
 
 const seo = {
   pathname: '/company',
@@ -33,6 +34,7 @@ export default function Company() {
       <TeamRow />
       <OurWorksRow />
       <StakeForOpenSourceRow />
+      <NicoNicoChoKaigi2024Row />
       <ContactRow />
     </>
   )
