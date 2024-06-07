@@ -1,4 +1,4 @@
-import { execAsync } from '@skeet-framework/utils'
+import { spawnSync } from 'node:child_process'
 
 export const createSecurityPolicy = async (
   projectId: string,
@@ -16,7 +16,8 @@ export const createSecurityPolicy = async (
       '--project',
       projectId,
     ]
-    return await execAsync(shCmd.join(' '))
+    spawnSync(shCmd.join(' '), { stdio: 'inherit', shell: true })
+    return true
   } catch (error) {
     throw new Error(`createSecurityPolicy: ${error}`)
   }

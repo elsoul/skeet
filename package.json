@@ -25,7 +25,7 @@
     "npm": "please_use_pnpm_instead",
     "node": ">=20"
   },
-  "packageManager": "pnpm@9.0.5",
+  "packageManager": "pnpm@9.1.0",
   "scripts": {
     "ci:version": "changeset version",
     "ci:publish": "changeset publish",

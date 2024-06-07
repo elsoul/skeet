@@ -1,4 +1,4 @@
-import { execAsyncCmd } from '@/lib/execAsyncCmd'
+import { spawnSync } from 'node:child_process'
 
 export const createSecurityPolicyRule = async (
   projectId: string,
@@ -26,5 +26,5 @@ export const createSecurityPolicyRule = async (
       shCmd.push(`--${key}=${value}`)
     }
   }
-  await execAsyncCmd(shCmd)
+  spawnSync(shCmd.join(' '), { stdio: 'inherit', shell: true })
 }
