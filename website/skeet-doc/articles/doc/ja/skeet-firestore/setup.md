@@ -48,7 +48,7 @@ Skeet Framework は SQL と NoSQL を組み合わせてアプリを構築でき�
 ## 🧪 依存パッケージ 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) 5.4.0 以上
-- [Node.js](https://nodejs.org/ja/) 20.11.0 以上
+- [Node.js](https://nodejs.org/ja/) 20.15.1 以上
 - [Pnpm](https://pnpm.io/) 8.0.0 以上
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) 471.0.0 以上
 - [Firebase CLI](https://firebase.google.com/docs/cli) 12.0.1 以上

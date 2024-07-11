@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Constants and configurable variables
-NODE_VERSION="20.11.0"
+NODE_VERSION="20.15.1"
 
 # Set current user and home directory
 CURRENT_USER=$(whoami)
