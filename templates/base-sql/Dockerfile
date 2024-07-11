@@ -1,5 +1,5 @@
-# ベースイメージとして node:20.11-alpine を使用
-FROM node:20.11-alpine AS base
+# ベースイメージとして node:20.15-alpine を使用
+FROM node:20.15-alpine AS base
 
 # PNPMのインストールと設定
 ENV PNPM_HOME="/pnpm"

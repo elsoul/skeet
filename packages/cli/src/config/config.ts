@@ -3,7 +3,7 @@ import { SQLConfig } from './skeetCloud'
 export const SKEET_CONFIG_CLOUD_PATH = './skeet-cloud.config.json'
 
 export enum SKEET_CONFIG {
-  NODE_VERSION = '20.11.1',
+  NODE_VERSION = '20.15.1',
 }
 
 export type TemplateType =

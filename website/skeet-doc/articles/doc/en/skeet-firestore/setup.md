@@ -47,7 +47,7 @@ It also automatically sets security policies to protect your apps using CloudArm
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.4.0
-- [Node.js](https://nodejs.org/ja/) ^20.11.0
+- [Node.js](https://nodejs.org/ja/) ^20.15.1
 - [Pnpm](https://pnpm.io/) ^8.0.0
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^471.0.0
 - [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0

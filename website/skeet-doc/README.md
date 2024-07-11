@@ -51,7 +51,7 @@ Document Web Media for Skeet Framework.
 ```bash
 # Node version (using pnpm)
 $ node -v
-v20.11.0
+v20.15.1
 
 # Install dependencies
 $ pnpm -F skeet-doc i
