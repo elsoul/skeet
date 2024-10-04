@@ -1,0 +1,83 @@
+{
+  "v1doc": {
+    "title": "Skeet v1 Documentation",
+    "menuNav": {
+      "home": "Docs Home",
+      "general": {
+        "groupTitle": "General",
+        "motivation": "Motivation",
+        "overall-architecture": "Overall Architecture"
+      },
+      "skeet-graphql": {
+        "groupTitle": "GraphQL Backend",
+        "quickstart": "Quickstart",
+        "setup": "Setup",
+        "basic-architecture": "Basic Architecture",
+        "initial-deploy": "Deploy for Production",
+        "tutorial": "Tutorial",
+        "zero-to-deploy": "Zero to Deploy",
+        "firebase-user-authentification": "Firebase Login Authentification",
+        "add-worker": "Add Worker",
+        "setup-load-balancer": "Setup Load Balancer",
+        "cloud-armor": "Setup Cloud Armor",
+        "skeet-plugins": "Skeet Plugins"
+      },
+      "skeet-firestore": {
+        "groupTitle": "Firestore Backend",
+        "quickstart": "Quickstart",
+        "setup": "Setup",
+        "basic-architecture": "Basic Architecture",
+        "initial-deploy": "Deploy for Production",
+        "tutorial": "Tutorial",
+        "zero-to-deploy": "Zero to Deploy",
+        "firebase-user-authentification": "Firebase Login Authentification",
+        "add-worker": "Add Worker",
+        "setup-load-balancer": "Setup Load Balancer",
+        "cloud-armor": "Setup Cloud Armor",
+        "skeet-plugins": "Skeet Plugins"
+      },
+      "skeet-ai": {
+        "groupTitle": "Skeet AI",
+        "skeet-ai-basic": "Basic Usage",
+        "prisma": "Prisma Mode",
+        "method": "Method Mode",
+        "typedoc": "TypeDoc Mode",
+        "firestore": "Firestore Mode",
+        "translate": "Translate Mode",
+        "function": "Function Mode"
+      },
+      "plugins": {
+        "groupTitle": "Plugins",
+        "skeet-ai": "Skeet AI Assistant",
+        "skeet-firestore": "Skeet Firestore",
+        "skeet-utils": "Skeet Utils"
+      },
+      "frontend": {
+        "groupTitle": "Frontend",
+        "nextjs-graphql-template": "Next.js + GraphQL",
+        "nextjs-firestore-template": "Next.js + Firestore",
+        "expo-firestore-template": "Expo + Firestore",
+        "solana-firestore-template": "Solana Mobile Stack + Web"
+      },
+      "skeet-cli": {
+        "groupTitle": "Skeet CLI",
+        "create": "Skeet Create",
+        "server": "Skeet Server",
+        "deploy": "Skeet Deploy",
+        "init": "Skeet Init",
+        "yarn": "Skeet Yarn",
+        "login": "Skeet Login",
+        "curl": "Skeet Curl",
+        "generate": "Skeet Generate",
+        "docker": "Skeet Docker",
+        "db": "Skeet DB",
+        "iam": "Skeet iAM",
+        "add": "Skeet Add",
+        "sync": "Skeet Sync",
+        "delete": "Skeet Delete",
+        "list": "Skeet List",
+        "test": "Skeet Test"
+      }
+    }
+  }
+}

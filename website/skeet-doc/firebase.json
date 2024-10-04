@@ -1,7 +1,0 @@
-{
-  "hosting": {
-    "target": "skeet-doc",
-    "public": "out",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
-  }
-}

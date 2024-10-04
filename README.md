@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://skeet.dev/en/">
-    <img src="https://user-images.githubusercontent.com/20677823/221215449-93a7b5a8-5f33-4da8-9dd4-d0713db0a280.png" alt="Skeet" />
+    <img src="https://storage.skeet.dev/ogp.jpg" alt="Skeet" />
   </a>
 
-  <a href="https://twitter.com/intent/follow?screen_name=ELSOUL_LABO2">
-    <img src="https://img.shields.io/twitter/follow/ELSOUL_LABO2.svg?label=Follow%20@ELSOUL_LABO2" alt="Follow @ELSOUL_LABO2" />
+  <a href="https://twitter.com/intent/follow?screen_name=SkeetDev">
+    <img src="https://img.shields.io/twitter/follow/SkeetDev.svg?label=Follow%20@SkeetDev" alt="Follow @SkeetDev" />
   </a>
   <br/>
   <a aria-label="npm version" href="https://www.npmjs.com/package/@skeet-framework/cli">
@@ -23,227 +23,66 @@
 
 📗 Doc: https://skeet.dev/
 
-📱 Demo App: https://skeeter.dev/
-
-## 💃 What's Skeet? 🕺
-
-⚡️ AI Auto-code Development ⚡️
-
-Skeet is an open-source app development solution capable of AI auto-code development.
-
-It allows for rapid development of Web/iOS/Android apps and supports a wide range of developments, including AI-powered chatbot apps, Web3 apps utilizing blockchain, and dApps.
-
-AI is also used in the development flow, overcoming the learning curve that is a challenge in software frameworks.
-
-Developers can quickly start building functional apps and publish them in the cloud.
-
-## Overall Architecture Diagram
-
-![Skeet Architecture](https://storage.googleapis.com/skeet-assets/imgs/SkeetArchitecture.png)
-
-Skeet is an open-source framework for serverless app development crafted in TypeScript.
-
-It offers the flexibility to select functionalities and the ability to build additional web or mobile interfaces and sophisticated data analytics foundations later on.
-
-It supports Web3 development, eliminates complex infrastructure management, and facilitates auto-scaling and pay-as-you-go pricing.
-
-The Skeet CLI leverages generative AI to reduce overall development costs, is ready for CI/CD automation, and provides enhanced security features.
-
-Currently, it supports development on Google Cloud and Firebase.
-
-## Installation
-
-Oneliner installation (Install nodenv, node, npm, @skeet-framework/cli)
-
-```bash
-$ sh -c "$(curl -sSfL https://storage.googleapis.com/skeet-assets/resources/install-v2.0.5)"
-```
-
-If you already have Node.js installed, you can install Skeet CLI with npm:
-
-```bash
-$ pnpm add -g firebase-tools
-$ pnpm add -g @skeet-framework/cli
-```
-
-## Enabling Google Cloud VertexAI/OpenAI
-
-Create a new project in Google Cloud Platform and enable VertexAI.
-You will need OpenAI API Key to use OpenAI.
-
-Use the following command to enable VertexAI:
-
-```bash
-$ skeet init
-```
-
-```bash
-$ skeet ai --help
-```
-
-or you can choose AI engine by passing options
-
-```bash
-$ skeet ai --openai
-```
-
-**You need to set CHAT_GPT_ORG/CHAT_GPT_KEY in your .env**
-
-Then you can ask Skeet AI Assistant to create a new function, method, typedoc and more.
-
-[![SkeetAI](https://storage.googleapis.com/skeet-assets/animation/skeet-ai-short.gif)](https://www.youtube.com/watch?v=e7J5HDhtpE4)
-
-YouTube Video Link: https://www.youtube.com/watch?v=e7J5HDhtpE4
-
-## 🧪 Dependency 🧪
-
-- [TypeScript](https://www.typescriptlang.org/) ^5.0.0
-- [Node.js](https://nodejs.org/ja/) ^20.11.0
-- [PNPM](https://pnpm.io/) ^8.0.0
-- [GitHub CLI](https://cli.github.com/) ^2.29.0
-
-For Firebase Template
-
-- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
-- [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0
-- [Java](https://www.java.com/en/download/)
-
-## 📗 Usage 📗
-
-### ① Install dependencies
-
-```bash
-$ curl -fsSL https://get.pnpm.io/install.sh | sh -
-$ pnpm add -g @skeet-framework/cli
-$ pnpm add -g firebase-tools
-```
-
-### ② Create Skeet App
-
-```bash
-$ skeet new
-? Enter the name of the app (skeet-app)
-```
-
-### ③ Initialize Firebase/Google Cloud Project
-
-```bash
-$ skeet init
-Initializing Cloud Configurations...
-? What's your GCP Project ID (skeet-framework)
-```
-
-### ④ Call Your AI Assistant
-
-Now you can call your AI Assistant to create a new function, method, typedoc, and more.
-
-```bash
-$ skeet ai --help
-```
-
-or You can call check command to check your configurations
-
-```bash
-$ skeet check
-```
-
-## Add Build-in Template
-
-You can add a build-in template to your App.
-
-```bash
-$ skeet add --help
-```
-
-![Solana Mobile Stack](https://storage.googleapis.com/skeet-assets/animation/SkeetSolanaMobileStack.gif)
-
-![Chatbot](https://storage.googleapis.com/skeet-assets/animation/skeet-chat-latest.gif)
-
-### Run Skeet App
-
-```bash
-$ cd <appName>
-$ skeet s
-```
-
-### Test Firebase Functions Endpoint
-
-To call Firebase Functions Endpoint, you can use the following command:
-
-e.g. Call root() function
-
-```bash
-$ skeet c
-firebase > root()
-```
-
-## Development Environment
-
-Now you have both frontend and backend running locally ⭐️
-
-📲 Frontend(Next.js) - [http://localhost:4200/](http://localhost:4200/)
-
-📲 Frontend(Expo) - [http://localhost:19006/](http://localhost:19006/)
-
-💻 Firebase Emulator - [http://localhost:4000/](http://localhost:4000/)
-
-## Skeet Document
-
-- [https://skeet.dev/](https://skeet.dev/)
-
-## Skeet CLI
-
-```bash
-$ skeet --help
-Usage: skeet [options] [command]
-
-CLI for Skeet - Full-stack TypeScript Serverless framework
-
-Options:
-  -V, --version                output the version number
-  -h, --help                   display help for command
-
-Commands:
-  create [options] <appName>   Create Skeet Framework App
-  server|s [options]           Run Skeet App
-  deploy [options]             Deploy Skeet APP to Firebase
-  init [options]               Initialize Google Cloud Setups
-  login                        Skeet Login Command - Create Firebase Login Token
-  curl [options] <methodName>  Skeet Curl Command - Call Firebase Functions Endpoint
-  g|generate                   Skeet Generate Comannd
-  log [options]                Deploy Skeet APP to Firebase
-  docker                       Docker commands
-  db                           Database commands
-  iam                          Skeet IAM Comannd to setup Google Cloud Platform
-  add                          Skeet Add Comannd to add new functions
-  sync                         Skeet Sync Comannd to sync backend and frontend
-  delete|d                     Skeet Delete Command
-  get                          Get Skeet App List
-  ai [options]                 Call Skeet AI Assistant
-  config                       Config commands
-  run [options]                Run commands
-  new|n [options]              Create Skeet Framework App
-  console|c                    Call Firebase Console to Test Functions
-  check                        Check Cloud Configurations
-  help [command]               display help for command
-```
-
-## Powered by
-
-- [Firebase - Serverless Platform](https://firebase.google.com/)
-- [Firestore - NoSQL Database](https://firebase.google.com/docs/firestore)
-- [Firebase Cloud Functions 2nd Gen - FaaS](https://firebase.google.com/docs/functions)
-- [Firebase Storage - Cloud Storage](https://firebase.google.com/docs/storage)
-- [Firebase Authentication - Auth](https://firebase.google.com/docs/auth)
-- [Cloud SQL - Relational Database](https://cloud.google.com/sql)
-- [Cloud Load Balancing - Routing](https://cloud.google.com/load-balancing)
-- [Prisma - ORM](https://www.prisma.io/?via=ELSOULLABO)
-- [TypeScript - TypeCheck](https://www.typescriptlang.org/)
-- [Vitest - Test](https://vitest.dev/)
-- [ESLint - Linter](https://eslint.org/)
-- [Prettier - Formatter](https://prettier.io/)
-- [Next.js (React) - Web Frontend(SSG)](https://nextjs.org/)
-- [Expo (React Native) - Mobile App](https://expo.dev/)
+📱 Demo App (Edge Runtime): https://app.skeeter.dev/
+
+🌍️ SSG Demo: https://skeeter.dev/
+
+Repository for Demo App: https://github.com/elsoul/skeet-v3-next-edge-rc
+
+Repository for SSG Demo: https://github.com/elsoul/skeet-v3-next-ssg-rc
+
+## The Complete Web Framework for Modern Developers
+
+With Skeet v3, we’ve fully migrated to Cloudflare, eliminating cold starts and introducing support for edge runtime. It has been transformed into a serverless-native architecture, optimized for the modern web.
+
+🚧 The Skeet development team is currently focused on building v3. Active development is underway.
+
+For the latest updates, join our official Discord community:
+https://discord.gg/H2HeqRq54J
+
+For documentation on versions running on Firebase (v1, v2), please refer to the following links:
+
+v1 Documentation: https://skeet.dev/en/v1doc/general/overall-architecture
+
+v2 Documentation: https://skeet.dev/en/v2doc/general/overall-architecture
+
+## Built with
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [pnpm](https://pnpm.io/)
+- [Cloudflare Workers](https://workers.cloudflare.com/)
+- [Cloudflare KV](https://developers.cloudflare.com/kv/)
+- [Cloudflare Durable Objects](https://developers.cloudflare.com/durable-objects/)
+- [Cloudflare D1](https://developers.cloudflare.com/d1/)
+- [Cloudflare Pages](https://pages.cloudflare.com/)
+- [Wrangler](https://developers.cloudflare.com/workers/wrangler/)
+- [`@cloudflare/next-on-pages`](https://github.com/cloudflare/next-on-pages)
+- [Neon](https://neon.tech/)
+- [Prisma](https://www.prisma.io/)
+- [Next.js](https://nextjs.org/)
+- [Auth.js](https://authjs.dev/)
+- [Resend](https://resend.com/docs/introduction)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [next-intl](https://next-intl-docs.vercel.app/)
+- [React Compiler](https://react.dev/learn/react-compiler)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
+- [Jotai](https://jotai.org/)
+- [Vercel AI SDK](https://sdk.vercel.ai/docs/introduction)
+- [Next Sitemap](https://github.com/iamvishnusankar/next-sitemap)
+
+## References
+
+- [Next.js App Routing](https://nextjs.org/docs/app/building-your-application/routing)
+- [React Server Components](https://react.dev/reference/rsc/server-components)
+- [React Server Actions](https://react.dev/reference/rsc/server-actions)
+- [The Edge Runtime](https://edge-runtime.vercel.app/)
+- [What is edge computing?](https://www.cloudflare.com/learning/serverless/glossary/what-is-edge-computing/)
+- [Static Site Generation (SSG)](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)
+- [Static Exports](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
 
 ## Contributing
 

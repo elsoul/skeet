@@ -1,0 +1,39 @@
+name: SkeetDev
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'website/skeet-dev/**'
+      - '.github/workflows/skeet-dev.yml'
+
+jobs:
+  build:
+    name: Build and Deploy
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Deploy to Cloudflare
+        run: pnpm run -F skeet-dev deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
