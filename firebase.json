@@ -54,11 +54,6 @@
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     },
     {
-      "target": "skeet-doc",
-      "public": "website/skeet-doc/out",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
-    },
-    {
       "target": "skeet-cloud-task",
       "public": "packages/cloud-task/docs",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
