@@ -62,14 +62,14 @@ const DocMenuItem = ({ item }: DocMenuItemProps) => {
   const isActivePath = (path: string) => pathname.includes(path)
 
   return (
-    <li className="mt-3 w-full">
+    <li className="mt-4 w-full">
       <div
         className="flex cursor-pointer items-center justify-between gap-2 py-0.5 hover:opacity-70"
         onClick={() => setIsOpen(!item.subItems ? false : !isOpen)}
       >
         {item.subItems ? (
           <>
-            <span className="flex-1 text-sm text-zinc-500 dark:text-zinc-300">
+            <span className="flex-1 text-sm text-zinc-600 dark:text-zinc-200">
               {t(item.title)}
             </span>
             {isOpen ? (
@@ -96,7 +96,7 @@ const DocMenuItem = ({ item }: DocMenuItemProps) => {
         )}
       </div>
       {isOpen && item.subItems && (
-        <ul className="ml-1.5 mt-1 w-full border-l border-zinc-300 pl-3 dark:border-zinc-500">
+        <ul className="my-2 ml-1 w-full border-l border-zinc-300 pl-4 dark:border-zinc-500">
           {item.subItems.map((subItem) => (
             <li key={subItem.title} className="mb-1 w-full">
               <Link href={subItem.route} className="w-full">
@@ -104,8 +104,8 @@ const DocMenuItem = ({ item }: DocMenuItemProps) => {
                   className={cn(
                     isActivePath(subItem.route)
                       ? 'text-blue-500 dark:text-blue-300'
-                      : 'text-zinc-500 dark:text-zinc-300',
-                    'w-full py-1.5 text-sm hover:opacity-70',
+                      : 'text-zinc-400 dark:text-zinc-400',
+                    'w-full py-2 text-sm hover:opacity-70',
                   )}
                 >
                   {t(subItem.title)}
