@@ -46,12 +46,12 @@ export default function Toc({ toc, activeItemIds, modalFunction }: Props) {
     <>
       {toc.length > 0 && (
         <>
-          <div className="p-4 lg:ml-4">
+          <div className="p-4 lg:ml-6">
             <p className="text-base font-semibold tracking-tight">
               {t('common.tableOfContents')}
             </p>
           </div>
-          <div className="border-l p-4 lg:ml-4">
+          <div className="border-l px-4 py-1 lg:ml-6">
             <nav className="space-y-1" aria-label="Sidebar">
               {toc.map((item) => (
                 <a
@@ -61,10 +61,8 @@ export default function Toc({ toc, activeItemIds, modalFunction }: Props) {
                   className={clsx(
                     activeItemIds.includes(item.id)
                       ? 'text-blue-500 dark:text-blue-300'
-                      : 'text-zinc-500 dark:text-zinc-300',
-                    `block py-1.5 text-sm hover:opacity-70 ml-${
-                      item.depth > 2 ? 3 : 0
-                    }`,
+                      : 'text-zinc-500 dark:text-zinc-300 md:text-zinc-400 md:dark:text-zinc-400',
+                    `block py-2 text-sm hover:opacity-70 ml-${item.depth * 4}`,
                   )}
                   aria-current={
                     activeItemIds.includes(item.id) ? 'location' : undefined
