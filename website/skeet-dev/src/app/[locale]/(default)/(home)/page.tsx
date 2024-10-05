@@ -6,6 +6,9 @@ import { useTranslations } from 'next-intl'
 import HomeHeroRow from './HomeHeroRow'
 import CTARow from '@/components/rows/CTARow'
 import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
+import GlobalEdgeServersRow from './GlobalEdgeServersRow'
+import ManageableMicroServicesRow from './ManageableMicroServicesRow'
+import Web3CompatibleRow from './Web3CompatibleRow'
 
 const { generateMetadata } = getDataForPageByFilename(__filename)
 export { generateMetadata }
@@ -23,6 +26,9 @@ export default function HomePage({ params: { locale } }: PageProps) {
   return (
     <>
       <HomeHeroRow />
+      <GlobalEdgeServersRow />
+      <ManageableMicroServicesRow />
+      <Web3CompatibleRow />
       <CTARow />
       <ProductsSlideRow />
       <h2 className="my-6 px-3 text-center text-3xl font-bold tracking-tight">
