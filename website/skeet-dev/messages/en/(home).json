@@ -25,8 +25,8 @@
       "title": "Into the World of Web3",
       "summary": "Don’t worry. You can develop just as before using REST APIs and SDKs with TypeScript.",
       "description": "Skeet’s rapid app development platform allows you to easily adapt to Web3 simply by adding a Web3 adapter. Once you start using Skeet, you're already prepared for Web3. We provide extensive support for Solana, a blockchain beloved by our development team for its technological excellence. With tailored boilerplates and code generations for various situations, you’ll find that development is smooth and efficient.",
-      "button1": "Join Us",
-      "button2": "Documentation"
+      "button1": "Solana dApp Demo",
+      "button2": "GitHub Repo"
     }
   }
 }
