@@ -27,9 +27,11 @@
 
 🌍️ SSG Demo: https://skeeter.dev/
 
-Repository for Demo App: https://github.com/elsoul/skeet-v3-next-edge-rc
+Repository for AI Chat App Demo: https://github.com/elsoul/skeet-v3-next-edge-rc
 
 Repository for SSG Demo: https://github.com/elsoul/skeet-v3-next-ssg-rc
+
+Repository for Solana dApp Demo: https://github.com/elsoul/skeet-v3-solana-dapp-rc
 
 ## The Complete Web Framework for Modern Developers
 

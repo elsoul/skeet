@@ -27,3 +27,5 @@ Skeet v2 ドキュメント: https://skeet.dev/ja/v2doc/general/overall-architec
 Skeet v3 Edge Runtime Next.js: https://github.com/elsoul/skeet-v3-next-edge-rc
 
 Skeet v3 SSG Next.js: https://github.com/elsoul/skeet-v3-next-ssg-rc
+
+Skeet v3 Solana dApp: https://github.com/elsoul/skeet-v3-solana-dapp-rc

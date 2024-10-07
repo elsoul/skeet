@@ -6,7 +6,7 @@ import { Link } from '@/navigation'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import appInfo from '@appInfo'
-import { faDiscord } from '@fortawesome/free-brands-svg-icons'
+import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DEFAULT_PATHS } from '../defaultNavs'
 
@@ -55,23 +55,22 @@ export default function Web3CompatibleRow() {
             </p>
             <div className="flex flex-wrap items-center justify-start gap-3 pt-6">
               <Link
-                href={appInfo.discordInviteURL}
+                href={'https://solana-dapp.skeeter.dev/'}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button>
+                <Button>{t('(home).Web3CompatibleRow.button1')}</Button>
+              </Link>
+              <Link
+                href="https://github.com/elsoul/skeet-v3-solana-dapp-rc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline">
                   {
                     // @ts-ignore
-                    <FontAwesomeIcon
-                      icon={faDiscord}
-                      className="mr-2 h-5 w-5"
-                    />
+                    <FontAwesomeIcon icon={faGithub} className="mr-2 h-5 w-5" />
                   }
-                  {t('(home).Web3CompatibleRow.button1')}
-                </Button>
-              </Link>
-              <Link href={DEFAULT_PATHS.doc}>
-                <Button variant="outline">
                   {t('(home).Web3CompatibleRow.button2')}
                 </Button>
               </Link>
