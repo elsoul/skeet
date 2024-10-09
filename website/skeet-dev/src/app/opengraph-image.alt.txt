@@ -1,1 +1,1 @@
-elSOL - Solana LST
+Skeet - TypeScript Serverless Framework
