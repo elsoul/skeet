@@ -8,7 +8,7 @@ description: Skeet - TypeScript Serverless Framework. The Complete Web Framework
 
 ## The Complete Web Framework for Modern Developers
 
-Skeet v3では、Cloudflareへの完全な移行を実現し、コールドスタートを排除するとともに、エッジランタイムへのサポートを導入しました。これにより、サーバーレスネイティブなアーキテクチャへと変貌し、現代のウェブに最適化されています。
+Skeet v3では、Cloudflareへの完全な移行を実現し、コールドスタートを排除するとともに、エッジランタイムのサポートを導入しました。これにより、Edge-Native なアーキテクチャへと変貌し、現代のウェブに最適化されています。
 
 🚧 現在、Skeet開発チームはv3の開発に注力しており、活発な開発が進行中です。
 
