@@ -17,7 +17,7 @@ export default function Web3CompatibleRow() {
       <div className="relative mx-auto max-w-7xl px-8 py-24 sm:px-12 md:py-60 lg:px-3">
         <h2
           className={cn(
-            'py-2 text-center text-2xl font-bold tracking-tight sm:text-3xl md:text-5xl lg:text-6xl',
+            'py-2 text-center text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl',
             mainShardGradation,
           )}
         >

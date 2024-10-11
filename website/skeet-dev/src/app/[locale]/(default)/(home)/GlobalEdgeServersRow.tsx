@@ -16,14 +16,14 @@ export default function GlobalEdgeServersRow() {
       <div className="relative mx-auto max-w-7xl px-8 py-24 sm:px-12 md:py-60 lg:px-3">
         <h2
           className={cn(
-            'py-2 text-center text-2xl font-bold tracking-tight sm:text-3xl md:text-5xl lg:text-6xl',
+            'py-2 text-center text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl',
             mainShardGradation,
           )}
         >
           {t('(home).GlobalEdgeServersRow.title')}
         </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-7">
-          <div className="px-16 py-24 sm:col-span-3 sm:px-0">
+          <div className="py-8 sm:col-span-3 sm:py-24">
             <div
               className={cn(
                 'dark:bg-gradient-to-b',
