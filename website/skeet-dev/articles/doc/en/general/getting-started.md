@@ -8,7 +8,7 @@ description: Skeet - TypeScript Serverless Framework. The Complete Web Framework
 
 ## The Complete Web Framework for Modern Developers
 
-With Skeet v3, we’ve fully migrated to Cloudflare, eliminating cold starts and introducing support for edge runtime. It has been transformed into a serverless-native architecture, optimized for the modern web.
+With Skeet v3, we’ve fully migrated to Cloudflare, eliminating cold starts and introducing support for edge runtime. It has been transformed into a edge-native architecture, optimized for the modern web.
 
 🚧 The Skeet development team is currently focused on building v3. Active development is underway.
 
