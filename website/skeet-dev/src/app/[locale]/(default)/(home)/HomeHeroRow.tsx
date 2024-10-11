@@ -3,6 +3,8 @@
 import {
   CloudFlareLogoHorizontal,
   CloudFlareLogoInvertHorizontal,
+  DenoLogoHorizontal,
+  DenoLogoInvertHorizontal,
   ExpoLogoHorizontal,
   ExpoLogoInvertHorizontal,
   NeonLogoHorizontal,
@@ -15,7 +17,6 @@ import {
   PrismaLogoInvertHorizontal,
   SolanaLogoHorizontal,
   SolanaLogoInvertHorizontal,
-  TypeScriptLogoHorizontal,
 } from '@/assets/img'
 import { Button } from '@/components/ui/button'
 import appInfo from '@appInfo'
@@ -38,17 +39,18 @@ const logos = [
     href: 'https://cloudflare.com/',
   },
   {
+    title: 'Deno',
+    logo: DenoLogoHorizontal,
+    logoInvert: DenoLogoInvertHorizontal,
+    href: 'https://deno.com/',
+  },
+  {
     title: 'Neon',
     logo: NeonLogoHorizontal,
     logoInvert: NeonLogoInvertHorizontal,
     href: 'https://neon.tech/',
   },
-  {
-    title: 'TypeScript',
-    logo: TypeScriptLogoHorizontal,
-    logoInvert: TypeScriptLogoHorizontal,
-    href: 'https://typescriptlang.org/',
-  },
+
   {
     title: 'Prisma',
     logo: PrismaLogoHorizontal,
