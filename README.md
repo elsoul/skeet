@@ -35,7 +35,7 @@ Repository for Solana dApp Demo: https://github.com/elsoul/skeet-v3-solana-dapp-
 
 ## The Complete Web Framework for Modern Developers
 
-With Skeet v3, we’ve fully migrated to Cloudflare, eliminating cold starts and introducing support for edge runtime. It has been transformed into a serverless-native architecture, optimized for the modern web.
+With Skeet v3, we’ve fully migrated to Cloudflare, eliminating cold starts and introducing support for edge runtime. It has been transformed into a edge-native architecture, optimized for the modern web.
 
 🚧 The Skeet development team is currently focused on building v3. Active development is underway.
 
@@ -50,10 +50,8 @@ v2 Documentation: https://skeet.dev/en/v2doc/general/overall-architecture
 
 ## Built with
 
+- [Deno](https://deno.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-- [pnpm](https://pnpm.io/)
 - [Cloudflare Workers](https://workers.cloudflare.com/)
 - [Cloudflare KV](https://developers.cloudflare.com/kv/)
 - [Cloudflare Durable Objects](https://developers.cloudflare.com/durable-objects/)

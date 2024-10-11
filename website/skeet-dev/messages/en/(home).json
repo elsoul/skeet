@@ -8,7 +8,7 @@
       "subtitle1": "Your productivity shines even brighter."
     },
     "GlobalEdgeServersRow": {
-      "title": "The Full Power of Serverless",
+      "title": "Built for the edge",
       "summary": "Globally scalable from the moment you deploy. No more waiting for cold starts.",
       "description": "Apps created with Skeet can be deployed instantly and are scalable globally from the moment they go live. The cold start delay, a common issue with serverless, has been resolved. With over 300 edge servers around the world, your app will respond immediately to users anywhere. You'll also be freed from the complexities of regional management, enjoying a simple yet powerful deployment experience.",
       "button1": "Join Us",

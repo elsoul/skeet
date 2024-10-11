@@ -1,7 +1,7 @@
 {
   "name": "skeet-framework",
   "version": "2.0.0-rc",
-  "description": "Skeet Serverless Framework",
+  "description": "Skeet: Edge-Native Web Framework",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
@@ -9,14 +9,13 @@
   },
   "private": false,
   "keywords": [
-    "openai",
-    "firestore",
-    "firebase",
-    "GCP",
-    "TypeScript",
+    "Cloudflare",
+    "Deno",
+    "Neon",
     "Prisma",
     "framework",
-    "AI"
+    "Next.js",
+    "Expo"
   ],
   "author": "ELSOUL LABO B.V.",
   "license": "Apache-2.0",

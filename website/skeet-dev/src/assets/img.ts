@@ -14,6 +14,8 @@ import NextLogoInvertHorizontal from '@/assets/img/logo/partners/NextLogoInvertH
 import PrismaLogoHorizontal from '@/assets/img/logo/partners/PrismaLogoHorizontal.svg'
 import PrismaLogoInvertHorizontal from '@/assets/img/logo/partners/PrismaLogoInvertHorizontal.svg'
 import TypeScriptLogoHorizontal from '@/assets/img/logo/partners/TypeScriptLogoHorizontal.svg'
+import DenoLogoHorizontal from '@/assets/img/logo/partners/DenoLogoHorizontal.svg'
+import DenoLogoInvertHorizontal from '@/assets/img/logo/partners/DenoLogoInvertHorizontal.svg'
 
 import OPOSClimate from '@/assets/img/icon/opos/Climate.png'
 import OPOSClosedCube from '@/assets/img/icon/opos/ClosedCube.png'
@@ -54,6 +56,8 @@ export {
   PrismaLogoHorizontal,
   PrismaLogoInvertHorizontal,
   TypeScriptLogoHorizontal,
+  DenoLogoHorizontal,
+  DenoLogoInvertHorizontal,
   OPOSClimate,
   OPOSClosedCube,
   OPOSCompressedCoil,
