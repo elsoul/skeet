@@ -3,7 +3,7 @@
   "nodeModulesDir": "auto",
   "tasks": {
     "cli:run": "deno run -A --watch packages/cli/src/index.ts",
-    "deploy:cli": "cd packages/cli && deno deploy"
+    "deploy:cli": "cd packages/cli && deno publish"
   },
   "imports": {
     "@common/": "./common/",
