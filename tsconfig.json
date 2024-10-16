@@ -1,5 +1,0 @@
-{
-  "extends": "./tsconfig.utils.typecheck.json",
-  "include": ["./**/*", ".eslintrc.js", "common/**/*"],
-  "exclude": ["**/dist", "**/build", "**/fixtures", "**/node_modules"]
-}

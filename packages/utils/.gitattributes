@@ -1,2 +1,0 @@
-.env filter=git-crypt diff=git-crypt
-skeet-cloud.config.ts filter=git-crypt diff=git-crypt

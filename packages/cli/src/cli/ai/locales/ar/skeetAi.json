@@ -1,86 +1,0 @@
-{
-  "common": {
-    "you": "أنت",
-    "start": "ماذا يمكنني أن أفعل لك؟",
-    "aiType": "نوع الذكاء الاصطناعي",
-    "model": "النموذج",
-    "maxToken": "الحد الأقصى للرمز",
-    "temperature": "درجة الحرارة",
-    "skeetAiModeText": "وضع Skeet AI\n `$ <mode>` لتغيير وضع الذكاء الاصطناعي",
-    "isSelected": "تم الاختيار 🤖 (اكتب 'q' للخروج)",
-    "shutdown": "يتم الإغلاق",
-    "howAboutThis": "ما رأيك في هذا؟\n\n",
-    "updateFile": "يرجى تحديث ملفك",
-    "getFileDesc": "تظهر هذه الأمر أحدث الملفات المحدثة",
-    "currentSet": "المجموعة الحالية",
-    "areYouReady": "هل أنت مستعد للتشغيل؟",
-    "firestoreMode": "🔥 وضع إنشاء نموذج Firestore 🔥",
-    "firestoreModeDesc": "يرجى وصف حالة استخدام Firestore الخاصة بك.",
-    "MayICreateFile": "هل يمكنني إنشاء هذا الملف لك؟",
-    "MayIUpdateFile": "هل يمكنني تحديث هذا الملف لك؟",
-    "MayIAddDoc": "هل يمكنني إضافة Typedoc لهذه الطريقة؟",
-    "created": "✔️ تم الإنشاء",
-    "thenRun": "\nثم تشغيل:",
-    "mayISyncModel": "هل يمكنني مزامنة النماذج الآن؟",
-    "confirmSyncModel": "❓ هل يمكنني مزامنة النماذج الآن؟",
-    "example": "مثلا. ",
-    "addedDoc": "✔️ تمت إضافة Typedoc"
-  },
-  "warning": {
-    "temperature": "⚠️ يجب أن تكون الحرارة بين 0 و 1 ⚠️",
-    "gptKey": "⚠️ الرجاء تعيين CHAT_GPT_ORG و CHAT_GPT_KEY ⚠️",
-    "gcpKey": "⚠️ الرجاء تعيين GCLOUD_PROJECT و REGION ⚠️"
-  },
-  "skeetMode": {},
-  "typedocMode": {
-    "init": "📚 وضع Typedoc 📚",
-    "modeDesc": "الرجاء تحديد مسار الملف لإنشاء typedoc.",
-    "ExitingMode": "الخروج من وضع Typedoc"
-  },
-  "translateMode": {
-    "init": "🌐 وضع الترجمة 🌐",
-    "modeDesc": "قراءة tmp/ai/translate.json ...",
-    "currentSet": "المجموعة الحالية",
-    "ExitingMode": "الخروج من وضع الترجمة"
-  },
-  "firestoreMode": {
-    "init": "🔥 وضع إنشاء نموذج Firestore 🔥",
-    "modeDesc": "يرجى وصف حالة الاستخدام الخاصة بك لـ Firestore.",
-    "example1": "أريد إنشاء تطبيق مدونة.",
-    "example2": "أريد إنشاء نموذج جديد يسمى Client مع الحقول التالية: id, name, email, password, createdAt, updatedAt.",
-    "ExitingMode": "الخروج من وضع Firestore"
-  },
-  "methodMode": {
-    "init": "📝 وضع الطريقة 📝",
-    "modeDesc": "يرجى وصف حالة الاستخدام الخاصة بطريقتك",
-    "list1": "حدد Firebase Function لإضافة طريقة جديدة",
-    "example1": "إنشاء وظيفة تجد الرقم الأكبر في مجموعة.",
-    "ExitingMode": "الخروج من وضع الطريقة"
-  },
-  "functionMode": {
-    "init": "🔥 Firebase Function Generating Mode 🔥",
-    "modeDesc": "Select Firebase Function Instance Type",
-    "modeDesc2": "Please describe your Firebase Function use case.",
-    "list1": "Select Firebase Function to add new method",
-    "http": "- Triggered by http request",
-    "auth": "- Triggered by User Auth event",
-    "firestore": "- Triggered by Firestore event",
-    "pubsub": "- Triggered by PubSub event",
-    "schedule": "- Triggered by Schedule event",
-    "example1": "I want to create a blog app.",
-    "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
-    "ExitingMode": "Exiting Function Mode"
-  },
-  "prismaMode": {
-    "init": "🤖 Prisma Scheme Generating Mode 🤖",
-    "mayISyncModel": "May I sync models now ?",
-    "modeDesc": "Please describe your Prisma use case.",
-    "example1": "I want to create a blog app.",
-    "example2": "I want to create a new model called Client with the following fields: id, name, email, password, createdAt, updatedAt.",
-    "ExitingMode": "Exiting Prisma Mode",
-    "warning": "(يتم عرض الأجزاء الجديدة فقط من النماذج. سيضيف تنسيق prisma (وهناك أيضًا مكون إضافي vscode) العلاقات تلقائيًا إلى النماذج الموجودة.)\n\n",
-    "schemaConfirm": "\n❓ هل هذا المخطط مناسب لك؟",
-    "migrationConfirm": "\n❓ هل تريد مني تشغيل الترحيل الآن؟",
-    "scaffoldConfirm": "\n❓ هل تريد مني بناء النماذج الآن؟"
-  }
-}

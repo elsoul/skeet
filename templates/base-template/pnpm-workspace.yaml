@@ -1,6 +1,0 @@
-packages:
-  - "functions/*"
-  - "website/*"
-  - "sql/*"
-  - "webapp/*"
-  - "mobile/*"

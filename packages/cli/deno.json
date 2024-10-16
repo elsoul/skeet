@@ -1,0 +1,23 @@
+{
+  "name": "@skeet-framework/cli",
+  "version": "0.0.1",
+  "exports": {
+    "./src/index.ts": "./src/index.ts"
+  },
+  "tasks": {
+    "publish": "deno publish",
+    "start": "deno run -A src/index.ts",
+    "install": "deno install -Afg src/index.ts --name saver --import-map=deno.json --allow-scripts=npm:bigint-buffer@1.1.5,npm:bufferutil@4.0.8,npm:utf-8-validate@5.0.10"
+  },
+  "imports": {
+    "@/": "./src/",
+    "@/lib": "./src/lib/",
+    "@common/": "../../common/",
+    "/": "./",
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "fmt": {
+    "semiColons": false,
+    "singleQuote": true
+  }
+}

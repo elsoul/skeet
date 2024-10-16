@@ -1,0 +1,63 @@
+{
+  "version": "4",
+  "specifiers": {
+    "npm:chalk@5": "5.3.0",
+    "npm:commander@*": "12.1.0",
+    "npm:commander@12.0.0": "12.0.0"
+  },
+  "npm": {
+    "chalk@5.3.0": {
+      "integrity": "sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w=="
+    },
+    "commander@12.0.0": {
+      "integrity": "sha512-MwVNWlYjDTtOjX5PiD7o5pK0UrFU/OYgcJfjjK4RaHZETNtjJqrZa9Y9ds88+A+f+d5lv+561eZ+yCKoS3gbAA=="
+    },
+    "commander@12.1.0": {
+      "integrity": "sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA=="
+    }
+  },
+  "redirects": {
+    "https://deno.land/x/denomander/mod.ts": "https://deno.land/x/denomander@0.9.3/mod.ts"
+  },
+  "remote": {
+    "https://deno.land/std@0.138.0/_util/assert.ts": "e94f2eb37cebd7f199952e242c77654e43333c1ac4c5c700e929ea3aa5489f74",
+    "https://deno.land/std@0.138.0/flags/mod.ts": "019df8a63ed24df2d10be22e8983aa9253623e871228a2f8f328ff2d0404f7ef",
+    "https://deno.land/std@0.138.0/fmt/colors.ts": "30455035d6d728394781c10755351742dd731e3db6771b1843f9b9e490104d37",
+    "https://deno.land/std@0.138.0/testing/_diff.ts": "029a00560b0d534bc0046f1bce4bd36b3b41ada3f2a3178c85686eb2ff5f1413",
+    "https://deno.land/std@0.138.0/testing/_format.ts": "0d8dc79eab15b67cdc532826213bbe05bccfd276ca473a50a3fc7bbfb7260642",
+    "https://deno.land/std@0.138.0/testing/asserts.ts": "dc7ab67b635063989b4aec8620dbcc6fa7c2465f2d9c856bddf8c0e7b45b4481",
+    "https://deno.land/x/denomander@0.9.3/deps.ts": "ee3eaf845a9837e38bfd660fd3521c85b3decc5f264b7c6e474627a46f87e9bf",
+    "https://deno.land/x/denomander@0.9.3/mod.ts": "eb4b69cb286079982ac85c30591a2311047441f2bc2c9ad137f738843933965a",
+    "https://deno.land/x/denomander@0.9.3/src/Arguments.ts": "597037e58244baa1d9acb216da77913d3a4e9885fafadc76929155a4f0a74298",
+    "https://deno.land/x/denomander@0.9.3/src/Command.ts": "f27085b553809674dec027ffd5b8f4470730af8186856850ee9689c48cd0c095",
+    "https://deno.land/x/denomander@0.9.3/src/CustomOption.ts": "22316399f71ce584d36e242643113456cf7d93b195b4667a3cf4c1e20c8847ae",
+    "https://deno.land/x/denomander@0.9.3/src/Denomander.ts": "597491b5bfbb653ae5e05d0307cfb0c733615e7dbc3322b7da36523dd306ebd6",
+    "https://deno.land/x/denomander@0.9.3/src/Executor.ts": "fa3a1132981369a97636af17139a316885e05810806498daf15a8197b0f032eb",
+    "https://deno.land/x/denomander@0.9.3/src/Kernel.ts": "7800e95588c341ee46019991453f60e54e850a2d6293dbd81dfca3b212d2db47",
+    "https://deno.land/x/denomander@0.9.3/src/Option.ts": "a272450bb3e814ee2ef1776f75c595e50230c3f56fd16c85809c122979dbf492",
+    "https://deno.land/x/denomander@0.9.3/src/Validator.ts": "b7f56a2bd773ab52394bf0d7d8b47379331eead2dcd1282062c045bec215a020",
+    "https://deno.land/x/denomander@0.9.3/src/printer/Printer.ts": "ff4b25a2c734322ea60ce43a7c66f39e28bb0b32ca105bcdf78e5741d0ecab60",
+    "https://deno.land/x/denomander@0.9.3/src/printer/colors.ts": "ba785bf6a5975200e29fd120e34a78cf192b43fd25deed3b2516c05f833fc941",
+    "https://deno.land/x/denomander@0.9.3/src/types/interfaces.ts": "1a64640a774f6a6a0c4f23aa3886b5e19acd07da7b72fa5365e3cd208457c704",
+    "https://deno.land/x/denomander@0.9.3/src/types/types.ts": "8c575c785e522269e454f6130aea764d829d581566b06fc1fc87e3fce3779856",
+    "https://deno.land/x/denomander@0.9.3/src/utils/detect.ts": "e20b93554e8d87126a0a813c247a53b8781c6a65bbd1ca0cd6526567e84f878a",
+    "https://deno.land/x/denomander@0.9.3/src/utils/find.ts": "0a74d7a081a0c97ded180e5ce728bd1b156e7aaf67116713ddc4abe545e44ded",
+    "https://deno.land/x/denomander@0.9.3/src/utils/print.ts": "6d6a6d86f14ced800bb1c49eed2d2ea20f5f33a922aba60659e221b4a7e942ff",
+    "https://deno.land/x/denomander@0.9.3/src/utils/remove.ts": "e80f1d257f76cbcafafc855debe7274c59db319639b51aca63a63003e8cf1118",
+    "https://deno.land/x/denomander@0.9.3/src/utils/set.ts": "a89fe0f27575cecd5f5fdaa6907f13a387a03c83b3ef66fd317d114f4dc0fe3e",
+    "https://deno.land/x/denomander@0.9.3/src/utils/utils.ts": "fc29c3b267065685c45d24b3e597e67bee94b2b9d68b5739625051358fef541e"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@1",
+      "npm:chalk@5"
+    ],
+    "members": {
+      "packages/cli": {
+        "dependencies": [
+          "jsr:@std/assert@1"
+        ]
+      }
+    }
+  }
+}

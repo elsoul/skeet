@@ -1,0 +1,20 @@
+{
+  "workspace": ["./packages/cli"],
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "cli:run": "deno run -A --watch packages/cli/src/index.ts",
+    "deploy:cli": "cd packages/cli && deno deploy"
+  },
+  "imports": {
+    "@common/": "./common/",
+    "@std/assert": "jsr:@std/assert@1",
+    "chalk": "npm:chalk@5"
+  },
+  "compilerOptions": {
+    "checkJs": true
+  },
+  "fmt": {
+    "semiColons": false,
+    "singleQuote": true
+  }
+}

@@ -1,6 +1,0 @@
-out
-dist
-build
-prompts/prisma/*.prisma
-.next
-.eslintrc.js
