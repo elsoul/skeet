@@ -1,70 +1,16 @@
-name: SkeetRelease
+name: Publish
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'packages/**'
-      - 'templates/**'
-      - '.github/workflows/skeet-release.yml'
+    branches:
+      - main
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
-
+    permissions:
+      contents: read
+      id-token: write # The OIDC ID token is used for authentication with JSR.
     steps:
-      - name: checkout code repository
-        uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-
-      - name: Install dependencie
-        run: |
-          pnpm install --no-frozen-lockfile
-          pnpm -r run build
-          pnpm -r run test
-
-      - name: Creating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: create and publish versions
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          version: pnpm ci:version
-          publish: pnpm ci:publish
-          createGithubReleases: true
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Send a Discord/X Notification if a publish happens
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm discord:epics
-          pnpm discord:labo
-          curl --location ${{ secrets.TW_ENDPOINT }} \
-          --header 'Content-Type: application/json' \
-          --data '{"repo": "elsoul/skeet", "hey": "${{ secrets.TW_ENDPOINT_SECRET }}"}'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
-          DISCORD_CHANNEL_ID_JA: ${{ secrets.DISCORD_CHANNEL_ID_JA }}
-          DISCORD_TOKEN_LABO: ${{ secrets.DISCORD_TOKEN_LABO }}
-          LABO_SKEET_CHANNEL_ID: ${{ secrets.LABO_SKEET_CHANNEL_ID }}
+      - uses: actions/checkout@v4
+      - run: deno publish

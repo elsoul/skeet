@@ -24,9 +24,7 @@ const main = () => {
     .action(() => {
       console.log('Initializing new Skeet project...')
     })
-
-  console.log(Deno.args)
-  program.parse(Deno.args)
+  program.parse()
 }
 
 main()

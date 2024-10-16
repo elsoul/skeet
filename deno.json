@@ -1,9 +1,10 @@
 {
-  "workspace": ["./packages/cli"],
+  "workspace": ["./packages/cli", "./templates/discord-bot"],
   "nodeModulesDir": "auto",
   "tasks": {
     "cli:run": "deno run -A --watch packages/cli/src/index.ts",
-    "deploy:cli": "cd packages/cli && deno publish"
+    "deploy:cli": "cd packages/cli && deno publish",
+    "tmp:run:discord-bot": "deno run -A --watch templates/discord-bot/src/index.ts"
   },
   "imports": {
     "@common/": "./common/",
