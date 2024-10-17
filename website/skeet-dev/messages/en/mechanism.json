@@ -1,0 +1,20 @@
+{
+  "mechanism": {
+    "title": "How it Works",
+    "description": "elSOL is a Liquid Staking Token (LST) created using the official Solana Foundation Stake Pool Program.",
+    "Why1SOLnot1elSOLRow": {
+      "title": "Why is 1 SOL not 1 elSOL?",
+      "summary": "elSOL is a reward-bearing token that increases in value over time as staking rewards accumulate.",
+      "description": "When you stake your SOL, you receive elSOL in return. elSOL represents your staked SOL and the rights to earn staking rewards as a Liquid Staking Token (LST). The staked SOL is then distributed among high-quality validators through the elSOL stake pool, designed to achieve optimal yields. The rewards earned by these validators are added back into the pool, increasing the value of elSOL over time. This is why 1 SOL is not equal to 1 elSOL. By holding elSOL, you continue to accumulate rewards and can benefit more the longer you hold.",
+      "button1": "Get elSOL",
+      "button2": "What is elSOL?"
+    },
+    "HavingLiquidityRow": {
+      "title": "What is a Liquid Staking Token (LST)?",
+      "summary": "Unlike traditional staking, LSTs can be swapped at any time and offer opportunities for additional yield.",
+      "description": "A Liquid Staking Token (LST) represents the ownership of your staked tokens and the rewards they earn, while maintaining liquidity. As an LST, elSOL allows you to freely swap it for other tokens without locking them, unlike traditional staking. Additionally, you can provide elSOL to Liquidity Pools on DeFi platforms like Orca to potentially earn higher yields compared to regular staking. This allows you to earn staking rewards while also leveraging the DeFi ecosystem to maximize your assets' efficiency.",
+      "button1": "Get elSOL",
+      "button2": "DeFi"
+    }
+  }
+}

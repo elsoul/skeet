@@ -1,6 +1,7 @@
 export enum DEFAULT_PATHS {
   home = '/',
   doc = '/doc/general/getting-started',
+  staking = '/staking',
   news = '/news',
   privacy = '/legal/privacy-policy',
 }
@@ -9,6 +10,10 @@ export const defaultHeaderNav = [
   {
     path: DEFAULT_PATHS.doc,
     label: 'doc.title',
+  },
+  {
+    path: DEFAULT_PATHS.staking,
+    label: 'staking.title',
   },
   {
     path: DEFAULT_PATHS.news,
@@ -20,6 +25,10 @@ export const defaultFooterNav = [
   {
     path: DEFAULT_PATHS.doc,
     label: 'doc.title',
+  },
+  {
+    path: DEFAULT_PATHS.staking,
+    label: 'staking.title',
   },
   {
     path: DEFAULT_PATHS.news,

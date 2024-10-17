@@ -1,0 +1,20 @@
+{
+  "mechanism": {
+    "title": "elSOL の仕組み",
+    "description": "elSOL は Solana Foundation 公式の Stake Pool Program で作成された Liquid Staking Token (LST) です。",
+    "Why1SOLnot1elSOLRow": {
+      "title": "なぜ 1SOL は 1 elSOL ではないの？",
+      "summary": "elSOLは時間の経過とともに報酬が蓄積され、その価値が増加するリワードベアリング型のトークンです。",
+      "description": "あなたがSOLをステークする際、その対価としてelSOLを受け取ります。elSOLはステークされたSOLと、その報酬を受け取る権利を表すLiquid Staking Token (LST) です。その後、ステークされたSOLはelSOLステークプールを通じて高品質なバリデータに分散ステーキングされ、最適な利回りを得るように設計されています。バリデータから得られた報酬はプールに蓄積されるため、時間の経過とともにelSOLの価値が増加します。これが、1 SOLが1 elSOLと等価ではなくなる理由です。長期保有することでelSOLは報酬を蓄積し、より多くの利益を得ることが可能です。",
+      "button1": "Get elSOL",
+      "button2": "elSOL とは？"
+    },
+    "HavingLiquidityRow": {
+      "title": "Liquid Staking Token (LST) とは？",
+      "summary": "通常のステーキングとは異なり、いつでもトークンスワップが可能であり、追加の利回りを狙うこともできます。",
+      "description": "Liquid Staking Token (LST) とは、ステーキングされたトークンの所有権と報酬を表す、流動性のあるトークンです。elSOLはLSTであるため、通常のステーキングのようにトークンをロックする必要がなく、いつでも自由に他のトークンと交換可能です。また、elSOLをOrca等のDeFiプラットフォームのLiquidity Poolに提供することで、通常のステーキングよりも高い利回りを狙うことができます。これにより、ステーキング報酬を受け取りつつ、DeFiエコシステムで資産を効率的に運用することが可能となります。",
+      "button1": "Get elSOL",
+      "button2": "DeFi"
+    }
+  }
+}

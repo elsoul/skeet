@@ -7,6 +7,8 @@ export const messageJsons = [
   '(home)',
   'news',
   'doc',
+  'staking',
+  'mechanism',
   'v1doc',
   'v2doc',
   'legal',

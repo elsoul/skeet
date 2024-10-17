@@ -2,10 +2,12 @@ import { Inter, Noto_Sans_JP } from 'next/font/google'
 import { unstable_setRequestLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import '../globals.css'
+import '@dialectlabs/blinks/index.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/toaster'
 import { locales } from '@/app/config'
+import SolanaWalletProvider from '@/components/providers/SolanaWalletProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -48,7 +50,7 @@ export default async function LocaleLayout({
           enableSystem={false}
         >
           <NextIntlClientProvider messages={messages}>
-            {children}
+            <SolanaWalletProvider>{children}</SolanaWalletProvider>
             <Toaster />
           </NextIntlClientProvider>
         </ThemeProvider>
