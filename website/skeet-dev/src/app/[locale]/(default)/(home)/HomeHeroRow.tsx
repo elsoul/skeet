@@ -27,7 +27,7 @@ import { cn } from '@/lib/utils'
 import { Link } from '@/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
+import { useTheme } from '@/hooks/utils/useTheme'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -80,7 +80,8 @@ const logos = [
 export default function HomeHeroRow() {
   const t = useTranslations()
   const locale = useLocale()
-  const { theme } = useTheme()
+  const { theme, mounted } = useTheme()
+  if (!mounted) return null
 
   return (
     <>
