@@ -47,7 +47,7 @@ export default function TotalStakedSOL() {
       }
     }
 
-    fetchTotalStakedSOL()
+    void fetchTotalStakedSOL()
   }, [])
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function TotalStakedSOL() {
     }
 
     if (totalStakedSOL !== null) {
-      fetchSOLPrice()
+      void fetchSOLPrice()
     }
   }, [totalStakedSOL])
 

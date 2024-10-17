@@ -55,7 +55,7 @@ export default function ElsolPrice() {
       }
     }
 
-    fetchStakePoolPrice()
+    void fetchStakePoolPrice()
   }, [])
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function ElsolPrice() {
     }
 
     if (elsolStakePoolPrice !== null) {
-      fetchSOLPrice()
+      void fetchSOLPrice()
     }
   }, [elsolStakePoolPrice])
 

@@ -57,7 +57,7 @@ export default function EpochTime() {
       }
     }
 
-    fetchEpochData()
+    void fetchEpochData()
   }, [])
 
   useEffect(() => {
