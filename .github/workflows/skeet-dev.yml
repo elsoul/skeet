@@ -34,8 +34,8 @@ jobs:
 
       - name: Create .env.local file
         run: |
-          echo "NEXT_PUBLIC_SOLANA_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_ENDPOINT }}" > .env.local
-          echo "NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT }}" >> .env.local
+          echo "NEXT_PUBLIC_SOLANA_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_ENDPOINT }}" > website/skeet-dev/.env.local
+          echo "NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT }}" >> website/skeet-dev/.env.local
 
       - name: Deploy to Cloudflare
         run: pnpm run -F skeet-dev deploy
