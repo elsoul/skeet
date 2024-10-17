@@ -42,12 +42,7 @@ export default async function LocaleLayout({
         className={cn(`${inter.variable} ${notoSansJP.variable}`)}
         suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <NextIntlClientProvider messages={messages}>
             {children}
             <Toaster />

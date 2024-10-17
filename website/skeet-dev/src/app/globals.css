@@ -85,6 +85,13 @@
       'Segoe UI Symbol',
       'Noto Color Emoji';
   }
+
+  ::selection {
+    background-color: rgba(209, 213, 219, 0.5);
+  }
+  .dark ::selection {
+    background-color: rgba(82, 82, 91, 0.5);
+  }
 }
 
 @layer base {
