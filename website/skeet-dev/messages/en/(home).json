@@ -27,6 +27,12 @@
       "description": "Skeet’s rapid app development platform allows you to easily adapt to Web3 simply by adding a Web3 adapter. Once you start using Skeet, you're already prepared for Web3. We provide extensive support for Solana, a blockchain beloved by our development team for its technological excellence. With tailored boilerplates and code generations for various situations, you’ll find that development is smooth and efficient.",
       "button1": "Solana dApp Demo",
       "button2": "GitHub Repo"
+    },
+    "GreenCodingRow": {
+      "title": "Green Coding",
+      "summary": "We prioritize clean energy, driving the development of software and infrastructure to build a sustainable society.",
+      "description": "The environment is the foundation of our future society, and technological innovation should not come at its expense. We prioritize energy efficiency and the use of renewable energy, aiming for clean and sustainable data center operations. All applications deployed through the Skeet are powered by renewable energy and certified as environmentally friendly hosting by the Green Web Foundation.",
+      "button": "Join Us"
     }
   }
 }
