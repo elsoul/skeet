@@ -92,9 +92,5 @@
     "typescript": "5.4.5",
     "unified": "11.0.5",
     "wrangler": "3.58.0"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
   }
 }
