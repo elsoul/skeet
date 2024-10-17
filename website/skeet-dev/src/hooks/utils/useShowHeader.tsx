@@ -14,7 +14,7 @@ export function useShowHeader({ defaultShowHeader = true }: Props = {}) {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
 
-      if (currentScrollY < lastScrollY) {
+      if (currentScrollY < 80 || currentScrollY < lastScrollY) {
         setShowHeader(true)
       } else {
         setShowHeader(false)
