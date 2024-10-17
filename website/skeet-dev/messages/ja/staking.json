@@ -1,0 +1,28 @@
+{
+  "staking": {
+    "title": "SOL ステーキング",
+    "staking": "ステーク",
+    "unstaking": "アンステーク",
+    "swap": "スワップ",
+    "balance": "残高",
+    "updated": "更新完了!",
+    "stakeSOL": "SOLをステーク",
+    "stakingInfo": "すでにステークアカウントをお持ちの方は手数料無料でelSOLと交換することができます。",
+    "stakingFromAccount": "ステークアカウントを交換",
+    "unstakingToAccount": "アカウントにアンステーク",
+    "unstakingCaution": "※ アンステークを行うと、報酬追加後のSOLがステークアカウントとしてご利用のウォレットに払い出されます。ステークアカウントを解除することで次のエポックにSOLがアンロックされます。(最大約2日)",
+    "instantUnstaking": "即時アンステークにはスワップをご利用ください",
+    "StakingHeroRow": {
+      "title1": "Stake SOL to Earn",
+      "title2": "Additional Incentives",
+      "subtitle1": "SOLをelSOLプール(Solana Foundation 公式の Stake Pool Program で作成)にステークし、ステーキング報酬と追加インセンティブを獲得しましょう。",
+      "subtitle2": "elSOL ホルダーとして、Solanaブロックチェーンの分散化とセキュリティ向上に貢献できます。"
+    },
+    "DirectStakingRow": {
+      "title1": "Stake SOL",
+      "title2": "for Max TrueAPY",
+      "subtitle1": "Solana ネットワークの分散化とセキュリティ強化のため、私たちは常に高性能かつハイスコアのバリデータをノーダウンタイムで運用・アップデートしています。",
+      "subtitle2": "ダウンタイムを最小化し、最適なエリアで運用することで、より高いリターンを追求します。すべての手数料は 0% に設定されており、Solana バリデータ最大の TrueAPY を実現しています。"
+    }
+  }
+}

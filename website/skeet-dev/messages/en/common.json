@@ -15,10 +15,28 @@
     "toPrevious": "Previous",
     "joinUs": "Join Us",
     "demo": "Demo App",
+    "balance": "Balance",
+    "updated": "Updated!",
+    "priceDataFromCoingecko": "※ Price data is retrieved from CoinGecko",
+    "connectYourWallet": "Connect your wallet",
     "CTARow": {
       "title": "Join Our Discord Community",
       "body": "Stay informed with the latest updates, news, and exclusive insights by joining our official Discord server.",
       "button": "Join Us on Discord"
+    },
+    "EpochTime": {
+      "currentEpoch": "Current Epoch",
+      "remainingTime": "Remaining Time (approx)"
+    },
+    "ElsolAPY": {
+      "currentAPY": "Current APY",
+      "30daysCalculate": "※ Calculated based on pure staking rewards over the past 30 days. Additional incentives are not included."
+    },
+    "InstantLiquidityRow": {
+      "title1": "Boost Your Rewards",
+      "title2": "with Instant Liquidity.",
+      "body": "By holding elSOL, you can earn staking rewards, but adding it to Orca's liquidity pool opens up even more opportunities for earning. No complicated setup is required—you can provide liquidity instantly and start earning trading fee rewards right away. By adopting the new 'Bundle Position' technology, fees are reduced by approximately 70% compared to the traditional method of minting Position NFTs.",
+      "closeOrca": "Redeem"
     },
     "ProductsSolvRow": {
       "title": "solv: Open-Source Solana Validator Tool",
@@ -43,6 +61,12 @@
       "body": "Fastest Transactions from Anywhere, Anytime. ERPC offers a global proxy supported by more than 300 edge servers around the world. Every time users access the network, the closest server is automatically selected, ensuring low-latency and stable connections. This guarantees fast access from any region, maximizing performance.",
       "button1": "Get Started - Free",
       "button2": "ERPC"
+    },
+    "VLDAirdropRow": {
+      "title": "$VLD Airdrop Coming Soon...",
+      "body": "An airdrop of $VLD tokens is planned primarily for $elSOL holders, Solana Validators using Validators Solutions, and holders of Epics DAO's NFTs and tokens ($EPCT). For more details, please check the official Discord of Validators DAO.",
+      "button1": "Learn more",
+      "button2": "Get elSOL"
     }
   }
 }

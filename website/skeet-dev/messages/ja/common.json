@@ -15,10 +15,26 @@
     "toPrevious": "前へ",
     "joinUs": "仲間になる",
     "demo": "デモアプリ",
+    "priceDataFromCoingecko": "※ 価格データは CoinGecko より取得",
+    "connectYourWallet": "ウォレットを接続してください",
     "CTARow": {
       "title": "Discord コミュニティに参加しましょう",
       "body": "最新のアップデート、ニュース、限定情報等を公式 Discord サーバーでチェックしてください。",
       "button": "公式 Discord に参加"
+    },
+    "EpochTime": {
+      "currentEpoch": "現在のエポック",
+      "remainingTime": "残り時間(約)"
+    },
+    "ElsolAPY": {
+      "currentAPY": "現在の APY",
+      "30daysCalculate": "※ 過去30日間の純粋なステーキング報酬に基づいた計算です。追加インセンティブは含まれていません。"
+    },
+    "InstantLiquidityRow": {
+      "title1": "Boost Your Rewards",
+      "title2": "with Instant Liquidity.",
+      "body": "elSOLを保有するだけでステーキング報酬が得られますが、Orcaの流動性プールに追加することで、さらなる報酬獲得のチャンスが広がります。設定は不要で、インスタントに流動性を提供し、すぐにトレード手数料の報酬を開始できます。新技術『Bundle Position』を採用し、従来のPosition NFTをミントする方法に比べて、約70%の手数料削減を実現しました。",
+      "closeOrca": "報酬を獲得"
     },
     "ProductsSolvRow": {
       "title": "solv: オープンソースの Solana バリデータツール",
@@ -43,6 +59,12 @@
       "body": "最速のトランザクションをいつでも、どこからでも。ERPCは、世界中に配置された300以上のエッジサーバーによって支えられたグローバルプロキシを提供しています。ユーザーがアクセスするたびに、最短距離のサーバーが自動で選ばれ、低遅延で安定した接続を実現します。これにより、どの地域からでも迅速なアクセスが保証され、パフォーマンスの最大化を図ります。",
       "button1": "無料でスタート",
       "button2": "ERPC"
+    },
+    "VLDAirdropRow": {
+      "title": "$VLD Airdrop Coming Soon...",
+      "body": "主に $elSOL ホルダー、Validators Solutions を利用しているバリデーター、Epics DAO の NFT 及びトークン ($EPCT) ホルダーを対象とした $VLD トークンのエアドロップが予定されています。詳しくは Validators DAO の公式 Discord をご確認ください。",
+      "button1": "最新情報を入手",
+      "button2": "Get elSOL"
     }
   }
 }

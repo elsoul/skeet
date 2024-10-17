@@ -1,5 +1,7 @@
 import logoHorizontal from '@/assets/img/logo/SkeetLogoHorizontal.svg'
 import logoHorizontalInvert from '@/assets/img/logo/SkeetLogoInvertHorizontal.svg'
+import ValidatorsDAOLogoHorizontal from '@/assets/img/logo/ValidatorsDAOLogoHorizontal.svg'
+import ValidatorsDAOLogoInvertHorizontal from '@/assets/img/logo/ValidatorsDAOLogoInvertHorizontal.svg'
 
 import CloudFlareLogoHorizontal from '@/assets/img/logo/partners/CloudFlareLogoHorizontal.svg'
 import CloudFlareLogoInvertHorizontal from '@/assets/img/logo/partners/CloudFlareLogoInvertHorizontal.svg'
@@ -16,6 +18,13 @@ import PrismaLogoInvertHorizontal from '@/assets/img/logo/partners/PrismaLogoInv
 import TypeScriptLogoHorizontal from '@/assets/img/logo/partners/TypeScriptLogoHorizontal.svg'
 import DenoLogoHorizontal from '@/assets/img/logo/partners/DenoLogoHorizontal.svg'
 import DenoLogoInvertHorizontal from '@/assets/img/logo/partners/DenoLogoInvertHorizontal.svg'
+import SolanaFoundationLogoHorizontal from '@/assets/img/logo/partners/SolanaFoundationLogoHorizontal.svg'
+import SolanaFoundationLogoInvertHorizontal from '@/assets/img/logo/partners/SolanaFoundationLogoInvertHorizontal.svg'
+import OrcaLogoHorizontal from '@/assets/img/logo/partners/OrcaLogoHorizontal.svg'
+import OrcaLogoInvertHorizontal from '@/assets/img/logo/partners/OrcaLogoInvertHorizontal.svg'
+
+import Why1SOLnot1elSOLImg from '@/assets/img/icon/mechanism/Why1SOLnot1elSOL.png'
+import HavingLiquidityImg from '@/assets/img/icon/mechanism/HavingLiquidity.png'
 
 import OPOSClimate from '@/assets/img/icon/opos/Climate.png'
 import OPOSClosedCube from '@/assets/img/icon/opos/ClosedCube.png'
@@ -31,6 +40,15 @@ import OPOSParallelTransactions from '@/assets/img/icon/opos/ParallelTransaction
 import OPOSSagaPhone from '@/assets/img/icon/opos/SagaPhone.png'
 import OPOSSecurity from '@/assets/img/icon/opos/Security.png'
 
+import elSOLcoin from '@/assets/img/coin/elSOLcoin.png'
+import elSOLcoins from '@/assets/img/coin/elSOLcoins.png'
+import elSOLAngledLeft from '@/assets/img/coin/elSOLAngledLeft.png'
+import elSOLAngledRight from '@/assets/img/coin/elSOLAngledRight.png'
+import VLDcoin from '@/assets/img/coin/VLDcoin.png'
+import VLDcoins from '@/assets/img/coin/VLDcoins.png'
+import VLDAngledLeft from '@/assets/img/coin/VLDAngledLeft.png'
+import VLDAngledRight from '@/assets/img/coin/VLDAngledRight.png'
+
 import GreenCodingImg from '@/assets/img/icon/home/GreenCoding.png'
 
 import ElsolProductImg from '@/assets/img/products/elSOL.jpg'
@@ -41,10 +59,13 @@ import ERPCProductImg from '@/assets/img/products/ERPC.jpg'
 import EdgeComputeNetworkImg from '@/assets/img/merit/EdgeComputeNetwork.png'
 import MonorepoArchitectureImg from '@/assets/img/merit/MonorepoArchitecture.png'
 import Web3CompatibleImg from '@/assets/img/merit/Web3Compatible.png'
+import VLDAirdropImg from '@/assets/img/icon/rows/VLDAirdrop.png'
 
 export {
   logoHorizontal,
   logoHorizontalInvert,
+  ValidatorsDAOLogoHorizontal,
+  ValidatorsDAOLogoInvertHorizontal,
   CloudFlareLogoHorizontal,
   CloudFlareLogoInvertHorizontal,
   SolanaLogoHorizontal,
@@ -60,6 +81,20 @@ export {
   TypeScriptLogoHorizontal,
   DenoLogoHorizontal,
   DenoLogoInvertHorizontal,
+  SolanaFoundationLogoHorizontal,
+  SolanaFoundationLogoInvertHorizontal,
+  OrcaLogoHorizontal,
+  OrcaLogoInvertHorizontal,
+  Why1SOLnot1elSOLImg,
+  HavingLiquidityImg,
+  elSOLcoin,
+  elSOLcoins,
+  elSOLAngledLeft,
+  elSOLAngledRight,
+  VLDcoin,
+  VLDcoins,
+  VLDAngledLeft,
+  VLDAngledRight,
   OPOSClimate,
   OPOSClosedCube,
   OPOSCompressedCoil,
@@ -81,4 +116,5 @@ export {
   EdgeComputeNetworkImg,
   MonorepoArchitectureImg,
   Web3CompatibleImg,
+  VLDAirdropImg,
 }
