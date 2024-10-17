@@ -31,6 +31,8 @@ import OPOSParallelTransactions from '@/assets/img/icon/opos/ParallelTransaction
 import OPOSSagaPhone from '@/assets/img/icon/opos/SagaPhone.png'
 import OPOSSecurity from '@/assets/img/icon/opos/Security.png'
 
+import GreenCodingImg from '@/assets/img/icon/home/GreenCoding.png'
+
 import ElsolProductImg from '@/assets/img/products/elSOL.jpg'
 import SolvProductImg from '@/assets/img/products/solv.jpg'
 import ValidatrosSolutionsProductImg from '@/assets/img/products/ValidatorsSolutions.jpg'
@@ -71,6 +73,7 @@ export {
   OPOSParallelTransactions,
   OPOSSagaPhone,
   OPOSSecurity,
+  GreenCodingImg,
   ElsolProductImg,
   SolvProductImg,
   ValidatrosSolutionsProductImg,

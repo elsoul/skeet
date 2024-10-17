@@ -9,6 +9,7 @@ import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
 import GlobalEdgeServersRow from './GlobalEdgeServersRow'
 import ManageableMicroServicesRow from './ManageableMicroServicesRow'
 import Web3CompatibleRow from './Web3CompatibleRow'
+import GreenCodingRow from './GreenCodingRow'
 
 const { generateMetadata } = getDataForPageByFilename(__filename)
 export { generateMetadata }
@@ -29,6 +30,7 @@ export default function HomePage({ params: { locale } }: PageProps) {
       <GlobalEdgeServersRow />
       <ManageableMicroServicesRow />
       <Web3CompatibleRow />
+      <GreenCodingRow />
       <CTARow />
       <ProductsSlideRow />
       <h2 className="my-6 px-3 text-center text-3xl font-bold tracking-tight">
