@@ -43,7 +43,7 @@ export default function ElsolAPY() {
       }
     }
 
-    fetchAPY()
+    void fetchAPY()
   }, [])
 
   return (
