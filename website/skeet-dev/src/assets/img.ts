@@ -60,6 +60,10 @@ import EdgeComputeNetworkImg from '@/assets/img/merit/EdgeComputeNetwork.png'
 import MonorepoArchitectureImg from '@/assets/img/merit/MonorepoArchitecture.png'
 import Web3CompatibleImg from '@/assets/img/merit/Web3Compatible.png'
 import VLDAirdropImg from '@/assets/img/icon/rows/VLDAirdrop.png'
+import SkeetProductImg from '@/assets/img/products/Skeet.jpg'
+import BuidlersCollectiveImg from '@/assets/img/products/BuidlersCollective.jpg'
+import EpicsDAOImg from '@/assets/img/daos/EpicsDAO.jpg'
+import ValidatorsDAOImg from '@/assets/img/daos/ValidatorsDAO.jpg'
 
 export {
   logoHorizontal,
@@ -117,4 +121,8 @@ export {
   MonorepoArchitectureImg,
   Web3CompatibleImg,
   VLDAirdropImg,
+  EpicsDAOImg,
+  SkeetProductImg,
+  BuidlersCollectiveImg,
+  ValidatorsDAOImg,
 }

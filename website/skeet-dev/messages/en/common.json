@@ -67,6 +67,30 @@
       "body": "An airdrop of $VLD tokens is planned primarily for $elSOL holders, Solana Validators using Validators Solutions, and holders of Epics DAO's NFTs and tokens ($EPCT). For more details, please check the official Discord of Validators DAO.",
       "button1": "Learn more",
       "button2": "Get elSOL"
+    },
+    "ProductsSkeetRow": {
+      "title": "Skeet: Edge-Native Web Framework",
+      "body": "Skeet maximizes developer productivity by enabling instant implementation of ideas and fast improvement cycles. From backend to frontend, it provides an environment where you can quickly test and deploy. Edge-native applications scale globally from the moment they are deployed, with requests handled swiftly by the nearest edge server. Additionally, Web3 compatibility is easily achieved by simply attaching an adapter.",
+      "button1": "Skeet",
+      "button2": "Community"
+    },
+    "ProductsBuidlersCollectiveRow": {
+      "title": "Buidlers Collective Solana NFT",
+      "body": "Buidlers Collective is an NFT collection designed to support sustainable open-source development. By staking this NFT on the Epics platform, you can earn $EPCT token rewards, while an equal amount is donated to the staked open-source project. We are committed to building a sustainable environment for the future of open-source, pioneering a new form of social contribution through No-Loss Donation, where staking rewards are donated without losing the principal.",
+      "button1": "Buidlers Collective",
+      "button2": "Community"
+    },
+    "DAOsEpicsRow": {
+      "title": "Epics DAO",
+      "body": "Epics DAO is a platform that supports sustainable open-source development through a competitive NFT trading card game. By combining the fun of gaming with social contribution, it promotes the growth of open-source software through tokenomics and gamification. Collect cards, compete, and contribute to the future of open-source development.",
+      "button1": "Epics DAO",
+      "button2": "Community"
+    },
+    "DAOsValidatorsRow": {
+      "title": "Validators DAO",
+      "body": "Validators DAO is a project focused on decentralizing and enhancing the security of the Solana network. To maintain Solana's high performance and overall health, increasing the number of validators and decentralizing staking is essential. The open-source tool 'solv' simplifies validator operations, while the community fosters active knowledge sharing among validators. Additionally, Validators Solutions offers automated operation solutions, creating an environment where anyone can easily participate as a validator.",
+      "button1": "Validators DAO",
+      "button2": "Community"
     }
   }
 }

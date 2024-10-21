@@ -65,6 +65,30 @@
       "body": "主に $elSOL ホルダー、Validators Solutions を利用しているバリデーター、Epics DAO の NFT 及びトークン ($EPCT) ホルダーを対象とした $VLD トークンのエアドロップが予定されています。詳しくは Validators DAO の公式 Discord をご確認ください。",
       "button1": "最新情報を入手",
       "button2": "Get elSOL"
+    },
+    "ProductsSkeetRow": {
+      "title": "Skeet: Edge-Native Web Framework",
+      "body": "Skeetは、開発者の生産性を最大限に引き上げ、アイデアの即時実行と迅速な改善サイクルを実現します。バックエンドからフロントエンドまで、試したいことをすぐに試せる環境が整っており、本番へのデプロイもスムーズです。エッジネイティブなアプリケーションは、デプロイ直後からグローバルにスケールし、最寄りのエッジサーバーでリクエストを高速処理します。さらに、Web3対応もアダプターを追加するだけで簡単に実装可能です。",
+      "button1": "Skeet",
+      "button2": "コミュニティ"
+    },
+    "ProductsBuidlersCollectiveRow": {
+      "title": "Buidlers Collective Solana NFT",
+      "body": "Buidlers Collective は、オープンソース開発を持続可能にするために設計された NFT コレクションです。この NFT を Epics プラットフォーム上でステークすることで、$EPCT トークン報酬を獲得できるだけでなく、同額がステーク先のオープンソースプロジェクトに寄付されます。私たちは、オープンソースの未来を支える持続可能な開発環境の構築に貢献し、No-Loss Donation (元本を失わずにステーキング報酬を寄付する) という新しい形の社会貢献を実現しています。",
+      "button1": "Buidlers Collective",
+      "button2": "コミュニティ"
+    },
+    "DAOsEpicsRow": {
+      "title": "Epics DAO",
+      "body": "Epics DAOは、対戦型NFTトレーディングカードゲームを通じて、持続可能なオープンソース開発を支援するプラットフォームです。ゲームの楽しさと社会貢献を組み合わせ、トークンエコノミクスとゲーミフィケーションにより、オープンソースソフトウェアの発展を促進します。カードを集め、対戦しながら、オープンソースの未来に貢献しましょう。",
+      "button1": "Epics DAO",
+      "button2": "コミュニティ"
+    },
+    "DAOsValidatorsRow": {
+      "title": "Validators DAO",
+      "body": "Validators DAOは、Solanaネットワークの分散化とセキュリティ強化を目的としたプロジェクトです。Solanaの高い処理性能と健全性を維持するためには、バリデータの増加とステーキングの分散が不可欠です。オープンソースツール「solv」により、バリデータの運用を簡略化し、コミュニティ内ではバリデータ同士の活発な情報交換が行われています。さらに、Validators Solutionsの自動運用ソリューションにより、誰もが容易にバリデータとして参加できる環境を整備しています。",
+      "button1": "Validators DAO",
+      "button2": "コミュニティ"
     }
   }
 }
