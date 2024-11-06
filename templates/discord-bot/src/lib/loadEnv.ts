@@ -7,8 +7,8 @@ export type Env = {
 function loadEnv() {
   const TOKEN = Deno.env.get('DISCORD_TOKEN') || ''
   if (TOKEN === '') {
-    console.error(`Missing DISCORD_TOKEN in .env
-Please set the environment variable DISCORD_TOKEN`)
+    console.error(`⚠️ Missing Discord token
+      Please set the environment variable DISCORD_TOKEN in .env file`)
     Deno.exit(1)
   }
 

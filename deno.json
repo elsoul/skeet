@@ -1,15 +1,23 @@
 {
-  "workspace": ["./packages/cli", "./templates/discord-bot"],
+  "workspace": [
+    "./packages/cli",
+    "./templates/discord-bot",
+    "./templates/deno-api-prisma"
+  ],
   "nodeModulesDir": "auto",
   "tasks": {
-    "cli:run": "deno run -A --watch packages/cli/src/index.ts",
+    "cli": "deno task --cwd packages/cli",
     "deploy:cli": "cd packages/cli && deno publish",
-    "tmp:run:discord-bot": "deno run -A --watch templates/discord-bot/src/index.ts"
+    "discord-bot": "deno task --cwd templates/discord-bot",
+    "db:dev:prisma": "deno run -A npm:prisma migrate dev --schema cmn/prisma/skeet/skeet.prisma",
+    "db:gen:prisma": "deno run -A npm:prisma generate --no-engine --schema cmn/prisma/skeet/skeet.prisma"
   },
   "imports": {
-    "@common/": "./common/",
+    "@cmn/": "./cmn/",
     "@std/assert": "jsr:@std/assert@1",
-    "chalk": "npm:chalk@5"
+    "@std/dotenv": "jsr:@std/dotenv@0.225.2",
+    "@prisma/client": "npm:@prisma/client@5.21.0",
+    "@hono/hono": "jsr:@hono/hono@4.6.5"
   },
   "compilerOptions": {
     "checkJs": true

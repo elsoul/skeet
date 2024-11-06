@@ -1,30 +1,27 @@
-import { Command } from 'npm:commander@12.0.0'
+import { Command } from '@cliffy'
 import denoJson from '/deno.json' with { type: 'json' }
 
-/**
- * CLI Program for Skeet
- *
- * This is the entry point for the Skeet CLI, a full-stack Deno serverless framework.
- * It supports commands like initializing a new Skeet project.
- */
-const program = new Command()
-
-program
-  .name('skeet')
-  .description('CLI for Skeet - Full-stack Deno Serverless framework')
-  .version(denoJson.version)
-
-/**
- * The main function that sets up the CLI.
- */
-const main = () => {
-  program
-    .command('init')
-    .description('Initialize a new Skeet project')
-    .action(() => {
-      console.log('Initializing new Skeet project...')
-    })
-  program.parse()
+type Options = {
+  debug?: boolean | undefined
+  logLevel: 'debug' | 'info' | 'warn' | 'error'
 }
 
-main()
+type Arguments = [string, (string | undefined)?]
+
+await new Command()
+  .name('skeet')
+  .version(denoJson.version)
+  .description('Skeet Framework CLI - A Deno framework for web3 applications')
+  .globalOption('-d, --debug', 'Enable debug output.')
+  .action((options, ...args) => console.log('Main command called.'))
+  // Child command 1.
+  .command('foo', 'Foo sub-command.')
+  .option('-f, --foo', 'Foo option.')
+  .arguments('<value:string>')
+  .action((options, ...args) => console.log('Foo command called.'))
+  // Child command 2.
+  .command('bar', 'Bar sub-command.')
+  .option('-b, --bar', 'Bar option.')
+  .arguments('<input:string> [output:string]')
+  .action((options, ...args) => console.log('Bar command called.'))
+  .parse(Deno.args)

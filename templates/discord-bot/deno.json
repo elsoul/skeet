@@ -1,18 +1,19 @@
 {
-  "name": "@discord/ashley",
+  "name": "@skeet-framework/discord-bot",
   "exports": {
     "./src/index.ts": "./src/index.ts"
   },
   "tasks": {
     "dev": "deno run -A --watch src/index.ts",
-    "start": "deno run -A src/index.ts",
-    "install": "deno install -Afg src/index.ts --name saver --import-map=deno.json --allow-scripts=npm:bigint-buffer@1.1.5,npm:bufferutil@4.0.8,npm:utf-8-validate@5.0.10"
+    "serve": "deno run -A src/index.ts",
+    "start": "./dist/exe"
   },
   "imports": {
     "@/": "./src/",
     "@/lib": "./src/lib/",
     "@cmn/": "../../cmn/",
     "./": "./",
+    "@discord/harmony": "https://deno.land/x/harmony@v2.9.1/mod.ts",
     "@std/assert": "jsr:@std/assert@1"
   },
   "fmt": {

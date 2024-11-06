@@ -1,0 +1,15 @@
+{
+  "tasks": {
+    "dev": "deno run -A --watch src/index.ts",
+    "s": "deno run -A src/index.ts",
+    "start": "dist/exe"
+  },
+  "imports": {
+    "@/": "./src/",
+    "@PrismaSkeetClient": "../../cmn/prisma/skeet/PrismaSkeetClient/index.cjs"
+  },
+  "fmt": {
+    "semiColons": false,
+    "singleQuote": true
+  }
+}
