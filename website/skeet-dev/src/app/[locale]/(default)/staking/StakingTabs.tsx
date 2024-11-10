@@ -28,7 +28,7 @@ export default function StakingTabs() {
           </TabsList>
           <TabsContent value="staking">
             <BlinksComponent
-              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/stake`}
+              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/stake?pubkey=${publicKey}`}
             />
             {publicKey && (
               <div className="mt-5 grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
@@ -71,7 +71,7 @@ export default function StakingTabs() {
           </TabsContent>
           <TabsContent value="unstaking">
             <BlinksComponent
-              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/unstake`}
+              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/unstake?pubkey=${publicKey}`}
             />
             {publicKey && (
               <div className="mt-5 grid gap-4 sm:grid-cols-7">
@@ -98,7 +98,7 @@ export default function StakingTabs() {
           </TabsContent>
           <TabsContent value="swap">
             <BlinksComponent
-              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/swap`}
+              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/swap?pubkey=${publicKey}`}
             />
             {publicKey && (
               <div className="mt-5 grid gap-4">
