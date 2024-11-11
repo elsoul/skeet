@@ -11,11 +11,8 @@ import ArticleContents from '@/components/articles/ArticleContents'
 import DocMobileHeader from '../V1DocMobileHeader'
 import { v1docMenuData } from '../v1docNavs'
 import ArticlePager from '@/components/articles/ArticlePager'
-import { Link } from '@/i18n/routing'
-import { DEFAULT_PATHS } from '../../defaultNavs'
-import { Button } from '@/components/ui/button'
-import { useTranslations } from 'next-intl'
 import { getPagerData } from '@/lib/getPagerData'
+import ShowOldDoc from '@/components/articles/ShowOldDoc'
 
 const { groupDir, generateMetadata, generateStaticParams } =
   getDataForArticlePageByFilename(__filename)
@@ -24,7 +21,6 @@ export { generateMetadata, generateStaticParams }
 export default async function V1DocArticlePage({ params }: ArticlePageProps) {
   const { locale, slug } = await params
   setRequestLocale(locale)
-  const t = useTranslations()
 
   const articleData = getArticleBySlug(
     slug,
@@ -49,14 +45,7 @@ export default async function V1DocArticlePage({ params }: ArticlePageProps) {
       <DocMobileHeader articleContent={articleData.content as string} />
       <div className="grid grid-cols-1 gap-4 p-3 sm:p-4 md:grid-cols-3">
         <div className="md:col-span-2">
-          <div className="mb-12 mt-3 flex flex-wrap items-center justify-between rounded-lg bg-yellow-200/30 py-2 pl-4 pr-2 dark:bg-yellow-300/40">
-            <p className="text-sm text-yellow-950 dark:text-yellow-100">
-              {t('doc.youLookingOldDoc', { version: 1 })}
-            </p>
-            <Link href={DEFAULT_PATHS.doc}>
-              <Button variant="ghost">{t('doc.toNewDoc')}</Button>
-            </Link>
-          </div>
+          <ShowOldDoc version={1} />
           <h1 className="text-3xl font-bold tracking-tight">
             {articleData.title}
           </h1>

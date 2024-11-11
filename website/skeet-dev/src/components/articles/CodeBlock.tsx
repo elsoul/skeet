@@ -79,7 +79,7 @@ const CodeBlock: FC<Props> = memo(({ language, value, fileName }) => {
       3,
       true,
     )}${fileExtension}`
-    const fileName = window.prompt('Enter file name' || '', suggestedFileName)
+    const fileName = window.prompt('Enter file name', suggestedFileName)
 
     if (!fileName) {
       return
