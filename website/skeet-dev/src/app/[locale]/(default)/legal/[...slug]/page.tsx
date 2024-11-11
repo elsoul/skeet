@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import {
   ArticlePageProps,
   getDataForArticlePageByFilename,
@@ -12,10 +12,9 @@ const { groupDir, generateMetadata, generateStaticParams } =
   getDataForArticlePageByFilename(__filename)
 export { generateMetadata, generateStaticParams }
 
-export default function LegalArticlePage({
-  params: { locale, slug },
-}: ArticlePageProps) {
-  unstable_setRequestLocale(locale)
+export default async function LegalArticlePage({ params }: ArticlePageProps) {
+  const { locale, slug } = await params
+  setRequestLocale(locale)
 
   const articleData = getArticleBySlug(
     slug,

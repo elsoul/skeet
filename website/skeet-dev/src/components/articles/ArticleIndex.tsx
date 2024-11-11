@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { useTranslations } from 'next-intl'
@@ -28,6 +28,9 @@ export default function ArticleIndex({
   return (
     <>
       <div className="mx-auto max-w-7xl p-3 md:py-8">
+        <h1 className="my-6 px-3 text-center text-3xl font-bold tracking-tight">
+          {t('news.title')}
+        </h1>
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
           {displayedArticles.map(({ article, url }) => (
             <Card key={article.title as string} className="flex flex-col">

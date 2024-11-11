@@ -11,7 +11,7 @@ import {
 import { LanguageToggle } from '@/components/config/LanguageToggle'
 import { ModeToggle } from '@/components/config/ModeToggle'
 import { defaultFooterNav } from './defaultNavs'
-import { Link, usePathname } from '@/navigation'
+import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import GreenHostingBadge from '@/components/common/GreenHostingBadge'

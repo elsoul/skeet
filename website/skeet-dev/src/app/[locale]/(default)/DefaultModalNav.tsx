@@ -2,7 +2,7 @@
 
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
-import { Link, usePathname } from '@/navigation'
+import { Link, usePathname } from '@/i18n/routing'
 import appInfo from '@appInfo'
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'

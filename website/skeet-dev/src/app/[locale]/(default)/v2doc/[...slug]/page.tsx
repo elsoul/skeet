@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import {
   ArticlePageProps,
   getDataForArticlePageByFilename,
@@ -10,21 +10,20 @@ import { cn } from '@/lib/utils'
 import ArticleContents from '@/components/articles/ArticleContents'
 import DocMobileHeader from '../V2DocMobileHeader'
 import { v2docMenuData } from '../v2docNavs'
-import { usePagerData } from '@/hooks/articles/usePagerData'
 import ArticlePager from '@/components/articles/ArticlePager'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import { DEFAULT_PATHS } from '../../defaultNavs'
+import { getPagerData } from '@/lib/getPagerData'
 
 const { groupDir, generateMetadata, generateStaticParams } =
   getDataForArticlePageByFilename(__filename)
 export { generateMetadata, generateStaticParams }
 
-export default function V2DocArticlePage({
-  params: { locale, slug },
-}: ArticlePageProps) {
-  unstable_setRequestLocale(locale)
+export default async function V2DocArticlePage({ params }: ArticlePageProps) {
+  const { locale, slug } = await params
+  setRequestLocale(locale)
   const t = useTranslations()
   const articleData = getArticleBySlug(
     slug,
@@ -37,7 +36,7 @@ export default function V2DocArticlePage({
     (route) => `/${route.split('/').slice(2).join('/')}`,
   )
 
-  const pagerData = usePagerData({
+  const pagerData = getPagerData({
     slug,
     groupDir,
     locale,

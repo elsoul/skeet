@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import {
   ArticlePageProps,
   getDataForArticlePageByFilename,
@@ -11,20 +11,17 @@ import { cn } from '@/lib/utils'
 import ArticleContents from '@/components/articles/ArticleContents'
 import Image from 'next/image'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { useTranslations } from 'next-intl'
 import ArticleIndex from '@/components/articles/ArticleIndex'
-import { usePagerData } from '@/hooks/articles/usePagerData'
 import ArticlePager from '@/components/articles/ArticlePager'
+import { getPagerData } from '@/lib/getPagerData'
 
 const { groupDir, generateMetadata, generateStaticParams, getArticlePaths } =
   getDataForArticlePageByFilename(__filename)
 export { generateMetadata, generateStaticParams }
 
-export default function NewsArticlePage({
-  params: { locale, slug },
-}: ArticlePageProps) {
-  unstable_setRequestLocale(locale)
-  const t = useTranslations()
+export default async function NewsArticlePage({ params }: ArticlePageProps) {
+  const { locale, slug } = await params
+  setRequestLocale(locale)
 
   const articleData = getArticleBySlug(
     slug,
@@ -39,7 +36,7 @@ export default function NewsArticlePage({
     locale,
   )
 
-  const pagerData = usePagerData({
+  const pagerData = getPagerData({
     slug,
     groupDir,
     locale,
@@ -97,9 +94,6 @@ export default function NewsArticlePage({
         </div>
       </div>
       <div className="my-16">
-        <h2 className="my-6 px-3 text-center text-3xl font-bold tracking-tight">
-          {t('news.latestNews')}
-        </h2>
         <ArticleIndex articlesData={articlesData} showItemsNum={3} />
       </div>
     </>

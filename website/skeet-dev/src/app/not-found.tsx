@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function NotFound() {
   return (
     <>
@@ -19,9 +21,9 @@ export default function NotFound() {
               </div>
             </div>
 
-            <a href="/" style={styles.button}>
+            <Link href="/" style={styles.button}>
               Go back to Home
-            </a>
+            </Link>
           </div>
         </body>
       </html>

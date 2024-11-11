@@ -1,4 +1,4 @@
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'

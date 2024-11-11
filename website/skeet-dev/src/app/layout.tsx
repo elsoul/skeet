@@ -2,7 +2,8 @@ import { getTranslations } from 'next-intl/server'
 import { locales } from './config'
 import appInfo from '@appInfo'
 
-export async function generateMetadata({ params: { locale } }: Props) {
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params
   const t = await getTranslations({
     locale: locale ? locale : locales[0],
     namespace: 'metadata',
@@ -40,9 +41,9 @@ export async function generateMetadata({ params: { locale } }: Props) {
 
 type Props = {
   children: React.ReactNode
-  params: {
+  params: Promise<{
     locale: string
-  }
+  }>
 }
 
 export default function RootLayout({
