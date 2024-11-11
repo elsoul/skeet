@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Link, usePathname } from '@/navigation'
+import { Link, usePathname } from '@/i18n/routing'
 import { docMenuData } from './docNavs'
 import { Item, Section } from '@/lib/articles'
 import { ChevronRightIcon, ChevronDownIcon } from '@radix-ui/react-icons'

@@ -11,7 +11,7 @@ import {
 import { mainShardGradation } from '@/lib/decoration'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

@@ -3,11 +3,11 @@
 import {
   OPOSOpenCube,
   SolanaFoundationLogoHorizontal,
-  SolanaFoundationLogoInvertHorizontal
+  SolanaFoundationLogoInvertHorizontal,
 } from '@/assets/img'
 import { mainShardGradation } from '@/lib/decoration'
 import { cn } from '@/lib/utils'
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useTheme } from '@/hooks/utils/useTheme'
@@ -19,8 +19,8 @@ const logos = [
     title: 'SolanaFoundation',
     logo: SolanaFoundationLogoHorizontal,
     logoInvert: SolanaFoundationLogoInvertHorizontal,
-    href: SOLANA_VALIDATOR_LINK
-  }
+    href: SOLANA_VALIDATOR_LINK,
+  },
 ]
 
 export default function DirectStakingRow() {
@@ -48,7 +48,7 @@ export default function DirectStakingRow() {
             <h2
               className={cn(
                 'py-2 text-5xl font-bold tracking-tighter sm:text-7xl lg:text-8xl',
-                mainShardGradation
+                mainShardGradation,
               )}
             >
               {t('staking.DirectStakingRow.title1')} <br />
@@ -57,7 +57,7 @@ export default function DirectStakingRow() {
             <p
               className={cn(
                 'max-w-96 text-sm font-medium sm:max-w-lg sm:text-lg lg:-mt-2 lg:max-w-xl lg:text-xl',
-                'text-zinc-500 dark:text-zinc-300'
+                'text-zinc-500 dark:text-zinc-300',
               )}
             >
               {t('staking.DirectStakingRow.subtitle1')} <br />

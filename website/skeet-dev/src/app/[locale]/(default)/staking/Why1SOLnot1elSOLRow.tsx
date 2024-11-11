@@ -2,7 +2,7 @@ import { Why1SOLnot1elSOLImg } from '@/assets/img'
 import { Button } from '@/components/ui/button'
 import { mainShardGradation } from '@/lib/decoration'
 import { cn } from '@/lib/utils'
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
@@ -14,7 +14,7 @@ export default function Why1SOLnot1elSOLRow() {
         <h2
           className={cn(
             'mx-auto max-w-4xl py-2 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl',
-            mainShardGradation
+            mainShardGradation,
           )}
         >
           {t('mechanism.Why1SOLnot1elSOLRow.title')}
@@ -36,7 +36,7 @@ export default function Why1SOLnot1elSOLRow() {
             <h3
               className={cn(
                 'pb-4 text-lg font-bold tracking-tight sm:text-2xl md:text-3xl lg:text-4xl xl:pb-5 xl:text-5xl',
-                mainShardGradation
+                mainShardGradation,
               )}
             >
               {t('mechanism.Why1SOLnot1elSOLRow.summary')}
@@ -44,7 +44,7 @@ export default function Why1SOLnot1elSOLRow() {
             <p
               className={cn(
                 'text-sm font-medium sm:text-base lg:text-lg xl:text-xl',
-                'text-zinc-500 dark:text-zinc-300'
+                'text-zinc-500 dark:text-zinc-300',
               )}
             >
               {t('mechanism.Why1SOLnot1elSOLRow.description')}

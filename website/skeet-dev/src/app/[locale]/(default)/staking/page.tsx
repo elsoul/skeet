@@ -1,7 +1,6 @@
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import { getDataForPageByFilename, PageProps } from '@/lib/pages'
 
-import { useTranslations } from 'next-intl'
 import CTARow from '@/components/rows/CTARow'
 import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
 import Why1SOLnot1elSOLRow from './Why1SOLnot1elSOLRow'
@@ -15,9 +14,9 @@ import VLDAirdropRow from '@/components/rows/VLDAirdropRow'
 const { generateMetadata } = getDataForPageByFilename(__filename)
 export { generateMetadata }
 
-export default function BlinksPage({ params: { locale } }: PageProps) {
-  unstable_setRequestLocale(locale)
-  const t = useTranslations()
+export default async function BlinksPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
 
   return (
     <>

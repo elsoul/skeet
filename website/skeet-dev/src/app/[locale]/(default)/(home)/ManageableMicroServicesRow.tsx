@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { MonorepoArchitectureImg } from '@/assets/img'
 import { Button } from '@/components/ui/button'
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import Image from 'next/image'
 import appInfo from '@appInfo'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'

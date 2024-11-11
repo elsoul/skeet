@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import {
   ArticlePageProps,
   getDataForArticlePageByFilename,
@@ -10,17 +10,16 @@ import { cn } from '@/lib/utils'
 import ArticleContents from '@/components/articles/ArticleContents'
 import DocMobileHeader from '../DocMobileHeader'
 import { docMenuData } from '../docNavs'
-import { usePagerData } from '@/hooks/articles/usePagerData'
 import ArticlePager from '@/components/articles/ArticlePager'
+import { getPagerData } from '@/lib/getPagerData'
 
 const { groupDir, generateMetadata, generateStaticParams } =
   getDataForArticlePageByFilename(__filename)
 export { generateMetadata, generateStaticParams }
 
-export default function DocArticlePage({
-  params: { locale, slug },
-}: ArticlePageProps) {
-  unstable_setRequestLocale(locale)
+export default async function DocArticlePage({ params }: ArticlePageProps) {
+  const { locale, slug } = await params
+  setRequestLocale(locale)
 
   const articleData = getArticleBySlug(
     slug,
@@ -33,7 +32,7 @@ export default function DocArticlePage({
     (route) => `/${route.split('/').slice(2).join('/')}`,
   )
 
-  const pagerData = usePagerData({
+  const pagerData = getPagerData({
     slug,
     groupDir,
     locale,

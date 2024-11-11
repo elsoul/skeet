@@ -1,6 +1,6 @@
 'use client'
 
-import { Link } from '@/navigation'
+import { Link } from '@/i18n/routing'
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons'
 import { useTranslations } from 'next-intl'
 

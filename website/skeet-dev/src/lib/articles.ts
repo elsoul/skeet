@@ -62,17 +62,18 @@ export const getAllArticles = (articleDirPrefix: string) => {
 }
 
 export type ArticlePageProps = {
-  params: {
+  params: Promise<{
     locale: string
     slug: string[]
-  }
+  }>
 }
 
 export const getDataForArticlePageByFilename = (filename: string) => {
   const groupDir = getGroupDir(filename)
   return {
     groupDir,
-    generateMetadata: ({ params: { locale, slug } }: ArticlePageProps) => {
+    generateMetadata: async ({ params }: ArticlePageProps) => {
+      const { locale, slug } = await params
       const metadata = getArticleBySlug(
         slug,
         ['title', 'thumbnail', 'content'],

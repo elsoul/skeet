@@ -58,3 +58,4 @@ tmp/
 .profile
 
 **/sitemap*.xml
+**/robots.txt

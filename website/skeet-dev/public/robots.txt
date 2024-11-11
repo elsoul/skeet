@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://skeet.dev
-
-# Sitemaps
-Sitemap: https://skeet.dev/sitemap.xml
