@@ -79,8 +79,26 @@ export default function StakingTabs() {
                   <p className="text-xs text-zinc-500 dark:text-zinc-200">
                     {t('staking.unstakingCaution')}
                   </p>
+                  <div className="my-4 flex flex-row items-center gap-4">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setTabValue('deactivate')
+                      }}
+                    >
+                      {t('staking.deactivate')}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setTabValue('withdraw')
+                      }}
+                    >
+                      {t('staking.withdraw')}
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex w-full flex-col items-center justify-center sm:col-span-2">
+                <div className="flex w-full flex-col items-center justify-start sm:col-span-2">
                   <p className="px-1 pb-2 text-center text-xs text-zinc-500 dark:text-zinc-200">
                     {t('staking.instantUnstaking')}
                   </p>
@@ -95,6 +113,35 @@ export default function StakingTabs() {
                 </div>
               </div>
             )}
+          </TabsContent>
+          <TabsContent value="deactivate">
+            <BlinksComponent
+              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/unstake/deactivate?pubkey=${publicKey}`}
+            />
+            {publicKey && (
+              <div className="mt-5 grid gap-4 sm:grid-cols-7">
+                <div className="w-full sm:col-span-5">
+                  <p className="text-xs text-zinc-500 dark:text-zinc-200">
+                    {t('staking.canWithdrawNextEpoch')}
+                  </p>
+                </div>
+                <div className="flex w-full flex-col items-center justify-center sm:col-span-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setTabValue('withdraw')
+                    }}
+                  >
+                    {t('staking.withdraw')}
+                  </Button>
+                </div>
+              </div>
+            )}
+          </TabsContent>
+          <TabsContent value="withdraw">
+            <BlinksComponent
+              actionUrl={`${VALIDATORS_BLINKS_BASE_URL}/v1/unstake/withdraw?pubkey=${publicKey}`}
+            />
           </TabsContent>
           <TabsContent value="swap">
             <BlinksComponent

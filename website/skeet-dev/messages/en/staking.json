@@ -3,20 +3,37 @@
     "title": "SOL Staking",
     "staking": "Staking",
     "unstaking": "Unstaking",
+    "withdraw": "Withdraw",
+    "deactivate": "Deactivate",
     "swap": "Swap",
     "balance": "Balance",
     "updated": "Updated!",
     "stakeSOL": "Stake SOL",
     "stakingInfo": "If you already have a stake account, you can convert it to elSOL with no fees.",
+    "canWithdrawNextEpoch": "You will be able to Withdraw in the epoch following the execution of Deactivate.",
     "stakingFromAccount": "Convert Stake Account",
     "unstakingToAccount": "Unstake to Account",
-    "unstakingCaution": "※ When you unstake, the SOL accumulated after rewards are added will be distributed to your wallet's stake account. By deactivating the stake account, the SOL will be unlocked in the next epoch. (Up to approximately 2 days)",
+    "unstakingCaution": "※ When you unstake, the SOL with the added rewards will be transferred to the stake account of your wallet. By deactivating the stake account, the SOL will unlock in the next epoch, making it withdrawable. (Up to approximately 2 days)",
     "instantUnstaking": "Use Swap to unstake your SOL instantly.",
     "StakingHeroRow": {
       "title1": "Stake SOL to Earn",
       "title2": "Additional Incentives",
       "subtitle1": "Stake your SOL in the elSOL pool (created with Solana Foundation official Stake Pool Program) to earn staking rewards and additional incentives.",
       "subtitle2": "As an elSOL holder, you contribute to the decentralization and security enhancement of the Solana blockchain."
+    },
+    "Why1SOLnot1elSOLRow": {
+      "title": "Why is 1 SOL not 1 elSOL?",
+      "summary": "elSOL is a reward-bearing token that increases in value over time as staking rewards accumulate.",
+      "description": "When you stake your SOL, you receive elSOL in return. elSOL represents your staked SOL and the rights to earn staking rewards as a Liquid Staking Token (LST). The staked SOL is then distributed among high-quality validators through the elSOL stake pool, designed to achieve optimal yields. The rewards earned by these validators are added back into the pool, increasing the value of elSOL over time. This is why 1 SOL is not equal to 1 elSOL. By holding elSOL, you continue to accumulate rewards and can benefit more the longer you hold.",
+      "button1": "Get elSOL",
+      "button2": "What is elSOL?"
+    },
+    "HavingLiquidityRow": {
+      "title": "What is a Liquid Staking Token (LST)?",
+      "summary": "Unlike traditional staking, LSTs can be swapped at any time and offer opportunities for additional yield.",
+      "description": "A Liquid Staking Token (LST) represents the ownership of your staked tokens and the rewards they earn, while maintaining liquidity. As an LST, elSOL allows you to freely swap it for other tokens without locking them, unlike traditional staking. Additionally, you can provide elSOL to Liquidity Pools on DeFi platforms like Orca to potentially earn higher yields compared to regular staking. This allows you to earn staking rewards while also leveraging the DeFi ecosystem to maximize your assets' efficiency.",
+      "button1": "Get elSOL",
+      "button2": "DeFi"
     },
     "DirectStakingRow": {
       "title1": "Stake SOL",
