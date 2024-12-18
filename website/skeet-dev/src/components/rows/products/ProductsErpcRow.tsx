@@ -17,7 +17,7 @@ export default function ProductsErpcRow() {
       <div className="mx-auto grid max-w-7xl items-center justify-center gap-4 px-6 py-48 sm:gap-8 sm:py-80 md:grid-cols-2 md:gap-16 lg:gap-24">
         <div className="w-full md:order-last">
           <Link
-            href={`https://erpc.validators.solutions/${locale}`}
+            href={`https://erpc.global/${locale}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:opacity-80"
@@ -60,7 +60,7 @@ export default function ProductsErpcRow() {
               </Button>
             </Link>
             <Link
-              href={`https://erpc.validators.solutions/${locale}`}
+              href={`https://erpc.global/${locale}`}
               target="_blank"
               rel="noopener noreferrer"
             >

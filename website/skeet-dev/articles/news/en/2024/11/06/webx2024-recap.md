@@ -63,7 +63,7 @@ Validators Solutions: https://validators.solutions/
 
 Fastest Transactions from Anywhere, Anytime. ERPC offers a global proxy supported by more than 300 edge servers around the world. Every time users access the network, the closest server is automatically selected, ensuring low-latency and stable connections. This guarantees fast access from any region, maximizing performance.
 
-ERPC: https://erpc.validators.solutions/
+ERPC: https://erpc.global/
 
 ## Solana Incentivized LST - elSOL
 

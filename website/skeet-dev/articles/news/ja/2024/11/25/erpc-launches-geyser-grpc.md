@@ -45,6 +45,6 @@ ELSOUL LABO B.V.（本社: オランダ・アムステルダム、代表取締�
 
 詳細は公式ウェブサイトまたはDiscordコミュニティをご確認ください：
 
-公式ウェブサイト: https://erpc.validators.solutions/ja/
+公式ウェブサイト: https://erpc.global/ja/
 
 公式 Discord: https://discord.gg/C7ZQSrCkYR

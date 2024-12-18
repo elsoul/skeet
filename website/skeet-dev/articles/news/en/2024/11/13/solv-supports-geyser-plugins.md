@@ -69,7 +69,7 @@ ERPC is an RPC service backed by advanced technology and edge infrastructure, pr
 - **Fastest Dedicated RPC Connections**  
   ERPC’s dedicated RPC connections eliminate unnecessary logic associated with shared security protocols, enabling the fastest connections for Solana execution. Measured latency for simple read requests is as low as 2-3 ms round-trip. For more details, please reach out to our team on the official Discord.
 
-ERPC: https://erpc.validators.solutions/en/
+ERPC: https://erpc.global/en/
 
 Official Discord: https://discord.gg/C7ZQSrCkYR
 
