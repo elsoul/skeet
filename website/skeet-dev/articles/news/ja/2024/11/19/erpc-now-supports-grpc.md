@@ -58,7 +58,7 @@ ERPCは、最先端の技術とエッジインフラに支えられたRPCサー�
 - **最速の専有RPCコネクション**  
   専有RPCは、別のレイヤーでセキュリティを担保できるため、共有のために生じるセキュリティロジック等、Solanaの実行に不必要な動作を徹底的に排除した設計により、最速のコネクションを提供します。手元の実測値では、簡単なReadで往復2~3msの通信が可能です。詳しくは公式Discordにてチームにご相談ください。
 
-ERPC: https://erpc.validators.solutions/ja/
+ERPC: https://erpc.global/ja/
 
 公式 Discord: https://discord.gg/C7ZQSrCkYR
 

@@ -53,6 +53,6 @@ All plans include a 7-day free trial. Take this opportunity to experience the co
 
 For more details, please visit our official website or join our Discord community:
 
-Official Website: https://erpc.validators.solutions/en/
+Official Website: https://erpc.global/en/
 
 Official Discord: https://discord.gg/C7ZQSrCkYR

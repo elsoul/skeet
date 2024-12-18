@@ -45,6 +45,6 @@ We are offering a 7-day free trial for the Geyser gRPC Connection. Take this opp
 
 For more details, please visit our official website or join the Discord community:
 
-Official Website: https://erpc.validators.solutions/en/
+Official Website: https://erpc.global/en/
 
 Official Discord: https://discord.gg/C7ZQSrCkYR

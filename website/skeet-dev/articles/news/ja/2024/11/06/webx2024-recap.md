@@ -66,7 +66,7 @@ Validators Solutions: https://validators.solutions/
 
 最速のトランザクションをいつでも、どこからでも。ERPCは、世界中に配置された300以上のエッジサーバーによって支えられたグローバルプロキシを提供しています。ユーザーがアクセスするたびに、最短距離のサーバーが自動で選ばれ、低遅延で安定した接続を実現します。これにより、どの地域からでも迅速なアクセスが保証され、パフォーマンスの最大化を図ります。
 
-ERPC: https://erpc.validators.solutions/
+ERPC: https://erpc.global/
 
 ## Solana Incentivized LST - elSOL
 

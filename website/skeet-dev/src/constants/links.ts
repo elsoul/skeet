@@ -48,7 +48,7 @@ export const SKEET_WEB_LINK = 'https://skeet.dev/'
 export const SOLV_WEB_LINK = 'https://solv.epics.dev/'
 export const VALIDATORS_SOLUTIONS_WEB_LINK = 'https://validators.solutions/'
 export const VALIDATORS_DAO_WEB_LINK = 'https://dao.validators.solutions/'
-export const ERPC_WEB_LINK = 'https://erpc.validators.solutions/'
+export const ERPC_WEB_LINK = 'https://erpc.global/'
 export const ELSOL_WEB_LINK = 'https://elsol.app/'
 export const EPICS_PLATFORM_LINK = 'https://app.epics.dev/'
 
