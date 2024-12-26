@@ -21,7 +21,7 @@ This increase in resource requirements reflects the Solana client’s challenge 
 
 ![Validators Solutions](/news/2024/12/26/ValidatorsSolutionsPriceListEN.jpg)
 
-In response to these developments, we will implement a new pricing plan starting December 25, 2024. By standardizing high-spec nodes and strengthening the operational environment to more efficiently handle updates and potential issues, we aim to support higher uptime and consistent rewards. Increasing node specifications also allows flexible adaptation to evolving testnet requirements, minimizing downtime and ensuring stable validator operations over the long term.
+In light of the above circumstances, we adopted a new pricing plan starting December 25, 2024. By standardizing high-spec nodes and strengthening the operational environment to more efficiently handle updates and potential issues, we aim to support higher uptime and consistent rewards. Increasing node specifications also allows flexible adaptation to evolving testnet requirements, minimizing downtime and ensuring stable validator operations over the long term.
 
 For mainnet validators as well, choosing high-spec servers can increase the success rate of block production, thereby enhancing overall chain quality and maximizing rewards.
 
