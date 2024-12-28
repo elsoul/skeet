@@ -1,10 +1,11 @@
 import { setRequestLocale } from 'next-intl/server'
-import { getDataForPageByFilename, PageProps } from '@/lib/pages'
+import { getDataForPageByGroupDir, PageProps } from '@/lib/pages'
 
 import { getArticleForIndex } from '@/lib/articles'
 import ArticleIndex from '@/components/articles/ArticleIndex'
 
-const { groupDir, generateMetadata } = getDataForPageByFilename(__filename)
+const groupDir = 'news'
+const { generateMetadata } = getDataForPageByGroupDir(groupDir)
 export { generateMetadata }
 
 export default async function NewsPage({ params }: PageProps) {

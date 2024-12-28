@@ -1,4 +1,3 @@
-import { getGroupDir } from './utils'
 import { getTranslations } from 'next-intl/server'
 
 export type PageProps = {
@@ -7,10 +6,8 @@ export type PageProps = {
   }>
 }
 
-export const getDataForPageByFilename = (filename: string) => {
-  const groupDir = getGroupDir(filename)
+export const getDataForPageByGroupDir = (groupDir: string) => {
   return {
-    groupDir,
     generateMetadata: async ({ params }: PageProps) => {
       const { locale } = await params
       const t = await getTranslations({ locale, namespace: groupDir })

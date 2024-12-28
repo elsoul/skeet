@@ -11,20 +11,6 @@ export const blurDataURL =
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
-export const getGroupDir = (fileName: string) => {
-  const parts = fileName.split('/')
-  const lastPart = parts[parts.length - 1]
-  if (lastPart.includes('.')) {
-    parts.pop()
-  }
-  let groupDir = parts.pop() ?? '(default)'
-
-  if (groupDir.startsWith('[') && groupDir.endsWith(']')) {
-    groupDir = parts.pop() ?? '(default)'
-  }
-  return groupDir
-}
-
 export const uniqueArray = <T>(arr: T[]): T[] => {
   return Array.from(new Set(arr.map((item) => JSON.stringify(item)))).map(
     (item) => JSON.parse(item) as T,

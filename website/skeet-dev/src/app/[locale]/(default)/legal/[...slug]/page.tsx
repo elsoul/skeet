@@ -1,15 +1,16 @@
 import { setRequestLocale } from 'next-intl/server'
 import {
   ArticlePageProps,
-  getDataForArticlePageByFilename,
   getArticleBySlug,
+  getDataForArticlePageByGroupDir,
 } from '@/lib/articles'
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
 import ArticleContents from '@/components/articles/ArticleContents'
 import { cn } from '@/lib/utils'
 
-const { groupDir, generateMetadata, generateStaticParams } =
-  getDataForArticlePageByFilename(__filename)
+const groupDir = 'legal'
+const { generateMetadata, generateStaticParams } =
+  getDataForArticlePageByGroupDir(groupDir)
 export { generateMetadata, generateStaticParams }
 
 export default async function LegalArticlePage({ params }: ArticlePageProps) {

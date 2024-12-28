@@ -1,9 +1,9 @@
 import { setRequestLocale } from 'next-intl/server'
 import {
   ArticlePageProps,
-  getDataForArticlePageByFilename,
   getArticleBySlug,
   getAllRoutes,
+  getDataForArticlePageByGroupDir,
 } from '@/lib/articles'
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
 import { cn } from '@/lib/utils'
@@ -13,8 +13,9 @@ import { docMenuData } from '../docNavs'
 import ArticlePager from '@/components/articles/ArticlePager'
 import { getPagerData } from '@/lib/getPagerData'
 
-const { groupDir, generateMetadata, generateStaticParams } =
-  getDataForArticlePageByFilename(__filename)
+const groupDir = 'doc'
+const { generateMetadata, generateStaticParams } =
+  getDataForArticlePageByGroupDir(groupDir)
 export { generateMetadata, generateStaticParams }
 
 export default async function DocArticlePage({ params }: ArticlePageProps) {
