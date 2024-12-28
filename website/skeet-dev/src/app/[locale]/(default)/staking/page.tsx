@@ -1,5 +1,5 @@
 import { setRequestLocale } from 'next-intl/server'
-import { getDataForPageByFilename, PageProps } from '@/lib/pages'
+import { getDataForPageByGroupDir, PageProps } from '@/lib/pages'
 
 import CTARow from '@/components/rows/CTARow'
 import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
@@ -11,7 +11,8 @@ import InstantLiquidityRow from '@/components/rows/InstantLiquidityRow'
 import DirectStakingRow from './DirectStakingRow'
 import VLDAirdropRow from '@/components/rows/VLDAirdropRow'
 
-const { generateMetadata } = getDataForPageByFilename(__filename)
+const groupDir = 'staking'
+const { generateMetadata } = getDataForPageByGroupDir(groupDir)
 export { generateMetadata }
 
 export default async function BlinksPage({ params }: PageProps) {

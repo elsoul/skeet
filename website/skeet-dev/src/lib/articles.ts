@@ -2,7 +2,7 @@ import fs from 'fs'
 import { glob } from 'glob'
 import { join } from 'path'
 import matter from 'gray-matter'
-import { getGroupDir, uniqueArray, truncateContent } from './utils'
+import { uniqueArray, truncateContent } from './utils'
 import { locales } from '@/app/config'
 
 type Items = {
@@ -68,12 +68,11 @@ export type ArticlePageProps = {
   }>
 }
 
-export const getDataForArticlePageByFilename = (filename: string) => {
-  const groupDir = getGroupDir(filename)
+export const getDataForArticlePageByGroupDir = (groupDir: string) => {
   return {
-    groupDir,
     generateMetadata: async ({ params }: ArticlePageProps) => {
       const { locale, slug } = await params
+
       const metadata = getArticleBySlug(
         slug,
         ['title', 'thumbnail', 'content'],

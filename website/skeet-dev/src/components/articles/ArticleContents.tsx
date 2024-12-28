@@ -67,13 +67,15 @@ export default function ArticleContents({ content }: Props) {
               const videoId = getYouTubeVideoId(href)
               if (isYouTube && videoId) {
                 return (
-                  <AspectRatio ratio={16 / 9}>
-                    <iframe
-                      src={`https://www.youtube.com/embed/${videoId}`}
-                      allowFullScreen
-                      className="h-full w-full rounded-xl object-cover"
-                    />
-                  </AspectRatio>
+                  <>
+                    <AspectRatio ratio={16 / 9}>
+                      <iframe
+                        src={`https://www.youtube.com/embed/${videoId}`}
+                        allowFullScreen
+                        className="h-full w-full rounded-xl object-cover"
+                      />
+                    </AspectRatio>
+                  </>
                 )
               }
 
