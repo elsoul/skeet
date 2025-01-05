@@ -47,14 +47,7 @@ SLV GitHub: https://github.com/ValidatorsDAO/slv
 
 Validators DAO Discord Community: https://discord.gg/C7ZQSrCkYR
 
-## The Complete Web Framework for Modern Developers
-
-With Skeet v3, we’ve fully migrated to Cloudflare, eliminating cold starts and introducing support for edge runtime. It has been transformed into a edge-native architecture, optimized for the modern web.
-
-🚧 The Skeet development team is currently focused on building v3. Active development is underway.
-
-For the latest updates, join our official Discord community:
-https://discord.gg/H2HeqRq54J
+## 🚧 The Complete Web Framework for Modern Developers
 
 For documentation on versions running on Firebase (v1, v2), please refer to the following links:
 
