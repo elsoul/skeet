@@ -3,8 +3,8 @@
     <img src="https://storage.skeet.dev/ogp.jpg" alt="Skeet" />
   </a>
 
-  <a href="https://twitter.com/intent/follow?screen_name=SkeetDev">
-    <img src="https://img.shields.io/twitter/follow/SkeetDev.svg?label=Follow%20@SkeetDev" alt="Follow @SkeetDev" />
+  <a href="https://twitter.com/intent/follow?screen_name=slvSOLANA">
+    <img src="https://img.shields.io/twitter/follow/slvSOLANA.svg?label=Follow%20@slvSOLANA" alt="Follow @slvSOLANA" />
   </a>
   <br/>
   <a aria-label="npm version" href="https://www.npmjs.com/package/@skeet-framework/cli">
