@@ -89,6 +89,12 @@
       "body": "Validators DAOは、Solanaネットワークの分散化とセキュリティ強化を目的としたプロジェクトです。Solanaの高い処理性能と健全性を維持するためには、バリデータの増加とステーキングの分散が不可欠です。オープンソースツール「solv」により、バリデータの運用を簡略化し、コミュニティ内ではバリデータ同士の活発な情報交換が行われています。さらに、Validators Solutionsの自動運用ソリューションにより、誰もが容易にバリデータとして参加できる環境を整備しています。",
       "button1": "Validators DAO",
       "button2": "コミュニティ"
+    },
+    "ProductsSLVRow": {
+      "title": "SLV: The Toolkit for Solana Devs",
+      "body": "Solana 開発に必要なすべてがここに。バリデータもRPCもdAppも爆速でスタート。Jito MEV や Geyser gRPC プラグイン、最新の Firedancer にも対応しており、高速なトレードや効率的な RPC、エネルギー効率に優れたバリデータ運用を実現します。さらに、完全リモート管理とキーレスオペレーションによるセキュリティ強化や、Discord アラート機能といった充実のサポート体制で、Solana の本格運用を強力にバックアップします。",
+      "button1": "SLV",
+      "button2": "GitHub"
     }
   }
 }

@@ -91,6 +91,12 @@
       "body": "Validators DAO is a project focused on decentralizing and enhancing the security of the Solana network. To maintain Solana's high performance and overall health, increasing the number of validators and decentralizing staking is essential. The open-source tool 'solv' simplifies validator operations, while the community fosters active knowledge sharing among validators. Additionally, Validators Solutions offers automated operation solutions, creating an environment where anyone can easily participate as a validator.",
       "button1": "Validators DAO",
       "button2": "Community"
+    },
+    "ProductsSLVRow": {
+      "title": "SLV: The Toolkit for Solana Devs",
+      "body": "Everything you need for Solana development is here. Launch validators, RPC, and dApps at blazing speed. With support for Jito MEV, the Geyser gRPC plugin, and the latest Firedancer, you can achieve high-speed trading, efficient RPC, and energy-efficient validator operations. Additionally, full remote management and keyless operations strengthen security, while robust support features like Discord alerts provide powerful backup for large-scale Solana operations.",
+      "button1": "SLV",
+      "button2": "GitHub"
     }
   }
 }

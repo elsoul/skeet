@@ -64,6 +64,7 @@ import SkeetProductImg from '@/assets/img/products/Skeet.jpg'
 import BuidlersCollectiveImg from '@/assets/img/products/BuidlersCollective.jpg'
 import EpicsDAOImg from '@/assets/img/daos/EpicsDAO.jpg'
 import ValidatorsDAOImg from '@/assets/img/daos/ValidatorsDAO.jpg'
+import SLVImg from '@/assets/img/products/SLV.jpg'
 
 export {
   logoHorizontal,
@@ -125,4 +126,5 @@ export {
   SkeetProductImg,
   BuidlersCollectiveImg,
   ValidatorsDAOImg,
+  SLVImg,
 }
