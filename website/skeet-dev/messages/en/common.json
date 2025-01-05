@@ -97,6 +97,12 @@
       "body": "Everything you need for Solana development is here. Launch validators, RPC, and dApps at blazing speed. With support for Jito MEV, the Geyser gRPC plugin, and the latest Firedancer, you can achieve high-speed trading, efficient RPC, and energy-efficient validator operations. Additionally, full remote management and keyless operations strengthen security, while robust support features like Discord alerts provide powerful backup for large-scale Solana operations.",
       "button1": "SLV",
       "button2": "GitHub"
+    },
+    "EvolvingToSLVRow": {
+      "title": "What...? Skeet is evolving to SLV!",
+      "body": "With the standardization of crypto and Web3 technologies, Skeet’s serverless application technology is evolving into SLV, migrating its development platform to a new era of application frameworks that integrate natively with Solana. It’s predicted that more than half of all online payments will soon be made with crypto, and SLV is poised to power this future. By leveraging all the experience gained from Skeet, we aim to provide a suite of tools for lightning-fast Web3 app development and global edge deployment.",
+      "button1": "SLV",
+      "button2": "GitHub"
     }
   }
 }

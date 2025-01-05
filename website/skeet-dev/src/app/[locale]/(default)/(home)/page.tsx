@@ -9,6 +9,7 @@ import GlobalEdgeServersRow from './GlobalEdgeServersRow'
 import ManageableMicroServicesRow from './ManageableMicroServicesRow'
 import Web3CompatibleRow from './Web3CompatibleRow'
 import GreenCodingRow from './GreenCodingRow'
+import EvolvingToSLVRow from './EvolvingToSLVRow'
 
 const groupDir = '(home)'
 const { generateMetadata } = getDataForPageByGroupDir(groupDir)
@@ -27,6 +28,7 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <HomeHeroRow />
+      <EvolvingToSLVRow />
       <GlobalEdgeServersRow />
       <ManageableMicroServicesRow />
       <Web3CompatibleRow />

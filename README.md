@@ -33,6 +33,20 @@ Repository for SSG Demo: https://github.com/elsoul/skeet-v3-next-ssg-rc
 
 Repository for Solana dApp Demo: https://github.com/elsoul/skeet-v3-solana-dapp-rc
 
+# What...? Skeet is evolving to SLV!
+
+<a href="https://slv.dev/">
+  <img src="https://storage.slv.dev/SLVogp.jpg" alt="SLV" />
+</a>
+
+With the standardization of crypto and Web3 technologies, Skeet’s serverless application technology is evolving into SLV, migrating its development platform to a new era of application frameworks that integrate natively with Solana. It’s predicted that more than half of all online payments will soon be made with crypto, and SLV is poised to power this future. By leveraging all the experience gained from Skeet, we aim to provide a suite of tools for lightning-fast Web3 app development and global edge deployment.
+
+SLV Web: https://slv.dev/
+
+SLV GitHub: https://github.com/ValidatorsDAO/slv
+
+Validators DAO Discord Community: https://discord.gg/C7ZQSrCkYR
+
 ## The Complete Web Framework for Modern Developers
 
 With Skeet v3, we’ve fully migrated to Cloudflare, eliminating cold starts and introducing support for edge runtime. It has been transformed into a edge-native architecture, optimized for the modern web.
