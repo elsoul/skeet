@@ -6,7 +6,7 @@
   "engines": {
     "pnpm": ">=9",
     "npm": "please_use_pnpm_instead",
-    "node": ">=20"
+    "node": ">=22"
   },
   "packageManager": "pnpm@9.12.3",
   "scripts": {
